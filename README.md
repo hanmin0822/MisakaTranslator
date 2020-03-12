@@ -1,20 +1,49 @@
-# MisakaTranslator
-MisakaTranslator 御坂翻译器
+![MisakaTranslator](https://github.com/hanmin0822/MisakaTranslator/blob/master/MisakaTranslator/Resources/Background.jpg)
+# MisakaTranslator御坂翻译器
+
 开源|高效|易用
-MisakaTranslator的名字由来是因为本软件连接到了一万多名御坂妹妹所组成的『御坂网络』，利用其强大的计算能力来提供实时可靠的翻译（误）
-MisakaTranslator使用了文本Hook+OCR的方式完成文本的提取，能支持绝大部分游戏的识别，同时也支持在VNR中大名鼎鼎的JBeijing离线翻译，使得本翻译器能完全离线工作，支持百度在线翻译和腾讯在线翻译，大大提高游戏文本可读性。由于使用C#开发，程序效率较使用Python开发的VNR要高，方便使用。
 
-本项目所使用到的其他开源项目：
-IgnaceMaes/MaterialSkin  	https://github.com/IgnaceMaes/MaterialSkin
-平原君关于MaterialSkin的fork  	https://gitee.com/victorzhao/MaterialSkin
-Artikash/Textractor		https://github.com/Artikash/Textractor
-JamesNK/Newtonsoft.Json		https://github.com/JamesNK/Newtonsoft.Json
-kwwwvagaa/NetWinformControl	https://github.com/kwwwvagaa/NetWinformControl
+Galgame/文字游戏多语种实时机翻工具
 
-本项目开发过程中使用到的重要参考文献：
-C#调用Textractor提取文本		https://www.lgztx.com/?p=157
-C#调用JBeijing离线中日翻译	https://github.com/Artikash/VNR-Core/
+~~MisakaTranslator的名字由来是因为本软件连接到了一万多名御坂妹妹所组成的『御坂网络』，利用其强大的计算能力来提供实时可靠的翻译（误）~~
 
-作者的联系方式:
+演示视频：https://www.bilibili.com/video/av94082641
+
+以上视频仅为测试版第一版功能，目前的实际功能和其他效果见最新版本！
+
+
+## 软件功能
+
+* 支持`Hook+OCR`两种方式提取游戏文本
+* 支持完全离线工作(`Hook+Jbeijing`)
+* 方便的API调用(`百度OCR+百度翻译+腾讯翻译（两种）`)
+* 程序效率较使用Python开发的VNR要高
+* UI亲切，易上手，有详细教程
+* 更多功能，正在开发
+
+## 帮助开发者
+
+如果您对这个项目感兴趣，想提供任何帮助，欢迎联系作者。
+
+作者的联系方式在下方。
+
+## 本项目所使用到的其他开源项目
+
+* [IgnaceMaes/MaterialSkin](https://github.com/IgnaceMaes/MaterialSkin) 
+* [平原君关于MaterialSkin的fork](https://gitee.com/victorzhao/MaterialSkin)
+* [Artikash/Textractor](https://github.com/Artikash/Textractor)
+* [JamesNK/Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
+* [kwwwvagaa/NetWinformControl](https://github.com/kwwwvagaa/NetWinformControl)
+
+## 本项目开发过程中使用到的重要参考文献
+
+* [C#调用Textractor提取文本](https://www.lgztx.com/?p=157) 
+* [C#调用JBeijing离线中日翻译](https://github.com/Artikash/VNR-Core/)
+
+## 联系作者
+
 E-Mail/QQ:512240272@qq.com
-软件制作部分素材来源网络，如果侵犯到您的权益，请立即通知我删除，谢谢!
+
+## 其他注意
+
+软件开发过程中使用到部分网络素材，如果侵犯到您的权益，请第一时间联系作者删除，谢谢！
