@@ -2,12 +2,6 @@
  *Namespace         MisakaTranslator
  *Class             TencentOldTranslator
  *Description       腾讯翻译（私人） API  其余几个类均为用于读取json结果时处理的
- *Author            Hanmin Qi
- *LastModifyTime    2020-03-12
- * ===============================================================
- * 以下是修改记录（任何一次修改都应被记录）
- * 日期   修改内容    作者
- * 2020-03-12       代码注释完成      果冻
  */
 
 

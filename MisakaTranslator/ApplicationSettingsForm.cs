@@ -2,12 +2,6 @@
  *Namespace         MisakaTranslator
  *Class             ApplicationSettingsForm
  *Description       软件本体的设置窗口，包含了各个按钮的点击事件等，由于按钮过多，不一一注释
- *Author            Hanmin Qi
- *LastModifyTime    2020-03-12
- * ===============================================================
- * 以下是修改记录（任何一次修改都应被记录）
- * 日期   修改内容    作者
- * 2020-03-12       代码注释完成      果冻
  */
 
 
