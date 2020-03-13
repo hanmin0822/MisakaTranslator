@@ -98,8 +98,10 @@ namespace MisakaTranslator
                         Assembly.GetExecutingAssembly().GetModules()[0]),
                         0);
                 }
-                catch (Exception err)
-                { }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
                 //如果安装鼠标钩子失败
                 if (_hMouseHook == 0)
                 {

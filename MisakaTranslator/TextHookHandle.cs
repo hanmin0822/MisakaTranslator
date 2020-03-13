@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MisakaTranslator
 {
@@ -80,7 +81,15 @@ namespace MisakaTranslator
             string Path = Environment.CurrentDirectory + "\\lib\\TextHook";
 
             string CurrentPath = Environment.CurrentDirectory;
+            try
+            {
             Environment.CurrentDirectory = Path;//更改当前工作目录保证TextractorCLI正常运行
+            }
+            catch(System.IO.DirectoryNotFoundException ex)
+            {
+                MessageBox.Show("未找到Textractor所在目录，请检查应用完整性。","错误");
+                return false;
+            }
 
             ProcessTextractor = new Process();
             ProcessTextractor.StartInfo.FileName = "TextractorCLI.exe";
@@ -90,11 +99,18 @@ namespace MisakaTranslator
             ProcessTextractor.StartInfo.RedirectStandardInput = true;
             ProcessTextractor.StartInfo.RedirectStandardOutput = true;
             ProcessTextractor.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+            try
+            {
             bool res = ProcessTextractor.Start();
             ProcessTextractor.BeginOutputReadLine();
-
             Environment.CurrentDirectory = CurrentPath;//打开后即可恢复原目录
             return res;
+            }
+            catch(System.ComponentModel.Win32Exception ex)
+            {
+                MessageBox.Show("未找到Textractor，请检查应用完整性。","错误");
+                return false;
+            }
         }
 
 

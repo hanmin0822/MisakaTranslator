@@ -175,7 +175,7 @@ namespace MisakaTranslator
                         }
                         catch (Win32Exception ex)
                         {
-                            continue;
+                            throw ex;
                         }
                         Console.WriteLine(filepath);
                         if (filepath == ReadText[j])
