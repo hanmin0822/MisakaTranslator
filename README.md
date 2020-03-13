@@ -44,6 +44,10 @@ Galgame/文字游戏多语种实时机翻工具
 
 E-Mail/QQ:512240272@qq.com
 
+## 合作开发者
+
+* [unlsycn](https://github.com/HumphreyDotSln) 
+
 ## 贡献者名单
 
 感谢所有对本项目开发提供帮助的人！
