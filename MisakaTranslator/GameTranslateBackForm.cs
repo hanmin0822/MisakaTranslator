@@ -157,7 +157,6 @@ namespace MisakaTranslator
             frmBack.SizeChanged += GameTranslateBackForm_SizeLocationChanged;
             frmBack.LocationChanged += GameTranslateBackForm_SizeLocationChanged;
             frmBack.MouseDoubleClick += GameTranslateBackForm_DoubleClick;
-            frmBack.MouseClick += GameTranslateBackForm_Click;
             frmBack.FormClosing += GameTranslateBackForm_FormClosing;
 
             frmBack.TopMost = true;
