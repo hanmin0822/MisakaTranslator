@@ -44,6 +44,12 @@ Galgame/文字游戏多语种实时机翻工具
 
 E-Mail/QQ:512240272@qq.com
 
+## 贡献者名单
+
+感谢所有对本项目开发提供帮助的人！
+
+* [点此查看贡献者名单](https://github.com/hanmin0822/MisakaTranslator/blob/master/THANKLIST.MD)
+
 ## 其他注意
 
 软件开发过程中使用到部分网络素材，如果侵犯到您的权益，请第一时间联系作者删除，谢谢！
