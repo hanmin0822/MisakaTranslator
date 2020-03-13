@@ -2,12 +2,6 @@
  *Namespace         MisakaTranslator
  *Class             TextHookHandle
  *Description       操作Textractor CLI进程，与其交互，获取结果
- *Author            Hanmin Qi
- *LastModifyTime    2020-03-12
- * ===============================================================
- * 以下是修改记录（任何一次修改都应被记录）
- * 日期   修改内容    作者
- * 2020-03-12       代码注释完成      果冻
  */
 
 using MaterialSkin.Controls;

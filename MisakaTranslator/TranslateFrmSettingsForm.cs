@@ -2,12 +2,6 @@
  *Namespace         MisakaTranslator
  *Class             TranslateFrmSettingsForm
  *Description       翻译窗口字体和窗口设置的窗口
- *Author            Hanmin Qi
- *LastModifyTime    2020-03-12
- * ===============================================================
- * 以下是修改记录（任何一次修改都应被记录）
- * 日期   修改内容    作者
- * 2020-03-12       代码注释完成      果冻
  */
 
 

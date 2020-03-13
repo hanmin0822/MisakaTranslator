@@ -2,12 +2,6 @@
  *Namespace         MisakaTranslator
  *Class             GameTranslateForm
  *Description       翻译窗口的前部窗口，通过固定颜色去色达到完全透明，与翻译窗口后部窗口叠加
- *Author            Hanmin Qi
- *LastModifyTime    2020-03-12
- * ===============================================================
- * 以下是修改记录（任何一次修改都应被记录）
- * 日期   修改内容    作者
- * 2020-03-12       代码注释完成      果冻
  */
 
 using Newtonsoft.Json;
