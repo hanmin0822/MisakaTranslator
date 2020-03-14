@@ -64,6 +64,11 @@ namespace MisakaTranslator
 
         private void ScreenCaptureBtn_BtnClick(object sender, EventArgs e)
         {
+            if(Common.isAllWindowCap == false && SelectedHwnd == 0)
+            {
+                MessageBox.Show("请先选择窗口", "警告");
+                return;
+            }
             Image img;
             if (Common.isAllWindowCap == true)
             {
