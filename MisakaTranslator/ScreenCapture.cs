@@ -115,7 +115,15 @@ namespace MisakaTranslator
                 img = GetWindowCapture(handle);
             }
             Bitmap bmpImage = new Bitmap(img);
+            try
+            {
             return bmpImage.Clone(rec, bmpImage.PixelFormat);
+            }
+            catch(OutOfMemoryException ex)
+            {
+                MessageBox.Show("内存不足，请稍后重试", "错误");
+                return null;
+            }
         }
 
         /// <summary>

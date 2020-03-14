@@ -138,8 +138,12 @@ namespace MisakaTranslator
         {
             BaiduGeneralOCRBasic.BaiduGeneralOCRBasic_Init();
             Image img = ScreenCapture.GetWindowRectCapture((IntPtr)SelectedHwnd, Common.OCRrec, Common.isAllWindowCap);
+            if(img == null)
+            {
+                MessageBox.Show("请选择正确的截屏区域", "警告");
+                return;
+            }
             string ret = BaiduGeneralOCRBasic.BaiduGeneralBasicOCR(img,srcLangCombox.SelectedValue);
-            
             MessageBox.Show(ret,"百度OCR结果");
         }
 
