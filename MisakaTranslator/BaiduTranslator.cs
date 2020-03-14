@@ -74,7 +74,9 @@ namespace MisakaTranslator
                 myStreamReader.Close();
                 myResponseStream.Close();
                 return retString;
-            } catch (WebException ex) {
+            } 
+            catch (WebException ex)
+            {
                 return "Request Timeout";
             }
         }

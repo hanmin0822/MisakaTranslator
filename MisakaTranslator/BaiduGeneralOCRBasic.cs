@@ -15,6 +15,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web;
+using System.Windows.Forms;
 
 namespace MisakaTranslator
 {
@@ -42,6 +43,19 @@ namespace MisakaTranslator
         public string words { get; set; }
     }
 
+    class BaiduOCRErrorInfo
+    {
+        public short error_code
+        {
+            get;
+            set;
+        }
+        public string error_msg
+        {
+            get;
+            set;
+        }
+    }
 
     class BaiduGeneralOCRBasic
     {
@@ -98,7 +112,14 @@ namespace MisakaTranslator
         public static String getFileBase64(Image img)
         {
             string fileName = Environment.CurrentDirectory + "\\OCRRes.png";
-            img.Save(fileName, ImageFormat.Png);
+            try
+            {
+                img.Save(fileName, ImageFormat.Png);
+            }
+            catch (System.NullReferenceException ex)
+            {
+                
+            }
             FileStream filestream = new FileStream(fileName, FileMode.Open);
             byte[] arr = new byte[filestream.Length];
             filestream.Read(arr, 0, (int)filestream.Length);

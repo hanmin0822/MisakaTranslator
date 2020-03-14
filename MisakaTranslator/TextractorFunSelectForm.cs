@@ -33,6 +33,16 @@ namespace MisakaTranslator
             }
             else
             {
+                //缺失texthook.dll时有时会抛出异常。尚未成功捕捉到异常
+                //try
+                //{
+                //TextractorFunListView.BeginInvoke(new Action(() => { TextractorFunListView.BeginUpdate(); }));
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show("未找到texthook.dll，请检查应用完整性。");
+                //    return;
+                //}
                 TextractorFunListView.BeginInvoke(new Action(() => { TextractorFunListView.BeginUpdate(); }));
                 ListViewItem lvi = new ListViewItem();
                 lvi.Text = Item[0];

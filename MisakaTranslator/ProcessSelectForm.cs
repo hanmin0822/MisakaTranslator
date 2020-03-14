@@ -150,8 +150,13 @@ namespace MisakaTranslator
             
             if (gamePID != -1)
             {
-                Common.GameID = Common.GetGameID(FindProcessPath(gamePID));
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID, "gameName",System.IO.Path.GetFileName(FindProcessPath(gamePID)));
+                string game_ID = FindProcessPath(gamePID); 
+                if(game_ID == "Exception")//判断是否为异常
+                {
+                    return;
+                }
+                Common.GameID = Common.GetGameID(game_ID);
+                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID, "gameName",System.IO.Path.GetFileName(game_ID));
                 
                 if (SameNameGameProcessList.Count == 1)
                 {
@@ -225,7 +230,15 @@ namespace MisakaTranslator
             {
                 if (ps[i].Id == pid)
                 {
+                    try
+                    {
                     filepath = ps[i].MainModule.FileName;
+                    }
+                    catch(System.ComponentModel.Win32Exception ex)
+                    {
+                        MessageBox.Show("无法捕捉64位程序，请使用64位翻译器再次尝试","错误");
+                        return "Exception";
+                    }
                     break;
                 }
             }

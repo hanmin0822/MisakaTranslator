@@ -59,9 +59,11 @@ namespace MisakaTranslator
             CP936   SAP 简体中文
             */
             int desCP;
-            if (issimplified == true){
+            if (issimplified == true)
+            {
                 desCP = 936;
-            }else {
+            }else 
+            {
                 desCP = 950;
             }
 
@@ -76,10 +78,13 @@ namespace MisakaTranslator
             int p1 = 1500;
             int p2 = 1500;
 
-            try{
+            try
+            {
                 int a = JC_Transfer_Unicode(0, 932, (uint)desCP, 1, 1, jp, jp2, ref p1, jp3, ref p2);
-            } catch (Exception ex) {
-                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
             Environment.CurrentDirectory = path;

@@ -64,6 +64,11 @@ namespace MisakaTranslator
 
         private void ScreenCaptureBtn_BtnClick(object sender, EventArgs e)
         {
+            if(Common.isAllWindowCap == false && SelectedHwnd == 0)
+            {
+                MessageBox.Show("请先选择窗口", "警告");
+                return;
+            }
             Image img;
             if (Common.isAllWindowCap == true)
             {
@@ -138,8 +143,12 @@ namespace MisakaTranslator
         {
             BaiduGeneralOCRBasic.BaiduGeneralOCRBasic_Init();
             Image img = ScreenCapture.GetWindowRectCapture((IntPtr)SelectedHwnd, Common.OCRrec, Common.isAllWindowCap);
+            if(img == null)
+            {
+                MessageBox.Show("请选择正确的截屏区域", "警告");
+                return;
+            }
             string ret = BaiduGeneralOCRBasic.BaiduGeneralBasicOCR(img,srcLangCombox.SelectedValue);
-            
             MessageBox.Show(ret,"百度OCR结果");
         }
 
