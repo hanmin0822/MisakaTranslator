@@ -56,4 +56,8 @@ E-Mail/QQ:512240272@qq.com
 
 ## 其他注意
 
+软件运行时需要调用Textractor的CLI版本读输出，但原版的控制台输出可能导致本软件无法读取或读取存在问题，针对CLI版本的修改如下，请自行编译后使用
+
+* [hanmin0822/Textractor](https://github.com/hanmin0822/Textractor)
+
 软件开发过程中使用到部分网络素材，如果侵犯到您的权益，请第一时间联系作者删除，谢谢！
