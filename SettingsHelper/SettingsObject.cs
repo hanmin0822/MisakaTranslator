@@ -15,17 +15,8 @@ namespace SettingsHelper
         public JObject Value;
         public SettingsObject()
         {
-            this.SettingsPath = Environment.CurrentDirectory + "\\settings\\settings.json";
-            try
-            {
-                JSONReader reader = new JSONReader(SettingsPath);
-                Value = reader.ReadJSON<JObject>();
-            }
-            catch(IOException ex)//捕获FileNotFoundException和DirectoryNotFoundException(参见JSONReader类中的异常类型)a
-            {
-                PostEvent(new SettingsNotFoundEventArgs("找不到配置文件，将重新生成配置"));
-                Value = new JObject();//返回空对象
-            }
+            SettingsPath = Environment.CurrentDirectory + "\\settings\\settings.json";
+            GetSettings();
         }
 
         /// <summary>
@@ -49,6 +40,20 @@ namespace SettingsHelper
             JSONWriter writer = new JSONWriter(SettingsPath);
             writer.WriteJSON<JObject>(this.Value);
             return;
+        }
+
+        public void GetSettings()
+        {
+            try
+            {
+                JSONReader reader = new JSONReader(SettingsPath);
+                Value = reader.ReadJSON<JObject>();
+            }
+            catch (IOException ex)//捕获FileNotFoundException和DirectoryNotFoundException(参见JSONReader类中的异常类型)a
+            {
+                PostEvent(new SettingsNotFoundEventArgs("找不到配置文件，将重新生成配置"));
+                Value = new JObject();//返回空对象
+            }
         }
     }
 }
