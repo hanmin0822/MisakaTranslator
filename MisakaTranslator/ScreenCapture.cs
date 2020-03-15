@@ -58,7 +58,7 @@ namespace MisakaTranslator
         //3 最大化窗口
         //使用实例: ShowWindow(myPtr, 0);
         #endregion
-        
+
         /// <summary>
         /// 根据窗口HWND截取窗口
         /// </summary>
@@ -102,8 +102,10 @@ namespace MisakaTranslator
         /// <param name="rec"></param>
         /// <param name="isAllWin">是否是全屏截屏</param>
         /// <returns></returns>
-        public static Image GetWindowRectCapture(IntPtr handle, Rectangle rec,bool isAllWin) {
-            if (rec.Width == 0 || rec.Height == 0) {
+        public static Image GetWindowRectCapture(IntPtr handle, Rectangle rec, bool isAllWin)
+        {
+            if (rec.Width == 0 || rec.Height == 0)
+            {
                 return null;
             }
             Image img;
@@ -111,15 +113,16 @@ namespace MisakaTranslator
             {
                 img = GetAllWindow();
             }
-            else {
+            else
+            {
                 img = GetWindowCapture(handle);
             }
             Bitmap bmpImage = new Bitmap(img);
             try
             {
-            return bmpImage.Clone(rec, bmpImage.PixelFormat);
+                return bmpImage.Clone(rec, bmpImage.PixelFormat);
             }
-            catch(OutOfMemoryException ex)
+            catch (OutOfMemoryException ex)
             {
                 MessageBox.Show("内存不足，请稍后重试", "错误");
                 return null;
@@ -130,7 +133,8 @@ namespace MisakaTranslator
         /// 全屏截屏
         /// </summary>
         /// <returns></returns>
-        public static Image GetAllWindow() {
+        public static Image GetAllWindow()
+        {
 
             int w = Screen.PrimaryScreen.Bounds.Width;
             int h = Screen.PrimaryScreen.Bounds.Height;
@@ -143,9 +147,9 @@ namespace MisakaTranslator
         }
     }
 
-    
 
-    
+
+
 
 
 

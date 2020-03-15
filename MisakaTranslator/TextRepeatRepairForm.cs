@@ -24,16 +24,17 @@ namespace MisakaTranslator
 
         private void TextRepeatRepairForm_Load(object sender, EventArgs e)
         {
-            
+
             FunctionSelectCombox.BoxStyle = ComboBoxStyle.DropDownList;
             FunctionSelectCombox.Source = TextRepeatRepair.GetAllFun();
 
             FunctionSelectCombox.SelectedIndex = 0;
         }
 
-        public void TextractorHookContent(string[] Item) {
+        public void TextractorHookContent(string[] Item)
+        {
             SourceTextBox.BeginInvoke(new Action(() => { SourceTextBox.Text = Item[3]; }));
-            
+
         }
 
         private void SourceTextBox_TextChanged(object sender, EventArgs e)
@@ -46,7 +47,8 @@ namespace MisakaTranslator
             UpdateDes();
         }
 
-        private void UpdateDes() {
+        private void UpdateDes()
+        {
             Console.WriteLine(FunctionSelectCombox.SelectedValue);
 
             Type t = typeof(TextRepeatRepair);//括号中的为所要使用的函数所在的类的类名
@@ -78,10 +80,11 @@ namespace MisakaTranslator
 
         private void TextRepeatRepairForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (isNormalClose == false) {
+            if (isNormalClose == false)
+            {
                 Common.TextractorHandle.CloseTextractor();
             }
-           
+
         }
     }
 }

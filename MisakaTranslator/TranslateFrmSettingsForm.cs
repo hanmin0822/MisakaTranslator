@@ -38,7 +38,7 @@ namespace MisakaTranslator
             {
                 FontList.Add(family.Name);
             }
-            
+
             FontsCombox.DropDownStyle = ComboBoxStyle.DropDownList;
             FontsCombox.DataSource = FontList;
 
@@ -46,22 +46,22 @@ namespace MisakaTranslator
             SetPartList.Add("原文");
             SetPartList.Add("第一翻译源");
             SetPartList.Add("第二翻译源");
-            
+
             PartCombox.DropDownStyle = ComboBoxStyle.DropDownList;
             PartCombox.DataSource = SetPartList;
 
-            
+
             lastPartChoose = 0;
             PartCombox.SelectedIndex = 0;
-            
+
             OpacityTrackBar.Value = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "opacity", "50"));
-            
+
             FontsCombox.Text = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextFont", "微软雅黑");
             TextSizeBox.Num = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextsize", "12"));
             ColorRTrackBar.Value = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorR", "0"));
             ColorGTrackBar.Value = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorG", "0"));
             ColorBTrackBar.Value = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorB", "0"));
-            
+
         }
 
         private void OpacityTrackBar_ValueChanged(object sender, EventArgs e)
@@ -69,7 +69,7 @@ namespace MisakaTranslator
             double FormOpacity = OpacityTrackBar.Value / 100;
             gtlbf.BeginInvoke(new Action(() => { gtlbf.Opacity = FormOpacity; }));
         }
-        
+
         private void FontsCombox_SelectedIndexChanged(object sender, EventArgs e)
         {
             gtlf.BeginInvoke(new Action(() => { gtlf.SetTextFont(FontsCombox.Text, (int)TextSizeBox.Num, PartCombox.SelectedIndex); }));
@@ -77,7 +77,7 @@ namespace MisakaTranslator
 
         private void TextSizeBox_NumChanged(object sender, EventArgs e)
         {
-            
+
             gtlf.BeginInvoke(new Action(() => { gtlf.SetTextFont(FontsCombox.Text, (int)TextSizeBox.Num, PartCombox.SelectedIndex); }));
         }
 
@@ -169,11 +169,12 @@ namespace MisakaTranslator
                 lastPartChoose = PartCombox.SelectedIndex;
 
             }
-            else {
+            else
+            {
                 openflag = false;
             }
 
-            
+
         }
 
         private void ColorRTrackBar_ValueChanged(object sender, EventArgs e)
@@ -196,7 +197,7 @@ namespace MisakaTranslator
             WinColorDialog.ShowDialog();
             gtlbf.BeginInvoke(new Action(() => { gtlbf.BackColor = this.WinColorDialog.Color; }));
             IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "BackColor", this.WinColorDialog.Color.ToArgb().ToString());
-            
+
         }
     }
 }

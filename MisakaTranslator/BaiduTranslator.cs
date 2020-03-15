@@ -22,12 +22,13 @@ namespace MisakaTranslator
 
         public static string appId;//百度翻译API 的APP ID
         public static string secretKey;//百度翻译API 的密钥
-        
-        public static void BaiduTrans_Init() {
+
+        public static void BaiduTrans_Init()
+        {
             appId = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduTranslator", "appID");
             secretKey = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduTranslator", "secretKey");
         }
-        
+
         /// <summary>
         /// 调用百度在线API翻译
         /// 语言简写列表 http://api.fanyi.baidu.com/product/113
@@ -36,7 +37,7 @@ namespace MisakaTranslator
         /// <param name="desLang">目的语言</param>
         /// <param name="srcLang">源语言</param>
         /// <returns></returns>
-        public static string Baidu_Translate(string sourceText,string desLang,string srcLang = "auto")
+        public static string Baidu_Translate(string sourceText, string desLang, string srcLang = "auto")
         {
             if (desLang == "kr")
                 desLang = "kor";
@@ -49,10 +50,10 @@ namespace MisakaTranslator
 
             // 原文
             string q = sourceText;
-            
+
             Random rd = new Random();
             string salt = rd.Next(100000).ToString();
-            
+
             string sign = EncryptString(appId + q + salt + secretKey);
             string url = "http://api.fanyi.baidu.com/api/trans/vip/translate?";
             url += "q=" + HttpUtility.UrlEncode(q);
@@ -66,7 +67,8 @@ namespace MisakaTranslator
             request.ContentType = "text/html;charset=UTF-8";
             request.UserAgent = null;
             request.Timeout = 6000;
-            try {
+            try
+            {
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 Stream myResponseStream = response.GetResponseStream();
                 StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
@@ -74,13 +76,13 @@ namespace MisakaTranslator
                 myStreamReader.Close();
                 myResponseStream.Close();
                 return retString;
-            } 
+            }
             catch (WebException ex)
             {
                 return "Request Timeout";
             }
         }
-        
+
         // 计算MD5值
         public static string EncryptString(string str)
         {
@@ -99,17 +101,19 @@ namespace MisakaTranslator
             // 返回加密的字符串
             return sb.ToString();
         }
-        
+
     }
 
-    class BaiduTransOutInfo {
+    class BaiduTransOutInfo
+    {
         public string from { get; set; }
         public string to { get; set; }
         public List<BaiduTransResult> trans_result { get; set; }
         public string error_code { get; set; }
     }
 
-    class BaiduTransResult {
+    class BaiduTransResult
+    {
         public string src { get; set; }
         public string dst { get; set; }
     }
