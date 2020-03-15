@@ -21,10 +21,11 @@ namespace MisakaTranslator
             InitializeComponent();
         }
 
-        
 
-        public void TextractorFunDealItem(int index, string[] Item,bool isExist) {
-            
+
+        public void TextractorFunDealItem(int index, string[] Item, bool isExist)
+        {
+
             if (isExist == true)
             {//表项已存在，更新
                 TextractorFunListView.BeginInvoke(new Action(() => { TextractorFunListView.BeginUpdate(); }));
@@ -49,7 +50,7 @@ namespace MisakaTranslator
                 lvi.SubItems.Add(Item[1]);
                 lvi.SubItems.Add(Item[2] + Item[4]);
                 lvi.SubItems.Add(Item[3]);
-                TextractorFunListView.BeginInvoke(new Action(() => { TextractorFunListView.Items.Insert(index,lvi); }));
+                TextractorFunListView.BeginInvoke(new Action(() => { TextractorFunListView.Items.Insert(index, lvi); }));
                 TextractorFunListView.BeginInvoke(new Action(() => { TextractorFunListView.EndUpdate(); }));
             }
 
@@ -69,25 +70,28 @@ namespace MisakaTranslator
                 string[] res = TextHookHandle.DealCode(TextractorFunListView.SelectedItems[0].SubItems[2].Text);
 
                 int sum = 0;
-                for (int i = 0;i < TextractorFunListView.Items.Count;i++) {
+                for (int i = 0; i < TextractorFunListView.Items.Count; i++)
+                {
                     if (TextractorFunListView.Items[i].SubItems[2].Text.Contains(res[0]))
                     {
                         sum++;
                     }
-                    if (sum >= 2) {
-                        IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\GameListInfo.ini", 
-                            "Game" + Common.GameID,"isHookFunMulti", "True");
+                    if (sum >= 2)
+                    {
+                        IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\GameListInfo.ini",
+                            "Game" + Common.GameID, "isHookFunMulti", "True");
                         break;
                     }
                 }
 
                 //不满足的游戏也应该记录一下
-                if (sum <= 1) {
+                if (sum <= 1)
+                {
                     IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\GameListInfo.ini",
                             "Game" + Common.GameID, "isHookFunMulti", "False");
                 }
-                
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID, 
+
+                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID,
                     "hookCode", res[0]);//保存特殊码，以后可以自动匹配这个游戏，但需要重设Plus部分
 
                 Common.HookCode = res[0];
@@ -102,7 +106,8 @@ namespace MisakaTranslator
                 this.Close();
 
             }
-            else {
+            else
+            {
                 MessageBox.Show("请先选择一个Hook方法再进行下一步操作！", "提示");
             }
         }

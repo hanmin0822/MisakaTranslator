@@ -14,8 +14,9 @@ namespace MisakaTranslator
 {
     class TextRepeatRepair
     {
-        
-        public static List<KeyValuePair<string, string>> GetAllFun() {
+
+        public static List<KeyValuePair<string, string>> GetAllFun()
+        {
             List<KeyValuePair<string, string>> ret = new List<KeyValuePair<string, string>>();
 
             ret.Add(new KeyValuePair<string, string>("RepairFun_NoDeal", "不进行处理"));
@@ -31,7 +32,8 @@ namespace MisakaTranslator
         /// 无处理方式
         /// </summary>
         /// <returns></returns>
-        public static string RepairFun_NoDeal(string source) {
+        public static string RepairFun_NoDeal(string source)
+        {
             return source;
         }
 
@@ -43,11 +45,12 @@ namespace MisakaTranslator
         /// <returns></returns>
         public static string RepairFun_RemoveSingleWordRepeat(string source)
         {
-            if (source == "") {
+            if (source == "")
+            {
                 return "";
             }
 
-            int repeatTimes = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\TextRepeatRepair.ini", "RepairFun_RemoveSingleWordRepeat","RepeatTimes","0"));
+            int repeatTimes = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\TextRepeatRepair.ini", "RepairFun_RemoveSingleWordRepeat", "RepeatTimes", "0"));
             int flag = 0;
             string ret = "";
 
@@ -98,7 +101,8 @@ namespace MisakaTranslator
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static string RepairFun_RemoveSentenceRepeat(string source) {
+        public static string RepairFun_RemoveSentenceRepeat(string source)
+        {
 
             if (source == "")
             {
@@ -118,7 +122,8 @@ namespace MisakaTranslator
             }
 
             int pos = text.IndexOf(cmp, findNum);
-            if (pos == -1) {
+            if (pos == -1)
+            {
                 return "句子去重出错";
             }
 
@@ -136,7 +141,8 @@ namespace MisakaTranslator
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static string RepairFun_RemoveLetterNumber(string source) {
+        public static string RepairFun_RemoveLetterNumber(string source)
+        {
             string strRemoved = Regex.Replace(source, "[a-z]", "", RegexOptions.IgnoreCase);
             strRemoved = Regex.Replace(strRemoved, "[0-9]", "", RegexOptions.IgnoreCase);
             return strRemoved;
@@ -149,11 +155,12 @@ namespace MisakaTranslator
         /// <returns></returns>
         public static string RepairFun_Custom(string source)
         {
-            if (source == "") {
+            if (source == "")
+            {
                 return "";
             }
 
-            Assembly asb = 
+            Assembly asb =
                 Assembly.LoadFrom(Environment.CurrentDirectory + "\\UserCustomRepairRepeat.dll");
             Type t = asb.GetType("UserCustomRepairRepeat.RepairRepeat");//获取类名 命名空间+类名
             object o = Activator.CreateInstance(t);
@@ -162,7 +169,7 @@ namespace MisakaTranslator
             {
                 source
             };
-            var ret = method.Invoke(o,obj);
+            var ret = method.Invoke(o, obj);
 
             return (string)ret;
         }

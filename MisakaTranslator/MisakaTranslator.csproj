@@ -154,6 +154,7 @@
       <DependentUpon>ScreenCapForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ScreenCapture.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="TencentOldTranslator.cs" />
     <Compile Include="TencentTranslator.cs" />
     <Compile Include="TextHookHandle.cs" />

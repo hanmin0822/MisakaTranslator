@@ -83,7 +83,8 @@ namespace MisakaTranslator
         /// </summary>
         /// <param name="hwnd"></param>
         /// <returns></returns>
-        public static int GetProcessIDByHWND(int hwnd) {
+        public static int GetProcessIDByHWND(int hwnd)
+        {
             int oo;
             IntPtr ip = new IntPtr(hwnd);
             GetWindowThreadProcessId(ip, out oo);

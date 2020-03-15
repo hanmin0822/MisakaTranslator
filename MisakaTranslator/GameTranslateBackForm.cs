@@ -123,13 +123,14 @@ namespace MisakaTranslator
             {
                 frmBack.StartPosition = FormStartPosition.CenterScreen;
             }
-            else {
-                frmBack.Location = new Point(LocX,LocY);
+            else
+            {
+                frmBack.Location = new Point(LocX, LocY);
                 frmBack.StartPosition = FormStartPosition.Manual;
                 frmBack.Width = SizeW;
                 frmBack.Height = SizeH;
             }
-            
+
             frmBack.ShowIcon = false;
             frmBack.ShowInTaskbar = false;
             frmBack.Opacity = frmBackOpacity;
@@ -169,7 +170,8 @@ namespace MisakaTranslator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private static void GameTranslateBackForm_FormClosing(object sender, EventArgs e) {
+        private static void GameTranslateBackForm_FormClosing(object sender, EventArgs e)
+        {
             IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "LocX", back.Left.ToString());
             IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "LocY", back.Top.ToString());
             IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "SizeW", back.Width.ToString());
@@ -181,7 +183,8 @@ namespace MisakaTranslator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private static void GameTranslateBackForm_SizeLocationChanged(object sender, EventArgs e) {
+        private static void GameTranslateBackForm_SizeLocationChanged(object sender, EventArgs e)
+        {
 
             offY = back.Height - back.ClientRectangle.Height;
 
@@ -200,20 +203,22 @@ namespace MisakaTranslator
         /// <param name="e"></param>
         private static void GameTranslateBackForm_DoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left) {
+            if (e.Button == MouseButtons.Left)
+            {
                 if (isLock == true)
                 {
                     back.FormBorderStyle = FormBorderStyle.Sizable;
                     isLock = false;
                 }
-                else {
+                else
+                {
                     back.FormBorderStyle = FormBorderStyle.None;
                     SetWindowRegion();
                     isLock = true;
                 }
             }
         }
-        
+
         /// <summary>
         /// 设置窗体的Region
         /// </summary>
@@ -274,7 +279,7 @@ namespace MisakaTranslator
 
         private static void SettingsItem_Click(object sender, EventArgs e)
         {
-            TranslateFrmSettingsForm tfsf = new TranslateFrmSettingsForm(top,back);
+            TranslateFrmSettingsForm tfsf = new TranslateFrmSettingsForm(top, back);
             tfsf.Show();
         }
 

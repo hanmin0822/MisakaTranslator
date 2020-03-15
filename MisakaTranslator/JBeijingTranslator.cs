@@ -45,11 +45,12 @@ namespace MisakaTranslator
         /// <param name="sourceString">源语句</param>
         /// <param name="issimplified">为真则翻译结果为简体中文</param>
         /// <returns></returns>
-        public static string Translate_JapanesetoChinese(string sourceString,bool issimplified = true)
+        public static string Translate_JapanesetoChinese(string sourceString, bool issimplified = true)
         {
             string JBeijingTranslatorPath = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "JBeijing", "JBJCTDllPath");
 
-            if (JBeijingTranslatorPath == "") {
+            if (JBeijingTranslatorPath == "")
+            {
                 return null;
             }
 
@@ -62,14 +63,15 @@ namespace MisakaTranslator
             if (issimplified == true)
             {
                 desCP = 936;
-            }else 
+            }
+            else
             {
                 desCP = 950;
             }
 
             string path = Environment.CurrentDirectory;
             Environment.CurrentDirectory = JBeijingTranslatorPath;
-            
+
             IntPtr jp = Marshal.StringToHGlobalUni(sourceString);
 
             IntPtr jp2 = Marshal.AllocHGlobal(3000);
@@ -94,7 +96,7 @@ namespace MisakaTranslator
             Marshal.FreeHGlobal(jp);
             Marshal.FreeHGlobal(jp2);
             Marshal.FreeHGlobal(jp3);
-            
+
             return ret;
         }
 

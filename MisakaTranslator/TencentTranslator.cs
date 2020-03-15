@@ -53,12 +53,13 @@ namespace MisakaTranslator
             req += "&time_stamp=" + GetTimeStamp();
             req += "&sign=" + EncryptString(req + "&app_key=" + appKey).ToUpper();
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url+req);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + req);
             request.Method = "GET";
             request.ContentType = "text/html;charset=UTF-8";
             request.UserAgent = null;
             request.Timeout = 6000;
-            try {
+            try
+            {
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 Stream myResponseStream = response.GetResponseStream();
                 StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
@@ -66,10 +67,12 @@ namespace MisakaTranslator
                 myStreamReader.Close();
                 myResponseStream.Close();
                 return retString;
-            } catch (WebException ex) {
+            }
+            catch (WebException ex)
+            {
                 return "Request Timeout";
             }
-            
+
         }
 
         public static string GetTimeStamp()
@@ -96,7 +99,7 @@ namespace MisakaTranslator
             // 返回加密的字符串
             return sb.ToString();
         }
-        
+
     }
 
 

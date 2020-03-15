@@ -21,7 +21,7 @@ namespace MisakaTranslator
         int gamePID;//找到的游戏PID
         List<Process> SameNameGameProcessList;//与gamePID进程同名的进程列表
 
-        
+
         public ProcessSelectForm()
         {
             InitializeComponent();
@@ -59,7 +59,9 @@ namespace MisakaTranslator
                 {
                     MessageBox.Show("安装钩子失败!");
                 }
-            } else if (SelectGameWindowBtn.BtnText == "结束选择") {
+            }
+            else if (SelectGameWindowBtn.BtnText == "结束选择")
+            {
                 hook.Stop();
                 SelectGameWindowBtn.BtnText = "选择窗口";
             }
@@ -70,24 +72,28 @@ namespace MisakaTranslator
         /// </summary>
         void Hook_OnMouseActivity(object sender, MouseEventArgs e)
         {
-            int hwnd = FindWindowInfo.GetWindowHWND(e.X,e.Y);
-            string gameName =  FindWindowInfo.GetWindowName(hwnd);
+            int hwnd = FindWindowInfo.GetWindowHWND(e.X, e.Y);
+            string gameName = FindWindowInfo.GetWindowName(hwnd);
             int pid = FindWindowInfo.GetProcessIDByHWND(hwnd);
 
-            if (Process.GetCurrentProcess().Id != pid) {
+            if (Process.GetCurrentProcess().Id != pid)
+            {
                 ProcessInfoLabel.Text = "[实时]" + gameName + "—" + pid;
 
                 bool flag = false;
-                for (int i = 0;i < processList.Count;i++) {
+                for (int i = 0; i < processList.Count; i++)
+                {
                     KeyValuePair<string, string> pkvp = processList[i];
-                    if (pkvp.Key == pid.ToString()) {
+                    if (pkvp.Key == pid.ToString())
+                    {
                         SystemProcessCombox.SelectedIndex = i;
                         flag = true;
                         break;
                     }
                 }
 
-                if (flag == false) {
+                if (flag == false)
+                {
                     //打开这个窗口后再打开游戏的情况
                     ReNewSystemProcessCombox();
                     for (int i = 0; i < processList.Count; i++)
@@ -107,14 +113,15 @@ namespace MisakaTranslator
                 hook.Stop();
                 SelectGameWindowBtn.BtnText = "选择窗口";
             }
-            
+
 
         }
 
         /// <summary>
         /// 刷新组合框中的进程列表
         /// </summary>
-        private void ReNewSystemProcessCombox() {
+        private void ReNewSystemProcessCombox()
+        {
             processList.Clear();
             //获取系统进程列表
             ps = Process.GetProcesses();
@@ -137,32 +144,35 @@ namespace MisakaTranslator
 
         private void ProcessSelectForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (SelectGameWindowBtn.BtnText == "结束选择") {
+            if (SelectGameWindowBtn.BtnText == "结束选择")
+            {
                 hook.Stop();
             }
         }
 
         private void ConfirmBtn_BtnClick(object sender, EventArgs e)
         {
-            if (SelectGameWindowBtn.BtnText == "结束选择") {
+            if (SelectGameWindowBtn.BtnText == "结束选择")
+            {
                 hook.Stop();
             }
-            
+
             if (gamePID != -1)
             {
-                string game_ID = FindProcessPath(gamePID); 
-                if(game_ID == "Exception")//判断是否为异常
+                string game_ID = FindProcessPath(gamePID);
+                if (game_ID == "Exception")//判断是否为异常
                 {
                     return;
                 }
                 Common.GameID = Common.GetGameID(game_ID);
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID, "gameName",System.IO.Path.GetFileName(game_ID));
-                
+                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID, "gameName", System.IO.Path.GetFileName(game_ID));
+
                 if (SameNameGameProcessList.Count == 1)
                 {
                     Common.TextractorHandle = new TextHookHandle(gamePID);
                 }
-                else {
+                else
+                {
                     Common.TextractorHandle = new TextHookHandle(SameNameGameProcessList);
                 }
                 Common.TextractorHandle.Init();
@@ -176,14 +186,16 @@ namespace MisakaTranslator
 
                 this.Close();
             }
-            else {
-                MessageBox.Show("请先选择一个进程再进行下一步操作！","提示");
+            else
+            {
+                MessageBox.Show("请先选择一个进程再进行下一步操作！", "提示");
             }
         }
 
         private void SystemProcessCombox_SelectedChangedEvent(object sender, EventArgs e)
         {
-            if (SystemProcessCombox.SelectedIndex != -1) {
+            if (SystemProcessCombox.SelectedIndex != -1)
+            {
                 gamePID = int.Parse(SystemProcessCombox.SelectedValue);
             }
 
@@ -197,12 +209,15 @@ namespace MisakaTranslator
         /// </summary>
         /// <param name="pid"></param>
         /// <returns></returns>
-        private List<Process> FindSameNameProcess(int pid) {
+        private List<Process> FindSameNameProcess(int pid)
+        {
             List<Process> res = new List<Process>();
             string DesProcessName = "";
 
-            for (int i = 0;i < ps.Length;i++) {
-                if (ps[i].Id == pid) {
+            for (int i = 0; i < ps.Length; i++)
+            {
+                if (ps[i].Id == pid)
+                {
                     DesProcessName = ps[i].ProcessName;
                     break;
                 }
@@ -215,7 +230,7 @@ namespace MisakaTranslator
                     res.Add(ps[i]);
                 }
             }
-            
+
             return res;
         }
 
@@ -224,7 +239,8 @@ namespace MisakaTranslator
         /// </summary>
         /// <param name="pid"></param>
         /// <returns></returns>
-        private string FindProcessPath(int pid) {
+        private string FindProcessPath(int pid)
+        {
             string filepath = "";
             for (int i = 0; i < ps.Length; i++)
             {
@@ -232,11 +248,11 @@ namespace MisakaTranslator
                 {
                     try
                     {
-                    filepath = ps[i].MainModule.FileName;
+                        filepath = ps[i].MainModule.FileName;
                     }
-                    catch(System.ComponentModel.Win32Exception ex)
+                    catch (System.ComponentModel.Win32Exception ex)
                     {
-                        MessageBox.Show("无法捕捉64位程序，请使用64位翻译器再次尝试","错误");
+                        MessageBox.Show("无法捕捉64位程序，请使用64位翻译器再次尝试", "错误");
                         return "Exception";
                     }
                     break;

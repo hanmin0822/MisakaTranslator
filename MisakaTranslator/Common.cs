@@ -11,7 +11,8 @@ using System.IO;
 
 namespace MisakaTranslator
 {
-    struct TextInfo {
+    struct TextInfo
+    {
         public string TIsrcText;
         public string TIfirstTransText;
         public string TIsecondTransText;
@@ -53,7 +54,8 @@ namespace MisakaTranslator
         /// <returns></returns>
         public static int GetGameID(string gamepath)
         {
-            if (File.Exists("GameList.txt") == false) {
+            if (File.Exists("GameList.txt") == false)
+            {
                 File.Create("GameList.txt").Close();
             }
 
@@ -90,7 +92,8 @@ namespace MisakaTranslator
         /// <param name="srcText"></param>
         /// <param name="firstTransText"></param>
         /// <param name="secondTransText"></param>
-        public static void AddHistoryText(string srcText,string firstTransText,string secondTransText) {
+        public static void AddHistoryText(string srcText, string firstTransText, string secondTransText)
+        {
             if (Common.HistoryTextInfos.Count >= 5)
             {
                 Common.HistoryTextInfos.Dequeue();
@@ -107,7 +110,8 @@ namespace MisakaTranslator
         /// 记录Textractor的历史输出记录
         /// </summary>
         /// <param name="output"></param>
-        public static void AddTextractorHistory(string output) {
+        public static void AddTextractorHistory(string output)
+        {
             if (Common.TextractorOutPutHistory.Count >= 1000)
             {
                 Common.TextractorOutPutHistory.Dequeue();
@@ -118,7 +122,8 @@ namespace MisakaTranslator
         /// <summary>
         /// 导出Textractor的历史输出记录
         /// </summary>
-        public static void ExportTextractorHistory() {
+        public static void ExportTextractorHistory()
+        {
             FileStream fs = new FileStream("TextractorOutPutHistory.txt", FileMode.Create);
             StreamWriter sw = new StreamWriter(fs);
 
@@ -129,10 +134,11 @@ namespace MisakaTranslator
             sw.WriteLine("HookCodePlus=" + HookCodePlus);
             sw.WriteLine("=================以下是Textractor的历史输出记录================");
             string[] history = Common.TextractorOutPutHistory.ToArray();
-            for (int i = 0;i < history.Length;i++) {
+            for (int i = 0; i < history.Length; i++)
+            {
                 sw.WriteLine(history[i]);
             }
-            
+
             sw.Flush();
             sw.Close();
             fs.Close();
