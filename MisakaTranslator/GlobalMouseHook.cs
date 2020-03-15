@@ -48,19 +48,19 @@ namespace MisakaTranslator
 
         // 定义鼠标钩子句柄.
         static int _hMouseHook = 0;
-        
+
         public int HMouseHook
         {
             get { return _hMouseHook; }
         }
-        
+
 
         // 鼠标钩子常量(from Microsoft SDK  Winuser.h )
         public const int WH_MOUSE_LL = 14;
-        
+
         //定义鼠标处理过程的委托对象
         GlobalHookProc MouseHookProcedure;
-        
+
 
         //导入window 钩子扩展方法导入
 
@@ -110,7 +110,7 @@ namespace MisakaTranslator
                     //throw new Exception("SetWindowsHookEx failed.");
                 }
             }
-            
+
             return true;
         }
 
@@ -122,7 +122,7 @@ namespace MisakaTranslator
                 retMouse = UnhookWindowsHookEx(_hMouseHook);
                 _hMouseHook = 0;
             }
-            
+
             //If UnhookWindowsHookEx fails.
             if (!(retMouse))
             {
@@ -139,7 +139,7 @@ namespace MisakaTranslator
             {
                 UnhookWindowsHookEx(hMouseHook);
             }
-            
+
         }
 
         private const int WM_MOUSEMOVE = 0x200;
@@ -190,7 +190,7 @@ namespace MisakaTranslator
 
                         break;
                     case WM_RBUTTONDOWN:
-                        
+
                         button = MouseButtons.Right;
                         break;
                 }

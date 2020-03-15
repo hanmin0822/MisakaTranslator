@@ -39,10 +39,11 @@ namespace MisakaTranslator
             {
                 TransparencyColor = Color.AliceBlue;
             }
-            else {
+            else
+            {
                 TransparencyColor = Color.FromArgb(int.Parse(color));
             }
-            
+
             InitUI();
             this.Load += GameTranslateForm_Load;
         }
@@ -52,7 +53,8 @@ namespace MisakaTranslator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void GameTranslateForm_Load(object sender, EventArgs e) {
+        private void GameTranslateForm_Load(object sender, EventArgs e)
+        {
             // 设置背景全透明
             this.BackColor = TransparencyColor;
             this.TransparencyKey = TransparencyColor;
@@ -153,22 +155,23 @@ namespace MisakaTranslator
                 }
 
             }
-            
+
 
             TextFontColorInit();
 
-            firstTransAPI = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", 
+            firstTransAPI = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini",
                 "Translate_All", "FirstTranslator", "NoTranslate");
-            secondTransAPI = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", 
+            secondTransAPI = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini",
                 "Translate_All", "SecondTranslator", "NoTranslate");
-            
+
         }
 
         /// <summary>
         /// 设置背景窗口
         /// </summary>
         /// <param name="bk"></param>
-        public void SetBackForm(GameTranslateBackForm bk) {
+        public void SetBackForm(GameTranslateBackForm bk)
+        {
             back = bk;
         }
 
@@ -225,7 +228,8 @@ namespace MisakaTranslator
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void GameTranslateForm_SizeChanged(object sender, EventArgs e) {
+        private void GameTranslateForm_SizeChanged(object sender, EventArgs e)
+        {
             LabelInit();
             //SetWindowRegion();
         }
@@ -364,8 +368,8 @@ namespace MisakaTranslator
             {
                 //OCR方式下单击鼠标进行更新
                 //先判断是单窗口还是全屏幕，如果是单窗口再判断是不是在游戏窗口中点的
-                
-                if ( (Common.isAllWindowCap == true && Process.GetCurrentProcess().Id != FindWindowInfo.GetProcessIDByHWND(FindWindowInfo.GetWindowHWND(e.X, e.Y)) ) 
+
+                if ((Common.isAllWindowCap == true && Process.GetCurrentProcess().Id != FindWindowInfo.GetProcessIDByHWND(FindWindowInfo.GetWindowHWND(e.X, e.Y)))
                     || Common.OCRWinHwnd == (IntPtr)FindWindowInfo.GetWindowHWND(e.X, e.Y))
                 {
                     if (IsOCRingFlag == false)
@@ -451,18 +455,20 @@ namespace MisakaTranslator
             {
                 string str = (string)mt.Invoke(null, new object[] { Item[3] });
 
-                srcTextLabel.BeginInvoke(new Action(() => {
+                srcTextLabel.BeginInvoke(new Action(() =>
+                {
                     srcTextLabel.Text = str;
                     GameTranslateAuto(str, Common.srcLang, Common.desLang);
                     firstTransTextLabel.Text = firstTransText;
                     secondTransTextLabel.Text = secondTransText;
                     Common.AddHistoryText(str, firstTransText, secondTransText);
                 }));
-                
+
             }
             else
             {
-                srcTextLabel.BeginInvoke(new Action(() => {
+                srcTextLabel.BeginInvoke(new Action(() =>
+                {
                     srcTextLabel.Text = "Hook去重处理出现错误";
                     firstTransTextLabel.Text = "";
                     secondTransTextLabel.Text = "";
@@ -470,7 +476,7 @@ namespace MisakaTranslator
             }
         }
 
-        
+
         /*
          * 
 
@@ -550,7 +556,7 @@ namespace MisakaTranslator
         }
         */
 
-        
+
         /// <summary>
         /// 自动进行游戏翻译
         /// 检查是否设置了分行翻译、去掉一些乱码类型的符号、检查是否空文本
@@ -558,12 +564,14 @@ namespace MisakaTranslator
         /// <param name="text"></param>
         /// <param name="srcLang"></param>
         /// <param name="desLang"></param>
-        public void GameTranslateAuto(string text,string srcLang,string desLang) {
+        public void GameTranslateAuto(string text, string srcLang, string desLang)
+        {
 
             //先检查玩家是否设置了分行翻译
             bool eachRowTrans = Convert.ToBoolean(IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "Translate_All", "EachRowTrans", "True"));
-            if (eachRowTrans == false) {
-                text = text.Replace("<br>","").Replace("</br>","").Replace("\n", "").Replace("\t", "").Replace("\r", "");
+            if (eachRowTrans == false)
+            {
+                text = text.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
             }
 
             //处理：去掉一些乱码类型的符号
@@ -571,7 +579,7 @@ namespace MisakaTranslator
 
             string currentAPI;
             string ret = "";
-            
+
             for (int i = 1; i <= 2; i++)
             {
                 if (i == 1)
@@ -587,7 +595,8 @@ namespace MisakaTranslator
                 {
                     ret = "";
                 }
-                else {
+                else
+                {
                     if (currentAPI == "BaiduTranslator")
                     {
                         ret = BaiduTranslator.Baidu_Translate(text, desLang, srcLang);
@@ -665,7 +674,7 @@ namespace MisakaTranslator
                         ret = "";
                     }
                 }
-                
+
                 if (i == 1)
                 {
                     firstTransText = ret;
@@ -674,21 +683,23 @@ namespace MisakaTranslator
                 {
                     secondTransText = ret;
                 }
-                
+
             }
         }
 
         /// <summary>
         /// 刷新OCR识别，重置窗口结果,使用多线程解决卡顿
         /// </summary>
-        public void ReNewOCR() {
+        public void ReNewOCR()
+        {
             if (Common.TransMode == 2)
             {
                 if (IsOCRingFlag == false)
                 {
                     IsOCRingFlag = true;
 
-                    ThreadPool.QueueUserWorkItem(state => {
+                    ThreadPool.QueueUserWorkItem(state =>
+                    {
                         Image img = ScreenCapture.GetWindowRectCapture(Common.OCRWinHwnd, Common.OCRrec, Common.isAllWindowCap);
                         string ret = BaiduGeneralOCRBasic.BaiduGeneralBasicOCR(img, Common.OCRsrcLangCode);
 
@@ -722,10 +733,11 @@ namespace MisakaTranslator
 
                     IsOCRingFlag = false;
                 }
-                
+
             }
-            else {
-                MessageBox.Show("当前处于非OCR翻译模式，无法刷新！","错误");
+            else
+            {
+                MessageBox.Show("当前处于非OCR翻译模式，无法刷新！", "错误");
             }
         }
 
@@ -733,11 +745,13 @@ namespace MisakaTranslator
         /// 设置原文标签是否可视
         /// </summary>
         /// <param name="flag"></param>
-        public void SetSrcTextLabelVisible(bool flag) {
-            srcTextLabel.BeginInvoke(new Action(() => {
+        public void SetSrcTextLabelVisible(bool flag)
+        {
+            srcTextLabel.BeginInvoke(new Action(() =>
+            {
                 srcTextLabel.Visible = flag;
             }));
         }
-       
+
     }
 }

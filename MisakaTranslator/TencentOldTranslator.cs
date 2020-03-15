@@ -45,7 +45,8 @@ namespace MisakaTranslator
             SecretKey = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TencentOldTranslator", "SecretKey");
         }
 
-        public static string TencentOld_Translate(string sourceText, string desLang, string srcLang) {
+        public static string TencentOld_Translate(string sourceText, string desLang, string srcLang)
+        {
             // 原文
             string q = sourceText;
 

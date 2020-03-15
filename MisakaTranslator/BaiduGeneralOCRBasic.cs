@@ -32,14 +32,16 @@ namespace MisakaTranslator
         public string session_secret { get; set; }
     }
 
-    class BaiduOCRresOutInfo {
+    class BaiduOCRresOutInfo
+    {
         public long log_id { get; set; }
         public List<BaiduOCRresDataOutInfo> words_result { get; set; }
         public int words_result_num { get; set; }
-        
+
     }
 
-    class BaiduOCRresDataOutInfo {
+    class BaiduOCRresDataOutInfo
+    {
         public string words { get; set; }
     }
 
@@ -63,19 +65,22 @@ namespace MisakaTranslator
         public static string secretKey;
         public static string accessToken;
 
-        public static bool BaiduGeneralOCRBasic_Init() {
+        public static bool BaiduGeneralOCRBasic_Init()
+        {
             APIKey = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduOCR", "APIKEY", "");
             secretKey = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduOCR", "SecretKey", "");
             string ret = BaiduGetToken(APIKey, secretKey);
             BaiduTokenOutInfo btoi = JsonConvert.DeserializeObject<BaiduTokenOutInfo>(ret);
-            if (btoi.access_token!=null) {
+            if (btoi.access_token != null)
+            {
                 accessToken = btoi.access_token;
                 return true;
             }
             return false;
         }
 
-        public static string BaiduGetToken(string clientId,string clientSecret) {
+        public static string BaiduGetToken(string clientId, string clientSecret)
+        {
             String authHost = "https://aip.baidubce.com/oauth/2.0/token";
             HttpClient client = new HttpClient();
             List<KeyValuePair<String, String>> paraList = new List<KeyValuePair<string, string>>();
@@ -90,7 +95,7 @@ namespace MisakaTranslator
         }
 
         // 通用文字识别
-        public static string BaiduGeneralBasicOCR(Image img,string langCode)
+        public static string BaiduGeneralBasicOCR(Image img, string langCode)
         {
             string host = "https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic?access_token=" + accessToken;
             Encoding encoding = Encoding.Default;
@@ -118,7 +123,7 @@ namespace MisakaTranslator
             }
             catch (System.NullReferenceException ex)
             {
-                
+
             }
             FileStream filestream = new FileStream(fileName, FileMode.Open);
             byte[] arr = new byte[filestream.Length];

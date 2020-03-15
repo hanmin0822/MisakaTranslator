@@ -21,7 +21,8 @@ namespace MisakaTranslator
         private void HistoryTextForm_Load(object sender, EventArgs e)
         {
             TextInfo[] ti = Common.HistoryTextInfos.ToArray();
-            for (int i = ti.Count()-1; i >=0 ;i--) {
+            for (int i = ti.Count() - 1; i >= 0; i--)
+            {
                 HistoryTextBox.Text += ti[i].TIsrcText + "\r\n";
                 HistoryTextBox.Text += ti[i].TIfirstTransText + "\r\n";
                 HistoryTextBox.Text += ti[i].TIsecondTransText + "\r\n";

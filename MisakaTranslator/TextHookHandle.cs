@@ -31,7 +31,8 @@ namespace MisakaTranslator
         private int listViewIndex_plus;
         private Dictionary<string, int> TextractorFunPlus_Index_List;//特殊码附加值与列表索引一一对应
 
-        public TextHookHandle(int gamePID) {
+        public TextHookHandle(int gamePID)
+        {
             ProcessTextractor = null;
             MaxMemoryProcess = null;
             GamePID = gamePID;
@@ -51,8 +52,10 @@ namespace MisakaTranslator
             GamePID = -1;
             PossibleGameProcessList = new Dictionary<Process, bool>();
             MaxMemoryProcess = GameProcessList[0];
-            for (int i = 0; i < GameProcessList.Count; i++) {
-                if (GameProcessList[i].WorkingSet64 > MaxMemoryProcess.WorkingSet64) {
+            for (int i = 0; i < GameProcessList.Count; i++)
+            {
+                if (GameProcessList[i].WorkingSet64 > MaxMemoryProcess.WorkingSet64)
+                {
                     MaxMemoryProcess = GameProcessList[i];
                 }
                 PossibleGameProcessList.Add(GameProcessList[i], false);
@@ -67,8 +70,10 @@ namespace MisakaTranslator
             TextractorFunPlus_Index_List = new Dictionary<string, int>();
         }
 
-        ~TextHookHandle() {
-            if (ProcessTextractor != null) {
+        ~TextHookHandle()
+        {
+            if (ProcessTextractor != null)
+            {
                 CloseTextractor();
             }
         }
@@ -77,17 +82,18 @@ namespace MisakaTranslator
         /// 初始化
         /// </summary>
         /// <returns></returns>
-        public bool Init() {
+        public bool Init()
+        {
             string Path = Environment.CurrentDirectory + "\\lib\\TextHook";
 
             string CurrentPath = Environment.CurrentDirectory;
             try
             {
-            Environment.CurrentDirectory = Path;//更改当前工作目录保证TextractorCLI正常运行
+                Environment.CurrentDirectory = Path;//更改当前工作目录保证TextractorCLI正常运行
             }
-            catch(System.IO.DirectoryNotFoundException ex)
+            catch (System.IO.DirectoryNotFoundException ex)
             {
-                MessageBox.Show("未找到Textractor所在目录，请检查应用完整性。","错误");
+                MessageBox.Show("未找到Textractor所在目录，请检查应用完整性。", "错误");
                 return false;
             }
 
@@ -101,14 +107,14 @@ namespace MisakaTranslator
             ProcessTextractor.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
             try
             {
-            bool res = ProcessTextractor.Start();
-            ProcessTextractor.BeginOutputReadLine();
-            Environment.CurrentDirectory = CurrentPath;//打开后即可恢复原目录
-            return res;
+                bool res = ProcessTextractor.Start();
+                ProcessTextractor.BeginOutputReadLine();
+                Environment.CurrentDirectory = CurrentPath;//打开后即可恢复原目录
+                return res;
             }
-            catch(System.ComponentModel.Win32Exception ex)
+            catch (System.ComponentModel.Win32Exception ex)
             {
-                MessageBox.Show("未找到Textractor，请检查应用完整性。","错误");
+                MessageBox.Show("未找到Textractor，请检查应用完整性。", "错误");
                 return false;
             }
         }
@@ -117,7 +123,8 @@ namespace MisakaTranslator
         /// <summary>
         /// 开始注入，会判断是否自动注入
         /// </summary>
-        public async void StartHook() {
+        public async void StartHook()
+        {
             if (HandleMode == 1)
             {
                 await AttachProcess(GamePID);
@@ -135,7 +142,8 @@ namespace MisakaTranslator
                         PossibleGameProcessList[item.Key] = true;
                     }
                 }
-                else {
+                else
+                {
                     await AttachProcess(MaxMemoryProcess.Id);
                 }
             }
@@ -154,9 +162,11 @@ namespace MisakaTranslator
 
             string[] dealRes = DealTextratorOutput(outLine.Data);
 
-            if (dealRes != null) {
+            if (dealRes != null)
+            {
 
-                if (dealRes[1] != "Console" && dealRes[1] != "") {
+                if (dealRes[1] != "Console" && dealRes[1] != "")
+                {
 
                     //Hook入口选择窗口处理
                     if (OutputSettingsform != null && OutputSettingsform is TextractorFunSelectForm)
@@ -176,9 +186,11 @@ namespace MisakaTranslator
                     }
 
                     //文本去重窗口处理
-                    if (OutputSettingsform != null && OutputSettingsform is TextRepeatRepairForm) {
+                    if (OutputSettingsform != null && OutputSettingsform is TextRepeatRepairForm)
+                    {
                         TextRepeatRepairForm frm = (TextRepeatRepairForm)OutputSettingsform;
-                        if (Common.HookCode != "" && dealRes[2] == Common.HookCode && dealRes[4] == Common.HookCodePlus) {
+                        if (Common.HookCode != "" && dealRes[2] == Common.HookCode && dealRes[4] == Common.HookCodePlus)
+                        {
                             frm.TextractorHookContent(dealRes);
                         }
                     }
@@ -205,7 +217,8 @@ namespace MisakaTranslator
 
                     //游戏翻译窗口处理
                     //如果Common.HookCodePlus = "NoMulti"则说明没有多重处理，不用再对比HookCodePlus
-                    if (GameTransForm != null) {
+                    if (GameTransForm != null)
+                    {
                         if (Common.HookCode != "" && dealRes[2] == Common.HookCode && (Common.HookCodePlus == "NoMulti" || dealRes[4] == Common.HookCodePlus))
                         {
                             GameTransForm.TextractorHookContent(dealRes);
@@ -225,7 +238,8 @@ namespace MisakaTranslator
         /// 注入进程
         /// </summary>
         /// <param name="pid"></param>
-        public async Task AttachProcess(int pid) {
+        public async Task AttachProcess(int pid)
+        {
             await ProcessTextractor.StandardInput.WriteLineAsync("attach -P" + pid);
             await ProcessTextractor.StandardInput.FlushAsync();
         }
@@ -244,7 +258,8 @@ namespace MisakaTranslator
         /// <summary>
         /// 关闭Textractor进程
         /// </summary>
-        public async void CloseTextractor() {
+        public async void CloseTextractor()
+        {
 
             if (ProcessTextractor != null && ProcessTextractor.HasExited == false)
             {
@@ -281,7 +296,8 @@ namespace MisakaTranslator
         private string GetMiddleString(string Text, string front, string back, int location)
         {
 
-            if (front == "" || back == "") {
+            if (front == "" || back == "")
+            {
                 return null;
             }
 
@@ -309,14 +325,17 @@ namespace MisakaTranslator
         /// </summary>
         /// <param name="OutputText">来自Textrator的输出</param>
         /// <returns></returns>
-        private string[] DealTextratorOutput(string OutputText) {
+        private string[] DealTextratorOutput(string OutputText)
+        {
 
-            if (OutputText == "" || OutputText == null) {
+            if (OutputText == "" || OutputText == null)
+            {
                 return null;
             }
 
             string Info = GetMiddleString(OutputText, "[", "]", 0);
-            if (Info == null) {
+            if (Info == null)
+            {
                 return null;
             }
 
@@ -343,17 +362,20 @@ namespace MisakaTranslator
 
                 return ret;
             }
-            else {
+            else
+            {
                 return null;
             }
 
         }
 
-        public void SetSettingsOutPutform(MaterialForm form) {
+        public void SetSettingsOutPutform(MaterialForm form)
+        {
             OutputSettingsform = form;
         }
 
-        public void SetGameTransForm(GameTranslateForm frm) {
+        public void SetGameTransForm(GameTranslateForm frm)
+        {
             GameTransForm = frm;
         }
 
@@ -363,13 +385,14 @@ namespace MisakaTranslator
         /// 分离  特殊码【值1:值2:值3】
         /// </summary>
         /// <returns>返回数组 [0]为特殊码，[1]为【值1:值2:值3】</returns>
-        public static string[] DealCode(string code){
+        public static string[] DealCode(string code)
+        {
             if (code == "")
             {
                 return null;
             }
             string[] ret = new string[2];
-            
+
             string[] res = code.Split('【');
             ret[0] = res[0];
             ret[1] = "【" + res[1];

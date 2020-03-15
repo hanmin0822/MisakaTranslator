@@ -14,7 +14,7 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace MisakaTranslator
-    
+
 {
     public partial class MainForm : MaterialForm
     {
@@ -59,7 +59,7 @@ namespace MisakaTranslator
         {
             BtnHinrLabel.Text = "通过窗口/列表选取一个进程并使用Textrator方法注入以获取翻译";
         }
-        
+
         /// <summary>
         /// 设置按钮点击事件
         /// </summary>
@@ -83,7 +83,8 @@ namespace MisakaTranslator
             {
                 MessageBox.Show("未找到任何正在运行中的已保存游戏", "提示");
             }
-            else {
+            else
+            {
                 Common.TransMode = 1;
                 Common.GameID = res[1];
                 Common.HookCode = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID, "hookCode");
@@ -96,13 +97,14 @@ namespace MisakaTranslator
                 {
                     Common.TextractorHandle = new TextHookHandle(proList[0].Id);
                 }
-                else {
+                else
+                {
                     Common.TextractorHandle = new TextHookHandle(proList);
                 }
-                
+
                 Common.TextractorHandle.Init();
 
-                bool isFunReSelect = Convert.ToBoolean(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID, "isHookFunMulti","False"));
+                bool isFunReSelect = Convert.ToBoolean(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID, "isHookFunMulti", "False"));
 
                 if (isFunReSelect == true)
                 {
@@ -111,13 +113,14 @@ namespace MisakaTranslator
                     Common.TextractorHandle.SetSettingsOutPutform(tfcf);
                     tfcf.Show();
                 }
-                else {
+                else
+                {
                     Common.HookCodePlus = "NoMulti";//提示无重复码。直接进游戏
                     GameTranslateForm gtf = new GameTranslateForm();
                     Common.TextractorHandle.StartHook();
                     Common.TextractorHandle.SetGameTransForm(gtf);
                     GameTranslateBackForm.Show(gtf);
-                    
+
                 }
             }
         }
@@ -157,7 +160,8 @@ namespace MisakaTranslator
         /// 寻找任何正在运行中的之前已保存过的游戏
         /// </summary>
         /// <returns>进程ID列表</returns>
-        private List<int> GetGameListHasProcessGame_PID_ID() {
+        private List<int> GetGameListHasProcessGame_PID_ID()
+        {
             Process[] ps = Process.GetProcesses();
             List<int> ret = new List<int>();
             if (File.Exists("GameList.txt") == true)

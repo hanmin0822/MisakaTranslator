@@ -22,7 +22,7 @@ namespace MisakaTranslator
         {
             List<KeyValuePair<string, string>> langList = new List<KeyValuePair<string, string>>();
 
-            langList.Add(new KeyValuePair<string, string>("zh","中文"));
+            langList.Add(new KeyValuePair<string, string>("zh", "中文"));
             langList.Add(new KeyValuePair<string, string>("en", "英语"));
             langList.Add(new KeyValuePair<string, string>("jp", "日语"));
             langList.Add(new KeyValuePair<string, string>("kr", "韩语"));//百度为kor
@@ -54,7 +54,8 @@ namespace MisakaTranslator
                 Common.desLang = dstLangCombox.SelectedValue;
 
                 GameTranslateForm gtlf = new GameTranslateForm();
-                if (Common.TransMode != 2) {
+                if (Common.TransMode != 2)
+                {
                     Common.TextractorHandle.SetGameTransForm(gtlf);
                 }
 

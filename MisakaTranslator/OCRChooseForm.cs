@@ -28,7 +28,7 @@ namespace MisakaTranslator
         {
             Common.isAllWindowCap = false;
             List<KeyValuePair<string, string>> srcLangls = new List<KeyValuePair<string, string>>();
-            srcLangls.Add(new KeyValuePair<string, string>("JAP","日语"));
+            srcLangls.Add(new KeyValuePair<string, string>("JAP", "日语"));
             srcLangls.Add(new KeyValuePair<string, string>("ENG", "英语"));
 
             srcLangCombox.BoxStyle = ComboBoxStyle.DropDownList;
@@ -64,7 +64,7 @@ namespace MisakaTranslator
 
         private void ScreenCaptureBtn_BtnClick(object sender, EventArgs e)
         {
-            if(Common.isAllWindowCap == false && SelectedHwnd == 0)
+            if (Common.isAllWindowCap == false && SelectedHwnd == 0)
             {
                 MessageBox.Show("请先选择窗口", "警告");
                 return;
@@ -78,7 +78,7 @@ namespace MisakaTranslator
             {
                 img = ScreenCapture.GetWindowCapture((IntPtr)SelectedHwnd);
             }
-            
+
             ScreenCapForm scf = new ScreenCapForm(img);
             scf.BackgroundImage = img;
             scf.Width = img.Width;
@@ -118,21 +118,22 @@ namespace MisakaTranslator
 
         private void renovateORCPicBtn_BtnClick(object sender, EventArgs e)
         {
-            Image img = ScreenCapture.GetWindowRectCapture((IntPtr)SelectedHwnd,Common.OCRrec, Common.isAllWindowCap);
+            Image img = ScreenCapture.GetWindowRectCapture((IntPtr)SelectedHwnd, Common.OCRrec, Common.isAllWindowCap);
             PreviewBox.BackgroundImage = img;
         }
 
         private void OCRConfirmBtn_BtnClick(object sender, EventArgs e)
         {
             Common.OCRdelay = int.Parse(delaySetBox.InputText);
-            if (Common.OCRdelay <= 0) {
+            if (Common.OCRdelay <= 0)
+            {
                 MessageBox.Show("延时不能小于等于0，将自动设置为1000", "提示");
                 Common.OCRdelay = 1000;
             }
             Common.TransMode = 2;
             Common.OCRWinHwnd = (IntPtr)SelectedHwnd;
             Common.OCRsrcLangCode = srcLangCombox.SelectedValue;
-            
+
             TransLangSettingForm tlsf = new TransLangSettingForm();
             tlsf.Show();
             this.Close();
@@ -143,13 +144,13 @@ namespace MisakaTranslator
         {
             BaiduGeneralOCRBasic.BaiduGeneralOCRBasic_Init();
             Image img = ScreenCapture.GetWindowRectCapture((IntPtr)SelectedHwnd, Common.OCRrec, Common.isAllWindowCap);
-            if(img == null)
+            if (img == null)
             {
                 MessageBox.Show("请选择正确的截屏区域", "警告");
                 return;
             }
-            string ret = BaiduGeneralOCRBasic.BaiduGeneralBasicOCR(img,srcLangCombox.SelectedValue);
-            MessageBox.Show(ret,"百度OCR结果");
+            string ret = BaiduGeneralOCRBasic.BaiduGeneralBasicOCR(img, srcLangCombox.SelectedValue);
+            MessageBox.Show(ret, "百度OCR结果");
         }
 
         private void AllWinCheckBox_CheckedChangeEvent(object sender, EventArgs e)
@@ -167,6 +168,6 @@ namespace MisakaTranslator
             Common.isAllWindowCap = AllWinCheckBox.Checked;
         }
 
-        
+
     }
 }
