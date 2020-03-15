@@ -16,7 +16,6 @@ namespace SettingsHelper
         public SettingsObject()
         {
             SettingsPath = Environment.CurrentDirectory + "\\settings\\settings.json";
-            GetSettings();
         }
 
         /// <summary>
