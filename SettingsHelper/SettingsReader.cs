@@ -11,6 +11,6 @@ namespace SettingsHelper
         /// 获取设置的接口
         /// </summary>
         /// <returns>设置对象</returns>
-        //SettingsObject GetSettings();
+        void GetSettings();
     }
 }
