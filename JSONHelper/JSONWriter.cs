@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using System.Text;
@@ -42,9 +43,11 @@ namespace JSONHelper
                  SecurityException
                     调用方没有所要求的权限。
                  */
-                using (StreamWriter writer = new StreamWriter(Path))
+                JsonSerializer serializer = new JsonSerializer();
+                using (StreamWriter streamWriter = new StreamWriter(Path))
+                using (JsonWriter writer = new JsonTextWriter(streamWriter))
                 {
-                    writer.WriteLine(jsonText);
+                    serializer.Serialize(writer, jsonText);
                 }
             }
             catch (Exception ex)//在上层处理异常

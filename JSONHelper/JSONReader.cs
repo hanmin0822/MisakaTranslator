@@ -13,12 +13,15 @@ namespace JSONHelper
             get;
             set;
         }
-        public JSONReader(string path)
+        public JSONReader(string path, bool checkExtensionName = false)
         {
-            Regex regex = new Regex("\\.[jJ][sS][oO][nN]");
-            if (!regex.IsMatch(path))//判断拓展名
+            if(checkExtensionName)
             {
-                throw new ArgumentOutOfRangeException("path", "传入的不是JSON格式文件");//抛出异常
+                Regex regex = new Regex("\\.[jJ][sS][oO][nN]");
+                if (!regex.IsMatch(path))//判断拓展名
+                {
+                    throw new ArgumentOutOfRangeException("path", "传入的不是JSON格式文件");//抛出异常
+                }
             }
             this.Path = path;
         }
