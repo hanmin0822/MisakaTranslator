@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>MisakaTranslator</RootNamespace>
     <AssemblyName>MisakaTranslator</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -27,6 +27,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -154,7 +155,6 @@
       <DependentUpon>ScreenCapForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ScreenCapture.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="TencentOldTranslator.cs" />
     <Compile Include="TencentTranslator.cs" />
     <Compile Include="TextHookHandle.cs" />

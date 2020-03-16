@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SettingsHelper", "SettingsH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{395CE196-AA7F-4343-A0CC-C281FA6C48D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSONHelper", "JSONHelper\JSONHelper.csproj", "{17AE73D3-A228-4E07-8ADD-3C4935D00B61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JSONHelper", "JSONHelper\JSONHelper.csproj", "{17AE73D3-A228-4E07-8ADD-3C4935D00B61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MisakaTranslator-WPF", "MisakaTranslator-WPF\MisakaTranslator-WPF.csproj", "{642624F2-AE09-4D72-98CC-93FB052783FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,14 @@ Global
 		{17AE73D3-A228-4E07-8ADD-3C4935D00B61}.Release|Any CPU.Build.0 = Release|Any CPU
 		{17AE73D3-A228-4E07-8ADD-3C4935D00B61}.Release|x64.ActiveCfg = Release|Any CPU
 		{17AE73D3-A228-4E07-8ADD-3C4935D00B61}.Release|x64.Build.0 = Release|Any CPU
+		{642624F2-AE09-4D72-98CC-93FB052783FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{642624F2-AE09-4D72-98CC-93FB052783FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{642624F2-AE09-4D72-98CC-93FB052783FA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{642624F2-AE09-4D72-98CC-93FB052783FA}.Debug|x64.Build.0 = Debug|Any CPU
+		{642624F2-AE09-4D72-98CC-93FB052783FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{642624F2-AE09-4D72-98CC-93FB052783FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{642624F2-AE09-4D72-98CC-93FB052783FA}.Release|x64.ActiveCfg = Release|Any CPU
+		{642624F2-AE09-4D72-98CC-93FB052783FA}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
