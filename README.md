@@ -34,6 +34,7 @@ Galgame/文字游戏多语种实时机翻工具
 * [Artikash/Textractor](https://github.com/Artikash/Textractor)
 * [JamesNK/Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
 * [kwwwvagaa/NetWinformControl](https://github.com/kwwwvagaa/NetWinformControl)
+* [Panuon/PanuonUI.Silver](https://github.com/Panuon/PanuonUI.Silver)
 
 ## 本项目开发过程中使用到的重要参考文献
 
