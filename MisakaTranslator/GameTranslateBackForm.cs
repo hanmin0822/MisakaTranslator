@@ -25,6 +25,7 @@ namespace MisakaTranslator
         public static int offY = 30;
         public static bool isLock;
         public static bool isShowSrcText;
+        public static bool isPause;
 
         /// <summary>
         /// 设置背景窗口透明度
@@ -50,6 +51,7 @@ namespace MisakaTranslator
             ToolStripMenuItem HistoryTextItem = new ToolStripMenuItem();
             ToolStripMenuItem ExitTransFrmItem = new ToolStripMenuItem();
             ToolStripMenuItem ShowsrcTextFrmItem = new ToolStripMenuItem();
+            ToolStripMenuItem PauseStartItem = new ToolStripMenuItem();
 
             FunMenuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             FunMenuStrip.Depth = 0;
@@ -59,6 +61,7 @@ namespace MisakaTranslator
                 ReNewOCRItem,
                 HistoryTextItem,
                 ShowsrcTextFrmItem,
+                PauseStartItem,
                 ExitTransFrmItem});
             FunMenuStrip.MouseState = MaterialSkin.MouseState.HOVER;
             FunMenuStrip.ShowImageMargin = false;
@@ -99,6 +102,12 @@ namespace MisakaTranslator
             ShowsrcTextFrmItem.Size = new System.Drawing.Size(155, 22);
             ShowsrcTextFrmItem.Text = "显示/隐藏原文";
             ShowsrcTextFrmItem.Click += ShowSrcTextItem_Click;
+            // 
+            // 一件暂停/恢复ToolStripMenuItem
+            // 
+            PauseStartItem.Size = new System.Drawing.Size(155, 22);
+            PauseStartItem.Text = "暂停/恢复";
+            PauseStartItem.Click += PauseStartItem_Click;
 
 
             top = frmTop;
@@ -107,18 +116,17 @@ namespace MisakaTranslator
             top.SetBackForm(frmBack);
             back = frmBack;
 
-            double frmBackOpacity = (double)(double.Parse(
-                IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings",
-                "opacity", "50")) / 100);
+            double frmBackOpacity = (double)(double.Parse(Common.settings.TF_Opacity) / 100);
 
             frmBack.Text = "MisakaTranslator游戏翻译窗口";
             frmBack.FormBorderStyle = FormBorderStyle.None;
             frmBack.MaximizeBox = false;
 
-            int LocX = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "LocX", "-1"));
-            int LocY = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "LocY", "-1"));
-            int SizeW = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "SizeW", "-1"));
-            int SizeH = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "SizeH", "-1"));
+            int LocX = int.Parse(Common.settings.TF_LocX);
+            int LocY = int.Parse(Common.settings.TF_LocY);
+            int SizeW = int.Parse(Common.settings.TF_SizeW);
+            int SizeH = int.Parse(Common.settings.TF_SizeH);
+
             if (LocX == -1 && LocY == -1)
             {
                 frmBack.StartPosition = FormStartPosition.CenterScreen;
@@ -134,7 +142,7 @@ namespace MisakaTranslator
             frmBack.ShowIcon = false;
             frmBack.ShowInTaskbar = false;
             frmBack.Opacity = frmBackOpacity;
-            string color = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "BackColor", "Noset");
+            string color = Common.settings.TF_BackColor;
             if (color == "Noset")
             {
                 frmBack.BackColor = Color.LightGray;
@@ -159,6 +167,7 @@ namespace MisakaTranslator
 
             isLock = true;
             isShowSrcText = true;
+            isPause = false;
 
             // 显示窗体
             frmTop.Show();
@@ -172,10 +181,10 @@ namespace MisakaTranslator
         /// <param name="e"></param>
         private static void GameTranslateBackForm_FormClosing(object sender, EventArgs e)
         {
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "LocX", back.Left.ToString());
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "LocY", back.Top.ToString());
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "SizeW", back.Width.ToString());
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "SizeH", back.Height.ToString());
+            Common.settings.TF_LocX = back.Left.ToString();
+            Common.settings.TF_LocY = back.Top.ToString();
+            Common.settings.TF_SizeW = back.Width.ToString();
+            Common.settings.TF_SizeH = back.Height.ToString();
         }
 
         /// <summary>
@@ -311,6 +320,27 @@ namespace MisakaTranslator
             }
 
             top.SetSrcTextLabelVisible(isShowSrcText);
+        }
+
+        private static void PauseStartItem_Click(object sender, EventArgs e)
+        {
+            if (isPause == true)
+            {
+                isPause = false;
+            }
+            else
+            {
+                isPause = true;
+            }
+
+            if (Common.TransMode == 1)
+            {
+                Common.TextractorHandle.isPause = isPause;
+            }
+            else {
+                top.isPause = isPause;
+            }
+            
         }
     }
 }

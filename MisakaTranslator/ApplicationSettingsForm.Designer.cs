@@ -32,6 +32,8 @@
             this.SettingsMenu = new HZH_Controls.Controls.UCMenu();
             this.SettingsTabControl = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.GithubBtn = new HZH_Controls.Controls.UCBtnExt();
             this.HelpBtn = new HZH_Controls.Controls.UCBtnExt();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.GetTextractorHistoryBtn = new HZH_Controls.Controls.UCBtnExt();
@@ -117,10 +119,13 @@
             this.TXOKeyTextBox = new HZH_Controls.Controls.UCTextBoxEx();
             this.materialLabel29 = new MaterialSkin.Controls.MaterialLabel();
             this.TXOappidTextBox = new HZH_Controls.Controls.UCTextBoxEx();
-            this.GithubBtn = new HZH_Controls.Controls.UCBtnExt();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.OCRsourceCombox = new HZH_Controls.Controls.UCCombox();
+            this.materialLabel30 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel31 = new MaterialSkin.Controls.MaterialLabel();
             this.SettingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -128,7 +133,7 @@
             this.tabPage6.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.tabPage8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabPage9.SuspendLayout();
             this.SuspendLayout();
             // 
             // SettingsMenu
@@ -160,6 +165,7 @@
             this.SettingsTabControl.Controls.Add(this.tabPage6);
             this.SettingsTabControl.Controls.Add(this.tabPage7);
             this.SettingsTabControl.Controls.Add(this.tabPage8);
+            this.SettingsTabControl.Controls.Add(this.tabPage9);
             this.SettingsTabControl.Depth = 0;
             this.SettingsTabControl.Location = new System.Drawing.Point(199, 65);
             this.SettingsTabControl.MouseState = MaterialSkin.MouseState.HOVER;
@@ -180,6 +186,42 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "关于";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::MisakaTranslator.Properties.Resources.About;
+            this.pictureBox1.Location = new System.Drawing.Point(81, 29);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(545, 346);
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
+            // GithubBtn
+            // 
+            this.GithubBtn.BackColor = System.Drawing.Color.White;
+            this.GithubBtn.BtnBackColor = System.Drawing.Color.White;
+            this.GithubBtn.BtnFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.GithubBtn.BtnForeColor = System.Drawing.Color.White;
+            this.GithubBtn.BtnText = "GitHub主页";
+            this.GithubBtn.ConerRadius = 5;
+            this.GithubBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.GithubBtn.EnabledMouseEffect = true;
+            this.GithubBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.GithubBtn.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.GithubBtn.IsRadius = true;
+            this.GithubBtn.IsShowRect = true;
+            this.GithubBtn.IsShowTips = false;
+            this.GithubBtn.Location = new System.Drawing.Point(423, 393);
+            this.GithubBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.GithubBtn.Name = "GithubBtn";
+            this.GithubBtn.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(58)))));
+            this.GithubBtn.RectWidth = 1;
+            this.GithubBtn.Size = new System.Drawing.Size(203, 45);
+            this.GithubBtn.TabIndex = 2;
+            this.GithubBtn.TabStop = false;
+            this.GithubBtn.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
+            this.GithubBtn.TipsText = "";
+            this.GithubBtn.BtnClick += new System.EventHandler(this.GithubBtn_BtnClick);
             // 
             // HelpBtn
             // 
@@ -2201,41 +2243,71 @@
             this.TXOappidTextBox.Size = new System.Drawing.Size(257, 37);
             this.TXOappidTextBox.TabIndex = 34;
             // 
-            // GithubBtn
+            // tabPage9
             // 
-            this.GithubBtn.BackColor = System.Drawing.Color.White;
-            this.GithubBtn.BtnBackColor = System.Drawing.Color.White;
-            this.GithubBtn.BtnFont = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.GithubBtn.BtnForeColor = System.Drawing.Color.White;
-            this.GithubBtn.BtnText = "GitHub主页";
-            this.GithubBtn.ConerRadius = 5;
-            this.GithubBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.GithubBtn.EnabledMouseEffect = true;
-            this.GithubBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
-            this.GithubBtn.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.GithubBtn.IsRadius = true;
-            this.GithubBtn.IsShowRect = true;
-            this.GithubBtn.IsShowTips = false;
-            this.GithubBtn.Location = new System.Drawing.Point(423, 393);
-            this.GithubBtn.Margin = new System.Windows.Forms.Padding(0);
-            this.GithubBtn.Name = "GithubBtn";
-            this.GithubBtn.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(58)))));
-            this.GithubBtn.RectWidth = 1;
-            this.GithubBtn.Size = new System.Drawing.Size(203, 45);
-            this.GithubBtn.TabIndex = 2;
-            this.GithubBtn.TabStop = false;
-            this.GithubBtn.TipsColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(30)))), ((int)(((byte)(99)))));
-            this.GithubBtn.TipsText = "";
-            this.GithubBtn.BtnClick += new System.EventHandler(this.GithubBtn_BtnClick);
+            this.tabPage9.Controls.Add(this.OCRsourceCombox);
+            this.tabPage9.Controls.Add(this.materialLabel30);
+            this.tabPage9.Controls.Add(this.materialLabel31);
+            this.tabPage9.Location = new System.Drawing.Point(4, 4);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(706, 454);
+            this.tabPage9.TabIndex = 8;
+            this.tabPage9.Text = "OCR_通用";
+            this.tabPage9.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
+            // OCRsourceCombox
             // 
-            this.pictureBox1.Image = global::MisakaTranslator.Properties.Resources.About;
-            this.pictureBox1.Location = new System.Drawing.Point(81, 29);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(545, 346);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
+            this.OCRsourceCombox.BackColor = System.Drawing.Color.Transparent;
+            this.OCRsourceCombox.BackColorExt = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.OCRsourceCombox.BoxStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            this.OCRsourceCombox.ConerRadius = 5;
+            this.OCRsourceCombox.DropPanelHeight = -1;
+            this.OCRsourceCombox.FillColor = System.Drawing.Color.White;
+            this.OCRsourceCombox.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.OCRsourceCombox.IsRadius = true;
+            this.OCRsourceCombox.IsShowRect = true;
+            this.OCRsourceCombox.ItemWidth = 70;
+            this.OCRsourceCombox.Location = new System.Drawing.Point(301, 155);
+            this.OCRsourceCombox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.OCRsourceCombox.Name = "OCRsourceCombox";
+            this.OCRsourceCombox.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.OCRsourceCombox.RectWidth = 1;
+            this.OCRsourceCombox.SelectedIndex = -1;
+            this.OCRsourceCombox.SelectedValue = "";
+            this.OCRsourceCombox.Size = new System.Drawing.Size(209, 35);
+            this.OCRsourceCombox.Source = null;
+            this.OCRsourceCombox.TabIndex = 47;
+            this.OCRsourceCombox.TextValue = null;
+            this.OCRsourceCombox.TriangleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.OCRsourceCombox.SelectedChangedEvent += new System.EventHandler(this.OCRsourceCombox_SelectedChangedEvent);
+            // 
+            // materialLabel30
+            // 
+            this.materialLabel30.AutoSize = true;
+            this.materialLabel30.Depth = 0;
+            this.materialLabel30.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.materialLabel30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel30.Location = new System.Drawing.Point(205, 162);
+            this.materialLabel30.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel30.Name = "materialLabel30";
+            this.materialLabel30.Size = new System.Drawing.Size(71, 20);
+            this.materialLabel30.TabIndex = 46;
+            this.materialLabel30.Text = "OCR来源";
+            // 
+            // materialLabel31
+            // 
+            this.materialLabel31.AutoSize = true;
+            this.materialLabel31.Depth = 0;
+            this.materialLabel31.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.materialLabel31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel31.Location = new System.Drawing.Point(22, 19);
+            this.materialLabel31.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel31.Name = "materialLabel31";
+            this.materialLabel31.Size = new System.Drawing.Size(650, 100);
+            this.materialLabel31.TabIndex = 45;
+            this.materialLabel31.Text = "在这里进行所有OCR选项的通用设置，一个实时翻译窗口只能设置一种OCR方式\r\n您可以指定OCR过程中用到的API\r\n注：离线OCR功能使用Tesseract实现，" +
+    "目前可支持英语、日语的来源识别，如果识别效果不理想\r\n可以考虑自行训练相关OCR字库或使用百度在线OCR识别\r\n更多有关OCR预处理的设置选项见OCR设置窗口";
             // 
             // ApplicationSettingsForm
             // 
@@ -2252,6 +2324,7 @@
             this.Load += new System.EventHandler(this.ApplicationSettingsForm_Load);
             this.SettingsTabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -2266,7 +2339,8 @@
             this.tabPage7.PerformLayout();
             this.tabPage8.ResumeLayout(false);
             this.tabPage8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabPage9.ResumeLayout(false);
+            this.tabPage9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2363,5 +2437,9 @@
         private HZH_Controls.Controls.UCBtnExt GetTextractorHistoryBtn;
         private HZH_Controls.Controls.UCBtnExt GithubBtn;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TabPage tabPage9;
+        private HZH_Controls.Controls.UCCombox OCRsourceCombox;
+        private MaterialSkin.Controls.MaterialLabel materialLabel30;
+        private MaterialSkin.Controls.MaterialLabel materialLabel31;
     }
 }

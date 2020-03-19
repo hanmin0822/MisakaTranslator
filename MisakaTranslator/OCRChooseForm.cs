@@ -19,6 +19,8 @@ namespace MisakaTranslator
         GlobalMouseHook hook;//全局鼠标钩子
         int SelectedHwnd;//选择的窗口句柄
 
+        private Bitmap srcPic;
+
         public OCRChooseForm()
         {
             InitializeComponent();
@@ -119,7 +121,8 @@ namespace MisakaTranslator
         private void renovateORCPicBtn_BtnClick(object sender, EventArgs e)
         {
             Image img = ScreenCapture.GetWindowRectCapture((IntPtr)SelectedHwnd, Common.OCRrec, Common.isAllWindowCap);
-            PreviewBox.BackgroundImage = img;
+            PreviewBox.Image = img;
+            srcPic = (Bitmap)img;
         }
 
         private void OCRConfirmBtn_BtnClick(object sender, EventArgs e)
@@ -133,6 +136,24 @@ namespace MisakaTranslator
             Common.TransMode = 2;
             Common.OCRWinHwnd = (IntPtr)SelectedHwnd;
             Common.OCRsrcLangCode = srcLangCombox.SelectedValue;
+            
+            if (srcLangCombox.SelectedValue == "JAP")
+            {
+                TesseractOCR.srcLangCode = "jpn";
+            }
+            else if(srcLangCombox.SelectedValue == "ENG")
+            {
+                TesseractOCR.srcLangCode = "eng";
+            }
+
+            if (PreHandleCheckBox.Checked == true)
+            {
+                TesseractOCR.thresh = (int)threshTrackBar.Value;
+            }
+            else {
+                TesseractOCR.thresh = -1;
+            }
+            
 
             TransLangSettingForm tlsf = new TransLangSettingForm();
             tlsf.Show();
@@ -142,15 +163,48 @@ namespace MisakaTranslator
 
         private void TestOCRBtn_BtnClick(object sender, EventArgs e)
         {
-            BaiduGeneralOCRBasic.BaiduGeneralOCRBasic_Init();
-            Image img = ScreenCapture.GetWindowRectCapture((IntPtr)SelectedHwnd, Common.OCRrec, Common.isAllWindowCap);
-            if (img == null)
+            srcPic = (Bitmap)ScreenCapture.GetWindowRectCapture((IntPtr)SelectedHwnd, Common.OCRrec, Common.isAllWindowCap);
+            if (srcPic == null)
             {
                 MessageBox.Show("请选择正确的截屏区域", "警告");
                 return;
             }
-            string ret = BaiduGeneralOCRBasic.BaiduGeneralBasicOCR(img, srcLangCombox.SelectedValue);
-            MessageBox.Show(ret, "百度OCR结果");
+
+            Bitmap bm;
+            if (PreHandleCheckBox.Checked == true)
+            {
+                
+                TesseractOCR.thresh = (int)threshTrackBar.Value;
+                bm = TesseractOCR.Thresholding(srcPic);
+            }
+            else
+            {
+                bm = srcPic;
+            }
+            
+
+            if (Common.settings.OCRsource == "BaiduOCR")
+            {
+                BaiduGeneralOCRBasic.BaiduGeneralOCRBasic_Init();
+                
+                string ret = BaiduGeneralOCRBasic.BaiduGeneralBasicOCR(bm, srcLangCombox.SelectedValue);
+                MessageBox.Show(ret, "百度OCR结果");
+            }
+            else {
+                if (srcLangCombox.SelectedValue == "JAP")
+                {
+                    TesseractOCR.srcLangCode = "jpn";
+                }
+                else if (srcLangCombox.SelectedValue == "ENG")
+                {
+                    TesseractOCR.srcLangCode = "eng";
+                }
+                TesseractOCR.TesseractOCR_Init();
+                
+
+                string ret = TesseractOCR.OCRProcess(bm);
+                MessageBox.Show(ret, "Tesseract离线OCR结果");
+            }
         }
 
         private void AllWinCheckBox_CheckedChangeEvent(object sender, EventArgs e)
@@ -168,6 +222,28 @@ namespace MisakaTranslator
             Common.isAllWindowCap = AllWinCheckBox.Checked;
         }
 
+        private void threshTrackBar_ValueChanged(object sender, EventArgs e)
+        {
+            if (PreHandleCheckBox.Checked == true) {
+                srcPic = (Bitmap)ScreenCapture.GetWindowRectCapture((IntPtr)SelectedHwnd, Common.OCRrec, Common.isAllWindowCap);
+                TesseractOCR.thresh = (int)threshTrackBar.Value;
+                PreviewBox.Image = TesseractOCR.Thresholding(srcPic);
+            }
+        }
 
+        private void PreHandleCheckBox_CheckedChangeEvent(object sender, EventArgs e)
+        {
+            if (PreHandleCheckBox.Checked == true)
+            {
+                srcPic = (Bitmap)ScreenCapture.GetWindowRectCapture((IntPtr)SelectedHwnd, Common.OCRrec, Common.isAllWindowCap);
+                TesseractOCR.thresh = (int)threshTrackBar.Value;
+                PreviewBox.Image = TesseractOCR.Thresholding(srcPic);
+                
+            }
+            else {
+                srcPic = (Bitmap)ScreenCapture.GetWindowRectCapture((IntPtr)SelectedHwnd, Common.OCRrec, Common.isAllWindowCap);
+                PreviewBox.Image = srcPic;
+            }
+        }
     }
 }

@@ -46,10 +46,10 @@ namespace MisakaTranslator
             }
             else
             {
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID,
-                    "srcLang", srcLangCombox.SelectedValue);//保存游戏源语言
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID,
-                    "dstLang", dstLangCombox.SelectedValue);//保存目标翻译语言
+
+                SQLiteHelper sqliteH = new SQLiteHelper(Environment.CurrentDirectory + "\\settings\\GameList.sqlite");
+                sqliteH.ExecuteSql(string.Format("UPDATE gamelist SET srcLang = '{0}',dstLang = '{1}' WHERE gameID = {2};", srcLangCombox.SelectedValue, dstLangCombox.SelectedValue, Common.GameID));
+
                 Common.srcLang = srcLangCombox.SelectedValue;
                 Common.desLang = dstLangCombox.SelectedValue;
 

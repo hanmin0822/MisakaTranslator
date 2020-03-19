@@ -31,6 +31,8 @@ namespace MisakaTranslator
         private int listViewIndex_plus;
         private Dictionary<string, int> TextractorFunPlus_Index_List;//特殊码附加值与列表索引一一对应
 
+        public bool isPause;//暂停Hook标志,为真时停止获取文本
+
         public TextHookHandle(int gamePID)
         {
             ProcessTextractor = null;
@@ -131,7 +133,7 @@ namespace MisakaTranslator
             }
             else if (HandleMode == 2)
             {
-                if (Convert.ToBoolean(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "Textractor", "AutoHook", "false")))
+                if (Convert.ToBoolean(Common.settings.AutoHook))
                 {
                     //不进行智能注入
                     for (int i = 0; i < PossibleGameProcessList.Count; i++)
@@ -160,75 +162,75 @@ namespace MisakaTranslator
             //Console.WriteLine(outLine.Data);
             Common.AddTextractorHistory(outLine.Data);
 
-            string[] dealRes = DealTextratorOutput(outLine.Data);
+            if (isPause == false) {
 
-            if (dealRes != null)
-            {
+                string[] dealRes = DealTextratorOutput(outLine.Data);
 
-                if (dealRes[1] != "Console" && dealRes[1] != "")
+                if (dealRes != null)
                 {
 
-                    //Hook入口选择窗口处理
-                    if (OutputSettingsform != null && OutputSettingsform is TextractorFunSelectForm)
+                    if (dealRes[1] != "Console" && dealRes[1] != "")
                     {
-                        if (TextractorFun_Index_List.ContainsKey(dealRes[2] + dealRes[4]) == true)
-                        {
-                            TextractorFunSelectForm frm = (TextractorFunSelectForm)OutputSettingsform;
-                            frm.TextractorFunDealItem(TextractorFun_Index_List[dealRes[2] + dealRes[4]], dealRes, true);
-                        }
-                        else
-                        {
-                            TextractorFun_Index_List.Add(dealRes[2] + dealRes[4], listViewIndex);
-                            TextractorFunSelectForm frm = (TextractorFunSelectForm)OutputSettingsform;
-                            frm.TextractorFunDealItem(listViewIndex, dealRes, false);
-                            listViewIndex++;
-                        }
-                    }
 
-                    //文本去重窗口处理
-                    if (OutputSettingsform != null && OutputSettingsform is TextRepeatRepairForm)
-                    {
-                        TextRepeatRepairForm frm = (TextRepeatRepairForm)OutputSettingsform;
-                        if (Common.HookCode != "" && dealRes[2] == Common.HookCode && dealRes[4] == Common.HookCodePlus)
+                        //Hook入口选择窗口处理
+                        if (OutputSettingsform != null && OutputSettingsform is TextractorFunSelectForm)
                         {
-                            frm.TextractorHookContent(dealRes);
-                        }
-                    }
-
-                    //Hook入口重复确认窗口处理
-                    if (OutputSettingsform != null && OutputSettingsform is TextractorFunReConfirmForm)
-                    {
-                        TextractorFunReConfirmForm frm = (TextractorFunReConfirmForm)OutputSettingsform;
-                        if (Common.HookCode != "" && dealRes[2] == Common.HookCode)
-                        {
-                            if (TextractorFunPlus_Index_List.ContainsKey(dealRes[4]) == true)
+                            if (TextractorFun_Index_List.ContainsKey(dealRes[2] + dealRes[4]) == true)
                             {
-
-                                frm.TextractorFunDealItem(TextractorFunPlus_Index_List[dealRes[4]], dealRes, true);
+                                TextractorFunSelectForm frm = (TextractorFunSelectForm)OutputSettingsform;
+                                frm.TextractorFunDealItem(TextractorFun_Index_List[dealRes[2] + dealRes[4]], dealRes, true);
                             }
                             else
                             {
-                                TextractorFunPlus_Index_List.Add(dealRes[4], listViewIndex_plus);
-                                frm.TextractorFunDealItem(listViewIndex_plus, dealRes, false);
-                                listViewIndex_plus++;
+                                TextractorFun_Index_List.Add(dealRes[2] + dealRes[4], listViewIndex);
+                                TextractorFunSelectForm frm = (TextractorFunSelectForm)OutputSettingsform;
+                                frm.TextractorFunDealItem(listViewIndex, dealRes, false);
+                                listViewIndex++;
                             }
                         }
-                    }
 
-                    //游戏翻译窗口处理
-                    //如果Common.HookCodePlus = "NoMulti"则说明没有多重处理，不用再对比HookCodePlus
-                    if (GameTransForm != null)
-                    {
-                        if (Common.HookCode != "" && dealRes[2] == Common.HookCode && (Common.HookCodePlus == "NoMulti" || dealRes[4] == Common.HookCodePlus))
+                        //文本去重窗口处理
+                        if (OutputSettingsform != null && OutputSettingsform is TextRepeatRepairForm)
                         {
-                            GameTransForm.TextractorHookContent(dealRes);
+                            TextRepeatRepairForm frm = (TextRepeatRepairForm)OutputSettingsform;
+                            if (Common.HookCode != "" && dealRes[2] == Common.HookCode && dealRes[4] == Common.HookCodePlus)
+                            {
+                                frm.TextractorHookContent(dealRes);
+                            }
+                        }
+
+                        //Hook入口重复确认窗口处理
+                        if (OutputSettingsform != null && OutputSettingsform is TextractorFunReConfirmForm)
+                        {
+                            TextractorFunReConfirmForm frm = (TextractorFunReConfirmForm)OutputSettingsform;
+                            if (Common.HookCode != "" && dealRes[2] == Common.HookCode)
+                            {
+                                if (TextractorFunPlus_Index_List.ContainsKey(dealRes[4]) == true)
+                                {
+
+                                    frm.TextractorFunDealItem(TextractorFunPlus_Index_List[dealRes[4]], dealRes, true);
+                                }
+                                else
+                                {
+                                    TextractorFunPlus_Index_List.Add(dealRes[4], listViewIndex_plus);
+                                    frm.TextractorFunDealItem(listViewIndex_plus, dealRes, false);
+                                    listViewIndex_plus++;
+                                }
+                            }
+                        }
+
+                        //游戏翻译窗口处理
+                        //如果Common.HookCodePlus = "NoMulti"则说明没有多重处理，不用再对比HookCodePlus
+                        if (GameTransForm != null)
+                        {
+                            if (Common.HookCode != "" && dealRes[2] == Common.HookCode && (Common.HookCodePlus == "NoMulti" || dealRes[4] == Common.HookCodePlus))
+                            {
+                                GameTransForm.TextractorHookContent(dealRes);
+                            }
                         }
                     }
                 }
             }
-
-
-
 
         }
 

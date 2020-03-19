@@ -9,6 +9,7 @@ using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
@@ -87,10 +88,14 @@ namespace MisakaTranslator
             {
                 Common.TransMode = 1;
                 Common.GameID = res[1];
-                Common.HookCode = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID, "hookCode");
-                Common.RepeatMethod = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID, "RepeatMethod");
-                Common.srcLang = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID, "srcLang");
-                Common.desLang = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID, "dstLang");
+
+                SQLiteHelper sqliteH = new SQLiteHelper(Environment.CurrentDirectory + "\\settings\\GameList.sqlite");
+                List<string> ls = sqliteH.ExecuteReader_OneLine(string.Format("SELECT * FROM gamelist WHERE gameID = '{0}';", res[1]),8);
+
+                Common.HookCode = ls[4];
+                Common.RepeatMethod = ls[7];
+                Common.srcLang = ls[5];
+                Common.desLang = ls[6];
 
                 List<Process> proList = FindSameNameProcess(res[0]);
                 if (proList.Count == 1)
@@ -104,7 +109,7 @@ namespace MisakaTranslator
 
                 Common.TextractorHandle.Init();
 
-                bool isFunReSelect = Convert.ToBoolean(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID, "isHookFunMulti", "False"));
+                bool isFunReSelect = Convert.ToBoolean(ls[3]);
 
                 if (isFunReSelect == true)
                 {
@@ -164,30 +169,32 @@ namespace MisakaTranslator
         {
             Process[] ps = Process.GetProcesses();
             List<int> ret = new List<int>();
-            if (File.Exists("GameList.txt") == true)
+            if (File.Exists(Environment.CurrentDirectory + "\\settings\\GameList.sqlite") == true)
             {
-                string[] ReadText = File.ReadAllLines("GameList.txt");
-
+                SQLiteHelper sqliteH = new SQLiteHelper(Environment.CurrentDirectory + "\\settings\\GameList.sqlite");
+                
                 for (int i = 0; i < ps.Length; i++)
                 {
-                    for (int j = 0; j < ReadText.Length; j++)
+                    string filepath = "";
+                    try
                     {
-                        string filepath = "";
-                        try
-                        {
-                            filepath = ps[i].MainModule.FileName;
-                        }
-                        catch (Win32Exception ex)
-                        {
-                            throw ex;
-                        }
-                        Console.WriteLine(filepath);
-                        if (filepath == ReadText[j])
-                        {
-                            ret.Add(ps[i].Id);
-                            ret.Add(int.Parse(ReadText[j + 1]));
-                            return ret;
-                        }
+                        filepath = ps[i].MainModule.FileName;
+                    }
+                    catch (Win32Exception ex)
+                    {
+                        continue;
+                        //这个地方直接跳过，是因为32位程序确实会读到64位的系统进程，而系统进程是不能被访问的
+                        //throw ex;
+                    }
+                    Console.WriteLine(filepath);
+                    
+                    List<string> ls = sqliteH.ExecuteReader_OneLine(string.Format("SELECT gameID FROM gamelist WHERE gameFilePath = '{0}';", filepath),1);
+
+                    if (ls != null)
+                    {
+                        ret.Add(ps[i].Id);
+                        ret.Add(int.Parse(ls[0]));
+                        return ret;
                     }
                 }
             }

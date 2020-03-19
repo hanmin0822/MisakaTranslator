@@ -170,7 +170,9 @@ namespace MisakaTranslator
                     return;
                 }
                 Common.GameID = Common.GetGameID(game_ID);
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID, "gameName", System.IO.Path.GetFileName(game_ID));
+                
+                SQLiteHelper sqliteH = new SQLiteHelper(Environment.CurrentDirectory + "\\settings\\GameList.sqlite");
+                sqliteH.ExecuteSql(string.Format("UPDATE gamelist SET gameName = '{0}' WHERE gameID = {1};", System.IO.Path.GetFileName(game_ID),Common.GameID));
 
                 if (SameNameGameProcessList.Count == 1)
                 {
@@ -257,7 +259,9 @@ namespace MisakaTranslator
                     }
                     catch (System.ComponentModel.Win32Exception ex)
                     {
-                        throw ex;
+                        continue;
+                        //这个地方直接跳过，是因为32位程序确实会读到64位的系统进程，而系统进程是不能被访问的
+                        //throw ex;
                     }
                     break;
                 }
