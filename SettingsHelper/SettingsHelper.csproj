@@ -5,6 +5,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Config.Net" Version="4.14.23" />
+      <PackageReference Include="Config.Net.Json" Version="4.14.23" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\JSONHelper\JSONHelper.csproj" />
     </ItemGroup>
 
