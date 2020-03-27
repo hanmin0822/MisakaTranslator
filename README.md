@@ -43,6 +43,7 @@ Galgame/文字游戏多语种实时机翻工具
 * [C#调用Textractor提取文本](https://www.lgztx.com/?p=157) 
 * [C#调用JBeijing离线中日翻译](https://github.com/Artikash/VNR-Core/)
 * [C#图像处理(二值化,灰阶)](https://blog.csdn.net/chaoguodong/article/details/7877312)
+* [C#中使用全局键盘鼠标钩子](https://www.cnblogs.com/CJSTONE/p/4961865.html)
 
 ## 联系作者
 
