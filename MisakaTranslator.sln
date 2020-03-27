@@ -14,6 +14,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyboardMouseHookLibrary", "KeyboardMouseHookLibrary\KeyboardMouseHookLibrary.csproj", "{1AE9EA11-9FA0-4D30-B16E-ECF7183DEC7A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextHookLibrary", "TextHookLibrary\TextHookLibrary.csproj", "{A976D07E-0B39-41B6-B6F7-7022BBFBD3FF}"
+
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
