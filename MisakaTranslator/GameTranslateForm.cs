@@ -34,7 +34,7 @@ namespace MisakaTranslator
 
         public GameTranslateForm()
         {
-            string color = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "BackColor", "Noset");
+            string color = Common.settings.TF_BackColor;
             if (color == "Noset")
             {
                 TransparencyColor = Color.AliceBlue;
@@ -80,6 +80,9 @@ namespace MisakaTranslator
         public Label secondTransTextLabel;//第二翻译源标签
 
         public bool IsOCRingFlag;//线程锁:判断是否正在OCR线程中，保证同时只有一组在跑OCR
+
+        public bool isPause;//是否暂停，如果暂停则OCR不工作
+        
 
         public Color TransparencyColor;//透明色
 
@@ -138,7 +141,16 @@ namespace MisakaTranslator
 
             if (Common.TransMode == 2)
             {
-                BaiduGeneralOCRBasic.BaiduGeneralOCRBasic_Init();
+                if (Common.settings.OCRsource == "BaiduOCR")
+                {
+                    BaiduGeneralOCRBasic.BaiduGeneralOCRBasic_Init();
+                }
+                else {
+                    TesseractOCR.TesseractOCR_Init();
+                }
+
+
+                
 
                 //初始化钩子对象
                 if (hook == null)
@@ -159,10 +171,8 @@ namespace MisakaTranslator
 
             TextFontColorInit();
 
-            firstTransAPI = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini",
-                "Translate_All", "FirstTranslator", "NoTranslate");
-            secondTransAPI = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini",
-                "Translate_All", "SecondTranslator", "NoTranslate");
+            firstTransAPI = Common.settings.FirstTranslator;
+            secondTransAPI = Common.settings.SecondTranslator;
 
         }
 
@@ -264,37 +274,37 @@ namespace MisakaTranslator
         public void TextFontColorInit()
         {
             srcTextFont = new Font(
-                IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextFont", "微软雅黑"),
-                int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextsize", "12"))
+                Common.settings.TF_srcTextFont,
+                int.Parse(Common.settings.TF_srcTextSize)
                 );
 
             firstTransTextFont = new Font(
-                IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextFont", "微软雅黑"),
-                int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextsize", "12"))
+                Common.settings.TF_firstTransTextFont,
+                int.Parse(Common.settings.TF_firstTransTextSize)
                 );
 
             secondTransTextFont = new Font(
-                IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextFont", "微软雅黑"),
-                int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextsize", "12"))
+                Common.settings.TF_secondTransTextFont,
+                int.Parse(Common.settings.TF_secondTransTextSize)
                 );
 
 
             srcTextColor = Color.FromArgb(
-                int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorR", "0")),
-                int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorG", "0")),
-                int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorB", "0"))
+                int.Parse(Common.settings.TF_srcTextColorR),
+                int.Parse(Common.settings.TF_srcTextColorG),
+                int.Parse(Common.settings.TF_srcTextColorB)
                 );
 
             firstTransTextColor = Color.FromArgb(
-                int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextColorR", "0")),
-                int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextColorG", "0")),
-                int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextColorB", "0"))
+                int.Parse(Common.settings.TF_firstTransTextColorR),
+                int.Parse(Common.settings.TF_firstTransTextColorG),
+                int.Parse(Common.settings.TF_firstTransTextColorB)
                 );
 
             secondTransTextColor = Color.FromArgb(
-                int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextColorR", "0")),
-                int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextColorG", "0")),
-                int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextColorB", "0"))
+                int.Parse(Common.settings.TF_secondTransTextColorR),
+                int.Parse(Common.settings.TF_secondTransTextColorG),
+                int.Parse(Common.settings.TF_secondTransTextColorB)
                 );
 
 
@@ -366,78 +376,96 @@ namespace MisakaTranslator
         {
             if (Common.TransMode == 2)
             {
-                //OCR方式下单击鼠标进行更新
-                //先判断是单窗口还是全屏幕，如果是单窗口再判断是不是在游戏窗口中点的
+                if (isPause == false) {
+                    //OCR方式下单击鼠标进行更新
+                    //先判断是单窗口还是全屏幕，如果是单窗口再判断是不是在游戏窗口中点的
 
-                if ((Common.isAllWindowCap == true && Process.GetCurrentProcess().Id != FindWindowInfo.GetProcessIDByHWND(FindWindowInfo.GetWindowHWND(e.X, e.Y)))
-                    || Common.OCRWinHwnd == (IntPtr)FindWindowInfo.GetWindowHWND(e.X, e.Y))
-                {
-                    if (IsOCRingFlag == false)
+                    if ((Common.isAllWindowCap == true && Process.GetCurrentProcess().Id != FindWindowInfo.GetProcessIDByHWND(FindWindowInfo.GetWindowHWND(e.X, e.Y)))
+                        || Common.OCRWinHwnd == (IntPtr)FindWindowInfo.GetWindowHWND(e.X, e.Y))
                     {
-                        IsOCRingFlag = true;
-                        ThreadPool.QueueUserWorkItem(state =>
+                        if (IsOCRingFlag == false)
                         {
-                            int j = 0;
-
-                            for (; j < 3; j++)
+                            IsOCRingFlag = true;
+                            ThreadPool.QueueUserWorkItem(state =>
                             {
+                                int j = 0;
 
-                                Thread.Sleep(Common.OCRdelay);
-
-                                Image img = ScreenCapture.GetWindowRectCapture(Common.OCRWinHwnd, Common.OCRrec, Common.isAllWindowCap);
-                                string ret = BaiduGeneralOCRBasic.BaiduGeneralBasicOCR(img, Common.OCRsrcLangCode);
-
-                                string srcText = "";
-                                BaiduOCRresOutInfo oinfo = JsonConvert.DeserializeObject<BaiduOCRresOutInfo>(ret);
-                                if (oinfo.words_result != null)
+                                for (; j < 3; j++)
                                 {
-                                    for (int i = 0; i < oinfo.words_result_num; i++)
+
+                                    Thread.Sleep(Common.OCRdelay);
+
+                                    Image img = ScreenCapture.GetWindowRectCapture(Common.OCRWinHwnd, Common.OCRrec, Common.isAllWindowCap);
+
+                                    if (TesseractOCR.thresh != -1){
+                                        img = TesseractOCR.Thresholding((Bitmap)img);
+                                    }
+
+                                    string srcText = "";
+                                    string ret;
+                                    if (Common.settings.OCRsource == "BaiduOCR")
                                     {
-                                        srcText = srcText + oinfo.words_result[i].words + "\n";
+                                        ret = BaiduGeneralOCRBasic.BaiduGeneralBasicOCR(img, Common.OCRsrcLangCode);
+                                        BaiduOCRresOutInfo oinfo = JsonConvert.DeserializeObject<BaiduOCRresOutInfo>(ret);
+                                        if (oinfo.words_result != null)
+                                        {
+                                            for (int i = 0; i < oinfo.words_result_num; i++)
+                                            {
+                                                srcText = srcText + oinfo.words_result[i].words + "\n";
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ret = TesseractOCR.OCRProcess((Bitmap)img);
+                                        srcText = ret.Replace(" ", "").Replace("\r\n\r\n","\r\n");//去空格和空行
+                                    }
+                                    
+                                    
+                                    if (srcText != "")
+                                    {
+                                        GameTranslateAuto(srcText, Common.srcLang, Common.desLang);
+
+                                        srcTextLabel.BeginInvoke(new Action(() =>
+                                        {
+                                            srcTextLabel.Text = srcText;
+                                        }));
+
+                                        firstTransTextLabel.BeginInvoke(new Action(() =>
+                                        {
+                                            firstTransTextLabel.Text = firstTransText;
+                                        }));
+
+                                        secondTransTextLabel.BeginInvoke(new Action(() =>
+                                        {
+                                            secondTransTextLabel.Text = secondTransText;
+                                        }));
+
+                                        Common.AddHistoryText(srcText, firstTransText, secondTransText);
+
+                                        IsOCRingFlag = false;
+                                        break;
                                     }
                                 }
 
-                                if (srcText != "")
+                                if (j == 3)
                                 {
-                                    GameTranslateAuto(srcText, Common.srcLang, Common.desLang);
-
                                     srcTextLabel.BeginInvoke(new Action(() =>
                                     {
-                                        srcTextLabel.Text = srcText;
+                                        srcTextLabel.Text = "[OCR]识别三次均为空，请自行刷新！";
                                     }));
-
-                                    firstTransTextLabel.BeginInvoke(new Action(() =>
-                                    {
-                                        firstTransTextLabel.Text = firstTransText;
-                                    }));
-
-                                    secondTransTextLabel.BeginInvoke(new Action(() =>
-                                    {
-                                        secondTransTextLabel.Text = secondTransText;
-                                    }));
-
-                                    Common.AddHistoryText(srcText, firstTransText, secondTransText);
-
                                     IsOCRingFlag = false;
-                                    break;
                                 }
-                            }
 
-                            if (j == 3)
-                            {
-                                srcTextLabel.BeginInvoke(new Action(() =>
-                                {
-                                    srcTextLabel.Text = "[OCR]识别三次均为空，请自行刷新！";
-                                }));
-                                IsOCRingFlag = false;
-                            }
+                            });
+                        }
 
-                        });
                     }
+
 
                 }
 
-
+                
 
             }
         }
@@ -568,7 +596,7 @@ namespace MisakaTranslator
         {
 
             //先检查玩家是否设置了分行翻译
-            bool eachRowTrans = Convert.ToBoolean(IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "Translate_All", "EachRowTrans", "True"));
+            bool eachRowTrans = Convert.ToBoolean(Common.settings.EachRowTrans);
             if (eachRowTrans == false)
             {
                 text = text.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
@@ -701,18 +729,32 @@ namespace MisakaTranslator
                     ThreadPool.QueueUserWorkItem(state =>
                     {
                         Image img = ScreenCapture.GetWindowRectCapture(Common.OCRWinHwnd, Common.OCRrec, Common.isAllWindowCap);
-                        string ret = BaiduGeneralOCRBasic.BaiduGeneralBasicOCR(img, Common.OCRsrcLangCode);
 
-                        string srcText = "";
-                        BaiduOCRresOutInfo oinfo = JsonConvert.DeserializeObject<BaiduOCRresOutInfo>(ret);
-                        if (oinfo.words_result != null)
+                        if (TesseractOCR.thresh != -1)
                         {
-                            for (int i = 0; i < oinfo.words_result_num; i++)
-                            {
-                                srcText = srcText + oinfo.words_result[i].words + "\n";
-                            }
+                            img = TesseractOCR.Thresholding((Bitmap)img);
                         }
 
+                        string srcText = "";
+                        string ret;
+                        if (Common.settings.OCRsource == "BaiduOCR")
+                        {
+                            ret = BaiduGeneralOCRBasic.BaiduGeneralBasicOCR(img, Common.OCRsrcLangCode);
+                            BaiduOCRresOutInfo oinfo = JsonConvert.DeserializeObject<BaiduOCRresOutInfo>(ret);
+                            if (oinfo.words_result != null)
+                            {
+                                for (int i = 0; i < oinfo.words_result_num; i++)
+                                {
+                                    srcText = srcText + oinfo.words_result[i].words + "\n";
+                                }
+                            }
+                        }
+                        else
+                        {
+                            ret = TesseractOCR.OCRProcess((Bitmap)img);
+                            srcText = ret.Replace(" ", "").Replace("\r\n\r\n", "\r\n");//去空格和空行
+                        }
+                        
                         srcTextLabel.BeginInvoke(new Action(() =>
                         {
                             srcTextLabel.Text = srcText;

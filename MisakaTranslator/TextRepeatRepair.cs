@@ -50,7 +50,7 @@ namespace MisakaTranslator
                 return "";
             }
 
-            int repeatTimes = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\TextRepeatRepair.ini", "RepairFun_RemoveSingleWordRepeat", "RepeatTimes", "0"));
+            int repeatTimes = int.Parse(Common.repeatRsettings.SingleWordRepeatTimes);
             int flag = 0;
             string ret = "";
 
@@ -109,7 +109,7 @@ namespace MisakaTranslator
                 return "";
             }
 
-            int findNum = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\TextRepeatRepair.ini", "RepairFun_RemoveSentenceRepeat", "FindCharNum", "4")); ;
+            int findNum = int.Parse(Common.repeatRsettings.SentenceRepeatFindCharNum);
 
             char[] arr = source.ToCharArray();
             Array.Reverse(arr);

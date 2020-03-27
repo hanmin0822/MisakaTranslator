@@ -47,7 +47,7 @@ namespace MisakaTranslator
         /// <returns></returns>
         public static string Translate_JapanesetoChinese(string sourceString, bool issimplified = true)
         {
-            string JBeijingTranslatorPath = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "JBeijing", "JBJCTDllPath");
+            string JBeijingTranslatorPath = Common.settings.JBJCTDllPath;
 
             if (JBeijingTranslatorPath == "")
             {

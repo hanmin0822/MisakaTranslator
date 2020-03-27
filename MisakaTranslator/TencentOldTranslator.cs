@@ -41,8 +41,8 @@ namespace MisakaTranslator
 
         public static void TencentOldTrans_Init()
         {
-            SecretId = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TencentOldTranslator", "SecretId");
-            SecretKey = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TencentOldTranslator", "SecretKey");
+            SecretId = Common.settings.TXOSecretId;
+            SecretKey = Common.settings.TXOSecretKey;
         }
 
         public static string TencentOld_Translate(string sourceText, string desLang, string srcLang)

@@ -54,13 +54,13 @@ namespace MisakaTranslator
             lastPartChoose = 0;
             PartCombox.SelectedIndex = 0;
 
-            OpacityTrackBar.Value = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "opacity", "50"));
-
-            FontsCombox.Text = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextFont", "微软雅黑");
-            TextSizeBox.Num = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextsize", "12"));
-            ColorRTrackBar.Value = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorR", "0"));
-            ColorGTrackBar.Value = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorG", "0"));
-            ColorBTrackBar.Value = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorB", "0"));
+            OpacityTrackBar.Value = int.Parse(Common.settings.TF_Opacity);
+            
+            ColorRTrackBar.Value = int.Parse(Common.settings.TF_srcTextColorR);
+            ColorGTrackBar.Value = int.Parse(Common.settings.TF_srcTextColorG);
+            ColorBTrackBar.Value = int.Parse(Common.settings.TF_srcTextColorB);
+            FontsCombox.Text = Common.settings.TF_srcTextFont;
+            TextSizeBox.Num = int.Parse(Common.settings.TF_srcTextSize);
 
         }
 
@@ -83,31 +83,31 @@ namespace MisakaTranslator
 
         private void TranslateFrmSettingsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "opacity", "" + OpacityTrackBar.Value);
+            Common.settings.TF_Opacity = OpacityTrackBar.Value.ToString();
 
             if (lastPartChoose == 0)
             {
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorR", "" + ColorRTrackBar.Value);
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorG", "" + ColorGTrackBar.Value);
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorB", "" + ColorBTrackBar.Value);
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextFont", FontsCombox.Text);
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextsize", "" + TextSizeBox.Num);
+                Common.settings.TF_srcTextColorR = ColorRTrackBar.Value.ToString();
+                Common.settings.TF_srcTextColorG = ColorGTrackBar.Value.ToString();
+                Common.settings.TF_srcTextColorB = ColorBTrackBar.Value.ToString();
+                Common.settings.TF_srcTextFont = FontsCombox.Text;
+                Common.settings.TF_srcTextSize = TextSizeBox.Num.ToString();
             }
             else if (lastPartChoose == 1)
             {
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextColorR", "" + ColorRTrackBar.Value);
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextColorG", "" + ColorGTrackBar.Value);
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextColorB", "" + ColorBTrackBar.Value);
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextFont", FontsCombox.Text);
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextsize", "" + TextSizeBox.Num);
+                Common.settings.TF_firstTransTextColorR = ColorRTrackBar.Value.ToString();
+                Common.settings.TF_firstTransTextColorG = ColorGTrackBar.Value.ToString();
+                Common.settings.TF_firstTransTextColorB = ColorBTrackBar.Value.ToString();
+                Common.settings.TF_firstTransTextFont = FontsCombox.Text;
+                Common.settings.TF_firstTransTextSize = TextSizeBox.Num.ToString();
             }
             else if (lastPartChoose == 2)
             {
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextColorR", "" + ColorRTrackBar.Value);
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextColorG", "" + ColorGTrackBar.Value);
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextColorB", "" + ColorBTrackBar.Value);
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextFont", FontsCombox.Text);
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextsize", "" + TextSizeBox.Num);
+                Common.settings.TF_secondTransTextColorR = ColorRTrackBar.Value.ToString();
+                Common.settings.TF_secondTransTextColorG = ColorGTrackBar.Value.ToString();
+                Common.settings.TF_secondTransTextColorB = ColorBTrackBar.Value.ToString();
+                Common.settings.TF_secondTransTextFont = FontsCombox.Text;
+                Common.settings.TF_secondTransTextSize = TextSizeBox.Num.ToString();
             }
 
         }
@@ -118,52 +118,52 @@ namespace MisakaTranslator
             {
                 if (lastPartChoose == 0)
                 {
-                    IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorR", "" + ColorRTrackBar.Value);
-                    IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorG", "" + ColorGTrackBar.Value);
-                    IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorB", "" + ColorBTrackBar.Value);
-                    IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextFont", FontsCombox.Text);
-                    IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextsize", "" + TextSizeBox.Num);
+                    Common.settings.TF_srcTextColorR = ColorRTrackBar.Value.ToString();
+                    Common.settings.TF_srcTextColorG = ColorGTrackBar.Value.ToString();
+                    Common.settings.TF_srcTextColorB = ColorBTrackBar.Value.ToString();
+                    Common.settings.TF_srcTextFont = FontsCombox.Text;
+                    Common.settings.TF_srcTextSize = TextSizeBox.Num.ToString();
                 }
                 else if (lastPartChoose == 1)
                 {
-                    IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextColorR", "" + ColorRTrackBar.Value);
-                    IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextColorG", "" + ColorGTrackBar.Value);
-                    IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextColorB", "" + ColorBTrackBar.Value);
-                    IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextFont", FontsCombox.Text);
-                    IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextsize", "" + TextSizeBox.Num);
+                    Common.settings.TF_firstTransTextColorR = ColorRTrackBar.Value.ToString();
+                    Common.settings.TF_firstTransTextColorG = ColorGTrackBar.Value.ToString();
+                    Common.settings.TF_firstTransTextColorB = ColorBTrackBar.Value.ToString();
+                    Common.settings.TF_firstTransTextFont = FontsCombox.Text;
+                    Common.settings.TF_firstTransTextSize = TextSizeBox.Num.ToString();
                 }
                 else if (lastPartChoose == 2)
                 {
-                    IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextColorR", "" + ColorRTrackBar.Value);
-                    IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextColorG", "" + ColorGTrackBar.Value);
-                    IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextColorB", "" + ColorBTrackBar.Value);
-                    IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextFont", FontsCombox.Text);
-                    IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextsize", "" + TextSizeBox.Num);
+                    Common.settings.TF_secondTransTextColorR = ColorRTrackBar.Value.ToString();
+                    Common.settings.TF_secondTransTextColorG = ColorGTrackBar.Value.ToString();
+                    Common.settings.TF_secondTransTextColorB = ColorBTrackBar.Value.ToString();
+                    Common.settings.TF_secondTransTextFont = FontsCombox.Text;
+                    Common.settings.TF_secondTransTextSize = TextSizeBox.Num.ToString();
                 }
 
                 if (PartCombox.SelectedIndex == 0)
                 {
-                    ColorRTrackBar.Value = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorR", "0"));
-                    ColorGTrackBar.Value = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorG", "0"));
-                    ColorBTrackBar.Value = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextColorB", "0"));
-                    FontsCombox.Text = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextFont", "微软雅黑");
-                    TextSizeBox.Num = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "srcTextsize", "12"));
+                    ColorRTrackBar.Value = int.Parse(Common.settings.TF_srcTextColorR);
+                    ColorGTrackBar.Value = int.Parse(Common.settings.TF_srcTextColorG);
+                    ColorBTrackBar.Value = int.Parse(Common.settings.TF_srcTextColorB);
+                    FontsCombox.Text = Common.settings.TF_srcTextFont;
+                    TextSizeBox.Num = int.Parse(Common.settings.TF_srcTextSize);
                 }
                 else if (PartCombox.SelectedIndex == 1)
                 {
-                    ColorRTrackBar.Value = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextColorR", "0"));
-                    ColorGTrackBar.Value = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextColorG", "0"));
-                    ColorBTrackBar.Value = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextColorB", "0"));
-                    FontsCombox.Text = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextFont", "微软雅黑");
-                    TextSizeBox.Num = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "firstTransTextsize", "12"));
+                    ColorRTrackBar.Value = int.Parse(Common.settings.TF_firstTransTextColorR);
+                    ColorGTrackBar.Value = int.Parse(Common.settings.TF_firstTransTextColorG);
+                    ColorBTrackBar.Value = int.Parse(Common.settings.TF_firstTransTextColorB);
+                    FontsCombox.Text = Common.settings.TF_firstTransTextFont;
+                    TextSizeBox.Num = int.Parse(Common.settings.TF_firstTransTextSize);
                 }
                 else if (PartCombox.SelectedIndex == 2)
                 {
-                    ColorRTrackBar.Value = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextColorR", "0"));
-                    ColorGTrackBar.Value = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextColorG", "0"));
-                    ColorBTrackBar.Value = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextColorB", "0"));
-                    FontsCombox.Text = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextFont", "微软雅黑");
-                    TextSizeBox.Num = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "secondTransTextsize", "12"));
+                    ColorRTrackBar.Value = int.Parse(Common.settings.TF_secondTransTextColorR);
+                    ColorGTrackBar.Value = int.Parse(Common.settings.TF_secondTransTextColorG);
+                    ColorBTrackBar.Value = int.Parse(Common.settings.TF_secondTransTextColorB);
+                    FontsCombox.Text = Common.settings.TF_secondTransTextFont;
+                    TextSizeBox.Num = int.Parse(Common.settings.TF_secondTransTextSize);
                 }
 
                 lastPartChoose = PartCombox.SelectedIndex;
@@ -196,8 +196,7 @@ namespace MisakaTranslator
         {
             WinColorDialog.ShowDialog();
             gtlbf.BeginInvoke(new Action(() => { gtlbf.BackColor = this.WinColorDialog.Color; }));
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TranslateFormSettings", "BackColor", this.WinColorDialog.Color.ToArgb().ToString());
-
+            Common.settings.TF_BackColor = this.WinColorDialog.Color.ToArgb().ToString();
         }
     }
 }

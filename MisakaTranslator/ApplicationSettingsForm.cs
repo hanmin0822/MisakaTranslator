@@ -25,23 +25,24 @@ namespace MisakaTranslator
         {
             MenuInit();
 
-            BDOCRapikeyTextBox.InputText = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduOCR", "APIKEY", "");
-            BDOCRsecretkeyTextBox.InputText = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduOCR", "SecretKey", "");
+            
+            BDOCRapikeyTextBox.InputText = Common.settings.BDOCR_APIKEY;
+            BDOCRsecretkeyTextBox.InputText = Common.settings.BDOCR_SecretKey;
 
-            BDappidTextBox.InputText = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduTranslator", "appID", "");
-            BDKeyTextBox.InputText = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduTranslator", "secretKey", "");
+            BDappidTextBox.InputText = Common.settings.BDappID;
+            BDKeyTextBox.InputText = Common.settings.BDsecretKey;
 
-            TXappidTextBox.InputText = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TencentTranslator", "appID", "");
-            TXKeyTextBox.InputText = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TencentTranslator", "appKey", "");
+            TXappidTextBox.InputText = Common.settings.TXappID;
+            TXKeyTextBox.InputText = Common.settings.TXappKey;
 
-            TXOappidTextBox.InputText = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TencentOldTranslator", "SecretId", "");
-            TXOKeyTextBox.InputText = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TencentOldTranslator", "SecretKey", "");
+            TXOappidTextBox.InputText = Common.settings.TXOSecretId;
+            TXOKeyTextBox.InputText = Common.settings.TXOSecretKey;
 
-            JBjPathBox.InputText = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "JBeijing", "JBJCTDllPath");
+            JBjPathBox.InputText = Common.settings.JBJCTDllPath;
 
-            AutoHookCheckBox.Checked = Convert.ToBoolean(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "Textractor", "AutoHook", "False"));
+            AutoHookCheckBox.Checked = Convert.ToBoolean(Common.settings.AutoHook);
 
-            EachRowTransCheckBox.Checked = Convert.ToBoolean(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "Translate_All", "EachRowTrans", "True"));
+            EachRowTransCheckBox.Checked = Convert.ToBoolean(Common.settings.EachRowTrans);
 
             List<KeyValuePair<string, string>> transApiSrc = GetAllTranslateAPI();
             FirstTransCombox.Source = transApiSrc;
@@ -49,8 +50,13 @@ namespace MisakaTranslator
             FirstTransCombox.BoxStyle = ComboBoxStyle.DropDownList;
             SecondTransCombox.BoxStyle = ComboBoxStyle.DropDownList;
 
-            string first = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "Translate_All", "FirstTranslator", "NoTranslate");
-            string second = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "Translate_All", "SecondTranslator", "NoTranslate");
+            string first = Common.settings.FirstTranslator;
+            string second = Common.settings.SecondTranslator;
+
+            List<KeyValuePair<string, string>> OCRApiSrc = GetAllOCRAPI();
+            OCRsourceCombox.Source = OCRApiSrc;
+            OCRsourceCombox.BoxStyle = ComboBoxStyle.DropDownList;
+
             for (int i = 0; i < transApiSrc.Count; i++)
             {
                 if (transApiSrc[i].Key == first)
@@ -61,6 +67,14 @@ namespace MisakaTranslator
                 if (transApiSrc[i].Key == second)
                 {
                     SecondTransCombox.SelectedIndex = i;
+                }
+            }
+
+            for (int i = 0; i < OCRApiSrc.Count; i++)
+            {
+                if (OCRApiSrc[i].Key == Common.settings.OCRsource)
+                {
+                    OCRsourceCombox.SelectedIndex = i;
                 }
             }
         }
@@ -81,6 +95,21 @@ namespace MisakaTranslator
 
             return ret;
         }
+
+        /// <summary>
+        /// 得到所有OCR API的列表，即每更新一个API，需要在这里加上
+        /// </summary>
+        /// <returns></returns>
+        public List<KeyValuePair<string, string>> GetAllOCRAPI()
+        {
+            List<KeyValuePair<string, string>> ret = new List<KeyValuePair<string, string>>();
+
+            ret.Add(new KeyValuePair<string, string>("BaiduOCR", "百度在线OCR"));
+            ret.Add(new KeyValuePair<string, string>("TesseractOCR", "Tesseract离线OCR"));
+
+            return ret;
+        }
+
 
         /// <summary>
         /// 左部导航菜单初始化
@@ -209,16 +238,14 @@ namespace MisakaTranslator
                         SettingsTabControl.SelectedIndex = 1;
                         break;
                     case "p3":
-
+                        SettingsTabControl.SelectedIndex = 8;
                         break;
                     case "p4":
                         SettingsTabControl.SelectedIndex = 6;
                         break;
                 }
             }
-
-
-
+            
         }
 
         private void BaiduTransApplyBtn_BtnClick(object sender, EventArgs e)
@@ -228,8 +255,8 @@ namespace MisakaTranslator
 
         private void BaiduAPITestBtn_BtnClick(object sender, EventArgs e)
         {
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduTranslator", "appID", BDappidTextBox.InputText);
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduTranslator", "secretKey", BDKeyTextBox.InputText);
+            Common.settings.BDappID = BDappidTextBox.InputText;
+            Common.settings.BDsecretKey = BDKeyTextBox.InputText;
 
             BaiduTranslator.BaiduTrans_Init();
             string ret = BaiduTranslator.Baidu_Translate("apple", "zh");
@@ -258,8 +285,8 @@ namespace MisakaTranslator
 
         private void BDTransTextTestBtn_BtnClick(object sender, EventArgs e)
         {
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduTranslator", "appID", BDappidTextBox.InputText);
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduTranslator", "secretKey", BDKeyTextBox.InputText);
+            Common.settings.BDappID = BDappidTextBox.InputText;
+            Common.settings.BDsecretKey = BDKeyTextBox.InputText;
 
             BaiduTranslator.BaiduTrans_Init();
             string ret = BaiduTranslator.Baidu_Translate(BDTestTextBox.InputText, BDDesLangBox.InputText, BDSrcLangBox.InputText);
@@ -293,8 +320,8 @@ namespace MisakaTranslator
 
         private void TXAPITestBtn_BtnClick(object sender, EventArgs e)
         {
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TencentTranslator", "appID", TXappidTextBox.InputText);
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TencentTranslator", "appKey", TXKeyTextBox.InputText);
+            Common.settings.TXappID = TXappidTextBox.InputText;
+            Common.settings.TXappKey = TXKeyTextBox.InputText;
 
             TencentTranslator.TencentTrans_Init();
             string ret = TencentTranslator.Fanyijun_Translate("apple", "zh", "en");
@@ -313,8 +340,8 @@ namespace MisakaTranslator
 
         private void TXTransTextTestBtn_BtnClick(object sender, EventArgs e)
         {
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TencentTranslator", "appID", TXappidTextBox.InputText);
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TencentTranslator", "appKey", TXKeyTextBox.InputText);
+            Common.settings.TXappID = TXappidTextBox.InputText;
+            Common.settings.TXappKey = TXKeyTextBox.InputText;
 
             TencentTranslator.TencentTrans_Init();
             string ret = TencentTranslator.Fanyijun_Translate(TXTestTextBox.InputText, TXDesLangBox.InputText, TXSrcLangBox.InputText);
@@ -333,7 +360,8 @@ namespace MisakaTranslator
 
         private void JBjTransTestBtn_BtnClick(object sender, EventArgs e)
         {
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "JBeijing", "JBJCTDllPath", JBjPathBox.InputText);
+            Common.settings.JBJCTDllPath = JBjPathBox.InputText;
+
             string res = JBeijingTranslator.Translate_JapanesetoChinese(JbjTestTextBox.InputText);
             MessageBox.Show(res, "翻译结果");
         }
@@ -351,8 +379,7 @@ namespace MisakaTranslator
                 else
                 {
                     JBjPathBox.InputText = dialog.SelectedPath;
-                    IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "JBeijing", "JBJCTDllPath", JBjPathBox.InputText);
-
+                    Common.settings.JBJCTDllPath = JBjPathBox.InputText;
 
                 }
 
@@ -362,18 +389,17 @@ namespace MisakaTranslator
 
         private void FirstTransCombox_SelectedChangedEvent(object sender, EventArgs e)
         {
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "Translate_All", "FirstTranslator", FirstTransCombox.SelectedValue);
+            Common.settings.FirstTranslator = FirstTransCombox.SelectedValue;
         }
 
         private void SecondTransCombox_SelectedChangedEvent(object sender, EventArgs e)
         {
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "Translate_All", "SecondTranslator", SecondTransCombox.SelectedValue);
-
+            Common.settings.SecondTranslator = SecondTransCombox.SelectedValue;
         }
 
         private void AutoHookCheckBox_CheckedChangeEvent(object sender, EventArgs e)
         {
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "Textractor", "AutoHook", Convert.ToString(AutoHookCheckBox.Checked));
+            Common.settings.AutoHook = Convert.ToString(AutoHookCheckBox.Checked);
         }
 
         private void BaiduOCRApplyBtn_BtnClick(object sender, EventArgs e)
@@ -388,8 +414,8 @@ namespace MisakaTranslator
 
         private void BaiduOCRTestBtn_BtnClick(object sender, EventArgs e)
         {
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduOCR", "APIKEY", BDOCRapikeyTextBox.InputText);
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduOCR", "SecretKey", BDOCRsecretkeyTextBox.InputText);
+            Common.settings.BDOCR_APIKEY = BDOCRapikeyTextBox.InputText;
+            Common.settings.BDOCR_SecretKey = BDOCRsecretkeyTextBox.InputText;
 
             bool ret = BaiduGeneralOCRBasic.BaiduGeneralOCRBasic_Init();
 
@@ -405,7 +431,7 @@ namespace MisakaTranslator
 
         private void EachRowTransCheckBox_CheckedChangeEvent(object sender, EventArgs e)
         {
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "Translate_All", "EachRowTrans", Convert.ToString(EachRowTransCheckBox.Checked));
+            Common.settings.EachRowTrans = Convert.ToString(EachRowTransCheckBox.Checked);
         }
 
         private void TXOAPIDocBtn_BtnClick(object sender, EventArgs e)
@@ -425,9 +451,9 @@ namespace MisakaTranslator
 
         private void TXOAPITestBtn_BtnClick(object sender, EventArgs e)
         {
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TencentOldTranslator", "SecretId", TXOappidTextBox.InputText);
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TencentOldTranslator", "SecretKey", TXOKeyTextBox.InputText);
-
+            Common.settings.TXOSecretId = TXOappidTextBox.InputText;
+            Common.settings.TXOSecretKey = TXOKeyTextBox.InputText;
+            
             TencentOldTranslator.TencentOldTrans_Init();
             string ret = TencentOldTranslator.TencentOld_Translate("apple", "zh", "en");
 
@@ -445,8 +471,8 @@ namespace MisakaTranslator
 
         private void TXOTransTextTestBtn_BtnClick(object sender, EventArgs e)
         {
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TencentOldTranslator", "SecretId", TXOappidTextBox.InputText);
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\settings.ini", "TencentOldTranslator", "SecretKey", TXOKeyTextBox.InputText);
+            Common.settings.TXOSecretId = TXOappidTextBox.InputText;
+            Common.settings.TXOSecretKey = TXOKeyTextBox.InputText;
 
             TencentOldTranslator.TencentOldTrans_Init();
             string ret = TencentOldTranslator.TencentOld_Translate(TXOTestTextBox.InputText, TXODesLangBox.InputText, TXOSrcLangBox.InputText);
@@ -477,6 +503,11 @@ namespace MisakaTranslator
         private void GithubBtn_BtnClick(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/hanmin0822/MisakaTranslator");
+        }
+
+        private void OCRsourceCombox_SelectedChangedEvent(object sender, EventArgs e)
+        {
+            Common.settings.OCRsource = OCRsourceCombox.SelectedValue;
         }
     }
 }
