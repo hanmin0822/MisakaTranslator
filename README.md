@@ -14,11 +14,12 @@ Galgame/文字游戏多语种实时机翻工具
 
 ## 软件功能
 
-* 支持`Hook+OCR`两种方式提取游戏文本
-* 支持完全离线工作(`Hook+Jbeijing`)
-* 方便的API调用(`百度OCR+百度翻译+腾讯翻译（两种）`)
-* 程序效率较使用Python开发的VNR要高
-* UI亲切，易上手，有详细教程
+* 兼容性强:支持`Hook+OCR`两种方式提取游戏文本
+* 可离线:支持完全离线工作(`Hook+Jbeijing`或`Tesseract-ocr+Jbeijing`)
+* 多种在线API:方便的API调用(`百度OCR+百度翻译+腾讯翻译（两种）`)
+* 更高的OCR精度:支持在提交OCR前对图片进行预处理（多种处理方法）
+* 高效:程序效率较使用Python开发的VNR要高
+* 易用:UI亲切，易上手，有详细教程
 * 更多功能，正在开发
 
 ## 帮助开发者
@@ -37,6 +38,7 @@ Galgame/文字游戏多语种实时机翻工具
 * [Config.Net](https://github.com/aloneguid/config)
 * [charlesw/tesseract](https://github.com/charlesw/tesseract/)
 * [tesseract-ocr/tesseract](https://github.com/tesseract-ocr/tesseract)
+* [kekyo/MeCab.DotNet](https://github.com/kekyo/MeCab.DotNet)
 
 ## 本项目开发过程中使用到的重要参考文献
 

@@ -28,7 +28,7 @@ namespace OCRLibrary
             }
         }
 
-        public bool OCR_Init(string param1, string param2)
+        public bool OCR_Init(string param1 = "", string param2 = "")
         {
             try
             {

@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TranslatorLibrary
@@ -39,7 +41,7 @@ namespace TranslatorLibrary
 
             string url = "http://api.interpreter.caiyunai.com/v1/translator";
             //json参数
-            string jsonParam = "{ source:\"" + q + "\",trans_type:\"" + trans_type + "\",request_id:\"demo\",detect:True }";
+            string jsonParam = "{\"source\": [\"" + q + "\"], \"trans_type\": \"" + trans_type + "\", \"request_id\": \"demo\", \"detect\": true}";
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "POST";
             request.Headers.Add("x-authorization", "token " + caiyunToken);
@@ -63,14 +65,39 @@ namespace TranslatorLibrary
             }
             catch (WebException ex)
             {
-                errorInfo = "Request Timeout";
+                errorInfo = ex.Message;
                 return null;
             }
 
-            return retString;
+            CaiyunTransResult oinfo;
+            try
+            {
+                oinfo = JsonConvert.DeserializeObject<CaiyunTransResult>(retString);
+            }
+            catch {
+                errorInfo = "JsonConvert Error";
+                return null;
+            }
+
+            if (oinfo != null && oinfo.target.Count >= 1)
+            {
+                //得到翻译结果
+                string r = "";
+                for (int i = 0;i < oinfo.target.Count;i++) {
+                    r += Regex.Unescape(oinfo.target[i]);
+                }
+
+                return r;
+            }
+            else
+            {
+                errorInfo = "ErrorInfo:" + oinfo.message;
+                return null;
+            }
+            
         }
 
-        public void TranslatorInit(string param1, string param2)
+        public void TranslatorInit(string param1, string param2 = "")
         {
             caiyunToken = param1;
         }
@@ -107,7 +134,10 @@ namespace TranslatorLibrary
 
     class CaiyunTransResult
     {
-        public string target { get; set; }
+        public string message { get; set; }
+        public double confidence { get; set; }
+        public int rc { get; set; }
+        public List<string> target { get; set; }
     }
 
 

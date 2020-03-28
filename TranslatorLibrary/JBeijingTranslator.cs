@@ -92,7 +92,7 @@ namespace TranslatorLibrary
             return ret;
         }
 
-        public void TranslatorInit(string param1, string param2)
+        public void TranslatorInit(string param1, string param2 = "")
         {
             JBJCTDllPath = param1;
         }

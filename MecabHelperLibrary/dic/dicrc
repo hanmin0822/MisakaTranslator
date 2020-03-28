@@ -1,0 +1,29 @@
+;
+; Configuration file of IPADIC
+;
+; $Id: dicrc,v 1.4 2006/04/08 06:41:36 taku-ku Exp $;
+;
+cost-factor = 800
+bos-feature = BOS/EOS,*,*,*,*,*,*,*,*
+eval-size = 8
+unk-eval-size = 4
+config-charset = SHIFT-JIS
+
+; yomi
+node-format-yomi = %pS%f[7]
+unk-format-yomi = %M
+eos-format-yomi  = \n
+
+; simple
+node-format-simple = %m\t%F-[0,1,2,3]\n
+eos-format-simple  = EOS\n
+
+; ChaSen
+node-format-chasen = %m\t%f[7]\t%f[6]\t%F-[0,1,2,3]\t%f[4]\t%f[5]\n
+unk-format-chasen  = %m\t%m\t%m\t%F-[0,1,2,3]\t\t\n
+eos-format-chasen  = EOS\n
+
+; ChaSen (include spaces)
+node-format-chasen2 = %M\t%f[7]\t%f[6]\t%F-[0,1,2,3]\t%f[4]\t%f[5]\n
+unk-format-chasen2  = %M\t%m\t%m\t%F-[0,1,2,3]\t\t\n
+eos-format-chasen2  = EOS\n

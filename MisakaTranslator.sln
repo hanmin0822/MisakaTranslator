@@ -14,7 +14,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyboardMouseHookLibrary", "KeyboardMouseHookLibrary\KeyboardMouseHookLibrary.csproj", "{1AE9EA11-9FA0-4D30-B16E-ECF7183DEC7A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextHookLibrary", "TextHookLibrary\TextHookLibrary.csproj", "{A976D07E-0B39-41B6-B6F7-7022BBFBD3FF}"
-
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MecabHelperLibrary", "MecabHelperLibrary\MecabHelperLibrary.csproj", "{82FDE770-321E-4433-8E05-8803850F24DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLHelperLibrary", "SQLHelperLibrary\SQLHelperLibrary.csproj", "{08A96F84-775C-4F7E-90B0-B54780A4DDB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +75,22 @@ Global
 		{A976D07E-0B39-41B6-B6F7-7022BBFBD3FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A976D07E-0B39-41B6-B6F7-7022BBFBD3FF}.Release|x64.ActiveCfg = Release|Any CPU
 		{A976D07E-0B39-41B6-B6F7-7022BBFBD3FF}.Release|x64.Build.0 = Release|Any CPU
+		{82FDE770-321E-4433-8E05-8803850F24DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82FDE770-321E-4433-8E05-8803850F24DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82FDE770-321E-4433-8E05-8803850F24DB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{82FDE770-321E-4433-8E05-8803850F24DB}.Debug|x64.Build.0 = Debug|Any CPU
+		{82FDE770-321E-4433-8E05-8803850F24DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82FDE770-321E-4433-8E05-8803850F24DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82FDE770-321E-4433-8E05-8803850F24DB}.Release|x64.ActiveCfg = Release|Any CPU
+		{82FDE770-321E-4433-8E05-8803850F24DB}.Release|x64.Build.0 = Release|Any CPU
+		{08A96F84-775C-4F7E-90B0-B54780A4DDB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08A96F84-775C-4F7E-90B0-B54780A4DDB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08A96F84-775C-4F7E-90B0-B54780A4DDB9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{08A96F84-775C-4F7E-90B0-B54780A4DDB9}.Debug|x64.Build.0 = Debug|Any CPU
+		{08A96F84-775C-4F7E-90B0-B54780A4DDB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08A96F84-775C-4F7E-90B0-B54780A4DDB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08A96F84-775C-4F7E-90B0-B54780A4DDB9}.Release|x64.ActiveCfg = Release|Any CPU
+		{08A96F84-775C-4F7E-90B0-B54780A4DDB9}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
