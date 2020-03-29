@@ -11,7 +11,7 @@ namespace SQLHelperLibrary
     {
         private string m_ConnectionString;
         private SQLiteConnection m_dbConnection;//数据库连接
-        
+        private string errorInfo;//最后一次错误信息
 
         /// <summary>
         /// 初始化
@@ -47,7 +47,7 @@ namespace SQLHelperLibrary
         }
 
         /// <summary>
-        /// 执行一条非查询语句
+        /// 执行一条非查询语句,失败会返回-1，可通过getLastError获取失败原因
         /// </summary>
         /// <param name="sql">SQL语句</param>
         /// <returns>返回影响的结果数</returns>
@@ -64,7 +64,8 @@ namespace SQLHelperLibrary
             catch (System.Data.SQLite.SQLiteException ex)
             {
                 m_dbConnection.Close();
-                throw ex;
+                errorInfo = ex.Message;
+                return -1;
             }
         }
 
@@ -147,6 +148,14 @@ namespace SQLHelperLibrary
                 m_dbConnection.Close();
                 throw new Exception(e.Message);
             }
+        }
+
+        /// <summary>
+        /// 获取最后一次失败原因
+        /// </summary>
+        /// <returns></returns>
+        public string getLastError() {
+            return errorInfo;
         }
     }
 }
