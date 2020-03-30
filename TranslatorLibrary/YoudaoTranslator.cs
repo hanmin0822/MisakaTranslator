@@ -90,7 +90,7 @@ namespace TranslatorLibrary
             }
         }
 
-        public void TranslatorInit(string param1, string param2)
+        public void TranslatorInit(string param1 = "", string param2 = "")
         {
             //不用初始化
         }

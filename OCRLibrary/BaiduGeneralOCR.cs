@@ -63,8 +63,9 @@ namespace OCRLibrary
 
         }
 
-        public bool OCR_Init(string param1, string param2)
+        public bool OCR_Init(string lang, string param1, string param2)
         {
+            langCode = lang;
             APIKey = param1;
             secretKey = param2;
 
@@ -77,11 +78,6 @@ namespace OCRLibrary
             }
             errorInfo = "ErrorID:" + btoi.error + " ErrorInfo:" + btoi.error_description;
             return false;
-        }
-
-        public void OCR_SetLangCode(string Code)
-        {
-            langCode = Code;
         }
 
         public static string BaiduGetToken(string clientId, string clientSecret)

@@ -70,7 +70,7 @@ namespace TranslatorLibrary
             return retString;
         }
 
-        public void TranslatorInit(string param1, string param2)
+        public void TranslatorInit(string param1, string param2 = "")
         {
             caiyunToken = param1;
         }

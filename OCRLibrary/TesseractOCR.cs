@@ -28,8 +28,9 @@ namespace OCRLibrary
             }
         }
 
-        public bool OCR_Init(string param1, string param2)
+        public bool OCR_Init(string lang, string param1 = "", string param2 = "")
         {
+            srcLangCode = lang;
             try
             {
                 TessOCR = new TesseractEngine(Environment.CurrentDirectory + "\\tessdata", srcLangCode, EngineMode.Default);
@@ -40,11 +41,6 @@ namespace OCRLibrary
                 errorInfo = ex.Message;
                 return false;
             }
-        }
-
-        public void OCR_SetLangCode(string Code)
-        {
-            srcLangCode = Code;
         }
 
         public string GetLastError()
