@@ -69,8 +69,10 @@ namespace MisakaTranslator
             isNormalClose = true;
 
             Common.RepeatMethod = FunctionSelectCombox.SelectedValue;
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID,
-                    "RepeatMethod", FunctionSelectCombox.SelectedValue);//保存去重方法，之后可能会用到
+            
+            SQLiteHelper sqliteH = new SQLiteHelper(Environment.CurrentDirectory + "\\settings\\GameList.sqlite");
+            sqliteH.ExecuteSql(string.Format("UPDATE gamelist SET RepeatMethod = '{0}' WHERE gameID = {1};", FunctionSelectCombox.SelectedValue, Common.GameID));
+
             Common.TransMode = 1;
             Common.TextractorHandle.SetSettingsOutPutform(null);
             TransLangSettingForm tlsf = new TransLangSettingForm();

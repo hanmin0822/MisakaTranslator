@@ -67,8 +67,9 @@ namespace MisakaTranslator
 
         public static bool BaiduGeneralOCRBasic_Init()
         {
-            APIKey = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduOCR", "APIKEY", "");
-            secretKey = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduOCR", "SecretKey", "");
+            APIKey = Common.settings.BDOCR_APIKEY;
+            secretKey = Common.settings.BDOCR_SecretKey;
+
             string ret = BaiduGetToken(APIKey, secretKey);
             BaiduTokenOutInfo btoi = JsonConvert.DeserializeObject<BaiduTokenOutInfo>(ret);
             if (btoi.access_token != null)

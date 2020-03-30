@@ -21,8 +21,8 @@ namespace MisakaTranslator
 
         public static void TencentTrans_Init()
         {
-            appId = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TencentTranslator", "appID");
-            appKey = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "TencentTranslator", "appKey");
+            appId = Common.settings.TXappID;
+            appKey = Common.settings.TXappKey;
         }
 
 

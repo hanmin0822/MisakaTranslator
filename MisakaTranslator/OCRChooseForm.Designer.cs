@@ -42,6 +42,8 @@
             this.delaySetBox = new HZH_Controls.Controls.UCTextBoxEx();
             this.AllWinCheckBox = new HZH_Controls.Controls.UCCheckBox();
             this.PreviewBox = new System.Windows.Forms.PictureBox();
+            this.PreHandleCheckBox = new HZH_Controls.Controls.UCCheckBox();
+            this.threshTrackBar = new HZH_Controls.Controls.UCTrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.PreviewBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -170,7 +172,7 @@
             this.OCRConfirmBtn.IsRadius = true;
             this.OCRConfirmBtn.IsShowRect = true;
             this.OCRConfirmBtn.IsShowTips = false;
-            this.OCRConfirmBtn.Location = new System.Drawing.Point(606, 475);
+            this.OCRConfirmBtn.Location = new System.Drawing.Point(606, 507);
             this.OCRConfirmBtn.Margin = new System.Windows.Forms.Padding(0);
             this.OCRConfirmBtn.Name = "OCRConfirmBtn";
             this.OCRConfirmBtn.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(58)))));
@@ -325,14 +327,48 @@
             this.PreviewBox.Location = new System.Drawing.Point(23, 323);
             this.PreviewBox.Name = "PreviewBox";
             this.PreviewBox.Size = new System.Drawing.Size(741, 138);
+            this.PreviewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PreviewBox.TabIndex = 4;
             this.PreviewBox.TabStop = false;
+            // 
+            // PreHandleCheckBox
+            // 
+            this.PreHandleCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.PreHandleCheckBox.Checked = false;
+            this.PreHandleCheckBox.Location = new System.Drawing.Point(22, 471);
+            this.PreHandleCheckBox.Name = "PreHandleCheckBox";
+            this.PreHandleCheckBox.Padding = new System.Windows.Forms.Padding(1);
+            this.PreHandleCheckBox.Size = new System.Drawing.Size(125, 26);
+            this.PreHandleCheckBox.TabIndex = 13;
+            this.PreHandleCheckBox.TextValue = "二值化处理";
+            this.PreHandleCheckBox.CheckedChangeEvent += new System.EventHandler(this.PreHandleCheckBox_CheckedChangeEvent);
+            // 
+            // threshTrackBar
+            // 
+            this.threshTrackBar.BackColor = System.Drawing.Color.White;
+            this.threshTrackBar.DcimalDigits = 0;
+            this.threshTrackBar.IsShowTips = true;
+            this.threshTrackBar.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(231)))), ((int)(((byte)(237)))));
+            this.threshTrackBar.LineWidth = 10F;
+            this.threshTrackBar.Location = new System.Drawing.Point(139, 471);
+            this.threshTrackBar.MaxValue = 255F;
+            this.threshTrackBar.MinValue = 0F;
+            this.threshTrackBar.Name = "threshTrackBar";
+            this.threshTrackBar.Size = new System.Drawing.Size(624, 26);
+            this.threshTrackBar.TabIndex = 14;
+            this.threshTrackBar.Text = "ucTrackBar1";
+            this.threshTrackBar.TipsFormat = null;
+            this.threshTrackBar.Value = 120F;
+            this.threshTrackBar.ValueColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.threshTrackBar.ValueChanged += new System.EventHandler(this.threshTrackBar_ValueChanged);
             // 
             // OCRChooseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(785, 540);
+            this.ClientSize = new System.Drawing.Size(785, 576);
+            this.Controls.Add(this.threshTrackBar);
+            this.Controls.Add(this.PreHandleCheckBox);
             this.Controls.Add(this.AllWinCheckBox);
             this.Controls.Add(this.delaySetBox);
             this.Controls.Add(this.materialLabel3);
@@ -373,5 +409,7 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private HZH_Controls.Controls.UCTextBoxEx delaySetBox;
         private HZH_Controls.Controls.UCCheckBox AllWinCheckBox;
+        private HZH_Controls.Controls.UCCheckBox PreHandleCheckBox;
+        private HZH_Controls.Controls.UCTrackBar threshTrackBar;
     }
 }

@@ -25,8 +25,8 @@ namespace MisakaTranslator
 
         public static void BaiduTrans_Init()
         {
-            appId = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduTranslator", "appID");
-            secretKey = IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\settings.ini", "BaiduTranslator", "secretKey");
+            appId = Common.settings.BDappID;
+            secretKey = Common.settings.BDsecretKey;
         }
 
         /// <summary>

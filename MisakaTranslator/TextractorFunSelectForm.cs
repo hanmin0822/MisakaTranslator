@@ -78,8 +78,10 @@ namespace MisakaTranslator
                     }
                     if (sum >= 2)
                     {
-                        IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\GameListInfo.ini",
-                            "Game" + Common.GameID, "isHookFunMulti", "True");
+                        SQLiteHelper sqliteH1 = new SQLiteHelper(Environment.CurrentDirectory + "\\settings\\GameList.sqlite");
+                        sqliteH1.ExecuteSql(string.Format("UPDATE gamelist SET isHookFunMulti = 'True' WHERE gameID = {0};", Common.GameID));
+                        
+
                         break;
                     }
                 }
@@ -87,12 +89,14 @@ namespace MisakaTranslator
                 //不满足的游戏也应该记录一下
                 if (sum <= 1)
                 {
-                    IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\GameListInfo.ini",
-                            "Game" + Common.GameID, "isHookFunMulti", "False");
+                    SQLiteHelper sqliteH1 = new SQLiteHelper(Environment.CurrentDirectory + "\\settings\\GameList.sqlite");
+                    sqliteH1.ExecuteSql(string.Format("UPDATE gamelist SET isHookFunMulti = 'False' WHERE gameID = {0};", Common.GameID));
                 }
 
-                IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "Game" + Common.GameID,
-                    "hookCode", res[0]);//保存特殊码，以后可以自动匹配这个游戏，但需要重设Plus部分
+                
+
+                SQLiteHelper sqliteH = new SQLiteHelper(Environment.CurrentDirectory + "\\settings\\GameList.sqlite");
+                sqliteH.ExecuteSql(string.Format("UPDATE gamelist SET hookCode = '{0}' WHERE gameID = {1};", res[0], Common.GameID));
 
                 Common.HookCode = res[0];
                 Common.HookCodePlus = res[1];

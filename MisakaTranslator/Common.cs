@@ -4,10 +4,12 @@
  *Description       公共类，包含全局需要的一些变量、方法
  */
 
+using Config.Net;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Data.SQLite;
 
 namespace MisakaTranslator
 {
@@ -45,45 +47,46 @@ namespace MisakaTranslator
 
         public static Queue<string> TextractorOutPutHistory;//全局的Textractor的输出记录，用于查错
 
+        public static IAppSettings settings;//全局的设置接口
+        public static IRepeatRepairSettings repeatRsettings;//全局的去重方法配置接口
+
 
         /// <summary>
-        /// 得到一个游戏的游戏ID，用于在GameListInfo.ini中对对应游戏进行个性化设置
-        /// 如果游戏已经存在于GameList.txt，则直接返回ID，否则追加新游戏路径并返回新ID
+        /// 得到一个游戏的游戏ID
+        /// 如果游戏已经存在于数据库中，则直接返回ID，否则追加新游戏路径并返回新ID
         /// </summary>
         /// <param name="gamepath"></param>
-        /// <returns></returns>
+        /// <returns>返回游戏ID</returns>
         public static int GetGameID(string gamepath)
         {
-            if (File.Exists("GameList.txt") == false)
+
+            if (File.Exists(Environment.CurrentDirectory + "\\settings\\GameList.sqlite") == false)
             {
-                File.Create("GameList.txt").Close();
+                CreateNewGameList();
             }
 
+            SQLiteHelper sqliteH = new SQLiteHelper(Environment.CurrentDirectory + "\\settings\\GameList.sqlite");
+            
+            List<string> ls = sqliteH.ExecuteReader_OneLine(string.Format("SELECT gameID FROM gamelist WHERE gameFilePath = '{0}';", gamepath),1);
+            
 
-            string[] res = File.ReadAllLines("GameList.txt");
-
-            for (int i = 0; i < res.Length; i = i + 2)
+            if (ls == null)
             {
-                if (res[i] == gamepath)
-                {
-                    return int.Parse(res[i + 1]);
-                }
+                string sql = string.Format("INSERT INTO gamelist VALUES(NULL,'{0}',NULL,'False',NULL,NULL,NULL,NULL);", gamepath);
+                sqliteH.ExecuteSql(sql);
+                ls = sqliteH.ExecuteReader_OneLine(string.Format("SELECT gameID FROM gamelist WHERE gameFilePath = '{0}';", gamepath),1);
             }
 
-            FileStream fs = new FileStream("GameList.txt", FileMode.Append);
-            StreamWriter sw = new StreamWriter(fs);
+            return int.Parse(ls[0]);
+        }
 
-            int newid = int.Parse(IniFileHelper.ReadItemValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "AllGame", "GameNum", "0")) + 1;
-
-            IniFileHelper.WriteValue(Environment.CurrentDirectory + "\\GameListInfo.ini", "AllGame", "GameNum", "" + newid);
-
-            sw.WriteLine(gamepath);
-            sw.WriteLine(newid);
-            sw.Flush();
-            sw.Close();
-            fs.Close();
-
-            return newid;
+        /// <summary>
+        /// 创建一个新游戏列表库
+        /// </summary>
+        public static void CreateNewGameList() {
+            SQLiteHelper.CreateNewDatabase(Environment.CurrentDirectory + "\\settings\\GameList.sqlite");
+            SQLiteHelper sqliteH = new SQLiteHelper(Environment.CurrentDirectory + "\\settings\\GameList.sqlite");
+            sqliteH.ExecuteSql("CREATE TABLE gamelist(gameID INTEGER PRIMARY KEY AUTOINCREMENT,gameFilePath TEXT,gameName TEXT,isHookFunMulti TEXT,hookCode TEXT,srcLang TEXT,dstLang TEXT,RepeatMethod TEXT);");
         }
 
         /// <summary>
