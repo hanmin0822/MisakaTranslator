@@ -2,6 +2,7 @@
 using HandyControl.Controls;
 using System.Drawing;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -12,13 +13,13 @@ namespace MisakaTranslator_WPF
         public MainWindow()
         {
             InitializeComponent();
-            ISettings settings = new ConfigurationBuilder<ISettings>().UseJsonFile("settings/settings.json").Build();
-            this.Resources["Foreground"] = (SolidColorBrush)(new BrushConverter().ConvertFrom(settings.ForegroundHex));
+            InitializeApperence();
         }
 
-        private static void InitializeApperence()
+        private void InitializeApperence()
         {
-            
+            ISettings settings = new ConfigurationBuilder<ISettings>().UseJsonFile("settings/settings.json").Build();
+            this.Resources["Foreground"] = (SolidColorBrush)(new BrushConverter().ConvertFrom(settings.ForegroundHex));
         }
     }
 }

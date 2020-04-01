@@ -1,7 +1,7 @@
-﻿﻿﻿
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29827.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MisakaTranslator", "MisakaTranslator\MisakaTranslator.csproj", "{BB4CF2AC-2E47-4EF0-AD35-75266262AAC1}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLHelperLibrary", "SQLHelperLibrary\SQLHelperLibrary.csproj", "{08A96F84-775C-4F7E-90B0-B54780A4DDB9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransOptimizationLibrary", "TransOptimizationLibrary\TransOptimizationLibrary.csproj", "{A17B385F-8E6E-4B7D-B3EF-EC08C7A8D115}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MisakaTranslator-WPF", "MisakaTranslator-WPF\MisakaTranslator-WPF.csproj", "{5F985830-49EF-4EF4-8A37-9AEE99E17AD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +103,14 @@ Global
 		{A17B385F-8E6E-4B7D-B3EF-EC08C7A8D115}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A17B385F-8E6E-4B7D-B3EF-EC08C7A8D115}.Release|x64.ActiveCfg = Release|Any CPU
 		{A17B385F-8E6E-4B7D-B3EF-EC08C7A8D115}.Release|x64.Build.0 = Release|Any CPU
+		{5F985830-49EF-4EF4-8A37-9AEE99E17AD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F985830-49EF-4EF4-8A37-9AEE99E17AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F985830-49EF-4EF4-8A37-9AEE99E17AD4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5F985830-49EF-4EF4-8A37-9AEE99E17AD4}.Debug|x64.Build.0 = Debug|Any CPU
+		{5F985830-49EF-4EF4-8A37-9AEE99E17AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F985830-49EF-4EF4-8A37-9AEE99E17AD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F985830-49EF-4EF4-8A37-9AEE99E17AD4}.Release|x64.ActiveCfg = Release|Any CPU
+		{5F985830-49EF-4EF4-8A37-9AEE99E17AD4}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
