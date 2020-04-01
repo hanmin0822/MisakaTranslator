@@ -358,3 +358,6 @@ MigrationBackup/
 
 # 用于测试模块功能
 Test/*
+
+# Vscode
+.vscode/

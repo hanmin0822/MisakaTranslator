@@ -13,7 +13,7 @@
         Height="540" 
         Width="960">
     <Window.Resources>
-        <ResourceDictionary Source = "res/Appearance.xaml"></ResourceDictionary>
+        <ResourceDictionary Source = "res/Appearance.xaml"/>
     </Window.Resources>
     <hc:Window.NonClientAreaContent>
         <StackPanel Height="29">
@@ -34,10 +34,9 @@
             <ColumnDefinition />
             <ColumnDefinition Width="273" />
         </Grid.ColumnDefinitions>
-            
-        <Border Grid.Column="1" Grid.Row="1" Padding="30,30,30,30" Effect="{StaticResource EffectShadow3}">
-        <Button Background="{DynamicResource Foreground}" Content="{StaticResource BtnStart}" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Border Grid.Column="1" Grid.Row="1" Padding="30" Effect="{StaticResource EffectShadow3}">
+            <Button Background="{DynamicResource Foreground}" Content="{StaticResource BtnStart}" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Border>
-        <Button fa:Awesome.Content="Cog" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{DynamicResource Foreground}" FontSize="30" Background="#01FFFFFF"  Height="50" Width="50"  Effect="{StaticResource EffectShadow5}"></Button>
+        <Button fa:Awesome.Content="Cog" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{DynamicResource Foreground}" FontSize="30" Background="#01FFFFFF"  Height="50" Width="50"  Effect="{StaticResource EffectShadow5}"/>
     </Grid>
 </hc:Window>

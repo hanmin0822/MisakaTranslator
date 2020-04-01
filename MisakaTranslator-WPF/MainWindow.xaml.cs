@@ -13,10 +13,10 @@ namespace MisakaTranslator_WPF
         public MainWindow()
         {
             InitializeComponent();
-            InitializeApperence();
+            InitializeAppearance();
         }
 
-        private void InitializeApperence()
+        private void InitializeAppearance()
         {
             ISettings settings = new ConfigurationBuilder<ISettings>().UseJsonFile("settings/settings.json").Build();
             this.Resources["Foreground"] = (SolidColorBrush)(new BrushConverter().ConvertFrom(settings.ForegroundHex));
