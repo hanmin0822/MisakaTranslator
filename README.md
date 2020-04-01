@@ -59,7 +59,7 @@ E-Mail/QQ:512240272@qq.com
 ## 项目团队成员
 
 * 画师担当-百川行
-* 官网制作-Disviel
+* 官网制作-[Disviel](https://github.com/Disviel)
 
 ## 贡献者名单
 
