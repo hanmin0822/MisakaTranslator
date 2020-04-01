@@ -54,6 +54,12 @@ E-Mail/QQ:512240272@qq.com
 ## 合作开发者
 
 * [unlsycn](https://github.com/HumphreyDotSln) 
+* [tpxxn](https://github.com/tpxxn)
+
+## 项目团队成员
+
+* 画师担当-百川行
+* 官网制作-Disviel
 
 ## 贡献者名单
 
