@@ -1,0 +1,58 @@
+﻿<Window x:Class="MisakaTranslator_WPF.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:local="clr-namespace:MisakaTranslator_WPF"
+        mc:Ignorable="d"
+        Title="{StaticResource SettingsMenu_WinName}" Height="450" Width="800">
+    <StackPanel Orientation="Horizontal">
+        <hc:SideMenu BorderThickness="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="0">
+            <hc:Interaction.Triggers>
+                <hc:EventTrigger EventName="SelectionChanged">
+                    <hc:EventToCommand Command="{Binding SwitchItemCmd}" PassEventArgsToCommand="True"/>
+                </hc:EventTrigger>
+            </hc:Interaction.Triggers>
+            <hc:SideMenuItem Header="{StaticResource SettingsMenu_About}" FontSize="15" Selected="Item_About_Selected"/>
+            <hc:SideMenuItem Header="{StaticResource SettingsMenu_HookSettings}" FontSize="15" Selected="Item_HookSettings_Selected"/>
+            <hc:SideMenuItem Header="{StaticResource SettingsMenu_OCRsettings}" FontSize="15">
+
+                <hc:SideMenuItem Header="{StaticResource SettingsMenu_OCRsettings_General}" Selected="Item_OCRGeneral_Selected">
+
+                </hc:SideMenuItem>
+                
+                <hc:SideMenuItem Header="{StaticResource SettingsMenu_OCRsettings_Baidu}" Selected="Item_BaiduOCR_Selected">
+
+                </hc:SideMenuItem>
+
+            </hc:SideMenuItem>
+            <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings}" FontSize="15">
+                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_General}" Selected="Item_TransGeneral_Selected">
+
+                </hc:SideMenuItem>
+                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Baidu}" Selected="Item_BaiduTrans_Selected">
+
+                </hc:SideMenuItem>
+                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_TencentFYJ}" Selected="Item_FYJTrans_Selected">
+
+                </hc:SideMenuItem>
+                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_TencentOld}" Selected="Item_TXOTrans_Selected">
+
+                </hc:SideMenuItem>
+                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Caiyun}" Selected="Item_Caiyun_Selected">
+
+                </hc:SideMenuItem>
+                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Jbeijing}" Selected="Item_JBeijing_Selected">
+
+                </hc:SideMenuItem>
+            </hc:SideMenuItem>
+
+        </hc:SideMenu>
+
+        <Frame Name="SettingFrame" Source="SettingsPages/TranslatorPages/BaiduTransSettingsPage.xaml" NavigationUIVisibility="Hidden" Height="420" Margin="0" VerticalAlignment="Top" Width="594" BorderThickness="0">
+            
+        </Frame>
+    </StackPanel>
+</Window>
+    

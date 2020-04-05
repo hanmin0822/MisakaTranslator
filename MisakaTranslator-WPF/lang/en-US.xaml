@@ -3,4 +3,6 @@
                     xmlns:local="clr-namespace:MisakaTranslator_WPF.lang"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <sys:String x:Key="BtnStart">Start</sys:String>
+
+    <sys:String x:Key="SettingsMenu_About">MisakaTranslator</sys:String>
 </ResourceDictionary>

@@ -3,4 +3,5 @@
                     xmlns:local="clr-namespace:MisakaTranslator_WPF.res"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <SolidColorBrush x:Key="Foreground" Color="AliceBlue"></SolidColorBrush>
+
 </ResourceDictionary>

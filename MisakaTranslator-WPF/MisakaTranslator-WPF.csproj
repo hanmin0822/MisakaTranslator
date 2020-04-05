@@ -13,6 +13,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -101,6 +102,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -114,6 +116,41 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common.cs" />
+    <Compile Include="IAppSettings.cs" />
+    <Compile Include="SettingsPages\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPages\HookSettingsPage.xaml.cs">
+      <DependentUpon>HookSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPages\OCRGeneralSettingsPage.xaml.cs">
+      <DependentUpon>OCRGeneralSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPages\OCRPages\BaiduOCRSettingsPage.xaml.cs">
+      <DependentUpon>BaiduOCRSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPages\TranslatorGeneralSettingsPage.xaml.cs">
+      <DependentUpon>TranslatorGeneralSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPages\TranslatorPages\BaiduTransSettingsPage.xaml.cs">
+      <DependentUpon>BaiduTransSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPages\TranslatorPages\CaiyunTransSettingsPage.xaml.cs">
+      <DependentUpon>CaiyunTransSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPages\TranslatorPages\JbeijingTransSettingsPage.xaml.cs">
+      <DependentUpon>JbeijingTransSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPages\TranslatorPages\TencentFYJTransSettingsPage.xaml.cs">
+      <DependentUpon>TencentFYJTransSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPages\TranslatorPages\TencentOldTransSettingsPage.xaml.cs">
+      <DependentUpon>TencentOldTransSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="lang\en-US.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -139,6 +176,50 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SettingsPages\AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\HookSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\OCRGeneralSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\OCRPages\BaiduOCRSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\TranslatorGeneralSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\TranslatorPages\BaiduTransSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\TranslatorPages\CaiyunTransSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\TranslatorPages\JbeijingTransSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\TranslatorPages\TencentFYJTransSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\TranslatorPages\TencentOldTransSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -147,8 +228,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MecabHelperLibrary\MecabHelperLibrary.csproj">
+      <Project>{82fde770-321e-4433-8e05-8803850f24db}</Project>
+      <Name>MecabHelperLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OCRLibrary\OCRLibrary.csproj">
+      <Project>{b66d98ec-fe39-45b4-9808-ac737c1a49fb}</Project>
+      <Name>OCRLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SQLHelperLibrary\SQLHelperLibrary.csproj">
+      <Project>{08a96f84-775c-4f7e-90b0-b54780a4ddb9}</Project>
+      <Name>SQLHelperLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TextHookLibrary\TextHookLibrary.csproj">
+      <Project>{a976d07e-0b39-41b6-b6f7-7022bbfbd3ff}</Project>
+      <Name>TextHookLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TextRepairLibrary\TextRepairLibrary.csproj">
+      <Project>{722c0650-3d77-42b2-a754-50f2cb3f4c8b}</Project>
+      <Name>TextRepairLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TranslatorLibrary\TranslatorLibrary.csproj">
+      <Project>{bbebcf78-7bbb-4b19-99ee-87ddea4f3793}</Project>
+      <Name>TranslatorLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TransOptimizationLibrary\TransOptimizationLibrary.csproj">
+      <Project>{a17b385f-8e6e-4b7d-b3ef-ec08c7a8d115}</Project>
+      <Name>TransOptimizationLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

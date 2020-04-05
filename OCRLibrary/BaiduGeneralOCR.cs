@@ -96,7 +96,7 @@ namespace OCRLibrary
         }
 
         /// <summary>
-        /// 百OCRAPI申请地址
+        /// 百度OCRAPI申请地址
         /// </summary>
         /// <returns></returns>
         public static string GetUrl_allpyAPI()
@@ -111,6 +111,15 @@ namespace OCRLibrary
         public static string GetUrl_bill()
         {
             return "https://console.bce.baidu.com/ai/?fromai=1#/ai/ocr/overview/index";
+        }
+
+        /// <summary>
+        /// 百度OCRAPI文档地址
+        /// </summary>
+        /// <returns></returns>
+        public static string GetUrl_Doc()
+        {
+            return "https://ai.baidu.com/ai-doc/OCR/zk3h7xz52";
         }
     }
 

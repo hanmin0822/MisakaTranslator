@@ -46,7 +46,7 @@ namespace TextHookLibrary
         /// </summary>
         public List<string> HookCodeList;
 
-        private Queue<string> TextractorOutPutHistory;//Textractor的输出记录队列，用于查错
+        public Queue<string> TextractorOutPutHistory;//Textractor的输出记录队列，用于查错
 
         private int GamePID;//能够获取到文本的游戏进程ID
         private Dictionary<Process, bool> PossibleGameProcessList;//与gamePID进程同名的进程列表

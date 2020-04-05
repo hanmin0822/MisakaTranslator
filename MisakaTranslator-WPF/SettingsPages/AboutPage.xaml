@@ -1,0 +1,15 @@
+﻿<Page x:Class="MisakaTranslator_WPF.SettingsPages.AboutPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MisakaTranslator_WPF.SettingsPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="594"
+      Title="AboutPage">
+
+    <Canvas Background="White">
+        <Button Content="{StaticResource AboutPage_BtnHelp}" Canvas.Left="62" Canvas.Top="335" Click="BtnHelp_Click"></Button>
+        <Button Content="{StaticResource AboutPage_BtnGithub}" Canvas.Left="409" Canvas.Top="335" Click="BtnGithub_Click"></Button>
+    </Canvas>
+</Page>
