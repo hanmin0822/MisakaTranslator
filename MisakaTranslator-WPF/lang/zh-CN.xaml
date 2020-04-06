@@ -70,4 +70,38 @@
 
     <sys:String x:Key="AboutPage_BtnHelp">使用说明和反馈</sys:String>
     <sys:String x:Key="AboutPage_BtnGithub">本项目GitHub主页</sys:String>
+
+    <sys:String x:Key="GameGuideWin_WinName">游戏翻译向导</sys:String>
+    <sys:String x:Key="GameGuideWin_AlwaysTop">本窗口总在最前</sys:String>
+
+    <sys:String x:Key="ChooseGamePage_Introduce">说明：请先运行游戏，之后通过下拉列表选择游戏进程名。部分游戏可能存在多进程，请根据需要开启"智能注入"功能。</sys:String>
+    <sys:String x:Key="ChooseGamePage_BtnChooseWin">选择窗口</sys:String>
+    <sys:String x:Key="ChooseGamePage_BtnConfirm">确认进程</sys:String>
+    <sys:String x:Key="ChooseGamePage_CBoxX64">使用x64版本注入方式</sys:String>
+    <sys:String x:Key="ChooseGamePage_CBoxX64Hint">启用后，将使用x64版本Textractor注入游戏，适用于64位游戏</sys:String>
+
+    <sys:String x:Key="Drawer_BtnExit">关闭</sys:String>
+    
+    <sys:String x:Key="ChooseHookFuncPage_Introduce">进行游戏并使游戏中文本发生变化，在下方找到完全包含游戏文本内容的对应项并确定。</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_BtnAddHook">添加指定特殊码Hook</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_BtnConfirm">确认方法</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_Header_PID">进程号</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_Header_FunName">方法名</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_Header_HookCode">特殊码</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_Header_Content">获取内容</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_Drawer_Header">请输入进程ID和特殊码</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_Drawer_PidBox">进程ID</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_Drawer_HookCodeBox">Hook特殊码</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_Drawer_BtnConfirm">确认注入</sys:String>
+    
+    
+    <sys:String x:Key="ChooseTextRepairFuncPage_Introduce">进行游戏并使游戏中文本发生变化，然后选择一种适合您游戏的去重方法，部分方法需要提供参数。</sys:String>
+    <sys:String x:Key="ChooseTextRepairFuncPage_SourceText">源文本：</sys:String>
+    <sys:String x:Key="ChooseTextRepairFuncPage_RepairedText">处理后文本：</sys:String>
+    <sys:String x:Key="ChooseTextRepairFuncPage_Drawer_BtnConfirm">确认方法</sys:String>
+    <sys:String x:Key="ChooseTextRepairFuncPage_Drawer_Single">请输入单字重复次数</sys:String>
+    <sys:String x:Key="ChooseTextRepairFuncPage_Drawer_Sentence">请输入句子重复判断阈值</sys:String>
+    <sys:String x:Key="ChooseTextRepairFuncPage_Drawer_RegexIntrduce">请输入正则表达式及替换内容</sys:String>
+    <sys:String x:Key="ChooseTextRepairFuncPage_Drawer_Regex">请输入正则表达式</sys:String>
+    <sys:String x:Key="ChooseTextRepairFuncPage_Drawer_RegexReplace">请输入替换内容</sys:String>
 </ResourceDictionary>

@@ -1,0 +1,102 @@
+﻿<Page x:Class="MisakaTranslator_WPF.GuidePages.Hook.ChooseTextRepairFuncPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MisakaTranslator_WPF.GuidePages.Hook"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="800"
+      Title="ChooseTextRepairFuncPage">
+
+    <Grid>
+        <Grid>
+            <Grid Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*"></RowDefinition>
+                    <RowDefinition Height="205*"></RowDefinition>
+                    <RowDefinition Height="40*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="{StaticResource ChooseTextRepairFuncPage_Introduce}" Margin="10"/>
+
+                <StackPanel Grid.Row="1">
+                    <hc:ComboBox Name="RepairFuncCombox" Margin="10,10,10,0" VerticalAlignment="Center" SelectionChanged="RepairFuncCombox_SelectionChanged" />
+
+                    <hc:TextBox Margin="10,0,10,0" Height="100" hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource ChooseTextRepairFuncPage_SourceText}"></hc:TextBox>
+
+                    <hc:TextBox Margin="10,0,10,0" Height="100" hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource ChooseTextRepairFuncPage_RepairedText}"></hc:TextBox>
+
+                </StackPanel>
+                
+                <Button Grid.Row="2" HorizontalAlignment="Right" Margin="10" Content="{StaticResource ChooseHookFuncPage_BtnConfirm}" Width="205" Click="ConfirmBtn_Click"/>
+
+            </Grid>
+
+            <hc:Drawer Name="Single_InputDrawer" MaskCanClose="False">
+                <Border Background="White" Width="300" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource BorderBrush}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="{StaticResource ChooseTextRepairFuncPage_Drawer_Single}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+
+                        <TextBox Name="Single_TextBox" Grid.Row="1" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Center" FontSize="15" Width="200"/>
+
+                        <Button Grid.Row="2" Style="{StaticResource ButtonInfo}" HorizontalAlignment="Left" Margin="30" VerticalAlignment="Center" Content="{StaticResource ChooseTextRepairFuncPage_Drawer_BtnConfirm}" FontSize="15" Height="Auto" Click="SingleConfirm_Click"></Button>
+                        <Button Grid.Row="2" Style="{StaticResource ButtonDanger}" HorizontalAlignment="Right" Margin="30" VerticalAlignment="Center" Content="{StaticResource Drawer_BtnExit}" FontSize="15" Height="Auto" Click="ExitBtn_Click"></Button>
+
+                    </Grid>
+                </Border>
+            </hc:Drawer>
+
+            <hc:Drawer Name="Sentence_InputDrawer" MaskCanClose="False">
+                <Border Background="White" Width="300" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource BorderBrush}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="{StaticResource ChooseTextRepairFuncPage_Drawer_Sentence}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+
+                        <TextBox Name="Sentence_TextBox" Grid.Row="1" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Center" FontSize="15" Width="200"/>
+
+                        <Button Grid.Row="2" Style="{StaticResource ButtonInfo}" HorizontalAlignment="Left" Margin="30" VerticalAlignment="Center" Content="{StaticResource ChooseTextRepairFuncPage_Drawer_BtnConfirm}" FontSize="15" Height="Auto" Click="SentenceConfirm_Click"></Button>
+                        <Button Grid.Row="2" Style="{StaticResource ButtonDanger}" HorizontalAlignment="Right" Margin="30" VerticalAlignment="Center" Content="{StaticResource Drawer_BtnExit}" FontSize="15" Height="Auto" Click="ExitBtn_Click"></Button>
+
+                    </Grid>
+                </Border>
+            </hc:Drawer>
+
+            <hc:Drawer Name="Regex_InputDrawer" MaskCanClose="False">
+                <Border Background="White" Width="300" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource BorderBrush}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="{StaticResource ChooseTextRepairFuncPage_Drawer_RegexIntrduce}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+
+                        <TextBox Name="Regex_TextBox" hc:InfoElement.Placeholder="{StaticResource ChooseTextRepairFuncPage_Drawer_Regex}" hc:InfoElement.Necessary="True" Style="{StaticResource TextBoxExtend}" Grid.Row="1" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Center" FontSize="15" Width="200"/>
+
+                        <TextBox Name="Replace_TextBox" hc:InfoElement.Placeholder="{StaticResource ChooseTextRepairFuncPage_Drawer_RegexReplace}" hc:InfoElement.Necessary="True" Style="{StaticResource TextBoxExtend}" Grid.Row="2" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Center" FontSize="15" Width="200"></TextBox>
+
+                        <Button Grid.Row="3" Style="{StaticResource ButtonInfo}" HorizontalAlignment="Left" Margin="30" VerticalAlignment="Center" Content="{StaticResource ChooseTextRepairFuncPage_Drawer_BtnConfirm}" FontSize="15" Height="Auto" Click="RegexConfirm_Click"></Button>
+                        <Button Grid.Row="3" Style="{StaticResource ButtonDanger}" HorizontalAlignment="Right" Margin="30" VerticalAlignment="Center" Content="{StaticResource Drawer_BtnExit}" FontSize="15" Height="Auto" Click="ExitBtn_Click"></Button>
+
+                    </Grid>
+                </Border>
+            </hc:Drawer>
+        </Grid>
+
+        <StackPanel hc:Growl.GrowlParent="True" HorizontalAlignment="Right" Margin="15"/>
+    </Grid>
+</Page>

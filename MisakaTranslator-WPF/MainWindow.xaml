@@ -41,5 +41,7 @@
             
 
         </Button>
+
+        <Button Content="gameguide" Height="43" Margin="292,110,259.2,97.4" Width="120" Click="Button_Click"></Button>
     </Grid>
 </hc:Window>

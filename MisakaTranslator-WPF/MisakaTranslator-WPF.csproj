@@ -117,6 +117,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common.cs" />
+    <Compile Include="GameGuideWindow.xaml.cs">
+      <DependentUpon>GameGuideWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GuidePages\Hook\ChooseGamePage.xaml.cs">
+      <DependentUpon>ChooseGamePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GuidePages\Hook\ChooseHookFuncPage.xaml.cs">
+      <DependentUpon>ChooseHookFuncPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GuidePages\Hook\ChooseTextRepairFuncPage.xaml.cs">
+      <DependentUpon>ChooseTextRepairFuncPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GuidePages\PageChangeRoutedEventArgs.cs" />
     <Compile Include="IAppSettings.cs" />
     <Compile Include="SettingsPages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
@@ -151,6 +164,22 @@
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="GameGuideWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GuidePages\Hook\ChooseGamePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GuidePages\Hook\ChooseHookFuncPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GuidePages\Hook\ChooseTextRepairFuncPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="lang\en-US.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -261,6 +290,9 @@
       <Project>{a17b385f-8e6e-4b7d-b3ef-ec08c7a8d115}</Project>
       <Name>TransOptimizationLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GuidePages\OCR\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

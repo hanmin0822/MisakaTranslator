@@ -31,5 +31,12 @@ namespace MisakaTranslator_WPF
             SettingsWindow sw = new SettingsWindow();
             sw.Show();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            GameGuideWindow ggw = new GameGuideWindow(1);
+            ggw.Show();
+
+        }
     }
 }

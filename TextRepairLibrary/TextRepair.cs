@@ -8,28 +8,23 @@ using System.Threading.Tasks;
 
 namespace TextRepairLibrary
 {
-    public class TextRepir
+    public class TextRepair
     {
         public static int SingleWordRepeatTimes;
         public static int SentenceRepeatFindCharNum;
         public static string regexPattern;
         public static string regexReplacement;
+
+        public static Dictionary<string, string> lstRepairFun = new Dictionary<string, string>() {
+            { "不进行处理" , "RepairFun_NoDeal" },
+            { "单字重复处理" , "RepairFun_RemoveSingleWordRepeat" },
+            { "句子重复处理" , "RepairFun_RemoveSentenceRepeat" },
+            { "去除字母和数字" , "RepairFun_RemoveLetterNumber" },
+            { "正则表达式替换(见说明)" , "RepairFun_RegexReplace" },
+            { "用户自定义(见说明)" , "RepairFun_Custom" }
+        };
+
         
-
-        public static List<KeyValuePair<string, string>> GetAllTextRepirFun()
-        {
-            List<KeyValuePair<string, string>> ret = new List<KeyValuePair<string, string>>();
-
-            ret.Add(new KeyValuePair<string, string>("RepairFun_NoDeal", "不进行处理"));
-            ret.Add(new KeyValuePair<string, string>("RepairFun_RemoveSingleWordRepeat", "单字重复处理"));
-            ret.Add(new KeyValuePair<string, string>("RepairFun_RemoveSentenceRepeat", "句子重复处理"));
-            ret.Add(new KeyValuePair<string, string>("RepairFun_RemoveLetterNumber", "去除字母和数字"));
-            ret.Add(new KeyValuePair<string, string>("RepairFun_RegexReplace", "正则表达式替换(见说明)"));
-            ret.Add(new KeyValuePair<string, string>("RepairFun_Custom", "用户自定义(见说明)"));
-
-            return ret;
-        }
-
         /// <summary>
         /// 无处理方式
         /// </summary>

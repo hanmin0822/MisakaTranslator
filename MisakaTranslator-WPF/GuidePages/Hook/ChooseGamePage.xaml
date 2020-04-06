@@ -1,0 +1,34 @@
+﻿<Page x:Class="MisakaTranslator_WPF.GuidePages.Hook.ChooseGamePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:local="clr-namespace:MisakaTranslator_WPF.GuidePages"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="800"
+      Title="ChooseGamePage">
+
+    <Grid>
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="{StaticResource ChooseGamePage_Introduce}" FontSize="15" TextWrapping="WrapWithOverflow" Margin="10"/>
+
+            <hc:ComboBox Name="GameProcessCombox" Grid.Row="1" Margin="10" VerticalAlignment="Center" SelectionChanged="GameProcessCombox_SelectionChanged"/>
+
+            <TextBlock Name="AutoHookTag" Grid.Row="2" Text="[AutoHook]" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" FontSize="15"></TextBlock>
+
+            <CheckBox Name="x64GameCheckBox" Grid.Row="3" Margin="10" Content="{StaticResource ChooseGamePage_CBoxX64}" FontSize="15" HorizontalAlignment="Left" hc:Poptip.HitMode="None" hc:Poptip.IsOpen="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" hc:Poptip.Content="{StaticResource ChooseGamePage_CBoxX64Hint}" hc:Poptip.Placement="Top"/>
+            <Button Grid.Row="3" Margin="10" Height="Auto" Content="{StaticResource ChooseGamePage_BtnConfirm}" HorizontalAlignment="Right" FontSize="15" Width="250" Click="ConfirmButton_Click"/>
+
+        </Grid>
+
+        <StackPanel hc:Growl.GrowlParent="True" HorizontalAlignment="Right" Margin="15"/>
+    </Grid>
+</Page>

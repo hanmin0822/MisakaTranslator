@@ -9,38 +9,38 @@ namespace TextHookLibrary
     /// <summary>
     /// TextHook数据结构体
     /// </summary>
-    public struct TextHookData{
+    public class TextHookData{
         /// <summary>
         /// 游戏进程ID
         /// </summary>
-        public string GamePID;
+        public string GamePID { set; get; }
 
         /// <summary>
         /// Hook入口地址
         /// </summary>
-        public string HookAddress;
+        public string HookAddress { set; get; }
 
         /// <summary>
         /// 通用特殊码
         /// </summary>
-        public string HookCode;
-        
+        public string HookCode { set; get; }
+
         /// <summary>
         /// MisakaTranslator专用特殊码
         /// 注意 本软件单独处理一套特殊码规则：即Textrator输出的从进程到方法名之间的三组数字做记录
         /// 格式如下：特殊码【值1:值2:值3】（值1即HookAddress）
         /// </summary>
-        public string MisakaHookCode;
+        public string MisakaHookCode { set; get; }
 
         /// <summary>
         /// Hook方法名
         /// </summary>
-        public string HookFunc;
+        public string HookFunc { set; get; }
 
         /// <summary>
         /// 实际内容
         /// </summary>
-        public string Data;
+        public string Data { set; get; }
     }
 
     

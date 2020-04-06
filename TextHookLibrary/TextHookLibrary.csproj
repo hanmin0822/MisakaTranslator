@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProcessHelper.cs" />
     <Compile Include="RecvEventArgs.cs" />
     <Compile Include="TextHookHandle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
