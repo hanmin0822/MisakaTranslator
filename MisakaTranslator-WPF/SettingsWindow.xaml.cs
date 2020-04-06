@@ -32,7 +32,7 @@ namespace MisakaTranslator_WPF
 
         private void Item_TransGeneral_Selected(object sender, RoutedEventArgs e)
         {
-            this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorGeneralSettingsPage.xaml", UriKind.Relative));
+            this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/TranslatorGeneralSettingsPage.xaml", UriKind.Relative));
         }
 
         private void Item_BaiduTrans_Selected(object sender, RoutedEventArgs e)
@@ -67,7 +67,7 @@ namespace MisakaTranslator_WPF
         
         private void Item_OCRGeneral_Selected(object sender, RoutedEventArgs e)
         {
-            this.SettingFrame.Navigate(new Uri("SettingsPages/OCRGeneralSettingsPage.xaml", UriKind.Relative));
+            this.SettingFrame.Navigate(new Uri("SettingsPages/OCRPages/OCRGeneralSettingsPage.xaml", UriKind.Relative));
         }
 
         private void Item_HookSettings_Selected(object sender, RoutedEventArgs e)

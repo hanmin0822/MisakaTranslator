@@ -1,0 +1,18 @@
+﻿<Page x:Class="MisakaTranslator_WPF.SettingsPages.OCRGeneralSettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:local="clr-namespace:MisakaTranslator_WPF.SettingsPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="594"
+      Title="OCRGeneralSettingsPage">
+
+    <hc:ScrollViewer HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Background="White">
+            <TextBlock Text="{StaticResource OCRGeneralSettingsPage_Introduce}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
+            <hc:ComboBox Name="OCRsourceCombox" Margin="20,46,0,0" Width="380" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource OCRGeneralSettingsPage_OCRsource}" SelectionChanged="OCRsourceCombox_SelectionChanged" HorizontalAlignment="Left" />
+        </StackPanel>
+    </hc:ScrollViewer>
+</Page>
