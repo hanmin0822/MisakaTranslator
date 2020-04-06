@@ -124,13 +124,13 @@
     <Compile Include="SettingsPages\HookSettingsPage.xaml.cs">
       <DependentUpon>HookSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsPages\OCRGeneralSettingsPage.xaml.cs">
+    <Compile Include="SettingsPages\OCRPages\OCRGeneralSettingsPage.xaml.cs">
       <DependentUpon>OCRGeneralSettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingsPages\OCRPages\BaiduOCRSettingsPage.xaml.cs">
       <DependentUpon>BaiduOCRSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsPages\TranslatorGeneralSettingsPage.xaml.cs">
+    <Compile Include="SettingsPages\TranslatorPages\TranslatorGeneralSettingsPage.xaml.cs">
       <DependentUpon>TranslatorGeneralSettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingsPages\TranslatorPages\BaiduTransSettingsPage.xaml.cs">
@@ -184,7 +184,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsPages\OCRGeneralSettingsPage.xaml">
+    <Page Include="SettingsPages\OCRPages\OCRGeneralSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -192,7 +192,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsPages\TranslatorGeneralSettingsPage.xaml">
+    <Page Include="SettingsPages\TranslatorPages\TranslatorGeneralSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
