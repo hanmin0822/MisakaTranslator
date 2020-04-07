@@ -1,0 +1,32 @@
+﻿<Page x:Class="MisakaTranslator_WPF.SettingsPages.HookSettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:local="clr-namespace:MisakaTranslator_WPF.SettingsPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="594"
+      Title="HookSettingsPage">
+
+
+    <Grid>
+        <StackPanel Background="White">
+            <TextBlock Text="{StaticResource HookSettingsPage_Introduce}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
+
+            <Canvas Margin="10,10,10,10" Height="348">
+
+                <TextBlock Text="{StaticResource HookSettingsPage_AutoHook_Introduce}" Canvas.Left="10" Canvas.Top="21" />
+                <CheckBox Name="AutoHookCheckBox" Content="{StaticResource HookSettingsPage_AutoHook}" hc:InfoElement.Title="{StaticResource HookSettingsPage_AutoHook}" Canvas.Left="10" Canvas.Top="42" hc:Poptip.HitMode="None" hc:Poptip.IsOpen="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" hc:Poptip.Content="{StaticResource HookSettingsPage_AutoHookHint}" hc:Poptip.Placement="Top" Click="AutoHookCheckBox_Click" />
+
+                <TextBlock Text="{StaticResource HookSettingsPage_AutoDetach_Introduce}" Canvas.Left="10" Canvas.Top="85" />
+                <CheckBox Name="AutoDetachCheckBox" Content="{StaticResource HookSettingsPage_AutoDetach}" hc:InfoElement.Title="{StaticResource HookSettingsPage_AutoHook}" Canvas.Left="10" Canvas.Top="105" Click="AutoDetachCheckBox_Click"/>
+
+                <Button Content="{StaticResource HookSettingsPage_BtnExtractHistory}" Canvas.Left="10" Canvas.Top="168" Click="Button_Click"/>
+            </Canvas>
+
+        </StackPanel>
+
+        <StackPanel hc:Growl.GrowlParent="True" HorizontalAlignment="Right" Margin="15"/>
+    </Grid>
+</Page>

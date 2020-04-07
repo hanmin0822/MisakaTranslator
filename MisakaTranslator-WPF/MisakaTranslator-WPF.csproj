@@ -118,38 +118,41 @@
     </ApplicationDefinition>
     <Compile Include="Common.cs" />
     <Compile Include="IAppSettings.cs" />
-    <Compile Include="SettingsPages\AboutPage.xaml.cs">
+    <Compile Include="res\SettingsPages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsPages\HookSettingsPage.xaml.cs">
+    <Compile Include="res\SettingsPages\HookSettingsPage.xaml.cs">
       <DependentUpon>HookSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsPages\OCRGeneralSettingsPage.xaml.cs">
+    <Compile Include="res\SettingsPages\OCRGeneralSettingsPage.xaml.cs">
       <DependentUpon>OCRGeneralSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsPages\OCRPages\BaiduOCRSettingsPage.xaml.cs">
+    <Compile Include="res\SettingsPages\OCRPages\BaiduOCRSettingsPage.xaml.cs">
       <DependentUpon>BaiduOCRSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsPages\TranslatorGeneralSettingsPage.xaml.cs">
+    <Compile Include="res\SettingsPages\TranslatorGeneralSettingsPage.xaml.cs">
       <DependentUpon>TranslatorGeneralSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsPages\TranslatorPages\BaiduTransSettingsPage.xaml.cs">
+    <Compile Include="res\SettingsPages\TranslatorPages\BaiduTransSettingsPage.xaml.cs">
       <DependentUpon>BaiduTransSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsPages\TranslatorPages\CaiyunTransSettingsPage.xaml.cs">
+    <Compile Include="res\SettingsPages\TranslatorPages\CaiyunTransSettingsPage.xaml.cs">
       <DependentUpon>CaiyunTransSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsPages\TranslatorPages\JbeijingTransSettingsPage.xaml.cs">
+    <Compile Include="res\SettingsPages\TranslatorPages\JbeijingTransSettingsPage.xaml.cs">
       <DependentUpon>JbeijingTransSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsPages\TranslatorPages\TencentFYJTransSettingsPage.xaml.cs">
+    <Compile Include="res\SettingsPages\TranslatorPages\TencentFYJTransSettingsPage.xaml.cs">
       <DependentUpon>TencentFYJTransSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsPages\TranslatorPages\TencentOldTransSettingsPage.xaml.cs">
+    <Compile Include="res\SettingsPages\TranslatorPages\TencentOldTransSettingsPage.xaml.cs">
       <DependentUpon>TencentOldTransSettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TranslatorWindow.xaml.cs">
+      <DependentUpon>TranslatorWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="lang\en-US.xaml">
       <SubType>Designer</SubType>
@@ -176,47 +179,51 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsPages\AboutPage.xaml">
+    <Page Include="res\SettingsPages\AboutPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsPages\HookSettingsPage.xaml">
+    <Page Include="res\SettingsPages\HookSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsPages\OCRGeneralSettingsPage.xaml">
+    <Page Include="res\SettingsPages\OCRGeneralSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsPages\OCRPages\BaiduOCRSettingsPage.xaml">
+    <Page Include="res\SettingsPages\OCRPages\BaiduOCRSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsPages\TranslatorGeneralSettingsPage.xaml">
+    <Page Include="res\SettingsPages\TranslatorGeneralSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsPages\TranslatorPages\BaiduTransSettingsPage.xaml">
+    <Page Include="res\SettingsPages\TranslatorPages\BaiduTransSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsPages\TranslatorPages\CaiyunTransSettingsPage.xaml">
+    <Page Include="res\SettingsPages\TranslatorPages\CaiyunTransSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsPages\TranslatorPages\JbeijingTransSettingsPage.xaml">
+    <Page Include="res\SettingsPages\TranslatorPages\JbeijingTransSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsPages\TranslatorPages\TencentFYJTransSettingsPage.xaml">
+    <Page Include="res\SettingsPages\TranslatorPages\TencentFYJTransSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsPages\TranslatorPages\TencentOldTransSettingsPage.xaml">
+    <Page Include="res\SettingsPages\TranslatorPages\TencentOldTransSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TranslatorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

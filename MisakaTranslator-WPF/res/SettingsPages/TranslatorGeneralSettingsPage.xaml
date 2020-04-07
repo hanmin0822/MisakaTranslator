@@ -1,0 +1,25 @@
+﻿<Page x:Class="MisakaTranslator_WPF.SettingsPages.TranslatorGeneralSettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:local="clr-namespace:MisakaTranslator_WPF.SettingsPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="594"
+      Title="TranslatorGeneralSettingsPage">
+
+    <StackPanel Background="White">
+        <TextBlock Text="{StaticResource GeneralTransSettingsPage_Introduce}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
+
+        <Canvas Margin="10,10,10,10" Height="348">
+
+            <hc:ComboBox Name="FirstTransCombox" Width="380" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource GeneralTransSettingsPage_FirstTranslator}" Canvas.Left="97" Canvas.Top="36" hc:Poptip.HitMode="None" hc:Poptip.IsOpen="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" hc:Poptip.Content="{StaticResource GeneralTransSettingsPage_TransSourceHint}" hc:Poptip.Placement="Top" SelectionChanged="FirstTransCombox_SelectionChanged"/>
+            <hc:ComboBox Name="SecondTransCombox" Width="380" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource GeneralTransSettingsPage_SecondTranslator}" Canvas.Left="97" Canvas.Top="84" hc:Poptip.HitMode="None" hc:Poptip.IsOpen="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" hc:Poptip.Content="{StaticResource GeneralTransSettingsPage_TransSourceHint}" hc:Poptip.Placement="Top" SelectionChanged="SecondTransCombox_SelectionChanged"/>
+
+            <CheckBox Name="EachRowTransCheckBox" Content="{StaticResource GeneralTransSettingsPage_EachRowTransCheckBox}" IsChecked="True" hc:InfoElement.Title="{StaticResource GeneralTransSettingsPage_SecondTranslator}" Canvas.Left="247" Canvas.Top="169" hc:Poptip.HitMode="None" hc:Poptip.IsOpen="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" hc:Poptip.Content="{StaticResource GeneralTransSettingsPage_EachRowTransHint}" hc:Poptip.Placement="Top" Click="EachRowTransCheckBox_Click"/>
+
+        </Canvas>
+    </StackPanel>
+
+</Page>

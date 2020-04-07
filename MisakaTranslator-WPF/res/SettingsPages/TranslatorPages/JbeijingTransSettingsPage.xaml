@@ -1,0 +1,34 @@
+﻿<Page x:Class="MisakaTranslator_WPF.SettingsPages.TranslatorPages.JbeijingTransSettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:local="clr-namespace:MisakaTranslator_WPF.SettingsPages.TranslatorPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="594"
+      Title="JbeijingTransSettingsPage">
+
+    <Grid>
+        <StackPanel Background="White">
+            <TextBlock Text="{StaticResource JbeijingTransSettingsPage_Introduce}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
+
+            <Canvas Margin="10,10,10,10" Height="310">
+                <TextBlock Text="{StaticResource JbeijingTransSettingsPage_Path}" VerticalAlignment="Center" TextAlignment="Left" Canvas.Left="10" Canvas.Top="33" Width="155"></TextBlock>
+                <hc:TextBox Name="PathBox" ShowClearButton="True" Width="412" Canvas.Left="10" Canvas.Top="53" Text="" />
+                <Button Content="{StaticResource JbeijingTransSettingsPage_ChoosePath}" Canvas.Left="437" Canvas.Top="53" Width="122" Click="ChoosePathBtn_Click" ></Button>
+
+                <hc:Divider Width="549" Canvas.Left="10" Margin="0" Canvas.Top="115"/>
+
+                <TextBlock Text="{StaticResource API_testSrcText}" VerticalAlignment="Center" TextAlignment="Left" Canvas.Left="10" Canvas.Top="141" Width="107"></TextBlock>
+                <hc:TextBox Name="TestSrcText" ShowClearButton="True" Width="549" Canvas.Left="10" Canvas.Top="167" Text="本ソフトウェアのご利用を歓迎します。"/>
+                <Button Content="{StaticResource API_testTransBtn}" Canvas.Left="437" Canvas.Top="211" Width="122" Click="TransTestBtn_Click" ></Button>
+            </Canvas>
+
+        </StackPanel>
+
+        <StackPanel hc:Growl.GrowlParent="True" HorizontalAlignment="Right" Margin="15"/>
+    </Grid>
+    
+    
+</Page>
