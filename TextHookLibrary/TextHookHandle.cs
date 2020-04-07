@@ -236,7 +236,7 @@ namespace TextHookLibrary
         }
         
         /// <summary>
-        /// 开始注入，会判断是否自动注入
+        /// 开始注入，会判断是否智能注入
         /// </summary>
         public async void StartHook(bool AutoHook = false)
         {
@@ -275,11 +275,11 @@ namespace TextHookLibrary
 
             if (Pause == false)
             {
-                TextHookData? thData = DealTextratorOutput(outLine.Data);
+                TextHookData thData = DealTextratorOutput(outLine.Data);
                 
                 if (thData != null)
                 {
-                    TextHookData data = thData.Value;
+                    TextHookData data = thData;
                     
                     if (data.HookFunc != "Console" && data.HookFunc != "")
                     {
@@ -289,7 +289,7 @@ namespace TextHookLibrary
                             HookSelectRecvEventArgs e = new HookSelectRecvEventArgs();
                             e.Index = TextractorFun_Index_List[data.MisakaHookCode];
                             e.Data = data;
-                            HFSevent(this,e);
+                            HFSevent?.Invoke(this, e);
                         }
                         else
                         {
@@ -297,7 +297,7 @@ namespace TextHookLibrary
                             HookSelectRecvEventArgs e = new HookSelectRecvEventArgs();
                             e.Index = TextractorFun_Index_List[data.MisakaHookCode];
                             e.Data = data;
-                            HFSevent(this, e);
+                            HFSevent?.Invoke(this, e);
                             listIndex++;
                         }
                         
@@ -311,7 +311,7 @@ namespace TextHookLibrary
                                     Index = TextractorFun_Index_List[data.MisakaHookCode],
                                     Data = data
                                 };
-                                HFRSevent(this, e);
+                                HFRSevent?.Invoke(this, e);
                             }
                             else
                             {
@@ -321,7 +321,7 @@ namespace TextHookLibrary
                                     Index = TextractorFun_Index_List[data.MisakaHookCode],
                                     Data = data
                                 };
-                                HFRSevent(this, e);
+                                HFRSevent?.Invoke(this, e);
                                 listIndex_Re++;
                             }
                         }
@@ -335,7 +335,7 @@ namespace TextHookLibrary
                             {
                                 Data = data
                             };
-                            Sevent(this,e);
+                            Sevent?.Invoke(this,e);
                         }
                         
                     }
@@ -423,7 +423,7 @@ namespace TextHookLibrary
         /// </summary>
         /// <param name="OutputText">来自Textrator的输出</param>
         /// <returns></returns>
-        private TextHookData? DealTextratorOutput(string OutputText)
+        private TextHookData DealTextratorOutput(string OutputText)
         {
             if (OutputText == "" || OutputText == null)
             {

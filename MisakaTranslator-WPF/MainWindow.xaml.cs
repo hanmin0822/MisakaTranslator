@@ -26,10 +26,27 @@ namespace MisakaTranslator_WPF
             this.Resources["Foreground"] = (SolidColorBrush)(new BrushConverter().ConvertFrom(settings.ForegroundHex));
         }
 
+        private static SettingsWindow _settingsWindow;
+
         private void SettingsBtn_Click(object sender, RoutedEventArgs e)
         {
-            SettingsWindow sw = new SettingsWindow();
-            sw.Show();
+            if (_settingsWindow == null || _settingsWindow.IsVisible == false)
+            {
+                _settingsWindow = new SettingsWindow();
+                _settingsWindow.Show();
+            }
+            else
+            {
+                _settingsWindow.WindowState = WindowState.Normal;
+                _settingsWindow.Activate();
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            GameGuideWindow ggw = new GameGuideWindow(1);
+            ggw.Show();
+
         }
     }
 }

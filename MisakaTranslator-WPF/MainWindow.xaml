@@ -37,9 +37,7 @@
         <Border Grid.Column="1" Grid.Row="1" Padding="30" Effect="{StaticResource EffectShadow3}">
             <Button Background="{DynamicResource Foreground}" Content="{StaticResource BtnStart}" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Border>
-        <Button fa:Awesome.Content="Cog" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{DynamicResource Foreground}" FontSize="30" Background="#01FFFFFF"  Height="50" Width="50"  Effect="{StaticResource EffectShadow5}" Click="SettingsBtn_Click">
-            
-
-        </Button>
+        <Button fa:Awesome.Content="Cog" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{DynamicResource Foreground}" FontSize="30" Background="#01FFFFFF"  Height="50" Width="50"  Effect="{StaticResource EffectShadow5}" Click="SettingsBtn_Click"/>
+        <Button Content="gameguide" Height="43" Margin="292,110,259.2,97.4" Width="120" Click="Button_Click"/>
     </Grid>
 </hc:BlurWindow>
