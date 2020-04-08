@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TextHookLibrary;
 using TextRepairLibrary;
 
 namespace MisakaTranslator_WPF.GuidePages.Hook
@@ -26,10 +27,21 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
         public ChooseTextRepairFuncPage()
         {
             InitializeComponent();
-
-
-
+            
             RepairFuncCombox.ItemsSource = lstRepairFun;
+            RepairFuncCombox.SelectedIndex = 0;
+
+            Common.textHooker.Sevent += DataRecvEventHandler;
+        }
+
+        public void DataRecvEventHandler(object sender, SolvedDataRecvEventArgs e)
+        {
+            Application.Current.Dispatcher.BeginInvoke((Action)(() =>
+            {
+                sourceTextBox.Text = e.Data.Data;
+                repairedTextBox.Text = TextRepair.RepairFun_Auto(TextRepair.lstRepairFun[lstRepairFun[RepairFuncCombox.SelectedIndex]], sourceTextBox.Text);
+
+            }));
         }
 
         private void RepairFuncCombox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -47,27 +59,47 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                     break;
             }
 
-
+            repairedTextBox.Text = TextRepair.RepairFun_Auto(TextRepair.lstRepairFun[lstRepairFun[RepairFuncCombox.SelectedIndex]],sourceTextBox.Text);
         }
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
+            Common.textHooker.Sevent -= DataRecvEventHandler;
 
+            Common.UsingRepairFunc = TextRepair.lstRepairFun[lstRepairFun[RepairFuncCombox.SelectedIndex]];
+
+            //写入数据库的去重方法
+
+
+            //使用路由事件机制通知窗口来完成下一步操作
+            PageChangeRoutedEventArgs args = new PageChangeRoutedEventArgs(PageChange.PageChangeRoutedEvent, this);
+            args.XamlPath = "GuidePages/ChooseLanguagePage.xaml";
+            this.RaiseEvent(args);
         }
 
         private void SingleConfirm_Click(object sender, RoutedEventArgs e)
         {
-
+            Common.repairSettings.SingleWordRepeatTimes = Single_TextBox.Text;
+            Common.RepairFuncInit();
+            repairedTextBox.Text = TextRepair.RepairFun_RemoveSingleWordRepeat(sourceTextBox.Text);
+            Single_InputDrawer.IsOpen = false;
         }
 
         private void SentenceConfirm_Click(object sender, RoutedEventArgs e)
         {
-
+            Common.repairSettings.SentenceRepeatFindCharNum = Sentence_TextBox.Text;
+            Common.RepairFuncInit();
+            repairedTextBox.Text = TextRepair.RepairFun_RemoveSentenceRepeat(sourceTextBox.Text);
+            Sentence_InputDrawer.IsOpen = false;
         }
 
         private void RegexConfirm_Click(object sender, RoutedEventArgs e)
         {
-
+            Common.repairSettings.Regex = Regex_TextBox.Text;
+            Common.repairSettings.Regex_Replace = Replace_TextBox.Text;
+            Common.RepairFuncInit();
+            repairedTextBox.Text = TextRepair.RepairFun_RegexReplace(sourceTextBox.Text);
+            Regex_InputDrawer.IsOpen = false;
         }
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)

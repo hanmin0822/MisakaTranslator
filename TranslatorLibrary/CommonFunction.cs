@@ -9,6 +9,15 @@ namespace TranslatorLibrary
 {
     public class CommonFunction
     {
+        public static Dictionary<string, string> lstLanguage = new Dictionary<string, string>() {
+            { "中文" , "zh" },
+            { "English" , "en" },
+            { "日本語" ,  "jp" },
+            { "한국어" , "kr" },
+            { "Русскийязык" , "ru" },
+            { "Français" , "fr" }
+        };
+
         public static Dictionary<string,string> lstTranslator = new Dictionary<string, string>() {
             { "百度翻译" , "BaiduTranslator" },
             { "腾讯翻译君" , "TencentFYJTranslator" },

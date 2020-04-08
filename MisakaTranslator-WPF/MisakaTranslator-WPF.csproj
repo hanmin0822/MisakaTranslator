@@ -120,6 +120,12 @@
     <Compile Include="GameGuideWindow.xaml.cs">
       <DependentUpon>GameGuideWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GuidePages\ChooseLanguagePage.xaml.cs">
+      <DependentUpon>ChooseLanguagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GuidePages\CompletationPage.xaml.cs">
+      <DependentUpon>CompletationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GuidePages\Hook\ChooseGamePage.xaml.cs">
       <DependentUpon>ChooseGamePage.xaml</DependentUpon>
     </Compile>
@@ -165,6 +171,14 @@
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="GameGuideWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GuidePages\ChooseLanguagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GuidePages\CompletationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

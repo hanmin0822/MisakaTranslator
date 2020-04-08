@@ -24,7 +24,28 @@ namespace TextRepairLibrary
             { "用户自定义(见说明)" , "RepairFun_Custom" }
         };
 
+
+        /// <summary>
+        /// 采用反射方式调用方法
+        /// </summary>
+        /// <param name="functionName">提供方法函数名</param>
+        /// <param name="sourceText">源文本</param>
+        /// <returns></returns>
+        public static string RepairFun_Auto(string functionName,string sourceText) {
+            Type t = typeof(TextRepair);//括号中的为所要使用的函数所在的类的类名
+            MethodInfo mt = t.GetMethod(functionName);
+            if (mt != null)
+            {
+                string str = (string)mt.Invoke(null, new object[] { sourceText });
+                return str;
+            }
+            else
+            {
+                return "该方法处理错误！";
+            }
+        }
         
+
         /// <summary>
         /// 无处理方式
         /// </summary>
@@ -151,6 +172,9 @@ namespace TextRepairLibrary
         /// <param name="source"></param>
         /// <returns></returns>
         public static string RepairFun_RegexReplace(string source) {
+            if (regexPattern == null || regexReplacement == null || source == "") {
+                return "";
+            }
             return Regex.Replace(source, regexPattern, regexReplacement);
         }
 

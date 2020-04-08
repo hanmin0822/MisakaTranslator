@@ -104,4 +104,12 @@
     <sys:String x:Key="ChooseTextRepairFuncPage_Drawer_RegexIntrduce">请输入正则表达式及替换内容</sys:String>
     <sys:String x:Key="ChooseTextRepairFuncPage_Drawer_Regex">请输入正则表达式</sys:String>
     <sys:String x:Key="ChooseTextRepairFuncPage_Drawer_RegexReplace">请输入替换内容</sys:String>
+
+    <sys:String x:Key="ChooseLanguagePage_Introduce">请选择游戏源语言和目标翻译语言，注意：某些翻译API可能仅支持一对一语言翻译哦！</sys:String>
+    <sys:String x:Key="ChooseLanguagePage_srcLang">游戏源语言</sys:String>
+    <sys:String x:Key="ChooseLanguagePage_dstLang">目标翻译语言</sys:String>
+    <sys:String x:Key="ChooseLanguagePage_BtnConfirm">确认语言</sys:String>
+
+    <sys:String x:Key="CompletationPage_BtnConfirm">完成设置</sys:String>
+    <sys:String x:Key="CompletationPage_Hint">恭喜！您已完成对该游戏的全部设置！</sys:String>
 </ResourceDictionary>

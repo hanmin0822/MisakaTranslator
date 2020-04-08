@@ -56,8 +56,17 @@ namespace MisakaTranslator_WPF
         /// <param name="e"></param>
         private void Next_Click(object sender, RoutedEventArgs e) {
             GuidePages.PageChangeRoutedEventArgs args = e as GuidePages.PageChangeRoutedEventArgs;
-            GuidePageFrame.Navigate(new Uri(args.XamlPath, UriKind.Relative));
-            GuideStepBar.Next();
+
+            if (args.XamlPath == "1")
+            {
+                //Hook方式设置 完成
+                this.Close();
+            }
+            else {
+                //其他情况就跳转指定页面
+                GuidePageFrame.Navigate(new Uri(args.XamlPath, UriKind.Relative));
+                GuideStepBar.Next();
+            }
         }
 
     }
