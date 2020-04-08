@@ -21,17 +21,25 @@ namespace MisakaTranslator_WPF
         private void InitializeAppearance()
         {
             Common.appSettings = new ConfigurationBuilder<IAppSettings>().UseIniFile(Environment.CurrentDirectory + "\\settings\\settings.ini").Build();
-            Common.repairSettings = new ConfigurationBuilder<IRepeatRepairSettings>().UseIniFile(Environment.CurrentDirectory + "\\settings\\RepeatRepairSettings.ini").Build();
-
 
             ISettings settings = new ConfigurationBuilder<ISettings>().UseJsonFile("settings/settings.json").Build();
             this.Resources["Foreground"] = (SolidColorBrush)(new BrushConverter().ConvertFrom(settings.ForegroundHex));
         }
 
+        private static SettingsWindow _settingsWindow;
+
         private void SettingsBtn_Click(object sender, RoutedEventArgs e)
         {
-            SettingsWindow sw = new SettingsWindow();
-            sw.Show();
+            if (_settingsWindow == null || _settingsWindow.IsVisible == false)
+            {
+                _settingsWindow = new SettingsWindow();
+                _settingsWindow.Show();
+            }
+            else
+            {
+                _settingsWindow.WindowState = WindowState.Normal;
+                _settingsWindow.Activate();
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
