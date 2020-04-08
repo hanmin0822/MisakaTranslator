@@ -65,7 +65,12 @@ namespace OCRLibrary
 
         public bool OCR_Init(string lang, string param1, string param2)
         {
-            langCode = lang;
+            if (lang == "jpn")
+            {
+                lang = "jap";
+            }
+
+            langCode = lang.ToUpper();
             APIKey = param1;
             secretKey = param2;
 

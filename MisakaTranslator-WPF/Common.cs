@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TextHookLibrary;
 using TextRepairLibrary;
 
@@ -18,6 +20,9 @@ namespace MisakaTranslator_WPF
         public static string UsingSrcLang;//全局使用中的源语言
         public static string UsingDstLang;//全局使用中的目标翻译语言
 
+        public static Rectangle UsingOCRArea;//全局使用中的OCR识别区域
+        public static IntPtr UsingOCRWinHwnd;//全局使用中的OCR的工作窗口
+        public static bool UsingIsAllWin;//全局使用中的OCR是否全屏截取
 
         /// <summary>
         /// 导出Textractor历史记录，返回是否成功的结果

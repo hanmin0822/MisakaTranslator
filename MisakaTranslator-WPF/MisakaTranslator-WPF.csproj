@@ -135,8 +135,20 @@
     <Compile Include="GuidePages\Hook\ChooseTextRepairFuncPage.xaml.cs">
       <DependentUpon>ChooseTextRepairFuncPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GuidePages\OCR\ChooseHandleFuncPage.xaml.cs">
+      <DependentUpon>ChooseHandleFuncPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GuidePages\OCR\ChooseHotKeyPage.xaml.cs">
+      <DependentUpon>ChooseHotKeyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GuidePages\OCR\ChooseOCRAreaPage.xaml.cs">
+      <DependentUpon>ChooseOCRAreaPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GuidePages\PageChangeRoutedEventArgs.cs" />
     <Compile Include="IAppSettings.cs" />
+    <Compile Include="ScreenCaptureWindow.xaml.cs">
+      <DependentUpon>ScreenCaptureWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
@@ -194,6 +206,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GuidePages\OCR\ChooseHandleFuncPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GuidePages\OCR\ChooseHotKeyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GuidePages\OCR\ChooseOCRAreaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="lang\en-US.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -216,6 +240,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="res\Appearance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScreenCaptureWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -305,8 +333,6 @@
       <Name>TransOptimizationLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GuidePages\OCR\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

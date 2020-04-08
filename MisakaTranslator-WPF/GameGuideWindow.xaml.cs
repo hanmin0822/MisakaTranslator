@@ -39,6 +39,7 @@ namespace MisakaTranslator_WPF
                 List<string> lstStep = new List<string>() { "选择截图区域", "OCR预处理", "设置触发键", "选择翻译语言", "完成" };
                 GuideStepBar.ItemsSource = lstStep;
                 FuncHint.Text = "使用OCR方式提取文本";
+                GuidePageFrame.Navigate(new Uri("GuidePages/OCR/ChooseOCRAreaPage.xaml", UriKind.Relative));
             }
             else if(Mode == 3)
             {
@@ -60,6 +61,10 @@ namespace MisakaTranslator_WPF
             if (args.XamlPath == "1")
             {
                 //Hook方式设置 完成
+                this.Close();
+            }
+            else if (args.XamlPath == "2") {
+                //OCR方式设置 完成
                 this.Close();
             }
             else {

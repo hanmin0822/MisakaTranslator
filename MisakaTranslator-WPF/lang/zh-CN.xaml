@@ -112,4 +112,20 @@
 
     <sys:String x:Key="CompletationPage_BtnConfirm">完成设置</sys:String>
     <sys:String x:Key="CompletationPage_Hint">恭喜！您已完成对该游戏的全部设置！</sys:String>
+
+    <sys:String x:Key="ChooseOCRAreaPage_Introduce">首先选择使用全屏截取或选择到游戏界面(建议点击游戏画面)，再框选出识别区域，使用刷新OCR区域测试截屏效果。</sys:String>
+    <sys:String x:Key="ChooseOCRAreaPage_IsAllWinCBox">全屏截取</sys:String>
+    <sys:String x:Key="ChooseOCRAreaPage_ChooseWinBtn">选择窗口</sys:String>
+    <sys:String x:Key="ChooseOCRAreaPage_ChooseAreaBtn">选择识别区域</sys:String>
+    <sys:String x:Key="ChooseOCRAreaPage_RenewAreaBtn">刷新显示OCR区域</sys:String>
+    <sys:String x:Key="ChooseOCRAreaPage_ConfirmBtn">确认OCR区域</sys:String>
+
+    <sys:String x:Key="ChooseHandleFuncPage_Introduce">选择OCR源语言和一种适合您游戏的OCR预处理方法，可在下方对比查看，进行OCR结果测试并确认。</sys:String>
+    <sys:String x:Key="ChooseHandleFuncPage_OCRLangCBox">OCR源语言</sys:String>
+    <sys:String x:Key="ChooseHandleFuncPage_OCRLangCBox_Hint">选择您要进行OCR的游戏的源语言</sys:String>
+    <sys:String x:Key="ChooseHandleFuncPage_HandleFuncCBox">OCR预处理方法</sys:String>
+    <sys:String x:Key="ChooseHandleFuncPage_RenewAreaBtn">刷新OCR预处理预览</sys:String>
+    <sys:String x:Key="ChooseHandleFuncPage_OCRBtn">OCR结果测试</sys:String>
+    <sys:String x:Key="ChooseHandleFuncPage_ConfirmBtn">确认OCR预处理方法</sys:String>
+    
 </ResourceDictionary>
