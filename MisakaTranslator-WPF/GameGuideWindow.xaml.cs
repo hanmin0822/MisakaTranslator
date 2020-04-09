@@ -19,12 +19,15 @@ namespace MisakaTranslator_WPF
     /// </summary>
     public partial class GameGuideWindow : Window
     {
+        int GuideMode;
+
         public GameGuideWindow(int Mode)
         {
             InitializeComponent();
 
             this.AddHandler(GuidePages.PageChange.PageChangeRoutedEvent,new RoutedEventHandler(Next_Click));
 
+            GuideMode = Mode;
             if (Mode == 1)
             {
                 //Hook模式
@@ -60,18 +63,28 @@ namespace MisakaTranslator_WPF
 
             if (args.XamlPath == "1")
             {
-                //Hook方式设置 完成
-                this.Close();
-            }
-            else if (args.XamlPath == "2") {
-                //OCR方式设置 完成
-                this.Close();
+                if (GuideMode == 1)
+                {
+                    //Hook方式设置 完成
+                    this.Close();
+                }
+                else if (GuideMode == 2)
+                {
+                    //OCR方式设置 完成
+                    this.Close();
+                }
+                else
+                {
+                    
+                }
             }
             else {
                 //其他情况就跳转指定页面
                 GuidePageFrame.Navigate(new Uri(args.XamlPath, UriKind.Relative));
                 GuideStepBar.Next();
             }
+
+            
         }
 
     }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KeyboardMouseHookLibrary;
+using OCRLibrary;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -13,16 +15,18 @@ namespace MisakaTranslator_WPF
 {
     public class Common
     {
-        public static IAppSettings appSettings;
-        public static IRepeatRepairSettings repairSettings;
+        public static IAppSettings appSettings;//应用设置
+        public static IRepeatRepairSettings repairSettings;//去重方法参数
+
         public static TextHookHandle textHooker;//全局使用中的Hook对象
         public static string UsingRepairFunc;//全局使用中的去重方法
+
         public static string UsingSrcLang;//全局使用中的源语言
         public static string UsingDstLang;//全局使用中的目标翻译语言
 
-        public static Rectangle UsingOCRArea;//全局使用中的OCR识别区域
-        public static IntPtr UsingOCRWinHwnd;//全局使用中的OCR的工作窗口
-        public static bool UsingIsAllWin;//全局使用中的OCR是否全屏截取
+        public static IOptChaRec ocr;//全局使用中的OCR对象
+        public static HotKeyInfo UsingHotKey;//全局使用中的触发键信息
+        public static int UsingOCRDelay;//全局使用中的OCR延时
 
         /// <summary>
         /// 导出Textractor历史记录，返回是否成功的结果

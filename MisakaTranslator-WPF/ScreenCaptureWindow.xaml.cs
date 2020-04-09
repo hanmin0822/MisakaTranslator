@@ -18,7 +18,10 @@ namespace MisakaTranslator_WPF
         Point iniP;
         private ViewModel viewModel;
         Rect selectRect;
-        
+
+        public static System.Drawing.Rectangle OCRArea;
+
+
 
         public ScreenCaptureWindow(BitmapImage i)
         {
@@ -91,7 +94,7 @@ namespace MisakaTranslator_WPF
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            Common.UsingOCRArea = new System.Drawing.Rectangle((int)selectRect.Location.X, (int)selectRect.Location.Y, (int)selectRect.Size.Width, (int)selectRect.Size.Height);
+            OCRArea = new System.Drawing.Rectangle((int)selectRect.Location.X, (int)selectRect.Location.Y, (int)selectRect.Size.Width, (int)selectRect.Size.Height);
         }
     }
 

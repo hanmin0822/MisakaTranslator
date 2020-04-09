@@ -29,7 +29,7 @@ namespace MisakaTranslator_WPF.GuidePages
         {
             //使用路由事件机制通知窗口来完成下一步操作
             PageChangeRoutedEventArgs args = new PageChangeRoutedEventArgs(PageChange.PageChangeRoutedEvent, this);
-            args.XamlPath = "1";
+            args.XamlPath = "1";//表示完成
             this.RaiseEvent(args);
         }
     }

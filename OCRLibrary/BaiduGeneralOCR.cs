@@ -18,6 +18,10 @@ namespace OCRLibrary
         private string langCode;
         private string errorInfo;
 
+        private IntPtr WinHandle;
+        private Rectangle OCRArea;
+        private bool isAllWin;
+
 
         public string GetLastError()
         {
@@ -63,14 +67,8 @@ namespace OCRLibrary
 
         }
 
-        public bool OCR_Init(string lang, string param1, string param2)
+        public bool OCR_Init(string param1, string param2)
         {
-            if (lang == "jpn")
-            {
-                lang = "jap";
-            }
-
-            langCode = lang.ToUpper();
             APIKey = param1;
             secretKey = param2;
 
@@ -125,6 +123,41 @@ namespace OCRLibrary
         public static string GetUrl_Doc()
         {
             return "https://ai.baidu.com/ai-doc/OCR/zk3h7xz52";
+        }
+
+        public string OCRProcess()
+        {
+            if (OCRArea != null)
+            {
+                Image img = ScreenCapture.GetWindowRectCapture(WinHandle, OCRArea, isAllWin);
+                return OCRProcess(new Bitmap(img));
+            }
+            else {
+                errorInfo = "未设置截图区域";
+                return null;
+            }
+        }
+
+        public void SetOCRArea(IntPtr handle, Rectangle rec, bool AllWin)
+        {
+            WinHandle = handle;
+            OCRArea = rec;
+            isAllWin = AllWin;
+        }
+
+        public Image GetOCRAreaCap()
+        {
+            return ScreenCapture.GetWindowRectCapture(WinHandle, OCRArea, isAllWin);
+        }
+
+        public void SetOCRSourceLang(string lang)
+        {
+            if (lang == "jpn")
+            {
+                lang = "jap";
+            }
+
+            langCode = lang.ToUpper();
         }
     }
 

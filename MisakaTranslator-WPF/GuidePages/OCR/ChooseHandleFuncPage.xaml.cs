@@ -34,13 +34,13 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
 
             Langlist = ImageProcFunc.lstOCRLang.Keys.ToList();
             OCRLangCombox.ItemsSource = Langlist;
-            OCRLangCombox.SelectedIndex = 0;
+            OCRLangCombox.SelectedIndex = 1;
 
         }
 
         private void RenewAreaBtn_Click(object sender, RoutedEventArgs e)
         {
-            System.Drawing.Image img = ScreenCapture.GetWindowRectCapture(Common.UsingOCRWinHwnd, Common.UsingOCRArea, Common.UsingIsAllWin);
+            System.Drawing.Image img = Common.ocr.GetOCRAreaCap();
             
             SrcImg.Source = ImageProcFunc.ImageToBitmapImage(img);
 
@@ -52,8 +52,45 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
 
         private void OCRTestBtn_Click(object sender, RoutedEventArgs e)
         {
-            IOptChaRec ocr = new BaiduGeneralOCR();
+            
+            if (Common.appSettings.OCRsource == "TesseractOCR")
+            {
+                if (Common.ocr.OCR_Init("", "") != false)
+                {
+                    string res = Common.ocr.OCRProcess();
 
+                    if (res != null)
+                    {
+                        HandyControl.Controls.MessageBox.Show(res, "识别结果");
+                    }
+                    else {
+                        HandyControl.Controls.Growl.Error("TesseractOCR 工作异常\n" + Common.ocr.GetLastError());
+                    }
+                }
+                else
+                {
+                    HandyControl.Controls.Growl.Error("TesseractOCR 工作异常\n" + Common.ocr.GetLastError());
+                }
+            }
+            else if (Common.appSettings.OCRsource == "BaiduOCR")
+            {
+                if (Common.ocr.OCR_Init(Common.appSettings.BDOCR_APIKEY, Common.appSettings.BDOCR_SecretKey) != false)
+                {
+                    string res = Common.ocr.OCRProcess();
+
+                    if (res != null)
+                    {
+                        HandyControl.Controls.MessageBox.Show(res, "识别结果");
+                    }
+                    else
+                    {
+                        HandyControl.Controls.Growl.Error("百度OCR API工作异常\n" + Common.ocr.GetLastError());
+                    }
+                }
+                else {
+                    HandyControl.Controls.Growl.Error("百度OCR API工作异常\n" + Common.ocr.GetLastError());
+                }
+            }
             
         }
 
@@ -67,12 +104,12 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
 
         private void OCRLangCombox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Common.ocr.SetOCRSourceLang(ImageProcFunc.lstOCRLang[Langlist[OCRLangCombox.SelectedIndex]]);
         }
 
         private void HandleFuncCombox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            System.Drawing.Image img = ScreenCapture.GetWindowRectCapture(Common.UsingOCRWinHwnd, Common.UsingOCRArea, Common.UsingIsAllWin);
+            System.Drawing.Image img = Common.ocr.GetOCRAreaCap();
 
             SrcImg.Source = ImageProcFunc.ImageToBitmapImage(img);
 

@@ -225,6 +225,10 @@ namespace OCRLibrary
         /// <returns></returns>
         public static BitmapImage ImageToBitmapImage(Image bitmap)
         {
+            if (bitmap == null) {
+                return null;
+            }
+
             using (MemoryStream stream = new MemoryStream())
             {
                 bitmap.Save(stream, ImageFormat.Png); //格式选Bmp时，不带透明度
