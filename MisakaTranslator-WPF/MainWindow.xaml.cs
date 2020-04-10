@@ -48,5 +48,11 @@ namespace MisakaTranslator_WPF
             ggw.Show();
 
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            TranslateWindow translateWindow = new TranslateWindow();
+            translateWindow.Show();
+        }
     }
 }

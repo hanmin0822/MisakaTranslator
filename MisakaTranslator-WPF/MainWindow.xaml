@@ -8,12 +8,11 @@
         mc:Ignorable="d"
         Title="MisakaTranslator" 
         WindowStartupLocation="CenterScreen"
-        Style="{StaticResource WindowWin10}"
         ShowTitle="True"
         Height="540" 
         Width="960">
     <Window.Resources>
-        <ResourceDictionary Source = "res/Appearance.xaml"/>
+        <ResourceDictionary Source = "Appearance.xaml"/>
     </Window.Resources>
     <hc:Window.NonClientAreaContent>
         <StackPanel Height="29">
@@ -39,5 +38,6 @@
         </Border>
         <Button fa:Awesome.Content="Cog" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{DynamicResource Foreground}" FontSize="30" Background="#01FFFFFF"  Height="50" Width="50"  Effect="{StaticResource EffectShadow5}" Click="SettingsBtn_Click"/>
         <Button Content="gameguide" Height="43" Margin="292,110,259.2,97.4" Width="120" Click="Button_Click"/>
+        <Button Content="translatewindow" HorizontalAlignment="Left" Margin="460,110,0,0" VerticalAlignment="Top" Width="76" Click="Button_Click_1"/>
     </Grid>
 </hc:BlurWindow>

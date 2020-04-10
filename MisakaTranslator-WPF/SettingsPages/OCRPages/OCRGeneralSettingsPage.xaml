@@ -9,22 +9,10 @@
       d:DesignHeight="450" d:DesignWidth="594"
       Title="OCRGeneralSettingsPage">
 
-<<<<<<< HEAD:MisakaTranslator-WPF/res/SettingsPages/OCRGeneralSettingsPage.xaml
-    <StackPanel Background="White">
-        <TextBlock Text="{StaticResource OCRGeneralSettingsPage_Introduce}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
-
-        <Canvas Margin="10,10,10,10" Height="305">
-
-            <hc:ComboBox Name="OCRsourceCombox" Width="380" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource OCRGeneralSettingsPage_OCRsource}" Canvas.Left="97" Canvas.Top="36" SelectionChanged="OCRsourceCombox_SelectionChanged" />
-            
-        </Canvas>
-    </StackPanel>
-=======
     <hc:ScrollViewer HorizontalScrollBarVisibility="Disabled">
         <StackPanel Background="White">
             <TextBlock Text="{StaticResource OCRGeneralSettingsPage_Introduce}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
             <hc:ComboBox Name="OCRsourceCombox" Margin="20,46,0,0" Width="380" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource OCRGeneralSettingsPage_OCRsource}" SelectionChanged="OCRsourceCombox_SelectionChanged" HorizontalAlignment="Left" />
         </StackPanel>
     </hc:ScrollViewer>
->>>>>>> 092d7af72f70694bfc65c1b81cca5494800db6d6:MisakaTranslator-WPF/SettingsPages/OCRPages/OCRGeneralSettingsPage.xaml
 </Page>

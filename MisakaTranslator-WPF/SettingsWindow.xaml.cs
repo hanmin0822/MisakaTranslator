@@ -27,7 +27,7 @@ namespace MisakaTranslator_WPF
 
         private void Item_About_Selected(object sender, RoutedEventArgs e)
         {
-            this.SettingFrame.Navigate(new Uri("res/SettingsPages/AboutPage.xaml", UriKind.Relative));
+            this.SettingFrame.Navigate(new Uri("SettingsPages/AboutPage.xaml", UriKind.Relative));
         }
 
         private void Item_TransGeneral_Selected(object sender, RoutedEventArgs e)
@@ -37,32 +37,32 @@ namespace MisakaTranslator_WPF
 
         private void Item_BaiduTrans_Selected(object sender, RoutedEventArgs e)
         {
-            this.SettingFrame.Navigate(new Uri("res/SettingsPages/TranslatorPages/BaiduTransSettingsPage.xaml", UriKind.Relative));
+            this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/BaiduTransSettingsPage.xaml", UriKind.Relative));
         }
 
         private void Item_FYJTrans_Selected(object sender, RoutedEventArgs e)
         {
-            this.SettingFrame.Navigate(new Uri("res/SettingsPages/TranslatorPages/TencentFYJTransSettingsPage.xaml", UriKind.Relative));
+            this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/TencentFYJTransSettingsPage.xaml", UriKind.Relative));
         }
 
         private void Item_TXOTrans_Selected(object sender, RoutedEventArgs e)
         {
-            this.SettingFrame.Navigate(new Uri("res/SettingsPages/TranslatorPages/TencentOldTransSettingsPage.xaml", UriKind.Relative));
+            this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/TencentOldTransSettingsPage.xaml", UriKind.Relative));
         }
 
         private void Item_Caiyun_Selected(object sender, RoutedEventArgs e)
         {
-            this.SettingFrame.Navigate(new Uri("res/SettingsPages/TranslatorPages/CaiyunTransSettingsPage.xaml", UriKind.Relative));
+            this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/CaiyunTransSettingsPage.xaml", UriKind.Relative));
         }
 
         private void Item_JBeijing_Selected(object sender, RoutedEventArgs e)
         {
-            this.SettingFrame.Navigate(new Uri("res/SettingsPages/TranslatorPages/JbeijingTransSettingsPage.xaml", UriKind.Relative));
+            this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/JbeijingTransSettingsPage.xaml", UriKind.Relative));
         }
 
         private void Item_BaiduOCR_Selected(object sender, RoutedEventArgs e)
         {
-            this.SettingFrame.Navigate(new Uri("res/SettingsPages/OCRPages/BaiduOCRSettingsPage.xaml", UriKind.Relative));
+            this.SettingFrame.Navigate(new Uri("SettingsPages/OCRPages/BaiduOCRSettingsPage.xaml", UriKind.Relative));
         }
         
         private void Item_OCRGeneral_Selected(object sender, RoutedEventArgs e)
@@ -72,7 +72,7 @@ namespace MisakaTranslator_WPF
 
         private void Item_HookSettings_Selected(object sender, RoutedEventArgs e)
         {
-            this.SettingFrame.Navigate(new Uri("res/SettingsPages/HookSettingsPage.xaml", UriKind.Relative));
+            this.SettingFrame.Navigate(new Uri("SettingsPages/HookSettingsPage.xaml", UriKind.Relative));
         }
         
     }

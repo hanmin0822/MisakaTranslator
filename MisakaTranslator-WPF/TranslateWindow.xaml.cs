@@ -11,17 +11,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using HandyControl.Controls;
 
 namespace MisakaTranslator_WPF
 {
     /// <summary>
-    /// TranslatorWindow.xaml 的交互逻辑
+    /// TranslateWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class TranslatorWindow : Window
+    public partial class TranslateWindow
     {
-        public TranslatorWindow()
+        public TranslateWindow()
         {
             InitializeComponent();
+        }
+
+        private void SourceTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
         }
     }
 }
