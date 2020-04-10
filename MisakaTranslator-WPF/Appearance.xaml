@@ -4,4 +4,6 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <SolidColorBrush x:Key="Foreground" Color="AliceBlue"></SolidColorBrush>
 
+    <SolidColorBrush x:Key="TranslateWindowBackground" Color="#6fffcccc"></SolidColorBrush>
+
 </ResourceDictionary>

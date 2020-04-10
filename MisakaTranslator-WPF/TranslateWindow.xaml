@@ -1,0 +1,26 @@
+﻿<Window x:Class="MisakaTranslator_WPF.TranslateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MisakaTranslator_WPF"
+        mc:Ignorable="d"
+               Background="{DynamicResource TranslateWindowBackground}"
+               AllowsTransparency="True"
+               WindowStyle="None"
+        Title="TranslateWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Border hc:WindowAttach.IsDragElement="True" Grid.Row="0" VerticalAlignment="Top" Margin="11" Height="28" Background="{DynamicResource DarkDefaultBrush}" CornerRadius="4">
+            <TextBlock Text="DragHere" Style="{StaticResource TextBlockDefault}"/>
+        </Border>
+        <TextBlock x:Name="SourceTextBlock" HorizontalAlignment="Left" Margin="141,53.5,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="449" Height="37" MouseLeftButtonDown="SourceTextBlock_MouseLeftButtonDown"/>
+    </Grid>
+</Window>
