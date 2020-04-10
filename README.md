@@ -30,15 +30,16 @@ Galgame/文字游戏多语种实时机翻工具
 
 ## 本项目所使用到的其他开源项目
 
-* [IgnaceMaes/MaterialSkin](https://github.com/IgnaceMaes/MaterialSkin) 
-* [平原君关于MaterialSkin的fork](https://gitee.com/victorzhao/MaterialSkin)
+* [~~IgnaceMaes/MaterialSkin~~](https://github.com/IgnaceMaes/MaterialSkin) 
+* [~~平原君关于MaterialSkin的fork~~](https://gitee.com/victorzhao/MaterialSkin)
 * [Artikash/Textractor](https://github.com/Artikash/Textractor)
 * [JamesNK/Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
-* [kwwwvagaa/NetWinformControl](https://github.com/kwwwvagaa/NetWinformControl)
+* [~~kwwwvagaa/NetWinformControl~~](https://github.com/kwwwvagaa/NetWinformControl)
 * [Config.Net](https://github.com/aloneguid/config)
 * [charlesw/tesseract](https://github.com/charlesw/tesseract/)
 * [tesseract-ocr/tesseract](https://github.com/tesseract-ocr/tesseract)
 * [kekyo/MeCab.DotNet](https://github.com/kekyo/MeCab.DotNet)
+* [HandyOrg/HandyControl](https://github.com/HandyOrg/HandyControl)
 
 ## 本项目开发过程中使用到的重要参考文献
 

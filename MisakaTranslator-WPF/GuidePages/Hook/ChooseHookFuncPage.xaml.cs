@@ -42,10 +42,6 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                 {
                     lstData[e.Index] = e.Data;
                 }
-                else {
-                    lstData.Add(e.Data);
-                    sum++;
-                }
             }));
         }
 
@@ -54,7 +50,7 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
             InputDrawer.IsOpen = true;
         }
 
-        private async void ConfirmBtn_Click(object sender, RoutedEventArgs e)
+        private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
             if (HookFunListView.SelectedIndex != -1)
             {
@@ -64,9 +60,16 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                 //先关闭对本窗口的输出
                 Common.textHooker.HFSevent -= DataRecvEventHandler;
 
+                //先要将需要用到的方法注明，再进行后续卸载操作
+                Common.textHooker.HookCodeList.Add(lstData[HookFunListView.SelectedIndex].HookCode);
+                Common.textHooker.MisakaCodeList.Add(lstData[HookFunListView.SelectedIndex].MisakaHookCode);
+
+                List<string> usedHook = new List<string>();
+                usedHook.Add(hookAdd);
+
                 //用户开启了自动卸载
                 if (Convert.ToBoolean(Common.appSettings.AutoDetach) == true) {
-                    await Common.textHooker.DetachProcessByHookAddress(pid,hookAdd);
+                    Common.textHooker.DetachUnrelatedHooks(pid, usedHook);
                 }
 
                 int sum = 0;
@@ -91,9 +94,7 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                     
                 }
                 
-                Common.textHooker.HookCodeList.Add(lstData[HookFunListView.SelectedIndex].HookCode);
-                Common.textHooker.MisakaCodeList.Add(lstData[HookFunListView.SelectedIndex].MisakaHookCode);
-
+                
                 //使用路由事件机制通知窗口来完成下一步操作
                 PageChangeRoutedEventArgs args = new PageChangeRoutedEventArgs(PageChange.PageChangeRoutedEvent, this);
                 args.XamlPath = "GuidePages/Hook/ChooseTextRepairFuncPage.xaml";

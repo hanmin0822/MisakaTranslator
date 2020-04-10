@@ -6,11 +6,39 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace OCRLibrary
 {
     public class ImageProcFunc
     {
+        public static Dictionary<string, string> lstHandleFun = new Dictionary<string, string>() {
+            { "不进行处理" , "ImgFunc_NoDeal" },
+            { "OTSU二值化处理" , "ImgFunc_OTSU" }
+        };
+
+        public static Dictionary<string, string> lstOCRLang = new Dictionary<string, string>() {
+            { "英语" , "eng" },
+            { "日语" , "jpn" },
+        };
+
+        /// <summary>
+        /// 根据方法名自动处理
+        /// </summary>
+        /// <param name="b"></param>
+        /// <param name="func"></param>
+        /// <returns></returns>
+        public static Bitmap Auto_Thresholding(Bitmap b, string func) {
+            switch (func) {
+                case "ImgFunc_NoDeal":
+                    return b;
+                case "ImgFunc_OTSU":
+                    return OtsuThreshold(b);
+            }
+            return b;
+        }
+
+
         /// <summary>
         /// 得到图片的Base64编码
         /// </summary>
@@ -190,5 +218,33 @@ namespace OCRLibrary
         }
 
 
+        /// <summary>
+        /// 将System.Drawing.Image转换成System.Windows.Media.Imaging.BitmapImage
+        /// </summary>
+        /// <param name="bitmap"></param>
+        /// <returns></returns>
+        public static BitmapImage ImageToBitmapImage(Image bitmap)
+        {
+            if (bitmap == null) {
+                return null;
+            }
+
+            using (MemoryStream stream = new MemoryStream())
+            {
+                bitmap.Save(stream, ImageFormat.Png); //格式选Bmp时，不带透明度
+
+                stream.Position = 0;
+                BitmapImage result = new BitmapImage();
+                result.BeginInit();
+                // According to MSDN, "The default OnDemand cache option retains access to the stream until the image is needed."
+                // Force the bitmap to load right now so we can dispose the stream.
+                result.CacheOption = BitmapCacheOption.OnLoad;
+                result.StreamSource = stream;
+                result.EndInit();
+                result.Freeze();
+                return result;
+            }
+
+        }
     }
 }

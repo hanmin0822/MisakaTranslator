@@ -1,13 +1,32 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace KeyboardMouseHookLibrary
 {
+    public class HotKeyInfo {
+        /// <summary>
+        /// 是否使用鼠标
+        /// </summary>
+        public bool IsMouse { get; set; }
+
+        /// <summary>
+        /// 键盘键值
+        /// </summary>
+        public Keys KeyCode { get; set;}
+
+        /// <summary>
+        /// 鼠标键位
+        /// </summary>
+        public MouseButtons MouseButton { get; set; }
+    }
+
+
 
     //来源：https://www.cnblogs.com/CJSTONE/p/4961865.html
-    //未测试
+    
 
     /*
     注意：
@@ -135,6 +154,10 @@ namespace KeyboardMouseHookLibrary
         [DllImport("user32")]
         public static extern int GetKeyboardState(byte[] pbKeyState);
 
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr GetModuleHandle(string name);
+
+
         private const int WM_KEYDOWN = 0x100;
         private const int WM_KEYUP = 0x101;
         private const int WM_SYSKEYDOWN = 0x104;
@@ -152,8 +175,7 @@ namespace KeyboardMouseHookLibrary
                 {
                     _hMouseHook = SetWindowsHookEx(WH_MOUSE_LL,
                         MouseHookProcedure,
-                        Marshal.GetHINSTANCE(
-                        Assembly.GetExecutingAssembly().GetModules()[0]),
+                        GetModuleHandle(Process.GetCurrentProcess().MainModule.ModuleName),
                         0);
                 }
                 catch (Exception err)
@@ -174,8 +196,7 @@ namespace KeyboardMouseHookLibrary
                 {
                     _hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL,
                         KeyboardHookProcedure,
-                        Marshal.GetHINSTANCE(
-                        Assembly.GetExecutingAssembly().GetModules()[0]),
+                        GetModuleHandle(Process.GetCurrentProcess().MainModule.ModuleName),
                         0);
                 }
                 catch (Exception err2)

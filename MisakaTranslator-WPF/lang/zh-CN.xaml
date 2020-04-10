@@ -104,4 +104,35 @@
     <sys:String x:Key="ChooseTextRepairFuncPage_Drawer_RegexIntrduce">请输入正则表达式及替换内容</sys:String>
     <sys:String x:Key="ChooseTextRepairFuncPage_Drawer_Regex">请输入正则表达式</sys:String>
     <sys:String x:Key="ChooseTextRepairFuncPage_Drawer_RegexReplace">请输入替换内容</sys:String>
+
+    <sys:String x:Key="ChooseLanguagePage_Introduce">请选择游戏源语言和目标翻译语言，注意：某些翻译API可能仅支持一对一语言翻译哦！</sys:String>
+    <sys:String x:Key="ChooseLanguagePage_srcLang">游戏源语言</sys:String>
+    <sys:String x:Key="ChooseLanguagePage_dstLang">目标翻译语言</sys:String>
+    <sys:String x:Key="ChooseLanguagePage_BtnConfirm">确认语言</sys:String>
+
+    <sys:String x:Key="CompletationPage_BtnConfirm">完成设置</sys:String>
+    <sys:String x:Key="CompletationPage_Hint">恭喜！您已完成对该游戏的全部设置！</sys:String>
+
+    <sys:String x:Key="ChooseOCRAreaPage_Introduce">首先选择使用全屏截取或选择到游戏界面(建议点击游戏画面)，再框选出识别区域，使用刷新OCR区域测试截屏效果。</sys:String>
+    <sys:String x:Key="ChooseOCRAreaPage_IsAllWinCBox">全屏截取</sys:String>
+    <sys:String x:Key="ChooseOCRAreaPage_ChooseWinBtn">选择窗口</sys:String>
+    <sys:String x:Key="ChooseOCRAreaPage_ChooseAreaBtn">选择识别区域</sys:String>
+    <sys:String x:Key="ChooseOCRAreaPage_RenewAreaBtn">刷新显示OCR区域</sys:String>
+    <sys:String x:Key="ChooseOCRAreaPage_ConfirmBtn">确认OCR区域</sys:String>
+
+    <sys:String x:Key="ChooseHandleFuncPage_Introduce">选择OCR源语言和一种适合您游戏的OCR预处理方法，可在下方对比查看，进行OCR结果测试并确认。</sys:String>
+    <sys:String x:Key="ChooseHandleFuncPage_OCRLangCBox">OCR源语言</sys:String>
+    <sys:String x:Key="ChooseHandleFuncPage_OCRLangCBox_Hint">选择您要进行OCR的游戏的源语言</sys:String>
+    <sys:String x:Key="ChooseHandleFuncPage_HandleFuncCBox">OCR预处理方法</sys:String>
+    <sys:String x:Key="ChooseHandleFuncPage_RenewAreaBtn">刷新OCR预处理预览</sys:String>
+    <sys:String x:Key="ChooseHandleFuncPage_OCRBtn">OCR结果测试</sys:String>
+    <sys:String x:Key="ChooseHandleFuncPage_ConfirmBtn">确认OCR预处理方法</sys:String>
+
+    <sys:String x:Key="ChooseHotKeyPage_Introduce">选择一个使用OCR提取文本时的触发键及触发键响应后延时多长时间进行OCR。</sys:String>
+    <sys:String x:Key="ChooseHotKeyPage_HotKeySourceCBox">触发键来源</sys:String>
+    <sys:String x:Key="ChooseHotKeyPage_HotKeySourceCBox_Hint">触发键即按下此键后将会进行OCR，例如:大部分Galgame点击鼠标左键会更新画面</sys:String>
+    <sys:String x:Key="ChooseHotKeyPage_HotKeySetBtn">设置触发键</sys:String>
+    <sys:String x:Key="ChooseHotKeyPage_OCRDelayBox">OCR延时时间(毫秒)</sys:String>
+    <sys:String x:Key="ChooseHotKeyPage_ConfirmBtn">确认</sys:String>
+    <sys:String x:Key="ChooseHotKeyPage_WaitHotKeyIntroduce">请按下需要设置的键盘上的相应触发键</sys:String>
 </ResourceDictionary>

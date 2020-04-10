@@ -44,7 +44,7 @@ namespace MisakaTranslator_WPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            GameGuideWindow ggw = new GameGuideWindow(1);
+            GameGuideWindow ggw = new GameGuideWindow(2);
             ggw.Show();
 
         }

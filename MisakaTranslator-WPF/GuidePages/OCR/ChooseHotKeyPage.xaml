@@ -1,0 +1,55 @@
+﻿<Page x:Class="MisakaTranslator_WPF.GuidePages.OCR.ChooseHotKeyPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MisakaTranslator_WPF.GuidePages.OCR"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="800"
+      Title="ChooseHotKeyPage">
+
+    <Grid>
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="62*" ></RowDefinition>
+                <RowDefinition Height="110*" ></RowDefinition>
+                <RowDefinition Height="110*" ></RowDefinition>
+                <RowDefinition Height="117*" ></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="{StaticResource ChooseHotKeyPage_Introduce}" VerticalAlignment="Center" Margin="15"/>
+
+            <StackPanel Orientation="Horizontal" Margin="15" Grid.Row="1">
+                <hc:ComboBox Name="HotKeySourceCombox" VerticalAlignment="Center" Width="200" hc:InfoElement.TitleWidth="80" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource ChooseHotKeyPage_HotKeySourceCBox}" hc:Poptip.HitMode="None" hc:Poptip.IsOpen="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" hc:Poptip.Content="{StaticResource ChooseHotKeyPage_HotKeySourceCBox_Hint}" hc:Poptip.Placement="Top" HorizontalAlignment="Left" SelectionChanged="HotKeySourceCombox_SelectionChanged"/>
+                <Button Name="ChooseHotkeyBtn" VerticalAlignment="Center" Margin="15" Content="{StaticResource ChooseHotKeyPage_HotKeySetBtn}" Click="HotKeySetBtn_Click"></Button>
+                <TextBlock VerticalAlignment="Center" Margin="15" Name="HotKeyTag"></TextBlock>
+            </StackPanel>
+
+            <hc:TextBox Name="OCRDelayBox" Text="1500" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15" Width="250" hc:InfoElement.TitleWidth="130" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource ChooseHotKeyPage_OCRDelayBox}"></hc:TextBox>
+
+            <Button Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="30" Width="200" Content="{StaticResource ChooseHotKeyPage_ConfirmBtn}" Click="ConfirmBtn_Click"></Button>
+
+            <hc:Drawer Name="WaitHotKeyDrawer" MaskCanClose="False" Margin="0,0,0,3.4">
+                <Border Background="White" Width="300" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource BorderBrush}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="{StaticResource ChooseHotKeyPage_WaitHotKeyIntroduce}" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+
+                        <hc:LoadingLine Grid.Row="1" Style="{StaticResource LoadingLineLarge}"/>
+                    </Grid>
+                </Border>
+            </hc:Drawer>
+
+        </Grid>
+
+        <StackPanel hc:Growl.GrowlParent="True" HorizontalAlignment="Right" Margin="15"/>
+
+    </Grid>
+
+
+</Page>

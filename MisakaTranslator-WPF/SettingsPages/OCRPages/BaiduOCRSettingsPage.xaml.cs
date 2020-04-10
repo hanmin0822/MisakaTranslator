@@ -35,7 +35,7 @@ namespace MisakaTranslator_WPF.SettingsPages.OCRPages
 
             BaiduGeneralOCR bgocr = new BaiduGeneralOCR();
 
-            bool ret = bgocr.OCR_Init("en", APIKEYBox.Text, SecretKeyBox.Text);
+            bool ret = bgocr.OCR_Init(APIKEYBox.Text, SecretKeyBox.Text);
 
             if (ret == true)
             {

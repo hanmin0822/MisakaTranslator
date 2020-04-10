@@ -19,12 +19,15 @@ namespace MisakaTranslator_WPF
     /// </summary>
     public partial class GameGuideWindow : Window
     {
+        int GuideMode;
+
         public GameGuideWindow(int Mode)
         {
             InitializeComponent();
 
             this.AddHandler(GuidePages.PageChange.PageChangeRoutedEvent,new RoutedEventHandler(Next_Click));
 
+            GuideMode = Mode;
             if (Mode == 1)
             {
                 //Hook模式
@@ -39,6 +42,7 @@ namespace MisakaTranslator_WPF
                 List<string> lstStep = new List<string>() { "选择截图区域", "OCR预处理", "设置触发键", "选择翻译语言", "完成" };
                 GuideStepBar.ItemsSource = lstStep;
                 FuncHint.Text = "使用OCR方式提取文本";
+                GuidePageFrame.Navigate(new Uri("GuidePages/OCR/ChooseOCRAreaPage.xaml", UriKind.Relative));
             }
             else if(Mode == 3)
             {
@@ -56,8 +60,31 @@ namespace MisakaTranslator_WPF
         /// <param name="e"></param>
         private void Next_Click(object sender, RoutedEventArgs e) {
             GuidePages.PageChangeRoutedEventArgs args = e as GuidePages.PageChangeRoutedEventArgs;
-            GuidePageFrame.Navigate(new Uri(args.XamlPath, UriKind.Relative));
-            GuideStepBar.Next();
+
+            if (args.XamlPath == "1")
+            {
+                if (GuideMode == 1)
+                {
+                    //Hook方式设置 完成
+                    this.Close();
+                }
+                else if (GuideMode == 2)
+                {
+                    //OCR方式设置 完成
+                    this.Close();
+                }
+                else
+                {
+                    
+                }
+            }
+            else {
+                //其他情况就跳转指定页面
+                GuidePageFrame.Navigate(new Uri(args.XamlPath, UriKind.Relative));
+                GuideStepBar.Next();
+            }
+
+            
         }
 
     }

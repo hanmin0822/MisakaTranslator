@@ -97,9 +97,15 @@ namespace MisakaTranslator_WPF
     public interface IRepeatRepairSettings
     {
         [Option(Alias = "RepairFun_RemoveSingleWordRepeat.RepeatTimes", DefaultValue = "0")]
-        string SingleWordRepeatTimes { get; }
+        string SingleWordRepeatTimes { get; set; }
 
         [Option(Alias = "RepairFun_RemoveSentenceRepeat.FindCharNum", DefaultValue = "4")]
-        string SentenceRepeatFindCharNum { get; }
+        string SentenceRepeatFindCharNum { get; set; }
+
+        [Option(Alias = "RepairFun_Regex.Regex", DefaultValue = "")]
+        string Regex { get; set; }
+
+        [Option(Alias = "RepairFun_Regex.Replace", DefaultValue = "")]
+        string Regex_Replace { get; set; }
     }
 }

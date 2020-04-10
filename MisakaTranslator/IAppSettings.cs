@@ -93,10 +93,16 @@ namespace MisakaTranslator
 
     public interface IRepeatRepairSettings
     {
-        [Option(Alias = "RepairFun_RemoveSingleWordRepeat.RepeatTimes", DefaultValue = "0")]
+        [Option(Alias = "RepairFun_RemoveSingleWordRepeat.RepeatTimes", DefaultValue = "3")]
         string SingleWordRepeatTimes { get; }
 
         [Option(Alias = "RepairFun_RemoveSentenceRepeat.FindCharNum", DefaultValue = "4")]
         string SentenceRepeatFindCharNum { get; }
+
+        [Option(Alias = "RepairFun_Regex.Regex", DefaultValue = "")]
+        string Regex { get; }
+
+        [Option(Alias = "RepairFun_Regex.Replace", DefaultValue = "")]
+        string Regex_Replace { get; }
     }
 }

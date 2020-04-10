@@ -17,7 +17,7 @@
                     <TextBlock Text="{StaticResource HookSettingsPage_AutoHook_Introduce}" Margin="0,20,0,0" TextWrapping="WrapWithOverflow"/>
                     <CheckBox Name="AutoHookCheckBox" Content="{StaticResource HookSettingsPage_AutoHook}" Margin="0,20,0,0" hc:InfoElement.Title="{StaticResource HookSettingsPage_AutoHook}" hc:Poptip.HitMode="None" hc:Poptip.IsOpen="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" hc:Poptip.Content="{StaticResource HookSettingsPage_AutoHookHint}" hc:Poptip.Placement="Right" Click="AutoHookCheckBox_Click" HorizontalAlignment="Left"/>
                     <TextBlock Text="{StaticResource HookSettingsPage_AutoDetach_Introduce}" Margin="0,20,0,0" TextWrapping="WrapWithOverflow"/>
-                    <CheckBox Name="AutoDetachCheckBox" Content="{StaticResource HookSettingsPage_AutoDetach}" Margin="0,20,0,0" hc:InfoElement.Title="{StaticResource HookSettingsPage_AutoHook}" Canvas.Left="10" Canvas.Top="105" Click="AutoDetachCheckBox_Click" HorizontalAlignment="Left"/>
+                    <CheckBox Name="AutoDetachCheckBox" Content="{StaticResource HookSettingsPage_AutoDetach}" Margin="0,20,0,0" Canvas.Left="10" Canvas.Top="105" Click="AutoDetachCheckBox_Click" HorizontalAlignment="Left"/>
                     <Button Content="{StaticResource HookSettingsPage_BtnExtractHistory}" Margin="0,20,0,0" Click="Button_Click" HorizontalAlignment="Left"/>
                 </StackPanel>
             </StackPanel>
