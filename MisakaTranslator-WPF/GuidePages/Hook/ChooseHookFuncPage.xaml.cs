@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLHelperLibrary;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -58,6 +59,8 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
         {
             if (HookFunListView.SelectedIndex != -1)
             {
+                SQLHelper sqliteH = new SQLHelper();
+
                 string hookAdd = lstData[HookFunListView.SelectedIndex].HookAddress;
                 int pid = int.Parse(lstData[HookFunListView.SelectedIndex].GamePID, System.Globalization.NumberStyles.HexNumber);
 
@@ -87,6 +90,10 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                     if (sum >= 2)
                     {
                         //往数据库写信息，下一次游戏启动需要重新选方法
+                        if (Common.GameID != -1)
+                        {
+                            sqliteH.ExecuteSql(string.Format("UPDATE game_library SET isMultiHook = '{0}' WHERE gameid = {1};", "True", Common.GameID));
+                        }
 
                         break;
                     }
@@ -95,10 +102,18 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                 //不满足的游戏也应该记录一下
                 if (sum <= 1)
                 {
-                    
+                    if (Common.GameID != -1)
+                    {
+                        sqliteH.ExecuteSql(string.Format("UPDATE game_library SET isMultiHook = '{0}' WHERE gameid = {1};", "False", Common.GameID));
+                    }
                 }
-                
-                
+
+                if (Common.GameID != -1)
+                {
+                    sqliteH.ExecuteSql(string.Format("UPDATE game_library SET transmode = {0} WHERE gameid = {1};", "1", Common.GameID));
+                    sqliteH.ExecuteSql(string.Format("UPDATE game_library SET hookcode = '{0}' WHERE gameid = {1};", lstData[HookFunListView.SelectedIndex].HookCode, Common.GameID));
+                }
+
                 //使用路由事件机制通知窗口来完成下一步操作
                 PageChangeRoutedEventArgs args = new PageChangeRoutedEventArgs(PageChange.PageChangeRoutedEvent, this);
                 args.XamlPath = "GuidePages/Hook/ChooseTextRepairFuncPage.xaml";

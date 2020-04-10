@@ -96,6 +96,8 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
+            Common.GameID = -1;//OCR暂时还不支持保存,因此强制给值-1
+
             //使用路由事件机制通知窗口来完成下一步操作
             PageChangeRoutedEventArgs args = new PageChangeRoutedEventArgs(PageChange.PageChangeRoutedEvent, this);
             args.XamlPath = "GuidePages/OCR/ChooseHotKeyPage.xaml";

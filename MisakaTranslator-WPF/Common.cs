@@ -1,7 +1,9 @@
 ﻿using KeyboardMouseHookLibrary;
 using OCRLibrary;
+using SQLHelperLibrary;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -17,6 +19,8 @@ namespace MisakaTranslator_WPF
     {
         public static IAppSettings appSettings;//应用设置
         public static IRepeatRepairSettings repairSettings;//去重方法参数
+
+        public static int GameID;//全局使用中的游戏ID(数据库)
 
         public static TextHookHandle textHooker;//全局使用中的Hook对象
         public static string UsingRepairFunc;//全局使用中的去重方法
@@ -73,5 +77,87 @@ namespace MisakaTranslator_WPF
             TextRepair.regexReplacement = repairSettings.Regex_Replace;
         }
 
+        /// <summary>
+        /// 根据进程PID找到程序所在路径
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <returns></returns>
+        public static string FindProcessPath(int pid)
+        {
+            Process[] ps = Process.GetProcesses();
+            string filepath = "";
+            for (int i = 0; i < ps.Length; i++)
+            {
+                if (ps[i].Id == pid)
+                {
+                    try
+                    {
+                        filepath = ps[i].MainModule.FileName;
+                    }
+                    catch (System.ComponentModel.Win32Exception ex)
+                    {
+                        continue;
+                        //这个地方直接跳过，是因为32位程序确实会读到64位的系统进程，而系统进程是不能被访问的
+                    }
+                    break;
+                }
+            }
+            return filepath;
+        }
+
+        /// <summary>
+        /// 创建一个新游戏列表库
+        /// </summary>
+        public static bool CreateNewGameList()
+        {
+            SQLHelper.CreateNewDatabase(Environment.CurrentDirectory + "\\MisakaGameLibrary.sqlite");
+            SQLHelper sqliteH = new SQLHelper();
+            int id = sqliteH.ExecuteSql("CREATE TABLE game_library(gameid INTEGER PRIMARY KEY AUTOINCREMENT,gamename TEXT,gamefilepath TEXT,transmode INTEGER,src_lang TEXT,dst_lang TEXT,repair_func TEXT,repair_param_a TEXT,repair_param_b TEXT,hookcode TEXT,isMultiHook TEXT);");
+            if (id == -1)
+            {
+                MessageBox.Show("新建游戏库时发生错误，错误代码:\n" + sqliteH.getLastError(), "数据库错误");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// 得到一个游戏的游戏ID
+        /// 如果游戏已经存在于数据库中，则直接返回ID，否则追加新游戏路径并返回新ID，如果返回-1则有数据库错误
+        /// </summary>
+        /// <param name="gamepath"></param>
+        /// <returns>返回游戏ID</returns>
+        public static int GetGameID(string gamepath)
+        {
+
+            if (File.Exists(Environment.CurrentDirectory + "\\MisakaGameLibrary.sqlite") == false)
+            {
+                if (CreateNewGameList() == false) {
+                    return -1;
+                }
+            }
+
+            SQLHelper sqliteH = new SQLHelper();
+
+            List<string> ls = sqliteH.ExecuteReader_OneLine(string.Format("SELECT gameid FROM game_library WHERE gamefilepath = '{0}';", gamepath), 1);
+
+            if (ls == null)
+            {
+                MessageBox.Show("数据库访问时发生错误，错误代码:\n" + sqliteH.getLastError(), "数据库错误");
+                return -1;
+            }
+
+            if (ls.Count == 0)
+            {
+                string sql = string.Format("INSERT INTO game_library VALUES(NULL,'{0}','{1}',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL);", 
+                    Path.GetFileNameWithoutExtension(gamepath),gamepath);
+                sqliteH.ExecuteSql(sql);
+                ls = sqliteH.ExecuteReader_OneLine(string.Format("SELECT gameid FROM game_library WHERE gamefilepath = '{0}';", gamepath), 1);
+            }
+
+            return int.Parse(ls[0]);
+        }
     }
 }

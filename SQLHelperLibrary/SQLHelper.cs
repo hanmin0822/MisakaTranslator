@@ -36,7 +36,32 @@ namespace SQLHelperLibrary
                 throw ex;
             }
         }
-        
+
+        /// <summary>
+        /// 专用于游戏库的初始化
+        /// </summary>
+        public SQLHelper()
+        {
+            string DataSource = Environment.CurrentDirectory + "\\MisakaGameLibrary.sqlite";
+            try
+            {
+                SQLiteConnectionStringBuilder connectionStringBuilder = new SQLiteConnectionStringBuilder
+                {
+                    Version = 3,
+                    Pooling = true,
+                    FailIfMissing = false,
+                    DataSource = DataSource
+                };
+                m_ConnectionString = connectionStringBuilder.ConnectionString;
+                m_dbConnection = new SQLiteConnection(m_ConnectionString);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         /// <summary>
         /// 创建一个新的sqlite数据库，后缀名.sqlite
         /// </summary>
@@ -70,7 +95,7 @@ namespace SQLHelperLibrary
         }
 
         /// <summary>
-        /// 执行查询语句，返回单行结果（适用于执行查询可确定只有一条结果的）
+        /// 执行查询语句，返回单行结果（适用于执行查询可确定只有一条结果的）,失败返回null,可通过getLastError获取失败原因
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="columns">结果应包含的列数</param>
@@ -86,9 +111,9 @@ namespace SQLHelperLibrary
                 if (myReader.HasRows == false)
                 {
                     m_dbConnection.Close();
-                    return null;
+                    return new List<string>();
                 }
-
+                
                 List<string> ret = new List<string>();
                 while (myReader.Read())
                 {
@@ -104,12 +129,13 @@ namespace SQLHelperLibrary
             catch (System.Data.SQLite.SQLiteException e)
             {
                 m_dbConnection.Close();
-                throw new Exception(e.Message);
+                errorInfo = e.Message;
+                return null;
             }
         }
 
         /// <summary>
-        /// 执行查询语句,返回结果
+        /// 执行查询语句,返回结果,失败返回null,可通过getLastError获取失败原因
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="columns">结果应包含的列数</param>
@@ -125,7 +151,7 @@ namespace SQLHelperLibrary
                 if (myReader.HasRows == false)
                 {
                     m_dbConnection.Close();
-                    return null;
+                    return new List<List<string>>();
                 }
 
                 List<string> lst = new List<string>();
@@ -146,7 +172,8 @@ namespace SQLHelperLibrary
             catch (System.Data.SQLite.SQLiteException e)
             {
                 m_dbConnection.Close();
-                throw new Exception(e.Message);
+                errorInfo = e.Message;
+                return null;
             }
         }
 

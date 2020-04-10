@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLHelperLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,7 +55,14 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                 }
 
                 Common.textHooker.Init(!(bool)x64GameCheckBox.IsChecked);
-                
+
+                Common.GameID = -1;
+                string filepath = Common.FindProcessPath(GamePid);
+                if (filepath != "") {
+                    Common.GameID = Common.GetGameID(filepath);
+                }
+
+
                 //使用路由事件机制通知窗口来完成下一步操作
                 PageChangeRoutedEventArgs args = new PageChangeRoutedEventArgs(PageChange.PageChangeRoutedEvent, this);
                 args.XamlPath = "GuidePages/Hook/ChooseHookFuncPage.xaml";

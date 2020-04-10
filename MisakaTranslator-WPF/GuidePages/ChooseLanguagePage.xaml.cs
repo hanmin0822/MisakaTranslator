@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLHelperLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,6 +47,14 @@ namespace MisakaTranslator_WPF.GuidePages
                 Common.UsingDstLang = CommonFunction.lstLanguage[langlist[DstLangCombox.SelectedIndex]];
 
                 //写数据库信息
+                if(Common.GameID != -1)
+                {
+                    SQLHelper sqliteH = new SQLHelper();
+                    sqliteH.ExecuteSql(string.Format("UPDATE game_library SET src_lang = '{0}' WHERE gameid = {1};",
+                            Common.UsingSrcLang, Common.GameID));
+                    sqliteH.ExecuteSql(string.Format("UPDATE game_library SET dst_lang = '{0}' WHERE gameid = {1};",
+                            Common.UsingDstLang, Common.GameID));
+                }
 
                 //使用路由事件机制通知窗口来完成下一步操作
                 PageChangeRoutedEventArgs args = new PageChangeRoutedEventArgs(PageChange.PageChangeRoutedEvent, this);

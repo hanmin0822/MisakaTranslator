@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLHelperLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,12 +65,35 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
+            SQLHelper sqliteH = new SQLHelper();
+
             Common.textHooker.Sevent -= DataRecvEventHandler;
 
             Common.UsingRepairFunc = TextRepair.lstRepairFun[lstRepairFun[RepairFuncCombox.SelectedIndex]];
 
             //写入数据库的去重方法
-
+            if (Common.GameID != -1)
+            {
+                switch (TextRepair.lstRepairFun[lstRepairFun[RepairFuncCombox.SelectedIndex]])
+                {
+                    case "RepairFun_RemoveSingleWordRepeat":
+                        sqliteH.ExecuteSql(string.Format("UPDATE game_library SET repair_func = '{0}',repair_param_a = '{1}' WHERE gameid = {2};",
+                            Common.UsingRepairFunc, Common.repairSettings.SingleWordRepeatTimes, Common.GameID));
+                        break;
+                    case "RepairFun_RemoveSentenceRepeat":
+                        sqliteH.ExecuteSql(string.Format("UPDATE game_library SET repair_func = '{0}',repair_param_a = '{1}' WHERE gameid = {2};",
+                            Common.UsingRepairFunc, Common.repairSettings.SentenceRepeatFindCharNum, Common.GameID));
+                        break;
+                    case "RepairFun_RegexReplace":
+                        sqliteH.ExecuteSql(string.Format("UPDATE game_library SET repair_func = '{0}',repair_param_a = '{1}',repair_param_b = '{2}' WHERE gameid = {3};", 
+                            Common.UsingRepairFunc, Common.repairSettings.Regex ,Common.repairSettings.Regex_Replace , Common.GameID));
+                        break;
+                    default:
+                        sqliteH.ExecuteSql(string.Format("UPDATE game_library SET repair_func = '{0}' WHERE gameid = {1};", Common.UsingRepairFunc, Common.GameID));
+                        break;
+                }
+                
+            }
 
             //使用路由事件机制通知窗口来完成下一步操作
             PageChangeRoutedEventArgs args = new PageChangeRoutedEventArgs(PageChange.PageChangeRoutedEvent, this);
