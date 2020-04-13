@@ -346,6 +346,9 @@ namespace KeyboardMouseHookLibrary
                     KeyUp(this, e);
                 }
             }
+
+
+
             return CallNextHookEx(_hKeyboardHook, nCode, wParam, lParam);
         }
     }

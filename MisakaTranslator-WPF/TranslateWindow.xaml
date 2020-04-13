@@ -9,18 +9,55 @@
                Background="{DynamicResource TranslateWindowBackground}"
                AllowsTransparency="True"
                WindowStyle="None"
-        Title="TranslateWindow" Height="450" Width="800">
+        Title="TranslateWindow" Height="450" Width="800" Closing="Window_Closing">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
-        <Border hc:WindowAttach.IsDragElement="True" Grid.Row="0" VerticalAlignment="Top" Margin="11" Height="28" Background="{DynamicResource DarkDefaultBrush}" CornerRadius="4">
-            <TextBlock Text="DragHere" Style="{StaticResource TextBlockDefault}"/>
+        <!--背景（Background）-->
+        <Border Name="BackWinChrome" Margin="0" Background="White">
+            <Border.Effect>
+                <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="20" 
+                                  Opacity="0.25" Color="#FF5B5B5B"></DropShadowEffect>
+            </Border.Effect>
         </Border>
-        <TextBlock x:Name="SourceTextBlock" HorizontalAlignment="Left" Margin="141,53.5,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="449" Height="37" MouseLeftButtonDown="SourceTextBlock_MouseLeftButtonDown"/>
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Border Name="DragBorder" hc:WindowAttach.IsDragElement="True" Grid.Row="0" Margin="5" Background="{DynamicResource DarkDefaultBrush}" CornerRadius="4" MouseEnter="DragBorder_MouseEnter" MouseLeave="DragBorder_MouseLeave">
+                <TextBlock Text="{StaticResource TranslateWin_DragTitle}" Style="{StaticResource TextBlockDefault}"/>
+
+                <Border.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem  Header="{StaticResource TranslateWin_Menu_ChangeSize}" Click="ChangeSize_Item_Click"/>
+                        <MenuItem  Header="{StaticResource TranslateWin_Menu_Settings}" Click="Settings_Item_Click"/>
+                        <MenuItem  Header="{StaticResource TranslateWin_Menu_ShowSource}" Click="ShowSource_Item_Click"/>
+                        <MenuItem  Header="{StaticResource TranslateWin_Menu_History}" Click="History_Item_Click"/>
+                        <MenuItem  Header="{StaticResource TranslateWin_Menu_RenewOCR}" Click="RenewOCR_Item_Click"/>
+                        <MenuItem  Header="{StaticResource TranslateWin_Menu_AddNounTrans}" Click="AddNoun_Item_Click"/> 
+                        <MenuItem  Header="{StaticResource TranslateWin_Menu_Pause}" Click="Pause_Item_Click"/>
+                        <MenuItem  Header="{StaticResource TranslateWin_Menu_Exit}" Click="Exit_Item_Click"/>
+                    </ContextMenu>
+                </Border.ContextMenu>
+            </Border>
+
+            
+            <WrapPanel Grid.Row="1" x:Name="SourceTextPanel" Margin="10" Orientation="Horizontal"></WrapPanel>
+
+            <TextBlock Grid.Row="2" Text="等待源文本" Foreground="White" Name="FirstTransText" Margin="10" TextWrapping="Wrap"></TextBlock>
+
+            <TextBlock Grid.Row="3" Foreground="White" Name="SecondTransText" Margin="10" TextWrapping="Wrap"></TextBlock>
+
+        </Grid>
+
     </Grid>
+    
+    
 </Window>

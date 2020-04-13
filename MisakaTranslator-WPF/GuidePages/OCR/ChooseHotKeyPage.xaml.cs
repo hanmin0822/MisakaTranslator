@@ -49,6 +49,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             HotKeyTag.Text = "已设置触发键 键值:" + HotKey.KeyCode;
             hook.Stop();
             hook = null;
+            OCRDelayBox.Focus();//设置完后应该转移焦点
             WaitHotKeyDrawer.IsOpen = false;
         }
 

@@ -143,5 +143,13 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
         {
             InputDrawer.IsOpen = false;
         }
+
+        private void Page_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape) {
+                Common.textHooker.HFSevent -= DataRecvEventHandler;
+                HandyControl.Controls.Growl.Warning("已强制暂停刷新");
+            }
+        }
     }
 }

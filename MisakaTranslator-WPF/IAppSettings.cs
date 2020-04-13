@@ -48,7 +48,7 @@ namespace MisakaTranslator_WPF
 
         [Option(Alias = "TranslateFormSettings.opacity", DefaultValue = "50")]
         string TF_Opacity { get; set; }
-        [Option(Alias = "TranslateFormSettings.backColor", DefaultValue = "Noset")]
+        [Option(Alias = "TranslateFormSettings.backColor", DefaultValue = "#ffffffff")]
         string TF_BackColor { get; set; }
         [Option(Alias = "TranslateFormSettings.SizeW", DefaultValue = "0")]
         string TF_SizeW { get; set; }
@@ -61,36 +61,24 @@ namespace MisakaTranslator_WPF
 
         [Option(Alias = "TranslateFormSettings.srcTextFont", DefaultValue = "微软雅黑")]
         string TF_srcTextFont { get; set; }
-        [Option(Alias = "TranslateFormSettings.srcTextSize", DefaultValue = "12")]
+        [Option(Alias = "TranslateFormSettings.srcTextSize", DefaultValue = "15")]
         string TF_srcTextSize { get; set; }
-        [Option(Alias = "TranslateFormSettings.srcTextColorR", DefaultValue = "0")]
-        string TF_srcTextColorR { get; set; }
-        [Option(Alias = "TranslateFormSettings.srcTextColorG", DefaultValue = "0")]
-        string TF_srcTextColorG { get; set; }
-        [Option(Alias = "TranslateFormSettings.srcTextColorB", DefaultValue = "0")]
-        string TF_srcTextColorB { get; set; }
 
         [Option(Alias = "TranslateFormSettings.firstTransTextFont", DefaultValue = "微软雅黑")]
         string TF_firstTransTextFont { get; set; }
-        [Option(Alias = "TranslateFormSettings.firstTransTextSize", DefaultValue = "12")]
+        [Option(Alias = "TranslateFormSettings.firstTransTextSize", DefaultValue = "15")]
         string TF_firstTransTextSize { get; set; }
-        [Option(Alias = "TranslateFormSettings.firstTransTextColorR", DefaultValue = "0")]
-        string TF_firstTransTextColorR { get; set; }
-        [Option(Alias = "TranslateFormSettings.firstTransTextColorG", DefaultValue = "0")]
-        string TF_firstTransTextColorG { get; set; }
-        [Option(Alias = "TranslateFormSettings.firstTransTextColorB", DefaultValue = "0")]
-        string TF_firstTransTextColorB { get; set; }
+        [Option(Alias = "TranslateFormSettings.firstTransTextColor", DefaultValue = "#ff000000")]
+        string TF_firstTransTextColor { get; set; }
+        
 
         [Option(Alias = "TranslateFormSettings.secondTransTextFont", DefaultValue = "微软雅黑")]
         string TF_secondTransTextFont { get; set; }
-        [Option(Alias = "TranslateFormSettings.secondTransTextSize", DefaultValue = "12")]
+        [Option(Alias = "TranslateFormSettings.secondTransTextSize", DefaultValue = "15")]
         string TF_secondTransTextSize { get; set; }
-        [Option(Alias = "TranslateFormSettings.secondTransTextColorR", DefaultValue = "0")]
-        string TF_secondTransTextColorR { get; set; }
-        [Option(Alias = "TranslateFormSettings.secondTransTextColorG", DefaultValue = "0")]
-        string TF_secondTransTextColorG { get; set; }
-        [Option(Alias = "TranslateFormSettings.secondTransTextColorB", DefaultValue = "0")]
-        string TF_secondTransTextColorB { get; set; }
+        [Option(Alias = "TranslateFormSettings.secondTransTextColor", DefaultValue = "#ff000000")]
+        string TF_secondTransTextColor { get; set; }
+        
     }
 
     

@@ -21,6 +21,8 @@ namespace MisakaTranslator_WPF
         private void InitializeAppearance()
         {
             Common.appSettings = new ConfigurationBuilder<IAppSettings>().UseIniFile(Environment.CurrentDirectory + "\\settings\\settings.ini").Build();
+            Common.repairSettings = new ConfigurationBuilder<IRepeatRepairSettings>().UseIniFile(Environment.CurrentDirectory + "\\settings\\RepairSettings.ini").Build();
+
 
             ISettings settings = new ConfigurationBuilder<ISettings>().UseJsonFile("settings/settings.json").Build();
             this.Resources["Foreground"] = (SolidColorBrush)(new BrushConverter().ConvertFrom(settings.ForegroundHex));
@@ -44,7 +46,7 @@ namespace MisakaTranslator_WPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            GameGuideWindow ggw = new GameGuideWindow(1);
+            GameGuideWindow ggw = new GameGuideWindow(2);
             ggw.Show();
 
         }
@@ -53,6 +55,7 @@ namespace MisakaTranslator_WPF
         {
             TranslateWindow translateWindow = new TranslateWindow();
             translateWindow.Show();
+            
         }
     }
 }

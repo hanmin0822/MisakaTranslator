@@ -185,6 +185,9 @@
     <Compile Include="TranslateWindow.xaml.cs">
       <DependentUpon>TranslateWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TransWinSettingsWindow.xaml.cs">
+      <DependentUpon>TransWinSettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="GameGuideWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -295,6 +298,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TranslateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TransWinSettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

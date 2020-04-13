@@ -82,7 +82,7 @@
 
     <sys:String x:Key="Drawer_BtnExit">关闭</sys:String>
     
-    <sys:String x:Key="ChooseHookFuncPage_Introduce">进行游戏并使游戏中文本发生变化，在下方找到完全包含游戏文本内容的对应项并确定。</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_Introduce">进行游戏并使游戏中文本发生变化，在下方找到完全包含游戏文本内容的对应项并确定。卡顿时可在本页面获取焦点情况下按Esc进行强制暂停。</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_BtnAddHook">添加指定特殊码Hook</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_BtnConfirm">确认方法</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_Header_PID">进程号</sys:String>
@@ -135,4 +135,28 @@
     <sys:String x:Key="ChooseHotKeyPage_OCRDelayBox">OCR延时时间(毫秒)</sys:String>
     <sys:String x:Key="ChooseHotKeyPage_ConfirmBtn">确认</sys:String>
     <sys:String x:Key="ChooseHotKeyPage_WaitHotKeyIntroduce">请按下需要设置的键盘上的相应触发键</sys:String>
+
+
+    <sys:String x:Key="TranslateWin_DragTitle">按住此处拖拽 单击右键弹出菜单</sys:String>
+    <sys:String x:Key="TranslateWin_Menu_ChangeSize">调整界面尺寸</sys:String>
+    <sys:String x:Key="TranslateWin_Menu_ShowSource">显示/隐藏原文</sys:String>
+    <sys:String x:Key="TranslateWin_Menu_Settings">翻译界面设置</sys:String>
+    <sys:String x:Key="TranslateWin_Menu_History">查看历史文本</sys:String>
+    <sys:String x:Key="TranslateWin_Menu_RenewOCR">刷新OCR</sys:String>
+    <sys:String x:Key="TranslateWin_Menu_Pause">暂停/恢复</sys:String>
+    <sys:String x:Key="TranslateWin_Menu_Exit">退出翻译</sys:String>
+    <sys:String x:Key="TranslateWin_Menu_AddNounTrans">添加专有名词</sys:String>
+
+    <sys:String x:Key="TransWinSettingsWin_Title">翻译窗口界面设置</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_Tab_Window">窗口</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_Tab_source">源文本</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_Tab_first">翻译一</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_Tab_second">翻译二</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_Opacity">翻译窗口透明度</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_BgColor">背景颜色</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_FontColor">字体颜色</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_FontSize">字体大小</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_FontName">字体</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_BtnChooseColor">选择颜色</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_srcSetNotice">源文本区域设置完成需要刷新才能看到效果！</sys:String>
 </ResourceDictionary>

@@ -20,6 +20,8 @@ namespace MisakaTranslator_WPF
         public static IAppSettings appSettings;//应用设置
         public static IRepeatRepairSettings repairSettings;//去重方法参数
 
+        public static int transMode;//全局使用中的翻译模式 1=hook 2=ocr
+
         public static int GameID;//全局使用中的游戏ID(数据库)
 
         public static TextHookHandle textHooker;//全局使用中的Hook对象
@@ -29,6 +31,8 @@ namespace MisakaTranslator_WPF
         public static string UsingDstLang;//全局使用中的目标翻译语言
 
         public static IOptChaRec ocr;//全局使用中的OCR对象
+        public static bool isAllWindowCap;//是否全屏截图
+        public static IntPtr OCRWinHwnd;//全局的OCR的工作窗口
         public static HotKeyInfo UsingHotKey;//全局使用中的触发键信息
         public static int UsingOCRDelay;//全局使用中的OCR延时
 

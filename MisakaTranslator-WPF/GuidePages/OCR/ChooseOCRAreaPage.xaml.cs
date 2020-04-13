@@ -144,6 +144,8 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
+            Common.isAllWindowCap = isAllWin;
+            Common.OCRWinHwnd = (IntPtr)SelectedHwnd;
             Common.ocr.SetOCRArea((IntPtr)SelectedHwnd, OCRArea, isAllWin);
 
             //使用路由事件机制通知窗口来完成下一步操作

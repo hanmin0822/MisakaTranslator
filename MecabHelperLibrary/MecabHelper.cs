@@ -41,6 +41,13 @@ namespace MecabHelperLibrary
             Tagger = MeCabTagger.Create(Parameter);
         }
 
+        ~MecabHelper() {
+            Tagger.Dispose();
+            Parameter = null;
+            Tagger = null;
+            GC.Collect();
+        }
+
 
         /// <summary>
         /// 处理句子，对句子进行分词，得到结果

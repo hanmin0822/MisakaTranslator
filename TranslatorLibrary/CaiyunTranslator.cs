@@ -49,13 +49,13 @@ namespace TranslatorLibrary
             byte[] byteData = Encoding.UTF8.GetBytes(jsonParam);
             int length = byteData.Length;
             request.ContentLength = length;
-            Stream writer = request.GetRequestStream();
-            writer.Write(byteData, 0, length);
-            writer.Close();
-            request.UserAgent = null;
-            request.Timeout = 6000;
             try
             {
+                Stream writer = request.GetRequestStream();
+                writer.Write(byteData, 0, length);
+                writer.Close();
+                request.UserAgent = null;
+                request.Timeout = 6000;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 Stream myResponseStream = response.GetResponseStream();
                 StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));

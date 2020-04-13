@@ -66,11 +66,19 @@ namespace MisakaTranslator_WPF
                 if (GuideMode == 1)
                 {
                     //Hook方式设置 完成
+                    Common.transMode = 1;
+                    TranslateWindow translateWindow = new TranslateWindow();
+                    translateWindow.Show();
+                    
                     this.Close();
                 }
                 else if (GuideMode == 2)
                 {
                     //OCR方式设置 完成
+                    Common.transMode = 2;
+                    TranslateWindow translateWindow = new TranslateWindow();
+                    translateWindow.Show();
+
                     this.Close();
                 }
                 else
