@@ -46,6 +46,9 @@ namespace MisakaTranslator_WPF
         [Option(Alias = "BaiduOCR.SecretKey", DefaultValue = "")]
         string BDOCR_SecretKey { get; set; }
 
+        [Option(Alias = "LE.LEPath", DefaultValue = "")]
+        string LEPath { get; set; }
+
         [Option(Alias = "TranslateFormSettings.opacity", DefaultValue = "50")]
         string TF_Opacity { get; set; }
         [Option(Alias = "TranslateFormSettings.backColor", DefaultValue = "#ffffffff")]

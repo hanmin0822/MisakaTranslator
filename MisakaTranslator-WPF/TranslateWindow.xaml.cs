@@ -36,6 +36,8 @@ namespace MisakaTranslator_WPF
         ITranslator translator1;//第一翻译源
         ITranslator translator2;//第二翻译源
 
+        private string currentsrcText;//当前源文本内容
+
         public string sourceTextFont;//源文本区域字体
         public int sourceTextFontSize;//源文本区域字体大小
 
@@ -218,6 +220,7 @@ namespace MisakaTranslator_WPF
                     Thread.Sleep(Common.UsingOCRDelay);
 
                     string srcText = Common.ocr.OCRProcess();
+                    GC.Collect();
 
                     if (srcText != null && srcText != "")
                     {
@@ -229,6 +232,8 @@ namespace MisakaTranslator_WPF
 
                             //1.得到原句
                             string source = srcText;
+
+                            currentsrcText = source;
 
                             if (IsShowSource == true)
                             {
@@ -269,13 +274,29 @@ namespace MisakaTranslator_WPF
                                 }
                             }
 
+                            if (Convert.ToBoolean(Common.appSettings.EachRowTrans) == true)
+                            {
+                                //需要分行翻译
+                                source = source.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
+                            }
+                            //去乱码
+                            source = source.Replace("_", "").Replace("-", "").Replace("+", "");
+
                             //4.翻译前预处理
                             string beforeString = bth.AutoHandle(source);
 
                             //5.提交翻译
-                            string transRes1 = translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
-                            string transRes2 = translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
-
+                            string transRes1 = "";
+                            string transRes2 = "";
+                            if (translator1 != null)
+                            {
+                                transRes1 = translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                            }
+                            if (translator2 != null)
+                            {
+                                transRes2 = translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                            }
+                            
                             //6.翻译后处理
                             string afterString1 = ath.AutoHandle(transRes1);
                             string afterString2 = ath.AutoHandle(transRes2);
@@ -327,6 +348,8 @@ namespace MisakaTranslator_WPF
                 //2.进行去重
                 string repairedText = TextRepair.RepairFun_Auto(Common.UsingRepairFunc, source);
 
+                currentsrcText = repairedText;
+
                 if (IsShowSource == true) {
                     //3.分词
                     List<MecabWordInfo> mwi = mh.SentenceHandle(repairedText);
@@ -364,12 +387,28 @@ namespace MisakaTranslator_WPF
                     }
                 }
 
+                if (Convert.ToBoolean(Common.appSettings.EachRowTrans) == true)
+                {
+                    //需要分行翻译
+                    repairedText = repairedText.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
+                }
+                //去乱码
+                repairedText = repairedText.Replace("_", "").Replace("-", "").Replace("+", "");
+
                 //4.翻译前预处理
                 string beforeString = bth.AutoHandle(repairedText);
 
                 //5.提交翻译
-                string transRes1 = translator1.Translate(beforeString,Common.UsingDstLang,Common.UsingSrcLang);
-                string transRes2 = translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                string transRes1 = "";
+                string transRes2 = "";
+                if (translator1 != null)
+                {
+                    transRes1 = translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                }
+                if (translator2 != null)
+                {
+                    transRes2 = translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                }
 
                 //6.翻译后处理
                 string afterString1 = ath.AutoHandle(transRes1);
@@ -397,7 +436,7 @@ namespace MisakaTranslator_WPF
                 DragBorder.Opacity = 1;
             }
             else {
-                BackWinChrome.Opacity = int.Parse(Common.appSettings.TF_Opacity) / 100;
+                BackWinChrome.Opacity = double.Parse(Common.appSettings.TF_Opacity) / 100;
                 DragBorder.Opacity = 0.01;
                 Growl.InfoGlobal("鼠标指向拖拽栏可显示！");
             }
@@ -491,7 +530,8 @@ namespace MisakaTranslator_WPF
 
         private void AddNoun_Item_Click(object sender, RoutedEventArgs e)
         {
-            HandyControl.Controls.MessageBox.Show("还在制作","用不了");
+            AddOptWindow win = new AddOptWindow(currentsrcText);
+            win.Show();
         }
 
         private void RenewOCR_Item_Click(object sender, RoutedEventArgs e)
@@ -501,8 +541,42 @@ namespace MisakaTranslator_WPF
                 OCR();
             }
             else {
-                Growl.InfoGlobal("非OCR模式下无法刷新！");
+                if (Convert.ToBoolean(Common.appSettings.EachRowTrans) == true) {
+                    //需要分行翻译
+                    currentsrcText = currentsrcText.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
+                }
+                //去乱码
+                currentsrcText = currentsrcText.Replace("_", "").Replace("-", "").Replace("+", "");
+            
+                
+                //4.翻译前预处理
+                string beforeString = bth.AutoHandle(currentsrcText);
+
+                //5.提交翻译
+                string transRes1 = "";
+                string transRes2 = "";
+                if (translator1 != null)
+                {
+                    transRes1 = translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                }
+                if (translator2 != null)
+                {
+                    transRes2 = translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                }
+
+                //6.翻译后处理
+                string afterString1 = ath.AutoHandle(transRes1);
+                string afterString2 = ath.AutoHandle(transRes2);
+
+                //7.翻译结果显示到窗口上
+                FirstTransText.Text = afterString1;
+                SecondTransText.Text = afterString2;
             }
+        }
+
+        private void Min_Item_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
     }
 }

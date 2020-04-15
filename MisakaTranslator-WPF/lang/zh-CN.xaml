@@ -2,10 +2,21 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:MisakaTranslator_WPF.lang"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    
     <sys:String x:Key="BtnStart">开始翻译</sys:String>
+    <sys:String x:Key="BtnHookGuide">Hook方式游戏向导</sys:String>
+    <sys:String x:Key="BtnOCRGuide">OCR方式游戏向导</sys:String>
+
+    <sys:String x:Key="MainWindow_Drawer_Start">正常启动</sys:String>
+    <sys:String x:Key="MainWindow_Drawer_LEStart">LE转区启动</sys:String>
+    <sys:String x:Key="MainWindow_Drawer_DeleteGame">从库中删除</sys:String>
+    <sys:String x:Key="MainWindow_Drawer_UpdateName">修改游戏名</sys:String>
+    <sys:String x:Key="MainWindow_Drawer_NameHint">输入新的游戏名</sys:String>
+    <sys:String x:Key="MainWindow_Drawer_NameConfirmBtn">确认修改</sys:String>
 
     <sys:String x:Key="SettingsMenu_WinName">MisakaTranslator本体设置</sys:String>
     <sys:String x:Key="SettingsMenu_About">MisakaTranslator</sys:String>
+    <sys:String x:Key="SettingsMenu_LESettings">LE转区相关设置</sys:String>
     <sys:String x:Key="SettingsMenu_HookSettings">Hook相关设置</sys:String>
     <sys:String x:Key="SettingsMenu_OCRsettings">OCR相关设置</sys:String>
     <sys:String x:Key="SettingsMenu_OCRsettings_General">通用设置</sys:String>
@@ -68,6 +79,10 @@
     <sys:String x:Key="HookSettingsPage_AutoDetach">开启自动卸载</sys:String>
     <sys:String x:Key="HookSettingsPage_BtnExtractHistory">导出Hook命令行历史记录</sys:String>
 
+    <sys:String x:Key="LESettingsPage_Introduce">LE转区工具可以解决一些游戏出现乱码的问题，您需要获取Locale Emulator软件本体并在下方设置其目录，保证文件夹下有LEProc.exe文件。</sys:String>
+    <sys:String x:Key="LESettingsPage_LEbox">Locale Emulator本体路径</sys:String>
+    
+    
     <sys:String x:Key="AboutPage_BtnHelp">使用说明和反馈</sys:String>
     <sys:String x:Key="AboutPage_BtnGithub">本项目GitHub主页</sys:String>
 
@@ -93,8 +108,7 @@
     <sys:String x:Key="ChooseHookFuncPage_Drawer_PidBox">进程ID</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_Drawer_HookCodeBox">Hook特殊码</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_Drawer_BtnConfirm">确认注入</sys:String>
-    
-    
+
     <sys:String x:Key="ChooseTextRepairFuncPage_Introduce">进行游戏并使游戏中文本发生变化，然后选择一种适合您游戏的去重方法，部分方法需要提供参数。</sys:String>
     <sys:String x:Key="ChooseTextRepairFuncPage_SourceText">源文本：</sys:String>
     <sys:String x:Key="ChooseTextRepairFuncPage_RepairedText">处理后文本：</sys:String>
@@ -142,8 +156,9 @@
     <sys:String x:Key="TranslateWin_Menu_ShowSource">显示/隐藏原文</sys:String>
     <sys:String x:Key="TranslateWin_Menu_Settings">翻译界面设置</sys:String>
     <sys:String x:Key="TranslateWin_Menu_History">查看历史文本</sys:String>
-    <sys:String x:Key="TranslateWin_Menu_RenewOCR">刷新OCR</sys:String>
+    <sys:String x:Key="TranslateWin_Menu_RenewOCR">重新翻译/OCR</sys:String>
     <sys:String x:Key="TranslateWin_Menu_Pause">暂停/恢复</sys:String>
+    <sys:String x:Key="TranslateWin_Menu_Min">最小化界面</sys:String>
     <sys:String x:Key="TranslateWin_Menu_Exit">退出翻译</sys:String>
     <sys:String x:Key="TranslateWin_Menu_AddNounTrans">添加专有名词</sys:String>
 
@@ -159,4 +174,10 @@
     <sys:String x:Key="TransWinSettingsWin_FontName">字体</sys:String>
     <sys:String x:Key="TransWinSettingsWin_BtnChooseColor">选择颜色</sys:String>
     <sys:String x:Key="TransWinSettingsWin_srcSetNotice">源文本区域设置完成需要刷新才能看到效果！</sys:String>
+
+    <sys:String x:Key="AddOptWin_Introduce">请输入您要添加进词库的单词，该单词之后在提交翻译前将被直接从原句中替换。</sys:String>
+    <sys:String x:Key="AddOptWin_beforeBox">原单词</sys:String>
+    <sys:String x:Key="AddOptWin_afterBox">定义翻译</sys:String>
+    <sys:String x:Key="AddOptWin_wordType">词性</sys:String>
+    <sys:String x:Key="AddOptWin_confirmBtn">添加到词库</sys:String>
 </ResourceDictionary>

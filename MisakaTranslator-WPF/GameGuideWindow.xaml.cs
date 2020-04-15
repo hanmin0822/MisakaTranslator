@@ -50,6 +50,7 @@ namespace MisakaTranslator_WPF
                 List<string> lstStep = new List<string>() { "重新选择Hook方法", "完成" };
                 GuideStepBar.ItemsSource = lstStep;
                 FuncHint.Text = "重新选择Hook方法以适配上次的设置";
+                GuidePageFrame.Navigate(new Uri("GuidePages/Hook/ReChooseHookFuncPage.xaml", UriKind.Relative));
             }
         }
 
@@ -81,9 +82,14 @@ namespace MisakaTranslator_WPF
 
                     this.Close();
                 }
-                else
+                else if(GuideMode == 3)
                 {
-                    
+                    //Hook方式设置 完成
+                    Common.transMode = 1;
+                    TranslateWindow translateWindow = new TranslateWindow();
+                    translateWindow.Show();
+
+                    this.Close();
                 }
             }
             else {

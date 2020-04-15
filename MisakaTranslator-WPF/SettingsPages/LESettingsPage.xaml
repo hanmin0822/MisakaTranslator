@@ -1,0 +1,21 @@
+﻿<Page x:Class="MisakaTranslator_WPF.SettingsPages.LESettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:local="clr-namespace:MisakaTranslator_WPF.SettingsPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="594"
+      Title="LESettingsPage">
+
+    <Grid Background="White">
+        <StackPanel Background="White">
+            <TextBlock Text="{StaticResource LESettingsPage_Introduce}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
+
+            <hc:TextBox Margin="10" hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource LESettingsPage_LEbox}" Name="PathBox" ShowClearButton="True"/>
+            <Button Margin="10" Content="{StaticResource JbeijingTransSettingsPage_ChoosePath}" Width="122" Click="ChoosePathBtn_Click" HorizontalAlignment="Right" ></Button>
+
+        </StackPanel>
+    </Grid>
+</Page>

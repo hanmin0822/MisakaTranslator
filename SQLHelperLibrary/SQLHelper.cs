@@ -154,16 +154,17 @@ namespace SQLHelperLibrary
                     return new List<List<string>>();
                 }
 
-                List<string> lst = new List<string>();
+                
                 List<List<string>> ret = new List<List<string>>();
                 while (myReader.Read())
                 {
+                    List<string> lst = new List<string>();
                     for (int i = 0; i < columns; i++)
                     {
                         lst.Add(myReader[i].ToString());
                     }
-
                     ret.Add(lst);
+                    
                 }
 
                 m_dbConnection.Close();

@@ -43,6 +43,7 @@
                         <MenuItem  Header="{StaticResource TranslateWin_Menu_RenewOCR}" Click="RenewOCR_Item_Click"/>
                         <MenuItem  Header="{StaticResource TranslateWin_Menu_AddNounTrans}" Click="AddNoun_Item_Click"/> 
                         <MenuItem  Header="{StaticResource TranslateWin_Menu_Pause}" Click="Pause_Item_Click"/>
+                        <MenuItem  Header="{StaticResource TranslateWin_Menu_Min}" Click="Min_Item_Click"/>
                         <MenuItem  Header="{StaticResource TranslateWin_Menu_Exit}" Click="Exit_Item_Click"/>
                     </ContextMenu>
                 </Border.ContextMenu>

@@ -19,6 +19,7 @@ namespace TranslatorLibrary
         };
 
         public static Dictionary<string,string> lstTranslator = new Dictionary<string, string>() {
+            { "无翻译" , "NoTranslator"},
             { "百度翻译" , "BaiduTranslator" },
             { "腾讯翻译君" , "TencentFYJTranslator" },
             { "腾讯私人翻译" , "TencentOldTranslator" },

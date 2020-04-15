@@ -37,6 +37,9 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
@@ -119,6 +122,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddOptWindow.xaml.cs">
+      <DependentUpon>AddOptWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common.cs" />
     <Compile Include="GameGuideWindow.xaml.cs">
       <DependentUpon>GameGuideWindow.xaml</DependentUpon>
@@ -137,6 +143,9 @@
     </Compile>
     <Compile Include="GuidePages\Hook\ChooseTextRepairFuncPage.xaml.cs">
       <DependentUpon>ChooseTextRepairFuncPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GuidePages\Hook\ReChooseHookFuncPage.xaml.cs">
+      <DependentUpon>ReChooseHookFuncPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="GuidePages\OCR\ChooseHandleFuncPage.xaml.cs">
       <DependentUpon>ChooseHandleFuncPage.xaml</DependentUpon>
@@ -157,6 +166,9 @@
     </Compile>
     <Compile Include="SettingsPages\HookSettingsPage.xaml.cs">
       <DependentUpon>HookSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPages\LESettingsPage.xaml.cs">
+      <DependentUpon>LESettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingsPages\OCRPages\OCRGeneralSettingsPage.xaml.cs">
       <DependentUpon>OCRGeneralSettingsPage.xaml</DependentUpon>
@@ -191,6 +203,10 @@
     <Compile Include="TransWinSettingsWindow.xaml.cs">
       <DependentUpon>TransWinSettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddOptWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GameGuideWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,6 +228,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GuidePages\Hook\ChooseTextRepairFuncPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GuidePages\Hook\ReChooseHookFuncPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -261,6 +281,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SettingsPages\HookSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\LESettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -355,6 +379,11 @@
       <Name>TransOptimizationLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="SettingsPages\Aboutv2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

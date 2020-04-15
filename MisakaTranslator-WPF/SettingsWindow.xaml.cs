@@ -74,6 +74,10 @@ namespace MisakaTranslator_WPF
         {
             this.SettingFrame.Navigate(new Uri("SettingsPages/HookSettingsPage.xaml", UriKind.Relative));
         }
-        
+
+        private void Item_LESettings_Selected(object sender, RoutedEventArgs e)
+        {
+            this.SettingFrame.Navigate(new Uri("SettingsPages/LESettingsPage.xaml", UriKind.Relative));
+        }
     }
 }

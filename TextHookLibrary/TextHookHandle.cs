@@ -36,6 +36,12 @@ namespace TextHookLibrary
         public bool Pause;
 
         /// <summary>
+        /// 去除无关Hook标志，请先定义好需要用的Misaka码，设为真时，将在接受事件的时候边接收边删除
+        /// </summary>
+        public bool DetachUnrelatedHookWhenDataRecv;
+        
+
+        /// <summary>
         /// Misaka特殊码列表：一个Misaka特殊码能固定匹配一个入口函数
         /// 此列表就表示当前进程要Hook的函数
         /// </summary>
@@ -281,7 +287,7 @@ namespace TextHookLibrary
                 {
                     TextHookData data = thData;
                     
-                    if (data.HookFunc != "Console" && data.HookFunc != "")
+                    if (data.HookFunc != "Console" && data.HookFunc != "Clipboard" && data.HookFunc != "")
                     {
                         //Hook入口选择窗口处理
                         if (TextractorFun_Index_List.ContainsKey(data.MisakaHookCode) == true)
@@ -326,9 +332,19 @@ namespace TextHookLibrary
                             }
                         }
 
+                        //使用了边Hook边卸载的情况
+                        //纠错：注意不能删misakacode不同的，因为地址可能相同，仅根据Hook特殊码来删就行了
+                        if (DetachUnrelatedHookWhenDataRecv == true) {
+                            if (HookCodeList[0] != data.HookCode)
+                            {
+                                DetachUnrelatedHookAsync(int.Parse(data.GamePID, System.Globalization.NumberStyles.HexNumber), data.MisakaHookCode);
+                            }
+
+                        }
+
 
                         //文本去重窗口处理&游戏翻译窗口处理
-                        //如果MisakaCodeList为空则说明没有多重处理，不用再对比HookCodePlus
+                        //如果IsNeedReChooseHook=false则说明没有多重处理，不用再对比HookCodePlus
                         if (HookCodeList.Count != 0 && HookCodeList.Contains(data.HookCode) && (MisakaCodeList == null || MisakaCodeList.Contains(data.MisakaHookCode)) )
                         {
                             SolvedDataRecvEventArgs e = new SolvedDataRecvEventArgs
@@ -465,6 +481,15 @@ namespace TextHookLibrary
             }
 
         }
-        
+
+        /// <summary>
+        /// 卸载无关Hook，仅用于处理事件中
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <param name="misakacode"></param>
+        /// <returns></returns>
+        private async Task DetachUnrelatedHookAsync(int pid,string misakacode) {
+            await DetachProcessByHookAddress(pid, GetHookAddressByMisakaCode(misakacode));
+        }
     }
 }

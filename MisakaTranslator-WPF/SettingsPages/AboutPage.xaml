@@ -8,8 +8,13 @@
       d:DesignHeight="450" d:DesignWidth="594"
       Title="AboutPage">
 
-    <Canvas Background="White">
-        <Button Content="{StaticResource AboutPage_BtnHelp}" Canvas.Left="62" Canvas.Top="335" Click="BtnHelp_Click"></Button>
-        <Button Content="{StaticResource AboutPage_BtnGithub}" Canvas.Left="409" Canvas.Top="335" Click="BtnGithub_Click"></Button>
-    </Canvas>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" Source="Aboutv2.jpg" Margin="20"></Image>
+        <Button Grid.Row="1" Content="{StaticResource AboutPage_BtnHelp}" HorizontalAlignment="Left" Margin="20" Click="BtnHelp_Click"></Button>
+        <Button Grid.Row="1" Content="{StaticResource AboutPage_BtnGithub}" HorizontalAlignment="Right" Margin="20" Click="BtnGithub_Click"></Button>
+    </Grid>
 </Page>

@@ -56,11 +56,14 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
 
                 Common.textHooker.Init(!(bool)x64GameCheckBox.IsChecked);
 
+                
                 Common.GameID = -1;
                 string filepath = Common.FindProcessPath(GamePid);
                 if (filepath != "") {
-                    Common.GameID = Common.GetGameID(filepath);
+                    Common.GameID = GameLibraryHelper.GetGameID(filepath);
                 }
+                SQLHelper sqliteH = new SQLHelper();
+                sqliteH.ExecuteSql(string.Format("UPDATE game_library SET isx64 = '{0}' WHERE gameid = {1};", x64GameCheckBox.IsChecked, Common.GameID));
 
 
                 //使用路由事件机制通知窗口来完成下一步操作
