@@ -129,6 +129,9 @@
     <Compile Include="GameGuideWindow.xaml.cs">
       <DependentUpon>GameGuideWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GlobalOCRWindow.xaml.cs">
+      <DependentUpon>GlobalOCRWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GuidePages\ChooseLanguagePage.xaml.cs">
       <DependentUpon>ChooseLanguagePage.xaml</DependentUpon>
     </Compile>
@@ -208,6 +211,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GameGuideWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GlobalOCRWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

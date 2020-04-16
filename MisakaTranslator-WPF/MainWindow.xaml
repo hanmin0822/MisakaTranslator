@@ -10,7 +10,7 @@
         WindowStartupLocation="CenterScreen"
         ShowTitle="True"
         Height="540" 
-        Width="960">
+        Width="960" Closing="BlurWindow_Closing">
     <Window.Resources>
         <ResourceDictionary Source = "Appearance.xaml"/>
     </Window.Resources>

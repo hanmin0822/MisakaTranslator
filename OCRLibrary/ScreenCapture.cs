@@ -13,6 +13,19 @@ namespace OCRLibrary
         public int bottom;
     }
 
+    public struct POINT
+    {
+        public int X;
+        public int Y;
+        public POINT(int x, int y)
+        {
+            this.X = x;
+            this.Y = y;
+        }
+    }
+
+    
+
     public class ScreenCapture
     {
         public const int CAPTUREBLT = 1073741824;
@@ -51,6 +64,10 @@ namespace OCRLibrary
         //3 最大化窗口
         //使用实例: ShowWindow(myPtr, 0);
         #endregion
+
+
+        [DllImport("user32.dll")]
+        public static extern bool GetCursorPos(out POINT lpPoint);
 
         /// <summary>
         /// 根据窗口HWND截取窗口

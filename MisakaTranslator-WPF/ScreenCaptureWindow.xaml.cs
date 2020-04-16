@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using OCRLibrary;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using TranslatorLibrary;
 
 namespace MisakaTranslator_WPF
 {
@@ -21,11 +23,12 @@ namespace MisakaTranslator_WPF
 
         public static System.Drawing.Rectangle OCRArea;
 
+        int capMode;
 
-
-        public ScreenCaptureWindow(BitmapImage i)
+        public ScreenCaptureWindow(BitmapImage i,int mode = 1)
         {
             img = i;
+            capMode = mode;
             InitializeComponent();
 
             imgMeasure.Source = img;
@@ -95,7 +98,23 @@ namespace MisakaTranslator_WPF
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             OCRArea = new System.Drawing.Rectangle((int)selectRect.Location.X, (int)selectRect.Location.Y, (int)selectRect.Size.Width, (int)selectRect.Size.Height);
+
+            if (capMode == 2) {
+                //全局OCR截图，直接打开结果页面
+                System.Drawing.Image img = ScreenCapture.GetWindowRectCapture(System.IntPtr.Zero, OCRArea, true);
+
+                var reswin = new GlobalOCRWindow(img);
+                POINT mousestart = new POINT();
+                ScreenCapture.GetCursorPos(out mousestart);
+                reswin.Left = mousestart.X;
+                reswin.Top = mousestart.Y;
+
+                reswin.Show();
+            }
+
         }
+
+        
     }
 
     class ViewModel : INotifyPropertyChanged

@@ -137,8 +137,9 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             ScreenCaptureWindow scw = new ScreenCaptureWindow(img);
             scw.Width = img.PixelWidth;
             scw.Height = img.PixelHeight;
-            
-            scw.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            scw.Topmost = true;
+            scw.Top = 0;
+            scw.Left = 0;
             scw.Show();
         }
 

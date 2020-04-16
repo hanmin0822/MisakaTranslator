@@ -45,6 +45,7 @@ namespace MisakaTranslator_WPF
 
         public static GlobalHook hook;//全局键盘鼠标钩子
         public bool IsOCRingFlag;//线程锁:判断是否正在OCR线程中，保证同时只有一组在跑OCR
+        public bool IsPauseFlag;//是否处在暂停状态（专用于OCR）,为真可以翻译
 
         bool IsShowSource;
 
@@ -62,7 +63,7 @@ namespace MisakaTranslator_WPF
 
             mh = new MecabHelper();
 
-            
+            IsPauseFlag = true;
             translator1 = TranslatorAuto(Common.appSettings.FirstTranslator);
             translator2 = TranslatorAuto(Common.appSettings.SecondTranslator);
 
@@ -140,7 +141,7 @@ namespace MisakaTranslator_WPF
         /// </summary>
         /// <param name="Translator"></param>
         /// <returns></returns>
-        public ITranslator TranslatorAuto(string Translator)
+        public static ITranslator TranslatorAuto(string Translator)
         {
             switch (Translator)
             {
@@ -208,124 +209,126 @@ namespace MisakaTranslator_WPF
         }
 
         private void OCR() {
-            if (IsOCRingFlag == false)
-            {
-                IsOCRingFlag = true;
-
-                int j = 0;
-
-                for (; j < 3; j++)
+            if (IsPauseFlag) {
+                if (IsOCRingFlag == false)
                 {
+                    IsOCRingFlag = true;
 
-                    Thread.Sleep(Common.UsingOCRDelay);
+                    int j = 0;
 
-                    string srcText = Common.ocr.OCRProcess();
-                    GC.Collect();
-
-                    if (srcText != null && srcText != "")
+                    for (; j < 3; j++)
                     {
 
+                        Thread.Sleep(Common.UsingOCRDelay);
+
+                        string srcText = Common.ocr.OCRProcess();
+                        GC.Collect();
+
+                        if (srcText != null && srcText != "")
+                        {
+
+                            Application.Current.Dispatcher.BeginInvoke((Action)(() =>
+                            {
+                                //0.清除面板
+                                SourceTextPanel.Children.Clear();
+
+                                //1.得到原句
+                                string source = srcText;
+
+                                currentsrcText = source;
+
+                                if (IsShowSource == true)
+                                {
+                                    //3.分词
+                                    List<MecabWordInfo> mwi = mh.SentenceHandle(source);
+                                    //分词后结果显示
+                                    for (int i = 0; i < mwi.Count; i++)
+                                    {
+                                        TextBlock tb = new TextBlock();
+                                        if (sourceTextFont != null && sourceTextFont != "")
+                                        {
+                                            FontFamily ff = new FontFamily(sourceTextFont);
+                                            tb.FontFamily = ff;
+                                        }
+                                        tb.Text = mwi[i].Word;
+                                        tb.Margin = new Thickness(10, 0, 0, 10);
+                                        tb.FontSize = sourceTextFontSize;
+                                        //根据不同词性跟字体上色
+                                        switch (mwi[i].PartOfSpeech)
+                                        {
+                                            case "名詞":
+                                                tb.Foreground = Brushes.AliceBlue;
+                                                break;
+                                            case "助詞":
+                                                tb.Foreground = Brushes.LightGreen;
+                                                break;
+                                            case "動詞":
+                                                tb.Foreground = Brushes.Red;
+                                                break;
+                                            case "連体詞":
+                                                tb.Foreground = Brushes.Orange;
+                                                break;
+                                            default:
+                                                tb.Foreground = Brushes.White;
+                                                break;
+                                        }
+                                        SourceTextPanel.Children.Add(tb);
+                                    }
+                                }
+
+                                if (Convert.ToBoolean(Common.appSettings.EachRowTrans) == true)
+                                {
+                                    //需要分行翻译
+                                    source = source.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
+                                }
+                                //去乱码
+                                source = source.Replace("_", "").Replace("-", "").Replace("+", "");
+
+                                //4.翻译前预处理
+                                string beforeString = bth.AutoHandle(source);
+
+                                //5.提交翻译
+                                string transRes1 = "";
+                                string transRes2 = "";
+                                if (translator1 != null)
+                                {
+                                    transRes1 = translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                                }
+                                if (translator2 != null)
+                                {
+                                    transRes2 = translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                                }
+
+                                //6.翻译后处理
+                                string afterString1 = ath.AutoHandle(transRes1);
+                                string afterString2 = ath.AutoHandle(transRes2);
+
+                                //7.翻译结果显示到窗口上
+                                FirstTransText.Text = afterString1;
+                                SecondTransText.Text = afterString2;
+
+                                //8.翻译结果记录到队列
+                                if (GameTextHistory.Count > 5)
+                                {
+                                    GameTextHistory.Dequeue();
+                                }
+                                GameTextHistory.Enqueue(source + "\n" + afterString1 + "\n" + afterString2);
+                            }));
+
+                            IsOCRingFlag = false;
+                            break;
+                        }
+                    }
+
+                    if (j == 3)
+                    {
                         Application.Current.Dispatcher.BeginInvoke((Action)(() =>
                         {
-                            //0.清除面板
-                            SourceTextPanel.Children.Clear();
-
-                            //1.得到原句
-                            string source = srcText;
-
-                            currentsrcText = source;
-
-                            if (IsShowSource == true)
-                            {
-                                //3.分词
-                                List<MecabWordInfo> mwi = mh.SentenceHandle(source);
-                                //分词后结果显示
-                                for (int i = 0; i < mwi.Count; i++)
-                                {
-                                    TextBlock tb = new TextBlock();
-                                    if (sourceTextFont != null && sourceTextFont != "")
-                                    {
-                                        FontFamily ff = new FontFamily(sourceTextFont);
-                                        tb.FontFamily = ff;
-                                    }
-                                    tb.Text = mwi[i].Word;
-                                    tb.Margin = new Thickness(10, 0, 0, 10);
-                                    tb.FontSize = sourceTextFontSize;
-                                    //根据不同词性跟字体上色
-                                    switch (mwi[i].PartOfSpeech)
-                                    {
-                                        case "名詞":
-                                            tb.Foreground = Brushes.AliceBlue;
-                                            break;
-                                        case "助詞":
-                                            tb.Foreground = Brushes.LightGreen;
-                                            break;
-                                        case "動詞":
-                                            tb.Foreground = Brushes.Red;
-                                            break;
-                                        case "連体詞":
-                                            tb.Foreground = Brushes.Orange;
-                                            break;
-                                        default:
-                                            tb.Foreground = Brushes.White;
-                                            break;
-                                    }
-                                    SourceTextPanel.Children.Add(tb);
-                                }
-                            }
-
-                            if (Convert.ToBoolean(Common.appSettings.EachRowTrans) == true)
-                            {
-                                //需要分行翻译
-                                source = source.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
-                            }
-                            //去乱码
-                            source = source.Replace("_", "").Replace("-", "").Replace("+", "");
-
-                            //4.翻译前预处理
-                            string beforeString = bth.AutoHandle(source);
-
-                            //5.提交翻译
-                            string transRes1 = "";
-                            string transRes2 = "";
-                            if (translator1 != null)
-                            {
-                                transRes1 = translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
-                            }
-                            if (translator2 != null)
-                            {
-                                transRes2 = translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
-                            }
-                            
-                            //6.翻译后处理
-                            string afterString1 = ath.AutoHandle(transRes1);
-                            string afterString2 = ath.AutoHandle(transRes2);
-
-                            //7.翻译结果显示到窗口上
-                            FirstTransText.Text = afterString1;
-                            SecondTransText.Text = afterString2;
-
-                            //8.翻译结果记录到队列
-                            if (GameTextHistory.Count > 5)
-                            {
-                                GameTextHistory.Dequeue();
-                            }
-                            GameTextHistory.Enqueue(source + "\n" + afterString1 + "\n" + afterString2);
+                            FirstTransText.Text = "[OCR]自动识别三次均为空，请自行刷新！";
                         }));
 
                         IsOCRingFlag = false;
-                        break;
                     }
-                }
-
-                if (j == 3)
-                {
-                    Application.Current.Dispatcher.BeginInvoke((Action)(() =>
-                    {
-                        FirstTransText.Text = "[OCR]自动识别三次均为空，请自行刷新！";
-                    }));
-
-                    IsOCRingFlag = false;
                 }
             }
         }
@@ -449,7 +452,15 @@ namespace MisakaTranslator_WPF
 
         private void Pause_Item_Click(object sender, RoutedEventArgs e)
         {
-            Common.textHooker.Pause = !Common.textHooker.Pause;
+            if (Common.transMode == 1)
+            {
+                Common.textHooker.Pause = !Common.textHooker.Pause;
+            }
+            else {
+                IsPauseFlag = !IsPauseFlag;
+            }
+
+            
         }
 
         private void ShowSource_Item_Click(object sender, RoutedEventArgs e)

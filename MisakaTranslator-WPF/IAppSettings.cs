@@ -41,6 +41,11 @@ namespace MisakaTranslator_WPF
         [Option(Alias = "OCR_All.OCRsource", DefaultValue = "BaiduOCR")]
         string OCRsource { get; set; }
 
+        [Option(Alias = "OCR_All.GlobalOCRHotkey", DefaultValue = "Ctrl + Alt + Q")]
+        string GlobalOCRHotkey { get; set; }
+        [Option(Alias = "OCR_All.GlobalOCRLang", DefaultValue = "jpn")]
+        string GlobalOCRLang { get; set; }
+
         [Option(Alias = "BaiduOCR.APIKEY", DefaultValue = "")]
         string BDOCR_APIKEY { get; set; }
         [Option(Alias = "BaiduOCR.SecretKey", DefaultValue = "")]

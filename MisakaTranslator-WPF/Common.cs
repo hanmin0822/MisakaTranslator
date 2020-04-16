@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using TextHookLibrary;
 using TextRepairLibrary;
 
@@ -35,6 +36,8 @@ namespace MisakaTranslator_WPF
         public static IntPtr OCRWinHwnd;//全局的OCR的工作窗口
         public static HotKeyInfo UsingHotKey;//全局使用中的触发键信息
         public static int UsingOCRDelay;//全局使用中的OCR延时
+
+        public static GlobalHotKey GlobalOCRHotKey;//全局OCR热键
 
         /// <summary>
         /// 导出Textractor历史记录，返回是否成功的结果
@@ -109,6 +112,18 @@ namespace MisakaTranslator_WPF
             return filepath;
         }
 
-        
+        /// <summary>
+        /// 全局OCR
+        /// </summary>
+        public static void GlobalOCR() {
+            BitmapImage img = ImageProcFunc.ImageToBitmapImage(ScreenCapture.GetAllWindow());
+            ScreenCaptureWindow scw = new ScreenCaptureWindow(img,2);
+            scw.Width = img.PixelWidth;
+            scw.Height = img.PixelHeight;
+            scw.Topmost = true;
+            scw.Left =0;
+            scw.Top = 0;
+            scw.Show();
+        }
     }
 }

@@ -67,6 +67,9 @@
     <sys:String x:Key="OCRGeneralSettingsPage_Introduce">在这里进行所有OCR选项的通用设置，一个实时翻译窗口只能设置一种OCR方式，您可以指定OCR过程中用到的API；注：离线OCR功能使用Tesseract实现，目前可支持英语、日语的来源识别，如果识别效果不理想，可以考虑自行训练相关OCR字库或使用百度在线OCR识别，更多有关OCR预处理的设置选项见OCR设置窗口。</sys:String>
     <sys:String x:Key="OCRGeneralSettingsPage_OCRsource">OCR来源</sys:String>
 
+    <sys:String x:Key="OCRGeneralSettingsPage_Introduce_GlobalOCR">此处选择一种全局快捷键组合用于全局OCR功能，全局OCR功能可以在任何情况下进行OCR识别和翻译，使用单独窗口显示。直接在下方输入框中按下你想要设置的快捷键，例如Ctrl + A，设置完成重启翻译器后生效。</sys:String>
+    <sys:String x:Key="OCRGeneralSettingsPage_GlobalOCRHotKey">全局OCR快捷键</sys:String>
+
     <sys:String x:Key="BaiduOCRSettingsPage_Introduce">百度通用文字识别可以供多场景、多语种、高精度的整图文字检测和识别服务，需要联网使用；您需要先申请本API并创建一个应用，获取APIKEY和SecretKey后填入下方相应位置并进行测试认证；百度通用文字识别部分版本可能会产生某些费用，您可以使用额度查询按钮进入控制台确认.</sys:String>
     <sys:String x:Key="BaiduOCRSettingsPage_APIKEY">百度OCR API_KEY</sys:String>
     <sys:String x:Key="BaiduOCRSettingsPage_SecretKey">百度OCR Secret_Key</sys:String>

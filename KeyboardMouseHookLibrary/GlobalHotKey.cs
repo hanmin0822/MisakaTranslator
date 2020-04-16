@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace KeyboardMouseHookLibrary
 {
 
     //代码来源：https://www.cnblogs.com/margin-gu/p/5887853.html
-    //未测试
 
     public class GlobalHotKey
     {
@@ -17,6 +17,7 @@ namespace KeyboardMouseHookLibrary
         [DllImport("user32.dll")]
         static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
+        
 
         int keyid = 10;     //区分不同的快捷键
         Dictionary<int, HotKeyCallBackHanlder> keymap = new Dictionary<int, HotKeyCallBackHanlder>();   //每一个key对于一个处理函数
@@ -32,12 +33,12 @@ namespace KeyboardMouseHookLibrary
         }
 
         //注册快捷键
-        public void RegistGlobalHotKey(IntPtr hWnd, int modifiers, Keys vk, HotKeyCallBackHanlder callBack)
+        public bool RegistGlobalHotKey(IntPtr hWnd, int modifiers, Keys vk, HotKeyCallBackHanlder callBack)
         {
             int id = keyid++;
-            if (!RegisterHotKey(hWnd, id, modifiers, vk))
-                throw new Exception("注册失败！");
+            bool res = RegisterHotKey(hWnd, id, modifiers, vk);
             keymap[id] = callBack;
+            return res;
         }
 
         // 注销快捷键
@@ -63,6 +64,42 @@ namespace KeyboardMouseHookLibrary
                 if (keymap.TryGetValue(id, out callback))
                     callback();
             }
+        }
+
+        /// <summary>
+        /// 根据键值组合字符串注册
+        /// </summary>
+        /// <param name="str"></param>
+        public bool RegistHotKeyByStr(string str,IntPtr Handle, HotKeyCallBackHanlder callback)
+        {
+            if (str == "")
+                return false;
+            int modifiers = 0;
+            Keys vk = Keys.None;
+            foreach (string value in str.Split('+'))
+            {
+                if (value.Trim() == "Ctrl")
+                    modifiers = modifiers + (int)HotkeyModifiers.Control;
+                else if (value.Trim() == "Alt")
+                    modifiers = modifiers + (int)HotkeyModifiers.Alt;
+                else if (value.Trim() == "Shift")
+                    modifiers = modifiers + (int)HotkeyModifiers.Shift;
+                else
+                {
+                    if (Regex.IsMatch(value, @"[0-9]"))
+                    {
+                        vk = (Keys)Enum.Parse(typeof(Keys), "D" + value.Trim());
+                    }
+                    else
+                    {
+                        vk = (Keys)Enum.Parse(typeof(Keys), value.Trim());
+                    }
+                }
+            }
+
+            
+            //这里注册了Ctrl+Alt+E 快捷键
+            return RegistGlobalHotKey(Handle, modifiers, vk, callback);
         }
 
     }
