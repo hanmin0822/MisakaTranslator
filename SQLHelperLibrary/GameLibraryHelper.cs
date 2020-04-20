@@ -144,43 +144,44 @@ namespace SQLHelperLibrary
                 }
             }
 
-            SQLHelper sqliteH = new SQLHelper();
-            List <List<string>> ls = sqliteH.ExecuteReader("SELECT * FROM game_library;", 12);
+            SQLHelper sqlHelper = new SQLHelper();
+            List <List<string>> gameLibraryList = sqlHelper.ExecuteReader("SELECT * FROM game_library;", 12);
 
-            if (ls == null)
+            if (gameLibraryList == null)
             {
-                MessageBox.Show("数据库访问时发生错误，错误代码:\n" + sqliteH.getLastError(), "数据库错误");
+                MessageBox.Show("数据库访问时发生错误，错误代码:\n" + sqlHelper.getLastError(), "数据库错误");
                 return null;
             }
             
-            if (ls.Count == 0)
+            if (gameLibraryList.Count == 0)
             {
                 return null;
             }
 
-            List<GameInfo> ret = new List<GameInfo>();
+            List<GameInfo> gameInfoList = new List<GameInfo>();
 
-            for (int i = 0;i < ls.Count;i++) {
-                List<string> gameI = ls[i];
+            foreach (var game in gameLibraryList)
+            {
+                GameInfo gameInfo = new GameInfo
+                {
+                    GameID = int.Parse(game[0]),
+                    GameName = game[1],
+                    FilePath = game[2],
+                    TransMode = int.Parse(game[3]),
+                    Src_Lang = game[4],
+                    Dst_Lang = game[5],
+                    Repair_func = game[6],
+                    Repair_param_a = game[7],
+                    Repair_param_b = game[8],
+                    Hookcode = game[9],
+                    IsMultiHook = Convert.ToBoolean(game[10]),
+                    Isx64 = Convert.ToBoolean(game[11])
+                };
 
-                GameInfo gi = new GameInfo();
-                gi.GameID = int.Parse(gameI[0]);
-                gi.GameName = gameI[1];
-                gi.FilePath = gameI[2];
-                gi.TransMode = int.Parse(gameI[3]);
-                gi.Src_Lang = gameI[4];
-                gi.Dst_Lang = gameI[5];
-                gi.Repair_func = gameI[6];
-                gi.Repair_param_a = gameI[7];
-                gi.Repair_param_b = gameI[8];
-                gi.Hookcode = gameI[9];
-                gi.IsMultiHook = Convert.ToBoolean(gameI[10]);
-                gi.Isx64 = Convert.ToBoolean(gameI[11]);
-
-                ret.Add(gi);
+                gameInfoList.Add(gameInfo);
             }
 
-            return ret;
+            return gameInfoList;
         }
 
         /// <summary>
