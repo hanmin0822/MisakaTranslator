@@ -164,6 +164,13 @@ namespace SQLHelperLibrary
                 List<string> gameI = ls[i];
 
                 GameInfo gi = new GameInfo();
+
+                if (gameI[4] == "" || gameI[5] == "" || gameI[6] == "" || gameI[9] == "" || gameI[10] == "" || gameI[11] == "")
+                {
+                    //没有完整走完导航的游戏，这时就不需要显示这个库
+                    continue;   
+                }
+
                 gi.GameID = int.Parse(gameI[0]);
                 gi.GameName = gameI[1];
                 gi.FilePath = gameI[2];

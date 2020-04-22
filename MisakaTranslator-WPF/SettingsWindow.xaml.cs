@@ -79,5 +79,10 @@ namespace MisakaTranslator_WPF
         {
             this.SettingFrame.Navigate(new Uri("SettingsPages/LESettingsPage.xaml", UriKind.Relative));
         }
+
+        private void Item_xxgrz_Selected(object sender, RoutedEventArgs e)
+        {
+            this.SettingFrame.Navigate(new Uri("SettingsPages/DictionaryPages/XxgJpZhDictPage.xaml", UriKind.Relative));
+        }
     }
 }

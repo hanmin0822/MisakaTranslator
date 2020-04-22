@@ -167,6 +167,9 @@
     <Compile Include="SettingsPages\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPages\DictionaryPages\XxgJpZhDictPage.xaml.cs">
+      <DependentUpon>XxgJpZhDictPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPages\HookSettingsPage.xaml.cs">
       <DependentUpon>HookSettingsPage.xaml</DependentUpon>
     </Compile>
@@ -287,6 +290,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SettingsPages\DictionaryPages\XxgJpZhDictPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SettingsPages\HookSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -353,6 +360,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DictionaryHelperLibrary\DictionaryHelperLibrary.csproj">
+      <Project>{ebe31abb-efb0-4a46-a8e0-655f614f88d9}</Project>
+      <Name>DictionaryHelperLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KeyboardMouseHookLibrary\KeyboardMouseHookLibrary.csproj">
       <Project>{1ae9ea11-9fa0-4d30-b16e-ecf7183dec7a}</Project>
       <Name>KeyboardMouseHookLibrary</Name>

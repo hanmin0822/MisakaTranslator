@@ -50,7 +50,7 @@
             </Border>
 
             
-            <WrapPanel Grid.Row="1" x:Name="SourceTextPanel" Margin="10" Orientation="Horizontal"></WrapPanel>
+            <WrapPanel Grid.Row="1" x:Name="SourceTextPanel" Margin="10" Orientation="Horizontal" Background="Transparent"></WrapPanel>
 
             <TextBlock Grid.Row="2" Text="等待源文本" Foreground="White" Name="FirstTransText" Margin="10" TextWrapping="Wrap"></TextBlock>
 

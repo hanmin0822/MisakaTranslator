@@ -28,6 +28,8 @@
     <sys:String x:Key="SettingsMenu_TranslatorSettings_TencentOld">腾讯私人</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Jbeijing">Jbeijing</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Caiyun">彩云小译</sys:String>
+    <sys:String x:Key="SettingsMenu_DictSettings">词典相关设置</sys:String>
+    <sys:String x:Key="SettingsMenu_DictSettings_xxgrz">小学馆日中</sys:String>
 
     <sys:String x:Key="API_applyBtn">申请API</sys:String>
     <sys:String x:Key="API_authTestBtn">测试API认证</sys:String>
@@ -183,4 +185,10 @@
     <sys:String x:Key="AddOptWin_afterBox">定义翻译</sys:String>
     <sys:String x:Key="AddOptWin_wordType">词性</sys:String>
     <sys:String x:Key="AddOptWin_confirmBtn">添加到词库</sys:String>
+
+    <sys:String x:Key="XxgJpZhDictPage_Introduce">小学馆日中翻译词典(第二版)包含大约七万词，涵盖常见词汇。请获得MisakaTranslator定制版本的小学馆日中翻译词典(第二版)的数据库文件(.db)后将其位置填写到下方并测试是否正常工作。</sys:String>
+    <sys:String x:Key="XxgJpZhDictPage_DBPath">数据库文件路径</sys:String>
+    <sys:String x:Key="XxgJpZhDictPage_TestSourceWord">字典查询测试 单词:</sys:String>
+    <sys:String x:Key="XxgJpZhDictPage_BtnTest">字典查询</sys:String>
+
 </ResourceDictionary>

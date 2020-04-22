@@ -34,6 +34,9 @@
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Caiyun}" Selected="Item_Caiyun_Selected"/>
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Jbeijing}" Selected="Item_JBeijing_Selected"/>
             </hc:SideMenuItem>
+            <hc:SideMenuItem Header="{StaticResource SettingsMenu_DictSettings}" FontSize="15">
+                <hc:SideMenuItem Header="{StaticResource SettingsMenu_DictSettings_xxgrz}" Selected="Item_xxgrz_Selected"/>
+            </hc:SideMenuItem>
         </hc:SideMenu>
         <Frame Grid.Column="1" Name="SettingFrame" Source="SettingsPages/AboutPage.xaml" NavigationUIVisibility="Hidden"/>
     </Grid>

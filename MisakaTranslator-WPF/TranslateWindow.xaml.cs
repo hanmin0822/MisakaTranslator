@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DictionaryHelperLibrary;
 using HandyControl.Controls;
 using KeyboardMouseHookLibrary;
 using MecabHelperLibrary;
@@ -35,6 +36,8 @@ namespace MisakaTranslator_WPF
         AfterTransHandle ath;
         ITranslator translator1;//第一翻译源
         ITranslator translator2;//第二翻译源
+
+        IDict dict;
 
         private string currentsrcText;//当前源文本内容
 
@@ -62,6 +65,12 @@ namespace MisakaTranslator_WPF
             IsOCRingFlag = false;
 
             mh = new MecabHelper();
+
+            if (Common.appSettings.xxgPath != "") {
+                dict = new XxgJpzhDict();
+                dict.DictInit(Common.appSettings.xxgPath, "");
+            }
+            
 
             IsPauseFlag = true;
             translator1 = TranslatorAuto(Common.appSettings.FirstTranslator);
@@ -272,6 +281,7 @@ namespace MisakaTranslator_WPF
                                                 tb.Foreground = Brushes.White;
                                                 break;
                                         }
+                                        
                                         SourceTextPanel.Children.Add(tb);
                                     }
                                 }
@@ -331,6 +341,49 @@ namespace MisakaTranslator_WPF
                     }
                 }
             }
+        }
+
+        
+
+        private void DictArea_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (dict != null) {
+                if (e.ClickCount == 2)
+                {
+                    //双击事件
+                    TextBlock tb = sender as TextBlock;
+
+                    string ret = dict.SearchInDict(tb.Text);
+                    if (ret != null)
+                    {
+                        ret = XxgJpzhDict.RemoveHTML(ret);
+
+                        var textbox = new HandyControl.Controls.TextBox();
+                        textbox.Text = ret;
+                        textbox.FontSize = 15;
+                        textbox.TextWrapping = TextWrapping.Wrap;
+                        textbox.TextAlignment = TextAlignment.Left;
+                        textbox.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
+                        var window = new HandyControl.Controls.PopupWindow
+                        {
+                            PopupElement = textbox,
+                            WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                            BorderThickness = new Thickness(0, 0, 0, 0),
+                            MaxWidth = 600,
+                            MaxHeight = 300,
+                            MinWidth = 600,
+                            MinHeight = 300,
+                            Title = "字典结果"
+                        };
+                        window.Show();
+                    }
+                    else
+                    {
+                        HandyControl.Controls.Growl.ErrorGlobal("查询错误！" + dict.GetLastError());
+                    }
+                }
+            }
+            
         }
 
         /// <summary>
@@ -499,7 +552,7 @@ namespace MisakaTranslator_WPF
 
         private void DragBorder_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (BackWinChrome.Visibility != Visibility.Visible)
+            if (BackWinChrome.Opacity != 1)
             {
                 DragBorder.Opacity = 0.01;
             }

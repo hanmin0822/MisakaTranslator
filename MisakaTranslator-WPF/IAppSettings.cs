@@ -54,6 +54,9 @@ namespace MisakaTranslator_WPF
         [Option(Alias = "LE.LEPath", DefaultValue = "")]
         string LEPath { get; set; }
 
+        [Option(Alias = "XxgJpZhDict.xxgPath", DefaultValue = "")]
+        string xxgPath { get; set; }
+
         [Option(Alias = "TranslateFormSettings.opacity", DefaultValue = "50")]
         string TF_Opacity { get; set; }
         [Option(Alias = "TranslateFormSettings.backColor", DefaultValue = "#ffffffff")]
