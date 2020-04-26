@@ -54,6 +54,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlapiTranslator.cs" />
     <Compile Include="BaiduTranslator.cs" />
     <Compile Include="CaiyunTranslator.cs" />
     <Compile Include="CommonFunction.cs" />

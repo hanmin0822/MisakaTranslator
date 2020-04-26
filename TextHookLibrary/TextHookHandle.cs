@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TextHookLibrary
 {
-    
+    //参考方法：https://www.lgztx.com/?p=170
+
     public class TextHookHandle
     {
-        /// <summary>
-        /// Textractor进程
-        /// </summary>
-        public Process ProcessTextractor;
-
         /// <summary>
         /// Hook功能选择界面提供的数据收到事件
         /// </summary>
@@ -39,7 +36,7 @@ namespace TextHookLibrary
         /// 去除无关Hook标志，请先定义好需要用的Misaka码，设为真时，将在接受事件的时候边接收边删除
         /// </summary>
         public bool DetachUnrelatedHookWhenDataRecv;
-        
+
 
         /// <summary>
         /// Misaka特殊码列表：一个Misaka特殊码能固定匹配一个入口函数
@@ -54,41 +51,65 @@ namespace TextHookLibrary
 
         public Queue<string> TextractorOutPutHistory;//Textractor的输出记录队列，用于查错
 
+
+        /// <summary>
+        /// Textractor输出事件（根据线程判断输出）
+        /// </summary>
+        private TextHostLib.OnOutputFunc output;
+
+        /// <summary>
+        /// Textractor回调事件
+        /// </summary>
+        private TextHostLib.CallbackFunc callback;
+
+        /// <summary>
+        /// Textractor创建线程事件（从此线程获得具体信息）
+        /// </summary>
+        private TextHostLib.OnCreateThreadFunc createthread;
+
+        /// <summary>
+        /// Textractor销毁线程事件
+        /// </summary>
+        private TextHostLib.OnRemoveThreadFunc removethread;
+
         private int GamePID;//能够获取到文本的游戏进程ID
         private Dictionary<Process, bool> PossibleGameProcessList;//与gamePID进程同名的进程列表
         private int HandleMode;//处理的方式 1=已确定的单个进程 2=多个进程寻找能搜到文本的进程
         private Process MaxMemoryProcess;//最大内存进程，用于智能处理时单独注入这个进程而不是PossibleGameProcessList中的每个进程都注入
 
         private int listIndex;//用于Hook功能选择界面的方法序号
-        private Dictionary<string, int> TextractorFun_Index_List;//Misaka特殊码与列表索引一一对应
+        private Dictionary<long, int> TextractorFun_Index_List;//Hook线程ID与列表索引一一对应
 
         private int listIndex_Re;//用于Hook功能重新选择界面的方法序号
-        private Dictionary<string, int> TextractorFun_Re_Index_List;//Misaka特殊码与列表索引一一对应
+        private Dictionary<long, int> TextractorFun_Re_Index_List;//Hook线程ID与列表索引一一对应
 
+        private Dictionary<long, TextHookData> ThreadID_HookDataInfo_List;//Hook线程ID与Hook详细信息一一对应
+
+        private Dictionary<long, int> ThreadID_RenewNum_List;//Hook线程ID与刷新次数一一对应，仅用于HookFunReSelectDataRecvEventHandler和HookFunSelectDataRecvEventHandler
 
         public TextHookHandle(int gamePID)
         {
             MisakaCodeList = new List<string>();
             HookCodeList = new List<string>();
-            ProcessTextractor = null;
             MaxMemoryProcess = null;
             GamePID = gamePID;
             PossibleGameProcessList = null;
-            TextractorOutPutHistory = new Queue<string>(1000);
+            TextractorOutPutHistory = new Queue<string>(2000);
             HandleMode = 1;
             listIndex = 0;
             listIndex_Re = 0;
-            TextractorFun_Index_List = new Dictionary<string, int>();
-            TextractorFun_Re_Index_List = new Dictionary<string, int>();
+            TextractorFun_Index_List = new Dictionary<long, int>();
+            TextractorFun_Re_Index_List = new Dictionary<long, int>();
+            ThreadID_HookDataInfo_List = new Dictionary<long, TextHookData>();
+            ThreadID_RenewNum_List = new Dictionary<long, int>();
         }
 
         public TextHookHandle(List<Process> GameProcessList)
         {
             MisakaCodeList = new List<string>();
             HookCodeList = new List<string>();
-            ProcessTextractor = null;
             GamePID = -1;
-            TextractorOutPutHistory = new Queue<string>(1000);
+            TextractorOutPutHistory = new Queue<string>(2000);
             PossibleGameProcessList = new Dictionary<Process, bool>();
             MaxMemoryProcess = GameProcessList[0];
             for (int i = 0; i < GameProcessList.Count; i++)
@@ -103,152 +124,128 @@ namespace TextHookLibrary
             HandleMode = 2;
             listIndex = 0;
             listIndex_Re = 0;
-            TextractorFun_Index_List = new Dictionary<string, int>();
-            TextractorFun_Re_Index_List = new Dictionary<string, int>();
-        }
-
-        ~TextHookHandle()
-        {
-            if (ProcessTextractor != null)
-            {
-                CloseTextractor();
-            }
+            TextractorFun_Index_List = new Dictionary<long, int>();
+            TextractorFun_Re_Index_List = new Dictionary<long, int>();
+            ThreadID_HookDataInfo_List = new Dictionary<long, TextHookData>();
+            ThreadID_RenewNum_List = new Dictionary<long, int>();
         }
 
         /// <summary>
-        /// 初始化Textractor,建立CLI与本软件间的通信
+        /// 结束时自动卸载所有Hook，调用方法即令此对象为null然后立即GC回收
+        /// </summary>
+        ~TextHookHandle()
+        {
+            if (HandleMode == 1)
+            {
+                DetachProcess(GamePID);
+            }
+            else if (HandleMode == 2)
+            {
+                for (int i = 0; i < PossibleGameProcessList.Count; i++)
+                {
+                    var item = PossibleGameProcessList.ElementAt(i);
+                    if (PossibleGameProcessList[item.Key] == true)
+                    {
+                        DetachProcess(item.Key.Id);
+                        PossibleGameProcessList[item.Key] = false;
+                    }
+                }
+            }
+            
+            
+            GC.Collect();
+        }
+
+        /// <summary>
+        /// 初始化Textractor
         /// </summary>
         /// <returns>成功返回真，失败返回假</returns>
         public bool Init(bool x86 = true)
         {
-            string Path;
+            string DllPath = "";
+            string ModulePath = "";
             if (x86 == true)
             {
-                //打开x86的Textractor
-                Path = Environment.CurrentDirectory + "\\lib\\TextHook\\x86";
+                //复制x86的dll
+                ModulePath = Environment.CurrentDirectory + "\\lib\\TextHook\\x86\\texthost.dll";
+                DllPath = Environment.CurrentDirectory + "\\lib\\TextHook\\x86\\texthook.dll";
             }
             else
             {
-                //打开x64的Textractor
-                Path = Environment.CurrentDirectory + "\\lib\\TextHook\\x64";
+                //复制x64的dll
+                ModulePath = Environment.CurrentDirectory + "\\lib\\TextHook\\x64\\texthost.dll";
+                DllPath = Environment.CurrentDirectory + "\\lib\\TextHook\\x64\\texthook.dll";
             }
-            
-            string CurrentPath = Environment.CurrentDirectory;
-            try
+
+            if (File.Exists(DllPath) && File.Exists(ModulePath))//判断要复制的文件是否存在
             {
-                Environment.CurrentDirectory = Path;//更改当前工作目录保证TextractorCLI正常运行
+                try {
+                    File.Copy(DllPath, Environment.CurrentDirectory + "\\texthook.dll", true);
+                    File.Copy(ModulePath, Environment.CurrentDirectory + "\\texthost.dll", true);
+                }
+                catch (System.IO.IOException) {
+                    throw new Exception("无法复制texthook.dll或texthost.dll，请重启游戏和翻译器后再试！");
+                }
             }
-            catch (System.IO.DirectoryNotFoundException ex)
+            else
             {
                 return false;
             }
 
-            ProcessTextractor = new Process();
-            ProcessTextractor.StartInfo.FileName = "TextractorCLI.exe";
-            ProcessTextractor.StartInfo.CreateNoWindow = true;
-            ProcessTextractor.StartInfo.UseShellExecute = false;
-            ProcessTextractor.StartInfo.StandardOutputEncoding = Encoding.Unicode;
-            ProcessTextractor.StartInfo.RedirectStandardInput = true;
-            ProcessTextractor.StartInfo.RedirectStandardOutput = true;
-            ProcessTextractor.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
-            try
-            {
-                bool res = ProcessTextractor.Start();
-                ProcessTextractor.BeginOutputReadLine();
-                Environment.CurrentDirectory = CurrentPath;//打开后即可恢复原目录
-                return res;
-            }
-            catch (System.ComponentModel.Win32Exception ex)
-            {
-                Environment.CurrentDirectory = CurrentPath;//恢复原目录
-                return false;
-            }
+            createthread = CreateThreadHandle;
+            output = OutputHandle;
+            removethread = RemoveThreadHandle;
+            callback = CallBackHandle;
+
+            TextHostLib.TextHostInit(callback, callback, createthread, removethread, output);
+            return true;
         }
 
         /// <summary>
-        /// 向Textractor CLI写入命令
         /// 注入进程
         /// </summary>
         /// <param name="pid"></param>
-        public async Task AttachProcess(int pid)
+        public void AttachProcess(int pid)
         {
-            await ProcessTextractor.StandardInput.WriteLineAsync("attach -P" + pid);
-            await ProcessTextractor.StandardInput.FlushAsync();
+            TextHostLib.InjectProcess((uint)pid);
         }
 
         /// <summary>
-        /// 向Textractor CLI写入命令
         /// 结束注入进程
         /// </summary>
         /// <param name="pid"></param>
-        public async Task DetachProcess(int pid)
+        public void DetachProcess(int pid)
         {
-            await ProcessTextractor.StandardInput.WriteLineAsync("detach -P" + pid);
-            await ProcessTextractor.StandardInput.FlushAsync();
+            TextHostLib.DetachProcess((uint)pid);
         }
 
         /// <summary>
-        /// 向Textractor CLI写入命令
-        /// 给定特殊码注入，由Textractor作者指导方法
+        /// 给定特殊码注入
         /// </summary>
         /// <param name="pid"></param>
-        public async Task AttachProcessByHookCode(int pid,string HookCode)
+        public void AttachProcessByHookCode(int pid, string HookCode)
         {
-            await ProcessTextractor.StandardInput.WriteLineAsync(HookCode + " -P" + pid);
-            await ProcessTextractor.StandardInput.FlushAsync();
+            TextHostLib.InsertHook((uint)pid,HookCode);
         }
 
         /// <summary>
-        /// 向Textractor CLI写入命令
-        /// 根据Hook入口地址卸载一个Hook，由Textractor作者指导方法
+        /// 根据Hook入口地址卸载一个Hook
         /// </summary>
         /// <param name="pid"></param>
-        public async Task DetachProcessByHookAddress(int pid, string HookAddress)
+        public void DetachProcessByHookAddress(int pid, string HookAddress)
         {
-            //这个方法的原理是注入一个用户给定的钩子，给定一个Hook地址，由于hook地址存在，Textractor会自动卸载掉之前的
-            //但是后续给定的模块并不存在，于是Textractor再卸载掉这个用户自定义钩子，达到卸载一个指定Hook办法
-            await ProcessTextractor.StandardInput.WriteLineAsync("HW0@"+ HookAddress + ":module_which_never_exists" + " -P" + pid);
-            await ProcessTextractor.StandardInput.FlushAsync();
+            TextHostLib.RemoveHook((uint)pid,long.Parse(HookAddress));
         }
 
-        /// <summary>
-        /// 关闭Textractor进程，关闭前Detach所有Hook
-        /// </summary>
-        public async void CloseTextractor()
-        {
-
-            if (ProcessTextractor != null && ProcessTextractor.HasExited == false)
-            {
-                if (HandleMode == 1)
-                {
-                    await DetachProcess(GamePID);
-                }
-                else if (HandleMode == 2)
-                {
-                    for (int i = 0; i < PossibleGameProcessList.Count; i++)
-                    {
-                        var item = PossibleGameProcessList.ElementAt(i);
-                        if (PossibleGameProcessList[item.Key] == true)
-                        {
-                            await DetachProcess(item.Key.Id);
-                            PossibleGameProcessList[item.Key] = false;
-                        }
-                    }
-                }
-                ProcessTextractor.Kill();
-            }
-
-            ProcessTextractor = null;
-        }
         
         /// <summary>
         /// 开始注入，会判断是否智能注入
         /// </summary>
-        public async void StartHook(bool AutoHook = false)
+        public void StartHook(bool AutoHook = false)
         {
             if (HandleMode == 1)
             {
-                await AttachProcess(GamePID);
+                AttachProcess(GamePID);
             }
             else if (HandleMode == 2)
             {
@@ -257,87 +254,97 @@ namespace TextHookLibrary
                     //不进行智能注入
                     for (int i = 0; i < PossibleGameProcessList.Count; i++)
                     {
-
                         var item = PossibleGameProcessList.ElementAt(i);
-                        await AttachProcess(item.Key.Id);
+                        AttachProcess(item.Key.Id);
                         PossibleGameProcessList[item.Key] = true;
                     }
                 }
                 else
                 {
-                    await AttachProcess(MaxMemoryProcess.Id);
+                    AttachProcess(MaxMemoryProcess.Id);
                 }
             }
         }
 
         /// <summary>
-        /// 控制台输出事件，在这做内部消化处理
+        /// Textractor输出事件
         /// </summary>
-        /// <param name="sendingProcess"></param>
-        /// <param name="outLine"></param>
-        void OutputHandler(object sendingProcess, DataReceivedEventArgs outLine)
+        /// <param name="threadid"></param>
+        /// <param name="opdata"></param>
+        public void OutputHandle(long threadid, string opdata)
         {
-            AddTextractorHistory(outLine.Data);
+            opdata = opdata.Replace("\r\n", "").Replace("\n","");
+            AddTextractorHistory(threadid + ":" + opdata);
 
             if (Pause == false)
             {
-                TextHookData thData = DealTextratorOutput(outLine.Data);
-                
+                TextHookData thData = ThreadID_HookDataInfo_List[threadid];
+
                 if (thData != null)
                 {
                     TextHookData data = thData;
-                    
+                    data.Data = opdata;
+
                     if (data.HookFunc != "Console" && data.HookFunc != "Clipboard" && data.HookFunc != "")
                     {
                         //Hook入口选择窗口处理
-                        if (TextractorFun_Index_List.ContainsKey(data.MisakaHookCode) == true)
-                        {
-                            HookSelectRecvEventArgs e = new HookSelectRecvEventArgs();
-                            e.Index = TextractorFun_Index_List[data.MisakaHookCode];
-                            e.Data = data;
-                            HFSevent?.Invoke(this, e);
-                        }
-                        else
-                        {
-                            TextractorFun_Index_List.Add(data.MisakaHookCode, listIndex);
-                            HookSelectRecvEventArgs e = new HookSelectRecvEventArgs();
-                            e.Index = TextractorFun_Index_List[data.MisakaHookCode];
-                            e.Data = data;
-                            HFSevent?.Invoke(this, e);
-                            listIndex++;
-                        }
-                        
-                        //Hook入口重复确认窗口处理
-                        if (HookCodeList.Count != 0 && HookCodeList.Contains(data.HookCode))
-                        {
-                            if (TextractorFun_Re_Index_List.ContainsKey(data.MisakaHookCode) == true)
+                        //if (ThreadID_RenewNum_List[threadid] < 150)
+                        //{
+                            if (TextractorFun_Index_List.ContainsKey(threadid) == true)
                             {
-                                HookSelectRecvEventArgs e = new HookSelectRecvEventArgs
-                                {
-                                    Index = TextractorFun_Index_List[data.MisakaHookCode],
-                                    Data = data
-                                };
-                                HFRSevent?.Invoke(this, e);
+                                HookSelectRecvEventArgs e = new HookSelectRecvEventArgs();
+                                e.Index = TextractorFun_Index_List[threadid];
+                                e.Data = data;
+                                HFSevent?.Invoke(this, e);
                             }
                             else
                             {
-                                TextractorFun_Re_Index_List.Add(data.MisakaHookCode, listIndex_Re);
-                                HookSelectRecvEventArgs e = new HookSelectRecvEventArgs
+                                TextractorFun_Index_List.Add(threadid, listIndex);
+                                HookSelectRecvEventArgs e = new HookSelectRecvEventArgs();
+                                e.Index = listIndex;
+                                e.Data = data;
+                                HFSevent?.Invoke(this, e);
+                                listIndex++;
+                            }
+                            //ThreadID_RenewNum_List[threadid]++;
+                        //}
+                        //else {
+                        //    DetachProcessByHookAddress(data.GamePID, data.HookAddress);
+                        //}
+                        
+
+                        //Hook入口重复确认窗口处理
+                        if (HookCodeList.Count != 0 && HookCodeList.Contains(data.HookCode))
+                        {
+                            if (TextractorFun_Re_Index_List.ContainsKey(threadid) == true)
+                            {
+                                HookSelectRecvEventArgs hsre = new HookSelectRecvEventArgs
                                 {
-                                    Index = TextractorFun_Index_List[data.MisakaHookCode],
+                                    Index = TextractorFun_Index_List[threadid],
                                     Data = data
                                 };
-                                HFRSevent?.Invoke(this, e);
+                                HFRSevent?.Invoke(this, hsre);
+                            }
+                            else
+                            {
+                                TextractorFun_Re_Index_List.Add(threadid, listIndex_Re);
+                                HookSelectRecvEventArgs hsre = new HookSelectRecvEventArgs
+                                {
+                                    Index = listIndex_Re,
+                                    Data = data
+                                };
+                                HFRSevent?.Invoke(this, hsre);
                                 listIndex_Re++;
                             }
                         }
 
                         //使用了边Hook边卸载的情况
                         //纠错：注意不能删misakacode不同的，因为地址可能相同，仅根据Hook特殊码来删就行了
-                        if (DetachUnrelatedHookWhenDataRecv == true) {
+                        if (DetachUnrelatedHookWhenDataRecv == true)
+                        {
                             if (HookCodeList[0] != data.HookCode)
                             {
-                                DetachUnrelatedHookAsync(int.Parse(data.GamePID, System.Globalization.NumberStyles.HexNumber), data.MisakaHookCode);
+                                DetachUnrelatedHookAsync(data.GamePID, data.MisakaHookCode);
                             }
 
                         }
@@ -345,34 +352,75 @@ namespace TextHookLibrary
 
                         //文本去重窗口处理&游戏翻译窗口处理
                         //如果IsNeedReChooseHook=false则说明没有多重处理，不用再对比HookCodePlus
-                        if (HookCodeList.Count != 0 && HookCodeList.Contains(data.HookCode) && (MisakaCodeList == null || MisakaCodeList.Contains(data.MisakaHookCode)) )
+                        if (HookCodeList.Count != 0 && HookCodeList.Contains(data.HookCode) && (MisakaCodeList == null || MisakaCodeList.Contains(data.MisakaHookCode)))
                         {
-                            SolvedDataRecvEventArgs e = new SolvedDataRecvEventArgs
+                            SolvedDataRecvEventArgs sdre = new SolvedDataRecvEventArgs
                             {
                                 Data = data
                             };
-                            Sevent?.Invoke(this,e);
+                            Sevent?.Invoke(this, sdre);
                         }
-                        
+
                     }
                 }
-
-
             }
-
         }
-        
+
+        /// <summary>
+        /// Textractor创建线程事件
+        /// </summary>
+        /// <param name="threadId"></param>
+        /// <param name="processId"></param>
+        /// <param name="address"></param>
+        /// <param name="context"></param>
+        /// <param name="subcontext"></param>
+        /// <param name="name"></param>
+        /// <param name="hookCode"></param>
+        public void CreateThreadHandle(long threadId, uint processId, long address, long context, long subcontext, string name, string hookCode)
+        {
+            TextHookData data = new TextHookData()
+            {
+                GamePID = (int)processId,
+                HookCode = hookCode,
+                HookAddress = "" + address,
+                MisakaHookCode = "【" + address + ":" + context + ":" + subcontext + "】",
+                HookFunc = name
+            };
+
+            //ThreadID_RenewNum_List.Add(threadId,0);
+            ThreadID_HookDataInfo_List.Add(threadId, data);
+        }
+
+        /// <summary>
+        /// Textractor移除线程事件
+        /// </summary>
+        /// <param name="threadId"></param>
+        public void RemoveThreadHandle(long threadId) {
+            //无用
+        }
+
+        /// <summary>
+        /// Textractor回调事件
+        /// </summary>
+        /// <param name="threadId"></param>
+        public void CallBackHandle(int processId)
+        {
+            //无用
+        }
+
         /// <summary>
         /// 卸载无关联Hook：缓解某些游戏同时进行很多Hook时造成的卡顿现象
         /// </summary>
         /// <param name="pid">欲操作的进程号（要求确保此进程号是游戏主进程且先对此进程号Attach）</param>
         /// <param name="UsedHookAddress">正在使用中的HookAddress列表，将卸载掉不存在于这个列表中的其他Hook</param>
-        public async void DetachUnrelatedHooks(int pid,List<string> UsedHookAddress) {
-
+        public void DetachUnrelatedHooks(int pid, List<string> UsedHookAddress)
+        {
             var FunList = TextractorFun_Index_List.Keys.ToList();//这个得到的是MisakaCode列表
-            for (int i = 0;i < TextractorFun_Index_List.Count;i++) {
-                if (UsedHookAddress.Contains(GetHookAddressByMisakaCode(FunList[i])) == false) {
-                    await DetachProcessByHookAddress(pid, GetHookAddressByMisakaCode(FunList[i]));
+            for (int i = 0; i < TextractorFun_Index_List.Count; i++)
+            {
+                if (UsedHookAddress.Contains(ThreadID_HookDataInfo_List[FunList[i]].HookAddress) == false)
+                {
+                    DetachProcessByHookAddress(pid, ThreadID_HookDataInfo_List[FunList[i]].HookAddress);
                 }
             }
         }
@@ -382,7 +430,8 @@ namespace TextHookLibrary
         /// </summary>
         /// <param name="MisakaCode"></param>
         /// <returns></returns>
-        public string GetHookAddressByMisakaCode(string MisakaCode) {
+        public string GetHookAddressByMisakaCode(string MisakaCode)
+        {
             return GetMiddleString(MisakaCode, "【", ":", 0);
         }
 
@@ -392,7 +441,7 @@ namespace TextHookLibrary
         /// <param name="output"></param>
         public void AddTextractorHistory(string output)
         {
-            if (TextractorOutPutHistory.Count >= 1000)
+            if (TextractorOutPutHistory.Count >= 999)
             {
                 TextractorOutPutHistory.Dequeue();
             }
@@ -410,7 +459,7 @@ namespace TextHookLibrary
         private string GetMiddleString(string Text, string front, string back, int location)
         {
 
-            if (front == "" || back == "")
+            if (Text == null || front == "" || back == "")
             {
                 return null;
             }
@@ -432,64 +481,17 @@ namespace TextHookLibrary
                 return Text.Substring(locA, locB);
             }
         }
-
-        /// <summary>
-        /// 智能处理来自Textrator的输出并返回一个TextHookData用于下一步处理(TextHookData可为空)
-        /// 具体的含义参见TextHookData定义
-        /// </summary>
-        /// <param name="OutputText">来自Textrator的输出</param>
-        /// <returns></returns>
-        private TextHookData DealTextratorOutput(string OutputText)
-        {
-            if (OutputText == "" || OutputText == null)
-            {
-                return null;
-            }
-
-            string Info = GetMiddleString(OutputText, "[", "]", 0);
-            if (Info == null)
-            {
-                return null;
-            }
-
-            string[] Infores = Info.Split(':');
-
-            if (Infores.Length >= 7)
-            {
-                TextHookData thd = new TextHookData();
-                
-                string content = OutputText.Replace("[" + Info + "] ", "");//删除信息头部分
-                
-                thd.GamePID = Infores[1]; //游戏/本体进程ID（为0一般代表Textrator本体进程ID）
-
-                thd.HookFunc = Infores[5]; //方法名：Textrator注入游戏进程获得文本时的方法名（为 Console 时代表Textrator本体控制台输出；为 Clipboard 时代表从剪贴板获取的文本）
-                
-                thd.HookCode = Infores[6]; //特殊码：Textrator注入游戏进程获得文本时的方法的特殊码，是一个唯一值，可用于判断
-
-                thd.Data = content; //实际获取到的内容
-
-                thd.HookAddress = Infores[2]; //Hook入口地址：可用于以后卸载Hook
-
-                thd.MisakaHookCode = "【" + Infores[2] + ":" + Infores[3] + ":" + Infores[4] + "】"; //【值1:值2:值3】见上方格式说明
-
-
-                return thd;
-            }
-            else
-            {
-                return null;
-            }
-
-        }
-
+        
         /// <summary>
         /// 卸载无关Hook，仅用于处理事件中
         /// </summary>
         /// <param name="pid"></param>
         /// <param name="misakacode"></param>
         /// <returns></returns>
-        private async Task DetachUnrelatedHookAsync(int pid,string misakacode) {
-            await DetachProcessByHookAddress(pid, GetHookAddressByMisakaCode(misakacode));
+        private void DetachUnrelatedHookAsync(int pid, string misakacode)
+        {
+            DetachProcessByHookAddress(pid, GetHookAddressByMisakaCode(misakacode));
         }
+
     }
 }

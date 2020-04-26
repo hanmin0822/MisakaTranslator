@@ -174,6 +174,10 @@ namespace MisakaTranslator_WPF
                     YoudaoTranslator yd = new YoudaoTranslator();
                     yd.TranslatorInit();
                     return yd;
+                case "AlapiTranslator":
+                    AlapiTranslator al = new AlapiTranslator();
+                    al.TranslatorInit();
+                    return al;
                 case "JBeijingTranslator":
                     JBeijingTranslator bj = new JBeijingTranslator();
                     bj.TranslatorInit(Common.appSettings.JBJCTDllPath);
@@ -262,6 +266,8 @@ namespace MisakaTranslator_WPF
                                         tb.Text = mwi[i].Word;
                                         tb.Margin = new Thickness(10, 0, 0, 10);
                                         tb.FontSize = sourceTextFontSize;
+                                        tb.Background = Brushes.Transparent;
+                                        tb.MouseLeftButtonDown += DictArea_MouseLeftButtonDown;
                                         //根据不同词性跟字体上色
                                         switch (mwi[i].PartOfSpeech)
                                         {
@@ -356,26 +362,32 @@ namespace MisakaTranslator_WPF
                     string ret = dict.SearchInDict(tb.Text);
                     if (ret != null)
                     {
-                        ret = XxgJpzhDict.RemoveHTML(ret);
-
-                        var textbox = new HandyControl.Controls.TextBox();
-                        textbox.Text = ret;
-                        textbox.FontSize = 15;
-                        textbox.TextWrapping = TextWrapping.Wrap;
-                        textbox.TextAlignment = TextAlignment.Left;
-                        textbox.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
-                        var window = new HandyControl.Controls.PopupWindow
+                        if (ret == "")
                         {
-                            PopupElement = textbox,
-                            WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                            BorderThickness = new Thickness(0, 0, 0, 0),
-                            MaxWidth = 600,
-                            MaxHeight = 300,
-                            MinWidth = 600,
-                            MinHeight = 300,
-                            Title = "字典结果"
-                        };
-                        window.Show();
+                            HandyControl.Controls.Growl.ErrorGlobal("或未查询到结果！" + dict.GetLastError());
+                        }
+                        else {
+                            ret = XxgJpzhDict.RemoveHTML(ret);
+
+                            var textbox = new HandyControl.Controls.TextBox();
+                            textbox.Text = ret;
+                            textbox.FontSize = 15;
+                            textbox.TextWrapping = TextWrapping.Wrap;
+                            textbox.TextAlignment = TextAlignment.Left;
+                            textbox.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
+                            var window = new HandyControl.Controls.PopupWindow
+                            {
+                                PopupElement = textbox,
+                                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                                BorderThickness = new Thickness(0, 0, 0, 0),
+                                MaxWidth = 600,
+                                MaxHeight = 300,
+                                MinWidth = 600,
+                                MinHeight = 300,
+                                Title = "字典结果"
+                            };
+                            window.Show();
+                        }
                     }
                     else
                     {
@@ -420,6 +432,8 @@ namespace MisakaTranslator_WPF
                         tb.Text = mwi[i].Word;
                         tb.Margin = new Thickness(10, 0, 0, 10);
                         tb.FontSize = sourceTextFontSize;
+                        tb.Background = Brushes.Transparent;
+                        tb.MouseLeftButtonDown += DictArea_MouseLeftButtonDown;
                         //根据不同词性跟字体上色
                         switch (mwi[i].PartOfSpeech)
                         {
@@ -536,7 +550,6 @@ namespace MisakaTranslator_WPF
             if (Common.textHooker != null)
             {
                 Common.textHooker.Sevent -= DataRecvEventHandler;
-                Common.textHooker.CloseTextractor();
                 Common.textHooker = null;
             }
             

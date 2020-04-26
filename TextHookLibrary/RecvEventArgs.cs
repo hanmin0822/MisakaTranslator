@@ -13,7 +13,7 @@ namespace TextHookLibrary
         /// <summary>
         /// 游戏进程ID
         /// </summary>
-        public string GamePID { set; get; }
+        public int GamePID { set; get; }
 
         /// <summary>
         /// Hook入口地址

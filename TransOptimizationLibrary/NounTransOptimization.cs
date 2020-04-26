@@ -41,6 +41,10 @@ namespace TransOptimizationLibrary
 
             PeopleChatName = "";
 
+            if (lst == null) {
+                return text;
+            }
+
             //直接替换
             for (int i = 0;i < lst.Count;i++) {
                 List<string> l = lst[i];
@@ -50,13 +54,13 @@ namespace TransOptimizationLibrary
 
                     if (text.IndexOf(l[0]) == 0) {
                         //出现在首部
-                        text.Remove(0,l[0].Length);
+                        text = text.Remove(0,l[0].Length);
                         PeopleChatName = l[1];
                     }
                     else if (text.LastIndexOf(l[0]) == text.Length - l[0].Length)
                     {
                         //出现在尾部
-                        text.Remove(text.LastIndexOf(l[0]), l[0].Length);
+                        text = text.Remove(text.LastIndexOf(l[0]), l[0].Length);
                         PeopleChatName = l[1];
                     }
                 }

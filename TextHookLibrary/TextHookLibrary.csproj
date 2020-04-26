@@ -44,7 +44,9 @@
     <Compile Include="ProcessHelper.cs" />
     <Compile Include="RecvEventArgs.cs" />
     <Compile Include="TextHookHandle.cs" />
+    <Compile Include="TextHookHandle_past.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextHostLib.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -24,11 +24,14 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
     public partial class ChooseHookFuncPage : Page
     {
         BindingList<TextHookData> lstData = new BindingList<TextHookData>();
+        
         int sum = 0;
 
         public ChooseHookFuncPage()
         {
             InitializeComponent();
+
+            
 
             HookFunListView.ItemsSource = lstData;
             sum = 0;
@@ -37,6 +40,9 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
         }
 
         public void DataRecvEventHandler(object sender, HookSelectRecvEventArgs e) {
+
+            //加一步判断防止卡顿，部分不可能使用的方法刷新速度过快，在几秒之内就能刷新超过100个，这时候就停止对他们的刷新,直接卸载这个方法
+            
             Application.Current.Dispatcher.BeginInvoke((Action)(() =>
             {
                 if (e.Index < sum)
@@ -47,7 +53,9 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                     lstData.Add(e.Data);
                     sum++;
                 }
-            }));
+            }), System.Windows.Threading.DispatcherPriority.DataBind);
+            
+            
         }
 
         private void AddHookBtn_Click(object sender, RoutedEventArgs e)
@@ -62,7 +70,7 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                 SQLHelper sqliteH = new SQLHelper();
 
                 string hookAdd = lstData[HookFunListView.SelectedIndex].HookAddress;
-                int pid = int.Parse(lstData[HookFunListView.SelectedIndex].GamePID, System.Globalization.NumberStyles.HexNumber);
+                int pid = lstData[HookFunListView.SelectedIndex].GamePID;
 
                 //先关闭对本窗口的输出
                 Common.textHooker.HFSevent -= DataRecvEventHandler;
@@ -126,11 +134,11 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
 
         }
 
-        private async void HookCodeConfirmBtn_Click(object sender, RoutedEventArgs e)
+        private void HookCodeConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
             if (PIDTextBox.Text != "" && HookCodeTextBox.Text != "")
             {
-                await Common.textHooker.AttachProcessByHookCode(int.Parse(PIDTextBox.Text), HookCodeTextBox.Text);
+                Common.textHooker.AttachProcessByHookCode(int.Parse(PIDTextBox.Text), HookCodeTextBox.Text);
                 InputDrawer.IsOpen = false;
                 HandyControl.Controls.Growl.Info("已提交Hook申请，请重新确认！");
             }
