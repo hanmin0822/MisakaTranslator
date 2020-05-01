@@ -58,8 +58,10 @@
     <Compile Include="BaiduTranslator.cs" />
     <Compile Include="CaiyunTranslator.cs" />
     <Compile Include="CommonFunction.cs" />
+    <Compile Include="DreyeTranslator.cs" />
     <Compile Include="ITranslator.cs" />
     <Compile Include="JBeijingTranslator.cs" />
+    <Compile Include="KingsoftFastAITTranslator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TencentFYJTranslator.cs" />
     <Compile Include="TencentOldTranslator.cs" />

@@ -201,6 +201,12 @@
     <Compile Include="SettingsPages\OCRPages\BaiduOCRSettingsPage.xaml.cs">
       <DependentUpon>BaiduOCRSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPages\TranslatorPages\DreyeTransSettingsPage.xaml.cs">
+      <DependentUpon>DreyeTransSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPages\TranslatorPages\KingsoftFAITTransSettingsPage.xaml.cs">
+      <DependentUpon>KingsoftFAITTransSettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPages\TranslatorPages\TranslatorGeneralSettingsPage.xaml.cs">
       <DependentUpon>TranslatorGeneralSettingsPage.xaml</DependentUpon>
     </Compile>
@@ -326,6 +332,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SettingsPages\OCRPages\BaiduOCRSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\TranslatorPages\DreyeTransSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\TranslatorPages\KingsoftFAITTransSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

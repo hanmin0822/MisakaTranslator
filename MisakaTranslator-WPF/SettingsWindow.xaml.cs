@@ -84,5 +84,15 @@ namespace MisakaTranslator_WPF
         {
             this.SettingFrame.Navigate(new Uri("SettingsPages/DictionaryPages/XxgJpZhDictPage.xaml", UriKind.Relative));
         }
+
+        private void Item_KingsoftFAIT_Selected(object sender, RoutedEventArgs e)
+        {
+            this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/KingsoftFAITTransSettingsPage.xaml", UriKind.Relative));
+        }
+
+        private void Item_Dreye_Selected(object sender, RoutedEventArgs e)
+        {
+            this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/DreyeTransSettingsPage.xaml", UriKind.Relative));
+        }
     }
 }

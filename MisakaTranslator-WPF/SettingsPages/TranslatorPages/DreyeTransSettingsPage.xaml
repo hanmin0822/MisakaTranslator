@@ -1,0 +1,39 @@
+﻿<Page x:Class="MisakaTranslator_WPF.SettingsPages.TranslatorPages.DreyeTransSettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:hc="https://handyorg.github.io/handycontrol"
+      xmlns:local="clr-namespace:MisakaTranslator_WPF.SettingsPages.TranslatorPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="594"
+      Title="DreyeTransSettingsPage">
+
+    <Grid>
+        <hc:ScrollViewer HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Background="White">
+                <TextBlock Text="{StaticResource DreyeTransSettingsPage_Introduce}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
+                <StackPanel Margin="20,20,20,0">
+                    <hc:TextBox hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource DreyeTransSettingsPage_Path}" Name="PathBox" ShowClearButton="True"/>
+                    <Button Margin="0,10,0,0" Content="{StaticResource JbeijingTransSettingsPage_ChoosePath}" Width="122" Click="ChoosePathBtn_Click" HorizontalAlignment="Right" ></Button>
+                    <hc:Divider/>
+                    <hc:TextBox hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource API_testSrcText}" Name="TestSrcText" ShowClearButton="True" Text="本ソフトウェアのご利用を歓迎します。"/>
+
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <hc:TextBox hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource API_testSrcLang}" Name="TestSrcLang" ShowClearButton="True" Text="jp" TextAlignment="Center"/>
+                        <hc:TextBox Grid.Column="2" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource API_testDstLang}" Name="TestDstLang" ShowClearButton="True" Text="zh" TextAlignment="Center"/>
+                        <Button Grid.Column="3" Content="{StaticResource API_testTransBtn}" Margin="10,0,0,0" Width="122" Click="TransTestBtn_Click" ></Button>
+                    </Grid>
+
+                </StackPanel>
+            </StackPanel>
+        </hc:ScrollViewer>
+        <StackPanel hc:Growl.GrowlParent="True" HorizontalAlignment="Right" Margin="15"/>
+    </Grid>
+</Page>

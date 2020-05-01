@@ -182,6 +182,14 @@ namespace MisakaTranslator_WPF
                     JBeijingTranslator bj = new JBeijingTranslator();
                     bj.TranslatorInit(Common.appSettings.JBJCTDllPath);
                     return bj;
+                case "KingsoftFastAITTranslator":
+                    KingsoftFastAITTranslator kfat = new KingsoftFastAITTranslator();
+                    kfat.TranslatorInit(Common.appSettings.KingsoftFastAITPath);
+                    return kfat;
+                case "Dreye":
+                    DreyeTranslator drt = new DreyeTranslator();
+                    drt.TranslatorInit(Common.appSettings.DreyePath);
+                    return drt;
                 default:
                     return null;
             }

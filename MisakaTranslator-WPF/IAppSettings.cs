@@ -16,6 +16,10 @@ namespace MisakaTranslator_WPF
 
         [Option(Alias = "JBeijing.JBJCTDllPath", DefaultValue = "")]
         string JBJCTDllPath { get; set; }
+        [Option(Alias = "KingsoftFastAIT.KingsoftFastAITPath", DefaultValue = "")]
+        string KingsoftFastAITPath { get; set; }
+        [Option(Alias = "Dreye.DreyePath", DefaultValue = "")]
+        string DreyePath { get; set; }
         [Option(Alias = "TencentOldTranslator.SecretId", DefaultValue = "")]
         string TXOSecretId { get; set; }
         [Option(Alias = "TencentOldTranslator.SecretKey", DefaultValue = "")]
