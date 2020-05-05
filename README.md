@@ -5,16 +5,13 @@
   <br>
 </h1>
 
-<h2 align="center">
-  Galgame/文字游戏多语种实时机翻工具
+<p align="center">
+  <b>Galgame/文字游戏多语种实时机翻工具</b>
   <br>
-</h2>
-
-<h3 align="center">
-  开源 | 高效 | 易用
+  <b>开源 | 高效 | 易用</b>
   <br>
   <br>
-</h3>
+</p>
 
 <p align="center">
   <a href="/README.md">中文</a> •
