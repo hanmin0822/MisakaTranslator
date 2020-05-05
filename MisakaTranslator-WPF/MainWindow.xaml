@@ -17,7 +17,9 @@
     <hc:Window.NonClientAreaContent>
         <StackPanel Height="29">
             <Menu HorizontalAlignment="Right">
-
+                <MenuItem Header="L">
+                    <MenuItem Header=""></MenuItem>
+                </MenuItem>
             </Menu>
         </StackPanel>
     </hc:Window.NonClientAreaContent>
@@ -25,33 +27,36 @@
         <Grid.Resources>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="9*" />
-            <RowDefinition Height="4*" />
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70*" />
+            <ColumnDefinition Width="27*" />
+            <ColumnDefinition Width="218*"/>
+        </Grid.ColumnDefinitions>
 
-        <hc:ScrollViewer Grid.Row="0" Margin="10" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" Orientation="Horizontal">
+        <hc:ScrollViewer Grid.Row="0" Grid.Column="1"  Margin="10,10,10,10.5" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" Orientation="Horizontal" Grid.ColumnSpan="2">
             <hc:WaterfallPanel Name="GameLibraryPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Height="250" Groups="2" Orientation="Vertical" hc:PanelElement.FluidMoveBehavior="{StaticResource BehaviorXY200}">
 
             </hc:WaterfallPanel>
         </hc:ScrollViewer>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
+        <StackPanel Grid.Column="0" Orientation="Vertical" Background="{DynamicResource TranslateWindowBackground}" Margin="0,0,0,0.5">
+
             <Border Padding="30" Effect="{StaticResource EffectShadow3}">
-                <Button Background="{DynamicResource Foreground}" Content="{StaticResource BtnHookGuide}" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="HookGuideBtn_Click"/>
-            </Border>
-            
-            <Border Padding="30" Effect="{StaticResource EffectShadow3}">
-                <Button Background="{DynamicResource Foreground}" Content="{StaticResource BtnOCRGuide}" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="OCRGuideBtn_Click"/>
+                <hc:ButtonGroup Orientation="Vertical">
+                    <Button  Background="{DynamicResource Foreground}" Content="{StaticResource BtnHookGuide}" Click="HookGuideBtn_Click" Height="50"></Button>
+                    <Button Background="{DynamicResource Foreground}" Content="{StaticResource BtnOCRGuide}" Click="OCRGuideBtn_Click" Height="50"></Button>
+                </hc:ButtonGroup>
             </Border>
 
         </StackPanel>
-        
-        
-        <Button fa:Awesome.Content="Cog" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{DynamicResource Foreground}" FontSize="30" Background="#01FFFFFF"  Height="50" Width="50"  Effect="{StaticResource EffectShadow5}" Click="SettingsBtn_Click"/>
 
 
-        <hc:Drawer Name="GameInfoDrawer" MaskCanClose="False" Margin="0,0,0,3.4">
+        <Button fa:Awesome.Content="Cog" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{DynamicResource Foreground}" FontSize="40" Background="#01FFFFFF"  Height="Auto" Width="Auto"  Effect="{StaticResource EffectShadow5}" Click="SettingsBtn_Click" Margin="0,0,0,0.5"/>
+
+
+        <hc:Drawer Name="GameInfoDrawer" MaskCanClose="False" Margin="0,0,0,3.5">
             <Border Background="White" Width="300" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource BorderBrush}">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -61,7 +66,7 @@
 
                     <StackPanel Grid.Row="0">
                         <Button HorizontalAlignment="Right" Foreground="{DynamicResource PrimaryTextBrush}" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource DeleteFillCircleGeometry}" Click="CloseDrawerBtn_Click"/>
-                        
+
                         <TextBlock Name="gameNameTag" Margin="25,0,0,10" FontSize="15"/>
                         <TextBlock Name="transModeTag" Margin="25,0,0,10" FontSize="15"/>
 
@@ -76,11 +81,11 @@
                         <TextBox Name="nameBox" Margin="10" Visibility="Hidden" hc:InfoElement.Placeholder="{StaticResource MainWindow_Drawer_NameHint}" hc:InfoElement.Necessary="True" Style="{StaticResource TextBoxExtend}"/>
                         <Button Name="nameConfirmBtn" Visibility="Hidden" Content="{StaticResource MainWindow_Drawer_NameConfirmBtn}" Click="NameConfirmBtn_Click"/>
                     </StackPanel>
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
                 </Grid>
             </Border>
         </hc:Drawer>

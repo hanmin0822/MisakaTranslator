@@ -15,7 +15,7 @@ namespace MisakaTranslator_WPF
     {
         #region 界面设置
         #region 前景色设置
-        [Option(Alias = "Appearance.Foreground", DefaultValue = "#F06292")]
+        [Option(Alias = "Appearance.Foreground", DefaultValue = "#ffcccc")]
         string ForegroundHex { get; set; }
         #endregion
         #endregion

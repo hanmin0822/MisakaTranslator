@@ -12,7 +12,7 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <hc:SideMenu BorderThickness="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+        <hc:SideMenu BorderThickness="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Stretch" >
             <hc:Interaction.Triggers>
                 <hc:EventTrigger EventName="SelectionChanged">
                     <hc:EventToCommand Command="{Binding SwitchItemCmd}" PassEventArgsToCommand="True"/>

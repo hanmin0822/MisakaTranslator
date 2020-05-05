@@ -98,6 +98,10 @@ namespace MisakaTranslator_WPF
                     GameLibraryPanel.Children.Add(back);
                 }
             }
+            else
+            {
+                //没有游戏
+            }
 
         }
 
@@ -342,6 +346,11 @@ namespace MisakaTranslator_WPF
         private void BlurWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Common.GlobalOCRHotKey.UnRegistGlobalHotKey(hwnd,CallBack);
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
