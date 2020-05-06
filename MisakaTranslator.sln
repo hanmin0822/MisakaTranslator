@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29827.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MisakaTranslator", "MisakaTranslator\MisakaTranslator.csproj", "{BB4CF2AC-2E47-4EF0-AD35-75266262AAC1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslatorLibrary", "TranslatorLibrary\TranslatorLibrary.csproj", "{BBEBCF78-7BBB-4B19-99EE-87DDEA4F3793}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCRLibrary", "OCRLibrary\OCRLibrary.csproj", "{B66D98EC-FE39-45B4-9808-AC737C1A49FB}"
@@ -33,14 +31,6 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BB4CF2AC-2E47-4EF0-AD35-75266262AAC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BB4CF2AC-2E47-4EF0-AD35-75266262AAC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BB4CF2AC-2E47-4EF0-AD35-75266262AAC1}.Debug|x64.ActiveCfg = Debug|x64
-		{BB4CF2AC-2E47-4EF0-AD35-75266262AAC1}.Debug|x64.Build.0 = Debug|x64
-		{BB4CF2AC-2E47-4EF0-AD35-75266262AAC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BB4CF2AC-2E47-4EF0-AD35-75266262AAC1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BB4CF2AC-2E47-4EF0-AD35-75266262AAC1}.Release|x64.ActiveCfg = Release|x64
-		{BB4CF2AC-2E47-4EF0-AD35-75266262AAC1}.Release|x64.Build.0 = Release|x64
 		{BBEBCF78-7BBB-4B19-99EE-87DDEA4F3793}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BBEBCF78-7BBB-4B19-99EE-87DDEA4F3793}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBEBCF78-7BBB-4B19-99EE-87DDEA4F3793}.Debug|x64.ActiveCfg = Debug|Any CPU
