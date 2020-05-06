@@ -17,8 +17,13 @@
     <hc:Window.NonClientAreaContent>
         <StackPanel Height="29">
             <Menu HorizontalAlignment="Right">
-                <MenuItem Header="L">
-                    <MenuItem Header=""></MenuItem>
+                <MenuItem>
+                    <MenuItem.Header>
+                        <fa:FontAwesome Icon="Language" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"></fa:FontAwesome>
+                    </MenuItem.Header>
+                    <MenuItem Header="中文">
+                    </MenuItem>
+                    <MenuItem Header="English"></MenuItem>
                 </MenuItem>
             </Menu>
         </StackPanel>
