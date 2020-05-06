@@ -175,6 +175,8 @@
     <sys:String x:Key="TranslateWin_Menu_Exit">退出翻译</sys:String>
     <sys:String x:Key="TranslateWin_Menu_AddNounTrans">添加专有名词</sys:String>
 
+    <sys:String x:Key="TranslateWin_History_Title">翻译历史记录</sys:String>
+
     <sys:String x:Key="TransWinSettingsWin_Title">翻译窗口界面设置</sys:String>
     <sys:String x:Key="TransWinSettingsWin_Tab_Window">窗口</sys:String>
     <sys:String x:Key="TransWinSettingsWin_Tab_source">源文本</sys:String>
