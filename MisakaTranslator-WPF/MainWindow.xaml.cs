@@ -1,4 +1,5 @@
 ﻿using Config.Net;
+using FontAwesome.WPF.Converters;
 using HandyControl.Controls;
 using KeyboardMouseHookLibrary;
 using OCRLibrary;
@@ -12,6 +13,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Navigation;
@@ -42,6 +44,8 @@ namespace MisakaTranslator_WPF
 
         private void InitializeAppearance()
         {
+            IAppSettings settings = new ConfigurationBuilder<IAppSettings>().UseJsonFile("settings/settings.json").Build();
+            this.Resources["Foreground"] = (SolidColorBrush)(new BrushConverter().ConvertFrom(settings.ForegroundHex));
             gameInfolst = GameLibraryHelper.GetAllGameLibrary();
             Common.appSettings = new ConfigurationBuilder<IAppSettings>().UseIniFile(Environment.CurrentDirectory + "\\settings\\settings.ini").Build();
             Common.repairSettings = new ConfigurationBuilder<IRepeatRepairSettings>().UseIniFile(Environment.CurrentDirectory + "\\settings\\RepairSettings.ini").Build();
@@ -51,9 +55,8 @@ namespace MisakaTranslator_WPF
             Common.UsingDstLang = "zh";
             Common.UsingSrcLang = "jp";
 
-            IAppSettings settings = new ConfigurationBuilder<IAppSettings>().UseJsonFile("settings/settings.json").Build();
-            this.Resources["Foreground"] = (SolidColorBrush)(new BrushConverter().ConvertFrom(settings.ForegroundHex));
         }
+        
 
         /// <summary>
         /// 游戏库瀑布流初始化
@@ -70,39 +73,68 @@ namespace MisakaTranslator_WPF
             {
                 for (int i = 0; i < gameInfolst.Count; i++)
                 {
-                    Border back = new Border();
-                    GameLibraryPanel.RegisterName("game" + i,back);
-                    back.Name = "game" + i;
+                    TextBlock tb = new TextBlock()
+                    {
+                        Text = gameInfolst[i].GameName,
+                        Foreground = System.Windows.Media.Brushes.White,
+                        VerticalAlignment = VerticalAlignment.Bottom,
+                        HorizontalAlignment = HorizontalAlignment.Left,
+                        Margin = new Thickness(3)
+                    };
+                    System.Windows.Controls.Image ico = new System.Windows.Controls.Image()
+                    {
+                        Source = ImageProcFunc.ImageToBitmapImage(ImageProcFunc.GetAppIcon(gameInfolst[i].FilePath)),
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        Height = 64,
+                        Width = 64
+                    };
                     Grid gd = new Grid();
-                    back.Width = 150;
-                    back.Margin = new Thickness(5);
-                    back.Child = gd;
-                    back.Background = bushLst[i % 4];
-                    TextBlock tb = new TextBlock();
-                    tb.Text = gameInfolst[i].GameName;
-                    tb.Foreground = System.Windows.Media.Brushes.White;
-                    tb.HorizontalAlignment = HorizontalAlignment.Left;
-                    tb.VerticalAlignment = VerticalAlignment.Bottom;
-                    tb.Margin = new Thickness(3);
-                    gd.Children.Add(tb);
-                    System.Windows.Controls.Image ico = new System.Windows.Controls.Image();
-                    ico.Source = ImageProcFunc.ImageToBitmapImage(ImageProcFunc.GetAppIcon(gameInfolst[i].FilePath));
-                    ico.HorizontalAlignment = HorizontalAlignment.Center;
-                    ico.VerticalAlignment = VerticalAlignment.Center;
-                    ico.Height = 50;
-                    ico.Width = 50;
                     gd.Children.Add(ico);
+                    gd.Children.Add(tb);
+                    Border back = new Border()
+                    {
+                        Name = "game" + i,
+                        Width = 150,
+                        Child = gd,
+                        Margin = new Thickness(5),
+                        Background = bushLst[i % 4],
+                    };
                     back.MouseEnter += Border_MouseEnter;
                     back.MouseLeave += Border_MouseLeave;
-                    back.MouseLeftButtonDown += Border_MouseLeftButtonDown;
+                    back.MouseLeftButtonDown += Back_MouseLeftButtonDown;
+                    GameLibraryPanel.RegisterName("game" + i,back);
                     GameLibraryPanel.Children.Add(back);
                 }
             }
-            else
+            TextBlock textBlock = new TextBlock()
             {
-                //没有游戏
-            }
+                Text = App.Current.Resources["MainWindow_ScrollViewer_AddNewGame"].ToString(),
+                Foreground = System.Windows.Media.Brushes.White,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Margin = new Thickness(3)
+            };
+            Grid grid = new Grid();
+            grid.Children.Add(textBlock);
+            Border border = new Border()
+            {
+                Name = "AddNewName",
+                Width = 150,
+                Child = grid,
+                Margin = new Thickness(5),
+                Background = (SolidColorBrush)this.Resources["Foreground"]
+            };
+            border.MouseEnter += Border_MouseEnter;
+            border.MouseLeave += Border_MouseLeave;
+            border.MouseLeftButtonDown += Border_MouseLeftButtonDown;
+            GameLibraryPanel.RegisterName("AddNewGame", border);
+            GameLibraryPanel.Children.Add(border);
+        }
 
+        private void Border_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            AddNewGameDrawer.IsOpen = true;
         }
 
         void MainWindow_SourceInitialized(object sender, EventArgs e)
@@ -165,7 +197,7 @@ namespace MisakaTranslator_WPF
             b.BorderThickness = new Thickness(0);
         }
 
-        private void Border_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void Back_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Border b = (Border)sender;
             string str = b.Name;
@@ -175,12 +207,12 @@ namespace MisakaTranslator_WPF
             gameNameTag.Text = "游戏名：" + gameInfolst[gid].GameName;
             if (gameInfolst[gid].TransMode == 1) {
                 transModeTag.Text = "翻译模式：Hook";
-            } else {
+            }
+            else 
+            {
                 transModeTag.Text = "翻译模式：OCR";
             }
 
-            nameBox.Visibility = Visibility.Hidden;
-            nameConfirmBtn.Visibility = Visibility.Hidden;
             GameInfoDrawer.IsOpen = true;
         }
 
@@ -304,27 +336,7 @@ namespace MisakaTranslator_WPF
 
         private void UpdateNameBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (nameBox.Visibility == Visibility.Hidden)
-            {
-                nameBox.Visibility = Visibility.Visible;
-                nameConfirmBtn.Visibility = Visibility.Visible;
-            }
-            else {
-                nameBox.Visibility = Visibility.Hidden;
-                nameConfirmBtn.Visibility = Visibility.Hidden;
-            }
-            
-        }
-
-        private void NameConfirmBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (nameBox.Text != "") {
-                GameLibraryHelper.UpdateGameNameByID(gameInfolst[gid].GameID, nameBox.Text);
-                nameBox.Visibility = Visibility.Hidden;
-                nameConfirmBtn.Visibility = Visibility.Hidden;
-                HandyControl.Controls.MessageBox.Show("已修改，重启后生效！","提示");
-            }
-            
+            Dialog.Show(new GameNameDialog(gameInfolst,gid));
         }
 
         private void LEStartBtn_Click(object sender, RoutedEventArgs e)

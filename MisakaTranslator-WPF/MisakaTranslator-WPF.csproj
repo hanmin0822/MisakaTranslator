@@ -148,6 +148,9 @@
     <Compile Include="GameGuideWindow.xaml.cs">
       <DependentUpon>GameGuideWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\GameNameDialog.xaml.cs">
+      <DependentUpon>GameNameDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GlobalOCRWindow.xaml.cs">
       <DependentUpon>GlobalOCRWindow.xaml</DependentUpon>
     </Compile>
@@ -242,6 +245,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\GameNameDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GlobalOCRWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -298,7 +305,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ISettings.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
