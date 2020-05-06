@@ -51,7 +51,7 @@ namespace MisakaTranslator_WPF
             Common.UsingDstLang = "zh";
             Common.UsingSrcLang = "jp";
 
-            ISettings settings = new ConfigurationBuilder<ISettings>().UseJsonFile("settings/settings.json").Build();
+            IAppSettings settings = new ConfigurationBuilder<IAppSettings>().UseJsonFile("settings/settings.json").Build();
             this.Resources["Foreground"] = (SolidColorBrush)(new BrushConverter().ConvertFrom(settings.ForegroundHex));
         }
 
