@@ -113,7 +113,7 @@ namespace MisakaTranslator_WPF
             bool r = hook.Start();
             if (!r)
             {
-                HandyControl.Controls.Growl.ErrorGlobal("安装钩子失败");
+                HandyControl.Controls.Growl.ErrorGlobal(App.Current.Resources["Hook_Error_Hint"].ToString());
             }
         }
 
@@ -372,7 +372,7 @@ namespace MisakaTranslator_WPF
                     {
                         if (ret == "")
                         {
-                            HandyControl.Controls.Growl.ErrorGlobal("或未查询到结果！" + dict.GetLastError());
+                            HandyControl.Controls.Growl.ErrorGlobal(App.Current.Resources["TranslateWin_DictError_Hint"].ToString() + dict.GetLastError());
                         }
                         else {
                             ret = XxgJpzhDict.RemoveHTML(ret);
@@ -392,14 +392,14 @@ namespace MisakaTranslator_WPF
                                 MaxHeight = 300,
                                 MinWidth = 600,
                                 MinHeight = 300,
-                                Title = "字典结果"
+                                Title = App.Current.Resources["TranslateWin_Dict_Title"].ToString()
                             };
                             window.Show();
                         }
                     }
                     else
                     {
-                        HandyControl.Controls.Growl.ErrorGlobal("查询错误！" + dict.GetLastError());
+                        HandyControl.Controls.Growl.ErrorGlobal(App.Current.Resources["TranslateWin_DictError_Hint"].ToString() + dict.GetLastError());
                     }
                 }
             }
@@ -516,7 +516,7 @@ namespace MisakaTranslator_WPF
             else {
                 BackWinChrome.Opacity = double.Parse(Common.appSettings.TF_Opacity) / 100;
                 DragBorder.Opacity = 0.01;
-                Growl.InfoGlobal("鼠标指向拖拽栏可显示！");
+                Growl.InfoGlobal(App.Current.Resources["TranslateWin_DragBox_Hint"].ToString());
             }
 
         }

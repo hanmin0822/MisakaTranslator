@@ -39,11 +39,11 @@ namespace MisakaTranslator_WPF.SettingsPages.OCRPages
 
             if (ret == true)
             {
-                HandyControl.Controls.Growl.Success("百度OCR API工作正常");
+                HandyControl.Controls.Growl.Success("百度OCR " + App.Current.Resources["APITest_Success_Hint"].ToString());
             }
             else
             {
-                HandyControl.Controls.Growl.Error("百度OCR API工作异常，请检查填写是否正确\n" + bgocr.GetLastError());
+                HandyControl.Controls.Growl.Error("百度OCR " + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + bgocr.GetLastError());
             }
         }
 

@@ -61,15 +61,15 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
 
                     if (res != null)
                     {
-                        HandyControl.Controls.MessageBox.Show(res, "识别结果");
+                        HandyControl.Controls.MessageBox.Show(res, App.Current.Resources["MessageBox_Result"].ToString());
                     }
                     else {
-                        HandyControl.Controls.Growl.Error("TesseractOCR 工作异常\n" + Common.ocr.GetLastError());
+                        HandyControl.Controls.Growl.Error("TesseractOCR " + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + Common.ocr.GetLastError());
                     }
                 }
                 else
                 {
-                    HandyControl.Controls.Growl.Error("TesseractOCR 工作异常\n" + Common.ocr.GetLastError());
+                    HandyControl.Controls.Growl.Error("TesseractOCR " + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + Common.ocr.GetLastError());
                 }
             }
             else if (Common.appSettings.OCRsource == "BaiduOCR")
@@ -80,15 +80,15 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
 
                     if (res != null)
                     {
-                        HandyControl.Controls.MessageBox.Show(res, "识别结果");
+                        HandyControl.Controls.MessageBox.Show(res, App.Current.Resources["MessageBox_Result"].ToString());
                     }
                     else
                     {
-                        HandyControl.Controls.Growl.Error("百度OCR API工作异常\n" + Common.ocr.GetLastError());
+                        HandyControl.Controls.Growl.Error("百度OCR " + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + Common.ocr.GetLastError());
                     }
                 }
                 else {
-                    HandyControl.Controls.Growl.Error("百度OCR API工作异常\n" + Common.ocr.GetLastError());
+                    HandyControl.Controls.Growl.Error("百度OCR " + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + Common.ocr.GetLastError());
                 }
             }
             

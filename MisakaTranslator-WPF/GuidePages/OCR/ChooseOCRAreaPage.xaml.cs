@@ -77,7 +77,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
                 }
                 else
                 {
-                    MessageBox.Show("安装钩子失败!");
+                    MessageBox.Show(App.Current.Resources["Hook_Error_Hint"].ToString());
                 }
             }
             else if (IsChoosingWin == true)
@@ -120,7 +120,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
         {
             if (isAllWin == false && SelectedHwnd == 0)
             {
-                HandyControl.Controls.Growl.Error("请先选择窗口!");
+                HandyControl.Controls.Growl.Error(App.Current.Resources["ChooseOCRAreaPage_NextErrorHint!"].ToString());
                 return;
             }
             BitmapImage img;

@@ -40,7 +40,7 @@ namespace MisakaTranslator_WPF.GuidePages
         {
             if (SrcLangCombox.SelectedIndex == DstLangCombox.SelectedIndex)
             {
-                HandyControl.Controls.Growl.Error("两种语言不能相同！");
+                HandyControl.Controls.Growl.Error(App.Current.Resources["ChooseLanguagePage_NextErrorHint"].ToString());
             }
             else {
                 Common.UsingSrcLang = CommonFunction.lstLanguage[langlist[SrcLangCombox.SelectedIndex]];

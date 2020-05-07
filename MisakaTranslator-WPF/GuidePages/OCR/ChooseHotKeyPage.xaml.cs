@@ -24,7 +24,9 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
         GlobalHook hook;
         List<string> lstHotKeySource = new List<string>()
         {
-            "键盘","鼠标左键","鼠标右键"
+            App.Current.Resources["ChooseHotKeyPage_List_Keyboard"].ToString(),
+            App.Current.Resources["ChooseHotKeyPage_List_MouseL"].ToString(),
+            App.Current.Resources["ChooseHotKeyPage_List_MouseR"].ToString()
         };
 
         HotKeyInfo HotKey;
@@ -46,7 +48,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
         {
             HotKey.IsMouse = false;
             HotKey.KeyCode = e.KeyCode;
-            HotKeyTag.Text = "已设置触发键 键值:" + HotKey.KeyCode;
+            HotKeyTag.Text = App.Current.Resources["ChooseHotKeyPage_HotKeyTag"].ToString() + HotKey.KeyCode;
             hook.Stop();
             hook = null;
             OCRDelayBox.Focus();//设置完后应该转移焦点
@@ -72,7 +74,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             }
             else
             {
-                HandyControl.Controls.Growl.Error("安装钩子失败");
+                HandyControl.Controls.Growl.Error(App.Current.Resources["Hook_Error_Hint"].ToString());
             }
         }
 
@@ -80,11 +82,11 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
         {
             if (HotKeyTag.Text == "")
             {
-                HandyControl.Controls.Growl.Error("请设置一个触发键");
+                HandyControl.Controls.Growl.Error(App.Current.Resources["ChooseHotKeyPage_NoKeyHint"].ToString());
             }
             else if (int.Parse(OCRDelayBox.Text) <= 0)
             {
-                HandyControl.Controls.Growl.Error("延时时间必须大于0毫秒");
+                HandyControl.Controls.Growl.Error(App.Current.Resources["ChooseHotKeyPage_TooLessDelayHint"].ToString());
             }
             else {
                 Common.UsingHotKey = HotKey;
@@ -110,14 +112,14 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             {
                 HotKey.IsMouse = true;
                 HotKey.MouseButton = System.Windows.Forms.MouseButtons.Left;
-                HotKeyTag.Text = "已设置触发键 键值:鼠标左键";
+                HotKeyTag.Text = App.Current.Resources["ChooseHotKeyPage_HotKeyTag"].ToString() + App.Current.Resources["ChooseHotKeyPage_List_MouseL"].ToString();
                 ChooseHotkeyBtn.Visibility = Visibility.Hidden;
             }
             else if (HotKeySourceCombox.SelectedIndex == 2)
             {
                 HotKey.IsMouse = true;
                 HotKey.MouseButton = System.Windows.Forms.MouseButtons.Right;
-                HotKeyTag.Text = "已设置触发键 键值:鼠标右键";
+                HotKeyTag.Text = App.Current.Resources["ChooseHotKeyPage_HotKeyTag"].ToString() + App.Current.Resources["ChooseHotKeyPage_List_MouseR"].ToString();
                 ChooseHotkeyBtn.Visibility = Visibility.Hidden;
             }
         }

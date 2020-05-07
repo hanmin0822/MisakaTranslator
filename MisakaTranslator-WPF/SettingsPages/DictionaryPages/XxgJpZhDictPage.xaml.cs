@@ -32,13 +32,13 @@ namespace MisakaTranslator_WPF.SettingsPages.DictionaryPages
             
             System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
             dialog.Multiselect = false;
-            dialog.Title = "请选择小学馆日中词典数据库文件";
+            dialog.Title = App.Current.Resources["XxgJpZhDictPage_ChoosePathHint"].ToString();
             dialog.Filter = "所有文件(*.*)|*.*";
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 if (string.IsNullOrEmpty(dialog.FileName))
                 {
-                    HandyControl.Controls.Growl.Error("文件路径不能为空");
+                    HandyControl.Controls.Growl.Error(App.Current.Resources["FilePath_Null_Hint"].ToString());
                 }
                 else
                 {

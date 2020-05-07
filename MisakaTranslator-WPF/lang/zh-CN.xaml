@@ -2,7 +2,15 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:MisakaTranslator_WPF.lang"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
-    
+
+    <sys:String x:Key="MessageBox_Error">错误</sys:String>
+    <sys:String x:Key="MessageBox_Result">结果</sys:String>
+
+    <sys:String x:Key="APITest_Success_Hint">API工作正常</sys:String>
+    <sys:String x:Key="APITest_Error_Hint">API工作异常</sys:String>
+    <sys:String x:Key="Hook_Error_Hint">安装钩子失败</sys:String>
+    <sys:String x:Key="FilePath_Null_Hint">"文件路径不能为空"</sys:String>
+
     <sys:String x:Key="BtnStart">开始翻译</sys:String>
     <sys:String x:Key="BtnHookGuide">Hook方式游戏向导</sys:String>
     <sys:String x:Key="BtnOCRGuide">OCR方式游戏向导</sys:String>
@@ -67,12 +75,15 @@
     <sys:String x:Key="JbeijingTransSettingsPage_Introduce">JBeijing翻译API支持日语译汉语，不需要联网使用；您需要先下载Jbeijing翻译软件本体，在下方对应路径框中确认，保证文件夹下有JBJCT.dll文件；JBeijing翻译API翻译质量不如在线翻译，不过翻译速度比在线翻译快一些。</sys:String>
     <sys:String x:Key="JbeijingTransSettingsPage_Path">JBeijing翻译本体路径</sys:String>
     <sys:String x:Key="JbeijingTransSettingsPage_ChoosePath">选择路径</sys:String>
+    <sys:String x:Key="JbeijingTransSettingsPage_ChoosePathHint">请选择JBeijing本体所在文件夹</sys:String>
 
     <sys:String x:Key="KingsoftFAITTransSettingsPage_Introduce">金山快译2009翻译API支持日语译汉语和英语译汉语，不需要联网使用；您需要先下载金山快译2009翻译软件本体，在下方对应路径框中确认，保证文件夹下有GTS文件夹且内容完整；金山快译2009翻译API翻译质量不如在线翻译，不过翻译速度比在线翻译快一些。</sys:String>
     <sys:String x:Key="KingsoftFAITTransSettingsPage_Path">金山快译2009翻译本体路径</sys:String>
+    <sys:String x:Key="KingsoftFAITTransSettingsPage_ChoosePathHint">请选择金山快译2009本体所在文件夹</sys:String>
 
     <sys:String x:Key="DreyeTransSettingsPage_Introduce">译典通翻译API支持日语译汉语和英语译汉语，不需要联网使用；您需要先下载译典通翻译软件本体，在下方对应路径框中确认，保证文件夹下有DreyeMT文件夹且内容完整；译典通翻译API翻译质量不如在线翻译，不过翻译速度比在线翻译快一些。</sys:String>
     <sys:String x:Key="DreyeTransSettingsPage_Path">译典通翻译本体路径</sys:String>
+    <sys:String x:Key="DreyeTransSettingsPage_ChoosePathHint">请选择译典通本体所在文件夹</sys:String>
 
     <sys:String x:Key="OCRGeneralSettingsPage_Introduce">在这里进行所有OCR选项的通用设置，一个实时翻译窗口只能设置一种OCR方式，您可以指定OCR过程中用到的API；注：离线OCR功能使用Tesseract实现，目前可支持英语、日语的来源识别，如果识别效果不理想，可以考虑自行训练相关OCR字库或使用百度在线OCR识别，更多有关OCR预处理的设置选项见OCR设置窗口。</sys:String>
     <sys:String x:Key="OCRGeneralSettingsPage_OCRsource">OCR来源</sys:String>
@@ -91,23 +102,41 @@
     <sys:String x:Key="HookSettingsPage_AutoDetach_Introduce">开启自动卸载后，在已经确认游戏的Hook方法后会自动卸载其他方法，可减少游戏卡顿</sys:String>
     <sys:String x:Key="HookSettingsPage_AutoDetach">开启自动卸载</sys:String>
     <sys:String x:Key="HookSettingsPage_BtnExtractHistory">导出Hook命令行历史记录</sys:String>
+    <sys:String x:Key="HookSettingsPage_SuccessHint">导出完成！请将目录下的TextractorOutPutHistory.txt文件发送给作者以检查。</sys:String>
+    <sys:String x:Key="HookSettingsPage_ErrorHint">导出失败！</sys:String>
+
 
     <sys:String x:Key="LESettingsPage_Introduce">LE转区工具可以解决一些游戏出现乱码的问题，您需要获取Locale Emulator软件本体并在下方设置其目录，保证文件夹下有LEProc.exe文件。</sys:String>
     <sys:String x:Key="LESettingsPage_LEbox">Locale Emulator本体路径</sys:String>
-    
+    <sys:String x:Key="LESettingsPage_ChooseFilePathHint">请选择Locale Emulator本体所在文件夹</sys:String>
     
     <sys:String x:Key="AboutPage_BtnHelp">使用说明和反馈</sys:String>
     <sys:String x:Key="AboutPage_BtnGithub">本项目GitHub主页</sys:String>
 
     <sys:String x:Key="GameGuideWin_WinName">游戏翻译向导</sys:String>
     <sys:String x:Key="GameGuideWin_AlwaysTop">本窗口总在最前</sys:String>
+    <sys:String x:Key="GameGuideWin_Hook_Step_1">选择游戏</sys:String>
+    <sys:String x:Key="GameGuideWin_Hook_Step_2">选择Hook方法</sys:String>
+    <sys:String x:Key="GameGuideWin_Hook_Step_3">选择去重方法</sys:String>
+    <sys:String x:Key="GameGuideWin_OCR_Step_1">选择截图区域</sys:String>
+    <sys:String x:Key="GameGuideWin_OCR_Step_2">OCR预处理</sys:String>
+    <sys:String x:Key="GameGuideWin_OCR_Step_3">设置触发键</sys:String>
+    <sys:String x:Key="GameGuideWin_ReHook_Step_1">重新选择Hook方法</sys:String>
+    <sys:String x:Key="GameGuideWin_Step_4">选择翻译语言</sys:String>
+    <sys:String x:Key="GameGuideWin_Step_5">完成</sys:String>
+    <sys:String x:Key="GameGuideWin_FuncHint_Hook">使用TextHook方式提取文本</sys:String>
+    <sys:String x:Key="GameGuideWin_FuncHint_ReHook">重新选择Hook方法以适配上次的设置</sys:String>
+    <sys:String x:Key="GameGuideWin_FuncHint_OCR">使用OCR方式提取文本</sys:String>
 
     <sys:String x:Key="ChooseGamePage_Introduce">说明：请先运行游戏，之后通过下拉列表选择游戏进程名。部分游戏可能存在多进程，请根据需要开启"智能注入"功能。</sys:String>
     <sys:String x:Key="ChooseGamePage_BtnChooseWin">选择窗口</sys:String>
     <sys:String x:Key="ChooseGamePage_BtnConfirm">确认进程</sys:String>
     <sys:String x:Key="ChooseGamePage_CBoxX64">使用x64版本注入方式</sys:String>
     <sys:String x:Key="ChooseGamePage_CBoxX64Hint">启用后，将使用x64版本Textractor注入游戏，适用于64位游戏</sys:String>
-
+    <sys:String x:Key="ChooseGamePage_AutoHookTag_Begin">【智能处理】共找到</sys:String>
+    <sys:String x:Key="ChooseGamePage_AutoHookTag_End">个同名进程</sys:String>
+    <sys:String x:Key="ChooseGamePage_NextErrorHint">请先选择一个进程再进行下一步操作！</sys:String>
+    
     <sys:String x:Key="Drawer_BtnExit">关闭</sys:String>
     
     <sys:String x:Key="ChooseHookFuncPage_Introduce">进行游戏并使游戏中文本发生变化，在下方找到完全包含游戏文本内容的对应项并确定。卡顿时可在本页面获取焦点情况下按Esc进行强制暂停。</sys:String>
@@ -121,6 +150,10 @@
     <sys:String x:Key="ChooseHookFuncPage_Drawer_PidBox">进程ID</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_Drawer_HookCodeBox">Hook特殊码</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_Drawer_BtnConfirm">确认注入</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_NextErrorHint">请选择一项Hook方法后进入下一步！</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_HookApplyHint">已提交Hook申请，请重新确认！</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_HookApplyErrorHint">请输入内容后再确认！</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_PauseHint">已强制暂停刷新</sys:String>
 
     <sys:String x:Key="ChooseTextRepairFuncPage_Introduce">进行游戏并使游戏中文本发生变化，然后选择一种适合您游戏的去重方法，部分方法需要提供参数。</sys:String>
     <sys:String x:Key="ChooseTextRepairFuncPage_SourceText">源文本：</sys:String>
@@ -136,6 +169,7 @@
     <sys:String x:Key="ChooseLanguagePage_srcLang">游戏源语言</sys:String>
     <sys:String x:Key="ChooseLanguagePage_dstLang">目标翻译语言</sys:String>
     <sys:String x:Key="ChooseLanguagePage_BtnConfirm">确认语言</sys:String>
+    <sys:String x:Key="ChooseLanguagePage_NextErrorHint">两种语言不能相同！</sys:String>
 
     <sys:String x:Key="CompletationPage_BtnConfirm">完成设置</sys:String>
     <sys:String x:Key="CompletationPage_Hint">恭喜！您已完成对该游戏的全部设置！</sys:String>
@@ -146,6 +180,7 @@
     <sys:String x:Key="ChooseOCRAreaPage_ChooseAreaBtn">选择识别区域</sys:String>
     <sys:String x:Key="ChooseOCRAreaPage_RenewAreaBtn">刷新显示OCR区域</sys:String>
     <sys:String x:Key="ChooseOCRAreaPage_ConfirmBtn">确认OCR区域</sys:String>
+    <sys:String x:Key="ChooseOCRAreaPage_NextErrorHint">请先选择窗口!</sys:String>
 
     <sys:String x:Key="ChooseHandleFuncPage_Introduce">选择OCR源语言和一种适合您游戏的OCR预处理方法，可在下方对比查看，进行OCR结果测试并确认。</sys:String>
     <sys:String x:Key="ChooseHandleFuncPage_OCRLangCBox">OCR源语言</sys:String>
@@ -162,7 +197,12 @@
     <sys:String x:Key="ChooseHotKeyPage_OCRDelayBox">OCR延时时间(毫秒)</sys:String>
     <sys:String x:Key="ChooseHotKeyPage_ConfirmBtn">确认</sys:String>
     <sys:String x:Key="ChooseHotKeyPage_WaitHotKeyIntroduce">请按下需要设置的键盘上的相应触发键</sys:String>
-
+    <sys:String x:Key="ChooseHotKeyPage_List_Keyboard">键盘</sys:String>
+    <sys:String x:Key="ChooseHotKeyPage_List_MouseL">鼠标左键</sys:String>
+    <sys:String x:Key="ChooseHotKeyPage_List_MouseR">鼠标右键</sys:String>
+    <sys:String x:Key="ChooseHotKeyPage_HotKeyTag">已设置触发键 键值:</sys:String>
+    <sys:String x:Key="ChooseHotKeyPage_NoKeyHint">请设置一个触发键</sys:String>
+    <sys:String x:Key="ChooseHotKeyPage_TooLessDelayHint">延时时间必须大于0毫秒</sys:String>
 
     <sys:String x:Key="TranslateWin_DragTitle">按住此处拖拽 单击右键弹出菜单</sys:String>
     <sys:String x:Key="TranslateWin_Menu_ChangeSize">调整界面尺寸</sys:String>
@@ -174,8 +214,10 @@
     <sys:String x:Key="TranslateWin_Menu_Min">最小化界面</sys:String>
     <sys:String x:Key="TranslateWin_Menu_Exit">退出翻译</sys:String>
     <sys:String x:Key="TranslateWin_Menu_AddNounTrans">添加专有名词</sys:String>
-
     <sys:String x:Key="TranslateWin_History_Title">翻译历史记录</sys:String>
+    <sys:String x:Key="TranslateWin_Dict_Title">字典查询结果</sys:String>
+    <sys:String x:Key="TranslateWin_DictError_Hint">查询错误或无结果！</sys:String>
+    <sys:String x:Key="TranslateWin_DragBox_Hint">鼠标指向拖拽栏可显示！</sys:String>
 
     <sys:String x:Key="TransWinSettingsWin_Title">翻译窗口界面设置</sys:String>
     <sys:String x:Key="TransWinSettingsWin_Tab_Window">窗口</sys:String>
@@ -200,5 +242,9 @@
     <sys:String x:Key="XxgJpZhDictPage_DBPath">数据库文件路径</sys:String>
     <sys:String x:Key="XxgJpZhDictPage_TestSourceWord">字典查询测试 单词:</sys:String>
     <sys:String x:Key="XxgJpZhDictPage_BtnTest">字典查询</sys:String>
+    <sys:String x:Key="XxgJpZhDictPage_ChoosePathHint">请选择小学馆日中词典数据库文件</sys:String>
 
+    
+    
+    
 </ResourceDictionary>

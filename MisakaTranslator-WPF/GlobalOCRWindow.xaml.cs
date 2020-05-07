@@ -46,12 +46,12 @@ namespace MisakaTranslator_WPF
                     }
                     else
                     {
-                        HandyControl.Controls.Growl.ErrorGlobal("TesseractOCR 工作异常\n" + ocr.GetLastError());
+                        HandyControl.Controls.Growl.ErrorGlobal("TesseractOCR " + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + ocr.GetLastError());
                     }
                 }
                 else
                 {
-                    HandyControl.Controls.Growl.ErrorGlobal("TesseractOCR 工作异常\n" + ocr.GetLastError());
+                    HandyControl.Controls.Growl.ErrorGlobal("TesseractOCR " + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + ocr.GetLastError());
                 }
             }
             else if (Common.appSettings.OCRsource == "BaiduOCR")
@@ -68,12 +68,12 @@ namespace MisakaTranslator_WPF
                     }
                     else
                     {
-                        HandyControl.Controls.Growl.ErrorGlobal("百度OCR API工作异常\n" + ocr.GetLastError());
+                        HandyControl.Controls.Growl.ErrorGlobal("百度OCR " + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + ocr.GetLastError());
                     }
                 }
                 else
                 {
-                    HandyControl.Controls.Growl.ErrorGlobal("百度OCR API工作异常\n" + ocr.GetLastError());
+                    HandyControl.Controls.Growl.ErrorGlobal("百度OCR " + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + ocr.GetLastError());
                 }
             }
 

@@ -128,7 +128,7 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                 this.RaiseEvent(args);
             }
             else {
-                HandyControl.Controls.Growl.Error("请选择一项Hook方法后进入下一步！");
+                HandyControl.Controls.Growl.Error(App.Current.Resources["ChooseHookFuncPage_NextErrorHint"].ToString());
             }
 
 
@@ -140,10 +140,10 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
             {
                 Common.textHooker.AttachProcessByHookCode(int.Parse(PIDTextBox.Text), HookCodeTextBox.Text);
                 InputDrawer.IsOpen = false;
-                HandyControl.Controls.Growl.Info("已提交Hook申请，请重新确认！");
+                HandyControl.Controls.Growl.Info(App.Current.Resources["ChooseHookFuncPage_HookApplyHint"].ToString());
             }
             else {
-                HandyControl.Controls.MessageBox.Show("请输入内容后再确认！","错误");
+                HandyControl.Controls.MessageBox.Show(App.Current.Resources["ChooseHookFuncPage_HookApplyErrorHint"].ToString(), App.Current.Resources["MessageBox_Error"].ToString());
             }
         }
 
@@ -156,8 +156,9 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
         {
             if (e.Key == Key.Escape) {
                 Common.textHooker.HFSevent -= DataRecvEventHandler;
-                HandyControl.Controls.Growl.Warning("已强制暂停刷新");
+                HandyControl.Controls.Growl.Warning(App.Current.Resources["ChooseHookFuncPage_PauseHint"].ToString());
             }
+            
         }
     }
 }

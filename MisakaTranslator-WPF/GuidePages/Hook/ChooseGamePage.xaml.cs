@@ -38,7 +38,7 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
         {
             GamePid = lstProcess[(string)GameProcessCombox.SelectedValue];
             SameNameGameProcessList = ProcessHelper.FindSameNameProcess(GamePid);
-            AutoHookTag.Text = "【智能处理】共找到" + SameNameGameProcessList.Count + "个同名进程";
+            AutoHookTag.Text = App.Current.Resources["ChooseGamePage_AutoHookTag_Begin"].ToString() + SameNameGameProcessList.Count + App.Current.Resources["ChooseGamePage_AutoHookTag_End"].ToString();
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
@@ -72,7 +72,7 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                 this.RaiseEvent(args);
             }
             else {
-                HandyControl.Controls.Growl.Error("请先选择一个进程再进行下一步操作！");
+                HandyControl.Controls.Growl.Error(App.Current.Resources["ChooseGamePage_NextErrorHint"].ToString());
             }
             
         }
