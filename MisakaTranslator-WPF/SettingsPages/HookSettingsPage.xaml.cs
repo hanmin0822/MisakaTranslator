@@ -32,11 +32,11 @@ namespace MisakaTranslator_WPF.SettingsPages
         {
             if (Common.ExportTextractorHistory())
             {
-                HandyControl.Controls.Growl.Success("导出完成！请将目录下的TextractorOutPutHistory.txt文件发送给作者以检查。");
+                HandyControl.Controls.Growl.Success(App.Current.Resources["HookSettingsPage_SuccessHint"].ToString());
             }
             else
             {
-                HandyControl.Controls.Growl.Error("导出错误！");
+                HandyControl.Controls.Growl.Error(App.Current.Resources["HookSettingsPage_ErrorHint"].ToString());
             }
         }
 

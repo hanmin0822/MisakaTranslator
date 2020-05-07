@@ -31,12 +31,12 @@ namespace MisakaTranslator_WPF.SettingsPages
         private void ChoosePathBtn_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog();
-            dialog.Description = "请选择LE本体所在文件夹";
+            dialog.Description = App.Current.Resources["LESettingsPage_ChooseFilePathHint"].ToString();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 if (string.IsNullOrEmpty(dialog.SelectedPath))
                 {
-                    HandyControl.Controls.Growl.Error("文件夹路径不能为空");
+                    HandyControl.Controls.Growl.Error(App.Current.Resources["FilePath_Null_Hint"].ToString());
                 }
                 else
                 {

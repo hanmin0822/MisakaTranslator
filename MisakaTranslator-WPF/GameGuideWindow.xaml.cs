@@ -31,25 +31,43 @@ namespace MisakaTranslator_WPF
             if (Mode == 1)
             {
                 //Hook模式
-                List<string> lstStep = new List<string>() { "选择游戏", "选择Hook方法", "选择去重方法", "选择翻译语言", "完成" };
+                List<string> lstStep = new List<string>() {
+                    App.Current.Resources["GameGuideWin_Hook_Step_1"].ToString(),
+                    App.Current.Resources["GameGuideWin_Hook_Step_2"].ToString(),
+                    App.Current.Resources["GameGuideWin_Hook_Step_3"].ToString(),
+                    App.Current.Resources["GameGuideWin_Step_4"].ToString(),
+                    App.Current.Resources["GameGuideWin_Step_5"].ToString()
+                };
+
                 GuideStepBar.ItemsSource = lstStep;
-                FuncHint.Text = "使用TextHook方式提取文本";
+                FuncHint.Text = App.Current.Resources["GameGuideWin_FuncHint_Hook"].ToString();
                 GuidePageFrame.Navigate(new Uri("GuidePages/Hook/ChooseGamePage.xaml", UriKind.Relative));
             }
             else if (Mode == 2)
             {
                 //OCR模式
-                List<string> lstStep = new List<string>() { "选择截图区域", "OCR预处理", "设置触发键", "选择翻译语言", "完成" };
+                List<string> lstStep = new List<string>() {
+                    App.Current.Resources["GameGuideWin_OCR_Step_1"].ToString(),
+                    App.Current.Resources["GameGuideWin_OCR_Step_2"].ToString(),
+                    App.Current.Resources["GameGuideWin_OCR_Step_3"].ToString(),
+                    App.Current.Resources["GameGuideWin_Step_4"].ToString(),
+                    App.Current.Resources["GameGuideWin_Step_5"].ToString()
+                };
+
                 GuideStepBar.ItemsSource = lstStep;
-                FuncHint.Text = "使用OCR方式提取文本";
+                FuncHint.Text = App.Current.Resources["GameGuideWin_FuncHint_OCR"].ToString();
                 GuidePageFrame.Navigate(new Uri("GuidePages/OCR/ChooseOCRAreaPage.xaml", UriKind.Relative));
             }
             else if(Mode == 3)
             {
                 //重新选择Hook方法
-                List<string> lstStep = new List<string>() { "重新选择Hook方法", "完成" };
+                List<string> lstStep = new List<string>() { 
+                    App.Current.Resources["GameGuideWin_ReHook_Step_1"].ToString(),
+                    App.Current.Resources["GameGuideWin_Step_5"].ToString()
+                };
+
                 GuideStepBar.ItemsSource = lstStep;
-                FuncHint.Text = "重新选择Hook方法以适配上次的设置";
+                FuncHint.Text = App.Current.Resources["GameGuideWin_FuncHint_ReHook"].ToString();
                 GuidePageFrame.Navigate(new Uri("GuidePages/Hook/ReChooseHookFuncPage.xaml", UriKind.Relative));
             }
         }

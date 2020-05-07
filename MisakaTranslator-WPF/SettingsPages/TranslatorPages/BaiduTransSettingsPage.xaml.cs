@@ -37,11 +37,11 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             
             if (BDTrans.Translate("apple", "zh", "en") != null)
             {
-                HandyControl.Controls.Growl.Success("百度翻译API工作正常!");
+                HandyControl.Controls.Growl.Success("百度翻译" + App.Current.Resources["APITest_Success_Hint"].ToString());
             }
             else
             {
-                HandyControl.Controls.Growl.Error("百度翻译API工作异常\n" + BDTrans.GetLastError());
+                HandyControl.Controls.Growl.Error("百度翻译" + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + BDTrans.GetLastError());
             }
         }
 
@@ -68,11 +68,11 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             
             if (res != null)
             {
-                HandyControl.Controls.MessageBox.Show(res, "翻译结果");
+                HandyControl.Controls.MessageBox.Show(res, App.Current.Resources["MessageBox_Result"].ToString());
             }
             else
             {
-                HandyControl.Controls.Growl.Error("百度翻译API工作异常\n" + BDTrans.GetLastError());
+                HandyControl.Controls.Growl.Error("百度翻译" + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + BDTrans.GetLastError());
             }
         }
     }

@@ -36,11 +36,11 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             Trans.TranslatorInit(TransAppIDBox.Text, TransSecretKeyBox.Text);
             if (Trans.Translate("apple", "zh", "en") != null)
             {
-                HandyControl.Controls.Growl.Success("翻译君API工作正常!");
+                HandyControl.Controls.Growl.Success("翻译君" + App.Current.Resources["APITest_Success_Hint"].ToString());
             }
             else
             {
-                HandyControl.Controls.Growl.Error("翻译君API工作异常\n" + Trans.GetLastError());
+                HandyControl.Controls.Growl.Error("翻译君" + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + Trans.GetLastError());
             }
         }
 
@@ -66,11 +66,11 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             string res = Trans.Translate(TestSrcText.Text, TestDstLang.Text, TestSrcLang.Text);
             if (res != null)
             {
-                HandyControl.Controls.MessageBox.Show(res, "翻译结果");
+                HandyControl.Controls.MessageBox.Show(res, App.Current.Resources["MessageBox_Result"].ToString());
             }
             else
             {
-                HandyControl.Controls.Growl.Error("翻译君API工作异常\n" + Trans.GetLastError());
+                HandyControl.Controls.Growl.Error("翻译君" + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + Trans.GetLastError());
             }
         }
     }
