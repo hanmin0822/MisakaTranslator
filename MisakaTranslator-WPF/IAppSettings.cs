@@ -94,6 +94,13 @@ namespace MisakaTranslator_WPF
         [Option(Alias = "TranslateFormSettings.secondTransTextColor", DefaultValue = "#ff000000")]
         string TF_secondTransTextColor { get; set; }
         
+        #region 界面设置
+        #region 前景色设置
+        [Option(Alias = "Appearance.Foreground", DefaultValue = "#ffcccc")]
+        string ForegroundHex { get; set; }
+        #endregion
+        #endregion
+
     }
 
     

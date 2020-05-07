@@ -32,12 +32,8 @@
         <Grid.Resources>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="70*" />
-            <ColumnDefinition Width="27*" />
-            <ColumnDefinition Width="218*"/>
         </Grid.ColumnDefinitions>
 
         <hc:ScrollViewer Grid.Row="0" Grid.Column="1"  Margin="10,10,10,10.5" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" Orientation="Horizontal" Grid.ColumnSpan="2">
@@ -45,28 +41,30 @@
 
             </hc:WaterfallPanel>
         </hc:ScrollViewer>
+        
+        <Button fa:Awesome.Content="Cog" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{DynamicResource Foreground}" FontSize="40" Background="#01FFFFFF"  Height="Auto" Width="Auto"  Effect="{StaticResource EffectShadow5}" Click="SettingsBtn_Click" Margin="0,0,0,0.5"/>
 
-        <StackPanel Grid.Column="0" Orientation="Vertical" Background="{DynamicResource TranslateWindowBackground}" Margin="0,0,0,0.5">
-
+        <hc:Drawer Name="AddNewGameDrawer" ShowMode="Press" MaskCanClose="True" Dock="Left">
+            
+        <StackPanel Orientation="Vertical" Background="{DynamicResource TranslateWindowBackground}">
             <Border Padding="30" Effect="{StaticResource EffectShadow3}">
                 <hc:ButtonGroup Orientation="Vertical">
-                    <Button  Background="{DynamicResource Foreground}" Content="{StaticResource BtnHookGuide}" Click="HookGuideBtn_Click" Height="50"></Button>
+                    <Button Background="{DynamicResource Foreground}" Content="{StaticResource BtnHookGuide}" Click="HookGuideBtn_Click" Height="50"></Button>
                     <Button Background="{DynamicResource Foreground}" Content="{StaticResource BtnOCRGuide}" Click="OCRGuideBtn_Click" Height="50"></Button>
                 </hc:ButtonGroup>
             </Border>
-
         </StackPanel>
 
+        </hc:Drawer>
 
-        <Button fa:Awesome.Content="Cog" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{DynamicResource Foreground}" FontSize="40" Background="#01FFFFFF"  Height="Auto" Width="Auto"  Effect="{StaticResource EffectShadow5}" Click="SettingsBtn_Click" Margin="0,0,0,0.5"/>
 
 
-        <hc:Drawer Name="GameInfoDrawer" MaskCanClose="False" Margin="0,0,0,3.5">
-            <Border Background="White" Width="300" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource BorderBrush}">
+        <hc:Drawer Name="GameInfoDrawer" ShowMode="Press" MaskCanClose="True" Dock="Left">
+            <Border Background="{DynamicResource TranslateWindowBackground}" Width="300" BorderBrush="{DynamicResource BorderBrush}">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="3*"></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0">
@@ -78,18 +76,16 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="1">
-                        <Button Content="{StaticResource MainWindow_Drawer_Start}" Width="200"  Margin="5" Foreground="White" Background="{DynamicResource SuccessBrush}" Click="StartBtn_Click"/>
-                        <Button Content="{StaticResource MainWindow_Drawer_LEStart}" Width="200" Margin="5" Foreground="White" Background="{DynamicResource InfoBrush}" Click="LEStartBtn_Click"/>
-                        <Button Content="{StaticResource MainWindow_Drawer_DeleteGame}" Width="200" Margin="5" Foreground="White" Background="{DynamicResource DangerBrush}" Click="DeleteGameBtn_Click"/>
-                        <Button Content="{StaticResource MainWindow_Drawer_UpdateName}" Width="200" Margin="5" Foreground="White" Background="{DynamicResource WarningBrush}" Click="UpdateNameBtn_Click"/>
+                        <Border Padding="30">
+                        <hc:ButtonGroup Orientation="Vertical">
+                            <Button Content="{StaticResource MainWindow_Drawer_Start}" Height="50" Margin="5" Foreground="White" Background="{DynamicResource SuccessBrush}" Click="StartBtn_Click"/>
+                            <Button Content="{StaticResource MainWindow_Drawer_LEStart}" Height="50" Margin="5" Foreground="White" Background="{DynamicResource InfoBrush}" Click="LEStartBtn_Click"/>
+                            <Button Content="{StaticResource MainWindow_Drawer_DeleteGame}" Height="50" Margin="5" Foreground="White" Background="{DynamicResource DangerBrush}" Click="DeleteGameBtn_Click"/>
+                                <Button Content="{StaticResource MainWindow_Drawer_UpdateName}" Height="50" Margin="5" Foreground="White" Command="{Binding ShowInteractiveDialogCmd}" Background="{DynamicResource WarningBrush}" Click="UpdateNameBtn_Click"/>
+                        </hc:ButtonGroup>
+                        </Border>
 
-                        <TextBox Name="nameBox" Margin="10" Visibility="Hidden" hc:InfoElement.Placeholder="{StaticResource MainWindow_Drawer_NameHint}" hc:InfoElement.Necessary="True" Style="{StaticResource TextBoxExtend}"/>
-                        <Button Name="nameConfirmBtn" Visibility="Hidden" Content="{StaticResource MainWindow_Drawer_NameConfirmBtn}" Click="NameConfirmBtn_Click"/>
                     </StackPanel>
-
-
-
-
 
                 </Grid>
             </Border>

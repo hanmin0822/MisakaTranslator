@@ -15,6 +15,8 @@
     <sys:String x:Key="BtnHookGuide">Hook方式游戏向导</sys:String>
     <sys:String x:Key="BtnOCRGuide">OCR方式游戏向导</sys:String>
 
+    <sys:String x:Key="MainWindow_ScrollViewer_AddNewGame">添加游戏</sys:String>
+
     <sys:String x:Key="MainWindow_Drawer_Start">正常启动</sys:String>
     <sys:String x:Key="MainWindow_Drawer_LEStart">LE转区启动</sys:String>
     <sys:String x:Key="MainWindow_Drawer_DeleteGame">从库中删除</sys:String>
