@@ -44,11 +44,11 @@
         
         <Button fa:Awesome.Content="Cog" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{DynamicResource Foreground}" FontSize="40" Background="#01FFFFFF"  Height="Auto" Width="Auto"  Effect="{StaticResource EffectShadow5}" Click="SettingsBtn_Click" Margin="0,0,0,0.5"/>
 
-        <hc:Drawer Name="AddNewGameDrawer" ShowMode="Press" MaskCanClose="True" Dock="Left">
+        <hc:Drawer Name="AddNewGameDrawer" ShowMode="Press" MaskCanClose="True" Dock="Top">
             
         <StackPanel Orientation="Vertical" Background="{DynamicResource TranslateWindowBackground}">
             <Border Padding="30" Effect="{StaticResource EffectShadow3}">
-                <hc:ButtonGroup Orientation="Vertical">
+                <hc:ButtonGroup Orientation="Horizontal">
                     <Button Background="{DynamicResource Foreground}" Content="{StaticResource BtnHookGuide}" Click="HookGuideBtn_Click" Height="50"></Button>
                     <Button Background="{DynamicResource Foreground}" Content="{StaticResource BtnOCRGuide}" Click="OCRGuideBtn_Click" Height="50"></Button>
                 </hc:ButtonGroup>
