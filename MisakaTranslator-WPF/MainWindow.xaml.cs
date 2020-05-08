@@ -344,10 +344,10 @@ namespace MisakaTranslator_WPF
             string filepath = gameInfolst[gid].FilePath;
             ProcessStartInfo p = new ProcessStartInfo();
             string lePath = Common.appSettings.LEPath;
-            p.FileName = lePath;
+            p.FileName = lePath + "\\LEProc.exe";
             p.Arguments = @"-run " + filepath;
             p.UseShellExecute = false;
-            p.WorkingDirectory = Path.GetDirectoryName(lePath);
+            p.WorkingDirectory = lePath;
             Process res = Process.Start(p);
             res.WaitForInputIdle(5000);
             GameInfoDrawer.IsOpen = false;
