@@ -21,8 +21,8 @@
                     <MenuItem.Header>
                         <fa:FontAwesome Icon="Language" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"></fa:FontAwesome>
                     </MenuItem.Header>
-                    <MenuItem Header="中文" Click="zhCN_MenuItem_Click"/>
-                    <MenuItem Header="English" Click="enUS_MenuItem_Click"/>
+                    <MenuItem Header="中文" Click="Language_MenuItem_Click" Tag="zh-cn"/>
+                    <MenuItem Header="English" Click="Language_MenuItem_Click" Tag="en-us"/>
                 </MenuItem>
             </Menu>
         </StackPanel>
@@ -69,8 +69,8 @@
                     <StackPanel Grid.Row="0">
                         <Button HorizontalAlignment="Right" Foreground="{DynamicResource PrimaryTextBrush}" Style="{StaticResource ButtonIcon}" hc:IconElement.Geometry="{StaticResource DeleteFillCircleGeometry}" Click="CloseDrawerBtn_Click"/>
 
-                        <TextBlock Name="gameNameTag" Margin="25,0,0,10" FontSize="15"/>
-                        <TextBlock Name="transModeTag" Margin="25,0,0,10" FontSize="15"/>
+                        <TextBlock Name="GameNameTag" Margin="25,0,0,10" FontSize="15"/>
+                        <TextBlock Name="TransModeTag" Margin="25,0,0,10" FontSize="15"/>
 
                     </StackPanel>
 
