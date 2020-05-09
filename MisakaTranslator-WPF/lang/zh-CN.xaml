@@ -9,7 +9,7 @@
     <sys:String x:Key="APITest_Success_Hint">API工作正常</sys:String>
     <sys:String x:Key="APITest_Error_Hint">API工作异常</sys:String>
     <sys:String x:Key="Hook_Error_Hint">安装钩子失败</sys:String>
-    <sys:String x:Key="FilePath_Null_Hint">"文件路径不能为空"</sys:String>
+    <sys:String x:Key="FilePath_Null_Hint">文件路径不能为空</sys:String>
 
     <sys:String x:Key="BtnStart">开始翻译</sys:String>
     <sys:String x:Key="BtnHookGuide">Hook方式游戏向导</sys:String>

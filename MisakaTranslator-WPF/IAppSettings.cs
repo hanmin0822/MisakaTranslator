@@ -9,6 +9,9 @@ namespace MisakaTranslator_WPF
 {
     public interface IAppSettings
     {
+        [Option(Alias = "Globalization.Language", DefaultValue = "zh-CN")]
+        string AppLanguage { get; set; }
+
         [Option(Alias = "Textractor.AutoHook", DefaultValue = "False")]
         string AutoHook { get; set; }
         [Option(Alias = "Textractor.AutoDetach", DefaultValue = "True")]

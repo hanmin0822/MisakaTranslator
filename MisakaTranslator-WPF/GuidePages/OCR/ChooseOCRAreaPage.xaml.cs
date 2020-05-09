@@ -120,7 +120,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
         {
             if (isAllWin == false && SelectedHwnd == 0)
             {
-                HandyControl.Controls.Growl.Error(App.Current.Resources["ChooseOCRAreaPage_NextErrorHint!"].ToString());
+                HandyControl.Controls.Growl.Error(App.Current.Resources["ChooseOCRAreaPage_NextErrorHint"].ToString());
                 return;
             }
             BitmapImage img;

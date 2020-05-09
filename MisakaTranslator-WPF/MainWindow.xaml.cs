@@ -29,6 +29,17 @@ namespace MisakaTranslator_WPF
 
         public MainWindow()
         {
+            var appResource = Application.Current.Resources.MergedDictionaries;
+            Common.appSettings = new ConfigurationBuilder<IAppSettings>().UseIniFile(Environment.CurrentDirectory + "\\settings\\settings.ini").Build();
+            foreach (ResourceDictionary item in appResource)
+            {
+                if (item.Source.ToString().Contains("lang") && item.Source.ToString() != @"lang/" + Common.appSettings.AppLanguage + ".xaml")
+                {
+                    appResource.Remove(item);
+                    break;
+                }
+            }
+
             InitializeComponent();
             InitializeAppearance();
 
@@ -47,7 +58,6 @@ namespace MisakaTranslator_WPF
             IAppSettings settings = new ConfigurationBuilder<IAppSettings>().UseJsonFile("settings/settings.json").Build();
             this.Resources["Foreground"] = (SolidColorBrush)(new BrushConverter().ConvertFrom(settings.ForegroundHex));
             gameInfolst = GameLibraryHelper.GetAllGameLibrary();
-            Common.appSettings = new ConfigurationBuilder<IAppSettings>().UseIniFile(Environment.CurrentDirectory + "\\settings\\settings.ini").Build();
             Common.repairSettings = new ConfigurationBuilder<IRepeatRepairSettings>().UseIniFile(Environment.CurrentDirectory + "\\settings\\RepairSettings.ini").Build();
             GameLibraryPanel_Init();
 
@@ -360,9 +370,19 @@ namespace MisakaTranslator_WPF
             Common.GlobalOCRHotKey.UnRegistGlobalHotKey(hwnd,CallBack);
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
+        
 
+        private void zhCN_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Common.appSettings.AppLanguage = "zh-CN";
+            HandyControl.Controls.MessageBox.Show("语言配置已修改！重启软件后生效！","提示");
+        }
+
+        private void enUS_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            HandyControl.Controls.MessageBox.Show("Profile in English is being produced", "Hint");
+            //Common.appSettings.AppLanguage = "en-US";
+            //HandyControl.Controls.MessageBox.Show("Language configuration has been modified! It will take effect after restarting MisakaTranslator!", "Hint");
         }
     }
 }
