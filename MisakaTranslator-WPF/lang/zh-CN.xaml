@@ -3,6 +3,8 @@
                     xmlns:local="clr-namespace:MisakaTranslator_WPF.lang"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
+    <sys:String x:Key="Language_Changed">语言配置已修改！重启软件后生效！</sys:String>
+
     <sys:String x:Key="MessageBox_Error">错误</sys:String>
     <sys:String x:Key="MessageBox_Result">结果</sys:String>
 

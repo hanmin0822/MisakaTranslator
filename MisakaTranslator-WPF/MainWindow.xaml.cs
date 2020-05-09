@@ -29,6 +29,17 @@ namespace MisakaTranslator_WPF
 
         public MainWindow()
         {
+            IAppSettings settings = new ConfigurationBuilder<IAppSettings>().UseJsonFile("settings/settings.json").Build();
+            InitializeLanguage();
+            InitializeComponent();
+            Initialize(settings);
+
+            //注册全局OCR热键
+            this.SourceInitialized += new EventHandler(MainWindow_SourceInitialized);
+        }
+
+        private static void InitializeLanguage()
+        {
             var appResource = Application.Current.Resources.MergedDictionaries;
             Common.appSettings = new ConfigurationBuilder<IAppSettings>().UseIniFile(Environment.CurrentDirectory + "\\settings\\settings.ini").Build();
             foreach (ResourceDictionary item in appResource)
@@ -39,12 +50,6 @@ namespace MisakaTranslator_WPF
                     break;
                 }
             }
-
-            InitializeComponent();
-            InitializeAppearance();
-
-            //注册全局OCR热键
-            this.SourceInitialized += new EventHandler(MainWindow_SourceInitialized);
         }
 
         //按下快捷键时被调用的方法
@@ -53,18 +58,15 @@ namespace MisakaTranslator_WPF
             Common.GlobalOCR();
         }
 
-        private void InitializeAppearance()
+        private void Initialize(IAppSettings settings)
         {
-            IAppSettings settings = new ConfigurationBuilder<IAppSettings>().UseJsonFile("settings/settings.json").Build();
             this.Resources["Foreground"] = (SolidColorBrush)(new BrushConverter().ConvertFrom(settings.ForegroundHex));
             gameInfolst = GameLibraryHelper.GetAllGameLibrary();
             Common.repairSettings = new ConfigurationBuilder<IRepeatRepairSettings>().UseIniFile(Environment.CurrentDirectory + "\\settings\\RepairSettings.ini").Build();
             GameLibraryPanel_Init();
-
             //先初始化这两个语言，用于全局OCR识别
             Common.UsingDstLang = "zh";
             Common.UsingSrcLang = "jp";
-
         }
         
 
