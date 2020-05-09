@@ -1,8 +1,12 @@
 ---
 name: Bug Report
 about: Bug 反馈
+title: ''
+labels: ''
+assignees: ''
 
 ---
+
 <!-- 最好先在最新Beta版本中测试一下, 有些问题可能已经修复 -->
 
 <!-- 请先确保您已在issues里搜索过相关问题, 避免重复 -->

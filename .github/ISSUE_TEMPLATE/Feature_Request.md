@@ -1,6 +1,9 @@
 ---
 name: Feature Request
 about: 功能建议
+title: ''
+labels: ''
+assignees: ''
 
 ---
 

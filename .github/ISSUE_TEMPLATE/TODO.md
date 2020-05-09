@@ -1,6 +1,9 @@
 ---
 name: TODO
 about: 待办事项
+title: ''
+labels: todo
+assignees: ''
 
 ---
 
