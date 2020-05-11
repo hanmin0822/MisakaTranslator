@@ -6,6 +6,7 @@ using OCRLibrary;
 using SQLHelperLibrary;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -157,7 +158,7 @@ namespace MisakaTranslator_WPF
             Common.GlobalOCRHotKey = new GlobalHotKey();
             if (Common.GlobalOCRHotKey.RegistHotKeyByStr(Common.appSettings.GlobalOCRHotkey, hwnd, CallBack) == false)
             {
-                Growl.ErrorGlobal("全局OCR热键注册失败！");
+                Growl.ErrorGlobal(App.Current.Resources["MainWindow_GlobalOCRError_Hint"].ToString());
             }
         }
 
@@ -216,13 +217,13 @@ namespace MisakaTranslator_WPF
             string temp = str.Remove(0,4);
             gid = int.Parse(temp);
 
-            GameNameTag.Text = "游戏名：" + gameInfolst[gid].GameName;
+            GameNameTag.Text = App.Current.Resources["MainWindow_Drawer_Tag_GmaeName"].ToString() + gameInfolst[gid].GameName;
             if (gameInfolst[gid].TransMode == 1) {
-                TransModeTag.Text = "翻译模式：Hook";
+                TransModeTag.Text = App.Current.Resources["MainWindow_Drawer_Tag_TransMode"].ToString() + "Hook";
             }
             else 
             {
-                TransModeTag.Text = "翻译模式：OCR";
+                TransModeTag.Text = App.Current.Resources["MainWindow_Drawer_Tag_TransMode"].ToString() + "OCR";
             }
 
             GameInfoDrawer.IsOpen = true;
@@ -255,7 +256,7 @@ namespace MisakaTranslator_WPF
 
             if (pidlst.Count == 0)
             {
-                HandyControl.Controls.MessageBox.Show("未找到游戏进程！", "提示");
+                HandyControl.Controls.MessageBox.Show(App.Current.Resources["MainWindow_StartError_Hint"].ToString(), App.Current.Resources["MessageBox_Hint"].ToString());
                 return;
             }
             else {
@@ -337,7 +338,7 @@ namespace MisakaTranslator_WPF
         /// <param name="e"></param>
         private void DeleteGameBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (HandyControl.Controls.MessageBox.Show("您是否确认要将此游戏从您的游戏库中移除？\r\n这个操作不会删除您的游戏文件，但下次进行这个游戏时需要重新设置相关参数。", "确认删除", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
+            if (HandyControl.Controls.MessageBox.Show(App.Current.Resources["MainWindow_Drawer_DeleteGameConfirmBox"].ToString(), App.Current.Resources["MessageBox_Ask"].ToString(), MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
                 GameLibraryHelper.DeleteGameByID(gameInfolst[gid].GameID);
                 Border b = GameLibraryPanel.FindName("game" + gid) as Border;
                 GameLibraryPanel.Children.Remove(b);
@@ -394,6 +395,60 @@ namespace MisakaTranslator_WPF
                         break;
                 }
             }
+        }
+
+        private void AutoStart_BtnClick(object sender, RoutedEventArgs e)
+        {
+            int res = GetGameListHasProcessGame_PID_ID();
+            if (res == -1)
+            {
+                HandyControl.Controls.Growl.ErrorGlobal(App.Current.Resources["MainWindow_AutoStartError_Hint"].ToString());
+            }
+            else
+            {
+                StartTranslateBygid(res);
+            }
+        }
+
+        /// <summary>
+        /// 寻找任何正在运行中的之前已保存过的游戏
+        /// </summary>
+        /// <returns>游戏gid，-1代表未找到</returns>
+        private int GetGameListHasProcessGame_PID_ID()
+        {
+            Process[] ps = Process.GetProcesses();
+            List<int> ret = new List<int>();
+            gameInfolst = GameLibraryHelper.GetAllGameLibrary();
+            if (gameInfolst != null)
+            {
+                for (int i = 0; i < ps.Length; i++)
+                {
+                    for (int j = 0; j < gameInfolst.Count; j++)
+                    {
+                        string filepath = "";
+                        try
+                        {
+                            filepath = ps[i].MainModule.FileName;
+                        }
+                        catch (Win32Exception ex)
+                        {
+                            continue;
+                        }
+
+                        if (filepath == gameInfolst[j].FilePath)
+                        {
+                            return j;
+                        }
+                    }
+                }
+
+                return -1;
+            }
+            else
+            {
+                return -1;
+            }
+            
         }
     }
 }

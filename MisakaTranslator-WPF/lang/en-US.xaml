@@ -5,6 +5,8 @@
     
     <sys:String x:Key="MessageBox_Error">Error</sys:String>
     <sys:String x:Key="MessageBox_Result">Result</sys:String>
+    <sys:String x:Key="MessageBox_Ask">Ask</sys:String>
+    <sys:String x:Key="MessageBox_Hint">Hint</sys:String>
 
     <sys:String x:Key="APITest_Success_Hint">API works successfully</sys:String>
     <sys:String x:Key="APITest_Error_Hint">API works failed</sys:String>
@@ -23,6 +25,14 @@
     <sys:String x:Key="MainWindow_Drawer_UpdateName">Change Game Name</sys:String>
     <sys:String x:Key="MainWindow_Drawer_NameHint">Input new game name</sys:String>
     <sys:String x:Key="MainWindow_Drawer_NameConfirmBtn">Confirm</sys:String>
+    <sys:String x:Key="MainWindow_Drawer_Tag_GmaeName">游戏名：</sys:String>
+    <sys:String x:Key="MainWindow_Drawer_Tag_TransMode">翻译模式：</sys:String>
+    <sys:String x:Key="MainWindow_Drawer_DeleteGameConfirmBox">您是否确认要将此游戏从您的游戏库中移除？这个操作不会删除您的游戏文件，但下次进行这个游戏时需要重新设置相关参数。</sys:String>
+    <sys:String x:Key="MainWindow_Tip_AutoStart">自动开始：在当前所有进程中自动查找之前已经保存过相关设置的游戏并开始翻译</sys:String>
+    <sys:String x:Key="MainWindow_Tip_Settings">MisakaTranslator本体设置</sys:String>
+    <sys:String x:Key="MainWindow_AutoStartError_Hint">未在当前进程列表中找到可以自动开始翻译的游戏！</sys:String>
+    <sys:String x:Key="MainWindow_GlobalOCRError_Hint">全局OCR热键注册失败！</sys:String>
+    <sys:String x:Key="MainWindow_StartError_Hint">未找到游戏进程！</sys:String>
 
     <sys:String x:Key="SettingsMenu_WinName">MisakaTranslator Settings</sys:String>
     <sys:String x:Key="SettingsMenu_About">MisakaTranslator</sys:String>
@@ -31,6 +41,11 @@
     <sys:String x:Key="SettingsMenu_OCRsettings">OCR Settings</sys:String>
     <sys:String x:Key="SettingsMenu_OCRsettings_General">GeneralSettings</sys:String>
     <sys:String x:Key="SettingsMenu_OCRsettings_Baidu">BaiduOCR API</sys:String>
+    
+    
+    <sys:String x:Key="Language_Changed">语言配置已修改！重启软件后生效！</sys:String>
+
+    
     <sys:String x:Key="SettingsMenu_TranslatorSettings">翻译相关设置</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_General">通用设置</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Baidu">百度翻译API</sys:String>
