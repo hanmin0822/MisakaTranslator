@@ -37,6 +37,8 @@ namespace MisakaTranslator_WPF
         public static HotKeyInfo UsingHotKey;//全局使用中的触发键信息
         public static int UsingOCRDelay;//全局使用中的OCR延时
 
+        public static Window mainWin;//全局的主窗口对象
+
         public static GlobalHotKey GlobalOCRHotKey;//全局OCR热键
 
         /// <summary>

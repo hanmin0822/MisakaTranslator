@@ -49,6 +49,11 @@ namespace TextHookLibrary
         /// </summary>
         public List<string> HookCodeList;
 
+        /// <summary>
+        /// 用户自定义Hook特殊码：用于非首次设置好游戏时，能让系统自动注入一次
+        /// </summary>
+        public string HookCode_Custom;
+
         public Queue<string> TextractorOutPutHistory;//Textractor的输出记录队列，用于查错
 
 
@@ -60,7 +65,7 @@ namespace TextHookLibrary
         /// <summary>
         /// Textractor回调事件
         /// </summary>
-        private TextHostLib.CallbackFunc callback;
+        private TextHostLib.ProcessEvent callback;
 
         /// <summary>
         /// Textractor创建线程事件（从此线程获得具体信息）
@@ -72,7 +77,9 @@ namespace TextHookLibrary
         /// </summary>
         private TextHostLib.OnRemoveThreadFunc removethread;
 
-        private int GamePID;//能够获取到文本的游戏进程ID
+        public int GamePID;//能够获取到文本的游戏进程ID
+
+
         private Dictionary<Process, bool> PossibleGameProcessList;//与gamePID进程同名的进程列表
         private int HandleMode;//处理的方式 1=已确定的单个进程 2=多个进程寻找能搜到文本的进程
         private Process MaxMemoryProcess;//最大内存进程，用于智能处理时单独注入这个进程而不是PossibleGameProcessList中的每个进程都注入
@@ -151,8 +158,8 @@ namespace TextHookLibrary
                     }
                 }
             }
-            
-            
+
+
             GC.Collect();
         }
 
@@ -225,7 +232,7 @@ namespace TextHookLibrary
         /// <param name="pid"></param>
         public void AttachProcessByHookCode(int pid, string HookCode)
         {
-            TextHostLib.InsertHook((uint)pid,HookCode);
+            TextHostLib.InsertHook((uint)pid, HookCode);
         }
 
         /// <summary>
@@ -234,10 +241,10 @@ namespace TextHookLibrary
         /// <param name="pid"></param>
         public void DetachProcessByHookAddress(int pid, string HookAddress)
         {
-            TextHostLib.RemoveHook((uint)pid,long.Parse(HookAddress));
+            TextHostLib.RemoveHook((uint)pid, long.Parse(HookAddress));
         }
 
-        
+
         /// <summary>
         /// 开始注入，会判断是否智能注入
         /// </summary>
@@ -249,6 +256,9 @@ namespace TextHookLibrary
             }
             else if (HandleMode == 2)
             {
+                //不管是否进行智能注入，为了保证再次开启游戏时某些用户自定义特殊码能直接导入，这里强制让游戏ID为最大进程ID
+                GamePID = MaxMemoryProcess.Id;
+
                 if (AutoHook == false)
                 {
                     //不进行智能注入
@@ -264,6 +274,8 @@ namespace TextHookLibrary
                     AttachProcess(MaxMemoryProcess.Id);
                 }
             }
+
+
         }
 
         /// <summary>
@@ -273,7 +285,7 @@ namespace TextHookLibrary
         /// <param name="opdata"></param>
         public void OutputHandle(long threadid, string opdata)
         {
-            opdata = opdata.Replace("\r\n", "").Replace("\n","");
+            opdata = opdata.Replace("\r\n", "").Replace("\n", "");
             AddTextractorHistory(threadid + ":" + opdata);
 
             if (Pause == false)
@@ -290,28 +302,28 @@ namespace TextHookLibrary
                         //Hook入口选择窗口处理
                         //if (ThreadID_RenewNum_List[threadid] < 150)
                         //{
-                            if (TextractorFun_Index_List.ContainsKey(threadid) == true)
-                            {
-                                HookSelectRecvEventArgs e = new HookSelectRecvEventArgs();
-                                e.Index = TextractorFun_Index_List[threadid];
-                                e.Data = data;
-                                HFSevent?.Invoke(this, e);
-                            }
-                            else
-                            {
-                                TextractorFun_Index_List.Add(threadid, listIndex);
-                                HookSelectRecvEventArgs e = new HookSelectRecvEventArgs();
-                                e.Index = listIndex;
-                                e.Data = data;
-                                HFSevent?.Invoke(this, e);
-                                listIndex++;
-                            }
-                            //ThreadID_RenewNum_List[threadid]++;
+                        if (TextractorFun_Index_List.ContainsKey(threadid) == true)
+                        {
+                            HookSelectRecvEventArgs e = new HookSelectRecvEventArgs();
+                            e.Index = TextractorFun_Index_List[threadid];
+                            e.Data = data;
+                            HFSevent?.Invoke(this, e);
+                        }
+                        else
+                        {
+                            TextractorFun_Index_List.Add(threadid, listIndex);
+                            HookSelectRecvEventArgs e = new HookSelectRecvEventArgs();
+                            e.Index = listIndex;
+                            e.Data = data;
+                            HFSevent?.Invoke(this, e);
+                            listIndex++;
+                        }
+                        //ThreadID_RenewNum_List[threadid]++;
                         //}
                         //else {
                         //    DetachProcessByHookAddress(data.GamePID, data.HookAddress);
                         //}
-                        
+
 
                         //Hook入口重复确认窗口处理
                         if (HookCodeList.Count != 0 && HookCodeList.Contains(data.HookCode))
@@ -481,7 +493,7 @@ namespace TextHookLibrary
                 return Text.Substring(locA, locB);
             }
         }
-        
+
         /// <summary>
         /// 卸载无关Hook，仅用于处理事件中
         /// </summary>
@@ -491,6 +503,25 @@ namespace TextHookLibrary
         private void DetachUnrelatedHookAsync(int pid, string misakacode)
         {
             DetachProcessByHookAddress(pid, GetHookAddressByMisakaCode(misakacode));
+        }
+
+        /// <summary>
+        /// 让系统自动注入用户设定好的特殊码，没有就不注入
+        /// </summary>
+        public void Auto_AddHookToGame() {
+            if (HookCode_Custom != "NULL" || HookCode_Custom != "")
+            {
+                AttachProcessByHookCode(GamePID, HookCode_Custom);
+            }
+        }
+
+
+        /// <summary>
+        /// 添加剪切板监视线程
+        /// </summary>
+        /// <param name="winHandle"></param>
+        public void AddClipBoardThread(IntPtr winHandle) {
+            TextHostLib.AddClipboardThread(winHandle);
         }
 
     }

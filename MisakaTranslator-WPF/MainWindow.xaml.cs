@@ -30,6 +30,8 @@ namespace MisakaTranslator_WPF
 
         public MainWindow()
         {
+            Common.mainWin = this;
+
             IAppSettings settings = new ConfigurationBuilder<IAppSettings>().UseJsonFile("settings/settings.json").Build();
             InitializeLanguage();
             InitializeComponent();
@@ -300,6 +302,8 @@ namespace MisakaTranslator_WPF
 
             Common.textHooker.Init(!gameInfolst[gid].Isx64);
             Common.textHooker.HookCodeList.Add(gameInfolst[gid].Hookcode);
+            Common.textHooker.HookCode_Custom = gameInfolst[gid].HookCode_Custom;
+
 
             if (gameInfolst[gid].IsMultiHook == true) {
                 GameGuideWindow ggw = new GameGuideWindow(3);
@@ -311,6 +315,12 @@ namespace MisakaTranslator_WPF
                 Common.textHooker.MisakaCodeList = null;
                 Common.textHooker.DetachUnrelatedHookWhenDataRecv = Convert.ToBoolean(Common.appSettings.AutoDetach);
                 Common.textHooker.StartHook(Convert.ToBoolean(Common.appSettings.AutoHook));
+                var task_1 = System.Threading.Tasks.Task.Run(async delegate
+                {
+                    await System.Threading.Tasks.Task.Delay(3000);
+                    Common.textHooker.Auto_AddHookToGame();
+                });
+                
 
                 TranslateWindow tw = new TranslateWindow();
                 tw.Show();

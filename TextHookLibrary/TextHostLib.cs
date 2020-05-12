@@ -10,7 +10,7 @@ namespace TextHookLibrary
 
     public class TextHostLib
     {
-        public delegate void CallbackFunc(Int32 processId);
+        public delegate void ProcessEvent(Int32 processId);
         public delegate void OnCreateThreadFunc(Int64 threadId,
             UInt32 processId,
             Int64 address,
@@ -23,8 +23,8 @@ namespace TextHookLibrary
         public delegate void OnOutputFunc(Int64 threadId, [MarshalAs(UnmanagedType.LPWStr)] string data);
 
         [DllImport("texthost.dll")]
-        public static extern Int32 TextHostInit(CallbackFunc OnConnect,
-            CallbackFunc OnDisconnect,
+        public static extern Int32 TextHostInit(ProcessEvent OnConnect,
+            ProcessEvent OnDisconnect,
             OnCreateThreadFunc OnCreateThread,
             OnRemoveThreadFunc OnRemoveThread,
             OnOutputFunc OnOutput

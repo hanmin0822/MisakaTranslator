@@ -24,14 +24,16 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
     public partial class ChooseHookFuncPage : Page
     {
         BindingList<TextHookData> lstData = new BindingList<TextHookData>();
-        
+
+        string LastCustomHookCode;
+
         int sum = 0;
 
         public ChooseHookFuncPage()
         {
             InitializeComponent();
 
-            
+            LastCustomHookCode = "NULL";
 
             HookFunListView.ItemsSource = lstData;
             sum = 0;
@@ -120,6 +122,34 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                 {
                     sqliteH.ExecuteSql(string.Format("UPDATE game_library SET transmode = {0} WHERE gameid = {1};", "1", Common.GameID));
                     sqliteH.ExecuteSql(string.Format("UPDATE game_library SET hookcode = '{0}' WHERE gameid = {1};", lstData[HookFunListView.SelectedIndex].HookCode, Common.GameID));
+
+                    if (LastCustomHookCode != "NULL")
+                    {
+                        MessageBoxResult result = HandyControl.Controls.MessageBox.Show(
+                            App.Current.Resources["ChooseHookFuncPage_MBOX_hookcodeConfirm_left"].ToString() + "\n" + LastCustomHookCode + "\n" + App.Current.Resources["ChooseHookFuncPage_MBOX_hookcodeConfirm_right"].ToString(),
+                            App.Current.Resources["MessageBox_Ask"].ToString(),
+                            MessageBoxButton.YesNoCancel,
+                            MessageBoxImage.Question);
+
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            //记录这个特殊码到数据库
+                            sqliteH.ExecuteSql(string.Format("UPDATE game_library SET hookcode_custom = '{0}' WHERE gameid = {1};", LastCustomHookCode, Common.GameID));
+                        }
+                        else if (result == MessageBoxResult.No)
+                        {
+                            //返回界面，否则会自动进入下一个界面
+                            return;
+                        } else{
+                            //不记录特殊码，但也要写NULL
+                            sqliteH.ExecuteSql(string.Format("UPDATE game_library SET hookcode_custom = '{0}' WHERE gameid = {1};", "NULL", Common.GameID));
+
+                        }
+                    }
+                    else {
+                        sqliteH.ExecuteSql(string.Format("UPDATE game_library SET hookcode_custom = '{0}' WHERE gameid = {1};", "NULL", Common.GameID));
+                    }
+
                 }
 
                 //使用路由事件机制通知窗口来完成下一步操作
@@ -139,6 +169,7 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
             if (PIDTextBox.Text != "" && HookCodeTextBox.Text != "")
             {
                 Common.textHooker.AttachProcessByHookCode(int.Parse(PIDTextBox.Text), HookCodeTextBox.Text);
+                LastCustomHookCode = HookCodeTextBox.Text;
                 InputDrawer.IsOpen = false;
                 HandyControl.Controls.Growl.Info(App.Current.Resources["ChooseHookFuncPage_HookApplyHint"].ToString());
             }
@@ -159,6 +190,11 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                 HandyControl.Controls.Growl.Warning(App.Current.Resources["ChooseHookFuncPage_PauseHint"].ToString());
             }
             
+        }
+
+        private void AddClipBoardFuncBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Common.textHooker.AddClipBoardThread(new System.Windows.Interop.WindowInteropHelper(Common.mainWin).Handle);
         }
     }
 }

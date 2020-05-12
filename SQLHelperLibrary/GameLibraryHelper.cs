@@ -61,6 +61,11 @@ namespace SQLHelperLibrary
         public string Hookcode { get; set; }
 
         /// <summary>
+        /// 用户自定的特殊码值，如果用户这一项不是自定义的，那么应该为'NULL'，仅在hook模式有效，注意下次开启游戏时这里就需要注入一下
+        /// </summary>
+        public string HookCode_Custom { get; set; }
+
+        /// <summary>
         /// 是否需要下次启动时重选Hook方法，仅在hook模式有效，值为True或False
         /// </summary>
         public bool IsMultiHook { get; set; }
@@ -80,7 +85,7 @@ namespace SQLHelperLibrary
         {
             SQLHelper.CreateNewDatabase(Environment.CurrentDirectory + "\\MisakaGameLibrary.sqlite");
             SQLHelper sqliteH = new SQLHelper();
-            int id = sqliteH.ExecuteSql("CREATE TABLE game_library(gameid INTEGER PRIMARY KEY AUTOINCREMENT,gamename TEXT,gamefilepath TEXT,transmode INTEGER,src_lang TEXT,dst_lang TEXT,repair_func TEXT,repair_param_a TEXT,repair_param_b TEXT,hookcode TEXT,isMultiHook TEXT,isx64 TEXT);");
+            int id = sqliteH.ExecuteSql("CREATE TABLE game_library(gameid INTEGER PRIMARY KEY AUTOINCREMENT,gamename TEXT,gamefilepath TEXT,transmode INTEGER,src_lang TEXT,dst_lang TEXT,repair_func TEXT,repair_param_a TEXT,repair_param_b TEXT,hookcode TEXT,isMultiHook TEXT,isx64 TEXT,hookcode_custom TEXT);");
             if (id == -1)
             {
                 MessageBox.Show("新建游戏库时发生错误，错误代码:\n" + sqliteH.getLastError(), "数据库错误");
@@ -122,7 +127,7 @@ namespace SQLHelperLibrary
 
             if (ls.Count == 0)
             {
-                string sql = string.Format("INSERT INTO game_library VALUES(NULL,'{0}','{1}',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);",
+                string sql = string.Format("INSERT INTO game_library VALUES(NULL,'{0}','{1}',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);",
                     Path.GetFileNameWithoutExtension(gamepath), gamepath);
                 sqliteH.ExecuteSql(sql);
                 ls = sqliteH.ExecuteReader_OneLine(string.Format("SELECT gameid FROM game_library WHERE gamefilepath = '{0}';", gamepath), 1);
@@ -145,7 +150,7 @@ namespace SQLHelperLibrary
             }
 
             SQLHelper sqliteH = new SQLHelper();
-            List <List<string>> ls = sqliteH.ExecuteReader("SELECT * FROM game_library;", 12);
+            List <List<string>> ls = sqliteH.ExecuteReader("SELECT * FROM game_library;", 13);
 
             if (ls == null)
             {
@@ -183,6 +188,7 @@ namespace SQLHelperLibrary
                 gi.Hookcode = gameI[9];
                 gi.IsMultiHook = Convert.ToBoolean(gameI[10]);
                 gi.Isx64 = Convert.ToBoolean(gameI[11]);
+                gi.HookCode_Custom = gameI[12];
 
                 ret.Add(gi);
             }
@@ -205,7 +211,7 @@ namespace SQLHelperLibrary
             }
 
             SQLHelper sqliteH = new SQLHelper();
-            List<string> ls = sqliteH.ExecuteReader_OneLine(string.Format("SELECT * FROM game_library WHERE gameid = {0};",gameID), 12);
+            List<string> ls = sqliteH.ExecuteReader_OneLine(string.Format("SELECT * FROM game_library WHERE gameid = {0};",gameID), 13);
 
             if (ls == null)
             {
@@ -231,6 +237,7 @@ namespace SQLHelperLibrary
             gi.Hookcode = ls[9];
             gi.IsMultiHook = Convert.ToBoolean(ls[10]);
             gi.Isx64 = Convert.ToBoolean(ls[11]);
+            gi.HookCode_Custom = ls[12];
 
             return gi;
         }

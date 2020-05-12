@@ -32,6 +32,12 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
             sum = 0;
             Common.textHooker.HFRSevent += DataRecvEventHandler;
             Common.textHooker.StartHook(Convert.ToBoolean(Common.appSettings.AutoHook));
+            var task_1 = System.Threading.Tasks.Task.Run(async delegate
+            {
+                await System.Threading.Tasks.Task.Delay(3000);
+                Common.textHooker.Auto_AddHookToGame();
+            });
+
         }
 
         public void DataRecvEventHandler(object sender, HookSelectRecvEventArgs e)
