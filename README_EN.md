@@ -78,6 +78,8 @@ E-Mail/QQ:512240272@qq.com
 
 Thanks to all the people who have helped in the development of this project!
 
+* Provide English translation of software-[Words](https://github.com/CPCer)
+* Provide a lot of development help to the author-[lgztx96](https://github.com/lgztx96)
 * [Click here to view the list of contributors](https://github.com/hanmin0822/MisakaTranslator/blob/master/THANKLIST.MD)
 
 ## Other Notes
