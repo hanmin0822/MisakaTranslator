@@ -82,7 +82,9 @@ E-Mail/QQ:512240272@qq.com
 
 感谢所有对本项目开发提供帮助的人！
 
-* [点此查看贡献者名单](https://github.com/hanmin0822/MisakaTranslator/blob/master/THANKLIST.MD)
+* 提供软件的英语版本翻译-[Words](https://github.com/CPCer)
+* 多次提供作者开发上的帮助-[lgztx96](https://github.com/lgztx96)
+* [点此查看其他的贡献者名单](https://github.com/hanmin0822/MisakaTranslator/blob/master/THANKLIST.MD)
 
 ## 其他注意
 
