@@ -38,8 +38,10 @@ namespace MisakaTranslator_WPF
         /// <param name="e"></param>
         void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            PrintErrorMessageToFile(e.Exception,0);
-            MessageBox.Show(App.Current.Resources["App_Global_ErrorHint"].ToString(), App.Current.Resources["MessageBox_Error"].ToString());
+            string fn = System.DateTime.Now.ToString("g");
+            PrintErrorMessageToFile(fn,e.Exception,0);
+            MessageBox.Show(App.Current.Resources["App_Global_ErrorHint_left"].ToString() + fn + App.Current.Resources["App_Global_ErrorHint_right"].ToString()
+                , App.Current.Resources["MessageBox_Error"].ToString());
         }
 
         /// <summary>
@@ -49,16 +51,18 @@ namespace MisakaTranslator_WPF
         /// <param name="e"></param>
         void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
+            string fn = System.DateTime.Now.ToString("g");
             if (e.ExceptionObject is Exception)
             {
-                PrintErrorMessageToFile((Exception)e.ExceptionObject, 1);
+                PrintErrorMessageToFile(fn,(Exception)e.ExceptionObject, 1);
             }
             else
             {
-                PrintErrorMessageToFile(null, 1, e.ExceptionObject.ToString());
+                PrintErrorMessageToFile(fn,null, 1, e.ExceptionObject.ToString());
             }
 
-            MessageBox.Show(App.Current.Resources["App_Global_ErrorHint"].ToString(), App.Current.Resources["MessageBox_Error"].ToString());
+            MessageBox.Show(App.Current.Resources["App_Global_ErrorHint_left"].ToString() + fn + App.Current.Resources["App_Global_ErrorHint_right"].ToString()
+                , App.Current.Resources["MessageBox_Error"].ToString());
         }
 
         /// <summary>
@@ -68,16 +72,23 @@ namespace MisakaTranslator_WPF
         /// <param name="e"></param>
         void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            PrintErrorMessageToFile(e.Exception, 2);
-            MessageBox.Show(App.Current.Resources["App_Global_ErrorHint"].ToString(), App.Current.Resources["MessageBox_Error"].ToString());
+            string fn = System.DateTime.Now.ToString("g");
+            PrintErrorMessageToFile(fn,e.Exception, 2);
+            MessageBox.Show(App.Current.Resources["App_Global_ErrorHint_left"].ToString() + fn + App.Current.Resources["App_Global_ErrorHint_right"].ToString()
+                , App.Current.Resources["MessageBox_Error"].ToString());
         }
 
         /// <summary>
         /// 打印错误信息到文本文件
         /// </summary>
         /// <param name="e"></param>
-        private void PrintErrorMessageToFile(Exception e,int exceptionThread,string ErrorMessage = null) {
-            FileStream fs = new FileStream("LastErrorLogs.txt", FileMode.Create);
+        private void PrintErrorMessageToFile(string fileName,Exception e,int exceptionThread,string ErrorMessage = null) {
+            if (Directory.Exists(Environment.CurrentDirectory + "\\logs") == false)
+            {
+                Directory.CreateDirectory(Environment.CurrentDirectory + "\\logs");
+            }
+            FileStream fs = new FileStream(Environment.CurrentDirectory + "\\logs\\" + fileName + ".txt", FileMode.Create);
+            
             StreamWriter sw = new StreamWriter(fs);
 
             sw.WriteLine("==============System Info================");
