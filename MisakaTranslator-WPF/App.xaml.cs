@@ -12,18 +12,18 @@ namespace MisakaTranslator_WPF
         public App()
         {
             //注册开始和退出事件
-            this.Startup += new StartupEventHandler(App_Startup);
-            this.Exit += new ExitEventHandler(App_Exit);
+            this.Startup += App_Startup;
+            this.Exit += App_Exit;
         }
 
         void App_Startup(object sender, StartupEventArgs e)
         {
             //UI线程未捕获异常处理事件
-            this.DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(App_DispatcherUnhandledException);
+            this.DispatcherUnhandledException += App_DispatcherUnhandledException;
             //Task线程内未捕获异常处理事件
             TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
             //非UI线程未捕获异常处理事件
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
         }
 
         void App_Exit(object sender, ExitEventArgs e)
@@ -34,67 +34,65 @@ namespace MisakaTranslator_WPF
         /// <summary>
         /// UI线程未捕获异常处理事件
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            string fn = System.DateTime.Now.ToString("g");
-            PrintErrorMessageToFile(fn,e.Exception,0);
-            MessageBox.Show(App.Current.Resources["App_Global_ErrorHint_left"].ToString() + fn + App.Current.Resources["App_Global_ErrorHint_right"].ToString()
-                , App.Current.Resources["MessageBox_Error"].ToString());
+            string fn = DateTime.Now.ToString("g");
+            PrintErrorMessageToFile(fn, e.Exception, 0);
+            MessageBox.Show($"{Current.Resources["App_Global_ErrorHint_left"]}{fn}{Current.Resources["App_Global_ErrorHint_right"]}"
+                , Current.Resources["MessageBox_Error"].ToString());
         }
 
         /// <summary>
         /// 非UI线程未捕获异常处理事件
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            string fn = System.DateTime.Now.ToString("g");
-            if (e.ExceptionObject is Exception)
+            string fn = DateTime.Now.ToString("g");
+            if (e.ExceptionObject is Exception exception)
             {
-                PrintErrorMessageToFile(fn,(Exception)e.ExceptionObject, 1);
+                PrintErrorMessageToFile(fn, exception, 1);
             }
             else
             {
-                PrintErrorMessageToFile(fn,null, 1, e.ExceptionObject.ToString());
+                PrintErrorMessageToFile(fn, null, 1, e.ExceptionObject.ToString());
             }
 
-            MessageBox.Show(App.Current.Resources["App_Global_ErrorHint_left"].ToString() + fn + App.Current.Resources["App_Global_ErrorHint_right"].ToString()
-                , App.Current.Resources["MessageBox_Error"].ToString());
+            MessageBox.Show($"{Current.Resources["App_Global_ErrorHint_left"]}{fn}{Current.Resources["App_Global_ErrorHint_right"]}"
+                , Current.Resources["MessageBox_Error"].ToString());
         }
 
         /// <summary>
         /// Task线程内未捕获异常处理事件
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            string fn = System.DateTime.Now.ToString("g");
-            PrintErrorMessageToFile(fn,e.Exception, 2);
-            MessageBox.Show(App.Current.Resources["App_Global_ErrorHint_left"].ToString() + fn + App.Current.Resources["App_Global_ErrorHint_right"].ToString()
-                , App.Current.Resources["MessageBox_Error"].ToString());
+            string fn = DateTime.Now.ToString("g");
+            PrintErrorMessageToFile(fn, e.Exception, 2);
+            MessageBox.Show($"{Current.Resources["App_Global_ErrorHint_left"]}{fn}{Current.Resources["App_Global_ErrorHint_right"]}"
+                , Current.Resources["MessageBox_Error"].ToString());
         }
 
         /// <summary>
         /// 打印错误信息到文本文件
         /// </summary>
-        /// <param name="e"></param>
-        private void PrintErrorMessageToFile(string fileName,Exception e,int exceptionThread,string ErrorMessage = null) {
-            if (Directory.Exists(Environment.CurrentDirectory + "\\logs") == false)
+        /// <param name="fileName">文件名</param>
+        /// <param name="e">异常</param>
+        /// <param name="exceptionThread">异常线程</param>
+        /// <param name="ErrorMessage">错误消息</param>
+        private void PrintErrorMessageToFile(string fileName, Exception e, int exceptionThread, string ErrorMessage = null)
+        {
+            if (!Directory.Exists($"{Environment.CurrentDirectory}\\logs"))
             {
-                Directory.CreateDirectory(Environment.CurrentDirectory + "\\logs");
+                Directory.CreateDirectory($"{Environment.CurrentDirectory}\\logs");
             }
-            FileStream fs = new FileStream(Environment.CurrentDirectory + "\\logs\\" + fileName + ".txt", FileMode.Create);
-            
+            FileStream fs = new FileStream($"{Environment.CurrentDirectory}\\logs\\{fileName}.txt", FileMode.Create);
+
             StreamWriter sw = new StreamWriter(fs);
 
             sw.WriteLine("==============System Info================");
-            sw.WriteLine("System:" + Environment.OSVersion.ToString());
-            sw.WriteLine("CurrentTime:" + System.DateTime.Now.ToString("g"));
-            sw.WriteLine("dotNetVersion:" + Environment.Version.ToString());
+            sw.WriteLine("System:" + Environment.OSVersion);
+            sw.WriteLine("CurrentTime:" + DateTime.Now.ToString("g"));
+            sw.WriteLine("dotNetVersion:" + Environment.Version);
 
             if (ErrorMessage != null)
             {
@@ -123,11 +121,11 @@ namespace MisakaTranslator_WPF
                 sw.WriteLine("ExceptionStackTrace:" + e.StackTrace);
             }
 
-            
+
             sw.Flush();
             sw.Close();
             fs.Close();
         }
-        
+
     }
 }
