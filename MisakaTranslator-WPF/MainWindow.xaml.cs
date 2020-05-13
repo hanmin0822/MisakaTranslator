@@ -399,9 +399,8 @@ namespace MisakaTranslator_WPF
                         HandyControl.Controls.MessageBox.Show("语言配置已修改！重启软件后生效！", "提示");
                         break;
                     case "en-us":
-                        HandyControl.Controls.MessageBox.Show("Profile in English is being produced", "Hint");
-                        //Common.appSettings.AppLanguage = "en-US";
-                        //HandyControl.Controls.MessageBox.Show("Language configuration has been modified! It will take effect after restarting MisakaTranslator!", "Hint");
+                        Common.appSettings.AppLanguage = "en-US";
+                        HandyControl.Controls.MessageBox.Show("Language configuration has been modified! It will take effect after restarting MisakaTranslator!", "Hint");
                         break;
                 }
             }

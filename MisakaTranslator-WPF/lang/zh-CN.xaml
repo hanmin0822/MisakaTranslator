@@ -263,5 +263,7 @@
     <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_left">MisakaTranslator检测到您有自定义特殊码行为，记录最后一个特殊码为</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_right">如果您确认这个特殊码可以得到文本，请选择是；如果此特殊码不是您想要的结果，您可以选择否来重新注入一个自定义特殊码；如果您不需要自定义特殊码，请选择取消来进入下一个界面。</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_BtnAddClipboardFunc">添加剪贴板监视方法</sys:String>
+
+    <sys:String x:Key="App_Global_ErrorHint">MisakaTranslator发现了全局无法解决的异常，即将强制退出。关于本次异常的详细信息已经存储在软件根目录下的LastErrorLogs.txt文件中，为了更好地维护本软件，我们希望您能将此文件发送给作者以修复这个问题。</sys:String>
     
 </ResourceDictionary>

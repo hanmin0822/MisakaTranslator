@@ -260,4 +260,11 @@
     <sys:String x:Key="XxgJpZhDictPage_TestSourceWord">Dictionary query test:</sys:String>
     <sys:String x:Key="XxgJpZhDictPage_BtnTest">Look up</sys:String>
     <sys:String x:Key="XxgJpZhDictPage_ChoosePathHint">Select the Shogakukan dictionary database file.</sys:String>
+
+    <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_left">Misakatranslator has detected that you have input custom hookcode behavior. The last hookcode recorded is</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_right">If you confirm that this hookcode can get text, please select Yes; if this hookcode is not the result you want, you can select no to re inject a custom hookcode; if you do not need a custom hookcode, please select Cancel to enter the next interface.</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_BtnAddClipboardFunc">Add clipboard monitoring thread</sys:String>
+
+    <sys:String x:Key="App_Global_ErrorHint">Misakatranslator found an exception that cannot be resolved. The software is about to exit. Details about this exception have been stored in the LastErrorLogs.txt File, in order to better maintain the software, we hope you can send this file to the author to fix this problem.</sys:String>
+
 </ResourceDictionary>

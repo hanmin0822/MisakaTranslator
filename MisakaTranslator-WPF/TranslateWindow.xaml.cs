@@ -608,7 +608,7 @@ namespace MisakaTranslator_WPF
                 MaxHeight = 300,
                 MinWidth = 600,
                 MinHeight = 300,
-                Title = this.Resources["TranslateWin_History_Title"].ToString()
+                Title = App.Current.Resources["TranslateWin_History_Title"].ToString()
             };
             window.Show();
         }
