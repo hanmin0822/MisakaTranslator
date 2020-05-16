@@ -75,7 +75,8 @@ E-Mail/QQ:512240272@qq.com
 
 ## 项目团队成员
 
-* 画师担当-百川行
+* 人设&画师-百川行
+* 画师-[洛奚](https://www.pixiv.net/users/13495987)
 * 官网制作-[Disviel](https://github.com/Disviel)
 
 ## 贡献者名单
