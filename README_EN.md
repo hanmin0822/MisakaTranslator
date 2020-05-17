@@ -71,7 +71,8 @@ E-Mail/QQ:512240272@qq.com
 
 ## Project Team Members
 
-* Paintist-百川行
+* Character&Paintist-百川行
+* Paintist-[洛奚](https://www.pixiv.net/users/13495987)
 * Web-[Disviel](https://github.com/Disviel)
 
 ## List Of Contributors
