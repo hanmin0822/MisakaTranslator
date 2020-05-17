@@ -13,7 +13,7 @@
             <RowDefinition Height="5*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" Source="Aboutv2.jpg" Margin="20"></Image>
+        <Image Grid.Row="0" Source="AboutV2.jpg" Margin="20"></Image>
         <Button Grid.Row="1" Content="{StaticResource AboutPage_BtnHelp}" HorizontalAlignment="Left" Margin="20" Click="BtnHelp_Click"></Button>
         <Button Grid.Row="1" Content="{StaticResource AboutPage_BtnGithub}" HorizontalAlignment="Right" Margin="20" Click="BtnGithub_Click"></Button>
     </Grid>

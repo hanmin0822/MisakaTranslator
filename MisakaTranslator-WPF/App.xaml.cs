@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,7 +29,10 @@ namespace MisakaTranslator_WPF
 
         void App_Exit(object sender, ExitEventArgs e)
         {
-            //程序退出时需要处理的业务
+            //程序退出时检查是否断开Hook
+            DoHookCheck();
+
+
         }
 
         /// <summary>
@@ -36,8 +40,9 @@ namespace MisakaTranslator_WPF
         /// </summary>
         void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            string fn = DateTime.Now.ToString("g");
+            string fn = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
             PrintErrorMessageToFile(fn, e.Exception, 0);
+            DoHookCheck();
             MessageBox.Show($"{Current.Resources["App_Global_ErrorHint_left"]}{fn}{Current.Resources["App_Global_ErrorHint_right"]}"
                 , Current.Resources["MessageBox_Error"].ToString());
         }
@@ -47,7 +52,7 @@ namespace MisakaTranslator_WPF
         /// </summary>
         void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            string fn = DateTime.Now.ToString("g");
+            string fn = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
             if (e.ExceptionObject is Exception exception)
             {
                 PrintErrorMessageToFile(fn, exception, 1);
@@ -57,6 +62,7 @@ namespace MisakaTranslator_WPF
                 PrintErrorMessageToFile(fn, null, 1, e.ExceptionObject.ToString());
             }
 
+            DoHookCheck();
             MessageBox.Show($"{Current.Resources["App_Global_ErrorHint_left"]}{fn}{Current.Resources["App_Global_ErrorHint_right"]}"
                 , Current.Resources["MessageBox_Error"].ToString());
         }
@@ -66,8 +72,10 @@ namespace MisakaTranslator_WPF
         /// </summary>
         void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            string fn = DateTime.Now.ToString("g");
+            string fn = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
             PrintErrorMessageToFile(fn, e.Exception, 2);
+
+            DoHookCheck();
             MessageBox.Show($"{Current.Resources["App_Global_ErrorHint_left"]}{fn}{Current.Resources["App_Global_ErrorHint_right"]}"
                 , Current.Resources["MessageBox_Error"].ToString());
         }
@@ -93,6 +101,8 @@ namespace MisakaTranslator_WPF
             sw.WriteLine("System:" + Environment.OSVersion);
             sw.WriteLine("CurrentTime:" + DateTime.Now.ToString("g"));
             sw.WriteLine("dotNetVersion:" + Environment.Version);
+            var version = Assembly.GetExecutingAssembly().GetName().Version;
+            sw.WriteLine("MisakaTranslatorVersion:" + version.ToString());
 
             if (ErrorMessage != null)
             {
@@ -125,6 +135,18 @@ namespace MisakaTranslator_WPF
             sw.Flush();
             sw.Close();
             fs.Close();
+        }
+
+
+        /// <summary>
+        /// 执行Hook是否完全卸载的检查
+        /// </summary>
+        public void DoHookCheck() {
+            if (Common.textHooker != null)
+            {
+                Common.textHooker = null;
+                GC.Collect();
+            }
         }
 
     }

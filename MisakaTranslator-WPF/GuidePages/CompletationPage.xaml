@@ -15,6 +15,7 @@
             <RowDefinition Height="25*"></RowDefinition>
             <RowDefinition Height="30*"></RowDefinition>
         </Grid.RowDefinitions>
+        <Image Grid.Row="0" Margin="0" Source="Completation.png"></Image>
 
         <TextBlock Grid.Row="1" Text="{StaticResource CompletationPage_Hint}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
 

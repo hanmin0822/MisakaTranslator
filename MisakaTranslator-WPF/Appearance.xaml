@@ -2,8 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:MisakaTranslator_WPF.res"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
-    <SolidColorBrush x:Key="Foreground" Color="AliceBlue"></SolidColorBrush>
+    
+    
+    <SolidColorBrush x:Key="MainBtnColor" Color="#ffff556d"></SolidColorBrush>
+    <SolidColorBrush x:Key="BoxBtnColor" Color="#ffff8e9d"></SolidColorBrush>
 
-    <SolidColorBrush x:Key="TranslateWindowBackground" Color="#6fffcccc"></SolidColorBrush>
+    <SolidColorBrush x:Key="TranslateWindowBackground" Color="#fffcf4f2"></SolidColorBrush>
 
 </ResourceDictionary>
