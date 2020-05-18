@@ -20,10 +20,9 @@
 
 ~~MisakaTranslator的名字由来是因为本软件连接到了一万多名御坂妹妹所组成的『御坂网络』，利用其强大的计算能力来提供实时可靠的翻译（误）~~
 
-演示视频：https://www.bilibili.com/video/av94082641
+[测试版演示视频](https://www.bilibili.com/video/av94082641)
 
-以上视频仅为测试版第一版功能，目前的实际功能和其他效果见最新版本！
-
+[2.0版本教程](https://www.bilibili.com/video/BV1Qt4y11713)
 
 ## 软件功能及特点
 
@@ -42,21 +41,11 @@
 
 如果您对这个项目感兴趣，想提供任何帮助，欢迎联系作者。
 
-作者的联系方式在下方。
+E-Mail/QQ:512240272@qq.com
 
 ## 本项目所使用到的其他开源项目
 
-* [~~IgnaceMaes/MaterialSkin~~](https://github.com/IgnaceMaes/MaterialSkin) 
-* [~~平原君关于MaterialSkin的fork~~](https://gitee.com/victorzhao/MaterialSkin)
-* [~~kwwwvagaa/NetWinformControl~~](https://github.com/kwwwvagaa/NetWinformControl)
-* [Artikash/Textractor](https://github.com/Artikash/Textractor)
-* [JamesNK/Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
-* [Config.Net](https://github.com/aloneguid/config)
-* [charlesw/tesseract](https://github.com/charlesw/tesseract/)
-* [tesseract-ocr/tesseract](https://github.com/tesseract-ocr/tesseract)
-* [kekyo/MeCab.DotNet](https://github.com/kekyo/MeCab.DotNet)
-* [HandyOrg/HandyControl](https://github.com/HandyOrg/HandyControl)
-* [lgztx96/texthost](https://github.com/lgztx96/texthost)
+参见[Dependencies](https://github.com/hanmin0822/MisakaTranslator/network/dependencies)
 
 ## 本项目开发过程中使用到的重要参考文献
 
@@ -64,20 +53,13 @@
 * [C#图像处理(二值化,灰阶)](https://blog.csdn.net/chaoguodong/article/details/7877312)
 * [C#中使用全局键盘鼠标钩子](https://www.cnblogs.com/CJSTONE/p/4961865.html)
 
-## 联系作者
-
-E-Mail/QQ:512240272@qq.com
-
-## 合作开发者
-
-* [unlsycn](https://github.com/HumphreyDotSln) 
-* [tpxxn](https://github.com/tpxxn)
-
 ## 项目团队成员
 
-* 人设&画师-百川行
 * 画师-[洛奚](https://www.pixiv.net/users/13495987)
 * 官网制作-[Disviel](https://github.com/Disviel)
+* 人设&画师-百川行
+* 合作开发者-[unlsycn](https://github.com/HumphreyDotSln) 
+* 合作开发者-[tpxxn](https://github.com/tpxxn)
 
 ## 贡献者名单
 
@@ -87,10 +69,10 @@ E-Mail/QQ:512240272@qq.com
 * 多次提供作者开发上的帮助-[lgztx96](https://github.com/lgztx96)
 * [点此查看其他的贡献者名单](https://github.com/hanmin0822/MisakaTranslator/blob/master/THANKLIST.MD)
 
+## 作出贡献
+
+如果您想为本项目作出贡献，请参阅[贡献指南](https://github.com/hanmin0822/MisakaTranslator/blob/master/CONTRIBUTING.md)
+
 ## 其他注意
-
-2.0beta3之前的版本运行时需要调用Textractor的CLI版本读输出，但原版的控制台输出可能导致本软件无法读取或读取存在问题，针对CLI版本的修改如下，请自行编译后使用
-
-* [hanmin0822/Textractor](https://github.com/hanmin0822/Textractor)
 
 软件开发过程中使用到部分网络素材，如果侵犯到您的权益，请第一时间联系作者删除，谢谢！
