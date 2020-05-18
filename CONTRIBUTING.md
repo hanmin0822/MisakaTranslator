@@ -8,7 +8,7 @@
 
 请[新建Issue](https://github.com/hanmin0822/MisakaTranslator/issues/new/choose)，并选择Feature Request模板，按照模板中的说明提交功能建议。
 
-##贡献代码
+## 贡献代码
 
 您可以直接Fork本项目，并且进行修改和编译，建议使用Visual Studio。
 
