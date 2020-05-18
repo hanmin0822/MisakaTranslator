@@ -45,7 +45,9 @@ E-Mail/QQ:512240272@qq.com
 
 ## 本项目所使用到的其他开源项目
 
-参见[Dependencies](https://github.com/hanmin0822/MisakaTranslator/network/dependencies)
+* [lgztx96/texthost](https://github.com/lgztx96/texthost)
+* [Artikash/Textractor](https://github.com/Artikash/Textractor)
+* 其他参见[Dependencies](https://github.com/hanmin0822/MisakaTranslator/network/dependencies)
 
 ## 本项目开发过程中使用到的重要参考文献
 
