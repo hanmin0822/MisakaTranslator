@@ -1,5 +1,3 @@
-![MisakaTranslator](https://github.com/hanmin0822/MisakaTranslator/blob/master/MisakaTranslator/Resources/Background.jpg)
-
 <h1 align="center">
   MisakaTranslator 御坂翻译器
   <br>
