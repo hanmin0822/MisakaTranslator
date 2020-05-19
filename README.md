@@ -57,7 +57,7 @@ E-Mail/QQ:512240272@qq.com
 
 * 画师-[洛奚](https://www.pixiv.net/users/13495987)
 * 官网制作-[Disviel](https://github.com/Disviel)
-* 人设&画师-百川行
+* 人设&画师-[百川行](https://www.pixiv.net/users/17591894)
 * 合作开发者-[unlsycn](https://github.com/HumphreyDotSln) 
 * 合作开发者-[tpxxn](https://github.com/tpxxn)
 
