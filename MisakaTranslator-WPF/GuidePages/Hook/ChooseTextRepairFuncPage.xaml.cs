@@ -77,19 +77,20 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                 switch (TextRepair.lstRepairFun[lstRepairFun[RepairFuncCombox.SelectedIndex]])
                 {
                     case "RepairFun_RemoveSingleWordRepeat":
-                        sqliteH.ExecuteSql(string.Format("UPDATE game_library SET repair_func = '{0}',repair_param_a = '{1}' WHERE gameid = {2};",
-                            Common.UsingRepairFunc, Common.repairSettings.SingleWordRepeatTimes, Common.GameID));
+                        sqliteH.ExecuteSql(
+                            $"UPDATE game_library SET repair_func = '{Common.UsingRepairFunc}',repair_param_a = '{Common.repairSettings.SingleWordRepeatTimes}' WHERE gameid = {Common.GameID};");
                         break;
                     case "RepairFun_RemoveSentenceRepeat":
-                        sqliteH.ExecuteSql(string.Format("UPDATE game_library SET repair_func = '{0}',repair_param_a = '{1}' WHERE gameid = {2};",
-                            Common.UsingRepairFunc, Common.repairSettings.SentenceRepeatFindCharNum, Common.GameID));
+                        sqliteH.ExecuteSql(
+                            $"UPDATE game_library SET repair_func = '{Common.UsingRepairFunc}',repair_param_a = '{Common.repairSettings.SentenceRepeatFindCharNum}' WHERE gameid = {Common.GameID};");
                         break;
                     case "RepairFun_RegexReplace":
-                        sqliteH.ExecuteSql(string.Format("UPDATE game_library SET repair_func = '{0}',repair_param_a = '{1}',repair_param_b = '{2}' WHERE gameid = {3};", 
-                            Common.UsingRepairFunc, Common.repairSettings.Regex ,Common.repairSettings.Regex_Replace , Common.GameID));
+                        sqliteH.ExecuteSql(
+                            $"UPDATE game_library SET repair_func = '{Common.UsingRepairFunc}',repair_param_a = '{Common.repairSettings.Regex}',repair_param_b = '{Common.repairSettings.Regex_Replace}' WHERE gameid = {Common.GameID};");
                         break;
                     default:
-                        sqliteH.ExecuteSql(string.Format("UPDATE game_library SET repair_func = '{0}' WHERE gameid = {1};", Common.UsingRepairFunc, Common.GameID));
+                        sqliteH.ExecuteSql(
+                            $"UPDATE game_library SET repair_func = '{Common.UsingRepairFunc}' WHERE gameid = {Common.GameID};");
                         break;
                 }
                 

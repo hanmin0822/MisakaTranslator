@@ -79,7 +79,8 @@ namespace TransOptimizationLibrary
         /// <param name="machineTrans">机器翻译的结果（可空）</param>
         /// <returns>添加结果，如果已存在则失败</returns>
         public bool AddNounTrans(string source,int type,string userTrans,string machineTrans = "") {
-            string sql = string.Format("INSERT INTO NounTransOpt VALUES('{0}','{1}',{2},'{3}','{4}','{5}');",source,srcLangCode,type,userTrans,dstLangCode,machineTrans);
+            string sql =
+                $"INSERT INTO NounTransOpt VALUES('{source}','{srcLangCode}',{type},'{userTrans}','{dstLangCode}','{machineTrans}');";
             if (sqlite.ExecuteSql(sql) > 0)
             {
                 return true;

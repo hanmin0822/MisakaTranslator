@@ -116,7 +116,8 @@ namespace SQLHelperLibrary
 
             SQLHelper sqliteH = new SQLHelper();
 
-            List<string> ls = sqliteH.ExecuteReader_OneLine(string.Format("SELECT gameid FROM game_library WHERE gamefilepath = '{0}';", gamepath), 1);
+            List<string> ls = sqliteH.ExecuteReader_OneLine(
+                $"SELECT gameid FROM game_library WHERE gamefilepath = '{gamepath}';", 1);
 
             if (ls == null)
             {
@@ -127,10 +128,11 @@ namespace SQLHelperLibrary
 
             if (ls.Count == 0)
             {
-                string sql = string.Format("INSERT INTO game_library VALUES(NULL,'{0}','{1}',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);",
-                    Path.GetFileNameWithoutExtension(gamepath), gamepath);
+                string sql =
+                    $"INSERT INTO game_library VALUES(NULL,'{Path.GetFileNameWithoutExtension(gamepath)}','{gamepath}',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);";
                 sqliteH.ExecuteSql(sql);
-                ls = sqliteH.ExecuteReader_OneLine(string.Format("SELECT gameid FROM game_library WHERE gamefilepath = '{0}';", gamepath), 1);
+                ls = sqliteH.ExecuteReader_OneLine(
+                    $"SELECT gameid FROM game_library WHERE gamefilepath = '{gamepath}';", 1);
             }
 
             return int.Parse(ls[0]);
@@ -211,7 +213,7 @@ namespace SQLHelperLibrary
             }
 
             SQLHelper sqliteH = new SQLHelper();
-            List<string> ls = sqliteH.ExecuteReader_OneLine(string.Format("SELECT * FROM game_library WHERE gameid = {0};",gameID), 13);
+            List<string> ls = sqliteH.ExecuteReader_OneLine($"SELECT * FROM game_library WHERE gameid = {gameID};", 13);
 
             if (ls == null)
             {
@@ -249,7 +251,7 @@ namespace SQLHelperLibrary
         /// <returns></returns>
         public static bool DeleteGameByID(int gameID) {
             SQLHelper sqliteH = new SQLHelper();
-            int ret = sqliteH.ExecuteSql(string.Format("DELETE FROM game_library WHERE gameid = {0};",gameID));
+            int ret = sqliteH.ExecuteSql($"DELETE FROM game_library WHERE gameid = {gameID};");
             if (ret == -1) {
                 return false;
             }
@@ -264,7 +266,7 @@ namespace SQLHelperLibrary
         /// <returns></returns>
         public static bool UpdateGameNameByID(int gameID, string name) {
             SQLHelper sqliteH = new SQLHelper();
-            int ret = sqliteH.ExecuteSql(string.Format("UPDATE game_library SET gamename = '{0}' WHERE gameid = {1};",name,gameID));
+            int ret = sqliteH.ExecuteSql($"UPDATE game_library SET gamename = '{name}' WHERE gameid = {gameID};");
             if (ret == -1)
             {
                 return false;

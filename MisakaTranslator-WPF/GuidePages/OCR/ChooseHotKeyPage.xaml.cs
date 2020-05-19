@@ -24,9 +24,9 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
         GlobalHook hook;
         List<string> lstHotKeySource = new List<string>()
         {
-            App.Current.Resources["ChooseHotKeyPage_List_Keyboard"].ToString(),
-            App.Current.Resources["ChooseHotKeyPage_List_MouseL"].ToString(),
-            App.Current.Resources["ChooseHotKeyPage_List_MouseR"].ToString()
+            Application.Current.Resources["ChooseHotKeyPage_List_Keyboard"].ToString(),
+            Application.Current.Resources["ChooseHotKeyPage_List_MouseL"].ToString(),
+            Application.Current.Resources["ChooseHotKeyPage_List_MouseR"].ToString()
         };
 
         HotKeyInfo HotKey;
@@ -48,7 +48,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
         {
             HotKey.IsMouse = false;
             HotKey.KeyCode = e.KeyCode;
-            HotKeyTag.Text = App.Current.Resources["ChooseHotKeyPage_HotKeyTag"].ToString() + HotKey.KeyCode;
+            HotKeyTag.Text = Application.Current.Resources["ChooseHotKeyPage_HotKeyTag"].ToString() + HotKey.KeyCode;
             hook.Stop();
             hook = null;
             OCRDelayBox.Focus();//设置完后应该转移焦点
@@ -63,7 +63,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
                 if (hook == null)
                 {
                     hook = new GlobalHook();
-                    hook.KeyDown += new System.Windows.Forms.KeyEventHandler(Hook_OnKeyBoardActivity);
+                    hook.KeyDown += Hook_OnKeyBoardActivity;
                 }
             }
 
@@ -74,7 +74,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             }
             else
             {
-                HandyControl.Controls.Growl.Error(App.Current.Resources["Hook_Error_Hint"].ToString());
+                HandyControl.Controls.Growl.Error(Application.Current.Resources["Hook_Error_Hint"].ToString());
             }
         }
 
@@ -82,11 +82,11 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
         {
             if (HotKeyTag.Text == "")
             {
-                HandyControl.Controls.Growl.Error(App.Current.Resources["ChooseHotKeyPage_NoKeyHint"].ToString());
+                HandyControl.Controls.Growl.Error(Application.Current.Resources["ChooseHotKeyPage_NoKeyHint"].ToString());
             }
             else if (int.Parse(OCRDelayBox.Text) <= 0)
             {
-                HandyControl.Controls.Growl.Error(App.Current.Resources["ChooseHotKeyPage_TooLessDelayHint"].ToString());
+                HandyControl.Controls.Growl.Error(Application.Current.Resources["ChooseHotKeyPage_TooLessDelayHint"].ToString());
             }
             else {
                 Common.UsingHotKey = HotKey;
@@ -95,8 +95,10 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
                 //存入数据库
 
                 //使用路由事件机制通知窗口来完成下一步操作
-                PageChangeRoutedEventArgs args = new PageChangeRoutedEventArgs(PageChange.PageChangeRoutedEvent, this);
-                args.XamlPath = "GuidePages/ChooseLanguagePage.xaml";
+                PageChangeRoutedEventArgs args = new PageChangeRoutedEventArgs(PageChange.PageChangeRoutedEvent, this)
+                {
+                    XamlPath = "GuidePages/ChooseLanguagePage.xaml"
+                };
                 this.RaiseEvent(args);
             }
         }
@@ -112,14 +114,14 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             {
                 HotKey.IsMouse = true;
                 HotKey.MouseButton = System.Windows.Forms.MouseButtons.Left;
-                HotKeyTag.Text = App.Current.Resources["ChooseHotKeyPage_HotKeyTag"].ToString() + App.Current.Resources["ChooseHotKeyPage_List_MouseL"].ToString();
+                HotKeyTag.Text = Application.Current.Resources["ChooseHotKeyPage_HotKeyTag"].ToString() + Application.Current.Resources["ChooseHotKeyPage_List_MouseL"].ToString();
                 ChooseHotkeyBtn.Visibility = Visibility.Hidden;
             }
             else if (HotKeySourceCombox.SelectedIndex == 2)
             {
                 HotKey.IsMouse = true;
                 HotKey.MouseButton = System.Windows.Forms.MouseButtons.Right;
-                HotKeyTag.Text = App.Current.Resources["ChooseHotKeyPage_HotKeyTag"].ToString() + App.Current.Resources["ChooseHotKeyPage_List_MouseR"].ToString();
+                HotKeyTag.Text = Application.Current.Resources["ChooseHotKeyPage_HotKeyTag"].ToString() + Application.Current.Resources["ChooseHotKeyPage_List_MouseR"].ToString();
                 ChooseHotkeyBtn.Visibility = Visibility.Hidden;
             }
         }

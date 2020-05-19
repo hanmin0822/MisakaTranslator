@@ -113,7 +113,7 @@ namespace MisakaTranslator_WPF
             bool r = hook.Start();
             if (!r)
             {
-                HandyControl.Controls.Growl.ErrorGlobal(App.Current.Resources["Hook_Error_Hint"].ToString());
+                HandyControl.Controls.Growl.ErrorGlobal(Application.Current.Resources["Hook_Error_Hint"].ToString());
             }
         }
 
@@ -372,7 +372,7 @@ namespace MisakaTranslator_WPF
                     {
                         if (ret == "")
                         {
-                            HandyControl.Controls.Growl.ErrorGlobal(App.Current.Resources["TranslateWin_DictError_Hint"].ToString() + dict.GetLastError());
+                            Growl.ErrorGlobal(Application.Current.Resources["TranslateWin_DictError_Hint"] + dict.GetLastError());
                         }
                         else {
                             ret = XxgJpzhDict.RemoveHTML(ret);
@@ -392,14 +392,14 @@ namespace MisakaTranslator_WPF
                                 MaxHeight = 300,
                                 MinWidth = 600,
                                 MinHeight = 300,
-                                Title = App.Current.Resources["TranslateWin_Dict_Title"].ToString()
+                                Title = Application.Current.Resources["TranslateWin_Dict_Title"].ToString()
                             };
                             window.Show();
                         }
                     }
                     else
                     {
-                        HandyControl.Controls.Growl.ErrorGlobal(App.Current.Resources["TranslateWin_DictError_Hint"].ToString() + dict.GetLastError());
+                        Growl.ErrorGlobal(Application.Current.Resources["TranslateWin_DictError_Hint"] + dict.GetLastError());
                     }
                 }
             }
@@ -516,7 +516,7 @@ namespace MisakaTranslator_WPF
             else {
                 BackWinChrome.Opacity = double.Parse(Common.appSettings.TF_Opacity) / 100;
                 DragBorder.Opacity = 0.01;
-                Growl.InfoGlobal(App.Current.Resources["TranslateWin_DragBox_Hint"].ToString());
+                Growl.InfoGlobal(Application.Current.Resources["TranslateWin_DragBox_Hint"].ToString());
             }
 
         }
@@ -608,7 +608,7 @@ namespace MisakaTranslator_WPF
                 MaxHeight = 300,
                 MinWidth = 600,
                 MinHeight = 300,
-                Title = App.Current.Resources["TranslateWin_History_Title"].ToString()
+                Title = Application.Current.Resources["TranslateWin_History_Title"].ToString()
             };
             window.Show();
         }

@@ -34,11 +34,11 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             Trans.TranslatorInit(TransTokenBox.Text,"");
             if (Trans.Translate("apple", "zh", "en") != null)
             {
-                HandyControl.Controls.Growl.Success("彩云小译" + App.Current.Resources["APITest_Success_Hint"].ToString());
+                HandyControl.Controls.Growl.Success($"彩云小译{Application.Current.Resources["APITest_Success_Hint"]}");
             }
             else
             {
-                HandyControl.Controls.Growl.Error("彩云小译" + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + Trans.GetLastError());
+                HandyControl.Controls.Growl.Error($"彩云小译{Application.Current.Resources["APITest_Error_Hint"]}\n{Trans.GetLastError()}");
             }
         }
 
@@ -64,11 +64,11 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             string res = Trans.Translate(TestSrcText.Text, TestDstLang.Text, TestSrcLang.Text);
             if (res != null)
             {
-                HandyControl.Controls.MessageBox.Show(res, App.Current.Resources["MessageBox_Result"].ToString());
+                HandyControl.Controls.MessageBox.Show(res, Application.Current.Resources["MessageBox_Result"].ToString());
             }
             else
             {
-                HandyControl.Controls.Growl.Error("彩云小译" + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + Trans.GetLastError());
+                HandyControl.Controls.Growl.Error($"彩云小译{Application.Current.Resources["APITest_Error_Hint"]}\n{Trans.GetLastError()}");
             }
         }
     }

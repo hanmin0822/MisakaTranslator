@@ -61,34 +61,34 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
 
                     if (res != null)
                     {
-                        HandyControl.Controls.MessageBox.Show(res, App.Current.Resources["MessageBox_Result"].ToString());
+                        HandyControl.Controls.MessageBox.Show(res, Application.Current.Resources["MessageBox_Result"].ToString());
                     }
                     else {
-                        HandyControl.Controls.Growl.Error("TesseractOCR " + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + Common.ocr.GetLastError());
+                        HandyControl.Controls.Growl.Error($"TesseractOCR {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
                     }
                 }
                 else
                 {
-                    HandyControl.Controls.Growl.Error("TesseractOCR " + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + Common.ocr.GetLastError());
+                    HandyControl.Controls.Growl.Error($"TesseractOCR {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
                 }
             }
             else if (Common.appSettings.OCRsource == "BaiduOCR")
             {
-                if (Common.ocr.OCR_Init(Common.appSettings.BDOCR_APIKEY, Common.appSettings.BDOCR_SecretKey) != false)
+                if (Common.ocr.OCR_Init(Common.appSettings.BDOCR_APIKEY, Common.appSettings.BDOCR_SecretKey))
                 {
                     string res = Common.ocr.OCRProcess();
 
                     if (res != null)
                     {
-                        HandyControl.Controls.MessageBox.Show(res, App.Current.Resources["MessageBox_Result"].ToString());
+                        HandyControl.Controls.MessageBox.Show(res, Application.Current.Resources["MessageBox_Result"].ToString());
                     }
                     else
                     {
-                        HandyControl.Controls.Growl.Error("百度OCR " + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + Common.ocr.GetLastError());
+                        HandyControl.Controls.Growl.Error($"百度OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
                     }
                 }
                 else {
-                    HandyControl.Controls.Growl.Error("百度OCR " + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + Common.ocr.GetLastError());
+                    HandyControl.Controls.Growl.Error($"百度OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
                 }
             }
             

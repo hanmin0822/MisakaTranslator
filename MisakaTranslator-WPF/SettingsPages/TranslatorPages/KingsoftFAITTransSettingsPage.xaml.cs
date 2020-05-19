@@ -29,13 +29,16 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
 
         private void ChoosePathBtn_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog();
-            dialog.Description = App.Current.Resources["KingsoftFAITTransSettingsPage_ChoosePathHint"].ToString();
+            System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog
+            {
+                Description = Application.Current.Resources["KingsoftFAITTransSettingsPage_ChoosePathHint"]
+                    .ToString()
+            };
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 if (string.IsNullOrEmpty(dialog.SelectedPath))
                 {
-                    HandyControl.Controls.Growl.Error(App.Current.Resources["FilePath_Null_Hint"].ToString());
+                    HandyControl.Controls.Growl.Error(Application.Current.Resources["FilePath_Null_Hint"].ToString());
                 }
                 else
                 {
@@ -52,11 +55,12 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             string res = Trans.Translate(TestSrcText.Text, "zh", TestSrcLang.Text);
             if (res != null)
             {
-                HandyControl.Controls.MessageBox.Show(res, App.Current.Resources["MessageBox_Result"].ToString());
+                HandyControl.Controls.MessageBox.Show(res, Application.Current.Resources["MessageBox_Result"].ToString());
             }
             else
             {
-                HandyControl.Controls.Growl.Error("金山快译翻译" + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + Trans.GetLastError());
+                HandyControl.Controls.Growl.Error(
+                    $"金山快译翻译{Application.Current.Resources["APITest_Error_Hint"]}\n{Trans.GetLastError()}");
             }
         }
     }

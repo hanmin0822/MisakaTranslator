@@ -102,7 +102,8 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                         //往数据库写信息，下一次游戏启动需要重新选方法
                         if (Common.GameID != -1)
                         {
-                            sqliteH.ExecuteSql(string.Format("UPDATE game_library SET isMultiHook = '{0}' WHERE gameid = {1};", "True", Common.GameID));
+                            sqliteH.ExecuteSql(
+                                $"UPDATE game_library SET isMultiHook = '{"True"}' WHERE gameid = {Common.GameID};");
                         }
 
                         break;
@@ -114,27 +115,30 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                 {
                     if (Common.GameID != -1)
                     {
-                        sqliteH.ExecuteSql(string.Format("UPDATE game_library SET isMultiHook = '{0}' WHERE gameid = {1};", "False", Common.GameID));
+                        sqliteH.ExecuteSql(
+                            $"UPDATE game_library SET isMultiHook = '{"False"}' WHERE gameid = {Common.GameID};");
                     }
                 }
 
                 if (Common.GameID != -1)
                 {
-                    sqliteH.ExecuteSql(string.Format("UPDATE game_library SET transmode = {0} WHERE gameid = {1};", "1", Common.GameID));
-                    sqliteH.ExecuteSql(string.Format("UPDATE game_library SET hookcode = '{0}' WHERE gameid = {1};", lstData[HookFunListView.SelectedIndex].HookCode, Common.GameID));
+                    sqliteH.ExecuteSql($"UPDATE game_library SET transmode = {"1"} WHERE gameid = {Common.GameID};");
+                    sqliteH.ExecuteSql(
+                        $"UPDATE game_library SET hookcode = '{lstData[HookFunListView.SelectedIndex].HookCode}' WHERE gameid = {Common.GameID};");
 
                     if (LastCustomHookCode != "NULL")
                     {
                         MessageBoxResult result = HandyControl.Controls.MessageBox.Show(
-                            App.Current.Resources["ChooseHookFuncPage_MBOX_hookcodeConfirm_left"].ToString() + "\n" + LastCustomHookCode + "\n" + App.Current.Resources["ChooseHookFuncPage_MBOX_hookcodeConfirm_right"].ToString(),
-                            App.Current.Resources["MessageBox_Ask"].ToString(),
+                            Application.Current.Resources["ChooseHookFuncPage_MBOX_hookcodeConfirm_left"] + "\n" + LastCustomHookCode + "\n" + Application.Current.Resources["ChooseHookFuncPage_MBOX_hookcodeConfirm_right"],
+                            Application.Current.Resources["MessageBox_Ask"].ToString(),
                             MessageBoxButton.YesNoCancel,
                             MessageBoxImage.Question);
 
                         if (result == MessageBoxResult.Yes)
                         {
                             //记录这个特殊码到数据库
-                            sqliteH.ExecuteSql(string.Format("UPDATE game_library SET hookcode_custom = '{0}' WHERE gameid = {1};", LastCustomHookCode, Common.GameID));
+                            sqliteH.ExecuteSql(
+                                $"UPDATE game_library SET hookcode_custom = '{LastCustomHookCode}' WHERE gameid = {Common.GameID};");
                         }
                         else if (result == MessageBoxResult.No)
                         {
@@ -142,23 +146,27 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                             return;
                         } else{
                             //不记录特殊码，但也要写NULL
-                            sqliteH.ExecuteSql(string.Format("UPDATE game_library SET hookcode_custom = '{0}' WHERE gameid = {1};", "NULL", Common.GameID));
+                            sqliteH.ExecuteSql(
+                                $"UPDATE game_library SET hookcode_custom = '{"NULL"}' WHERE gameid = {Common.GameID};");
 
                         }
                     }
                     else {
-                        sqliteH.ExecuteSql(string.Format("UPDATE game_library SET hookcode_custom = '{0}' WHERE gameid = {1};", "NULL", Common.GameID));
+                        sqliteH.ExecuteSql(
+                            $"UPDATE game_library SET hookcode_custom = '{"NULL"}' WHERE gameid = {Common.GameID};");
                     }
 
                 }
 
                 //使用路由事件机制通知窗口来完成下一步操作
-                PageChangeRoutedEventArgs args = new PageChangeRoutedEventArgs(PageChange.PageChangeRoutedEvent, this);
-                args.XamlPath = "GuidePages/Hook/ChooseTextRepairFuncPage.xaml";
+                PageChangeRoutedEventArgs args = new PageChangeRoutedEventArgs(PageChange.PageChangeRoutedEvent, this)
+                {
+                    XamlPath = "GuidePages/Hook/ChooseTextRepairFuncPage.xaml"
+                };
                 this.RaiseEvent(args);
             }
             else {
-                HandyControl.Controls.Growl.Error(App.Current.Resources["ChooseHookFuncPage_NextErrorHint"].ToString());
+                HandyControl.Controls.Growl.Error(Application.Current.Resources["ChooseHookFuncPage_NextErrorHint"].ToString());
             }
 
 
@@ -171,10 +179,10 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                 Common.textHooker.AttachProcessByHookCode(int.Parse(PIDTextBox.Text), HookCodeTextBox.Text);
                 LastCustomHookCode = HookCodeTextBox.Text;
                 InputDrawer.IsOpen = false;
-                HandyControl.Controls.Growl.Info(App.Current.Resources["ChooseHookFuncPage_HookApplyHint"].ToString());
+                HandyControl.Controls.Growl.Info(Application.Current.Resources["ChooseHookFuncPage_HookApplyHint"].ToString());
             }
             else {
-                HandyControl.Controls.MessageBox.Show(App.Current.Resources["ChooseHookFuncPage_HookApplyErrorHint"].ToString(), App.Current.Resources["MessageBox_Error"].ToString());
+                HandyControl.Controls.MessageBox.Show(Application.Current.Resources["ChooseHookFuncPage_HookApplyErrorHint"].ToString(), Application.Current.Resources["MessageBox_Error"].ToString());
             }
         }
 
@@ -187,7 +195,7 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
         {
             if (e.Key == Key.Escape) {
                 Common.textHooker.HFSevent -= DataRecvEventHandler;
-                HandyControl.Controls.Growl.Warning(App.Current.Resources["ChooseHookFuncPage_PauseHint"].ToString());
+                HandyControl.Controls.Growl.Warning(Application.Current.Resources["ChooseHookFuncPage_PauseHint"].ToString());
             }
             
         }

@@ -77,7 +77,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
                 }
                 else
                 {
-                    MessageBox.Show(App.Current.Resources["Hook_Error_Hint"].ToString());
+                    MessageBox.Show(Application.Current.Resources["Hook_Error_Hint"].ToString());
                 }
             }
             else if (IsChoosingWin == true)
@@ -120,7 +120,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
         {
             if (isAllWin == false && SelectedHwnd == 0)
             {
-                HandyControl.Controls.Growl.Error(App.Current.Resources["ChooseOCRAreaPage_NextErrorHint"].ToString());
+                HandyControl.Controls.Growl.Error(Application.Current.Resources["ChooseOCRAreaPage_NextErrorHint"].ToString());
                 return;
             }
             BitmapImage img;

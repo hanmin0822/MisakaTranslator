@@ -38,7 +38,7 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
         {
             GamePid = lstProcess[(string)GameProcessCombox.SelectedValue];
             SameNameGameProcessList = ProcessHelper.FindSameNameProcess(GamePid);
-            AutoHookTag.Text = App.Current.Resources["ChooseGamePage_AutoHookTag_Begin"].ToString() + SameNameGameProcessList.Count + App.Current.Resources["ChooseGamePage_AutoHookTag_End"].ToString();
+            AutoHookTag.Text = Application.Current.Resources["ChooseGamePage_AutoHookTag_Begin"].ToString() + SameNameGameProcessList.Count + Application.Current.Resources["ChooseGamePage_AutoHookTag_End"].ToString();
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
@@ -63,7 +63,8 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                     Common.GameID = GameLibraryHelper.GetGameID(filepath);
                 }
                 SQLHelper sqliteH = new SQLHelper();
-                sqliteH.ExecuteSql(string.Format("UPDATE game_library SET isx64 = '{0}' WHERE gameid = {1};", x64GameCheckBox.IsChecked, Common.GameID));
+                sqliteH.ExecuteSql(
+                    $"UPDATE game_library SET isx64 = '{x64GameCheckBox.IsChecked}' WHERE gameid = {Common.GameID};");
 
 
                 //使用路由事件机制通知窗口来完成下一步操作
@@ -72,7 +73,7 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                 this.RaiseEvent(args);
             }
             else {
-                HandyControl.Controls.Growl.Error(App.Current.Resources["ChooseGamePage_NextErrorHint"].ToString());
+                HandyControl.Controls.Growl.Error(Application.Current.Resources["ChooseGamePage_NextErrorHint"].ToString());
             }
             
         }

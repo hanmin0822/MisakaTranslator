@@ -32,11 +32,11 @@ namespace MisakaTranslator_WPF.SettingsPages
         {
             if (Common.ExportTextractorHistory())
             {
-                HandyControl.Controls.Growl.Success(App.Current.Resources["HookSettingsPage_SuccessHint"].ToString());
+                HandyControl.Controls.Growl.Success(Application.Current.Resources["HookSettingsPage_SuccessHint"].ToString());
             }
             else
             {
-                HandyControl.Controls.Growl.Error(App.Current.Resources["HookSettingsPage_ErrorHint"].ToString());
+                HandyControl.Controls.Growl.Error(Application.Current.Resources["HookSettingsPage_ErrorHint"].ToString());
             }
         }
 

@@ -29,16 +29,18 @@ namespace MisakaTranslator_WPF.SettingsPages.DictionaryPages
 
         private void ChoosePathBtn_Click(object sender, RoutedEventArgs e)
         {
-            
-            System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
-            dialog.Multiselect = false;
-            dialog.Title = App.Current.Resources["XxgJpZhDictPage_ChoosePathHint"].ToString();
-            dialog.Filter = "所有文件(*.*)|*.*";
+
+            System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog
+            {
+                Multiselect = false,
+                Title = Application.Current.Resources["XxgJpZhDictPage_ChoosePathHint"].ToString(),
+                Filter = "所有文件(*.*)|*.*"
+            };
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 if (string.IsNullOrEmpty(dialog.FileName))
                 {
-                    HandyControl.Controls.Growl.Error(App.Current.Resources["FilePath_Null_Hint"].ToString());
+                    HandyControl.Controls.Growl.Error(Application.Current.Resources["FilePath_Null_Hint"].ToString());
                 }
                 else
                 {
@@ -79,7 +81,7 @@ namespace MisakaTranslator_WPF.SettingsPages.DictionaryPages
                 window.Show();
             }
             else {
-                HandyControl.Controls.Growl.Error("查询错误！" + dict.GetLastError());
+                HandyControl.Controls.Growl.Error($"查询错误！{dict.GetLastError()}");
             }
 
             

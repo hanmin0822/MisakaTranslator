@@ -30,13 +30,15 @@ namespace MisakaTranslator_WPF.SettingsPages
 
         private void ChoosePathBtn_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog();
-            dialog.Description = App.Current.Resources["LESettingsPage_ChooseFilePathHint"].ToString();
+            System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog
+            {
+                Description = Application.Current.Resources["LESettingsPage_ChooseFilePathHint"].ToString()
+            };
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 if (string.IsNullOrEmpty(dialog.SelectedPath))
                 {
-                    HandyControl.Controls.Growl.Error(App.Current.Resources["FilePath_Null_Hint"].ToString());
+                    HandyControl.Controls.Growl.Error(Application.Current.Resources["FilePath_Null_Hint"].ToString());
                 }
                 else
                 {

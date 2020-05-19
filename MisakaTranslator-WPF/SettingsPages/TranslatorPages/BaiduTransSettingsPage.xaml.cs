@@ -37,11 +37,11 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             
             if (BDTrans.Translate("apple", "zh", "en") != null)
             {
-                HandyControl.Controls.Growl.Success("百度翻译" + App.Current.Resources["APITest_Success_Hint"].ToString());
+                HandyControl.Controls.Growl.Success($"百度翻译{Application.Current.Resources["APITest_Success_Hint"]}");
             }
             else
             {
-                HandyControl.Controls.Growl.Error("百度翻译" + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + BDTrans.GetLastError());
+                HandyControl.Controls.Growl.Error($"百度翻译{Application.Current.Resources["APITest_Error_Hint"]}\n{BDTrans.GetLastError()}");
             }
         }
 
@@ -68,11 +68,12 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             
             if (res != null)
             {
-                HandyControl.Controls.MessageBox.Show(res, App.Current.Resources["MessageBox_Result"].ToString());
+                HandyControl.Controls.MessageBox.Show(res, Application.Current.Resources["MessageBox_Result"].ToString());
             }
             else
             {
-                HandyControl.Controls.Growl.Error("百度翻译" + App.Current.Resources["APITest_Error_Hint"].ToString() + "\n" + BDTrans.GetLastError());
+                HandyControl.Controls.Growl.Error(
+                    $"百度翻译{Application.Current.Resources["APITest_Error_Hint"]}\n{BDTrans.GetLastError()}");
             }
         }
     }

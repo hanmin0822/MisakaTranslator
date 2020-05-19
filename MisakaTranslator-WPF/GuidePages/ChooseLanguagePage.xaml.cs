@@ -22,15 +22,15 @@ namespace MisakaTranslator_WPF.GuidePages
     /// </summary>
     public partial class ChooseLanguagePage : Page
     {
-        private List<string> langlist;
+        private readonly List<string> _langList;
 
         public ChooseLanguagePage()
         {
             InitializeComponent();
 
-            langlist = CommonFunction.lstLanguage.Keys.ToList();
-            SrcLangCombox.ItemsSource = langlist;
-            DstLangCombox.ItemsSource = langlist;
+            _langList = CommonFunction.lstLanguage.Keys.ToList();
+            SrcLangCombox.ItemsSource = _langList;
+            DstLangCombox.ItemsSource = _langList;
 
             SrcLangCombox.SelectedIndex = 2;
             DstLangCombox.SelectedIndex = 0;
@@ -40,25 +40,27 @@ namespace MisakaTranslator_WPF.GuidePages
         {
             if (SrcLangCombox.SelectedIndex == DstLangCombox.SelectedIndex)
             {
-                HandyControl.Controls.Growl.Error(App.Current.Resources["ChooseLanguagePage_NextErrorHint"].ToString());
+                HandyControl.Controls.Growl.Error(Application.Current.Resources["ChooseLanguagePage_NextErrorHint"].ToString());
             }
             else {
-                Common.UsingSrcLang = CommonFunction.lstLanguage[langlist[SrcLangCombox.SelectedIndex]];
-                Common.UsingDstLang = CommonFunction.lstLanguage[langlist[DstLangCombox.SelectedIndex]];
+                Common.UsingSrcLang = CommonFunction.lstLanguage[_langList[SrcLangCombox.SelectedIndex]];
+                Common.UsingDstLang = CommonFunction.lstLanguage[_langList[DstLangCombox.SelectedIndex]];
 
                 //写数据库信息
                 if(Common.GameID != -1)
                 {
                     SQLHelper sqliteH = new SQLHelper();
-                    sqliteH.ExecuteSql(string.Format("UPDATE game_library SET src_lang = '{0}' WHERE gameid = {1};",
-                            Common.UsingSrcLang, Common.GameID));
-                    sqliteH.ExecuteSql(string.Format("UPDATE game_library SET dst_lang = '{0}' WHERE gameid = {1};",
-                            Common.UsingDstLang, Common.GameID));
+                    sqliteH.ExecuteSql(
+                        $"UPDATE game_library SET src_lang = '{Common.UsingSrcLang}' WHERE gameid = {Common.GameID};");
+                    sqliteH.ExecuteSql(
+                        $"UPDATE game_library SET dst_lang = '{Common.UsingDstLang}' WHERE gameid = {Common.GameID};");
                 }
 
                 //使用路由事件机制通知窗口来完成下一步操作
-                PageChangeRoutedEventArgs args = new PageChangeRoutedEventArgs(PageChange.PageChangeRoutedEvent, this);
-                args.XamlPath = "GuidePages/CompletationPage.xaml";
+                PageChangeRoutedEventArgs args = new PageChangeRoutedEventArgs(PageChange.PageChangeRoutedEvent, this)
+                {
+                    XamlPath = "GuidePages/CompletationPage.xaml"
+                };
                 this.RaiseEvent(args);
             }
         }

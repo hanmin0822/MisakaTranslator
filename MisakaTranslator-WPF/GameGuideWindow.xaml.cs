@@ -32,42 +32,42 @@ namespace MisakaTranslator_WPF
             {
                 //Hook模式
                 List<string> lstStep = new List<string>() {
-                    App.Current.Resources["GameGuideWin_Hook_Step_1"].ToString(),
-                    App.Current.Resources["GameGuideWin_Hook_Step_2"].ToString(),
-                    App.Current.Resources["GameGuideWin_Hook_Step_3"].ToString(),
-                    App.Current.Resources["GameGuideWin_Step_4"].ToString(),
-                    App.Current.Resources["GameGuideWin_Step_5"].ToString()
+                    Application.Current.Resources["GameGuideWin_Hook_Step_1"].ToString(),
+                    Application.Current.Resources["GameGuideWin_Hook_Step_2"].ToString(),
+                    Application.Current.Resources["GameGuideWin_Hook_Step_3"].ToString(),
+                    Application.Current.Resources["GameGuideWin_Step_4"].ToString(),
+                    Application.Current.Resources["GameGuideWin_Step_5"].ToString()
                 };
 
                 GuideStepBar.ItemsSource = lstStep;
-                FuncHint.Text = App.Current.Resources["GameGuideWin_FuncHint_Hook"].ToString();
+                FuncHint.Text = Application.Current.Resources["GameGuideWin_FuncHint_Hook"].ToString();
                 GuidePageFrame.Navigate(new Uri("GuidePages/Hook/ChooseGamePage.xaml", UriKind.Relative));
             }
             else if (Mode == 2)
             {
                 //OCR模式
                 List<string> lstStep = new List<string>() {
-                    App.Current.Resources["GameGuideWin_OCR_Step_1"].ToString(),
-                    App.Current.Resources["GameGuideWin_OCR_Step_2"].ToString(),
-                    App.Current.Resources["GameGuideWin_OCR_Step_3"].ToString(),
-                    App.Current.Resources["GameGuideWin_Step_4"].ToString(),
-                    App.Current.Resources["GameGuideWin_Step_5"].ToString()
+                    Application.Current.Resources["GameGuideWin_OCR_Step_1"].ToString(),
+                    Application.Current.Resources["GameGuideWin_OCR_Step_2"].ToString(),
+                    Application.Current.Resources["GameGuideWin_OCR_Step_3"].ToString(),
+                    Application.Current.Resources["GameGuideWin_Step_4"].ToString(),
+                    Application.Current.Resources["GameGuideWin_Step_5"].ToString()
                 };
 
                 GuideStepBar.ItemsSource = lstStep;
-                FuncHint.Text = App.Current.Resources["GameGuideWin_FuncHint_OCR"].ToString();
+                FuncHint.Text = Application.Current.Resources["GameGuideWin_FuncHint_OCR"].ToString();
                 GuidePageFrame.Navigate(new Uri("GuidePages/OCR/ChooseOCRAreaPage.xaml", UriKind.Relative));
             }
             else if(Mode == 3)
             {
                 //重新选择Hook方法
                 List<string> lstStep = new List<string>() { 
-                    App.Current.Resources["GameGuideWin_ReHook_Step_1"].ToString(),
-                    App.Current.Resources["GameGuideWin_Step_5"].ToString()
+                    Application.Current.Resources["GameGuideWin_ReHook_Step_1"].ToString(),
+                    Application.Current.Resources["GameGuideWin_Step_5"].ToString()
                 };
 
                 GuideStepBar.ItemsSource = lstStep;
-                FuncHint.Text = App.Current.Resources["GameGuideWin_FuncHint_ReHook"].ToString();
+                FuncHint.Text = Application.Current.Resources["GameGuideWin_FuncHint_ReHook"].ToString();
                 GuidePageFrame.Navigate(new Uri("GuidePages/Hook/ReChooseHookFuncPage.xaml", UriKind.Relative));
             }
         }
