@@ -33,9 +33,9 @@ namespace MisakaTranslator_WPF.SettingsPages
         public OCRGeneralSettingsPage()
         {
             InitializeComponent();
-            OCRsourceCombox.ItemsSource = lstOCR;
+            OCRSourceCombox.ItemsSource = lstOCR;
 
-            OCRsourceCombox.SelectedValue = Common.appSettings.OCRsource;
+            OCRSourceCombox.SelectedValue = Common.appSettings.OCRsource;
             OCRHotKeyBox.Text = Common.appSettings.GlobalOCRHotkey;
 
             Langlist = ImageProcFunc.lstOCRLang.Keys.ToList();
@@ -50,15 +50,14 @@ namespace MisakaTranslator_WPF.SettingsPages
 
         private void OCRsourceCombox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Common.appSettings.OCRsource = (string)OCRsourceCombox.SelectedValue;
+            Common.appSettings.OCRsource = (string)OCRSourceCombox.SelectedValue;
         }
 
         
         private void OCRHotKeyBox_KeyDown(object sender, KeyEventArgs e1)
         {
             System.Windows.Forms.KeyEventArgs e = ToWinforms(e1);
-            StringBuilder keyValue = new StringBuilder();
-            keyValue.Length = 0;
+            StringBuilder keyValue = new StringBuilder {Length = 0};
             keyValue.Append("");
             if (e.Modifiers != 0)
             {
@@ -90,35 +89,35 @@ namespace MisakaTranslator_WPF.SettingsPages
         /// </summary>
         /// <param name="keyEventArgs"></param>
         /// <returns></returns>
-        public static System.Windows.Forms.KeyEventArgs ToWinforms(System.Windows.Input.KeyEventArgs keyEventArgs)
+        public static System.Windows.Forms.KeyEventArgs ToWinforms(KeyEventArgs keyEventArgs)
         {
-            var wpfKey = keyEventArgs.Key == System.Windows.Input.Key.System ? keyEventArgs.SystemKey : keyEventArgs.Key;
+            var wpfKey = keyEventArgs.Key == Key.System ? keyEventArgs.SystemKey : keyEventArgs.Key;
             var winformModifiers = ToWinforms(keyEventArgs.KeyboardDevice.Modifiers);
-            var winformKeys = (System.Windows.Forms.Keys)System.Windows.Input.KeyInterop.VirtualKeyFromKey(wpfKey);
+            var winformKeys = (System.Windows.Forms.Keys)KeyInterop.VirtualKeyFromKey(wpfKey);
             return new System.Windows.Forms.KeyEventArgs(winformKeys | winformModifiers);
         }
 
         public static System.Windows.Forms.Keys ToWinforms(System.Windows.Input.ModifierKeys modifier)
         {
             var retVal = System.Windows.Forms.Keys.None;
-            if (modifier.HasFlag(System.Windows.Input.ModifierKeys.Alt))
+            if (modifier.HasFlag(ModifierKeys.Alt))
             {
                 retVal |= System.Windows.Forms.Keys.Alt;
             }
-            if (modifier.HasFlag(System.Windows.Input.ModifierKeys.Control))
+            if (modifier.HasFlag(ModifierKeys.Control))
             {
                 retVal |= System.Windows.Forms.Keys.Control;
             }
-            if (modifier.HasFlag(System.Windows.Input.ModifierKeys.None))
+            if (modifier.HasFlag(ModifierKeys.None))
             {
                 // Pointless I know
                 retVal |= System.Windows.Forms.Keys.None;
             }
-            if (modifier.HasFlag(System.Windows.Input.ModifierKeys.Shift))
+            if (modifier.HasFlag(ModifierKeys.Shift))
             {
                 retVal |= System.Windows.Forms.Keys.Shift;
             }
-            if (modifier.HasFlag(System.Windows.Input.ModifierKeys.Windows))
+            if (modifier.HasFlag(ModifierKeys.Windows))
             {
                 // Not supported lel
             }
