@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using TextHookLibrary;
 using TextRepairLibrary;
@@ -127,5 +128,15 @@ namespace MisakaTranslator_WPF
             scw.Top = 0;
             scw.Show();
         }
+        /// <summary>
+        /// 获取DPI缩放倍数
+        /// </summary>
+        /// <returns>DPI缩放倍数</returns>
+        public static double GetScale()
+        {
+            Graphics currentGraphics = Graphics.FromHwnd(new WindowInteropHelper(mainWin).Handle);
+            return currentGraphics.DpiX / 96;
+        }
+
     }
 }

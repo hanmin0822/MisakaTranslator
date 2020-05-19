@@ -20,6 +20,7 @@ namespace MisakaTranslator_WPF
         Point iniP;
         private ViewModel viewModel;
         Rect selectRect;
+        double scale;
 
         public static System.Drawing.Rectangle OCRArea;
 
@@ -28,6 +29,7 @@ namespace MisakaTranslator_WPF
         public ScreenCaptureWindow(BitmapImage i,int mode = 1)
         {
             img = i;
+            scale = Common.GetScale();
             capMode = mode;
             InitializeComponent();
 
@@ -53,7 +55,7 @@ namespace MisakaTranslator_WPF
             };
 
             DataContext = viewModel;
-
+            
 
         }
 
@@ -91,7 +93,7 @@ namespace MisakaTranslator_WPF
                 viewModel.InkStrokes.Clear();
                 viewModel.InkStrokes.Add(stroke);
 
-                selectRect = new Rect(iniP,endP);
+                selectRect = new Rect(new Point(iniP.X * scale,iniP.Y * scale),new Point(endP.X * scale,endP.Y * scale));
             }
         }
 
