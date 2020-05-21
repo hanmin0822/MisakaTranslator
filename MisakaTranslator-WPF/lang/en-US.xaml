@@ -191,7 +191,7 @@
     <sys:String x:Key="CompletationPage_BtnConfirm">Finish setting</sys:String>
     <sys:String x:Key="CompletationPage_Hint">Congrats! You've completed all the settings for the game!</sys:String>
 
-    <sys:String x:Key="ChooseOCRAreaPage_Introduce">First choose full screen snapshot or the game window (Click on the window is recommended), and then select the OCR area. use the &quot;Refresh OCR area&quot; to preview.</sys:String>
+    <sys:String x:Key="ChooseOCRAreaPage_Introduce">First choose Full-screen snapshot or select a window (by clicking on the game window), and then select the OCR area. use the &quot;Refresh OCR area&quot; to preview.</sys:String>
     <sys:String x:Key="ChooseOCRAreaPage_IsAllWinCBox">Full-screen snapshot</sys:String>
     <sys:String x:Key="ChooseOCRAreaPage_ChooseWinBtn">Select a window</sys:String>
     <sys:String x:Key="ChooseOCRAreaPage_ChooseAreaBtn">Select OCR area</sys:String>
