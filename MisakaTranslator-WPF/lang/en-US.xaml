@@ -9,13 +9,13 @@
     <sys:String x:Key="MessageBox_Hint">Hint</sys:String>
 
     <sys:String x:Key="APITest_Success_Hint">API is valid.</sys:String>
-    <sys:String x:Key="APITest_Error_Hint">API is invalid, please check again.</sys:String>
+    <sys:String x:Key="APITest_Error_Hint">API is invalid. Please check again.</sys:String>
     <sys:String x:Key="Hook_Error_Hint">Load hook error.</sys:String>
     <sys:String x:Key="FilePath_Null_Hint">Error: File path is empty.</sys:String>
 
     <sys:String x:Key="BtnStart">Start translation</sys:String>
-    <sys:String x:Key="BtnHookGuide">Translate by hook wizard</sys:String>
-    <sys:String x:Key="BtnOCRGuide">Translate by OCR wizard</sys:String>
+    <sys:String x:Key="BtnHookGuide">Translate through hook Wizard</sys:String>
+    <sys:String x:Key="BtnOCRGuide">Translate through OCR Wizard</sys:String>
 
     <sys:String x:Key="MainWindow_ScrollViewer_AddNewGame">New game</sys:String>
 
@@ -28,7 +28,7 @@
     <sys:String x:Key="MainWindow_Drawer_Tag_GmaeName">Name:</sys:String>
     <sys:String x:Key="MainWindow_Drawer_Tag_TransMode">Translation mode:</sys:String>
     <sys:String x:Key="MainWindow_Drawer_DeleteGameConfirmBox">Are you sure you want to remove this game from your library? This will not delete your game files, but you will need to go through the wizard again next time you translate this game.</sys:String>
-    <sys:String x:Key="MainWindow_Tip_AutoStart">Auto Start: Looking for game process with saved settings and start translating automatically.</sys:String>
+    <sys:String x:Key="MainWindow_Tip_AutoStart">Auto Start: Looking for game processes with saved settings and start translating automatically.</sys:String>
     <sys:String x:Key="MainWindow_Tip_Settings">Preferences</sys:String>
     <sys:String x:Key="MainWindow_AutoStartError_Hint">Game process with saved settings is not found!</sys:String>
     <sys:String x:Key="MainWindow_GlobalOCRError_Hint">Global OCR shortcut registration failed!</sys:String>
@@ -36,7 +36,7 @@
 
     <sys:String x:Key="SettingsMenu_WinName">Preferences</sys:String>
     <sys:String x:Key="SettingsMenu_About">MisakaTranslator</sys:String>
-    <sys:String x:Key="SettingsMenu_LESettings">LE (Locale Emulator) Settings</sys:String>
+    <sys:String x:Key="SettingsMenu_LESettings">Locale Emulator Settings</sys:String>
     <sys:String x:Key="SettingsMenu_HookSettings">Hook Settings</sys:String>
     <sys:String x:Key="SettingsMenu_OCRsettings">OCR Settings</sys:String>
     <sys:String x:Key="SettingsMenu_OCRsettings_General">General</sys:String>
@@ -48,15 +48,15 @@
     
     <sys:String x:Key="SettingsMenu_TranslatorSettings">Translation Settings</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_General">General</sys:String>
-    <sys:String x:Key="SettingsMenu_TranslatorSettings_Baidu">Baidu Translate</sys:String>
-    <sys:String x:Key="SettingsMenu_TranslatorSettings_TencentFYJ">Tencent AI Translate</sys:String>
-    <sys:String x:Key="SettingsMenu_TranslatorSettings_TencentOld">Tencent TMT</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_Baidu">百度翻译 Baidu Translate</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_TencentFYJ">腾讯翻译君 Tencent AI Translate</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_TencentOld">腾讯私人翻译 Tencent TMT</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Jbeijing">Jbeijing</sys:String>
-    <sys:String x:Key="SettingsMenu_TranslatorSettings_KingsoftFAIT">Kingsoft FastAIT</sys:String>
-    <sys:String x:Key="SettingsMenu_TranslatorSettings_Dreye">Dr.eye</sys:String>
-    <sys:String x:Key="SettingsMenu_TranslatorSettings_Caiyun">Lingocloud</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_KingsoftFAIT">金山快译 Kingsoft FastAIT</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_Dreye">译典通 Dr.eye</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_Caiyun">彩云小译 Lingocloud</sys:String>
     <sys:String x:Key="SettingsMenu_DictSettings">Dictionary Settings</sys:String>
-    <sys:String x:Key="SettingsMenu_DictSettings_xxgrz">Shogakukan ja-zh dictionary</sys:String>
+    <sys:String x:Key="SettingsMenu_DictSettings_xxgrz">小学馆日中 Shogakukan ja-zh dictionary</sys:String>
 
     <sys:String x:Key="API_applyBtn">API Application</sys:String>
     <sys:String x:Key="API_authTestBtn">Test API</sys:String>
@@ -64,51 +64,51 @@
     <sys:String x:Key="API_testSrcLang">Source text language</sys:String>
     <sys:String x:Key="API_testDstLang">Target text language</sys:String>
     <sys:String x:Key="API_testTransBtn">Test translation</sys:String>
-    <sys:String x:Key="API_docBtn">Error codes guide(API Document)</sys:String>
+    <sys:String x:Key="API_docBtn">Error codes guide (API Document)</sys:String>
     <sys:String x:Key="API_billBtn">Check API quota</sys:String>
 
     <sys:String x:Key="GeneralTransSettingsPage_Introduce">The translator window simultaneously displays two sources at most. You can set the APIs in use and toggle the sentence-break setting from below.</sys:String>
-    <sys:String x:Key="GeneralTransSettingsPage_FirstTranslator">First translation source</sys:String>
-    <sys:String x:Key="GeneralTransSettingsPage_SecondTranslator">Second translation source</sys:String>
+    <sys:String x:Key="GeneralTransSettingsPage_FirstTranslator">No.1 translation source</sys:String>
+    <sys:String x:Key="GeneralTransSettingsPage_SecondTranslator">No.2 translation source</sys:String>
     <sys:String x:Key="GeneralTransSettingsPage_EachRowTransCheckBox">Enable sentence-break</sys:String>
     <sys:String x:Key="GeneralTransSettingsPage_TransSourceHint">Note: Translation takes longer if you use multiple online APIs at the same time.</sys:String>
     <sys:String x:Key="GeneralTransSettingsPage_EachRowTransHint">When disabled, the Translator combines all texts into one sentence. This improves translation quality for some games.</sys:String>
 
-    <sys:String x:Key="BaiduTransSettingsPage_Introduce">Baidu Translate (network required) supports inter-translation for 28 languages; among them English, Japanese, Chinese translation is better. You need to apply for the API and activate translation services (on the website in Chinese), get access to the appID and key, and then fill in below before testing. If the API is tested as invalid, you can refer to official Baidu documentations with the error codes. It is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of Baidu Translate.</sys:String>
-    <sys:String x:Key="BaiduTransSettingsPage_appID">Baidu API appID</sys:String>
-    <sys:String x:Key="BaiduTransSettingsPage_secretKey">Baidu API key</sys:String>
+    <sys:String x:Key="BaiduTransSettingsPage_Introduce">Baidu Translate (百度翻译, network required) supports inter-translation for 28 languages; among them English, Japanese, Chinese translation is better. You need to apply for the API and activate translation services (on the website in Chinese), get access to the appID and key, and then fill in below before testing. If the API is tested as invalid, you can refer to official Baidu documentations with the error codes. It is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of Baidu Translate.</sys:String>
+    <sys:String x:Key="BaiduTransSettingsPage_appID">API appID</sys:String>
+    <sys:String x:Key="BaiduTransSettingsPage_secretKey">API key</sys:String>
 
-    <sys:String x:Key="TencentOldTransSettingsPage_Introduce">Tencent TMT API (network required) supports multilingual translation with better support for Japanese and Chinese. You need to apply for the API (on the website in Chinese), get access to the SecretId and SecretKey, and then fill in below before testing. If the API is tested as invalid, you can refer to official Tencent documentations with the error codes. Previous version of API is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of Tencent TMT.</sys:String>
-    <sys:String x:Key="TencentOldTransSettingsPage_SecretId">Tencent TMT SecretId</sys:String>
-    <sys:String x:Key="TencentOldTransSettingsPage_SecretKey">Tencent TMT SecretKey</sys:String>
+    <sys:String x:Key="TencentOldTransSettingsPage_Introduce">Tencent TMT API (腾讯私人翻译, network required) supports multilingual translation with better support for Japanese and Chinese. You need to apply for the API (on the website in Chinese), get access to the SecretId and SecretKey, and then fill in below before testing. If the API is tested as invalid, you can refer to official Tencent documentations with the error codes. Previous version of API is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of Tencent TMT.</sys:String>
+    <sys:String x:Key="TencentOldTransSettingsPage_SecretId">SecretId</sys:String>
+    <sys:String x:Key="TencentOldTransSettingsPage_SecretKey">SecretKey</sys:String>
 
-    <sys:String x:Key="TencentFYJTransSettingsPage_Introduce">Tencent AI Translate (network required) supports multilingual translation with better support for English, Japanese and Chinese. You need to apply for the API and activate an application (on the website in Chinese), get access to the appID and key, and then fill in below before testing. If the API is tested as invalid, you can refer to official Tencent documentations with the error codes. It is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of Tencent AI Translate.</sys:String>
+    <sys:String x:Key="TencentFYJTransSettingsPage_Introduce">Tencent AI Translate (腾讯翻译君, network required) supports multilingual translation with better support for English, Japanese and Chinese. You need to apply for the API and activate an application (on the website in Chinese), get access to the appID and key, and then fill in below before testing. If the API is tested as invalid, you can refer to official Tencent documentations with the error codes. It is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of Tencent AI Translate.</sys:String>
     <sys:String x:Key="TencentFYJTransSettingsPage_appID">API appID</sys:String>
     <sys:String x:Key="TencentFYJTransSettingsPage_secretKey">API key</sys:String>
 
-    <sys:String x:Key="CaiyunTransSettingsPage_Introduce">Lingocloud (network required) supports multilingual translation with better support for Japanese and Chinese. You need to apply for the API (on the website in Chinese), receive confirmation email, get access to the appID and key, and then fill in below before testing. If the API is tested as invalid, you can refer to official Lingocloud documentations with the error codes. It is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of Lingocloud.</sys:String>
-    <sys:String x:Key="CaiyunTransSettingsPage_Token">Lingocloud API token</sys:String>
+    <sys:String x:Key="CaiyunTransSettingsPage_Introduce">Lingocloud (彩云小译, network required) supports multilingual translation with better support for Japanese and Chinese. You need to apply for the API (on the website in Chinese), receive confirmation email, get access to the appID and key, and then fill in below before testing. If the API is tested as invalid, you can refer to official Lingocloud documentations with the error codes. It is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of Lingocloud.</sys:String>
+    <sys:String x:Key="CaiyunTransSettingsPage_Token">API token</sys:String>
 
-    <sys:String x:Key="JbeijingTransSettingsPage_Introduce">JBeijing Translate API (local) supports Japanese translation to Chinese. You need to download and install the Jbeijing translation software, fill in the corresponding path below and confirm that there is JBJCT.dll file in the folder. JBeijing Translate API translation is faster but translation quality is lower than those online APIs.</sys:String>
+    <sys:String x:Key="JbeijingTransSettingsPage_Introduce">JBeijing Translate API (local) supports Japanese translation to Chinese. You need to download and install the Jbeijing translation software, fill in the corresponding path below and confirm that there is JBJCT.dll file in the folder. JBeijing Translate API translates faster, but its quality is lower than those online APIs.</sys:String>
     <sys:String x:Key="JbeijingTransSettingsPage_Path">JBeijing Translate Path</sys:String>
     <sys:String x:Key="JbeijingTransSettingsPage_ChoosePath">Select the path</sys:String>
     <sys:String x:Key="JbeijingTransSettingsPage_ChoosePathHint">Please select the folder where JBeijing is located</sys:String>
 
-    <sys:String x:Key="KingsoftFAITTransSettingsPage_Introduce">Kingsoft FastAIT 2009 (local) supports translation to Chinese from Japanese and English. You need to download and install Kingsoft FastAIT 2009, fill in the corresponding path below and confirm that there is the complete GTS folder. Kingsoft FastAIT 2009 is faster but translation quality is lower than those online APIs.</sys:String>
+    <sys:String x:Key="KingsoftFAITTransSettingsPage_Introduce">Kingsoft FastAIT 2009 (local) supports translation to Chinese from Japanese and English. You need to download and install Kingsoft FastAIT 2009, fill in the corresponding path below and confirm that there is the complete GTS folder. Kingsoft FastAIT 2009 translates faster, but its quality quality is lower than those online APIs.</sys:String>
     <sys:String x:Key="KingsoftFAITTransSettingsPage_Path">Kingsoft FastAIT Path</sys:String>
     <sys:String x:Key="KingsoftFAITTransSettingsPage_ChoosePathHint">Please select the folder where Kingsoft FastAIT 2009 is located</sys:String>
 
-    <sys:String x:Key="DreyeTransSettingsPage_Introduce">Dr.eye (local) supports translation to Chinese from Japanese and English. You need to download and install Dr.eye, fill in the corresponding path below and confirm that there is the complete DreyeMT folder. Dr.eye translation is faster but translation quality is lower than those online APIs.</sys:String>
+    <sys:String x:Key="DreyeTransSettingsPage_Introduce">Dr.eye (local) supports translation to Chinese from Japanese and English. You need to download and install Dr.eye, fill in the corresponding path below and confirm that there is the complete Dr.eye MT folder. Dr.eye translates faster, but its quality quality is lower than those online APIs.</sys:String>
     <sys:String x:Key="DreyeTransSettingsPage_Path">Dr.eye Path</sys:String>
     <sys:String x:Key="DreyeTransSettingsPage_ChoosePathHint">Please select the folder where Dr.eye is located</sys:String>
 
-    <sys:String x:Key="OCRGeneralSettingsPage_Introduce">This is the OCR setting page. The translation window supports only one OCR source. Offline OCR uses Tesseract. It currently supports English and Japanese recognition. If the recognition performance is low, you can train related OCR word library or use Baidu online OCR instead.</sys:String>
+    <sys:String x:Key="OCRGeneralSettingsPage_Introduce">This is the OCR (Optical Character Recognition) setting page. The translation window supports only one OCR source. Offline OCR uses Tesseract. It currently supports English and Japanese recognition. If the recognition performance is low, you can train related OCR word library or use Baidu online OCR instead.</sys:String>
     <sys:String x:Key="OCRGeneralSettingsPage_OCRsource">OCR source</sys:String>
 
     <sys:String x:Key="OCRGeneralSettingsPage_Introduce_GlobalOCR">Select a global shortcut here for the global OCR function, with which you can recognize and translate in any case. It displays a separate window. Click and press the shortcut you want in the input box below, such as Ctrl + A, and the setting takes effect after the translator is restarted.</sys:String>
     <sys:String x:Key="OCRGeneralSettingsPage_GlobalOCRHotKey">Global OCR shortcut</sys:String>
 
-    <sys:String x:Key="BaiduOCRSettingsPage_Introduce">Baidu universal text recognition (network required) can be used for multi-scene, multilingual, high-precision text detection and recognition. You need to apply for the API and activate translation services (on the website in Chinese), get access to the API Key and Secret Key, and then fill in below before testing. It is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of Baidu Translate.</sys:String>
+    <sys:String x:Key="BaiduOCRSettingsPage_Introduce">Baidu universal text recognition (network required) can be used for multi-scene, multilingual, high-precision text detection and recognition. You need to apply for the API and activate translation services (on the website in Chinese), get access to the API Key and Secret Key, and then fill in below before testing. It is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of Baidu OCR.</sys:String>
     <sys:String x:Key="BaiduOCRSettingsPage_APIKEY">Baidu OCR API Key</sys:String>
     <sys:String x:Key="BaiduOCRSettingsPage_SecretKey">Baidu OCR Secret Key</sys:String>
 
@@ -116,7 +116,7 @@
     <sys:String x:Key="HookSettingsPage_AutoHook">Enable smart hook</sys:String>
     <sys:String x:Key="HookSettingsPage_AutoHook_Introduce">Once enabled, Translator hooks the process that uses the biggest memory among multiple processes with the same name.</sys:String>
     <sys:String x:Key="HookSettingsPage_AutoHookHint">Note: This approach is slightly more efficient, but may not find the text.</sys:String>
-    <sys:String x:Key="HookSettingsPage_AutoDetach_Introduce">Once enabled, other modes are automatically unloaded after the hook method of the game has been confirmed, reducing game lag.</sys:String>
+    <sys:String x:Key="HookSettingsPage_AutoDetach_Introduce">Once enabled, other methods are unloaded after the hook method of the game has been confirmed, reducing game lag.</sys:String>
     <sys:String x:Key="HookSettingsPage_AutoDetach">Enable auto unload</sys:String>
     <sys:String x:Key="HookSettingsPage_BtnExtractHistory">Export Hook command line history</sys:String>
     <sys:String x:Key="HookSettingsPage_SuccessHint">Export is complete! Please send the TextractorOutPutHistory.txt file in the directory to the author for inspection.</sys:String>
@@ -124,11 +124,11 @@
 
 
     <sys:String x:Key="LESettingsPage_Introduce">LE (Locale Emulator) solves some problems of garbled texts. To make it work, you need to get the Locale Emulator and set its directory below, where there are LEProc.exe.</sys:String>
-    <sys:String x:Key="LESettingsPage_LEbox">LE path</sys:String>
+    <sys:String x:Key="LESettingsPage_LEbox">LE (Locale Emulator) path</sys:String>
     <sys:String x:Key="LESettingsPage_ChooseFilePathHint">Please select the folder where The Locale Emulator is located.</sys:String>
 
-    <sys:String x:Key="AboutPage_BtnHelp">Guide and feedback</sys:String>
-    <sys:String x:Key="AboutPage_BtnGithub">GitHub project page</sys:String>
+    <sys:String x:Key="AboutPage_BtnHelp">Guide and Feedback</sys:String>
+    <sys:String x:Key="AboutPage_BtnGithub">GitHub Project Page</sys:String>
 
     <sys:String x:Key="GameGuideWin_WinName">Game Translation Wizard</sys:String>
     <sys:String x:Key="GameGuideWin_AlwaysTop">Always on top</sys:String>
@@ -141,17 +141,17 @@
     <sys:String x:Key="GameGuideWin_ReHook_Step_1">Re-select the hook method</sys:String>
     <sys:String x:Key="GameGuideWin_Step_4">Select translation languages</sys:String>
     <sys:String x:Key="GameGuideWin_Step_5">Finish</sys:String>
-    <sys:String x:Key="GameGuideWin_FuncHint_Hook">Extract texts using TextHook</sys:String>
+    <sys:String x:Key="GameGuideWin_FuncHint_Hook">Extract Texts with TextHook</sys:String>
     <sys:String x:Key="GameGuideWin_FuncHint_ReHook">Re-select the hook method to match the previous settings</sys:String>
-    <sys:String x:Key="GameGuideWin_FuncHint_OCR">Extract text using OCR</sys:String>
+    <sys:String x:Key="GameGuideWin_FuncHint_OCR">Extract Texts with OCR</sys:String>
 
-    <sys:String x:Key="ChooseGamePage_Introduce">Note: Run the game first, and then select the game process from the drop-down list. If the game have multiple processes, enable smart hook in the Hook Settings.</sys:String>
+    <sys:String x:Key="ChooseGamePage_Introduce">Note: Run the game first, then come back and select the game process from the drop-down list. If the game has multiple processes, choose "Enable smart hook" in the Hook Settings.</sys:String>
     <sys:String x:Key="ChooseGamePage_BtnChooseWin">Select a window</sys:String>
     <sys:String x:Key="ChooseGamePage_BtnConfirm">Confirm process</sys:String>
     <sys:String x:Key="ChooseGamePage_CBoxX64">Hook with x64 version</sys:String>
     <sys:String x:Key="ChooseGamePage_CBoxX64Hint">Once enabled, the x64 version of Textractor is used to hook the 64-bit game.</sys:String>
     <sys:String x:Key="ChooseGamePage_AutoHookTag_Begin">Auto: Found </sys:String>
-    <sys:String x:Key="ChooseGamePage_AutoHookTag_End"> process(es).</sys:String>
+    <sys:String x:Key="ChooseGamePage_AutoHookTag_End">  process(es).</sys:String>
     <sys:String x:Key="ChooseGamePage_NextErrorHint">Please select a process before proceeding!</sys:String>
 
     <sys:String x:Key="Drawer_BtnExit">Close</sys:String>
@@ -191,7 +191,7 @@
     <sys:String x:Key="CompletationPage_BtnConfirm">Finish setting</sys:String>
     <sys:String x:Key="CompletationPage_Hint">Congrats! You've completed all the settings for the game!</sys:String>
 
-    <sys:String x:Key="ChooseOCRAreaPage_Introduce">First choose full screen snapshot or the game window (Click on the window is recommended), and then select the OCR area. use the &quot;Refresh OCR area&quot; to preview.</sys:String>
+    <sys:String x:Key="ChooseOCRAreaPage_Introduce">First choose Full-screen snapshot or select a window (by clicking on the game window), and then select the OCR area. use the &quot;Refresh OCR area&quot; to preview.</sys:String>
     <sys:String x:Key="ChooseOCRAreaPage_IsAllWinCBox">Full-screen snapshot</sys:String>
     <sys:String x:Key="ChooseOCRAreaPage_ChooseWinBtn">Select a window</sys:String>
     <sys:String x:Key="ChooseOCRAreaPage_ChooseAreaBtn">Select OCR area</sys:String>
@@ -209,7 +209,7 @@
 
     <sys:String x:Key="ChooseHotKeyPage_Introduce">Select a trigger that enables OCR and delay before extracting text.</sys:String>
     <sys:String x:Key="ChooseHotKeyPage_HotKeySourceCBox">Trigger source</sys:String>
-    <sys:String x:Key="ChooseHotKeyPage_HotKeySourceCBox_Hint">OCR starts after this trigger is pressed. For example, left click updates text in most galgames.</sys:String>
+    <sys:String x:Key="ChooseHotKeyPage_HotKeySourceCBox_Hint">OCR starts after this trigger is pressed. Left click updates text in most galgames and thus is recommended.</sys:String>
     <sys:String x:Key="ChooseHotKeyPage_HotKeySetBtn">Set the trigger</sys:String>
     <sys:String x:Key="ChooseHotKeyPage_OCRDelayBox">OCR delay (milliseconds)</sys:String>
     <sys:String x:Key="ChooseHotKeyPage_ConfirmBtn">Confirm</sys:String>
@@ -221,15 +221,15 @@
     <sys:String x:Key="ChooseHotKeyPage_NoKeyHint">Please set a trigger</sys:String>
     <sys:String x:Key="ChooseHotKeyPage_TooLessDelayHint">Delay must be greater than 0 ms</sys:String>
 
-    <sys:String x:Key="TranslateWin_DragTitle">Hold to drag in here. Right-click to the menu.</sys:String>
+    <sys:String x:Key="TranslateWin_DragTitle">Hold to drag here. Right-click to the menu.</sys:String>
     <sys:String x:Key="TranslateWin_Menu_ChangeSize">Resize the window</sys:String>
     <sys:String x:Key="TranslateWin_Menu_ShowSource">Show/Hide source text</sys:String>
-    <sys:String x:Key="TranslateWin_Menu_Settings">Translator window settings</sys:String>
-    <sys:String x:Key="TranslateWin_Menu_History">View history texts</sys:String>
+    <sys:String x:Key="TranslateWin_Menu_Settings">Translator Window Settings</sys:String>
+    <sys:String x:Key="TranslateWin_Menu_History">View texts history</sys:String>
     <sys:String x:Key="TranslateWin_Menu_RenewOCR">Re-translate/OCR</sys:String>
     <sys:String x:Key="TranslateWin_Menu_Pause">Pause/Resume Translator</sys:String>
     <sys:String x:Key="TranslateWin_Menu_Min">Minimize the Translator</sys:String>
-    <sys:String x:Key="TranslateWin_Menu_Exit">Exit the Translator</sys:String>
+    <sys:String x:Key="TranslateWin_Menu_Exit">Stop the Translator</sys:String>
     <sys:String x:Key="TranslateWin_Menu_AddNounTrans">Add proper nouns</sys:String>
     <sys:String x:Key="TranslateWin_History_Title">Translation history</sys:String>
     <sys:String x:Key="TranslateWin_Dict_Title">Dictionary queries</sys:String>
@@ -239,15 +239,15 @@
     <sys:String x:Key="TransWinSettingsWin_Title">Translator window settings</sys:String>
     <sys:String x:Key="TransWinSettingsWin_Tab_Window">Window</sys:String>
     <sys:String x:Key="TransWinSettingsWin_Tab_source">Source text</sys:String>
-    <sys:String x:Key="TransWinSettingsWin_Tab_first">Translation I</sys:String>
-    <sys:String x:Key="TransWinSettingsWin_Tab_second">Translation II</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_Tab_first">No.1 Translation</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_Tab_second">No.2 Translation</sys:String>
     <sys:String x:Key="TransWinSettingsWin_Opacity">Translator window opacity</sys:String>
     <sys:String x:Key="TransWinSettingsWin_BgColor">Background color</sys:String>
     <sys:String x:Key="TransWinSettingsWin_FontColor">Font color</sys:String>
     <sys:String x:Key="TransWinSettingsWin_FontSize">Font size</sys:String>
     <sys:String x:Key="TransWinSettingsWin_FontName">Font</sys:String>
     <sys:String x:Key="TransWinSettingsWin_BtnChooseColor">Choose a color</sys:String>
-    <sys:String x:Key="TransWinSettingsWin_srcSetNotice">The locale setting for the source text needs refreshing to see the effect.</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_srcSetNotice">Changes to the source text takes effect after texts updated.</sys:String>
 
     <sys:String x:Key="AddOptWin_Introduce">Enter the word you want to add into the thesaurus, which will be replaced directly in the original sentence before submitting for translation.</sys:String>
     <sys:String x:Key="AddOptWin_beforeBox">Original word</sys:String>
@@ -255,17 +255,17 @@
     <sys:String x:Key="AddOptWin_wordType">Speech</sys:String>
     <sys:String x:Key="AddOptWin_confirmBtn">Add to the thesaurus</sys:String>
 
-    <sys:String x:Key="XxgJpZhDictPage_Introduce">Shogakukan Japanese-Chinese dictionary contains about 70,000 words, covering common words. Please download the dictionary's database file (.db) of Misaka Translator customized version, and fill in its location below and test if it is working properly.</sys:String>
+    <sys:String x:Key="XxgJpZhDictPage_Introduce">Shogakukan Japanese-Chinese dictionary contains about 70,000 words, covering common words. Please download the dictionary's database file (.db) of MisakaTranslator customized version, and fill in its location below and test if it works properly.</sys:String>
     <sys:String x:Key="XxgJpZhDictPage_DBPath">Database file path</sys:String>
     <sys:String x:Key="XxgJpZhDictPage_TestSourceWord">Dictionary query test:</sys:String>
     <sys:String x:Key="XxgJpZhDictPage_BtnTest">Look up</sys:String>
     <sys:String x:Key="XxgJpZhDictPage_ChoosePathHint">Select the Shogakukan dictionary database file.</sys:String>
 
-    <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_left">Misakatranslator has detected that you have input custom hookcode behavior. The last hookcode recorded is</sys:String>
-    <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_right">If you confirm that this hookcode can get text, please select Yes; if this hookcode is not the result you want, you can select no to re inject a custom hookcode; if you do not need a custom hookcode, please select Cancel to enter the next interface.</sys:String>
-    <sys:String x:Key="ChooseHookFuncPage_BtnAddClipboardFunc">Add clipboard monitoring thread</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_left">MisakaTranslator has detected that you have input custom H-code behavior. The last H-code recorded is</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_right">If you confirm that this H-code can get text, please select "Yes"; if it can't, select "No" to re-inject a custom H-code; if you do not need a custom H-code, please select "Cancel" to enter the next interface.</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_BtnAddClipboardFunc">Add clipboard monitoring method</sys:String>
 
-    <sys:String x:Key="App_Global_ErrorHint_left">Misakatranslator found an exception that cannot be resolved. The software is about to exit. Details about this exception have been stored in the</sys:String>
-    <sys:String x:Key="App_Global_ErrorHint_right">File in 'logs' Directory, in order to better maintain the software, we hope you can send this file to the author to fix this problem.</sys:String>
+    <sys:String x:Key="App_Global_ErrorHint_left">MisakaTranslator encountered an exception that cannot be resolved. It is about to exit. Details about this exception have been stored in the "</sys:String>
+    <sys:String x:Key="App_Global_ErrorHint_right">" file in the "logs" Directory. To better the Translator, sending these files to the developer on GitHub to troubleshoot is appreciated.</sys:String>
 
 </ResourceDictionary>
