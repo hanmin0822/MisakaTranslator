@@ -161,11 +161,11 @@
     <sys:String x:Key="ChooseHookFuncPage_BtnConfirm">Confirm</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_Header_PID">PID</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_Header_FunName">Method</sys:String>
-    <sys:String x:Key="ChooseHookFuncPage_Header_H-code">H-code</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_Header_HookCode">H-code</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_Header_Content">Content</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_Drawer_Header">Please enter the PID and H-code</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_Drawer_PidBox">PID</sys:String>
-    <sys:String x:Key="ChooseHookFuncPage_Drawer_H-codeBox">H-code</sys:String>
+    <sys:String x:Key="ChooseHookFuncPage_Drawer_HookCodeBox">H-code</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_Drawer_BtnConfirm">Confirm hook</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_NextErrorHint">Select a hook method first.</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_HookApplyHint">Hook applied, please confirm the item text again.</sys:String>
