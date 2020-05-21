@@ -1,10 +1,7 @@
 ﻿using SQLHelperLibrary;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace DictionaryHelperLibrary
 {
@@ -13,34 +10,27 @@ namespace DictionaryHelperLibrary
     /// </summary>
     public class XxgJpzhDict : IDict
     {
-        SQLHelper sqlite;
-        string errorInfo;
+        private SQLHelper _sqlHelper;
+        private string _errorInfo;
 
         public string GetLastError()
         {
-            return errorInfo;
+            return _errorInfo;
         }
 
         public string SearchInDict(string sourceWord)
         {
-            List<List<string>> lst = sqlite.ExecuteReader("SELECT explanation FROM xiaoxueguanrizhong WHERE word LIKE '%" + sourceWord + "%';", 1);
+            var lst = _sqlHelper.ExecuteReader($"SELECT explanation FROM xiaoxueguanrizhong WHERE word LIKE '%{sourceWord}%';", 1);
 
-            if (lst == null) {
-                errorInfo = "DB Error:" + sqlite.getLastError();
-                return null;
-            }
+            if (lst != null) return lst.Aggregate("", (current, t) => current + t[0] + "\n");
+            _errorInfo = "DB Error:" + _sqlHelper.getLastError();
+            return null;
 
-            string ret = "";
-            for (int i = 0;i < lst.Count;i++) {
-                ret = ret + lst[i][0] + "\n";
-            }
-
-            return ret;
         }
 
         public void DictInit(string param1, string param2)
         {
-            sqlite = new SQLHelper(param1);
+            _sqlHelper = new SQLHelper(param1);
         }
 
         /// <summary>
@@ -48,23 +38,19 @@ namespace DictionaryHelperLibrary
         /// </summary>
         /// <param name="src"></param>
         /// <returns></returns>
-        public static string RemoveHTML(string src) {
-            if (src == null) {
+        public static string RemoveHTML(string src)
+        {
+            if (src == null)
+            {
                 return null;
             }
 
-            string tmp = Regex.Replace(src, "<[^>]+>", "");
+            var tmp = Regex.Replace(src, "<[^>]+>", "");
             tmp = Regex.Replace(tmp, "&[^;]+;", "");
 
-            string[] arr = tmp.Split(new string[] { "\\n" }, StringSplitOptions.None);
+            var arr = tmp.Split(new[] { "\\n" }, StringSplitOptions.None);
 
-            string ret = "";
-            foreach (string s in arr)
-            {
-                ret = ret + s + "\n";
-            }
-
-            return ret;
+            return arr.Aggregate("", (current, s) => current + s + "\n");
         }
     }
 }

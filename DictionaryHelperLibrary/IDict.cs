@@ -18,7 +18,7 @@ namespace DictionaryHelperLibrary
         /// <summary>
         /// 查询一次辞典
         /// </summary>
-        /// <param name="sourceText">源单词</param>
+        /// <param name="sourceWord">源单词</param>
         /// <returns>查询结果,如果查询有错误会返回空，可以通过GetLastError来获取错误</returns>
         string SearchInDict(string sourceWord);
 
