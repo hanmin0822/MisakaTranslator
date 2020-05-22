@@ -9,6 +9,9 @@ namespace MisakaTranslator_WPF
 {
     public interface IAppSettings
     {
+        [Option(Alias = "Software.OnCloseMainWindow", DefaultValue = "Exit")]
+        string OnClickCloseButton { get; set; }
+
         [Option(Alias = "Globalization.Language", DefaultValue = "zh-CN")]
         string AppLanguage { get; set; }
 

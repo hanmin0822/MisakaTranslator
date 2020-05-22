@@ -27,7 +27,7 @@
     <sys:String x:Key="MainWindow_Drawer_UpdateName">修改游戏名</sys:String>
     <sys:String x:Key="MainWindow_Drawer_NameHint">输入新的游戏名</sys:String>
     <sys:String x:Key="MainWindow_Drawer_NameConfirmBtn">确认修改</sys:String>
-    <sys:String x:Key="MainWindow_Drawer_Tag_GmaeName">游戏名：</sys:String>
+    <sys:String x:Key="MainWindow_Drawer_Tag_GameName">游戏名：</sys:String>
     <sys:String x:Key="MainWindow_Drawer_Tag_TransMode">翻译模式：</sys:String>
     <sys:String x:Key="MainWindow_Drawer_DeleteGameConfirmBox">您是否确认要将此游戏从您的游戏库中移除？这个操作不会删除您的游戏文件，但下次进行这个游戏时需要重新设置相关参数。</sys:String>
     <sys:String x:Key="MainWindow_Tip_AutoStart">自动开始：在当前所有进程中自动查找之前已经保存过相关设置的游戏并开始翻译</sys:String>
@@ -39,11 +39,12 @@
 
     <sys:String x:Key="SettingsMenu_WinName">MisakaTranslator本体设置</sys:String>
     <sys:String x:Key="SettingsMenu_About">MisakaTranslator</sys:String>
+    <sys:String x:Key="SettingsMenu_SoftwareSettings">软件本体设置</sys:String>
     <sys:String x:Key="SettingsMenu_LESettings">LE转区相关设置</sys:String>
     <sys:String x:Key="SettingsMenu_HookSettings">Hook相关设置</sys:String>
-    <sys:String x:Key="SettingsMenu_OCRsettings">OCR相关设置</sys:String>
-    <sys:String x:Key="SettingsMenu_OCRsettings_General">通用设置</sys:String>
-    <sys:String x:Key="SettingsMenu_OCRsettings_Baidu">百度在线OCR API</sys:String>
+    <sys:String x:Key="SettingsMenu_OCRSettings">OCR相关设置</sys:String>
+    <sys:String x:Key="SettingsMenu_OCRSettings_General">通用设置</sys:String>
+    <sys:String x:Key="SettingsMenu_OCRSettings_Baidu">百度在线OCR API</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings">翻译相关设置</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_General">通用设置</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Baidu">百度翻译API</sys:String>
@@ -101,7 +102,7 @@
     <sys:String x:Key="DreyeTransSettingsPage_ChoosePathHint">请选择译典通本体所在文件夹</sys:String>
 
     <sys:String x:Key="OCRGeneralSettingsPage_Introduce">在这里进行所有OCR选项的通用设置，一个实时翻译窗口只能设置一种OCR方式，您可以指定OCR过程中用到的API；注：离线OCR功能使用Tesseract实现，目前可支持英语、日语的来源识别，如果识别效果不理想，可以考虑自行训练相关OCR字库或使用百度在线OCR识别，更多有关OCR预处理的设置选项见OCR设置窗口。</sys:String>
-    <sys:String x:Key="OCRGeneralSettingsPage_OCRsource">OCR来源</sys:String>
+    <sys:String x:Key="OCRGeneralSettingsPage_OCRSource">OCR来源</sys:String>
 
     <sys:String x:Key="OCRGeneralSettingsPage_Introduce_GlobalOCR">此处选择一种全局快捷键组合用于全局OCR功能，全局OCR功能可以在任何情况下进行OCR识别和翻译，使用单独窗口显示。直接在下方输入框中按下你想要设置的快捷键，例如Ctrl + A，设置完成重启翻译器后生效。</sys:String>
     <sys:String x:Key="OCRGeneralSettingsPage_GlobalOCRHotKey">全局OCR快捷键</sys:String>

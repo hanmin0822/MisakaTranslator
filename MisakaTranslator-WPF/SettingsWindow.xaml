@@ -19,12 +19,12 @@
                 </hc:EventTrigger>
             </hc:Interaction.Triggers>
             <hc:SideMenuItem IsSelected="True" Header="{StaticResource SettingsMenu_About}" FontSize="15" Selected="Item_About_Selected"/>
+            <hc:SideMenuItem Header="{StaticResource SettingsMenu_SoftwareSettings}" FontSize="15" Selected="Item_SoftwareSettings_Selected"/>
             <hc:SideMenuItem Header="{StaticResource SettingsMenu_LESettings}" FontSize="15" Selected="Item_LESettings_Selected"/>
-
             <hc:SideMenuItem Header="{StaticResource SettingsMenu_HookSettings}" FontSize="15" Selected="Item_HookSettings_Selected"/>
-            <hc:SideMenuItem Header="{StaticResource SettingsMenu_OCRsettings}" FontSize="15">
-                <hc:SideMenuItem Header="{StaticResource SettingsMenu_OCRsettings_General}" Selected="Item_OCRGeneral_Selected"/>
-                <hc:SideMenuItem Header="{StaticResource SettingsMenu_OCRsettings_Baidu}" Selected="Item_BaiduOCR_Selected"/>
+            <hc:SideMenuItem Header="{StaticResource SettingsMenu_OCRSettings}" FontSize="15">
+                <hc:SideMenuItem Header="{StaticResource SettingsMenu_OCRSettings_General}" Selected="Item_OCRGeneral_Selected"/>
+                <hc:SideMenuItem Header="{StaticResource SettingsMenu_OCRSettings_Baidu}" Selected="Item_BaiduOCR_Selected"/>
             </hc:SideMenuItem>
             <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings}" FontSize="15">
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_General}" Selected="Item_TransGeneral_Selected"/>

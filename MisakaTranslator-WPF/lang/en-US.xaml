@@ -25,7 +25,7 @@
     <sys:String x:Key="MainWindow_Drawer_UpdateName">Rename the game</sys:String>
     <sys:String x:Key="MainWindow_Drawer_NameHint">Input a new name</sys:String>
     <sys:String x:Key="MainWindow_Drawer_NameConfirmBtn">Confirm</sys:String>
-    <sys:String x:Key="MainWindow_Drawer_Tag_GmaeName">Name:</sys:String>
+    <sys:String x:Key="MainWindow_Drawer_Tag_GameName">Name:</sys:String>
     <sys:String x:Key="MainWindow_Drawer_Tag_TransMode">Translation mode:</sys:String>
     <sys:String x:Key="MainWindow_Drawer_DeleteGameConfirmBox">Are you sure you want to remove this game from your library? This will not delete your game files, but you will need to go through the wizard again next time you translate this game.</sys:String>
     <sys:String x:Key="MainWindow_Tip_AutoStart">Auto Start: Looking for game processes with saved settings and start translating automatically.</sys:String>
@@ -36,11 +36,12 @@
 
     <sys:String x:Key="SettingsMenu_WinName">Preferences</sys:String>
     <sys:String x:Key="SettingsMenu_About">MisakaTranslator</sys:String>
+    <sys:String x:Key="SettingsMenu_SoftwareSettings">Software Settings</sys:String>
     <sys:String x:Key="SettingsMenu_LESettings">Locale Emulator Settings</sys:String>
     <sys:String x:Key="SettingsMenu_HookSettings">Hook Settings</sys:String>
-    <sys:String x:Key="SettingsMenu_OCRsettings">OCR Settings</sys:String>
-    <sys:String x:Key="SettingsMenu_OCRsettings_General">General</sys:String>
-    <sys:String x:Key="SettingsMenu_OCRsettings_Baidu">Baidu OCR API</sys:String>
+    <sys:String x:Key="SettingsMenu_OCRSettings">OCR Settings</sys:String>
+    <sys:String x:Key="SettingsMenu_OCRSettings_General">General</sys:String>
+    <sys:String x:Key="SettingsMenu_OCRSettings_Baidu">Baidu OCR API</sys:String>
     
     
     <sys:String x:Key="Language_Changed">Language is set. Restart translator to take effect.</sys:String>
@@ -103,7 +104,7 @@
     <sys:String x:Key="DreyeTransSettingsPage_ChoosePathHint">Please select the folder where Dr.eye is located</sys:String>
 
     <sys:String x:Key="OCRGeneralSettingsPage_Introduce">This is the OCR (Optical Character Recognition) setting page. The translation window supports only one OCR source. Offline OCR uses Tesseract. It currently supports English and Japanese recognition. If the recognition performance is low, you can train related OCR word library or use Baidu online OCR instead.</sys:String>
-    <sys:String x:Key="OCRGeneralSettingsPage_OCRsource">OCR source</sys:String>
+    <sys:String x:Key="OCRGeneralSettingsPage_OCRSource">OCR source</sys:String>
 
     <sys:String x:Key="OCRGeneralSettingsPage_Introduce_GlobalOCR">Select a global shortcut here for the global OCR function, with which you can recognize and translate in any case. It displays a separate window. Click and press the shortcut you want in the input box below, such as Ctrl + A, and the setting takes effect after the translator is restarted.</sys:String>
     <sys:String x:Key="OCRGeneralSettingsPage_GlobalOCRHotKey">Global OCR shortcut</sys:String>

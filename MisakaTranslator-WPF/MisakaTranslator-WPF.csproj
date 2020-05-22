@@ -163,6 +163,9 @@
     <Compile Include="GameGuideWindow.xaml.cs">
       <DependentUpon>GameGuideWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPages\SoftwareSettingsPage.xaml.cs">
+      <DependentUpon>SoftwareSettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\GameNameDialog.xaml.cs">
       <DependentUpon>GameNameDialog.xaml</DependentUpon>
     </Compile>
@@ -257,6 +260,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GameGuideWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\SoftwareSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

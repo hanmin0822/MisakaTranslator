@@ -220,7 +220,7 @@ namespace MisakaTranslator_WPF
             var temp = str.Remove(0,4);
             _gid = int.Parse(temp);
 
-            GameNameTag.Text = Application.Current.Resources["MainWindow_Drawer_Tag_GmaeName"].ToString() + _gameInfoList[_gid].GameName;
+            GameNameTag.Text = Application.Current.Resources["MainWindow_Drawer_Tag_GameName"].ToString() + _gameInfoList[_gid].GameName;
             if (_gameInfoList[_gid].TransMode == 1) {
                 TransModeTag.Text = Application.Current.Resources["MainWindow_Drawer_Tag_TransMode"].ToString() + "Hook";
             }
@@ -374,6 +374,7 @@ namespace MisakaTranslator_WPF
         private void BlurWindow_Closing(object sender, CancelEventArgs e)
         {
             Common.GlobalOCRHotKey.UnRegisterGlobalHotKey(_hwnd,CallBack);
+            Application.Current.Shutdown();
         }
 
         /// <summary>
