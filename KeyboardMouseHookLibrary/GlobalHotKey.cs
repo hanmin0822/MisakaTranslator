@@ -13,15 +13,15 @@ namespace KeyboardMouseHookLibrary
     {
         //引入系统API
         [DllImport("user32.dll")]
-        static extern bool RegisterHotKey(IntPtr hWnd, int id, int modifiers, Keys vk);
+        private static extern bool RegisterHotKey(IntPtr hWnd, int id, int modifiers, Keys vk);
+
         [DllImport("user32.dll")]
-        static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
-        
 
-        int keyid = 10;     //区分不同的快捷键
-        Dictionary<int, HotKeyCallBackHanlder> keymap = new Dictionary<int, HotKeyCallBackHanlder>();   //每一个key对于一个处理函数
-        public delegate void HotKeyCallBackHanlder();
+        private int _keyId = 10;     //区分不同的快捷键
+        private readonly Dictionary<int, HotKeyCallBackHandler> _keymap = new Dictionary<int, HotKeyCallBackHandler>();   //每一个key对于一个处理函数
+        public delegate void HotKeyCallBackHandler();
 
         //组合控制键
         public enum HotkeyModifiers
@@ -33,18 +33,18 @@ namespace KeyboardMouseHookLibrary
         }
 
         //注册快捷键
-        public bool RegistGlobalHotKey(IntPtr hWnd, int modifiers, Keys vk, HotKeyCallBackHanlder callBack)
+        public bool RegisterGlobalHotKey(IntPtr hWnd, int modifiers, Keys vk, HotKeyCallBackHandler callBack)
         {
-            int id = keyid++;
-            bool res = RegisterHotKey(hWnd, id, modifiers, vk);
-            keymap[id] = callBack;
-            return res;
+            int id = _keyId++;
+            bool registerHotkeyResult = RegisterHotKey(hWnd, id, modifiers, vk);
+            _keymap[id] = callBack;
+            return registerHotkeyResult;
         }
 
         // 注销快捷键
-        public void UnRegistGlobalHotKey(IntPtr hWnd, HotKeyCallBackHanlder callBack)
+        public void UnRegisterGlobalHotKey(IntPtr hWnd, HotKeyCallBackHandler callBack)
         {
-            foreach (KeyValuePair<int, HotKeyCallBackHanlder> var in keymap)
+            foreach (KeyValuePair<int, HotKeyCallBackHandler> var in _keymap)
             {
                 if (var.Value == callBack)
                 {
@@ -60,8 +60,7 @@ namespace KeyboardMouseHookLibrary
             if (m.Msg == 0x312)
             {
                 int id = m.WParam.ToInt32();
-                HotKeyCallBackHanlder callback;
-                if (keymap.TryGetValue(id, out callback))
+                if (_keymap.TryGetValue(id, out HotKeyCallBackHandler callback))
                     callback();
             }
         }
@@ -70,7 +69,9 @@ namespace KeyboardMouseHookLibrary
         /// 根据键值组合字符串注册
         /// </summary>
         /// <param name="str"></param>
-        public bool RegistHotKeyByStr(string str,IntPtr Handle, HotKeyCallBackHanlder callback)
+        /// <param name="handle"></param>
+        /// <param name="callback"></param>
+        public bool RegisterHotKeyByStr(string str, IntPtr handle, HotKeyCallBackHandler callback)
         {
             if (str == "")
                 return false;
@@ -78,28 +79,35 @@ namespace KeyboardMouseHookLibrary
             Keys vk = Keys.None;
             foreach (string value in str.Split('+'))
             {
-                if (value.Trim() == "Ctrl")
-                    modifiers = modifiers + (int)HotkeyModifiers.Control;
-                else if (value.Trim() == "Alt")
-                    modifiers = modifiers + (int)HotkeyModifiers.Alt;
-                else if (value.Trim() == "Shift")
-                    modifiers = modifiers + (int)HotkeyModifiers.Shift;
-                else
+                switch (value.Trim())
                 {
-                    if (Regex.IsMatch(value, @"[0-9]"))
+                    case "Ctrl":
+                        modifiers += (int)HotkeyModifiers.Control;
+                        break;
+                    case "Alt":
+                        modifiers += (int)HotkeyModifiers.Alt;
+                        break;
+                    case "Shift":
+                        modifiers += (int)HotkeyModifiers.Shift;
+                        break;
+                    default:
                     {
-                        vk = (Keys)Enum.Parse(typeof(Keys), "D" + value.Trim());
-                    }
-                    else
-                    {
-                        vk = (Keys)Enum.Parse(typeof(Keys), value.Trim());
+                        if (Regex.IsMatch(value, @"[0-9]"))
+                        {
+                            vk = (Keys)Enum.Parse(typeof(Keys), "D" + value.Trim());
+                        }
+                        else
+                        {
+                            vk = (Keys)Enum.Parse(typeof(Keys), value.Trim());
+                        }
+                        break;
                     }
                 }
             }
 
-            
+
             //这里注册了Ctrl+Alt+E 快捷键
-            return RegistGlobalHotKey(Handle, modifiers, vk, callback);
+            return RegisterGlobalHotKey(handle, modifiers, vk, callback);
         }
 
     }

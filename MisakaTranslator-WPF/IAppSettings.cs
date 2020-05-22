@@ -50,6 +50,7 @@ namespace MisakaTranslator_WPF
 
         [Option(Alias = "OCR_All.GlobalOCRHotkey", DefaultValue = "Ctrl + Alt + Q")]
         string GlobalOCRHotkey { get; set; }
+
         [Option(Alias = "OCR_All.GlobalOCRLang", DefaultValue = "jpn")]
         string GlobalOCRLang { get; set; }
 

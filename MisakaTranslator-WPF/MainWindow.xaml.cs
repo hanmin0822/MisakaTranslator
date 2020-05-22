@@ -153,13 +153,13 @@ namespace MisakaTranslator_WPF
             AddNewGameDrawer.IsOpen = true;
         }
 
-        void MainWindow_SourceInitialized(object sender, EventArgs e)
+        private void MainWindow_SourceInitialized(object sender, EventArgs e)
         {
             _hwnd = new WindowInteropHelper(this).Handle;
             HwndSource.FromHwnd(_hwnd)?.AddHook(WndProc);
             //注册热键
             Common.GlobalOCRHotKey = new GlobalHotKey();
-            if (Common.GlobalOCRHotKey.RegistHotKeyByStr(Common.appSettings.GlobalOCRHotkey, _hwnd, CallBack) == false)
+            if (Common.GlobalOCRHotKey.RegisterHotKeyByStr(Common.appSettings.GlobalOCRHotkey, _hwnd, CallBack) == false)
             {
                 Growl.ErrorGlobal(Application.Current.Resources["MainWindow_GlobalOCRError_Hint"].ToString());
             }
@@ -373,7 +373,7 @@ namespace MisakaTranslator_WPF
 
         private void BlurWindow_Closing(object sender, CancelEventArgs e)
         {
-            Common.GlobalOCRHotKey.UnRegistGlobalHotKey(_hwnd,CallBack);
+            Common.GlobalOCRHotKey.UnRegisterGlobalHotKey(_hwnd,CallBack);
         }
 
         /// <summary>
