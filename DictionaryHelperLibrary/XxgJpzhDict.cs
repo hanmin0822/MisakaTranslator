@@ -22,8 +22,8 @@ namespace DictionaryHelperLibrary
         {
             var lst = _sqlHelper.ExecuteReader($"SELECT explanation FROM xiaoxueguanrizhong WHERE word LIKE '%{sourceWord}%';", 1);
 
-            if (lst != null) return lst.Aggregate("", (current, t) => current + t[0] + "\n");
-            _errorInfo = "DB Error:" + _sqlHelper.getLastError();
+            if (lst != null) return lst.Aggregate(string.Empty, (current, t) => current + t[0] + "\n");
+            _errorInfo = "DB Error:" + _sqlHelper.GetLastError();
             return null;
 
         }
@@ -45,12 +45,12 @@ namespace DictionaryHelperLibrary
                 return null;
             }
 
-            var tmp = Regex.Replace(src, "<[^>]+>", "");
-            tmp = Regex.Replace(tmp, "&[^;]+;", "");
+            var tmp = Regex.Replace(src, "<[^>]+>", string.Empty);
+            tmp = Regex.Replace(tmp, "&[^;]+;", string.Empty);
 
             var arr = tmp.Split(new[] { "\\n" }, StringSplitOptions.None);
 
-            return arr.Aggregate("", (current, s) => current + s + "\n");
+            return arr.Aggregate(string.Empty, (current, s) => current + s + "\n");
         }
     }
 }

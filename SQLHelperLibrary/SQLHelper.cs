@@ -9,27 +9,26 @@ namespace SQLHelperLibrary
 {
     public class SQLHelper
     {
-        private string m_ConnectionString;
-        private SQLiteConnection m_dbConnection;//数据库连接
-        private string errorInfo;//最后一次错误信息
+        private readonly SQLiteConnection _mDbConnection;//数据库连接
+        private string _errorInfo;//最后一次错误信息
 
         /// <summary>
         /// 初始化
         /// </summary>
-        /// <param name="DataSource">数据库文件路径</param>
-        public SQLHelper(string DataSource)
+        /// <param name="dataSource">数据库文件路径</param>
+        public SQLHelper(string dataSource)
         {
             try
             {
-                SQLiteConnectionStringBuilder connectionStringBuilder = new SQLiteConnectionStringBuilder
+                var connectionStringBuilder = new SQLiteConnectionStringBuilder
                 {
                     Version = 3,
                     Pooling = true,
                     FailIfMissing = false,
-                    DataSource = DataSource
+                    DataSource = dataSource
                 };
-                m_ConnectionString = connectionStringBuilder.ConnectionString;
-                m_dbConnection = new SQLiteConnection(m_ConnectionString);
+                var mConnectionString = connectionStringBuilder.ConnectionString;
+                _mDbConnection = new SQLiteConnection(mConnectionString);
             }
             catch (Exception ex)
             {
@@ -42,18 +41,18 @@ namespace SQLHelperLibrary
         /// </summary>
         public SQLHelper()
         {
-            string DataSource = Environment.CurrentDirectory + "\\MisakaGameLibrary.sqlite";
+            var dataSource = $"{Environment.CurrentDirectory}\\MisakaGameLibrary.sqlite";
+            var connectionStringBuilder = new SQLiteConnectionStringBuilder
+            {
+                Version = 3,
+                Pooling = true,
+                FailIfMissing = false,
+                DataSource = dataSource
+            };
             try
             {
-                SQLiteConnectionStringBuilder connectionStringBuilder = new SQLiteConnectionStringBuilder
-                {
-                    Version = 3,
-                    Pooling = true,
-                    FailIfMissing = false,
-                    DataSource = DataSource
-                };
-                m_ConnectionString = connectionStringBuilder.ConnectionString;
-                m_dbConnection = new SQLiteConnection(m_ConnectionString);
+                var mConnectionString = connectionStringBuilder.ConnectionString;
+                _mDbConnection = new SQLiteConnection(mConnectionString);
             }
             catch (Exception ex)
             {
@@ -78,18 +77,18 @@ namespace SQLHelperLibrary
         /// <returns>返回影响的结果数</returns>
         public int ExecuteSql(string sql)
         {
-            SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
+            var command = new SQLiteCommand(sql, _mDbConnection);
             try
             {
-                m_dbConnection.Open();
-                int res = command.ExecuteNonQuery();
-                m_dbConnection.Close();
+                _mDbConnection.Open();
+                var res = command.ExecuteNonQuery();
+                _mDbConnection.Close();
                 return res;
             }
-            catch (System.Data.SQLite.SQLiteException ex)
+            catch (SQLiteException ex)
             {
-                m_dbConnection.Close();
-                errorInfo = ex.Message;
+                _mDbConnection.Close();
+                _errorInfo = ex.Message;
                 return -1;
             }
         }
@@ -102,34 +101,34 @@ namespace SQLHelperLibrary
         /// <returns></returns>
         public List<string> ExecuteReader_OneLine(string sql, int columns)
         {
-            SQLiteCommand cmd = new SQLiteCommand(sql, m_dbConnection);
+            var cmd = new SQLiteCommand(sql, _mDbConnection);
             try
             {
-                m_dbConnection.Open();
-                SQLiteDataReader myReader = cmd.ExecuteReader();
+                _mDbConnection.Open();
+                var myReader = cmd.ExecuteReader();
 
                 if (myReader.HasRows == false)
                 {
-                    m_dbConnection.Close();
+                    _mDbConnection.Close();
                     return new List<string>();
                 }
                 
-                List<string> ret = new List<string>();
+                var ret = new List<string>();
                 while (myReader.Read())
                 {
-                    for (int i = 0; i < columns; i++)
+                    for (var i = 0; i < columns; i++)
                     {
                         ret.Add(myReader[i].ToString());
                     }
                 }
 
-                m_dbConnection.Close();
+                _mDbConnection.Close();
                 return ret;
             }
             catch (System.Data.SQLite.SQLiteException e)
             {
-                m_dbConnection.Close();
-                errorInfo = e.Message;
+                _mDbConnection.Close();
+                _errorInfo = e.Message;
                 return null;
             }
         }
@@ -142,24 +141,24 @@ namespace SQLHelperLibrary
         /// <returns></returns>
         public List<List<string>> ExecuteReader(string sql, int columns)
         {
-            SQLiteCommand cmd = new SQLiteCommand(sql, m_dbConnection);
+            var cmd = new SQLiteCommand(sql, _mDbConnection);
             try
             {
-                m_dbConnection.Open();
-                SQLiteDataReader myReader = cmd.ExecuteReader();
+                _mDbConnection.Open();
+                var myReader = cmd.ExecuteReader();
 
                 if (myReader.HasRows == false)
                 {
-                    m_dbConnection.Close();
+                    _mDbConnection.Close();
                     return new List<List<string>>();
                 }
 
                 
-                List<List<string>> ret = new List<List<string>>();
+                var ret = new List<List<string>>();
                 while (myReader.Read())
                 {
-                    List<string> lst = new List<string>();
-                    for (int i = 0; i < columns; i++)
+                    var lst = new List<string>();
+                    for (var i = 0; i < columns; i++)
                     {
                         lst.Add(myReader[i].ToString());
                     }
@@ -167,13 +166,13 @@ namespace SQLHelperLibrary
                     
                 }
 
-                m_dbConnection.Close();
+                _mDbConnection.Close();
                 return ret;
             }
             catch (System.Data.SQLite.SQLiteException e)
             {
-                m_dbConnection.Close();
-                errorInfo = e.Message;
+                _mDbConnection.Close();
+                _errorInfo = e.Message;
                 return null;
             }
         }
@@ -182,8 +181,8 @@ namespace SQLHelperLibrary
         /// 获取最后一次失败原因
         /// </summary>
         /// <returns></returns>
-        public string getLastError() {
-            return errorInfo;
+        public string GetLastError() {
+            return _errorInfo;
         }
     }
 }
