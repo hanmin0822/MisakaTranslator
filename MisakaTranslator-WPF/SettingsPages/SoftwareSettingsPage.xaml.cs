@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using HandyControl.Controls;
 
 namespace MisakaTranslator_WPF.SettingsPages
 {
@@ -39,7 +38,7 @@ namespace MisakaTranslator_WPF.SettingsPages
 
         private void RadioButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            var radioButton = sender as ClockRadioButton;
+            var radioButton = sender as RadioButton;
             switch (radioButton.Name)
             {
                 case "MinimizationRadioButton":
