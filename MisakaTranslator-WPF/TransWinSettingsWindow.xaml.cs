@@ -54,7 +54,7 @@ namespace MisakaTranslator_WPF
         /// </summary>
         private void EventInit() {
             sourceFont.SelectionChanged += delegate {
-                translateWin.sourceTextFont = FontList[sourceFont.SelectedIndex];
+                translateWin.SourceTextFont = FontList[sourceFont.SelectedIndex];
                 Common.appSettings.TF_srcTextFont = FontList[sourceFont.SelectedIndex];
             };
 
@@ -71,7 +71,7 @@ namespace MisakaTranslator_WPF
             };
 
             sourceFontSize.ValueChanged += delegate {
-                translateWin.sourceTextFontSize = (int)sourceFontSize.Value;
+                translateWin.SourceTextFontSize = (int)sourceFontSize.Value;
                 Common.appSettings.TF_srcTextSize = Convert.ToString(sourceFontSize.Value);
             };
 

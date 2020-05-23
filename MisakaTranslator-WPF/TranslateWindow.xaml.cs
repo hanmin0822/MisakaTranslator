@@ -30,74 +30,77 @@ namespace MisakaTranslator_WPF
     /// </summary>
     public partial class TranslateWindow
     {
+        private MecabHelper _mecabHelper;
+        private BeforeTransHandle _beforeTransHandle;
+        private AfterTransHandle _afterTransHandle;
+        private ITranslator _translator1;//第一翻译源
+        private ITranslator _translator2;//第二翻译源
 
-        MecabHelper mh;
-        BeforeTransHandle bth;
-        AfterTransHandle ath;
-        ITranslator translator1;//第一翻译源
-        ITranslator translator2;//第二翻译源
+        private IDict _dict;
 
-        IDict dict;
+        private string _currentsrcText;//当前源文本内容
 
-        private string currentsrcText;//当前源文本内容
+        public string SourceTextFont;//源文本区域字体
+        public int SourceTextFontSize;//源文本区域字体大小
 
-        public string sourceTextFont;//源文本区域字体
-        public int sourceTextFontSize;//源文本区域字体大小
-
-        Queue<string> GameTextHistory;//历史文本
-
+        private Queue<string> _gameTextHistory;//历史文本
         public static GlobalHook hook;//全局键盘鼠标钩子
         public bool IsOCRingFlag;//线程锁:判断是否正在OCR线程中，保证同时只有一组在跑OCR
         public bool IsPauseFlag;//是否处在暂停状态（专用于OCR）,为真可以翻译
 
-        bool IsShowSource;
+        private bool _isShowSource;
 
         public TranslateWindow()
         {
             InitializeComponent();
 
-            IsShowSource = true;
+            _isShowSource = true;
 
-            GameTextHistory = new Queue<string>();
+            _gameTextHistory = new Queue<string>();
 
             this.Topmost = true;
             UI_Init();
             IsOCRingFlag = false;
 
-            mh = new MecabHelper();
+            _mecabHelper = new MecabHelper();
 
-            if (Common.appSettings.xxgPath != "") {
-                dict = new XxgJpzhDict();
-                dict.DictInit(Common.appSettings.xxgPath, "");
+            if (Common.appSettings.xxgPath != string.Empty)
+            {
+                _dict = new XxgJpzhDict();
+                _dict.DictInit(Common.appSettings.xxgPath, string.Empty);
             }
-            
+
 
             IsPauseFlag = true;
-            translator1 = TranslatorAuto(Common.appSettings.FirstTranslator);
-            translator2 = TranslatorAuto(Common.appSettings.SecondTranslator);
+            _translator1 = TranslatorAuto(Common.appSettings.FirstTranslator);
+            _translator2 = TranslatorAuto(Common.appSettings.SecondTranslator);
 
-            bth = new BeforeTransHandle(Convert.ToString(Common.GameID), Common.UsingSrcLang, Common.UsingDstLang);
-            ath = new AfterTransHandle(bth);
+            _beforeTransHandle = new BeforeTransHandle(Convert.ToString(Common.GameID), Common.UsingSrcLang, Common.UsingDstLang);
+            _afterTransHandle = new AfterTransHandle(_beforeTransHandle);
 
-            if (Common.transMode == 1) {
+            if (Common.transMode == 1)
+            {
                 Common.textHooker.Sevent += DataRecvEventHandler;
-            } else if (Common.transMode == 2) {
+            }
+            else if (Common.transMode == 2)
+            {
                 MouseKeyboardHook_Init();
             }
-            
+
         }
 
         /// <summary>
         /// 键盘鼠标钩子初始化
         /// </summary>
-        private void MouseKeyboardHook_Init() {
-            if (Common.UsingHotKey.IsMouse == true)
+        private void MouseKeyboardHook_Init()
+        {
+            if (Common.UsingHotKey.IsMouse)
             {
                 //初始化钩子对象
                 if (hook == null)
                 {
                     hook = new GlobalHook();
-                    hook.OnMouseActivity += new System.Windows.Forms.MouseEventHandler(Hook_OnMouseActivity);
+                    hook.OnMouseActivity += Hook_OnMouseActivity;
                 }
             }
             else
@@ -106,26 +109,27 @@ namespace MisakaTranslator_WPF
                 if (hook == null)
                 {
                     hook = new GlobalHook();
-                    hook.KeyDown += new System.Windows.Forms.KeyEventHandler(Hook_OnKeyBoardActivity);
+                    hook.KeyDown += Hook_OnKeyBoardActivity;
                 }
             }
 
             bool r = hook.Start();
             if (!r)
             {
-                HandyControl.Controls.Growl.ErrorGlobal(Application.Current.Resources["Hook_Error_Hint"].ToString());
+                Growl.ErrorGlobal(Application.Current.Resources["Hook_Error_Hint"].ToString());
             }
         }
 
         /// <summary>
         /// UI方面的初始化
         /// </summary>
-        private void UI_Init() {
-            sourceTextFontSize = int.Parse(Common.appSettings.TF_srcTextSize);
+        private void UI_Init()
+        {
+            SourceTextFontSize = int.Parse(Common.appSettings.TF_srcTextSize);
             FirstTransText.FontSize = int.Parse(Common.appSettings.TF_firstTransTextSize);
             SecondTransText.FontSize = int.Parse(Common.appSettings.TF_secondTransTextSize);
 
-            sourceTextFont = Common.appSettings.TF_srcTextFont;
+            SourceTextFont = Common.appSettings.TF_srcTextFont;
             FirstTransText.FontFamily = new FontFamily(Common.appSettings.TF_firstTransTextFont);
             SecondTransText.FontFamily = new FontFamily(Common.appSettings.TF_secondTransTextFont);
 
@@ -148,11 +152,11 @@ namespace MisakaTranslator_WPF
         /// <summary>
         /// 根据翻译器名称自动返回翻译器类实例(包括初始化)
         /// </summary>
-        /// <param name="Translator"></param>
+        /// <param name="translator"></param>
         /// <returns></returns>
-        public static ITranslator TranslatorAuto(string Translator)
+        public static ITranslator TranslatorAuto(string translator)
         {
-            switch (Translator)
+            switch (translator)
             {
                 case "BaiduTranslator":
                     BaiduTranslator bd = new BaiduTranslator();
@@ -201,7 +205,8 @@ namespace MisakaTranslator_WPF
         /// </summary>
         void Hook_OnKeyBoardActivity(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            if (e.KeyCode == Common.UsingHotKey.KeyCode) {
+            if (e.KeyCode == Common.UsingHotKey.KeyCode)
+            {
                 OCR();
             }
 
@@ -214,23 +219,25 @@ namespace MisakaTranslator_WPF
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void Hook_OnMouseActivity(object sender, System.Windows.Forms.MouseEventArgs e) {
-            if (e.Button == Common.UsingHotKey.MouseButton) {
-
-                if ((Common.isAllWindowCap == true && Process.GetCurrentProcess().Id != FindWindowInfo.GetProcessIDByHWND(FindWindowInfo.GetWindowHWND(e.X, e.Y)))
+        private void Hook_OnMouseActivity(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (e.Button == Common.UsingHotKey.MouseButton)
+            {
+                if (Common.isAllWindowCap && Process.GetCurrentProcess().Id != FindWindowInfo.GetProcessIDByHWND(FindWindowInfo.GetWindowHWND(e.X, e.Y))
                         || Common.OCRWinHwnd == (IntPtr)FindWindowInfo.GetWindowHWND(e.X, e.Y))
                 {
                     OCR();
                 }
-                    
             }
 
             hook.Stop();
             MouseKeyboardHook_Init();
         }
 
-        private void OCR() {
-            if (IsPauseFlag) {
+        private void OCR()
+        {
+            if (IsPauseFlag)
+            {
                 if (IsOCRingFlag == false)
                 {
                     IsOCRingFlag = true;
@@ -245,9 +252,8 @@ namespace MisakaTranslator_WPF
                         string srcText = Common.ocr.OCRProcess();
                         GC.Collect();
 
-                        if (srcText != null && srcText != "")
+                        if (!string.IsNullOrEmpty(srcText))
                         {
-
                             Application.Current.Dispatcher.BeginInvoke((Action)(() =>
                             {
                                 //0.清除面板
@@ -256,87 +262,87 @@ namespace MisakaTranslator_WPF
                                 //1.得到原句
                                 string source = srcText;
 
-                                currentsrcText = source;
+                                _currentsrcText = source;
 
-                                if (IsShowSource == true)
+                                if (_isShowSource)
                                 {
                                     //3.分词
-                                    List<MecabWordInfo> mwi = mh.SentenceHandle(source);
+                                    List<MecabWordInfo> mwi = _mecabHelper.SentenceHandle(source);
                                     //分词后结果显示
                                     for (int i = 0; i < mwi.Count; i++)
                                     {
-                                        TextBlock tb = new TextBlock();
-                                        if (sourceTextFont != null && sourceTextFont != "")
+                                        TextBlock textBlock = new TextBlock();
+                                        if (!string.IsNullOrEmpty(SourceTextFont))
                                         {
-                                            FontFamily ff = new FontFamily(sourceTextFont);
-                                            tb.FontFamily = ff;
+                                            FontFamily fontFamily = new FontFamily(SourceTextFont);
+                                            textBlock.FontFamily = fontFamily;
                                         }
-                                        tb.Text = mwi[i].Word;
-                                        tb.Margin = new Thickness(10, 0, 0, 10);
-                                        tb.FontSize = sourceTextFontSize;
-                                        tb.Background = Brushes.Transparent;
-                                        tb.MouseLeftButtonDown += DictArea_MouseLeftButtonDown;
+                                        textBlock.Text = mwi[i].Word;
+                                        textBlock.Margin = new Thickness(10, 0, 0, 10);
+                                        textBlock.FontSize = SourceTextFontSize;
+                                        textBlock.Background = Brushes.Transparent;
+                                        textBlock.MouseLeftButtonDown += DictArea_MouseLeftButtonDown;
                                         //根据不同词性跟字体上色
                                         switch (mwi[i].PartOfSpeech)
                                         {
                                             case "名詞":
-                                                tb.Foreground = Brushes.AliceBlue;
+                                                textBlock.Foreground = Brushes.AliceBlue;
                                                 break;
                                             case "助詞":
-                                                tb.Foreground = Brushes.LightGreen;
+                                                textBlock.Foreground = Brushes.LightGreen;
                                                 break;
                                             case "動詞":
-                                                tb.Foreground = Brushes.Red;
+                                                textBlock.Foreground = Brushes.Red;
                                                 break;
                                             case "連体詞":
-                                                tb.Foreground = Brushes.Orange;
+                                                textBlock.Foreground = Brushes.Orange;
                                                 break;
                                             default:
-                                                tb.Foreground = Brushes.White;
+                                                textBlock.Foreground = Brushes.White;
                                                 break;
                                         }
-                                        
-                                        SourceTextPanel.Children.Add(tb);
+
+                                        SourceTextPanel.Children.Add(textBlock);
                                     }
                                 }
 
-                                if (Convert.ToBoolean(Common.appSettings.EachRowTrans) == true)
+                                if (Convert.ToBoolean(Common.appSettings.EachRowTrans))
                                 {
                                     //需要分行翻译
-                                    source = source.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
+                                    source = source.Replace("<br>", string.Empty).Replace("</br>", string.Empty).Replace("\n", string.Empty).Replace("\t", string.Empty).Replace("\r", string.Empty);
                                 }
                                 //去乱码
-                                source = source.Replace("_", "").Replace("-", "").Replace("+", "");
+                                source = source.Replace("_", string.Empty).Replace("-", string.Empty).Replace("+", string.Empty);
 
                                 //4.翻译前预处理
-                                string beforeString = bth.AutoHandle(source);
+                                string beforeString = _beforeTransHandle.AutoHandle(source);
 
                                 //5.提交翻译
-                                string transRes1 = "";
-                                string transRes2 = "";
-                                if (translator1 != null)
+                                string transRes1 = string.Empty;
+                                string transRes2 = string.Empty;
+                                if (_translator1 != null)
                                 {
-                                    transRes1 = translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                                    transRes1 = _translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
                                 }
-                                if (translator2 != null)
+                                if (_translator2 != null)
                                 {
-                                    transRes2 = translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                                    transRes2 = _translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
                                 }
 
                                 //6.翻译后处理
-                                string afterString1 = ath.AutoHandle(transRes1);
-                                string afterString2 = ath.AutoHandle(transRes2);
+                                string afterString1 = _afterTransHandle.AutoHandle(transRes1);
+                                string afterString2 = _afterTransHandle.AutoHandle(transRes2);
 
                                 //7.翻译结果显示到窗口上
                                 FirstTransText.Text = afterString1;
                                 SecondTransText.Text = afterString2;
 
                                 //8.翻译结果记录到队列
-                                if (GameTextHistory.Count > 5)
+                                if (_gameTextHistory.Count > 5)
                                 {
-                                    GameTextHistory.Dequeue();
+                                    _gameTextHistory.Dequeue();
                                 }
-                                GameTextHistory.Enqueue(source + "\n" + afterString1 + "\n" + afterString2);
+                                _gameTextHistory.Enqueue(source + "\n" + afterString1 + "\n" + afterString2);
                             }));
 
                             IsOCRingFlag = false;
@@ -357,33 +363,37 @@ namespace MisakaTranslator_WPF
             }
         }
 
-        
+
 
         private void DictArea_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (dict != null) {
+            if (_dict != null)
+            {
                 if (e.ClickCount == 2)
                 {
                     //双击事件
-                    TextBlock tb = sender as TextBlock;
+                    TextBlock textBlock = sender as TextBlock;
 
-                    string ret = dict.SearchInDict(tb.Text);
+                    string ret = _dict.SearchInDict(textBlock.Text);
                     if (ret != null)
                     {
-                        if (ret == "")
+                        if (ret == string.Empty)
                         {
-                            Growl.ErrorGlobal(Application.Current.Resources["TranslateWin_DictError_Hint"] + dict.GetLastError());
+                            Growl.ErrorGlobal(Application.Current.Resources["TranslateWin_DictError_Hint"] + _dict.GetLastError());
                         }
-                        else {
+                        else
+                        {
                             ret = XxgJpzhDict.RemoveHTML(ret);
 
-                            var textbox = new HandyControl.Controls.TextBox();
-                            textbox.Text = ret;
-                            textbox.FontSize = 15;
-                            textbox.TextWrapping = TextWrapping.Wrap;
-                            textbox.TextAlignment = TextAlignment.Left;
-                            textbox.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
-                            var window = new HandyControl.Controls.PopupWindow
+                            var textbox = new HandyControl.Controls.TextBox
+                            {
+                                Text = ret,
+                                FontSize = 15,
+                                TextWrapping = TextWrapping.Wrap,
+                                TextAlignment = TextAlignment.Left,
+                                HorizontalScrollBarVisibility = ScrollBarVisibility.Visible
+                            };
+                            var window = new PopupWindow
                             {
                                 PopupElement = textbox,
                                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
@@ -399,18 +409,16 @@ namespace MisakaTranslator_WPF
                     }
                     else
                     {
-                        Growl.ErrorGlobal(Application.Current.Resources["TranslateWin_DictError_Hint"] + dict.GetLastError());
+                        Growl.ErrorGlobal(Application.Current.Resources["TranslateWin_DictError_Hint"] + _dict.GetLastError());
                     }
                 }
             }
-            
+
         }
 
         /// <summary>
         /// Hook模式下调用的事件
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         public void DataRecvEventHandler(object sender, SolvedDataRecvEventArgs e)
         {
             Application.Current.Dispatcher.BeginInvoke((Action)(() =>
@@ -424,86 +432,89 @@ namespace MisakaTranslator_WPF
                 //2.进行去重
                 string repairedText = TextRepair.RepairFun_Auto(Common.UsingRepairFunc, source);
 
-                currentsrcText = repairedText;
+                _currentsrcText = repairedText;
 
-                if (IsShowSource == true) {
+                if (_isShowSource)
+                {
                     //3.分词
-                    List<MecabWordInfo> mwi = mh.SentenceHandle(repairedText);
+                    var mwi = _mecabHelper.SentenceHandle(repairedText);
                     //分词后结果显示
                     for (int i = 0; i < mwi.Count; i++)
                     {
-                        TextBlock tb = new TextBlock();
-                        if (sourceTextFont != null && sourceTextFont !="") {
-                            FontFamily ff = new FontFamily(sourceTextFont);
-                            tb.FontFamily = ff;
+                        TextBlock textBlock = new TextBlock();
+                        if (!string.IsNullOrEmpty(SourceTextFont))
+                        {
+                            FontFamily fontFamily = new FontFamily(SourceTextFont);
+                            textBlock.FontFamily = fontFamily;
                         }
-                        tb.Text = mwi[i].Word;
-                        tb.Margin = new Thickness(10, 0, 0, 10);
-                        tb.FontSize = sourceTextFontSize;
-                        tb.Background = Brushes.Transparent;
-                        tb.MouseLeftButtonDown += DictArea_MouseLeftButtonDown;
+                        textBlock.Text = mwi[i].Word;
+                        textBlock.Margin = new Thickness(10, 0, 0, 10);
+                        textBlock.FontSize = SourceTextFontSize;
+                        textBlock.Background = Brushes.Transparent;
+                        textBlock.MouseLeftButtonDown += DictArea_MouseLeftButtonDown;
                         //根据不同词性跟字体上色
                         switch (mwi[i].PartOfSpeech)
                         {
                             case "名詞":
-                                tb.Foreground = Brushes.AliceBlue;
+                                textBlock.Foreground = Brushes.AliceBlue;
                                 break;
                             case "助詞":
-                                tb.Foreground = Brushes.LightGreen;
+                                textBlock.Foreground = Brushes.LightGreen;
                                 break;
                             case "動詞":
-                                tb.Foreground = Brushes.Red;
+                                textBlock.Foreground = Brushes.Red;
                                 break;
                             case "連体詞":
-                                tb.Foreground = Brushes.Orange;
+                                textBlock.Foreground = Brushes.Orange;
                                 break;
                             default:
-                                tb.Foreground = Brushes.White;
+                                textBlock.Foreground = Brushes.White;
                                 break;
                         }
-                        SourceTextPanel.Children.Add(tb);
+                        SourceTextPanel.Children.Add(textBlock);
                     }
                 }
 
-                if (Convert.ToBoolean(Common.appSettings.EachRowTrans) == true)
+                if (Convert.ToBoolean(Common.appSettings.EachRowTrans))
                 {
                     //需要分行翻译
-                    repairedText = repairedText.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
+                    repairedText = repairedText.Replace("<br>", string.Empty).Replace("</br>", string.Empty).Replace("\n", string.Empty).Replace("\t", string.Empty).Replace("\r", string.Empty);
                 }
                 //去乱码
-                repairedText = repairedText.Replace("_", "").Replace("-", "").Replace("+", "");
+                repairedText = repairedText.Replace("_", string.Empty).Replace("-", string.Empty).Replace("+", string.Empty);
 
                 //4.翻译前预处理
-                string beforeString = bth.AutoHandle(repairedText);
+                string beforeString = _beforeTransHandle.AutoHandle(repairedText);
 
                 //5.提交翻译
-                string transRes1 = "";
-                string transRes2 = "";
-                if (translator1 != null)
+                string transRes1 = string.Empty;
+                string transRes2 = string.Empty;
+                if (_translator1 != null)
                 {
-                    transRes1 = translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                    transRes1 = _translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
                 }
-                if (translator2 != null)
+                if (_translator2 != null)
                 {
-                    transRes2 = translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                    transRes2 = _translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
                 }
 
                 //6.翻译后处理
-                string afterString1 = ath.AutoHandle(transRes1);
-                string afterString2 = ath.AutoHandle(transRes2);
+                string afterString1 = _afterTransHandle.AutoHandle(transRes1);
+                string afterString2 = _afterTransHandle.AutoHandle(transRes2);
 
                 //7.翻译结果显示到窗口上
                 FirstTransText.Text = afterString1;
                 SecondTransText.Text = afterString2;
 
                 //8.翻译结果记录到队列
-                if (GameTextHistory.Count > 5) {
-                    GameTextHistory.Dequeue();
+                if (_gameTextHistory.Count > 5)
+                {
+                    _gameTextHistory.Dequeue();
                 }
-                GameTextHistory.Enqueue(repairedText + "\n" + afterString1 + "\n" + afterString2);
+                _gameTextHistory.Enqueue(repairedText + "\n" + afterString1 + "\n" + afterString2);
             }));
         }
-        
+
 
         private void ChangeSize_Item_Click(object sender, RoutedEventArgs e)
         {
@@ -513,7 +524,8 @@ namespace MisakaTranslator_WPF
                 BackWinChrome.Opacity = 1;
                 DragBorder.Opacity = 1;
             }
-            else {
+            else
+            {
                 BackWinChrome.Opacity = double.Parse(Common.appSettings.TF_Opacity) / 100;
                 DragBorder.Opacity = 0.01;
                 Growl.InfoGlobal(Application.Current.Resources["TranslateWin_DragBox_Hint"].ToString());
@@ -521,7 +533,8 @@ namespace MisakaTranslator_WPF
 
         }
 
-        private void Exit_Item_Click(object sender, RoutedEventArgs e) {
+        private void Exit_Item_Click(object sender, RoutedEventArgs e)
+        {
             this.Close();
         }
 
@@ -531,16 +544,17 @@ namespace MisakaTranslator_WPF
             {
                 Common.textHooker.Pause = !Common.textHooker.Pause;
             }
-            else {
+            else
+            {
                 IsPauseFlag = !IsPauseFlag;
             }
 
-            
+
         }
 
         private void ShowSource_Item_Click(object sender, RoutedEventArgs e)
         {
-            IsShowSource = !IsShowSource;
+            _isShowSource = !_isShowSource;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -550,7 +564,8 @@ namespace MisakaTranslator_WPF
             Common.appSettings.TF_SizeW = Convert.ToString((int)this.Width);
             Common.appSettings.TF_SizeH = Convert.ToString((int)this.Height);
 
-            if (hook != null) {
+            if (hook != null)
+            {
                 hook.Stop();
                 hook = null;
             }
@@ -560,9 +575,9 @@ namespace MisakaTranslator_WPF
                 Common.textHooker.Sevent -= DataRecvEventHandler;
                 Common.textHooker = null;
             }
-            
+
             //立即清一次，否则重复打开翻译窗口会造成异常：Mecab处理类库异常
-            mh = null;
+            _mecabHelper = null;
             GC.Collect();
         }
 
@@ -588,9 +603,10 @@ namespace MisakaTranslator_WPF
         private void History_Item_Click(object sender, RoutedEventArgs e)
         {
             var textbox = new HandyControl.Controls.TextBox();
-            string his = "";
-            string[] history = GameTextHistory.ToArray();
-            for (int i = history.Length - 1; i > 0;i--) {
+            string his = string.Empty;
+            string[] history = _gameTextHistory.ToArray();
+            for (int i = history.Length - 1; i > 0; i--)
+            {
                 his += history[i] + "\n";
                 his += "==================================\n";
             }
@@ -599,7 +615,7 @@ namespace MisakaTranslator_WPF
             textbox.TextWrapping = TextWrapping.Wrap;
             textbox.TextAlignment = TextAlignment.Left;
             textbox.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
-            var window = new HandyControl.Controls.PopupWindow
+            var window = new PopupWindow
             {
                 PopupElement = textbox,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
@@ -615,7 +631,7 @@ namespace MisakaTranslator_WPF
 
         private void AddNoun_Item_Click(object sender, RoutedEventArgs e)
         {
-            AddOptWindow win = new AddOptWindow(currentsrcText);
+            AddOptWindow win = new AddOptWindow(_currentsrcText);
             win.Show();
         }
 
@@ -625,33 +641,35 @@ namespace MisakaTranslator_WPF
             {
                 OCR();
             }
-            else {
-                if (Convert.ToBoolean(Common.appSettings.EachRowTrans) == true) {
+            else
+            {
+                if (Convert.ToBoolean(Common.appSettings.EachRowTrans))
+                {
                     //需要分行翻译
-                    currentsrcText = currentsrcText.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
+                    _currentsrcText = _currentsrcText.Replace("<br>", string.Empty).Replace("</br>", string.Empty).Replace("\n", string.Empty).Replace("\t", string.Empty).Replace("\r", string.Empty);
                 }
                 //去乱码
-                currentsrcText = currentsrcText.Replace("_", "").Replace("-", "").Replace("+", "");
-            
-                
+                _currentsrcText = _currentsrcText.Replace("_", string.Empty).Replace("-", string.Empty).Replace("+", string.Empty);
+
+
                 //4.翻译前预处理
-                string beforeString = bth.AutoHandle(currentsrcText);
+                string beforeString = _beforeTransHandle.AutoHandle(_currentsrcText);
 
                 //5.提交翻译
-                string transRes1 = "";
-                string transRes2 = "";
-                if (translator1 != null)
+                string transRes1 = string.Empty;
+                string transRes2 = string.Empty;
+                if (_translator1 != null)
                 {
-                    transRes1 = translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                    transRes1 = _translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
                 }
-                if (translator2 != null)
+                if (_translator2 != null)
                 {
-                    transRes2 = translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                    transRes2 = _translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
                 }
 
                 //6.翻译后处理
-                string afterString1 = ath.AutoHandle(transRes1);
-                string afterString2 = ath.AutoHandle(transRes2);
+                string afterString1 = _afterTransHandle.AutoHandle(transRes1);
+                string afterString2 = _afterTransHandle.AutoHandle(transRes2);
 
                 //7.翻译结果显示到窗口上
                 FirstTransText.Text = afterString1;
