@@ -17,7 +17,7 @@ namespace MisakaTranslator_WPF
             this.Exit += App_Exit;
         }
 
-        void App_Startup(object sender, StartupEventArgs e)
+        private void App_Startup(object sender, StartupEventArgs e)
         {
             //UI线程未捕获异常处理事件
             this.DispatcherUnhandledException += App_DispatcherUnhandledException;
@@ -27,7 +27,7 @@ namespace MisakaTranslator_WPF
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
         }
 
-        void App_Exit(object sender, ExitEventArgs e)
+        private void App_Exit(object sender, ExitEventArgs e)
         {
             //程序退出时检查是否断开Hook
             DoHookCheck();
@@ -38,7 +38,7 @@ namespace MisakaTranslator_WPF
         /// <summary>
         /// UI线程未捕获异常处理事件
         /// </summary>
-        void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             string fn = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
             PrintErrorMessageToFile(fn, e.Exception, 0);
@@ -70,7 +70,7 @@ namespace MisakaTranslator_WPF
         /// <summary>
         /// Task线程内未捕获异常处理事件
         /// </summary>
-        void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
             string fn = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
             PrintErrorMessageToFile(fn, e.Exception, 2);
@@ -86,8 +86,8 @@ namespace MisakaTranslator_WPF
         /// <param name="fileName">文件名</param>
         /// <param name="e">异常</param>
         /// <param name="exceptionThread">异常线程</param>
-        /// <param name="ErrorMessage">错误消息</param>
-        private void PrintErrorMessageToFile(string fileName, Exception e, int exceptionThread, string ErrorMessage = null)
+        /// <param name="errorMessage">错误消息</param>
+        private static void PrintErrorMessageToFile(string fileName, Exception e, int exceptionThread, string errorMessage = null)
         {
             if (!Directory.Exists($"{Environment.CurrentDirectory}\\logs"))
             {
@@ -104,33 +104,32 @@ namespace MisakaTranslator_WPF
             var version = Assembly.GetExecutingAssembly().GetName().Version;
             sw.WriteLine("MisakaTranslatorVersion:" + version.ToString());
 
-            if (ErrorMessage != null)
+            if (errorMessage != null)
             {
                 sw.WriteLine("==============Exception Info================");
                 sw.WriteLine("ExceptionType:" + "Non UI Thread But not Exception");
-                sw.WriteLine("ErrorMessage:" + ErrorMessage);
+                sw.WriteLine("ErrorMessage:" + errorMessage);
             }
             else
             {
                 sw.WriteLine("==============Exception Info================");
-                if (exceptionThread == 0)
+                switch (exceptionThread)
                 {
-                    sw.WriteLine("ExceptionType:" + "UI Thread");
-                }
-                else if (exceptionThread == 1)
-                {
-                    sw.WriteLine("ExceptionType:" + "Non UI Thread");
-                }
-                else if (exceptionThread == 2)
-                {
-                    sw.WriteLine("ExceptionType:" + "Task Thread");
+                    case 0:
+                        sw.WriteLine("ExceptionType:" + "UI Thread");
+                        break;
+                    case 1:
+                        sw.WriteLine("ExceptionType:" + "Non UI Thread");
+                        break;
+                    case 2:
+                        sw.WriteLine("ExceptionType:" + "Task Thread");
+                        break;
                 }
 
                 sw.WriteLine("ExceptionSource:" + e.Source);
                 sw.WriteLine("ExceptionMessage:" + e.Message);
                 sw.WriteLine("ExceptionStackTrace:" + e.StackTrace);
             }
-
 
             sw.Flush();
             sw.Close();
@@ -148,6 +147,5 @@ namespace MisakaTranslator_WPF
                 GC.Collect();
             }
         }
-
     }
 }

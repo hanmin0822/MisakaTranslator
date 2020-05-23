@@ -373,9 +373,20 @@ namespace MisakaTranslator_WPF
 
         private void BlurWindow_Closing(object sender, CancelEventArgs e)
         {
-            Common.GlobalOCRHotKey.UnRegisterGlobalHotKey(_hwnd,CallBack);
-            Application.Current.Shutdown();
+            e.Cancel = true;
+            switch (Common.appSettings.OnClickCloseButton)
+            {
+                case "Minimization":
+                    Visibility = Visibility.Collapsed;
+                    break;
+                case "Exit":
+                    Common.GlobalOCRHotKey.UnRegisterGlobalHotKey(_hwnd, CallBack);
+                    Application.Current.Shutdown();
+                    break;
+            }
         }
+
+        private void ButtonPush_OnClick(object sender, RoutedEventArgs e) => NotifyIconContextContent.CloseContextControl();
 
         /// <summary>
         /// 切换语言通用事件

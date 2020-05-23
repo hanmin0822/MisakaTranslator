@@ -99,6 +99,25 @@
                 </Grid>
             </Border>
         </hc:Drawer>
-
+        <hc:NotifyIcon Token="MisakaTranslator" x:Name="NotifyIconContextContent" Text="HandyControl" IsBlink="False" Visibility="Visible"  Icon="pack://application:,,,/MisakaTranslator-WPF;component/logo.ico">
+            <hc:NotifyIcon.ContextContent>
+                <Border CornerRadius="4" Margin="10" Background="{DynamicResource RegionBrush}" Effect="{StaticResource EffectShadow2}">
+                    <StackPanel VerticalAlignment="Center" Margin="16">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Button Click="ButtonPush_OnClick"  Command="hc:ControlCommands.PushMainWindow2Top" MinWidth="100" Content="打开主界面"/>
+                            <Button Command="hc:ControlCommands.ShutdownApp" Margin="16,0,0,0" MinWidth="100" Style="{StaticResource ButtonPrimary}" Content="退出"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </hc:NotifyIcon.ContextContent>
+            <hc:Interaction.Triggers>
+                <hc:EventTrigger EventName="Click">
+                    <hc:EventToCommand Command="hc:ControlCommands.PushMainWindow2Top"/>
+                </hc:EventTrigger>
+                <hc:EventTrigger EventName="MouseDoubleClick">
+                    <hc:EventToCommand Command="{Binding MouseCmd}" CommandParameter="MouseDoubleClick"/>
+                </hc:EventTrigger>
+            </hc:Interaction.Triggers>
+        </hc:NotifyIcon>
     </Grid>
 </hc:BlurWindow>
