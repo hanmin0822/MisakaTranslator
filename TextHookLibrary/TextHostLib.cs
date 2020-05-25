@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace TextHookLibrary
 {
-
     public class TextHostLib
     {
         public delegate void ProcessEvent(Int32 processId);

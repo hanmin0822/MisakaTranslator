@@ -25,9 +25,9 @@ namespace MisakaTranslator_WPF
 {
     public partial class MainWindow
     {
-        private List<GameInfo> _gameInfoList;
-        private int _gid;//当前选中的顺序，并非游戏ID
-        private IntPtr _hwnd;
+        private List<GameInfo> gameInfoList;
+        private int gid;//当前选中的顺序，并非游戏ID
+        private IntPtr hwnd;
 
         public MainWindow()
         {
@@ -65,7 +65,7 @@ namespace MisakaTranslator_WPF
         private void Initialize(IAppSettings settings)
         {
             this.Resources["Foreground"] = (SolidColorBrush)(new BrushConverter().ConvertFrom(settings.ForegroundHex));
-            _gameInfoList = GameLibraryHelper.GetAllGameLibrary();
+            gameInfoList = GameLibraryHelper.GetAllGameLibrary();
             Common.repairSettings = new ConfigurationBuilder<IRepeatRepairSettings>().UseIniFile(Environment.CurrentDirectory + "\\settings\\RepairSettings.ini").Build();
             GameLibraryPanel_Init();
             //先初始化这两个语言，用于全局OCR识别
@@ -85,13 +85,13 @@ namespace MisakaTranslator_WPF
                 System.Windows.Media.Brushes.Orange,
                 System.Windows.Media.Brushes.ForestGreen
             };
-            if (_gameInfoList != null)
+            if (gameInfoList != null)
             {
-                for (var i = 0; i < _gameInfoList.Count; i++)
+                for (var i = 0; i < gameInfoList.Count; i++)
                 {
                     var tb = new TextBlock()
                     {
-                        Text = _gameInfoList[i].GameName,
+                        Text = gameInfoList[i].GameName,
                         Foreground = System.Windows.Media.Brushes.White,
                         VerticalAlignment = VerticalAlignment.Bottom,
                         HorizontalAlignment = HorizontalAlignment.Left,
@@ -99,7 +99,7 @@ namespace MisakaTranslator_WPF
                     };
                     var ico = new System.Windows.Controls.Image()
                     {
-                        Source = ImageProcFunc.ImageToBitmapImage(ImageProcFunc.GetAppIcon(_gameInfoList[i].FilePath)),
+                        Source = ImageProcFunc.ImageToBitmapImage(ImageProcFunc.GetAppIcon(gameInfoList[i].FilePath)),
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
                         Height = 64,
@@ -155,11 +155,11 @@ namespace MisakaTranslator_WPF
 
         private void MainWindow_SourceInitialized(object sender, EventArgs e)
         {
-            _hwnd = new WindowInteropHelper(this).Handle;
-            HwndSource.FromHwnd(_hwnd)?.AddHook(WndProc);
+            hwnd = new WindowInteropHelper(this).Handle;
+            HwndSource.FromHwnd(hwnd)?.AddHook(WndProc);
             //注册热键
             Common.GlobalOCRHotKey = new GlobalHotKey();
-            if (Common.GlobalOCRHotKey.RegisterHotKeyByStr(Common.appSettings.GlobalOCRHotkey, _hwnd, CallBack) == false)
+            if (Common.GlobalOCRHotKey.RegisterHotKeyByStr(Common.appSettings.GlobalOCRHotkey, hwnd, CallBack) == false)
             {
                 Growl.ErrorGlobal(Application.Current.Resources["MainWindow_GlobalOCRError_Hint"].ToString());
             }
@@ -218,10 +218,10 @@ namespace MisakaTranslator_WPF
             var b = (Border)sender;
             var str = b.Name;
             var temp = str.Remove(0,4);
-            _gid = int.Parse(temp);
+            gid = int.Parse(temp);
 
-            GameNameTag.Text = Application.Current.Resources["MainWindow_Drawer_Tag_GameName"].ToString() + _gameInfoList[_gid].GameName;
-            if (_gameInfoList[_gid].TransMode == 1) {
+            GameNameTag.Text = Application.Current.Resources["MainWindow_Drawer_Tag_GameName"].ToString() + gameInfoList[gid].GameName;
+            if (gameInfoList[gid].TransMode == 1) {
                 TransModeTag.Text = Application.Current.Resources["MainWindow_Drawer_Tag_TransMode"].ToString() + "Hook";
             }
             else 
@@ -252,7 +252,7 @@ namespace MisakaTranslator_WPF
                 }
 
 
-                if (_gameInfoList[gid].FilePath == filepath) {
+                if (gameInfoList[gid].FilePath == filepath) {
                     pidList.Add(process);
                 }
             }
@@ -270,21 +270,21 @@ namespace MisakaTranslator_WPF
             }
 
             Common.transMode = 1;
-            Common.UsingDstLang = _gameInfoList[gid].DstLang;
-            Common.UsingSrcLang = _gameInfoList[gid].SrcLang;
-            Common.UsingRepairFunc = _gameInfoList[gid].RepairFunc;
+            Common.UsingDstLang = gameInfoList[gid].DstLang;
+            Common.UsingSrcLang = gameInfoList[gid].SrcLang;
+            Common.UsingRepairFunc = gameInfoList[gid].RepairFunc;
 
             switch (Common.UsingRepairFunc)
             {
                 case "RepairFun_RemoveSingleWordRepeat":
-                    Common.repairSettings.SingleWordRepeatTimes = _gameInfoList[gid].RepairParamA;
+                    Common.repairSettings.SingleWordRepeatTimes = gameInfoList[gid].RepairParamA;
                     break;
                 case "RepairFun_RemoveSentenceRepeat":
-                    Common.repairSettings.SentenceRepeatFindCharNum = _gameInfoList[gid].RepairParamA;
+                    Common.repairSettings.SentenceRepeatFindCharNum = gameInfoList[gid].RepairParamA;
                     break;
                 case "RepairFun_RegexReplace":
-                    Common.repairSettings.Regex = _gameInfoList[gid].RepairParamA;
-                    Common.repairSettings.Regex_Replace = _gameInfoList[gid].RepairParamB;
+                    Common.repairSettings.Regex = gameInfoList[gid].RepairParamA;
+                    Common.repairSettings.Regex_Replace = gameInfoList[gid].RepairParamB;
                     break;
                 default:
                     break;
@@ -295,12 +295,12 @@ namespace MisakaTranslator_WPF
             Common.textHooker = pidList.Count == 1 ? new TextHookHandle(pidList[0].Id) : new TextHookHandle(pidList);
 
 
-            Common.textHooker.Init(!_gameInfoList[gid].Isx64);
-            Common.textHooker.HookCodeList.Add(_gameInfoList[gid].Hookcode);
-            Common.textHooker.HookCode_Custom = _gameInfoList[gid].HookCodeCustom;
+            Common.textHooker.Init(!gameInfoList[gid].Isx64);
+            Common.textHooker.HookCodeList.Add(gameInfoList[gid].Hookcode);
+            Common.textHooker.HookCode_Custom = gameInfoList[gid].HookCodeCustom;
 
 
-            if (_gameInfoList[gid].IsMultiHook) {
+            if (gameInfoList[gid].IsMultiHook) {
                 var ggw = new GameGuideWindow(3);
                 ggw.Show();
             }
@@ -329,11 +329,11 @@ namespace MisakaTranslator_WPF
 
         private void StartBtn_Click(object sender, RoutedEventArgs e)
         {
-            var res = Process.Start(_gameInfoList[_gid].FilePath);
+            var res = Process.Start(gameInfoList[gid].FilePath);
             res?.WaitForInputIdle(5000);
             GameInfoDrawer.IsOpen = false;
             Thread.Sleep(2000);
-            StartTranslateByGid(_gid);
+            StartTranslateByGid(gid);
         }
 
         /// <summary>
@@ -342,8 +342,8 @@ namespace MisakaTranslator_WPF
         private void DeleteGameBtn_Click(object sender, RoutedEventArgs e)
         {
             if (HandyControl.Controls.MessageBox.Show(Application.Current.Resources["MainWindow_Drawer_DeleteGameConfirmBox"].ToString(), Application.Current.Resources["MessageBox_Ask"].ToString(), MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
-                GameLibraryHelper.DeleteGameByID(_gameInfoList[_gid].GameID);
-                var b = GameLibraryPanel.FindName($"game{_gid}") as Border;
+                GameLibraryHelper.DeleteGameByID(gameInfoList[gid].GameID);
+                var b = GameLibraryPanel.FindName($"game{gid}") as Border;
                 GameLibraryPanel.Children.Remove(b);
                 GameInfoDrawer.IsOpen = false;
             }
@@ -352,12 +352,12 @@ namespace MisakaTranslator_WPF
 
         private void UpdateNameBtn_Click(object sender, RoutedEventArgs e)
         {
-            Dialog.Show(new GameNameDialog(_gameInfoList,_gid));
+            Dialog.Show(new GameNameDialog(gameInfoList,gid));
         }
 
         private void LEStartBtn_Click(object sender, RoutedEventArgs e)
         {
-            var filepath = _gameInfoList[_gid].FilePath;
+            var filepath = gameInfoList[gid].FilePath;
             var p = new ProcessStartInfo();
             var lePath = Common.appSettings.LEPath;
             p.FileName = lePath + "\\LEProc.exe";
@@ -368,7 +368,7 @@ namespace MisakaTranslator_WPF
             res?.WaitForInputIdle(5000);
             GameInfoDrawer.IsOpen = false;
             Thread.Sleep(2000);
-            StartTranslateByGid(_gid);
+            StartTranslateByGid(gid);
         }
 
         private void BlurWindow_Closing(object sender, CancelEventArgs e)
@@ -380,7 +380,7 @@ namespace MisakaTranslator_WPF
                     Visibility = Visibility.Collapsed;
                     break;
                 case "Exit":
-                    Common.GlobalOCRHotKey.UnRegisterGlobalHotKey(_hwnd, CallBack);
+                    Common.GlobalOCRHotKey.UnRegisterGlobalHotKey(hwnd, CallBack);
                     Application.Current.Shutdown();
                     break;
             }
@@ -432,12 +432,12 @@ namespace MisakaTranslator_WPF
         {
             var processes = Process.GetProcesses();
             var ret = new List<int>();
-            _gameInfoList = GameLibraryHelper.GetAllGameLibrary();
-            if (_gameInfoList != null)
+            gameInfoList = GameLibraryHelper.GetAllGameLibrary();
+            if (gameInfoList != null)
             {
                 foreach (var process in processes)
                 {
-                    for (int j = 0; j < _gameInfoList.Count; j++)
+                    for (int j = 0; j < gameInfoList.Count; j++)
                     {
                         string filepath;
                         try
@@ -449,7 +449,7 @@ namespace MisakaTranslator_WPF
                             continue;
                         }
 
-                        if (filepath == _gameInfoList[j].FilePath)
+                        if (filepath == gameInfoList[j].FilePath)
                         {
                             return j;
                         }
