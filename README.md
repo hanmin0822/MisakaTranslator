@@ -75,4 +75,6 @@ E-Mail/QQ:512240272@qq.com
 
 ## 其他注意
 
+部分游戏无法使用此翻译器直接得到文本Hook方法的，可以使用本项目的子项目[MisakaHookFinder](https://github.com/hanmin0822/MisakaHookFinder)获取源文本并搭配使用，效果更佳！
+
 软件开发过程中使用到部分网络素材，如果侵犯到您的权益，请第一时间联系作者删除，谢谢！
