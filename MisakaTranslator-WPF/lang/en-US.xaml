@@ -16,6 +16,7 @@
     <sys:String x:Key="BtnStart">Start translation</sys:String>
     <sys:String x:Key="BtnHookGuide">Translate through hook Wizard</sys:String>
     <sys:String x:Key="BtnOCRGuide">Translate through OCR Wizard</sys:String>
+    <sys:String x:Key="BtnClipboardGuide">Translate through ClipBoard</sys:String>
 
     <sys:String x:Key="MainWindow_ScrollViewer_AddNewGame">New game</sys:String>
 
@@ -145,6 +146,7 @@
     <sys:String x:Key="GameGuideWin_FuncHint_Hook">Extract Texts with TextHook</sys:String>
     <sys:String x:Key="GameGuideWin_FuncHint_ReHook">Re-select the hook method to match the previous settings</sys:String>
     <sys:String x:Key="GameGuideWin_FuncHint_OCR">Extract Texts with OCR</sys:String>
+    <sys:String x:Key="GameGuideWin_FuncHint_ClipBoard">Extract Texts with ClipBoard</sys:String>
 
     <sys:String x:Key="ChooseGamePage_Introduce">Note: Run the game first, then come back and select the game process from the drop-down list. If the game has multiple processes, choose "Enable smart hook" in the Hook Settings.</sys:String>
     <sys:String x:Key="ChooseGamePage_BtnChooseWin">Select a window</sys:String>
@@ -264,8 +266,8 @@
 
     <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_left">MisakaTranslator has detected that you have input custom H-code behavior. The last H-code recorded is</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_right">If you confirm that this H-code can get text, please select "Yes"; if it can't, select "No" to re-inject a custom H-code; if you do not need a custom H-code, please select "Cancel" to enter the next interface.</sys:String>
-    <sys:String x:Key="ChooseHookFuncPage_BtnAddClipboardFunc">Add clipboard monitoring method</sys:String>
-
+    <sys:String x:Key="ChooseHookFuncPage_BtnCannotfindHook">Can not find correct Hook?</sys:String>
+    
     <sys:String x:Key="App_Global_ErrorHint_left">MisakaTranslator encountered an exception that cannot be resolved. It is about to exit. Details about this exception have been stored in the "</sys:String>
     <sys:String x:Key="App_Global_ErrorHint_right">" file in the "logs" Directory. To better the Translator, sending these files to the developer on GitHub to troubleshoot is appreciated.</sys:String>
 

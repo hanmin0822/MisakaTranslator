@@ -460,5 +460,20 @@ namespace MisakaTranslator_WPF
             }
             return -1;
         }
+
+        private void ClipboardGuideBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Common.textHooker = new TextHookHandle();
+            Common.transMode = 1;
+            Common.textHooker.Init();
+            Common.textHooker.AddClipBoardThread(new System.Windows.Interop.WindowInteropHelper(Common.mainWin).Handle);
+
+            //剪贴板方式读取的特殊码和misakacode
+            Common.textHooker.HookCodeList.Add("HB0@0");
+            Common.textHooker.MisakaCodeList.Add("【0:-1:-1】");
+
+            var ggw = new GameGuideWindow(4);
+            ggw.Show();
+        }
     }
 }

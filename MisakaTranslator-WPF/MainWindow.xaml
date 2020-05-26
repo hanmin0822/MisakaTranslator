@@ -60,7 +60,8 @@
                 <hc:ButtonGroup Orientation="Horizontal">
                         <Button Background="{DynamicResource BoxBtnColor}" Content="{StaticResource BtnHookGuide}" Click="HookGuideBtn_Click" Height="50"></Button>
                         <Button Background="{DynamicResource BoxBtnColor}" Content="{StaticResource BtnOCRGuide}" Click="OCRGuideBtn_Click" Height="50"></Button>
-                </hc:ButtonGroup>
+                        <Button Background="{DynamicResource BoxBtnColor}" Content="{StaticResource BtnClipboardGuide}" Click="ClipboardGuideBtn_Click" Height="50"></Button>
+                    </hc:ButtonGroup>
             </Border>
         </StackPanel>
 

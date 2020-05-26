@@ -200,9 +200,9 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
             
         }
 
-        private void AddClipBoardFuncBtn_Click(object sender, RoutedEventArgs e)
+        private void CannotfindHookBtn_Click(object sender, RoutedEventArgs e)
         {
-            Common.textHooker.AddClipBoardThread(new System.Windows.Interop.WindowInteropHelper(Common.mainWin).Handle);
+            System.Diagnostics.Process.Start("https://github.com/hanmin0822/MisakaHookFinder");
         }
     }
 }

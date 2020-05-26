@@ -58,10 +58,10 @@ namespace MisakaTranslator_WPF
                 FuncHint.Text = Application.Current.Resources["GameGuideWin_FuncHint_OCR"].ToString();
                 GuidePageFrame.Navigate(new Uri("GuidePages/OCR/ChooseOCRAreaPage.xaml", UriKind.Relative));
             }
-            else if(Mode == 3)
+            else if (Mode == 3)
             {
                 //重新选择Hook方法
-                List<string> lstStep = new List<string>() { 
+                List<string> lstStep = new List<string>() {
                     Application.Current.Resources["GameGuideWin_ReHook_Step_1"].ToString(),
                     Application.Current.Resources["GameGuideWin_Step_5"].ToString()
                 };
@@ -69,6 +69,18 @@ namespace MisakaTranslator_WPF
                 GuideStepBar.ItemsSource = lstStep;
                 FuncHint.Text = Application.Current.Resources["GameGuideWin_FuncHint_ReHook"].ToString();
                 GuidePageFrame.Navigate(new Uri("GuidePages/Hook/ReChooseHookFuncPage.xaml", UriKind.Relative));
+            }
+            else if (Mode == 4) {
+                //剪贴板监控
+                List<string> lstStep = new List<string>() {
+                    Application.Current.Resources["GameGuideWin_Hook_Step_3"].ToString(),
+                    Application.Current.Resources["GameGuideWin_Step_4"].ToString(),
+                    Application.Current.Resources["GameGuideWin_Step_5"].ToString()
+                };
+
+                GuideStepBar.ItemsSource = lstStep;
+                FuncHint.Text = Application.Current.Resources["GameGuideWin_FuncHint_ClipBoard"].ToString();
+                GuidePageFrame.Navigate(new Uri("GuidePages/Hook/ChooseTextRepairFuncPage.xaml", UriKind.Relative));
             }
         }
 
@@ -88,7 +100,7 @@ namespace MisakaTranslator_WPF
                     Common.transMode = 1;
                     TranslateWindow translateWindow = new TranslateWindow();
                     translateWindow.Show();
-                    
+
                     this.Close();
                 }
                 else if (GuideMode == 2)
@@ -100,9 +112,18 @@ namespace MisakaTranslator_WPF
 
                     this.Close();
                 }
-                else if(GuideMode == 3)
+                else if (GuideMode == 3)
                 {
                     //Hook方式设置 完成
+                    Common.transMode = 1;
+                    TranslateWindow translateWindow = new TranslateWindow();
+                    translateWindow.Show();
+
+                    this.Close();
+                }
+                else if (GuideMode == 4)
+                {
+                    //剪贴板监控方式设置 完成
                     Common.transMode = 1;
                     TranslateWindow translateWindow = new TranslateWindow();
                     translateWindow.Show();

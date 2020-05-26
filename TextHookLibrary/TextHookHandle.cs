@@ -81,7 +81,7 @@ namespace TextHookLibrary
 
 
         private Dictionary<Process, bool> PossibleGameProcessList;//与gamePID进程同名的进程列表
-        private int HandleMode;//处理的方式 1=已确定的单个进程 2=多个进程寻找能搜到文本的进程
+        private int HandleMode;//处理的方式 1=已确定的单个进程 2=多个进程寻找能搜到文本的进程 3=剪贴板监控
         private Process MaxMemoryProcess;//最大内存进程，用于智能处理时单独注入这个进程而不是PossibleGameProcessList中的每个进程都注入
 
         private int listIndex;//用于Hook功能选择界面的方法序号
@@ -129,6 +129,23 @@ namespace TextHookLibrary
             }
 
             HandleMode = 2;
+            listIndex = 0;
+            listIndex_Re = 0;
+            TextractorFun_Index_List = new Dictionary<long, int>();
+            TextractorFun_Re_Index_List = new Dictionary<long, int>();
+            ThreadID_HookDataInfo_List = new Dictionary<long, TextHookData>();
+            ThreadID_RenewNum_List = new Dictionary<long, int>();
+        }
+
+        public TextHookHandle() {
+            //剪贴板方式读取专用
+            MisakaCodeList = new List<string>();
+            HookCodeList = new List<string>();
+            MaxMemoryProcess = null;
+            GamePID = -1;
+            PossibleGameProcessList = null;
+            TextractorOutPutHistory = new Queue<string>(2000);
+            HandleMode = 3;
             listIndex = 0;
             listIndex_Re = 0;
             TextractorFun_Index_List = new Dictionary<long, int>();

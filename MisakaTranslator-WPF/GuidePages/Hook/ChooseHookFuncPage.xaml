@@ -34,7 +34,11 @@
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
                     <Button HorizontalAlignment="Left" Margin="10" Content="{StaticResource ChooseHookFuncPage_BtnAddHook}" Click="AddHookBtn_Click"/>
 
-                    <Button HorizontalAlignment="Left" Margin="10" Content="{StaticResource ChooseHookFuncPage_BtnAddClipboardFunc}" Click="AddClipBoardFuncBtn_Click"/>
+                    <TextBlock Margin="10" VerticalAlignment="Center">
+                        <Hyperlink Click="CannotfindHookBtn_Click"> 
+                            <TextBlock Text="{StaticResource ChooseHookFuncPage_BtnCannotfindHook}"/>
+                        </Hyperlink>
+                    </TextBlock>
                 </StackPanel>
 
                 <Button Grid.Row="2" HorizontalAlignment="Right" Margin="10" Content="{StaticResource ChooseHookFuncPage_BtnConfirm}" Width="205" Click="ConfirmBtn_Click"/>
