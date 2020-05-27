@@ -423,95 +423,99 @@ namespace MisakaTranslator_WPF
         {
             Application.Current.Dispatcher.BeginInvoke((Action)(() =>
             {
-                //0.清除面板
-                SourceTextPanel.Children.Clear();
-
+                
                 //1.得到原句
                 string source = e.Data.Data;
 
                 //2.进行去重
                 string repairedText = TextRepair.RepairFun_Auto(Common.UsingRepairFunc, source);
 
-                _currentsrcText = repairedText;
+                //补充:如果去重之后的文本长度超过100，直接不翻译、不显示
+                if (repairedText.Length <= 100) {
+                    //2.5 清除面板
+                    SourceTextPanel.Children.Clear();
 
-                if (_isShowSource)
-                {
-                    //3.分词
-                    var mwi = _mecabHelper.SentenceHandle(repairedText);
-                    //分词后结果显示
-                    for (int i = 0; i < mwi.Count; i++)
+                    _currentsrcText = repairedText;
+
+                    if (_isShowSource)
                     {
-                        TextBlock textBlock = new TextBlock();
-                        if (!string.IsNullOrEmpty(SourceTextFont))
+                        //3.分词
+                        var mwi = _mecabHelper.SentenceHandle(repairedText);
+                        //分词后结果显示
+                        for (int i = 0; i < mwi.Count; i++)
                         {
-                            FontFamily fontFamily = new FontFamily(SourceTextFont);
-                            textBlock.FontFamily = fontFamily;
+                            TextBlock textBlock = new TextBlock();
+                            if (!string.IsNullOrEmpty(SourceTextFont))
+                            {
+                                FontFamily fontFamily = new FontFamily(SourceTextFont);
+                                textBlock.FontFamily = fontFamily;
+                            }
+                            textBlock.Text = mwi[i].Word;
+                            textBlock.Margin = new Thickness(10, 0, 0, 10);
+                            textBlock.FontSize = SourceTextFontSize;
+                            textBlock.Background = Brushes.Transparent;
+                            textBlock.MouseLeftButtonDown += DictArea_MouseLeftButtonDown;
+                            //根据不同词性跟字体上色
+                            switch (mwi[i].PartOfSpeech)
+                            {
+                                case "名詞":
+                                    textBlock.Foreground = Brushes.AliceBlue;
+                                    break;
+                                case "助詞":
+                                    textBlock.Foreground = Brushes.LightGreen;
+                                    break;
+                                case "動詞":
+                                    textBlock.Foreground = Brushes.Red;
+                                    break;
+                                case "連体詞":
+                                    textBlock.Foreground = Brushes.Orange;
+                                    break;
+                                default:
+                                    textBlock.Foreground = Brushes.White;
+                                    break;
+                            }
+                            SourceTextPanel.Children.Add(textBlock);
                         }
-                        textBlock.Text = mwi[i].Word;
-                        textBlock.Margin = new Thickness(10, 0, 0, 10);
-                        textBlock.FontSize = SourceTextFontSize;
-                        textBlock.Background = Brushes.Transparent;
-                        textBlock.MouseLeftButtonDown += DictArea_MouseLeftButtonDown;
-                        //根据不同词性跟字体上色
-                        switch (mwi[i].PartOfSpeech)
-                        {
-                            case "名詞":
-                                textBlock.Foreground = Brushes.AliceBlue;
-                                break;
-                            case "助詞":
-                                textBlock.Foreground = Brushes.LightGreen;
-                                break;
-                            case "動詞":
-                                textBlock.Foreground = Brushes.Red;
-                                break;
-                            case "連体詞":
-                                textBlock.Foreground = Brushes.Orange;
-                                break;
-                            default:
-                                textBlock.Foreground = Brushes.White;
-                                break;
-                        }
-                        SourceTextPanel.Children.Add(textBlock);
                     }
+
+                    if (Convert.ToBoolean(Common.appSettings.EachRowTrans))
+                    {
+                        //需要分行翻译
+                        repairedText = repairedText.Replace("<br>", string.Empty).Replace("</br>", string.Empty).Replace("\n", string.Empty).Replace("\t", string.Empty).Replace("\r", string.Empty);
+                    }
+                    //去乱码
+                    repairedText = repairedText.Replace("_", string.Empty).Replace("-", string.Empty).Replace("+", string.Empty);
+
+                    //4.翻译前预处理
+                    string beforeString = _beforeTransHandle.AutoHandle(repairedText);
+
+                    //5.提交翻译
+                    string transRes1 = string.Empty;
+                    string transRes2 = string.Empty;
+                    if (_translator1 != null)
+                    {
+                        transRes1 = _translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                    }
+                    if (_translator2 != null)
+                    {
+                        transRes2 = _translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                    }
+
+                    //6.翻译后处理
+                    string afterString1 = _afterTransHandle.AutoHandle(transRes1);
+                    string afterString2 = _afterTransHandle.AutoHandle(transRes2);
+
+                    //7.翻译结果显示到窗口上
+                    FirstTransText.Text = afterString1;
+                    SecondTransText.Text = afterString2;
+
+                    //8.翻译结果记录到队列
+                    if (_gameTextHistory.Count > 5)
+                    {
+                        _gameTextHistory.Dequeue();
+                    }
+                    _gameTextHistory.Enqueue(repairedText + "\n" + afterString1 + "\n" + afterString2);
                 }
-
-                if (Convert.ToBoolean(Common.appSettings.EachRowTrans))
-                {
-                    //需要分行翻译
-                    repairedText = repairedText.Replace("<br>", string.Empty).Replace("</br>", string.Empty).Replace("\n", string.Empty).Replace("\t", string.Empty).Replace("\r", string.Empty);
-                }
-                //去乱码
-                repairedText = repairedText.Replace("_", string.Empty).Replace("-", string.Empty).Replace("+", string.Empty);
-
-                //4.翻译前预处理
-                string beforeString = _beforeTransHandle.AutoHandle(repairedText);
-
-                //5.提交翻译
-                string transRes1 = string.Empty;
-                string transRes2 = string.Empty;
-                if (_translator1 != null)
-                {
-                    transRes1 = _translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
-                }
-                if (_translator2 != null)
-                {
-                    transRes2 = _translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
-                }
-
-                //6.翻译后处理
-                string afterString1 = _afterTransHandle.AutoHandle(transRes1);
-                string afterString2 = _afterTransHandle.AutoHandle(transRes2);
-
-                //7.翻译结果显示到窗口上
-                FirstTransText.Text = afterString1;
-                SecondTransText.Text = afterString2;
-
-                //8.翻译结果记录到队列
-                if (_gameTextHistory.Count > 5)
-                {
-                    _gameTextHistory.Dequeue();
-                }
-                _gameTextHistory.Enqueue(repairedText + "\n" + afterString1 + "\n" + afterString2);
             }));
         }
 

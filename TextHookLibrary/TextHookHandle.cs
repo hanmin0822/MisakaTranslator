@@ -308,7 +308,7 @@ namespace TextHookLibrary
             if (Pause == false)
             {
                 TextHookData thData = ThreadID_HookDataInfo_List[threadid];
-
+                
                 if (thData != null)
                 {
                     TextHookData data = thData;
