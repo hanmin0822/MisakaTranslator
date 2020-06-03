@@ -25,6 +25,11 @@ namespace MecabHelperLibrary
         public string Description;
 
         /// <summary>
+        /// 假名
+        /// </summary>
+        public string Kana;
+
+        /// <summary>
         /// Mecab能提供的关于这个词的详细信息 CSV表示
         /// </summary>
         public string Feature;
@@ -68,6 +73,7 @@ namespace MecabHelperLibrary
                         Word = node.Surface,
                         PartOfSpeech = features[0],
                         Description = features[1],
+                        Kana = features[7],
                         Feature = node.Feature
                     };
 
