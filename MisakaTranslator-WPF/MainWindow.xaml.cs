@@ -465,8 +465,7 @@ namespace MisakaTranslator_WPF
         {
             Common.textHooker = new TextHookHandle();
             Common.transMode = 1;
-            Common.textHooker.Init();
-            Common.textHooker.AddClipBoardThread(new System.Windows.Interop.WindowInteropHelper(Common.mainWin).Handle);
+            Common.textHooker.AddClipBoardThread();
 
             //剪贴板方式读取的特殊码和misakacode
             Common.textHooker.HookCodeList.Add("HB0@0");

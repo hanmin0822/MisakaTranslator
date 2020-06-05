@@ -69,14 +69,20 @@ namespace MecabHelperLibrary
                 {
                     var features = node.Feature.Split(',');
 
+                    
                     MecabWordInfo mwi = new MecabWordInfo {
                         Word = node.Surface,
                         PartOfSpeech = features[0],
                         Description = features[1],
-                        Kana = features[7],
                         Feature = node.Feature
                     };
 
+                    //加这一步是为了防止乱码进入分词导致无法读取假名
+                    if (features.Length >= 8)
+                    {
+                        mwi.Kana = features[7];
+                    }
+                    
                     ret.Add(mwi);
                 }
             }
