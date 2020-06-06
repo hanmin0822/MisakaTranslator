@@ -40,6 +40,7 @@ namespace MisakaTranslator_WPF
         /// </summary>
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
+            MisakaTranslator_WPF.MainWindow.Instance.CloseNotifyIcon();
             string fn = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
             PrintErrorMessageToFile(fn, e.Exception, 0);
             DoHookCheck();
@@ -52,6 +53,7 @@ namespace MisakaTranslator_WPF
         /// </summary>
         void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
+            MisakaTranslator_WPF.MainWindow.Instance.CloseNotifyIcon();
             string fn = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
             if (e.ExceptionObject is Exception exception)
             {
@@ -72,6 +74,7 @@ namespace MisakaTranslator_WPF
         /// </summary>
         private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
+            MisakaTranslator_WPF.MainWindow.Instance.CloseNotifyIcon();
             string fn = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss");
             PrintErrorMessageToFile(fn, e.Exception, 2);
 
