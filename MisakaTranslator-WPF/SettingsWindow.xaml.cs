@@ -99,5 +99,10 @@ namespace MisakaTranslator_WPF
         {
             this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/DreyeTransSettingsPage.xaml", UriKind.Relative));
         }
+
+        private void Item_TTSSettings_Selected(object sender, RoutedEventArgs e)
+        {
+            this.SettingFrame.Navigate(new Uri("SettingsPages/TTSSettingsPage.xaml", UriKind.Relative));
+        }
     }
 }

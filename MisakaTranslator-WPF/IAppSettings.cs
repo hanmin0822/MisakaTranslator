@@ -68,6 +68,15 @@ namespace MisakaTranslator_WPF
         [Option(Alias = "XxgJpZhDict.xxgPath", DefaultValue = "")]
         string xxgPath { get; set; }
 
+        [Option(Alias = "TTS.Voice", DefaultValue = "")]
+        string ttsVoice { get; set; }
+
+        [Option(Alias = "TTS.volume", DefaultValue = "80")]
+        string ttsVolume { get; set; }
+
+        [Option(Alias = "TTS.rate", DefaultValue = "0")]
+        string ttsRate { get; set; }
+
         [Option(Alias = "TranslateFormSettings.opacity", DefaultValue = "50")]
         string TF_Opacity { get; set; }
         [Option(Alias = "TranslateFormSettings.backColor", DefaultValue = "#ffffffff")]

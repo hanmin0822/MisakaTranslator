@@ -271,4 +271,13 @@
     <sys:String x:Key="App_Global_ErrorHint_left">MisakaTranslator encountered an exception that cannot be resolved. It is about to exit. Details about this exception have been stored in the "</sys:String>
     <sys:String x:Key="App_Global_ErrorHint_right">" file in the "logs" Directory. To better the Translator, sending these files to the developer on GitHub to troubleshoot is appreciated.</sys:String>
 
+    <sys:String x:Key="SettingsMenu_TTSSettings">TTS Settings</sys:String>
+
+    <sys:String x:Key="TTSSettingsPage_Hint">TTS(文字转语音)可以应用在本软件的翻译界面和字典查询界面，提供文本的朗读功能。在使用前您需要先下载一些TTS引擎(例如NeoSpeech或Win10自带引擎等)并安装，然后在本界面中选中相应的TTS引擎并对其进行一些基本设置。设置完毕后您需要通过本界面的测试部分进行测试，这个步骤将保存您的设置。</sys:String>
+    <sys:String x:Key="TTSSettingsPage_TTSSourceLabel">TTS 引擎</sys:String>
+    <sys:String x:Key="TTSSettingsPage_TTSVolumeLabel">朗读音量</sys:String>
+    <sys:String x:Key="TTSSettingsPage_TTSRateLabel">朗读语速</sys:String>
+    <sys:String x:Key="TTSSettingsPage_TestText">TTS测试 源文本</sys:String>
+    <sys:String x:Key="TTSSettingsPage_TestBtn">Test Speech</sys:String>
+    
 </ResourceDictionary>

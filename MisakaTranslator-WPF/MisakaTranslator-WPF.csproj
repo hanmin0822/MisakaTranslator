@@ -166,6 +166,9 @@
     <Compile Include="SettingsPages\SoftwareSettingsPage.xaml.cs">
       <DependentUpon>SoftwareSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPages\TTSSettingsPage.xaml.cs">
+      <DependentUpon>TTSSettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\GameNameDialog.xaml.cs">
       <DependentUpon>GameNameDialog.xaml</DependentUpon>
     </Compile>
@@ -264,6 +267,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SettingsPages\SoftwareSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\TTSSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -458,6 +465,10 @@
     <ProjectReference Include="..\TransOptimizationLibrary\TransOptimizationLibrary.csproj">
       <Project>{a17b385f-8e6e-4b7d-b3ef-ec08c7a8d115}</Project>
       <Name>TransOptimizationLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TTSHelperLibrary\TTSHelperLibrary.csproj">
+      <Project>{dd77c61b-af8a-44be-bac7-745381f84753}</Project>
+      <Name>TTSHelperLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
