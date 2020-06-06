@@ -373,6 +373,7 @@ namespace MisakaTranslator_WPF
                     break;
                 case "Exit":
                     Common.GlobalOCRHotKey.UnRegisterGlobalHotKey(hwnd, CallBack);
+                    NotifyIconContextContent.Visibility = Visibility.Collapsed;
                     Application.Current.Shutdown();
                     break;
             }
