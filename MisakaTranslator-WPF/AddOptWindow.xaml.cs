@@ -23,7 +23,8 @@ namespace MisakaTranslator_WPF
         public AddOptWindow(string src = "")
         {
             InitializeComponent();
-            List<string> wordtype = new List<string>() {
+            List<string> wordtype = new List<string>()
+            {
                 "人名",
                 "地名"
             };
@@ -34,7 +35,8 @@ namespace MisakaTranslator_WPF
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (srcWord.Text != "" && dstWord.Text != "" && wordTypeCombox.SelectedIndex != -1) {
+            if (srcWord.Text != "" && dstWord.Text != "" && wordTypeCombox.SelectedIndex != -1)
+            {
                 NounTransOptimization opt = new NounTransOptimization("" + Common.GameID, Common.UsingSrcLang, Common.UsingDstLang);
                 opt.AddNounTrans(srcWord.Text, wordTypeCombox.SelectedIndex + 1, dstWord.Text);
                 HandyControl.Controls.Growl.InfoGlobal("已添加名词翻译优化词条");

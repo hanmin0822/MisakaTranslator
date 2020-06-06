@@ -1,5 +1,4 @@
-﻿using OCRLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using OCRLibrary;
 using TranslatorLibrary;
 
 namespace MisakaTranslator_WPF
@@ -29,7 +29,8 @@ namespace MisakaTranslator_WPF
             img = i;
         }
 
-        private void dataInit() {
+        private void dataInit()
+        {
             IOptChaRec ocr;
             string res = null;
             if (Common.appSettings.OCRsource == "TesseractOCR")

@@ -31,7 +31,7 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
         {
             Common.appSettings.CaiyunToken = TransTokenBox.Text;
             ITranslator Trans = new CaiyunTranslator();
-            Trans.TranslatorInit(TransTokenBox.Text,"");
+            Trans.TranslatorInit(TransTokenBox.Text, "");
             if (Trans.Translate("apple", "zh", "en") != null)
             {
                 HandyControl.Controls.Growl.Success($"彩云小译{Application.Current.Resources["APITest_Success_Hint"]}");
@@ -60,7 +60,7 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
         private void TransTestBtn_Click(object sender, RoutedEventArgs e)
         {
             ITranslator Trans = new CaiyunTranslator();
-            Trans.TranslatorInit(Common.appSettings.CaiyunToken,"");
+            Trans.TranslatorInit(Common.appSettings.CaiyunToken, "");
             string res = Trans.Translate(TestSrcText.Text, TestDstLang.Text, TestSrcLang.Text);
             if (res != null)
             {

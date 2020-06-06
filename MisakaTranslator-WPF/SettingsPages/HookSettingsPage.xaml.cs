@@ -17,7 +17,6 @@ namespace MisakaTranslator_WPF.SettingsPages
             AutoDetachCheckBox.IsChecked = Convert.ToBoolean(Common.appSettings.AutoDetach);
         }
 
-        
         private void AutoHookCheckBox_Click(object sender, RoutedEventArgs e)
         {
             Common.appSettings.AutoHook = Convert.ToString(AutoHookCheckBox.IsChecked);
@@ -40,6 +39,5 @@ namespace MisakaTranslator_WPF.SettingsPages
             }
         }
 
-        
     }
 }

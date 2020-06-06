@@ -25,18 +25,19 @@ namespace MisakaTranslator_WPF
         {
             InitializeComponent();
 
-            this.AddHandler(GuidePages.PageChange.PageChangeRoutedEvent,new RoutedEventHandler(Next_Click));
+            this.AddHandler(GuidePages.PageChange.PageChangeRoutedEvent, new RoutedEventHandler(Next_Click));
 
             GuideMode = Mode;
             if (Mode == 1)
             {
                 //Hook模式
-                List<string> lstStep = new List<string>() {
-                    Application.Current.Resources["GameGuideWin_Hook_Step_1"].ToString(),
-                    Application.Current.Resources["GameGuideWin_Hook_Step_2"].ToString(),
-                    Application.Current.Resources["GameGuideWin_Hook_Step_3"].ToString(),
-                    Application.Current.Resources["GameGuideWin_Step_4"].ToString(),
-                    Application.Current.Resources["GameGuideWin_Step_5"].ToString()
+                List<string> lstStep = new List<string>()
+                {
+                Application.Current.Resources["GameGuideWin_Hook_Step_1"].ToString(),
+                Application.Current.Resources["GameGuideWin_Hook_Step_2"].ToString(),
+                Application.Current.Resources["GameGuideWin_Hook_Step_3"].ToString(),
+                Application.Current.Resources["GameGuideWin_Step_4"].ToString(),
+                Application.Current.Resources["GameGuideWin_Step_5"].ToString()
                 };
 
                 GuideStepBar.ItemsSource = lstStep;
@@ -46,12 +47,13 @@ namespace MisakaTranslator_WPF
             else if (Mode == 2)
             {
                 //OCR模式
-                List<string> lstStep = new List<string>() {
-                    Application.Current.Resources["GameGuideWin_OCR_Step_1"].ToString(),
-                    Application.Current.Resources["GameGuideWin_OCR_Step_2"].ToString(),
-                    Application.Current.Resources["GameGuideWin_OCR_Step_3"].ToString(),
-                    Application.Current.Resources["GameGuideWin_Step_4"].ToString(),
-                    Application.Current.Resources["GameGuideWin_Step_5"].ToString()
+                List<string> lstStep = new List<string>()
+                {
+                Application.Current.Resources["GameGuideWin_OCR_Step_1"].ToString(),
+                Application.Current.Resources["GameGuideWin_OCR_Step_2"].ToString(),
+                Application.Current.Resources["GameGuideWin_OCR_Step_3"].ToString(),
+                Application.Current.Resources["GameGuideWin_Step_4"].ToString(),
+                Application.Current.Resources["GameGuideWin_Step_5"].ToString()
                 };
 
                 GuideStepBar.ItemsSource = lstStep;
@@ -61,21 +63,24 @@ namespace MisakaTranslator_WPF
             else if (Mode == 3)
             {
                 //重新选择Hook方法
-                List<string> lstStep = new List<string>() {
-                    Application.Current.Resources["GameGuideWin_ReHook_Step_1"].ToString(),
-                    Application.Current.Resources["GameGuideWin_Step_5"].ToString()
+                List<string> lstStep = new List<string>()
+                {
+                Application.Current.Resources["GameGuideWin_ReHook_Step_1"].ToString(),
+                Application.Current.Resources["GameGuideWin_Step_5"].ToString()
                 };
 
                 GuideStepBar.ItemsSource = lstStep;
                 FuncHint.Text = Application.Current.Resources["GameGuideWin_FuncHint_ReHook"].ToString();
                 GuidePageFrame.Navigate(new Uri("GuidePages/Hook/ReChooseHookFuncPage.xaml", UriKind.Relative));
             }
-            else if (Mode == 4) {
+            else if (Mode == 4)
+            {
                 //剪贴板监控
-                List<string> lstStep = new List<string>() {
-                    Application.Current.Resources["GameGuideWin_Hook_Step_3"].ToString(),
-                    Application.Current.Resources["GameGuideWin_Step_4"].ToString(),
-                    Application.Current.Resources["GameGuideWin_Step_5"].ToString()
+                List<string> lstStep = new List<string>()
+                {
+                Application.Current.Resources["GameGuideWin_Hook_Step_3"].ToString(),
+                Application.Current.Resources["GameGuideWin_Step_4"].ToString(),
+                Application.Current.Resources["GameGuideWin_Step_5"].ToString()
                 };
 
                 GuideStepBar.ItemsSource = lstStep;
@@ -89,7 +94,8 @@ namespace MisakaTranslator_WPF
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Next_Click(object sender, RoutedEventArgs e) {
+        private void Next_Click(object sender, RoutedEventArgs e)
+        {
             GuidePages.PageChangeRoutedEventArgs args = e as GuidePages.PageChangeRoutedEventArgs;
 
             if (args.XamlPath == "1")
@@ -131,13 +137,13 @@ namespace MisakaTranslator_WPF
                     this.Close();
                 }
             }
-            else {
+            else
+            {
                 //其他情况就跳转指定页面
                 GuidePageFrame.Navigate(new Uri(args.XamlPath, UriKind.Relative));
                 GuideStepBar.Next();
             }
 
-            
         }
 
     }

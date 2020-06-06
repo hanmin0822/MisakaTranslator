@@ -22,7 +22,7 @@ namespace MisakaTranslator_WPF.SettingsPages
     public partial class TranslatorGeneralSettingsPage : Page
     {
         private List<string> TranslatorList;
-            
+
         public TranslatorGeneralSettingsPage()
         {
             InitializeComponent();
@@ -45,7 +45,7 @@ namespace MisakaTranslator_WPF.SettingsPages
         {
             Common.appSettings.SecondTranslator = CommonFunction.lstTranslator[(string)SecondTransCombox.SelectedValue];
         }
-        
+
         private void EachRowTransCheckBox_Click(object sender, RoutedEventArgs e)
         {
             Common.appSettings.EachRowTrans = Convert.ToString(EachRowTransCheckBox.IsChecked);

@@ -33,20 +33,20 @@ namespace MisakaTranslator_WPF
         private MecabHelper _mecabHelper;
         private BeforeTransHandle _beforeTransHandle;
         private AfterTransHandle _afterTransHandle;
-        private ITranslator _translator1;//第一翻译源
-        private ITranslator _translator2;//第二翻译源
+        private ITranslator _translator1; //第一翻译源
+        private ITranslator _translator2; //第二翻译源
 
         private IDict _dict;
 
-        private string _currentsrcText;//当前源文本内容
+        private string _currentsrcText; //当前源文本内容
 
-        public string SourceTextFont;//源文本区域字体
-        public int SourceTextFontSize;//源文本区域字体大小
+        public string SourceTextFont; //源文本区域字体
+        public int SourceTextFontSize; //源文本区域字体大小
 
-        private Queue<string> _gameTextHistory;//历史文本
-        public static GlobalHook hook;//全局键盘鼠标钩子
-        public bool IsOCRingFlag;//线程锁:判断是否正在OCR线程中，保证同时只有一组在跑OCR
-        public bool IsPauseFlag;//是否处在暂停状态（专用于OCR）,为真可以翻译
+        private Queue<string> _gameTextHistory; //历史文本
+        public static GlobalHook hook; //全局键盘鼠标钩子
+        public bool IsOCRingFlag; //线程锁:判断是否正在OCR线程中，保证同时只有一组在跑OCR
+        public bool IsPauseFlag; //是否处在暂停状态（专用于OCR）,为真可以翻译
 
         private bool _isShowSource;
 
@@ -69,7 +69,6 @@ namespace MisakaTranslator_WPF
                 _dict = new XxgJpzhDict();
                 _dict.DictInit(Common.appSettings.xxgPath, string.Empty);
             }
-
 
             IsPauseFlag = true;
             _translator1 = TranslatorAuto(Common.appSettings.FirstTranslator);
@@ -199,7 +198,6 @@ namespace MisakaTranslator_WPF
             }
         }
 
-
         /// <summary>
         /// 键盘点击事件
         /// </summary>
@@ -224,7 +222,7 @@ namespace MisakaTranslator_WPF
             if (e.Button == Common.UsingHotKey.MouseButton)
             {
                 if (Common.isAllWindowCap && Process.GetCurrentProcess().Id != FindWindowInfo.GetProcessIDByHWND(FindWindowInfo.GetWindowHWND(e.X, e.Y))
-                        || Common.OCRWinHwnd == (IntPtr)FindWindowInfo.GetWindowHWND(e.X, e.Y))
+                    || Common.OCRWinHwnd == (IntPtr)FindWindowInfo.GetWindowHWND(e.X, e.Y))
                 {
                     OCR();
                 }
@@ -363,8 +361,6 @@ namespace MisakaTranslator_WPF
             }
         }
 
-
-
         private void DictArea_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (_dict != null)
@@ -423,7 +419,7 @@ namespace MisakaTranslator_WPF
         {
             Application.Current.Dispatcher.BeginInvoke((Action)(() =>
             {
-                
+
                 //1.得到原句
                 string source = e.Data.Data;
 
@@ -431,7 +427,8 @@ namespace MisakaTranslator_WPF
                 string repairedText = TextRepair.RepairFun_Auto(Common.UsingRepairFunc, source);
 
                 //补充:如果去重之后的文本长度超过100，直接不翻译、不显示
-                if (repairedText.Length <= 100) {
+                if (repairedText.Length <= 100)
+                {
                     //2.5 清除面板
                     SourceTextPanel.Children.Clear();
 
@@ -519,7 +516,6 @@ namespace MisakaTranslator_WPF
             }));
         }
 
-
         private void ChangeSize_Item_Click(object sender, RoutedEventArgs e)
         {
 
@@ -552,7 +548,6 @@ namespace MisakaTranslator_WPF
             {
                 IsPauseFlag = !IsPauseFlag;
             }
-
 
         }
 
@@ -654,7 +649,6 @@ namespace MisakaTranslator_WPF
                 }
                 //去乱码
                 _currentsrcText = _currentsrcText.Replace("_", string.Empty).Replace("-", string.Empty).Replace("+", string.Empty);
-
 
                 //4.翻译前预处理
                 string beforeString = _beforeTransHandle.AutoHandle(_currentsrcText);

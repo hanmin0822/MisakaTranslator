@@ -1,5 +1,4 @@
-﻿using DictionaryHelperLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DictionaryHelperLibrary;
 
 namespace MisakaTranslator_WPF.SettingsPages.DictionaryPages
 {
@@ -80,11 +80,11 @@ namespace MisakaTranslator_WPF.SettingsPages.DictionaryPages
                 };
                 window.Show();
             }
-            else {
+            else
+            {
                 HandyControl.Controls.Growl.Error($"查询错误！{dict.GetLastError()}");
             }
 
-            
         }
     }
 }

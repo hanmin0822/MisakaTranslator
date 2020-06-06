@@ -1,11 +1,11 @@
-﻿using OCRLibrary;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using OCRLibrary;
 using TranslatorLibrary;
 
 namespace MisakaTranslator_WPF
@@ -16,7 +16,7 @@ namespace MisakaTranslator_WPF
     public partial class ScreenCaptureWindow : Window
     {
         BitmapImage img;
-        
+
         Point iniP;
         private ViewModel viewModel;
         Rect selectRect;
@@ -26,7 +26,7 @@ namespace MisakaTranslator_WPF
 
         int capMode;
 
-        public ScreenCaptureWindow(BitmapImage i,int mode = 1)
+        public ScreenCaptureWindow(BitmapImage i, int mode = 1)
         {
             img = i;
             scale = Common.GetScale();
@@ -55,7 +55,6 @@ namespace MisakaTranslator_WPF
             };
 
             DataContext = viewModel;
-            
 
         }
 
@@ -66,7 +65,8 @@ namespace MisakaTranslator_WPF
                 iniP = e.GetPosition(inkCanvasMeasure);
             }
 
-            if (e.ChangedButton == MouseButton.Right) {
+            if (e.ChangedButton == MouseButton.Right)
+            {
                 this.Close();
             }
         }
@@ -78,13 +78,13 @@ namespace MisakaTranslator_WPF
                 // Draw square
                 System.Windows.Point endP = e.GetPosition(inkCanvasMeasure);
                 List<System.Windows.Point> pointList = new List<System.Windows.Point>
-                {
-                    new System.Windows.Point(iniP.X, iniP.Y),
-                    new System.Windows.Point(iniP.X, endP.Y),
-                    new System.Windows.Point(endP.X, endP.Y),
-                    new System.Windows.Point(endP.X, iniP.Y),
-                    new System.Windows.Point(iniP.X, iniP.Y),
-                };
+                    {
+                        new System.Windows.Point(iniP.X, iniP.Y),
+                        new System.Windows.Point(iniP.X, endP.Y),
+                        new System.Windows.Point(endP.X, endP.Y),
+                        new System.Windows.Point(endP.X, iniP.Y),
+                        new System.Windows.Point(iniP.X, iniP.Y),
+                    };
                 StylusPointCollection point = new StylusPointCollection(pointList);
                 Stroke stroke = new Stroke(point)
                 {
@@ -93,7 +93,7 @@ namespace MisakaTranslator_WPF
                 viewModel.InkStrokes.Clear();
                 viewModel.InkStrokes.Add(stroke);
 
-                selectRect = new Rect(new Point(iniP.X * scale,iniP.Y * scale),new Point(endP.X * scale,endP.Y * scale));
+                selectRect = new Rect(new Point(iniP.X * scale, iniP.Y * scale), new Point(endP.X * scale, endP.Y * scale));
             }
         }
 
@@ -101,7 +101,8 @@ namespace MisakaTranslator_WPF
         {
             OCRArea = new System.Drawing.Rectangle((int)selectRect.Location.X, (int)selectRect.Location.Y, (int)selectRect.Size.Width, (int)selectRect.Size.Height);
 
-            if (capMode == 2) {
+            if (capMode == 2)
+            {
                 //全局OCR截图，直接打开结果页面
                 System.Drawing.Image img = ScreenCapture.GetWindowRectCapture(System.IntPtr.Zero, OCRArea, true);
 
@@ -116,7 +117,6 @@ namespace MisakaTranslator_WPF
 
         }
 
-        
     }
 
     class ViewModel : INotifyPropertyChanged
@@ -143,7 +143,10 @@ namespace MisakaTranslator_WPF
         private StrokeCollection inkStrokes;
         public StrokeCollection InkStrokes
         {
-            get { return inkStrokes; }
+            get
+            {
+                return inkStrokes;
+            }
             set
             {
                 inkStrokes = value;
@@ -151,5 +154,5 @@ namespace MisakaTranslator_WPF
             }
         }
     }
-    
+
 }

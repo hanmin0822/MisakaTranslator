@@ -1,10 +1,4 @@
-﻿using Config.Net;
-using FontAwesome.WPF.Converters;
-using HandyControl.Controls;
-using KeyboardMouseHookLibrary;
-using OCRLibrary;
-using SQLHelperLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -18,7 +12,13 @@ using System.Windows.Data;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using Config.Net;
+using FontAwesome.WPF.Converters;
+using HandyControl.Controls;
 using HandyControl.Data;
+using KeyboardMouseHookLibrary;
+using OCRLibrary;
+using SQLHelperLibrary;
 using TextHookLibrary;
 
 namespace MisakaTranslator_WPF
@@ -26,7 +26,7 @@ namespace MisakaTranslator_WPF
     public partial class MainWindow
     {
         private List<GameInfo> gameInfoList;
-        private int gid;//当前选中的顺序，并非游戏ID
+        private int gid; //当前选中的顺序，并非游戏ID
         private IntPtr hwnd;
 
         public MainWindow()
@@ -72,19 +72,20 @@ namespace MisakaTranslator_WPF
             Common.UsingDstLang = "zh";
             Common.UsingSrcLang = "jp";
         }
-        
 
         /// <summary>
         /// 游戏库瀑布流初始化
         /// </summary>
-        private void GameLibraryPanel_Init() {
-            
-            var bushLst = new List<SolidColorBrush> {
-                System.Windows.Media.Brushes.CornflowerBlue,
-                System.Windows.Media.Brushes.IndianRed,
-                System.Windows.Media.Brushes.Orange,
-                System.Windows.Media.Brushes.ForestGreen
-            };
+        private void GameLibraryPanel_Init()
+        {
+
+            var bushLst = new List<SolidColorBrush>
+                {
+                    System.Windows.Media.Brushes.CornflowerBlue,
+                    System.Windows.Media.Brushes.IndianRed,
+                    System.Windows.Media.Brushes.Orange,
+                    System.Windows.Media.Brushes.ForestGreen
+                };
             if (gameInfoList != null)
             {
                 for (var i = 0; i < gameInfoList.Count; i++)
@@ -119,7 +120,7 @@ namespace MisakaTranslator_WPF
                     back.MouseEnter += Border_MouseEnter;
                     back.MouseLeave += Border_MouseLeave;
                     back.MouseLeftButtonDown += Back_MouseLeftButtonDown;
-                    GameLibraryPanel.RegisterName("game" + i,back);
+                    GameLibraryPanel.RegisterName("game" + i, back);
                     GameLibraryPanel.Children.Add(back);
                 }
             }
@@ -187,8 +188,6 @@ namespace MisakaTranslator_WPF
             }
         }
 
-        
-
         private void HookGuideBtn_Click(object sender, RoutedEventArgs e)
         {
             var ggw = new GameGuideWindow(1);
@@ -217,14 +216,15 @@ namespace MisakaTranslator_WPF
         {
             var b = (Border)sender;
             var str = b.Name;
-            var temp = str.Remove(0,4);
+            var temp = str.Remove(0, 4);
             gid = int.Parse(temp);
 
             GameNameTag.Text = Application.Current.Resources["MainWindow_Drawer_Tag_GameName"].ToString() + gameInfoList[gid].GameName;
-            if (gameInfoList[gid].TransMode == 1) {
+            if (gameInfoList[gid].TransMode == 1)
+            {
                 TransModeTag.Text = Application.Current.Resources["MainWindow_Drawer_Tag_TransMode"].ToString() + "Hook";
             }
-            else 
+            else
             {
                 TransModeTag.Text = Application.Current.Resources["MainWindow_Drawer_Tag_TransMode"].ToString() + "OCR";
             }
@@ -232,8 +232,8 @@ namespace MisakaTranslator_WPF
             GameInfoDrawer.IsOpen = true;
         }
 
-
-        private void StartTranslateByGid(int gid) {
+        private void StartTranslateByGid(int gid)
+        {
             var ps = Process.GetProcesses();
             var pidList = new List<Process>();
 
@@ -251,8 +251,8 @@ namespace MisakaTranslator_WPF
                     //throw ex;
                 }
 
-
-                if (gameInfoList[gid].FilePath == filepath) {
+                if (gameInfoList[gid].FilePath == filepath)
+                {
                     pidList.Add(process);
                 }
             }
@@ -262,7 +262,7 @@ namespace MisakaTranslator_WPF
                 HandyControl.Controls.MessageBox.Show(Application.Current.Resources["MainWindow_StartError_Hint"].ToString(), Application.Current.Resources["MessageBox_Hint"].ToString());
                 return;
             }
-            else 
+            else
             {
                 var pid = pidList[0].Id;
                 pidList.Clear();
@@ -294,13 +294,12 @@ namespace MisakaTranslator_WPF
 
             Common.textHooker = pidList.Count == 1 ? new TextHookHandle(pidList[0].Id) : new TextHookHandle(pidList);
 
-
             Common.textHooker.Init(!gameInfoList[gid].Isx64);
             Common.textHooker.HookCodeList.Add(gameInfoList[gid].Hookcode);
             Common.textHooker.HookCode_Custom = gameInfoList[gid].HookCodeCustom;
 
-
-            if (gameInfoList[gid].IsMultiHook) {
+            if (gameInfoList[gid].IsMultiHook)
+            {
                 var ggw = new GameGuideWindow(3);
                 ggw.Show();
             }
@@ -315,7 +314,6 @@ namespace MisakaTranslator_WPF
                     await System.Threading.Tasks.Task.Delay(3000);
                     Common.textHooker.Auto_AddHookToGame();
                 });
-                
 
                 var tw = new TranslateWindow();
                 tw.Show();
@@ -341,9 +339,10 @@ namespace MisakaTranslator_WPF
         /// </summary>
         private void DeleteGameBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (HandyControl.Controls.MessageBox.Show(Application.Current.Resources["MainWindow_Drawer_DeleteGameConfirmBox"].ToString(), Application.Current.Resources["MessageBox_Ask"].ToString(), MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
+            if (HandyControl.Controls.MessageBox.Show(Application.Current.Resources["MainWindow_Drawer_DeleteGameConfirmBox"].ToString(), Application.Current.Resources["MessageBox_Ask"].ToString(), MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
                 GameLibraryHelper.DeleteGameByID(gameInfoList[gid].GameID);
-                var b = GameLibraryPanel.FindName($"game{gid}") as Border;
+                var b = GameLibraryPanel.FindName($"game{gid}")as Border;
                 GameLibraryPanel.Children.Remove(b);
                 GameInfoDrawer.IsOpen = false;
             }
@@ -352,7 +351,7 @@ namespace MisakaTranslator_WPF
 
         private void UpdateNameBtn_Click(object sender, RoutedEventArgs e)
         {
-            Dialog.Show(new GameNameDialog(gameInfoList,gid));
+            Dialog.Show(new GameNameDialog(gameInfoList, gid));
         }
 
         private void LEStartBtn_Click(object sender, RoutedEventArgs e)
@@ -395,7 +394,7 @@ namespace MisakaTranslator_WPF
         /// <param name="e"></param>
         private void Language_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if(sender is MenuItem menuItem)
+            if (sender is MenuItem menuItem)
             {
                 switch (menuItem.Tag)
                 {

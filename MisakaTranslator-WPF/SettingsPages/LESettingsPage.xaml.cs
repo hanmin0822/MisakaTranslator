@@ -26,7 +26,6 @@ namespace MisakaTranslator_WPF.SettingsPages
 
             PathBox.Text = Common.appSettings.LEPath;
         }
-        
 
         private void ChoosePathBtn_Click(object sender, RoutedEventArgs e)
         {

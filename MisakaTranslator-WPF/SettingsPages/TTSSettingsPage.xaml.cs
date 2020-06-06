@@ -31,8 +31,10 @@ namespace MisakaTranslator_WPF.SettingsPages
             List<string> lst = tsh.GetAllTTSEngine();
             TTSSourceCombox.ItemsSource = lst;
 
-            for (int i = 0;i < lst.Count;i++) {
-                if (lst[i] == Common.appSettings.ttsVoice) {
+            for (int i = 0; i < lst.Count; i++)
+            {
+                if (lst[i] == Common.appSettings.ttsVoice)
+                {
                     TTSSourceCombox.SelectedIndex = i;
                     break;
                 }
@@ -43,25 +45,25 @@ namespace MisakaTranslator_WPF.SettingsPages
 
         private void TTSSourceCombox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            tsh.SetTTSVoice((string)TTSSourceCombox.SelectedValue);
+            tsh.SetTTSVoice((string) TTSSourceCombox.SelectedValue);
         }
 
         private void TestBtn_Click(object sender, RoutedEventArgs e)
         {
             tsh.SpeakAsync(TestSrcText.Text);
-            Common.appSettings.ttsVoice = (string)TTSSourceCombox.SelectedValue;
-            Common.appSettings.ttsVolume = ((int)VolumeBar.Value).ToString();
-            Common.appSettings.ttsRate = ((int)RateBar.Value).ToString();
+            Common.appSettings.ttsVoice = (string) TTSSourceCombox.SelectedValue;
+            Common.appSettings.ttsVolume = ((int) VolumeBar.Value).ToString();
+            Common.appSettings.ttsRate = ((int) RateBar.Value).ToString();
         }
 
         private void VolumeBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            tsh.SetVolume((int)VolumeBar.Value);
+            tsh.SetVolume((int) VolumeBar.Value);
         }
 
         private void RateBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            tsh.SetRate((int)RateBar.Value);
+            tsh.SetRate((int) RateBar.Value);
         }
     }
 }

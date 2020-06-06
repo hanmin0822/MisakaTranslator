@@ -64,7 +64,7 @@ namespace MisakaTranslator_WPF
         {
             this.SettingFrame.Navigate(new Uri("SettingsPages/OCRPages/BaiduOCRSettingsPage.xaml", UriKind.Relative));
         }
-        
+
         private void Item_OCRGeneral_Selected(object sender, RoutedEventArgs e)
         {
             this.SettingFrame.Navigate(new Uri("SettingsPages/OCRPages/OCRGeneralSettingsPage.xaml", UriKind.Relative));

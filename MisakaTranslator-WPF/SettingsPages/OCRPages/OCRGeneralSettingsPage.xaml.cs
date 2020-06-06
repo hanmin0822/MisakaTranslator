@@ -1,5 +1,4 @@
-﻿using OCRLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OCRLibrary;
 
 namespace MisakaTranslator_WPF.SettingsPages
 {
@@ -24,8 +24,8 @@ namespace MisakaTranslator_WPF.SettingsPages
 
         public List<string> Langlist;
 
-
-        private List<string> lstOCR = new List<string>() {
+        private List<string> lstOCR = new List<string>()
+        {
             "BaiduOCR",
             "TesseractOCR"
         };
@@ -40,12 +40,14 @@ namespace MisakaTranslator_WPF.SettingsPages
 
             Langlist = ImageProcFunc.lstOCRLang.Keys.ToList();
             OCRLangCombox.ItemsSource = Langlist;
-            for (int i = 0;i < Langlist.Count;i++) {
-                if (ImageProcFunc.lstOCRLang[Langlist[i]] == Common.appSettings.GlobalOCRLang) {
+            for (int i = 0; i < Langlist.Count; i++)
+            {
+                if (ImageProcFunc.lstOCRLang[Langlist[i]] == Common.appSettings.GlobalOCRLang)
+                {
                     OCRLangCombox.SelectedIndex = i;
                 }
             }
-            
+
         }
 
         private void OCRsourceCombox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -53,11 +55,13 @@ namespace MisakaTranslator_WPF.SettingsPages
             Common.appSettings.OCRsource = (string)OCRSourceCombox.SelectedValue;
         }
 
-        
         private void OCRHotKeyBox_KeyDown(object sender, KeyEventArgs e1)
         {
             System.Windows.Forms.KeyEventArgs e = ToWinforms(e1);
-            StringBuilder keyValue = new StringBuilder {Length = 0};
+            StringBuilder keyValue = new StringBuilder
+            {
+                Length = 0
+            };
             keyValue.Append("");
             if (e.Modifiers != 0)
             {
@@ -68,13 +72,14 @@ namespace MisakaTranslator_WPF.SettingsPages
                 if (e.Shift)
                     keyValue.Append("Shift + ");
             }
-            if ((e.KeyValue >= 33 && e.KeyValue <= 40) ||
-                (e.KeyValue >= 65 && e.KeyValue <= 90) ||   //a-z/A-Z
-                (e.KeyValue >= 112 && e.KeyValue <= 123))   //F1-F12
+            if ((e.KeyValue >= 33 && e.KeyValue <= 40)
+                || (e.KeyValue >= 65 && e.KeyValue <= 90)
+                || //a-z/A-Z
+                (e.KeyValue >= 112 && e.KeyValue <= 123)) //F1-F12
             {
                 keyValue.Append(e.KeyCode);
             }
-            else if ((e.KeyValue >= 48 && e.KeyValue <= 57))    //0-9
+            else if ((e.KeyValue >= 48 && e.KeyValue <= 57)) //0-9
             {
                 keyValue.Append(e.KeyCode.ToString().Substring(1));
             }
@@ -82,7 +87,6 @@ namespace MisakaTranslator_WPF.SettingsPages
 
             Common.appSettings.GlobalOCRHotkey = OCRHotKeyBox.Text;
         }
-
 
         /// <summary>
         /// 键盘事件转换
