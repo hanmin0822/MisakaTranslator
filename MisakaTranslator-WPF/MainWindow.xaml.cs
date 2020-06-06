@@ -78,7 +78,7 @@ namespace MisakaTranslator_WPF
         /// </summary>
         private void GameLibraryPanel_Init()
         {
-
+            Random random = new Random();
             var bushLst = new List<SolidColorBrush>
                 {
                     System.Windows.Media.Brushes.CornflowerBlue,

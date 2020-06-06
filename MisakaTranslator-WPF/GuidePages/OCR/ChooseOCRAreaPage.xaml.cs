@@ -1,4 +1,5 @@
-﻿using KeyboardMouseHookLibrary;
+﻿using HandyControl.Controls;
+using KeyboardMouseHookLibrary;
 using OCRLibrary;
 using System;
 using System.Collections.Generic;
@@ -77,7 +78,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
                 }
                 else
                 {
-                    MessageBox.Show(Application.Current.Resources["Hook_Error_Hint"].ToString());
+                    Growl.Error(Application.Current.Resources["Hook_Error_Hint"].ToString());
                 }
             }
             else if (IsChoosingWin == true)
@@ -118,14 +119,14 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
         
         private void ChooseAreaBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (isAllWin == false && SelectedHwnd == 0)
+            if (!isAllWin && SelectedHwnd == 0)
             {
                 HandyControl.Controls.Growl.Error(Application.Current.Resources["ChooseOCRAreaPage_NextErrorHint"].ToString());
                 return;
             }
             BitmapImage img;
             
-            if (isAllWin == true)
+            if (isAllWin)
             {
                 img = ImageProcFunc.ImageToBitmapImage(ScreenCapture.GetAllWindow());
             }

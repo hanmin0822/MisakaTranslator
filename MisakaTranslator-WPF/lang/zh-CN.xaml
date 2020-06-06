@@ -199,6 +199,7 @@
     <sys:String x:Key="ChooseOCRAreaPage_RenewAreaBtn">刷新显示OCR区域</sys:String>
     <sys:String x:Key="ChooseOCRAreaPage_ConfirmBtn">确认OCR区域</sys:String>
     <sys:String x:Key="ChooseOCRAreaPage_NextErrorHint">请先选择窗口!</sys:String>
+    <sys:String x:Key="ChooseOCRAreaPage_RenewErrorHint">请先预览选择区域！</sys:String>
 
     <sys:String x:Key="ChooseHandleFuncPage_Introduce">选择OCR源语言和一种适合您游戏的OCR预处理方法，可在下方对比查看，进行OCR结果测试并确认。</sys:String>
     <sys:String x:Key="ChooseHandleFuncPage_OCRLangCBox">OCR源语言</sys:String>
@@ -222,7 +223,7 @@
     <sys:String x:Key="ChooseHotKeyPage_NoKeyHint">请设置一个触发键</sys:String>
     <sys:String x:Key="ChooseHotKeyPage_TooLessDelayHint">延时时间必须大于0毫秒</sys:String>
 
-    <sys:String x:Key="TranslateWin_DragTitle">按住此处拖拽 单击右键弹出菜单</sys:String>
+    <sys:String x:Key="TranslateWin_DragTitle">按住此处拖拽窗口</sys:String>
     <sys:String x:Key="TranslateWin_Menu_ChangeSize">调整界面尺寸</sys:String>
     <sys:String x:Key="TranslateWin_Menu_ShowSource">显示/隐藏原文</sys:String>
     <sys:String x:Key="TranslateWin_Menu_Settings">翻译界面设置</sys:String>
@@ -232,10 +233,11 @@
     <sys:String x:Key="TranslateWin_Menu_Min">最小化界面</sys:String>
     <sys:String x:Key="TranslateWin_Menu_Exit">退出翻译</sys:String>
     <sys:String x:Key="TranslateWin_Menu_AddNounTrans">添加专有名词</sys:String>
+    <sys:String x:Key="TranslateWin_Menu_Lock">鼠标穿透窗口</sys:String>
     <sys:String x:Key="TranslateWin_History_Title">翻译历史记录</sys:String>
     <sys:String x:Key="TranslateWin_Dict_Title">字典查询结果</sys:String>
     <sys:String x:Key="TranslateWin_DictError_Hint">查询错误或无结果！</sys:String>
-    <sys:String x:Key="TranslateWin_DragBox_Hint">鼠标指向拖拽栏可显示！</sys:String>
+    <sys:String x:Key="TranslateWin_DragBox_Hint">鼠标指向窗口边框可更改尺寸！</sys:String>
 
     <sys:String x:Key="TransWinSettingsWin_Title">翻译窗口界面设置</sys:String>
     <sys:String x:Key="TransWinSettingsWin_Tab_Window">窗口</sys:String>

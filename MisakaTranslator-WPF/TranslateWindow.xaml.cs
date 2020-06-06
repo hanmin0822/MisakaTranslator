@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using DictionaryHelperLibrary;
+using FontAwesome.WPF;
 using HandyControl.Controls;
 using KeyboardMouseHookLibrary;
 using MecabHelperLibrary;
-using OCRLibrary;
 using TextHookLibrary;
 using TextRepairLibrary;
 using TranslatorLibrary;
@@ -48,13 +42,15 @@ namespace MisakaTranslator_WPF
         public bool IsOCRingFlag; //线程锁:判断是否正在OCR线程中，保证同时只有一组在跑OCR
         public bool IsPauseFlag; //是否处在暂停状态（专用于OCR）,为真可以翻译
 
-        private bool _isShowSource;
+        private bool _isShowSource; //是否显示原文
+        private bool _isLocked;
 
         public TranslateWindow()
         {
             InitializeComponent();
 
             _isShowSource = true;
+            _isLocked = false;
 
             _gameTextHistory = new Queue<string>();
 
@@ -518,17 +514,16 @@ namespace MisakaTranslator_WPF
 
         private void ChangeSize_Item_Click(object sender, RoutedEventArgs e)
         {
-
             if (BackWinChrome.Opacity != 1)
             {
                 BackWinChrome.Opacity = 1;
-                DragBorder.Opacity = 1;
+                ChangeSizeButton.Foreground = Brushes.Gray;
+                Growl.InfoGlobal(Application.Current.Resources["TranslateWin_DragBox_Hint"].ToString());
             }
             else
             {
                 BackWinChrome.Opacity = double.Parse(Common.appSettings.TF_Opacity) / 100;
-                DragBorder.Opacity = 0.01;
-                Growl.InfoGlobal(Application.Current.Resources["TranslateWin_DragBox_Hint"].ToString());
+                ChangeSizeButton.Foreground = Brushes.PapayaWhip;
             }
 
         }
@@ -538,14 +533,31 @@ namespace MisakaTranslator_WPF
             this.Close();
         }
 
+
         private void Pause_Item_Click(object sender, RoutedEventArgs e)
         {
             if (Common.transMode == 1)
             {
+                if (Common.textHooker.Pause)
+                {
+                    PauseButton.SetValue(FontAwesome.WPF.Awesome.ContentProperty, FontAwesomeIcon.Pause);
+                }
+                else
+                {
+                    PauseButton.SetValue(FontAwesome.WPF.Awesome.ContentProperty, FontAwesomeIcon.Play);
+                }
                 Common.textHooker.Pause = !Common.textHooker.Pause;
             }
             else
             {
+                if(IsPauseFlag)
+                {
+                    PauseButton.SetValue(FontAwesome.WPF.Awesome.ContentProperty, FontAwesomeIcon.Play);
+                }
+                else
+                {
+                    PauseButton.SetValue(FontAwesome.WPF.Awesome.ContentProperty, FontAwesomeIcon.Pause);
+                }
                 IsPauseFlag = !IsPauseFlag;
             }
 
@@ -553,6 +565,14 @@ namespace MisakaTranslator_WPF
 
         private void ShowSource_Item_Click(object sender, RoutedEventArgs e)
         {
+            if(_isShowSource)
+            {
+                ShowSourceButton.SetValue(FontAwesome.WPF.Awesome.ContentProperty, FontAwesomeIcon.Eye);
+            }
+            else
+            {
+                ShowSourceButton.SetValue(FontAwesome.WPF.Awesome.ContentProperty, FontAwesomeIcon.EyeSlash);
+            }
             _isShowSource = !_isShowSource;
         }
 
@@ -580,18 +600,6 @@ namespace MisakaTranslator_WPF
             GC.Collect();
         }
 
-        private void DragBorder_MouseEnter(object sender, MouseEventArgs e)
-        {
-            DragBorder.Opacity = 1;
-        }
-
-        private void DragBorder_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (BackWinChrome.Opacity != 1)
-            {
-                DragBorder.Opacity = 0.01;
-            }
-        }
 
         private void Settings_Item_Click(object sender, RoutedEventArgs e)
         {
@@ -678,6 +686,22 @@ namespace MisakaTranslator_WPF
         private void Min_Item_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+
+        private void Lock_Item_Click(object sender, RoutedEventArgs e)
+        {
+            if(!_isLocked)
+            {
+                BackWinChrome.Opacity = 0;
+                _isLocked = true;
+                LockButton.SetValue(FontAwesome.WPF.Awesome.ContentProperty, FontAwesomeIcon.UnlockAlt);
+            }
+            else
+            {
+                BackWinChrome.Opacity = Convert.ToDouble(Common.appSettings.TF_Opacity) / 100;
+                _isLocked = false;
+                LockButton.SetValue(FontAwesome.WPF.Awesome.ContentProperty, FontAwesomeIcon.Lock);
+            }
         }
     }
 }

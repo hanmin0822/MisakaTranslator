@@ -1,4 +1,5 @@
-﻿using OCRLibrary;
+﻿using HandyControl.Controls;
+using OCRLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -114,9 +115,16 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             System.Drawing.Image img = Common.ocr.GetOCRAreaCap();
 
             SrcImg.Source = ImageProcFunc.ImageToBitmapImage(img);
-
+            try
+            {
             DstImg.Source = ImageProcFunc.ImageToBitmapImage(ImageProcFunc.Auto_Thresholding(new System.Drawing.Bitmap(img),
                 ImageProcFunc.lstHandleFun[ImageProcFunclist[HandleFuncCombox.SelectedIndex]]));
+            }
+            catch(NullReferenceException ex)
+            {
+                Growl.Error(Application.Current.Resources["ChooseOCRAreaPage_RenewErrorHint"].ToString());
+                return;
+            }
 
             GC.Collect();
         }

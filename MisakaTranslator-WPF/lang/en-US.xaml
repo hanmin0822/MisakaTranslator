@@ -201,6 +201,7 @@
     <sys:String x:Key="ChooseOCRAreaPage_RenewAreaBtn">Refresh OCR area</sys:String>
     <sys:String x:Key="ChooseOCRAreaPage_ConfirmBtn">Confirm</sys:String>
     <sys:String x:Key="ChooseOCRAreaPage_NextErrorHint">Please select the window first.</sys:String>
+    <sys:String x:Key="ChooseOCRAreaPage_RenewErrorHint">请先预览选择区域！</sys:String>
 
     <sys:String x:Key="ChooseHandleFuncPage_Introduce">Select the OCR source language and an OCR pre-processing method for your game, which can be viewed below for testing and confirming.</sys:String>
     <sys:String x:Key="ChooseHandleFuncPage_OCRLangCBox">OCR source language</sys:String>
@@ -224,7 +225,7 @@
     <sys:String x:Key="ChooseHotKeyPage_NoKeyHint">Please set a trigger</sys:String>
     <sys:String x:Key="ChooseHotKeyPage_TooLessDelayHint">Delay must be greater than 0 ms</sys:String>
 
-    <sys:String x:Key="TranslateWin_DragTitle">Hold to drag here. Right-click to the menu.</sys:String>
+    <sys:String x:Key="TranslateWin_DragTitle">Hold to drag here</sys:String>
     <sys:String x:Key="TranslateWin_Menu_ChangeSize">Resize the window</sys:String>
     <sys:String x:Key="TranslateWin_Menu_ShowSource">Show/Hide source text</sys:String>
     <sys:String x:Key="TranslateWin_Menu_Settings">Translator Window Settings</sys:String>
