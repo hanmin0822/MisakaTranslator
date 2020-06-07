@@ -43,6 +43,7 @@
                 <Button fa:Awesome.Content="History" Background="#00000000" BorderThickness="0" Height="40" Width="40" FontSize="16" Foreground="PapayaWhip" Click="History_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_History}"></Button>
                 <Button fa:Awesome.Content="Edit" Background="#00000000" BorderThickness="0" Height="40" Width="40" FontSize="16" Foreground="PapayaWhip" Click="AddNoun_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_AddNounTrans}"></Button>
                 <Button fa:Awesome.Content="Cog" Background="#00000000" BorderThickness="0" Height="40" Width="40" FontSize="16" Foreground="PapayaWhip" Click="Settings_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Settings}"></Button>
+                <Button fa:Awesome.Content="Microphone" Background="#00000000" BorderThickness="0" Height="40" Width="40" FontSize="16" Foreground="PapayaWhip" Click="TTS_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_TTS}"></Button>
                 <Button fa:Awesome.Content="Lock" Background="#00000000" BorderThickness="0" Height="40" Width="40" FontSize="16" Foreground="PapayaWhip" Name="LockButton" Click="Lock_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Lock}"></Button>
             </WrapPanel>
             <WrapPanel Grid.Row="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right">

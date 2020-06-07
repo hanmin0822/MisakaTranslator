@@ -282,4 +282,6 @@
     <sys:String x:Key="TTSSettingsPage_TTSRateLabel">朗读语速</sys:String>
     <sys:String x:Key="TTSSettingsPage_TestText">TTS测试 源文本</sys:String>
     <sys:String x:Key="TTSSettingsPage_TestBtn">测试朗读</sys:String>
+
+    <sys:String x:Key="TranslateWin_Menu_TTS">朗读源文本</sys:String>
 </ResourceDictionary>

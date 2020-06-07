@@ -185,14 +185,14 @@ namespace MisakaTranslator_WPF
         }
 
         [Option(Alias = "TTS.volume", DefaultValue = "80")]
-        string ttsVolume
+        int ttsVolume
         {
             get;
             set;
         }
 
         [Option(Alias = "TTS.rate", DefaultValue = "0")]
-        string ttsRate
+        int ttsRate
         {
             get;
             set;

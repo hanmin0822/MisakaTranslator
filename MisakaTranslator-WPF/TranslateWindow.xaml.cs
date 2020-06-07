@@ -16,6 +16,7 @@ using TextHookLibrary;
 using TextRepairLibrary;
 using TranslatorLibrary;
 using TransOptimizationLibrary;
+using TTSHelperLibrary;
 
 namespace MisakaTranslator_WPF
 {
@@ -45,6 +46,8 @@ namespace MisakaTranslator_WPF
         private bool _isShowSource; //是否显示原文
         private bool _isLocked;
 
+        private TextSpeechHelper _textSpeechHelper;//TTS朗读对象
+
         public TranslateWindow()
         {
             InitializeComponent();
@@ -59,6 +62,12 @@ namespace MisakaTranslator_WPF
             IsOCRingFlag = false;
 
             _mecabHelper = new MecabHelper();
+
+            _textSpeechHelper = new TextSpeechHelper();
+            _textSpeechHelper.SetTTSVoice(Common.appSettings.ttsVoice);
+            _textSpeechHelper.SetVolume(Common.appSettings.ttsVolume);
+            _textSpeechHelper.SetRate(Common.appSettings.ttsRate);
+
 
             if (Common.appSettings.xxgPath != string.Empty)
             {
@@ -702,6 +711,11 @@ namespace MisakaTranslator_WPF
                 _isLocked = false;
                 LockButton.SetValue(FontAwesome.WPF.Awesome.ContentProperty, FontAwesomeIcon.Lock);
             }
+        }
+
+        private void TTS_Item_Click(object sender, RoutedEventArgs e)
+        {
+            _textSpeechHelper.SpeakAsync(_currentsrcText);
         }
     }
 }
