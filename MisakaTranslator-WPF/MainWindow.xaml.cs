@@ -22,8 +22,11 @@ namespace MisakaTranslator_WPF
         private int gid; //当前选中的顺序，并非游戏ID
         private IntPtr hwnd;
 
+        public static MainWindow Instance { get; set; }
+
         public MainWindow()
         {
+            Instance = this;
             Common.mainWin = this;
 
             var settings = new ConfigurationBuilder<IAppSettings>().UseJsonFile("settings/settings.json").Build();
@@ -373,9 +376,15 @@ namespace MisakaTranslator_WPF
                     break;
                 case "Exit":
                     Common.GlobalOCRHotKey.UnRegisterGlobalHotKey(hwnd, CallBack);
+                    CloseNotifyIcon();
                     Application.Current.Shutdown();
                     break;
             }
+        }
+
+        public void CloseNotifyIcon()
+        {
+            Instance.NotifyIconContextContent.Visibility = Visibility.Collapsed;
         }
 
         private void ButtonPush_OnClick(object sender, RoutedEventArgs e) => NotifyIconContextContent.CloseContextControl();
