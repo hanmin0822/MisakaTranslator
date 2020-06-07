@@ -73,25 +73,25 @@ namespace MisakaTranslator_WPF
             sourceFontSize.ValueChanged += delegate
             {
                 translateWin.SourceTextFontSize = (int) sourceFontSize.Value;
-                Common.appSettings.TF_srcTextSize = Convert.ToString(sourceFontSize.Value);
+                Common.appSettings.TF_srcTextSize = sourceFontSize.Value;
             };
 
             firstFontSize.ValueChanged += delegate
             {
                 translateWin.FirstTransText.FontSize = firstFontSize.Value;
-                Common.appSettings.TF_firstTransTextSize = Convert.ToString(firstFontSize.Value);
+                Common.appSettings.TF_firstTransTextSize = firstFontSize.Value;
             };
 
             secondFontSize.ValueChanged += delegate
             {
                 translateWin.SecondTransText.FontSize = secondFontSize.Value;
-                Common.appSettings.TF_secondTransTextSize = Convert.ToString(secondFontSize.Value);
+                Common.appSettings.TF_secondTransTextSize = secondFontSize.Value;
             };
 
             OpacityBar.ValueChanged += delegate
             {
                 translateWin.BackWinChrome.Opacity = OpacityBar.Value / 100;
-                Common.appSettings.TF_Opacity = Convert.ToString(OpacityBar.Value);
+                Common.appSettings.TF_Opacity = OpacityBar.Value;
             };
         }
 
@@ -123,11 +123,11 @@ namespace MisakaTranslator_WPF
                 }
             }
 
-            sourceFontSize.Value = int.Parse(Common.appSettings.TF_srcTextSize);
-            firstFontSize.Value = int.Parse(Common.appSettings.TF_firstTransTextSize);
-            secondFontSize.Value = int.Parse(Common.appSettings.TF_secondTransTextSize);
+            sourceFontSize.Value = Common.appSettings.TF_srcTextSize;
+            firstFontSize.Value = Common.appSettings.TF_firstTransTextSize;
+            secondFontSize.Value = Common.appSettings.TF_secondTransTextSize;
 
-            OpacityBar.Value = double.Parse(Common.appSettings.TF_Opacity);
+            OpacityBar.Value = Common.appSettings.TF_Opacity;
         }
 
         private void ChooseColorBtn_Click(object sender, RoutedEventArgs e)
@@ -154,13 +154,13 @@ namespace MisakaTranslator_WPF
                 else if (sender == firstColorBtn)
                 {
                     firstColorBlock.Background = picker.SelectedBrush;
-                    translateWin.FirstTransText.Foreground = picker.SelectedBrush;
+                    translateWin.FirstTransText.Fill = picker.SelectedBrush;
                     Common.appSettings.TF_firstTransTextColor = picker.SelectedBrush.ToString();
                 }
                 else if (sender == secondColorBtn)
                 {
                     secondColorBlock.Background = picker.SelectedBrush;
-                    translateWin.SecondTransText.Foreground = picker.SelectedBrush;
+                    translateWin.SecondTransText.Fill = picker.SelectedBrush;
                     Common.appSettings.TF_secondTransTextColor = picker.SelectedBrush.ToString();
                 }
                 window.Close();

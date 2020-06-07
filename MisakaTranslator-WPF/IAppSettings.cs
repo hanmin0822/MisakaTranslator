@@ -199,7 +199,7 @@ namespace MisakaTranslator_WPF
         }
 
         [Option(Alias = "TranslateFormSettings.opacity", DefaultValue = "50")]
-        string TF_Opacity
+        double TF_Opacity
         {
             get;
             set;
@@ -248,7 +248,7 @@ namespace MisakaTranslator_WPF
         }
 
         [Option(Alias = "TranslateFormSettings.srcTextSize", DefaultValue = "15")]
-        string TF_srcTextSize
+        double TF_srcTextSize
         {
             get;
             set;
@@ -262,7 +262,7 @@ namespace MisakaTranslator_WPF
         }
 
         [Option(Alias = "TranslateFormSettings.firstTransTextSize", DefaultValue = "15")]
-        string TF_firstTransTextSize
+        double TF_firstTransTextSize
         {
             get;
             set;
@@ -283,7 +283,7 @@ namespace MisakaTranslator_WPF
         }
 
         [Option(Alias = "TranslateFormSettings.secondTransTextSize", DefaultValue = "15")]
-        string TF_secondTransTextSize
+        double TF_secondTransTextSize
         {
             get;
             set;

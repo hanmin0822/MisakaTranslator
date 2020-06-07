@@ -120,20 +120,20 @@ namespace MisakaTranslator_WPF
         /// </summary>
         private void UI_Init()
         {
-            SourceTextFontSize = int.Parse(Common.appSettings.TF_srcTextSize);
-            FirstTransText.FontSize = int.Parse(Common.appSettings.TF_firstTransTextSize);
-            SecondTransText.FontSize = int.Parse(Common.appSettings.TF_secondTransTextSize);
+            SourceTextFontSize = (int)Common.appSettings.TF_srcTextSize;
+            FirstTransText.FontSize = Common.appSettings.TF_firstTransTextSize;
+            SecondTransText.FontSize = Common.appSettings.TF_secondTransTextSize;
 
             SourceTextFont = Common.appSettings.TF_srcTextFont;
             FirstTransText.FontFamily = new FontFamily(Common.appSettings.TF_firstTransTextFont);
             SecondTransText.FontFamily = new FontFamily(Common.appSettings.TF_secondTransTextFont);
 
             BrushConverter brushConverter = new BrushConverter();
-            FirstTransText.Foreground = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_firstTransTextColor);
-            SecondTransText.Foreground = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_secondTransTextColor);
+            FirstTransText.Fill = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_firstTransTextColor);
+            SecondTransText.Fill = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_secondTransTextColor);
 
             BackWinChrome.Background = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_BackColor);
-            BackWinChrome.Opacity = double.Parse(Common.appSettings.TF_Opacity) / 100;
+            BackWinChrome.Opacity = Common.appSettings.TF_Opacity / 100;
 
             if (int.Parse(Common.appSettings.TF_LocX) != -1 && int.Parse(Common.appSettings.TF_SizeW) != 0)
             {
@@ -522,7 +522,7 @@ namespace MisakaTranslator_WPF
             }
             else
             {
-                BackWinChrome.Opacity = double.Parse(Common.appSettings.TF_Opacity) / 100;
+                BackWinChrome.Opacity = Common.appSettings.TF_Opacity / 100;
                 ChangeSizeButton.Foreground = Brushes.PapayaWhip;
             }
 
@@ -698,7 +698,7 @@ namespace MisakaTranslator_WPF
             }
             else
             {
-                BackWinChrome.Opacity = Convert.ToDouble(Common.appSettings.TF_Opacity) / 100;
+                BackWinChrome.Opacity = Common.appSettings.TF_Opacity / 100;
                 _isLocked = false;
                 LockButton.SetValue(FontAwesome.WPF.Awesome.ContentProperty, FontAwesomeIcon.Lock);
             }

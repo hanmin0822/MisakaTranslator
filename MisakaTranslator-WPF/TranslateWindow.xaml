@@ -52,8 +52,8 @@
 
             <WrapPanel Grid.Row="1" Margin="10" Orientation="Vertical">
             <WrapPanel x:Name="SourceTextPanel" Margin="10" Orientation="Horizontal" Background="Transparent"></WrapPanel>
-                <TextBlock Text="等待源文本" Foreground="White" Name="FirstTransText" Margin="10" TextWrapping="Wrap"></TextBlock>
-                <TextBlock Text="" Foreground="White" Name="SecondTransText" Margin="10" TextWrapping="Wrap"></TextBlock>
+                <hc:OutlineText Text="等待源文本" Fill="White" Stroke="Beige" StrokeThickness="1" Name="FirstTransText" Margin="10" TextWrapping="Wrap" StrokePosition="Outside"></hc:OutlineText>
+                <hc:OutlineText Text="" Fill="White" Stroke="Beige" StrokeThickness="1" Name="SecondTransText" Margin="10" TextWrapping="Wrap" StrokePosition="Outside"></hc:OutlineText>
             </WrapPanel>
 
 
