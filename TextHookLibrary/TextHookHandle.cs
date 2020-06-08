@@ -529,7 +529,15 @@ namespace TextHookLibrary
         /// <returns></returns>
         private async void DetachUnrelatedHookAsync(int pid, string misakacode)
         {
-            await DetachProcessByHookAddress(pid, GetHookAddressByMisakaCode(misakacode));
+            //2020-06-08这个地方的处理不完善，因为使用控制台读写流的方法操作，很容易会冲突，这里单纯的取消掉这个钩子的移除，但这样就不能实现功能。
+
+            try {
+                await DetachProcessByHookAddress(pid, GetHookAddressByMisakaCode(misakacode));
+            }
+            catch (System.InvalidOperationException) {
+                return;
+            }
+            
         }
 
         /// <summary>
@@ -537,7 +545,7 @@ namespace TextHookLibrary
         /// </summary>
         public async void Auto_AddHookToGame()
         {
-            if (HookCode_Custom != "NULL" || HookCode_Custom != "")
+            if (HookCode_Custom != null && HookCode_Custom != "NULL" && HookCode_Custom != "")
             {
                 await AttachProcessByHookCode(GamePID, HookCode_Custom);
             }

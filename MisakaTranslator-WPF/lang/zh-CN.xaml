@@ -284,4 +284,5 @@
     <sys:String x:Key="TTSSettingsPage_TestBtn">测试朗读</sys:String>
 
     <sys:String x:Key="TranslateWin_Menu_TTS">朗读源文本</sys:String>
+    <sys:String x:Key="TranslateWin_NoTTS_Hint">您没有配置TTS相关设置，朗读功能无法使用</sys:String>
 </ResourceDictionary>

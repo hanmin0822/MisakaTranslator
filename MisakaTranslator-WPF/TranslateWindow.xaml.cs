@@ -64,11 +64,16 @@ namespace MisakaTranslator_WPF
             _mecabHelper = new MecabHelper();
 
             _textSpeechHelper = new TextSpeechHelper();
-            _textSpeechHelper.SetTTSVoice(Common.appSettings.ttsVoice);
-            _textSpeechHelper.SetVolume(Common.appSettings.ttsVolume);
-            _textSpeechHelper.SetRate(Common.appSettings.ttsRate);
-
-
+            if (Common.appSettings.ttsVoice == "")
+            {
+                Growl.InfoGlobal(Application.Current.Resources["TranslateWin_NoTTS_Hint"].ToString());
+            }
+            else {
+                _textSpeechHelper.SetTTSVoice(Common.appSettings.ttsVoice);
+                _textSpeechHelper.SetVolume(Common.appSettings.ttsVolume);
+                _textSpeechHelper.SetRate(Common.appSettings.ttsRate);
+            }
+            
             if (Common.appSettings.xxgPath != string.Empty)
             {
                 _dict = new XxgJpzhDict();
@@ -281,6 +286,7 @@ namespace MisakaTranslator_WPF
                                             textBlock.FontFamily = fontFamily;
                                         }
                                         textBlock.Text = mwi[i].Word;
+                                        textBlock.Tag = mwi[i].Kana;
                                         textBlock.Margin = new Thickness(10, 0, 0, 10);
                                         textBlock.FontSize = SourceTextFontSize;
                                         textBlock.Background = Brushes.Transparent;
@@ -384,28 +390,8 @@ namespace MisakaTranslator_WPF
                         }
                         else
                         {
-                            ret = XxgJpzhDict.RemoveHTML(ret);
-
-                            var textbox = new HandyControl.Controls.TextBox
-                            {
-                                Text = ret,
-                                FontSize = 15,
-                                TextWrapping = TextWrapping.Wrap,
-                                TextAlignment = TextAlignment.Left,
-                                HorizontalScrollBarVisibility = ScrollBarVisibility.Visible
-                            };
-                            var window = new PopupWindow
-                            {
-                                PopupElement = textbox,
-                                WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                                BorderThickness = new Thickness(0, 0, 0, 0),
-                                MaxWidth = 600,
-                                MaxHeight = 300,
-                                MinWidth = 600,
-                                MinHeight = 300,
-                                Title = Application.Current.Resources["TranslateWin_Dict_Title"].ToString()
-                            };
-                            window.Show();
+                            DictResWindow _dictResWindow = new DictResWindow(textBlock.Text,(string)textBlock.Tag,_textSpeechHelper);
+                            _dictResWindow.Show();
                         }
                     }
                     else
@@ -453,6 +439,7 @@ namespace MisakaTranslator_WPF
                                 textBlock.FontFamily = fontFamily;
                             }
                             textBlock.Text = mwi[i].Word;
+                            textBlock.Tag = mwi[i].Kana;
                             textBlock.Margin = new Thickness(10, 0, 0, 10);
                             textBlock.FontSize = SourceTextFontSize;
                             textBlock.Background = Brushes.Transparent;

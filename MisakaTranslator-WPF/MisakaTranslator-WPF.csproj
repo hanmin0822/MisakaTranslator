@@ -160,6 +160,9 @@
       <DependentUpon>AddOptWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common.cs" />
+    <Compile Include="DictResWindow.xaml.cs">
+      <DependentUpon>DictResWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameGuideWindow.xaml.cs">
       <DependentUpon>GameGuideWindow.xaml</DependentUpon>
     </Compile>
@@ -259,6 +262,10 @@
       <DependentUpon>TransWinSettingsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AddOptWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DictResWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

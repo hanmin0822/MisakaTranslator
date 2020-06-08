@@ -1,0 +1,26 @@
+﻿<Window x:Class="MisakaTranslator_WPF.DictResWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:local="clr-namespace:MisakaTranslator_WPF"
+        mc:Ignorable="d"
+        Title="{StaticResource TranslateWin_Dict_Title}" Height="300" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Name="SourceWord" Margin="10" FontSize="20" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Name="Kana" Margin="10" FontSize="15" VerticalAlignment="Center"></TextBlock>
+            <Button fa:Awesome.Content="Microphone" Margin="5" VerticalAlignment="Center" Background="#00000000" BorderThickness="0" Height="40" Width="40" FontSize="16" Foreground="Black" Click="TTS_Btn_Click"></Button>
+            <Button fa:Awesome.Content="Search"  Margin="5" VerticalAlignment="Center" Background="#00000000" BorderThickness="0" Height="40" Width="40" FontSize="16" Foreground="Black" Click="Search_Btn_Click"></Button>
+        </StackPanel>
+        
+        <TextBox Grid.Row="1" Margin="10" Name="DicResText"></TextBox>
+    </Grid>
+</Window>

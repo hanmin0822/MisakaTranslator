@@ -59,26 +59,8 @@ namespace MisakaTranslator_WPF.SettingsPages.DictionaryPages
             string ret = dict.SearchInDict(TestSrcText.Text);
             if (ret != null)
             {
-                ret = XxgJpzhDict.RemoveHTML(ret);
-
-                var textbox = new HandyControl.Controls.TextBox();
-                textbox.Text = ret;
-                textbox.FontSize = 15;
-                textbox.TextWrapping = TextWrapping.Wrap;
-                textbox.TextAlignment = TextAlignment.Left;
-                textbox.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
-                var window = new HandyControl.Controls.PopupWindow
-                {
-                    PopupElement = textbox,
-                    WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                    BorderThickness = new Thickness(0, 0, 0, 0),
-                    MaxWidth = 600,
-                    MaxHeight = 300,
-                    MinWidth = 600,
-                    MinHeight = 300,
-                    Title = "字典结果"
-                };
-                window.Show();
+                DictResWindow dictResWindow = new DictResWindow(TestSrcText.Text);
+                dictResWindow.Show();
             }
             else
             {
