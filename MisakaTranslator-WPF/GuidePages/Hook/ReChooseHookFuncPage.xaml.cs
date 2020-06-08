@@ -65,7 +65,15 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                 
                 Common.textHooker.MisakaCodeList.Add(lstData[HookFunListView.SelectedIndex].MisakaHookCode);
 
-                Common.textHooker.DetachUnrelatedHookWhenDataRecv = Convert.ToBoolean(Common.appSettings.AutoDetach);
+                //Common.textHooker.DetachUnrelatedHookWhenDataRecv = Convert.ToBoolean(Common.appSettings.AutoDetach);
+                //用户开启了自动卸载
+                if (Convert.ToBoolean(Common.appSettings.AutoDetach) == true)
+                {
+                    List<string> usedHook = new List<string>();
+                    usedHook.Add(lstData[HookFunListView.SelectedIndex].HookAddress);
+                    Common.textHooker.DetachUnrelatedHooks(lstData[HookFunListView.SelectedIndex].GamePID, usedHook);
+                }
+
 
                 //使用路由事件机制通知窗口来完成下一步操作
                 PageChangeRoutedEventArgs args = new PageChangeRoutedEventArgs(PageChange.PageChangeRoutedEvent, this);

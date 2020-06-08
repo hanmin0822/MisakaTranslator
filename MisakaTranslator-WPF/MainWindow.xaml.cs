@@ -303,14 +303,15 @@ namespace MisakaTranslator_WPF
             {
                 //无重复码。直接进游戏
                 Common.textHooker.MisakaCodeList = null;
-                Common.textHooker.DetachUnrelatedHookWhenDataRecv = Convert.ToBoolean(Common.appSettings.AutoDetach);
+                //2020-06-08 大部分情况无重复码的游戏不会hook到很多，不进行去多余hook
+                //Common.textHooker.DetachUnrelatedHookWhenDataRecv = Convert.ToBoolean(Common.appSettings.AutoDetach);
                 Common.textHooker.StartHook(Convert.ToBoolean(Common.appSettings.AutoHook));
                 var task1 = System.Threading.Tasks.Task.Run(async delegate
                 {
                     await System.Threading.Tasks.Task.Delay(3000);
                     Common.textHooker.Auto_AddHookToGame();
                 });
-
+                
                 var tw = new TranslateWindow();
                 tw.Show();
             }

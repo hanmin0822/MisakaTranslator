@@ -366,6 +366,7 @@ namespace TextHookLibrary
                             }
                         }
 
+                        /*
                         //使用了边Hook边卸载的情况
                         //纠错：注意不能删misakacode不同的，因为地址可能相同，仅根据Hook特殊码来删就行了
                         if (DetachUnrelatedHookWhenDataRecv == true)
@@ -376,7 +377,7 @@ namespace TextHookLibrary
                             }
 
                         }
-
+                        */
 
                         //文本去重窗口处理&游戏翻译窗口处理
                         //如果IsNeedReChooseHook=false则说明没有多重处理，不用再对比HookCodePlus
@@ -530,6 +531,7 @@ namespace TextHookLibrary
         private async void DetachUnrelatedHookAsync(int pid, string misakacode)
         {
             //2020-06-08这个地方的处理不完善，因为使用控制台读写流的方法操作，很容易会冲突，这里单纯的取消掉这个钩子的移除，但这样就不能实现功能。
+            //2020-06-08对于重复码的游戏，采用和第一次找特殊码一样的方法去重复码，对于无重复码游戏，不去重，故此方法已经无用
 
             try {
                 await DetachProcessByHookAddress(pid, GetHookAddressByMisakaCode(misakacode));
