@@ -133,16 +133,7 @@ namespace TextHookLibrary
 
         ~TextHookHandle()
         {
-            if (ProcessTextractor != null)
-            {
-                CloseTextractor();
-            }
-
-            if (cm != null) {
-                //取消注册剪贴板监听
-                cm.cn.UnregisterClipboardViewer();
-            }
-            
+            StopHook();
         }
 
         /// <summary>
@@ -582,6 +573,21 @@ namespace TextHookLibrary
                 }
             };
             Sevent?.Invoke(this, e);
+        }
+
+
+        /// <summary>
+        /// 这个方法用于翻译窗口关闭或者导航窗口关闭时调用，进行TextractorCLI的全方法卸载和关闭，否则会出现无法hook其他游戏的情况
+        /// </summary>
+        public void StopHook() {
+            CloseTextractor();
+            
+            if (cm != null)
+            {
+                //取消注册剪贴板监听
+                cm.cn.UnregisterClipboardViewer();
+                cm = null;
+            }
         }
     }
 }

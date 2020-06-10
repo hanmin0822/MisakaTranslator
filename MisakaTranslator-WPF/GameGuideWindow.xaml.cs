@@ -20,6 +20,7 @@ namespace MisakaTranslator_WPF
     public partial class GameGuideWindow : Window
     {
         int GuideMode;
+        bool isComplete;//是否是在完成状态下退出的，作为检验，默认为假
 
         public GameGuideWindow(int Mode)
         {
@@ -27,6 +28,7 @@ namespace MisakaTranslator_WPF
 
             this.AddHandler(GuidePages.PageChange.PageChangeRoutedEvent, new RoutedEventHandler(Next_Click));
 
+            isComplete = false;
             GuideMode = Mode;
             if (Mode == 1)
             {
@@ -106,7 +108,7 @@ namespace MisakaTranslator_WPF
                     Common.transMode = 1;
                     TranslateWindow translateWindow = new TranslateWindow();
                     translateWindow.Show();
-
+                    isComplete = true;
                     this.Close();
                 }
                 else if (GuideMode == 2)
@@ -115,7 +117,7 @@ namespace MisakaTranslator_WPF
                     Common.transMode = 2;
                     TranslateWindow translateWindow = new TranslateWindow();
                     translateWindow.Show();
-
+                    isComplete = true;
                     this.Close();
                 }
                 else if (GuideMode == 3)
@@ -124,7 +126,7 @@ namespace MisakaTranslator_WPF
                     Common.transMode = 1;
                     TranslateWindow translateWindow = new TranslateWindow();
                     translateWindow.Show();
-
+                    isComplete = true;
                     this.Close();
                 }
                 else if (GuideMode == 4)
@@ -133,7 +135,7 @@ namespace MisakaTranslator_WPF
                     Common.transMode = 1;
                     TranslateWindow translateWindow = new TranslateWindow();
                     translateWindow.Show();
-
+                    isComplete = true;
                     this.Close();
                 }
             }
@@ -146,5 +148,20 @@ namespace MisakaTranslator_WPF
 
         }
 
+        private void GuideWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (isComplete == false) {
+                //确保是在未完成的情况下退出再检查
+                if (GuideMode == 1 || GuideMode == 3 || GuideMode == 4)
+                {
+                    if (Common.textHooker != null)
+                    {
+                        Common.textHooker.StopHook();
+                        Common.textHooker = null;
+                    }
+                }
+            }
+            
+        }
     }
 }

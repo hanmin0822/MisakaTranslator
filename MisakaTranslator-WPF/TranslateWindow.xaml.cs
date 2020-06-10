@@ -588,6 +588,7 @@ namespace MisakaTranslator_WPF
             if (Common.textHooker != null)
             {
                 Common.textHooker.Sevent -= DataRecvEventHandler;
+                Common.textHooker.StopHook();
                 Common.textHooker = null;
             }
 

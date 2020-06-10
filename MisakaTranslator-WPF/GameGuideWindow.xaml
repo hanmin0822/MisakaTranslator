@@ -6,7 +6,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:local="clr-namespace:MisakaTranslator_WPF"
         mc:Ignorable="d"
-        Title="{StaticResource GameGuideWin_WinName}" Height="500" Width="800" Name="guide">
+        Title="{StaticResource GameGuideWin_WinName}" Height="500" Width="800" Name="guide" Closing="GuideWindow_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="28*"></RowDefinition>
