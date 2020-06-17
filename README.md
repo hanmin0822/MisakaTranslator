@@ -61,6 +61,20 @@ E-Mail/QQ:512240272@qq.com
 * 合作开发者-[unlsycn](https://github.com/HumphreyDotSln) 
 * 合作开发者-[tpxxn](https://github.com/tpxxn)
 
+## MisakaProject
+
+MisakaProject是基于MisakaTranslator或辅助其功能所开发的一切项目的集合。
+
+如果您有意将自己的相关类型项目加入到MisakaProject中，请联系作者。
+
+* [jsc723/MisakaPatcher](https://github.com/jsc723/MisakaPatcher)
+
+MisakaPatcher添加了对外挂汉化补丁的支持，因此本工具更适合喜欢人工翻译的玩家，也为解包封包遇到困难的汉化人员提供了另一种发布汉化的途径。
+
+* [hanmin0822/MisakaHookFinder](https://github.com/hanmin0822/MisakaHookFinder)
+
+MisakaHookFinder适用于部分游戏无法使用此翻译器直接得到文本Hook方法的场合，用户可以通过它自行搜索得到Hook特殊码或直接使用其获取源文本，同时也支持剪贴板输出原文。
+
 ## 贡献者名单
 
 感谢所有对本项目开发提供帮助的人！
@@ -74,7 +88,5 @@ E-Mail/QQ:512240272@qq.com
 如果您想为本项目作出贡献，请参阅[贡献指南](https://github.com/hanmin0822/MisakaTranslator/blob/master/CONTRIBUTING.md)
 
 ## 其他注意
-
-部分游戏无法使用此翻译器直接得到文本Hook方法的，可以使用本项目的子项目[MisakaHookFinder](https://github.com/hanmin0822/MisakaHookFinder)获取源文本并搭配使用，效果更佳！
 
 软件开发过程中使用到部分网络素材，如果侵犯到您的权益，请第一时间联系作者删除，谢谢！
