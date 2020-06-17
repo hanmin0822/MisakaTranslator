@@ -69,6 +69,20 @@ E-Mail/QQ:512240272@qq.com
 * [unlsycn](https://github.com/HumphreyDotSln) 
 * [tpxxn](https://github.com/tpxxn)
 
+## MisakaProject
+
+MisakaProject is a collection of all projects developed based on MisakaTranslator or its auxiliary functions.
+
+If you are interested in adding your own projects of related types to MisakaProject, please contact the author.
+
+* [jsc723/MisakaPatcher](https://github.com/jsc723/MisakaPatcher)
+
+MisakaPatcher added support for plug-in Chinese patch, so this tool is more suitable for players who like manual translation, and also provides another way for Chinese personnel who have difficulty unpacking packets to release Chinese patch.
+
+* [hanmin0822/MisakaHookFinder](https://github.com/hanmin0822/MisakaHookFinder)
+
+MisakaHookFinder is suitable for some games where the translator can not be used to directly get the text hook method. Users can search for the hook special code by themselves or directly use it to get the source text. At the same time, it also supports the clipboard to output the original text.
+
 ## Project Team Members
 
 * Character&Paintist-[百川行](https://www.pixiv.net/users/17591894)
