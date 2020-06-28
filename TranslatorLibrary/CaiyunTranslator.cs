@@ -39,7 +39,7 @@ namespace TranslatorLibrary
 
             string trans_type = srcLang + "2" + desLang;
 
-            string url = "http://api.interpreter.caiyunai.com/v1/translator";
+            string url = "https://api.interpreter.caiyunai.com/v1/translator";
             //json参数
             string jsonParam = "{\"source\": [\"" + q + "\"], \"trans_type\": \"" + trans_type + "\", \"request_id\": \"demo\", \"detect\": true}";
             var request = (HttpWebRequest)WebRequest.Create(url);
