@@ -10,7 +10,7 @@ namespace TranslatorLibrary
 {
     public class BaiduTranslator : ITranslator
     {
-        //语言简写列表 http://api.fanyi.baidu.com/product/113
+        //语言简写列表 https://api.fanyi.baidu.com/product/113
 
         public string appId;//百度翻译API 的APP ID
         public string secretKey;//百度翻译API 的密钥
@@ -41,7 +41,7 @@ namespace TranslatorLibrary
             string salt = rd.Next(100000).ToString();
 
             string sign = CommonFunction.EncryptString(appId + q + salt + secretKey);
-            string url = "http://api.fanyi.baidu.com/api/trans/vip/translate?";
+            string url = "https://api.fanyi.baidu.com/api/trans/vip/translate?";
             url += "q=" + HttpUtility.UrlEncode(q);
             url += "&from=" + srcLang;
             url += "&to=" + desLang;
