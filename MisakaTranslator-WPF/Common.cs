@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -132,6 +133,7 @@ namespace MisakaTranslator_WPF
             scw.Top = 0;
             scw.Show();
         }
+
         /// <summary>
         /// 获取DPI缩放倍数
         /// </summary>
@@ -142,5 +144,76 @@ namespace MisakaTranslator_WPF
             return currentGraphics.DpiX / 96;
         }
 
+        /// <summary>
+        /// 检查软件更新
+        /// </summary>
+        /// <returns>如果已经是最新或获取更新失败，返回NULL，否则返回更新信息可直接显示</returns>
+        public static List<string> CheckUpdate() {
+            var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            string currentVersion = version.ToString();
+
+            string url = "https://cdn.jsdelivr.net/gh/hanmin0822/MisakaTranslator@master/LatestVersionCheck.MD";
+
+            string strResult = "";
+
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                //声明一个HttpWebRequest请求
+                request.Timeout = 30000;
+                //设置连接超时时间
+                request.Headers.Set("Pragma", "no-cache");
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                Stream streamReceive = response.GetResponseStream();
+                Encoding encoding = Encoding.GetEncoding("GB2312");
+                StreamReader streamReader = new StreamReader(streamReceive, encoding);
+                strResult = streamReader.ReadToEnd();
+            }
+            catch
+            {
+                return null;
+            }
+
+            if (strResult != null) {
+                string newVersion = GetMiddleStr(strResult, "LatestVersion[", "]");
+
+                if (newVersion == null) {
+                    return null;
+                }
+
+                if (currentVersion == newVersion)
+                {
+                    return null;
+                }
+                else {
+                    string downloadPath = GetMiddleStr(strResult, "DownloadPath[", "]");
+                    return new List<string>() {
+                        newVersion,downloadPath
+                    };
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 取字符串中间
+        /// </summary>
+        /// <param name="oldStr"></param>
+        /// <param name="preStr"></param>
+        /// <param name="nextStr"></param>
+        /// <returns></returns>
+        public static string GetMiddleStr(string oldStr, string preStr, string nextStr)
+        {
+            try
+            {
+                string tempStr = oldStr.Substring(oldStr.IndexOf(preStr) + preStr.Length);
+                tempStr = tempStr.Substring(0, tempStr.IndexOf(nextStr));
+                return tempStr;
+            }
+            catch (Exception) {
+                return null;
+            }
+        }
     }
 }

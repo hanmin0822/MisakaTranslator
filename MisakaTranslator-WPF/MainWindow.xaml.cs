@@ -476,5 +476,18 @@ namespace MisakaTranslator_WPF
             var ggw = new GameGuideWindow(4);
             ggw.Show();
         }
+
+        private void BlurWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<string> res = Common.CheckUpdate();
+            if (res != null) {
+                MessageBoxResult dr = HandyControl.Controls.MessageBox.Show(res[0] + "\n" + Application.Current.Resources["MainWindow_AutoUpdateCheck"].ToString(), "AutoUpdateCheck", MessageBoxButton.OKCancel);
+
+                if (dr == MessageBoxResult.OK) {
+                    System.Diagnostics.Process.Start(res[1]);
+                }
+
+            }
+        }
     }
 }
