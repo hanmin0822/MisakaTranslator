@@ -10,8 +10,8 @@
                Background="{DynamicResource TranslateWindowBackground}"
                AllowsTransparency="True"
                WindowStyle="None"
-        Title="TranslateWindow" Height="450" Width="800" Closing="Window_Closing">
-    <WindowChrome.WindowChrome>
+        Title="TranslateWindow" Height="450" Width="800" Closing="Window_Closing" Loaded="TransWin_Loaded">
+    <WindowChrome.WindowChrome> 
         <WindowChrome CaptionHeight="0"/>
     </WindowChrome.WindowChrome>
 

@@ -52,16 +52,19 @@ namespace TransOptimizationLibrary
                 if (l[2] == "1") {
                     //如果是人名
 
-                    if (text.IndexOf(l[0]) == 0) {
+                    if (text.StartsWith(l[0])) {
                         //出现在首部
                         text = text.Remove(0,l[0].Length);
                         PeopleChatName = l[1];
                     }
-                    else if (text.LastIndexOf(l[0]) == text.Length - l[0].Length)
+                    else if (text.EndsWith(l[0]))
                     {
                         //出现在尾部
-                        text = text.Remove(text.LastIndexOf(l[0]), l[0].Length);
-                        PeopleChatName = l[1];
+                        int pos = text.LastIndexOf(l[0]);
+                        if (pos > 0) {
+                            text = text.Remove(pos, l[0].Length);
+                            PeopleChatName = l[1];
+                        }
                     }
                 }
 

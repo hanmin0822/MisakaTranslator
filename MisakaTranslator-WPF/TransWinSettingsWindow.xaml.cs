@@ -45,6 +45,7 @@ namespace MisakaTranslator_WPF
 
             UI_Init();
 
+            this.Topmost = true;
         }
 
         /// <summary>
@@ -93,6 +94,11 @@ namespace MisakaTranslator_WPF
                 translateWin.BackWinChrome.Opacity = OpacityBar.Value / 100;
                 Common.appSettings.TF_Opacity = OpacityBar.Value;
             };
+
+            KanaCheckBox.Click += delegate
+            {
+                Common.appSettings.TF_isKanaShow = (bool)KanaCheckBox.IsChecked;
+            };
         }
 
         /// <summary>
@@ -128,6 +134,7 @@ namespace MisakaTranslator_WPF
             secondFontSize.Value = Common.appSettings.TF_secondTransTextSize;
 
             OpacityBar.Value = Common.appSettings.TF_Opacity;
+            KanaCheckBox.IsChecked = Common.appSettings.TF_isKanaShow;
         }
 
         private void ChooseColorBtn_Click(object sender, RoutedEventArgs e)
@@ -172,5 +179,9 @@ namespace MisakaTranslator_WPF
             window.Show();
         }
 
+        private void TransWinSettingsWin_Closed(object sender, EventArgs e)
+        {
+            translateWin.dtimer.Start();
+        }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:local="clr-namespace:MisakaTranslator_WPF"
         mc:Ignorable="d"
-        Title="{StaticResource TransWinSettingsWin_Title}" Height="500" Width="300">
+        Title="{StaticResource TransWinSettingsWin_Title}" Height="500" Width="300" Closed="TransWinSettingsWin_Closed">
     <Grid>
 
         <TabControl Style="{StaticResource TabControlInLine}">
@@ -28,6 +28,9 @@
                     <hc:ComboBox Name="sourceFont" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontName}" Margin="10" />
 
                     <hc:NumericUpDown Name="sourceFontSize" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontSize}" Margin="10" Style="{StaticResource NumericUpDownExtend}"/>
+
+                    <CheckBox Name="KanaCheckBox" Content="{StaticResource TransWinSettingsWin_KanaCbox}" Margin="10" HorizontalAlignment="Left"/>
+
 
                     <TextBlock Text="{StaticResource TransWinSettingsWin_srcSetNotice}" Margin="10" HorizontalAlignment="Center"/>
                 </StackPanel>

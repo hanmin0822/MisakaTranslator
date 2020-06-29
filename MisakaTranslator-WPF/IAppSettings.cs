@@ -296,6 +296,13 @@ namespace MisakaTranslator_WPF
             set;
         }
 
+        [Option(Alias = "TranslateFormSettings.isKanaShow", DefaultValue = true)]
+        bool TF_isKanaShow
+        {
+            get;
+            set;
+        }
+
         #region 界面设置
         #region 前景色设置
         [Option(Alias = "Appearance.Foreground", DefaultValue = "#ffcccc")]

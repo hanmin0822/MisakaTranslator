@@ -23,6 +23,8 @@ namespace MisakaTranslator_WPF
         public AddOptWindow(string src = "")
         {
             InitializeComponent();
+            this.Topmost = true;
+
             List<string> wordtype = new List<string>()
             {
                 "人名",
@@ -38,8 +40,14 @@ namespace MisakaTranslator_WPF
             if (srcWord.Text != "" && dstWord.Text != "" && wordTypeCombox.SelectedIndex != -1)
             {
                 NounTransOptimization opt = new NounTransOptimization("" + Common.GameID, Common.UsingSrcLang, Common.UsingDstLang);
-                opt.AddNounTrans(srcWord.Text, wordTypeCombox.SelectedIndex + 1, dstWord.Text);
-                HandyControl.Controls.Growl.InfoGlobal("已添加名词翻译优化词条");
+                bool res = opt.AddNounTrans(srcWord.Text, wordTypeCombox.SelectedIndex + 1, dstWord.Text);
+                if (res)
+                {
+                    HandyControl.Controls.Growl.InfoGlobal(Application.Current.Resources["AddOptWin_Success_Hint"].ToString());
+                }
+                else {
+                    HandyControl.Controls.Growl.ErrorGlobal(Application.Current.Resources["AddOptWin_Error_Hint"].ToString());
+                }
             }
         }
     }

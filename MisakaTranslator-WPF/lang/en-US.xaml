@@ -283,4 +283,9 @@
 
     <sys:String x:Key="TranslateWin_Menu_TTS">朗读源文本</sys:String>
     <sys:String x:Key="TranslateWin_NoTTS_Hint">您没有配置TTS相关设置，朗读功能无法使用</sys:String>
+
+    <sys:String x:Key="AddOptWin_Success_Hint">已添加名词翻译优化词条</sys:String>
+    <sys:String x:Key="AddOptWin_Error_Hint">添加名词翻译优化词条失败</sys:String>
+
+    <sys:String x:Key="TransWinSettingsWin_KanaCbox">开启日语原文假名标注</sys:String>
 </ResourceDictionary>
