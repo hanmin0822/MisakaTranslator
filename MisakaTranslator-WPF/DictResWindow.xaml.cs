@@ -62,8 +62,8 @@ namespace MisakaTranslator_WPF
             SourceWord.Text = sourceWord;
             
             Kana.Text = kana;
-            
-            
+
+            this.Topmost = true;
             DicResText.Text = XxgJpzhDict.RemoveHTML(ret);
         }
 

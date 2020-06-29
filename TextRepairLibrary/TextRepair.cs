@@ -20,6 +20,7 @@ namespace TextRepairLibrary
             { "单字重复处理" , "RepairFun_RemoveSingleWordRepeat" },
             { "句子重复处理" , "RepairFun_RemoveSentenceRepeat" },
             { "去除字母和数字" , "RepairFun_RemoveLetterNumber" },
+            { "去除HTML标签" , "RepairFun_RemoveHTML" },
             { "正则表达式替换(见说明)" , "RepairFun_RegexReplace" },
             { "用户自定义(见说明)" , "RepairFun_Custom" }
         };
@@ -165,6 +166,16 @@ namespace TextRepairLibrary
             return strRemoved;
         }
 
+        /// <summary>
+        /// 去除HTML标签
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static string RepairFun_RemoveHTML(string source) {
+            string strRemoved = Regex.Replace(source, "<[^>]+>", "");
+            strRemoved = Regex.Replace(strRemoved, "&[^;]+;", "");
+            return strRemoved;
+        }
 
         /// <summary>
         /// 正则表达式替换

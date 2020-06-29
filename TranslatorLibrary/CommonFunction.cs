@@ -26,6 +26,7 @@ namespace TranslatorLibrary
             { "彩云小译" , "CaiyunTranslator" },
             { "有道翻译(公共接口)" , "YoudaoTranslator" },
             { "ALAPI免费接口" , "AlapiTranslator"},
+            { "谷歌翻译(公共接口)" , "GoogleCNTranslator"},
             { "JBeijing" , "JBeijingTranslator" },
             { "金山快译" , "KingsoftFastAITTranslator" },
             { "译典通", "Dreye"}

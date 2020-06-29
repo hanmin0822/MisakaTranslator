@@ -59,6 +59,7 @@
     <Compile Include="CaiyunTranslator.cs" />
     <Compile Include="CommonFunction.cs" />
     <Compile Include="DreyeTranslator.cs" />
+    <Compile Include="GoogleCNTranslator.cs" />
     <Compile Include="ITranslator.cs" />
     <Compile Include="JBeijingTranslator.cs" />
     <Compile Include="KingsoftFastAITTranslator.cs" />
@@ -70,6 +71,17 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="MSScriptControl">
+      <Guid>{0E59F1D2-1FBE-11D0-8FF2-00A0D10038BC}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

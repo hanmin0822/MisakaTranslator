@@ -203,6 +203,10 @@ namespace MisakaTranslator_WPF
                     AlapiTranslator al = new AlapiTranslator();
                     al.TranslatorInit();
                     return al;
+                case "GoogleCNTranslator":
+                    GoogleCNTranslator gct = new GoogleCNTranslator();
+                    gct.TranslatorInit();
+                    return gct;
                 case "JBeijingTranslator":
                     JBeijingTranslator bj = new JBeijingTranslator();
                     bj.TranslatorInit(Common.appSettings.JBJCTDllPath);
@@ -441,8 +445,10 @@ namespace MisakaTranslator_WPF
                         }
                         else
                         {
+                            dtimer.Stop();
                             DictResWindow _dictResWindow = new DictResWindow(textBlock.Text,(string)textBlock.Tag,_textSpeechHelper);
-                            _dictResWindow.Show();
+                            _dictResWindow.ShowDialog();
+                            dtimer.Start();
                         }
                     }
                     else
