@@ -179,7 +179,7 @@ namespace KeyboardMouseHookLibrary
                         0);
                 }
                 catch (Exception err)
-                { }
+                { return false; }
                 //如果安装鼠标钩子失败
                 if (_hMouseHook == 0)
                 {
@@ -200,7 +200,7 @@ namespace KeyboardMouseHookLibrary
                         0);
                 }
                 catch (Exception err2)
-                { }
+                { return false; }
                 //如果安装键盘钩子失败
                 if (_hKeyboardHook == 0)
                 {
@@ -304,6 +304,7 @@ namespace KeyboardMouseHookLibrary
                 OnMouseActivity(this, e);
             }
             return CallNextHookEx(_hMouseHook, nCode, wParam, lParam);
+             
         }
         
 
@@ -348,8 +349,8 @@ namespace KeyboardMouseHookLibrary
             }
 
 
-
             return CallNextHookEx(_hKeyboardHook, nCode, wParam, lParam);
+            
         }
     }
 

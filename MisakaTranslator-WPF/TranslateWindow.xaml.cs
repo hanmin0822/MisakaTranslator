@@ -233,8 +233,9 @@ namespace MisakaTranslator_WPF
             {
                 OCR();
             }
-
+            
             hook.Stop();
+            hook = null;
             MouseKeyboardHook_Init();
         }
 
@@ -253,8 +254,9 @@ namespace MisakaTranslator_WPF
                     OCR();
                 }
             }
-
+            
             hook.Stop();
+            hook = null;
             MouseKeyboardHook_Init();
         }
 

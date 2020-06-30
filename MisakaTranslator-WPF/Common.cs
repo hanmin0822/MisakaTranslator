@@ -152,7 +152,7 @@ namespace MisakaTranslator_WPF
             var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             string currentVersion = version.ToString();
 
-            string url = "https://cdn.jsdelivr.net/gh/hanmin0822/MisakaTranslator@master/LatestVersionCheck.MD";
+            string url = "https://hanmin0822.github.io/MisakaTranslator/index.html";
 
             string strResult = "";
 

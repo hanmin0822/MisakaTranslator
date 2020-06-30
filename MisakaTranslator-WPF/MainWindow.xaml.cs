@@ -192,6 +192,7 @@ namespace MisakaTranslator_WPF
 
         private void OCRGuideBtn_Click(object sender, RoutedEventArgs e)
         {
+            HandyControl.Controls.MessageBox.Show("根据部分用户反映，OCR功能目前存在热键失效的BUG，作者正在修复中，建议优先使用Hook功能！");
             var ggw = new GameGuideWindow(2);
             ggw.Show();
         }
@@ -477,13 +478,16 @@ namespace MisakaTranslator_WPF
             ggw.Show();
         }
 
-        private void BlurWindow_Loaded(object sender, RoutedEventArgs e)
+        
+        private void BlurWindow_ContentRendered(object sender, EventArgs e)
         {
             List<string> res = Common.CheckUpdate();
-            if (res != null) {
+            if (res != null)
+            {
                 MessageBoxResult dr = HandyControl.Controls.MessageBox.Show(res[0] + "\n" + Application.Current.Resources["MainWindow_AutoUpdateCheck"].ToString(), "AutoUpdateCheck", MessageBoxButton.OKCancel);
 
-                if (dr == MessageBoxResult.OK) {
+                if (dr == MessageBoxResult.OK)
+                {
                     System.Diagnostics.Process.Start(res[1]);
                 }
 
