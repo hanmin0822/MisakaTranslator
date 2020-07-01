@@ -42,7 +42,7 @@ namespace TranslatorLibrary
 
             string trans_type = srcLang + "2" + desLang;
             trans_type = trans_type.ToUpper();
-            string url = "http://fanyi.youdao.com/translate?&doctype=json&type=" + trans_type + "&i=" + q;
+            string url = "https://fanyi.youdao.com/translate?&doctype=json&type=" + trans_type + "&i=" + q;
 
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
