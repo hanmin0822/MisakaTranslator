@@ -366,7 +366,7 @@ namespace MisakaTranslator_WPF
                                     source = source.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
                                 }
                                 //去乱码
-                                source = source.Replace("_", "").Replace("-", "").Replace("+", "");
+                                source = source.Replace("_", "").Replace("-", "").Replace("+", "").Replace("&", "");
 
                                 //4.翻译前预处理
                                 string beforeString = _beforeTransHandle.AutoHandle(source);
@@ -472,7 +472,7 @@ namespace MisakaTranslator_WPF
                     repairedText = repairedText.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
                 }
                 //去乱码
-                repairedText = repairedText.Replace("_", "").Replace("-", "").Replace("+", "");
+                repairedText = repairedText.Replace("_", "").Replace("-", "").Replace("+", "").Replace("&", "");
 
                 //补充:如果去重之后的文本长度超过100，直接不翻译、不显示
                 if (repairedText.Length <= 100)

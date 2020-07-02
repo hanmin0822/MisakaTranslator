@@ -192,7 +192,6 @@ namespace MisakaTranslator_WPF
 
         private void OCRGuideBtn_Click(object sender, RoutedEventArgs e)
         {
-            HandyControl.Controls.MessageBox.Show("根据部分用户反映，OCR功能目前存在热键失效的BUG，作者正在修复中，建议优先使用Hook功能！");
             var ggw = new GameGuideWindow(2);
             ggw.Show();
         }
