@@ -68,6 +68,8 @@ namespace KeyboardMouseHookLibrary
 
     public class GlobalHook
     {
+        public string moduleName;//设置的模块名用于确认句柄
+
         public delegate int HookProc(int nCode, Int32 wParam, IntPtr lParam);
         public delegate int GlobalHookProc(int nCode, Int32 wParam, IntPtr lParam);
 
@@ -164,8 +166,10 @@ namespace KeyboardMouseHookLibrary
         private const int WM_SYSKEYUP = 0x105;
 
 
-        public bool Start()
+        public bool Start(string _moduleName)
         {
+            moduleName = _moduleName;
+
             // install Mouse hook 
             if (_hMouseHook == 0)
             {
@@ -175,7 +179,7 @@ namespace KeyboardMouseHookLibrary
                 {
                     _hMouseHook = SetWindowsHookEx(WH_MOUSE_LL,
                         MouseHookProcedure,
-                        GetModuleHandle(Process.GetCurrentProcess().MainModule.ModuleName),
+                        GetModuleHandle(moduleName),
                         0);
                 }
                 catch (Exception err)
@@ -196,7 +200,7 @@ namespace KeyboardMouseHookLibrary
                 {
                     _hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL,
                         KeyboardHookProcedure,
-                        GetModuleHandle(Process.GetCurrentProcess().MainModule.ModuleName),
+                        GetModuleHandle(moduleName),
                         0);
                 }
                 catch (Exception err2)

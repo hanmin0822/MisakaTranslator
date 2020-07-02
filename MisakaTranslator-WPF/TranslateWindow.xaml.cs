@@ -48,7 +48,7 @@ namespace MisakaTranslator_WPF
         public int SourceTextFontSize; //源文本区域字体大小
 
         private Queue<string> _gameTextHistory; //历史文本
-        public static GlobalHook hook; //全局键盘鼠标钩子
+        public static KeyboardMouseHook hook; //全局键盘鼠标钩子
         public bool IsOCRingFlag; //线程锁:判断是否正在OCR线程中，保证同时只有一组在跑OCR
         public bool IsPauseFlag; //是否处在暂停状态（专用于OCR）,为真可以翻译
 
@@ -115,30 +115,34 @@ namespace MisakaTranslator_WPF
         /// </summary>
         private void MouseKeyboardHook_Init()
         {
-            if (Common.UsingHotKey.IsMouse)
+            if (hook == null)
             {
-                //初始化钩子对象
-                if (hook == null)
+                hook = new KeyboardMouseHook();
+                bool r = false;
+
+                if (Common.UsingHotKey.IsMouse)
                 {
-                    hook = new GlobalHook();
                     hook.OnMouseActivity += Hook_OnMouseActivity;
+                    if (Common.UsingHotKey.MouseButton == System.Windows.Forms.MouseButtons.Left) {
+                        r = hook.Start(true, 1);
+                    } else if (Common.UsingHotKey.MouseButton == System.Windows.Forms.MouseButtons.Right) {
+                        r = hook.Start(true, 2);
+                    }
                 }
-            }
-            else
-            {
-                //初始化钩子对象
-                if (hook == null)
+                else
                 {
-                    hook = new GlobalHook();
-                    hook.KeyDown += Hook_OnKeyBoardActivity;
+                    hook.onKeyboardActivity += Hook_OnKeyBoardActivity;
+                    int keycode = (int)Common.UsingHotKey.KeyCode;
+                    r = hook.Start(false, keycode);
+                }
+
+                if (!r)
+                {
+                    Growl.ErrorGlobal(Application.Current.Resources["Hook_Error_Hint"].ToString());
                 }
             }
 
-            bool r = hook.Start();
-            if (!r)
-            {
-                Growl.ErrorGlobal(Application.Current.Resources["Hook_Error_Hint"].ToString());
-            }
+            
         }
 
         /// <summary>
@@ -227,16 +231,9 @@ namespace MisakaTranslator_WPF
         /// <summary>
         /// 键盘点击事件
         /// </summary>
-        void Hook_OnKeyBoardActivity(object sender, System.Windows.Forms.KeyEventArgs e)
+        void Hook_OnKeyBoardActivity(object sender)
         {
-            if (e.KeyCode == Common.UsingHotKey.KeyCode)
-            {
-                OCR();
-            }
-            
-            hook.Stop();
-            hook = null;
-            MouseKeyboardHook_Init();
+            OCR();
         }
 
         /// <summary>
@@ -244,20 +241,13 @@ namespace MisakaTranslator_WPF
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Hook_OnMouseActivity(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void Hook_OnMouseActivity(object sender, POINT e)
         {
-            if (e.Button == Common.UsingHotKey.MouseButton)
+            if (Common.isAllWindowCap && Process.GetCurrentProcess().Id != FindWindowInfo.GetProcessIDByHWND(FindWindowInfo.GetWindowHWND(e.x, e.y))
+                || Common.OCRWinHwnd == (IntPtr)FindWindowInfo.GetWindowHWND(e.x, e.y))
             {
-                if (Common.isAllWindowCap && Process.GetCurrentProcess().Id != FindWindowInfo.GetProcessIDByHWND(FindWindowInfo.GetWindowHWND(e.X, e.Y))
-                    || Common.OCRWinHwnd == (IntPtr)FindWindowInfo.GetWindowHWND(e.X, e.Y))
-                {
-                    OCR();
-                }
+                OCR();
             }
-            
-            hook.Stop();
-            hook = null;
-            MouseKeyboardHook_Init();
         }
 
         private void OCR()
@@ -370,13 +360,13 @@ namespace MisakaTranslator_WPF
                                     }
                                 }
 
-                                if (Convert.ToBoolean(Common.appSettings.EachRowTrans))
+                                if (Convert.ToBoolean(Common.appSettings.EachRowTrans) == false)
                                 {
-                                    //需要分行翻译
-                                    source = source.Replace("<br>", string.Empty).Replace("</br>", string.Empty).Replace("\n", string.Empty).Replace("\t", string.Empty).Replace("\r", string.Empty);
+                                    //不需要分行翻译
+                                    source = source.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
                                 }
                                 //去乱码
-                                source = source.Replace("_", string.Empty).Replace("-", string.Empty).Replace("+", string.Empty);
+                                source = source.Replace("_", "").Replace("-", "").Replace("+", "");
 
                                 //4.翻译前预处理
                                 string beforeString = _beforeTransHandle.AutoHandle(source);
@@ -476,6 +466,14 @@ namespace MisakaTranslator_WPF
                 //2.进行去重
                 string repairedText = TextRepair.RepairFun_Auto(Common.UsingRepairFunc, source);
 
+                if (Convert.ToBoolean(Common.appSettings.EachRowTrans) == false)
+                {
+                    //不需要分行翻译
+                    repairedText = repairedText.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
+                }
+                //去乱码
+                repairedText = repairedText.Replace("_", "").Replace("-", "").Replace("+", "");
+
                 //补充:如果去重之后的文本长度超过100，直接不翻译、不显示
                 if (repairedText.Length <= 100)
                 {
@@ -563,13 +561,7 @@ namespace MisakaTranslator_WPF
                         }
                     }
 
-                    if (Convert.ToBoolean(Common.appSettings.EachRowTrans))
-                    {
-                        //需要分行翻译
-                        repairedText = repairedText.Replace("<br>", string.Empty).Replace("</br>", string.Empty).Replace("\n", string.Empty).Replace("\t", string.Empty).Replace("\r", string.Empty);
-                    }
-                    //去乱码
-                    repairedText = repairedText.Replace("_", string.Empty).Replace("-", string.Empty).Replace("+", string.Empty);
+                    
 
                     //4.翻译前预处理
                     string beforeString = _beforeTransHandle.AutoHandle(repairedText);

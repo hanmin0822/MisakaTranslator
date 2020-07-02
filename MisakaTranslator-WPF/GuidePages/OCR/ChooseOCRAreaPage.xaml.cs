@@ -71,7 +71,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
 
             if (IsChoosingWin == false)
             {
-                bool r = hook.Start();
+                bool r = hook.Start(Process.GetCurrentProcess().MainModule.ModuleName);
                 if (r)
                 {
                     IsChoosingWin = true;

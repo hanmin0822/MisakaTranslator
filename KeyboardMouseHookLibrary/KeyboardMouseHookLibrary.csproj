@@ -46,6 +46,7 @@
     <Compile Include="FindWindowInfo.cs" />
     <Compile Include="GlobalHook.cs" />
     <Compile Include="GlobalHotKey.cs" />
+    <Compile Include="KeyboardMouseHook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

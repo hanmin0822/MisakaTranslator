@@ -67,7 +67,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
                 }
             }
 
-            bool r = hook.Start();
+            bool r = hook.Start(System.Diagnostics.Process.GetCurrentProcess().MainModule.ModuleName);
             if (r)
             {
                 WaitHotKeyDrawer.IsOpen = true;
