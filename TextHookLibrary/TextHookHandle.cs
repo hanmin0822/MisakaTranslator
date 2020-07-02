@@ -142,18 +142,7 @@ namespace TextHookLibrary
         /// <returns>成功返回真，失败返回假</returns>
         public bool Init(bool x86 = true)
         {
-            string Path;
-            if (x86 == true)
-            {
-                //打开x86的Textractor
-                Path = Environment.CurrentDirectory + "\\lib\\TextHook\\x86";
-            }
-            else
-            {
-                //打开x64的Textractor
-                Path = Environment.CurrentDirectory + "\\lib\\TextHook\\x64";
-            }
-
+            string Path = Environment.CurrentDirectory + @"\lib\TextHook\" + (x86 ? "x86" : "x64");//打开对应的Textractor
             string CurrentPath = Environment.CurrentDirectory;
             try
             {
