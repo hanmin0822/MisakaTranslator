@@ -34,6 +34,8 @@ namespace MisakaTranslator_WPF.SettingsPages
             SecondTransCombox.SelectedIndex = CommonFunction.GetTranslatorIndex(Common.appSettings.SecondTranslator);
 
             EachRowTransCheckBox.IsChecked = Convert.ToBoolean(Common.appSettings.EachRowTrans);
+
+            TransLimitBox.Value = Common.appSettings.TransLimitNums;
         }
 
         private void FirstTransCombox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -49,6 +51,11 @@ namespace MisakaTranslator_WPF.SettingsPages
         private void EachRowTransCheckBox_Click(object sender, RoutedEventArgs e)
         {
             Common.appSettings.EachRowTrans = Convert.ToString(EachRowTransCheckBox.IsChecked);
+        }
+
+        private void TransLimitBox_ValueChanged(object sender, HandyControl.Data.FunctionEventArgs<double> e)
+        {
+            Common.appSettings.TransLimitNums = (int)TransLimitBox.Value;
         }
     }
 }

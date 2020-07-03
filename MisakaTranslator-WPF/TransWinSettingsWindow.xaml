@@ -41,7 +41,7 @@
                 <StackPanel>
                     <hc:ComboBox Name="firstFont" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontName}" Margin="10" />
 
-                    <hc:NumericUpDown Name="firstFontSize" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontSize}" Margin="10" Style="{StaticResource NumericUpDownExtend}"/>
+                    <hc:NumericUpDown Name="firstFontSize" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontSize}" Margin="10" Style="{StaticResource NumericUpDownExtend}" />
 
                     <TextBlock Text="{StaticResource TransWinSettingsWin_BgColor}" HorizontalAlignment="Center" Margin="15"/>
                     <Button Name="firstColorBtn" Content="{StaticResource TransWinSettingsWin_BtnChooseColor}" Margin="0" Width="200" Style="{StaticResource ButtonPrimary}" Click="ChooseColorBtn_Click"/>

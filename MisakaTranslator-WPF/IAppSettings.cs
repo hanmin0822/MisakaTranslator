@@ -128,6 +128,13 @@ namespace MisakaTranslator_WPF
             set;
         }
 
+        [Option(Alias = "Translate_All.TransLimitNums", DefaultValue = 100)]
+        int TransLimitNums
+        {
+            get;
+            set;
+        }
+
         [Option(Alias = "OCR_All.OCRsource", DefaultValue = "BaiduOCR")]
         string OCRsource
         {

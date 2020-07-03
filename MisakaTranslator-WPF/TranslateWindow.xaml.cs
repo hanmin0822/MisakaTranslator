@@ -474,8 +474,8 @@ namespace MisakaTranslator_WPF
                 //去乱码
                 repairedText = repairedText.Replace("_", "").Replace("-", "").Replace("+", "").Replace("&", "");
 
-                //补充:如果去重之后的文本长度超过100，直接不翻译、不显示
-                if (repairedText.Length <= 100)
+                //补充:如果去重之后的文本长度超过指定值（默认100），直接不翻译、不显示
+                if (repairedText.Length <= Common.appSettings.TransLimitNums)
                 {
                     //2.5 清除面板
                     SourceTextPanel.Children.Clear();
