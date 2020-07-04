@@ -29,7 +29,8 @@ namespace TranslatorLibrary
             { "谷歌翻译(公共接口)" , "GoogleCNTranslator"},
             { "JBeijing" , "JBeijingTranslator" },
             { "金山快译" , "KingsoftFastAITTranslator" },
-            { "译典通", "Dreye"}
+            { "译典通", "Dreye"},
+            { "本地人工翻译(见说明)" , "ArtificialTranslator"}
         };
 
         /// <summary>

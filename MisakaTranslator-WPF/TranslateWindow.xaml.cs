@@ -223,6 +223,10 @@ namespace MisakaTranslator_WPF
                     DreyeTranslator drt = new DreyeTranslator();
                     drt.TranslatorInit(Common.appSettings.DreyePath);
                     return drt;
+                case "ArtificialTranslator":
+                    ArtificialTranslator at = new ArtificialTranslator();
+                    at.TranslatorInit(Common.appSettings.ArtificialPatchPath);
+                    return at;
                 default:
                     return null;
             }
