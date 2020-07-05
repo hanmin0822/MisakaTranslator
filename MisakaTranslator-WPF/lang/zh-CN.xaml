@@ -294,4 +294,17 @@
     <sys:String x:Key="MainWindow_AutoUpdateCheck">发现新版本！点击确认进入下载页面，点击取消忽略本次更新提示。</sys:String>
 
     <sys:String x:Key="GeneralTransSettingsPage_Translimit">翻译限制字数</sys:String>
+
+    <sys:String x:Key="ArtificialTransAdd_Error_Hint">人工翻译结果自动添加失败！</sys:String>
+
+    <sys:String x:Key="ArtificialTransWin_Title">自定义人工翻译结果</sys:String>
+    <sys:String x:Key="ArtificialTransWin_Hint">在此窗口可自定义人工翻译结果，上方编辑框代表原文内容，您可以在下方编辑框输入自定义的译文。默认情况下，译文将由第一翻译源的翻译结果决定。</sys:String>
+    <sys:String x:Key="ArtificialTransWin_transBox">请输入翻译</sys:String>
+    <sys:String x:Key="ArtificialTransWin_ResetBtn">清空内容</sys:String>
+    <sys:String x:Key="ArtificialTransWin_ConfirmBtn">确定修改</sys:String>
+    <sys:String x:Key="ArtificialTransWin_Success_Hint">自定义人工翻译结果成功！</sys:String>
+    <sys:String x:Key="ArtificialTransWin_Error_Hint">自定义人工翻译结果失败！</sys:String>
+
+    <sys:String x:Key="TranslateWin_Menu_ATadd">自定义人工翻译</sys:String>
+
 </ResourceDictionary>

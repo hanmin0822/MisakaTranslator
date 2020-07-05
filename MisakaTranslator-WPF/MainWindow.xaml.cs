@@ -265,6 +265,7 @@ namespace MisakaTranslator_WPF
                 pidList = ProcessHelper.FindSameNameProcess(pid);
             }
 
+            Common.GameID = gameInfoList[gid].GameID;
             Common.transMode = 1;
             Common.UsingDstLang = gameInfoList[gid].DstLang;
             Common.UsingSrcLang = gameInfoList[gid].SrcLang;
@@ -429,7 +430,7 @@ namespace MisakaTranslator_WPF
         /// <summary>
         /// 寻找任何正在运行中的之前已保存过的游戏
         /// </summary>
-        /// <returns>游戏gid，-1代表未找到</returns>
+        /// <returns>数组索引（非GameID），-1代表未找到</returns>
         private int GetGameListHasProcessGame_PID_ID()
         {
             var processes = Process.GetProcesses();
@@ -466,6 +467,7 @@ namespace MisakaTranslator_WPF
         private void ClipboardGuideBtn_Click(object sender, RoutedEventArgs e)
         {
             Common.textHooker = new TextHookHandle();
+            Common.GameID = 0;
             Common.transMode = 1;
             Common.textHooker.AddClipBoardThread();
 

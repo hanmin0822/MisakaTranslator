@@ -13,6 +13,10 @@ namespace ArtificialTransHelperLibrary
         public SQLHelper sqlite;
 
         public ArtificialTransHelper(string gameName) {
+            if (!Directory.Exists(Environment.CurrentDirectory + "\\ArtificialTranslation"))
+                Directory.CreateDirectory(Environment.CurrentDirectory + "\\ArtificialTranslation");
+
+
             if (File.Exists(Environment.CurrentDirectory + "\\ArtificialTranslation\\MisakaAT_" + gameName + ".sqlite") == false)
             {
                 CreateNewNounTransDB(gameName);
@@ -31,7 +35,21 @@ namespace ArtificialTransHelperLibrary
         /// <returns></returns>
         public bool AddTrans(string source,string Trans)
         {
+            if (source == null || source == "") {
+                //空条目不添加，且返回真
+                return true;
+            }
+
             string sql =
+                $"SELECT * FROM artificialtrans WHERE source = '{source}';";
+            
+            List<List<string>> ret = sqlite.ExecuteReader(sql, 4);
+
+            if (ret.Count > 0) {
+                return false;
+            }
+
+            sql =
                 $"INSERT INTO artificialtrans VALUES(NULL,'{source}','{Trans}',NULL);";
             if (sqlite.ExecuteSql(sql) > 0)
             {

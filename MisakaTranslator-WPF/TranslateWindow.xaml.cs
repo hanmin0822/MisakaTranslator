@@ -19,6 +19,7 @@ using TextRepairLibrary;
 using TranslatorLibrary;
 using TransOptimizationLibrary;
 using TTSHelperLibrary;
+using ArtificialTransHelperLibrary;
 
 namespace MisakaTranslator_WPF
 {
@@ -32,7 +33,7 @@ namespace MisakaTranslator_WPF
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern int SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int y, int Width, int Height, int flags);
 
-
+        private ArtificialTransHelper _artificialTransHelper;
 
         private MecabHelper _mecabHelper;
         private BeforeTransHandle _beforeTransHandle;
@@ -99,6 +100,8 @@ namespace MisakaTranslator_WPF
             _beforeTransHandle = new BeforeTransHandle(Convert.ToString(Common.GameID), Common.UsingSrcLang, Common.UsingDstLang);
             _afterTransHandle = new AfterTransHandle(_beforeTransHandle);
 
+            _artificialTransHelper = new ArtificialTransHelper(Convert.ToString(Common.GameID));
+
             if (Common.transMode == 1)
             {
                 Common.textHooker.Sevent += DataRecvEventHandler;
@@ -107,6 +110,7 @@ namespace MisakaTranslator_WPF
             {
                 MouseKeyboardHook_Init();
             }
+            
 
         }
 
@@ -401,6 +405,12 @@ namespace MisakaTranslator_WPF
                                     _gameTextHistory.Dequeue();
                                 }
                                 _gameTextHistory.Enqueue(source + "\n" + afterString1 + "\n" + afterString2);
+
+                                //9.翻译原句和结果记录到数据库
+                                bool addRes = _artificialTransHelper.AddTrans(source,afterString1);
+                                if (addRes == false) {
+                                    Growl.ErrorGlobal(Application.Current.Resources["ArtificialTransAdd_Error_Hint"].ToString());
+                                }
                             }));
 
                             IsOCRingFlag = false;
@@ -596,6 +606,13 @@ namespace MisakaTranslator_WPF
                         _gameTextHistory.Dequeue();
                     }
                     _gameTextHistory.Enqueue(repairedText + "\n" + afterString1 + "\n" + afterString2);
+
+                    //9.翻译原句和结果记录到数据库
+                    bool addRes = _artificialTransHelper.AddTrans(repairedText, afterString1);
+                    if (addRes == false)
+                    {
+                        Growl.ErrorGlobal(Application.Current.Resources["ArtificialTransAdd_Error_Hint"].ToString());
+                    }
                 }
                 
             }));
@@ -830,6 +847,12 @@ namespace MisakaTranslator_WPF
             }
         }
 
-
+        private void ArtificialTransAdd_Item_Click(object sender, RoutedEventArgs e)
+        {
+            dtimer.Stop();
+            ArtificialTransAddWindow win = new ArtificialTransAddWindow(_currentsrcText,FirstTransText.Text);
+            win.ShowDialog();
+            dtimer.Start();
+        }
     }
 }

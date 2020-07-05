@@ -159,6 +159,9 @@
     <Compile Include="AddOptWindow.xaml.cs">
       <DependentUpon>AddOptWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ArtificialTransAddWindow.xaml.cs">
+      <DependentUpon>ArtificialTransAddWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common.cs" />
     <Compile Include="DictResWindow.xaml.cs">
       <DependentUpon>DictResWindow.xaml</DependentUpon>
@@ -262,6 +265,10 @@
       <DependentUpon>TransWinSettingsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AddOptWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ArtificialTransAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -437,6 +444,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ArtificialTransHelperLibrary\ArtificialTransHelperLibrary.csproj">
+      <Project>{a6568552-a4d0-4546-ace5-d8a710ee7e0e}</Project>
+      <Name>ArtificialTransHelperLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DictionaryHelperLibrary\DictionaryHelperLibrary.csproj">
       <Project>{ebe31abb-efb0-4a46-a8e0-655f614f88d9}</Project>
       <Name>DictionaryHelperLibrary</Name>
