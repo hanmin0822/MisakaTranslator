@@ -94,27 +94,36 @@ namespace ArtificialTransHelperLibrary
         /// <summary>
         /// 将数据库内容按格式导出到文件以供他人使用
         /// </summary>
-        public static void ExportDBtoFile(string FilePath,string DBPath) {
-            SQLHelper sqliteDB = new SQLHelper(DBPath);
+        public static bool ExportDBtoFile(string FilePath,string DBPath) {
+            try
+            {
+                SQLHelper sqliteDB = new SQLHelper(DBPath);
 
-            //让没有直接被定义的用户翻译等于机器翻译
-            sqliteDB.ExecuteSql("UPDATE artificialtrans SET userTrans = machineTrans WHERE userTrans is NULL;");
+                //让没有直接被定义的用户翻译等于机器翻译
+                sqliteDB.ExecuteSql("UPDATE artificialtrans SET userTrans = machineTrans WHERE userTrans is NULL;");
 
-            List<List<string>> ret = sqliteDB.ExecuteReader("SELECT * FROM artificialtrans;", 4);
+                List<List<string>> ret = sqliteDB.ExecuteReader("SELECT * FROM artificialtrans;", 4);
 
-            FileStream fs = new FileStream(FilePath, FileMode.Create);
-            StreamWriter sw = new StreamWriter(fs);
+                FileStream fs = new FileStream(FilePath, FileMode.Create);
+                StreamWriter sw = new StreamWriter(fs);
 
-            for (int i = 0;i < ret.Count;i++) {
-                sw.WriteLine("<j>");
-                sw.WriteLine(ret[i][1]);
-                sw.WriteLine("<c>");
-                sw.WriteLine(ret[i][3]);
+                for (int i = 0; i < ret.Count; i++)
+                {
+                    sw.WriteLine("<j>");
+                    sw.WriteLine(ret[i][1]);
+                    sw.WriteLine("<c>");
+                    sw.WriteLine(ret[i][3]);
+                }
+
+                sw.Flush();
+                sw.Close();
+                fs.Close();
             }
-
-            sw.Flush();
-            sw.Close();
-            fs.Close();
+            catch (Exception) {
+                return false;
+            }
+            
+            return true;
         }
     }
 }

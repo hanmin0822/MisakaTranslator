@@ -169,6 +169,9 @@
     <Compile Include="GameGuideWindow.xaml.cs">
       <DependentUpon>GameGuideWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPages\ArtificialTransSettingsPage.xaml.cs">
+      <DependentUpon>ArtificialTransSettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPages\SoftwareSettingsPage.xaml.cs">
       <DependentUpon>SoftwareSettingsPage.xaml</DependentUpon>
     </Compile>
@@ -277,6 +280,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GameGuideWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\ArtificialTransSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

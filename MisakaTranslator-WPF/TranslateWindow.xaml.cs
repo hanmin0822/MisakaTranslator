@@ -407,9 +407,12 @@ namespace MisakaTranslator_WPF
                                 _gameTextHistory.Enqueue(source + "\n" + afterString1 + "\n" + afterString2);
 
                                 //9.翻译原句和结果记录到数据库
-                                bool addRes = _artificialTransHelper.AddTrans(source,afterString1);
-                                if (addRes == false) {
-                                    Growl.ErrorGlobal(Application.Current.Resources["ArtificialTransAdd_Error_Hint"].ToString());
+                                if (Common.appSettings.ATon) {
+                                    bool addRes = _artificialTransHelper.AddTrans(source, afterString1);
+                                    if (addRes == false)
+                                    {
+                                        Growl.ErrorGlobal(Application.Current.Resources["ArtificialTransAdd_Error_Hint"].ToString());
+                                    }
                                 }
                             }));
 
@@ -608,10 +611,13 @@ namespace MisakaTranslator_WPF
                     _gameTextHistory.Enqueue(repairedText + "\n" + afterString1 + "\n" + afterString2);
 
                     //9.翻译原句和结果记录到数据库
-                    bool addRes = _artificialTransHelper.AddTrans(repairedText, afterString1);
-                    if (addRes == false)
+                    if (Common.appSettings.ATon)
                     {
-                        Growl.ErrorGlobal(Application.Current.Resources["ArtificialTransAdd_Error_Hint"].ToString());
+                        bool addRes = _artificialTransHelper.AddTrans(repairedText, afterString1);
+                        if (addRes == false)
+                        {
+                            Growl.ErrorGlobal(Application.Current.Resources["ArtificialTransAdd_Error_Hint"].ToString());
+                        }
                     }
                 }
                 

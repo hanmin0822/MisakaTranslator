@@ -104,5 +104,10 @@ namespace MisakaTranslator_WPF
         {
             this.SettingFrame.Navigate(new Uri("SettingsPages/TTSSettingsPage.xaml", UriKind.Relative));
         }
+
+        private void Item_ATSettings_Selected(object sender, RoutedEventArgs e)
+        {
+            this.SettingFrame.Navigate(new Uri("SettingsPages/ArtificialTransSettingsPage.xaml", UriKind.Relative));
+        }
     }
 }
