@@ -24,8 +24,11 @@
 
         <TextBox Name="transText" Grid.Row="3" Margin="10" TextWrapping="Wrap"/>
 
-        <Button Grid.Row="4" HorizontalAlignment="Left" Width="100" Margin="10" Content="{StaticResource ArtificialTransWin_ResetBtn}" Click="ResetBtn_Click"/>
+        <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <Button HorizontalAlignment="Left" Width="100" Margin="10" Content="{StaticResource ArtificialTransWin_ResetBtn}" Click="ResetBtn_Click"/>
+            <Button HorizontalAlignment="Left" Margin="10" Content="{StaticResource ArtificialTransWin_SecondTransBtn}" Click="SecondTransBtn_Click"/>
+        </StackPanel>
         <Button Grid.Row="4" HorizontalAlignment="Right" Width="100" Margin="10" Content="{StaticResource ArtificialTransWin_ConfirmBtn}" Click="ConfirmBtn_Click"/>
-
+        
     </Grid>
 </Window>

@@ -856,7 +856,7 @@ namespace MisakaTranslator_WPF
         private void ArtificialTransAdd_Item_Click(object sender, RoutedEventArgs e)
         {
             dtimer.Stop();
-            ArtificialTransAddWindow win = new ArtificialTransAddWindow(_currentsrcText,FirstTransText.Text);
+            ArtificialTransAddWindow win = new ArtificialTransAddWindow(_currentsrcText,FirstTransText.Text,SecondTransText.Text);
             win.ShowDialog();
             dtimer.Start();
         }

@@ -20,12 +20,16 @@ namespace MisakaTranslator_WPF
     /// </summary>
     public partial class ArtificialTransAddWindow : Window
     {
-        public ArtificialTransAddWindow(string src,string trans)
+        private string secondTransRes;
+
+        public ArtificialTransAddWindow(string src,string trans,string secondTrans)
         {
             InitializeComponent();
 
             srcText.Text = src;
             transText.Text = trans;
+
+            secondTransRes = secondTrans;
 
             this.Topmost = true;
         }
@@ -48,6 +52,11 @@ namespace MisakaTranslator_WPF
         private void ResetBtn_Click(object sender, RoutedEventArgs e)
         {
             transText.Text = "";
+        }
+
+        private void SecondTransBtn_Click(object sender, RoutedEventArgs e)
+        {
+            transText.Text = secondTransRes;
         }
     }
 }

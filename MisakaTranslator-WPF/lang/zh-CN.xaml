@@ -318,4 +318,6 @@
 
     <sys:String x:Key="SettingsMenu_ATSettings">人工翻译相关设置</sys:String>
 
+    <sys:String x:Key="ArtificialTransWin_SecondTransBtn">使用第二翻译源结果</sys:String>
+
 </ResourceDictionary>
