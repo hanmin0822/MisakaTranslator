@@ -30,16 +30,25 @@ namespace MisakaTranslator_WPF.SettingsPages
             ATonCheckBox.IsChecked = Common.appSettings.ATon;
             PathBox.Text = Common.appSettings.ArtificialPatchPath;
 
-            strNames = Directory.GetFiles(Environment.CurrentDirectory + "\\ArtificialTranslation");
+            if (Directory.Exists(Environment.CurrentDirectory + "\\ArtificialTranslation")) {
+                strNames = Directory.GetFiles(Environment.CurrentDirectory + "\\ArtificialTranslation");
 
-            List<string> fileList = new List<string>();
+                List<string> fileList = new List<string>();
 
-            for (int i = 0;i < strNames.Length;i++) {
-                fileList.Add(System.IO.Path.GetFileName(strNames[i]));
+                for (int i = 0; i < strNames.Length; i++)
+                {
+                    fileList.Add(System.IO.Path.GetFileName(strNames[i]));
+                }
+
+                PatchFileCombox.ItemsSource = fileList;
+
+                if (fileList.Count > 0)
+                {
+                    PatchFileCombox.SelectedIndex = 0;
+                }
             }
 
-            PatchFileCombox.ItemsSource = fileList;
-            PatchFileCombox.SelectedIndex = 0;
+            
         }
 
         private void ChoosePathBtn_Click(object sender, RoutedEventArgs e)
