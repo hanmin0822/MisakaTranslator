@@ -20,6 +20,8 @@
 
 ~~MisakaTranslator的名字由来是因为本软件连接到了一万多名御坂妹妹所组成的『御坂网络』，利用其强大的计算能力来提供实时可靠的翻译（误）~~
 
+[MisakaTranslator官方网站](https://misaka.galeden.cn/)
+
 [测试版演示视频](https://www.bilibili.com/video/av94082641)
 
 [2.0版本教程](https://www.bilibili.com/video/BV1Qt4y11713)
@@ -62,6 +64,7 @@ E-Mail/QQ:512240272@qq.com
 * 人设&画师-[百川行](https://www.pixiv.net/users/17591894)
 * 合作开发者-[unlsycn](https://github.com/HumphreyDotSln) 
 * 合作开发者-[tpxxn](https://github.com/tpxxn)
+* 合作开发者-[imba-tjd](https://github.com/imba-tjd)
 
 ## MisakaProject
 
