@@ -10,6 +10,8 @@
   <br>
   <b>Open Source | High Efficiency | Easy To Use</b>
   <br>
+  <img src="https://github.com/hanmin0822/MisakaTranslator/workflows/CI/badge.svg" alt="CI">
+  <br>
   <br>
 </p>
 
