@@ -41,13 +41,15 @@ namespace TranslatorLibrary
             string salt = rd.Next(100000).ToString();
 
             string sign = CommonFunction.EncryptString(appId + q + salt + secretKey);
-            string url = "https://api.fanyi.baidu.com/api/trans/vip/translate?";
-            url += "q=" + HttpUtility.UrlEncode(q);
-            url += "&from=" + srcLang;
-            url += "&to=" + desLang;
-            url += "&appid=" + appId;
-            url += "&salt=" + salt;
-            url += "&sign=" + sign;
+            var sb = new StringBuilder("https://api.fanyi.baidu.com/api/trans/vip/translate?")
+                .Append("q=").Append(HttpUtility.UrlEncode(q))
+                .Append("&from=").Append(srcLang)
+                .Append("&to=").Append(desLang)
+                .Append("&appid=").Append(appId)
+                .Append("&salt=").Append(salt)
+                .Append("&sign=").Append(sign);
+            string url = sb.ToString();
+
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
             request.ContentType = "text/html;charset=UTF-8";

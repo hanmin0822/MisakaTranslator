@@ -37,14 +37,15 @@ namespace TranslatorLibrary
 
             string url = "https://api.ai.qq.com/fcgi-bin/nlp/nlp_texttranslate?";
 
-            string req = "";
-            req += "app_id=" + appId;
-            req += "&nonce_str=" + salt;
-            req += "&source=" + srcLang;
-            req += "&target=" + desLang;
-            req += "&text=" + HttpUtility.UrlEncode(q).ToUpper();
-            req += "&time_stamp=" + CommonFunction.GetTimeStamp();
-            req += "&sign=" + CommonFunction.EncryptString(req + "&app_key=" + appKey).ToUpper();
+            var sb = new StringBuilder()
+                .Append("app_id=").Append(appId)
+                .Append("&nonce_str=").Append(salt)
+                .Append("&source=").Append(srcLang)
+                .Append("&target=").Append(desLang)
+                .Append("&text=").Append(HttpUtility.UrlEncode(q).ToUpper())
+                .Append("&time_stamp=").Append(CommonFunction.GetTimeStamp());
+            sb.Append("&sign=" + CommonFunction.EncryptString(sb.ToString() + "&app_key=" + appKey).ToUpper());
+            string req = sb.ToString();
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + req);
             request.Method = "GET";
