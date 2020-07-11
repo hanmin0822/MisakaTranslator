@@ -35,9 +35,9 @@ namespace ArtificialTransHelperLibrary
         /// <returns></returns>
         public bool AddTrans(string source,string Trans)
         {
-            if (source == null || source == "") {
-                //空条目不添加，且返回真
-                return true;
+            if (source == null || source == "" || Trans == null) {
+                //空条目不添加，且返回假
+                return false;
             }
 
             string sql =

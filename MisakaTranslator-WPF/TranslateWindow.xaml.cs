@@ -411,7 +411,10 @@ namespace MisakaTranslator_WPF
                                     bool addRes = _artificialTransHelper.AddTrans(source, afterString1);
                                     if (addRes == false)
                                     {
-                                        Growl.ErrorGlobal(Application.Current.Resources["ArtificialTransAdd_Error_Hint"].ToString());
+                                        HandyControl.Data.GrowlInfo growlInfo = new HandyControl.Data.GrowlInfo();
+                                        growlInfo.Message = Application.Current.Resources["ArtificialTransAdd_Error_Hint"].ToString();
+                                        growlInfo.WaitTime = 2;
+                                        Growl.InfoGlobal(growlInfo);
                                     }
                                 }
                             }));
@@ -616,7 +619,10 @@ namespace MisakaTranslator_WPF
                         bool addRes = _artificialTransHelper.AddTrans(repairedText, afterString1);
                         if (addRes == false)
                         {
-                            Growl.ErrorGlobal(Application.Current.Resources["ArtificialTransAdd_Error_Hint"].ToString());
+                            HandyControl.Data.GrowlInfo growlInfo = new HandyControl.Data.GrowlInfo();
+                            growlInfo.Message = Application.Current.Resources["ArtificialTransAdd_Error_Hint"].ToString();
+                            growlInfo.WaitTime = 2;
+                            Growl.InfoGlobal(growlInfo);
                         }
                     }
                 }
