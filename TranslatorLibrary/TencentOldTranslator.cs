@@ -41,16 +41,18 @@ namespace TranslatorLibrary
 
             string url = "https://tmt.tencentcloudapi.com/?";
 
-            string req = "Action=TextTranslate";
-            req += "&Nonce=" + salt;
-            req += "&ProjectId=0";
-            req += "&Region=ap-shanghai";
-            req += "&SecretId=" + SecretId;
-            req += "&Source=" + srcLang;
-            req += "&SourceText=" + sourceText;
-            req += "&Target=" + desLang;
-            req += "&Timestamp=" + CommonFunction.GetTimeStamp();
-            req += "&Version=2018-03-21";
+            var sb = new StringBuilder()
+                .Append("Action=TextTranslate")
+                .Append("&Nonce=").Append(salt)
+                .Append("&ProjectId=0")
+                .Append("&Region=ap-shanghai")
+                .Append("&SecretId=").Append(SecretId)
+                .Append("&Source=").Append(srcLang)
+                .Append("&SourceText=").Append(sourceText)
+                .Append("&Target=").Append(desLang)
+                .Append("&Timestamp=").Append(CommonFunction.GetTimeStamp())
+                .Append("&Version=2018-03-21");
+            string req = sb.ToString();
 
             HMACSHA1 hmac = new HMACSHA1()
             {
