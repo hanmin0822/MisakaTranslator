@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Web;
 
 namespace TranslatorLibrary
 {
@@ -41,7 +40,7 @@ namespace TranslatorLibrary
 
             string sign = CommonFunction.EncryptString(appId + q + salt + secretKey);
             var sb = new StringBuilder("https://api.fanyi.baidu.com/api/trans/vip/translate?")
-                .Append("q=").Append(HttpUtility.UrlEncode(q))
+                .Append("q=").Append(Uri.EscapeDataString(q))
                 .Append("&from=").Append(srcLang)
                 .Append("&to=").Append(desLang)
                 .Append("&appid=").Append(appId)

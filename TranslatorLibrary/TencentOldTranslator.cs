@@ -6,7 +6,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace TranslatorLibrary
 {
@@ -59,7 +58,7 @@ namespace TranslatorLibrary
             };
             byte[] data = Encoding.UTF8.GetBytes("GETtmt.tencentcloudapi.com/?" + req);
             var result = hmac.ComputeHash(data);
-            req = req + "&Signature=" + HttpUtility.UrlEncode(Convert.ToBase64String(result));
+            req = req + "&Signature=" + Uri.EscapeDataString(Convert.ToBase64String(result));
 
             var hc = CommonFunction.GetHttpClient();
             try
