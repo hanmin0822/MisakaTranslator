@@ -73,15 +73,10 @@ namespace TranslatorLibrary
                 return null;
             }
 
-            if (oinfo != null && oinfo.target.Count >= 1)
+            if (oinfo?.target.Count >= 1)
             {
                 //得到翻译结果
-                string r = "";
-                for (int i = 0;i < oinfo.target.Count;i++) {
-                    r += Regex.Unescape(oinfo.target[i]);
-                }
-
-                return r;
+                return string.Join("", oinfo.target.Select(x => Regex.Unescape(x)));
             }
             else
             {

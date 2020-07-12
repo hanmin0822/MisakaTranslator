@@ -59,15 +59,10 @@ namespace TranslatorLibrary
 
             if (oinfo.errorCode == 0)
             {
-                string ret = "";
-
                 //得到翻译结果
                 if (oinfo.translateResult.Count == 1)
                 {
-                    for (int i = 0;i < oinfo.translateResult[0].Count;i++) {
-                        ret += oinfo.translateResult[0][i].tgt;
-                    }
-                    return ret;
+                    return string.Join("", oinfo.translateResult[0].Select(x => x.tgt));
                 }
                 else
                 {

@@ -58,16 +58,10 @@ namespace TranslatorLibrary
 
             if (oinfo.msg == "success")
             {
-                string ret = "";
-
                 //得到翻译结果
                 if (oinfo.data.trans_result.Count == 1)
                 {
-                    for (int i = 0; i < oinfo.data.trans_result.Count; i++)
-                    {
-                        ret += oinfo.data.trans_result[i].dst;
-                    }
-                    return ret;
+                    return string.Join("", oinfo.data.trans_result.Select(x => x.dst));
                 }
                 else
                 {
