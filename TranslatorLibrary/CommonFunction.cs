@@ -101,9 +101,16 @@ namespace TranslatorLibrary
                 lock(typeof(CommonFunction))
                     if(HC == null)
                     {
-                        HC = new HttpClient() { Timeout = TimeSpan.FromSeconds(6) };
-                        HC.DefaultRequestHeaders.UserAgent.ParseAdd("MisakaTranslator");
-                        HC.DefaultRequestHeaders.Add("ContentType", "text/html;charset=UTF-8");
+                        HC = new HttpClient(new HttpClientHandler()
+                        {
+                            AutomaticDecompression = DecompressionMethods.GZip
+                        });
+                        HC.Timeout = TimeSpan.FromSeconds(6);
+                        var headers = HC.DefaultRequestHeaders;
+                        headers.UserAgent.ParseAdd("MisakaTranslator");
+                        headers.Add("ContentType", "text/html;charset=UTF-8");
+                        headers.AcceptEncoding.ParseAdd("gzip");
+                        headers.Connection.ParseAdd("keep-alive");
                         ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
                     }
             return HC;
