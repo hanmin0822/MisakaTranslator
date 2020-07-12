@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace TranslatorLibrary
 {
@@ -42,31 +43,24 @@ namespace TranslatorLibrary
             string url = "https://api.interpreter.caiyunai.com/v1/translator";
             //json参数
             string jsonParam = "{\"source\": [\"" + q + "\"], \"trans_type\": \"" + trans_type + "\", \"request_id\": \"demo\", \"detect\": true}";
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = "POST";
-            request.Headers.Add("x-authorization", "token " + caiyunToken);
-            request.ContentType = "application/json;charset=UTF-8";
-            byte[] byteData = Encoding.UTF8.GetBytes(jsonParam);
-            int length = byteData.Length;
-            request.ContentLength = length;
+
+            var hc = CommonFunction.GetHttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, url);
+            request.Headers.Add("X-Authorization", "token " + caiyunToken);
+            request.Headers.Add("ContentType", "application/json;charset=UTF-8");
+            request.Content = new StringContent(jsonParam);
             try
             {
-                Stream writer = request.GetRequestStream();
-                writer.Write(byteData, 0, length);
-                writer.Close();
-                request.UserAgent = null;
-                request.Timeout = 6000;
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                Stream myResponseStream = response.GetResponseStream();
-                StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
-                retString = myStreamReader.ReadToEnd();
-                myStreamReader.Close();
-                myResponseStream.Close();
+                retString = hc.SendAsync(request).GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
             }
             catch (WebException ex)
             {
                 errorInfo = ex.Message;
                 return null;
+            }
+            finally
+            {
+                request.Dispose();
             }
 
             CaiyunTransResult oinfo;

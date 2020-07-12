@@ -98,14 +98,14 @@ namespace TranslatorLibrary
         public static HttpClient GetHttpClient()
         {
             if (HC == null)
-                lock(typeof(CommonFunction))
-                    if(HC == null)
+                lock (typeof(CommonFunction))
+                    if (HC == null)
                     {
                         HC = new HttpClient(new HttpClientHandler()
                         {
                             AutomaticDecompression = DecompressionMethods.GZip
-                        });
-                        HC.Timeout = TimeSpan.FromSeconds(6);
+                        })
+                        { Timeout = TimeSpan.FromSeconds(6) };
                         var headers = HC.DefaultRequestHeaders;
                         headers.UserAgent.ParseAdd("MisakaTranslator");
                         headers.Add("ContentType", "text/html;charset=UTF-8");

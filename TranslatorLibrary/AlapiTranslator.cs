@@ -43,18 +43,10 @@ namespace TranslatorLibrary
             
             string url = "https://v1.alapi.cn/api/fanyi?q=" + q + "&from=" + srcLang + "&to=" + desLang;
 
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = "GET";
-            request.UserAgent = null;
-            request.Timeout = 6000;
+            var hc = CommonFunction.GetHttpClient();
             try
             {
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                Stream myResponseStream = response.GetResponseStream();
-                StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
-                retString = myStreamReader.ReadToEnd();
-                myStreamReader.Close();
-                myResponseStream.Close();
+                retString = hc.GetStringAsync(url).GetAwaiter().GetResult();
             }
             catch (WebException ex)
             {

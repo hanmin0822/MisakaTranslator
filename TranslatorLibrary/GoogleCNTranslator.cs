@@ -13,10 +13,6 @@ namespace TranslatorLibrary
     {
         private string errorInfo;//错误信息
 
-        public string cok = "_ga=GA1.3.57119681.1530535466; _gid=GA1.3.822279719.1530535466; 1P_JAR=2018-7-2-13; NID=133=flt3w-FDEcjIeJEyNlrSsDT234uDZR5FCndtTvrkwShKHLzaTsk9FFQ0-7C9f_Qg0AgDHlVU-Z7Mz8JucebVhb2eW32XabvEEVoIJhdalWeCnkso8NUQvrBMEPT4eUJS";
-        public string rep = "";
-        public string usergant = "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36";
-
         public string GetTkkJS;
 
         public string GetLastError()
@@ -41,9 +37,6 @@ namespace TranslatorLibrary
             if (srcLang == "kr")
                 srcLang = "ko";
 
-
-            CookieContainer cc = new CookieContainer();
-
             string fun = string.Format(@"TL('{0}')", sourceText);
 
             var tk = ExecuteScript(fun, GetTkkJS);
@@ -52,7 +45,7 @@ namespace TranslatorLibrary
 
             try
             {
-                var ResultHtml = GetResultHtml(googleTransUrl, cc, "https://translate.google.cn/");
+                var ResultHtml = GetResultHtml(googleTransUrl);
 
                 dynamic TempResult = Newtonsoft.Json.JsonConvert.DeserializeObject(ResultHtml);
 
@@ -91,41 +84,16 @@ namespace TranslatorLibrary
         /// <param name="cc"></param>
         /// <param name="refer"></param>
         /// <returns></returns>
-        public string GetResultHtml(string url, CookieContainer cc, string refer)
+        public string GetResultHtml(string url)
         {
-            var html = "";
 
-            var webRequest = WebRequest.Create(url) as HttpWebRequest;
-            webRequest.CookieContainer = new CookieContainer();
+            var hc = CommonFunction.GetHttpClient();
+            return hc.GetStringAsync(url).GetAwaiter().GetResult();
 
-            CookieContainer cook = new CookieContainer();
-
-            webRequest.Method = "GET";
-
-            webRequest.CookieContainer = cc;
-
-            webRequest.Referer = "https://translate.google.cn/";
-
-            webRequest.UserAgent = usergant;
-
-            webRequest.Timeout = 20000;
-
-            webRequest.Headers.Add("X-Requested-With:XMLHttpRequest");
-
-            webRequest.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
-
-
-            using (var webResponse = (HttpWebResponse)webRequest.GetResponse())
-            {
-                using (var reader = new StreamReader(webResponse.GetResponseStream(), Encoding.UTF8))
-                {
-
-                    html = reader.ReadToEnd();
-                    reader.Close();
-                    webResponse.Close();
-                }
-            }
-            return html;
+            // string usergant = "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36";
+            //webRequest.Referer = "https://translate.google.cn/";
+            //webRequest.Headers.Add("X-Requested-With:XMLHttpRequest");
+            //webRequest.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
         }
 
         /// <summary>
