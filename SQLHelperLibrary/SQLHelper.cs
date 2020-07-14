@@ -39,26 +39,7 @@ namespace SQLHelperLibrary
         /// <summary>
         /// 专用于游戏库的初始化
         /// </summary>
-        public SQLHelper()
-        {
-            var dataSource = $"{Environment.CurrentDirectory}\\MisakaGameLibrary.sqlite";
-            var connectionStringBuilder = new SQLiteConnectionStringBuilder
-            {
-                Version = 3,
-                Pooling = true,
-                FailIfMissing = false,
-                DataSource = dataSource
-            };
-            try
-            {
-                var mConnectionString = connectionStringBuilder.ConnectionString;
-                _mDbConnection = new SQLiteConnection(mConnectionString);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        public SQLHelper() : this($"{Environment.CurrentDirectory}\\MisakaGameLibrary.sqlite") { }
 
 
         /// <summary>
