@@ -6,11 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SQLite" Version="1.0.115.5" />
+    <None Include="App.config" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AppEnvironmentLibrary\AppEnvironmentLibrary.csproj" />
+    <PackageReference Include="Microsoft.Data.SQLite">
+      <Version>3.1.5</Version>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
