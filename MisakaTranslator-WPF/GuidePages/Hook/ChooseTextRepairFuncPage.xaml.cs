@@ -65,8 +65,6 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
-            SQLHelper sqliteH = new SQLHelper();
-
             Common.textHooker.Sevent -= DataRecvEventHandler;
 
             Common.UsingRepairFunc = TextRepair.lstRepairFun[lstRepairFun[RepairFuncCombox.SelectedIndex]];
@@ -77,19 +75,19 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                 switch (TextRepair.lstRepairFun[lstRepairFun[RepairFuncCombox.SelectedIndex]])
                 {
                     case "RepairFun_RemoveSingleWordRepeat":
-                        sqliteH.ExecuteSql(
+                        GameLibraryHelper.sqlHelper.ExecuteSql(
                             $"UPDATE game_library SET repair_func = '{Common.UsingRepairFunc}',repair_param_a = '{Common.repairSettings.SingleWordRepeatTimes}' WHERE gameid = {Common.GameID};");
                         break;
                     case "RepairFun_RemoveSentenceRepeat":
-                        sqliteH.ExecuteSql(
+                        GameLibraryHelper.sqlHelper.ExecuteSql(
                             $"UPDATE game_library SET repair_func = '{Common.UsingRepairFunc}',repair_param_a = '{Common.repairSettings.SentenceRepeatFindCharNum}' WHERE gameid = {Common.GameID};");
                         break;
                     case "RepairFun_RegexReplace":
-                        sqliteH.ExecuteSql(
+                        GameLibraryHelper.sqlHelper.ExecuteSql(
                             $"UPDATE game_library SET repair_func = '{Common.UsingRepairFunc}',repair_param_a = '{Common.repairSettings.Regex}',repair_param_b = '{Common.repairSettings.Regex_Replace}' WHERE gameid = {Common.GameID};");
                         break;
                     default:
-                        sqliteH.ExecuteSql(
+                        GameLibraryHelper.sqlHelper.ExecuteSql(
                             $"UPDATE game_library SET repair_func = '{Common.UsingRepairFunc}' WHERE gameid = {Common.GameID};");
                         break;
                 }

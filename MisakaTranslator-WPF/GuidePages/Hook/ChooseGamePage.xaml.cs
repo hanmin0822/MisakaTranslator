@@ -65,8 +65,7 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                 if (filepath != "") {
                     Common.GameID = GameLibraryHelper.GetGameID(filepath);
                 }
-                SQLHelper sqliteH = new SQLHelper();
-                sqliteH.ExecuteSql(
+                GameLibraryHelper.sqlHelper.ExecuteSql(
                     $"UPDATE game_library SET isx64 = '{x64GameCheckBox.IsChecked}' WHERE gameid = {Common.GameID};");
 
 
