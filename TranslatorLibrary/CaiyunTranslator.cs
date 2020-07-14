@@ -45,13 +45,12 @@ namespace TranslatorLibrary
             string jsonParam = "{\"source\": [\"" + q + "\"], \"trans_type\": \"" + trans_type + "\", \"request_id\": \"demo\", \"detect\": true}";
 
             var hc = CommonFunction.GetHttpClient();
-            var request = new HttpRequestMessage(HttpMethod.Post, url);
-            request.Headers.Add("X-Authorization", "token " + caiyunToken);
-            request.Headers.Add("ContentType", "application/json;charset=UTF-8");
-            request.Content = new StringContent(jsonParam);
+            var req = new StringContent(jsonParam);
+            req.Headers.Add("X-Authorization", "token " + caiyunToken);
+            req.Headers.Add("ContentType", "application/json;charset=UTF-8");
             try
             {
-                retString = hc.SendAsync(request).GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                retString = hc.PostAsync(url, req).GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
             }
             catch (WebException ex)
             {
@@ -60,7 +59,7 @@ namespace TranslatorLibrary
             }
             finally
             {
-                request.Dispose();
+                req.Dispose();
             }
 
             CaiyunTransResult oinfo;
