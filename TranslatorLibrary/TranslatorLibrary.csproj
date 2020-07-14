@@ -67,6 +67,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TencentFYJTranslator.cs" />
     <Compile Include="TencentOldTranslator.cs" />
+    <Compile Include="XiaoniuTranslator.cs" />
     <Compile Include="YoudaoTranslator.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -203,6 +203,10 @@ namespace MisakaTranslator_WPF
                     CaiyunTranslator cy = new CaiyunTranslator();
                     cy.TranslatorInit(Common.appSettings.CaiyunToken);
                     return cy;
+                case "XiaoniuTranslator":
+                    XiaoniuTranslator xt = new XiaoniuTranslator();
+                    xt.TranslatorInit(Common.appSettings.xiaoniuApiKey);
+                    return xt;
                 case "YoudaoTranslator":
                     YoudaoTranslator yd = new YoudaoTranslator();
                     yd.TranslatorInit();

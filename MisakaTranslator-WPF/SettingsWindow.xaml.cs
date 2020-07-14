@@ -109,5 +109,10 @@ namespace MisakaTranslator_WPF
         {
             this.SettingFrame.Navigate(new Uri("SettingsPages/ArtificialTransSettingsPage.xaml", UriKind.Relative));
         }
+
+        private void Item_Xiaoniu_Selected(object sender, RoutedEventArgs e)
+        {
+            this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/XiaoniuTransSettingsPage.xaml", UriKind.Relative));
+        }
     }
 }

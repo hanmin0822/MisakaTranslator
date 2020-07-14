@@ -32,6 +32,7 @@
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_TencentFYJ}" Selected="Item_FYJTrans_Selected"/>
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_TencentOld}" Selected="Item_TXOTrans_Selected"/>
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Caiyun}" Selected="Item_Caiyun_Selected"/>
+                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Xiaoniu}" Selected="Item_Xiaoniu_Selected"/>
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Jbeijing}" Selected="Item_JBeijing_Selected"/>
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_KingsoftFAIT}" Selected="Item_KingsoftFAIT_Selected"/>
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Dreye}" Selected="Item_Dreye_Selected"/>
