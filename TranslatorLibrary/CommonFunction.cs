@@ -4,10 +4,12 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http;
+using System.Net;
 
 namespace TranslatorLibrary
 {
-    public class CommonFunction
+    public static class CommonFunction
     {
         public static Dictionary<string, string> lstLanguage = new Dictionary<string, string>() {
             { "中文" , "zh" },
@@ -89,6 +91,29 @@ namespace TranslatorLibrary
             return -1;
         }
 
-        
+        static HttpClient HC;
+        /// <summary>
+        /// 获得HttpClinet单例，第一次调用自动初始化
+        /// </summary>
+        public static HttpClient GetHttpClient()
+        {
+            if (HC == null)
+                lock (typeof(CommonFunction))
+                    if (HC == null)
+                    {
+                        HC = new HttpClient(new HttpClientHandler()
+                        {
+                            AutomaticDecompression = DecompressionMethods.GZip
+                        })
+                        { Timeout = TimeSpan.FromSeconds(6) };
+                        var headers = HC.DefaultRequestHeaders;
+                        headers.UserAgent.ParseAdd("MisakaTranslator");
+                        headers.Add("ContentType", "text/html;charset=UTF-8");
+                        headers.AcceptEncoding.ParseAdd("gzip");
+                        headers.Connection.ParseAdd("keep-alive");
+                        ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
+                    }
+            return HC;
+        }
     }
 }

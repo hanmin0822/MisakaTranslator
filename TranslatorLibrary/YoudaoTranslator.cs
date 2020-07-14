@@ -42,22 +42,14 @@ namespace TranslatorLibrary
 
             string trans_type = srcLang + "2" + desLang;
             trans_type = trans_type.ToUpper();
-            string url = "http://fanyi.youdao.com/translate?&doctype=json&type=" + trans_type + "&i=" + q;
+            string url = "https://fanyi.youdao.com/translate?&doctype=json&type=" + trans_type + "&i=" + q;
 
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = "GET";
-            request.UserAgent = null;
-            request.Timeout = 6000;
+            var hc = CommonFunction.GetHttpClient();
             try
             {
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                Stream myResponseStream = response.GetResponseStream();
-                StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
-                retString = myStreamReader.ReadToEnd();
-                myStreamReader.Close();
-                myResponseStream.Close();
+                retString = hc.GetStringAsync(url).GetAwaiter().GetResult();
             }
-            catch (WebException ex)
+            catch
             {
                 errorInfo = "Request Timeout";
                 return null;
@@ -67,15 +59,10 @@ namespace TranslatorLibrary
 
             if (oinfo.errorCode == 0)
             {
-                string ret = "";
-
                 //得到翻译结果
                 if (oinfo.translateResult.Count == 1)
                 {
-                    for (int i = 0;i < oinfo.translateResult[0].Count;i++) {
-                        ret += oinfo.translateResult[0][i].tgt;
-                    }
-                    return ret;
+                    return string.Join("", oinfo.translateResult[0].Select(x => x.tgt));
                 }
                 else
                 {

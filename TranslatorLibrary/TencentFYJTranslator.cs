@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.IO;
-using System.Net;
 using System.Text;
-using System.Web;
 
 namespace TranslatorLibrary
 {
@@ -42,27 +40,17 @@ namespace TranslatorLibrary
                 .Append("&nonce_str=").Append(salt)
                 .Append("&source=").Append(srcLang)
                 .Append("&target=").Append(desLang)
-                .Append("&text=").Append(HttpUtility.UrlEncode(q).ToUpper())
+                .Append("&text=").Append(Uri.EscapeDataString(q).ToUpper())
                 .Append("&time_stamp=").Append(CommonFunction.GetTimeStamp());
             sb.Append("&sign=" + CommonFunction.EncryptString(sb.ToString() + "&app_key=" + appKey).ToUpper());
             string req = sb.ToString();
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + req);
-            request.Method = "GET";
-            request.ContentType = "text/html;charset=UTF-8";
-            request.UserAgent = null;
-            request.Timeout = 6000;
+            var hc = CommonFunction.GetHttpClient();
             try
             {
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                Stream myResponseStream = response.GetResponseStream();
-                StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
-                retString = myStreamReader.ReadToEnd();
-                myStreamReader.Close();
-                myResponseStream.Close();
-                
+                retString = hc.GetStringAsync(url + req).GetAwaiter().GetResult();
             }
-            catch (WebException ex)
+            catch
             {
                 errorInfo =  "Request Timeout";
                 return null;

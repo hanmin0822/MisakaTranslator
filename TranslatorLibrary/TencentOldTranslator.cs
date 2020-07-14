@@ -3,11 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace TranslatorLibrary
 {
@@ -56,28 +54,18 @@ namespace TranslatorLibrary
 
             HMACSHA1 hmac = new HMACSHA1()
             {
-                Key = System.Text.Encoding.UTF8.GetBytes(SecretKey)
+                Key = Encoding.UTF8.GetBytes(SecretKey)
             };
             byte[] data = Encoding.UTF8.GetBytes("GETtmt.tencentcloudapi.com/?" + req);
             var result = hmac.ComputeHash(data);
-            req = req + "&Signature=" + HttpUtility.UrlEncode(Convert.ToBase64String(result));
+            req = req + "&Signature=" + Uri.EscapeDataString(Convert.ToBase64String(result));
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + req);
-            request.Method = "GET";
-            request.ContentType = "text/html;charset=UTF-8";
-            request.UserAgent = null;
-            request.Timeout = 6000;
+            var hc = CommonFunction.GetHttpClient();
             try
             {
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                Stream myResponseStream = response.GetResponseStream();
-                StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
-                retString = myStreamReader.ReadToEnd();
-                myStreamReader.Close();
-                myResponseStream.Close();
-                
+                retString = hc.GetStringAsync(url + req).GetAwaiter().GetResult();
             }
-            catch (WebException ex)
+            catch
             {
                 errorInfo = "Request Timeout";
                 return null;

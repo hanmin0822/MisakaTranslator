@@ -43,18 +43,10 @@ namespace TranslatorLibrary
             
             string url = "https://v1.alapi.cn/api/fanyi?q=" + q + "&from=" + srcLang + "&to=" + desLang;
 
-            var request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = "GET";
-            request.UserAgent = null;
-            request.Timeout = 6000;
+            var hc = CommonFunction.GetHttpClient();
             try
             {
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                Stream myResponseStream = response.GetResponseStream();
-                StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
-                retString = myStreamReader.ReadToEnd();
-                myStreamReader.Close();
-                myResponseStream.Close();
+                retString = hc.GetStringAsync(url).GetAwaiter().GetResult();
             }
             catch (WebException ex)
             {
@@ -66,16 +58,10 @@ namespace TranslatorLibrary
 
             if (oinfo.msg == "success")
             {
-                string ret = "";
-
                 //得到翻译结果
                 if (oinfo.data.trans_result.Count == 1)
                 {
-                    for (int i = 0; i < oinfo.data.trans_result.Count; i++)
-                    {
-                        ret += oinfo.data.trans_result[i].dst;
-                    }
-                    return ret;
+                    return string.Join("", oinfo.data.trans_result.Select(x => x.dst));
                 }
                 else
                 {

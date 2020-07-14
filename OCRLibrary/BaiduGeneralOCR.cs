@@ -6,7 +6,6 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Web;
 
 namespace OCRLibrary
 {
@@ -42,7 +41,7 @@ namespace OCRLibrary
             request.KeepAlive = true;
             // 图片的base64编码
             string base64 = ImageProcFunc.GetFileBase64(img);
-            String str = "language_type=" + langCode + "&image=" + HttpUtility.UrlEncode(base64);
+            String str = "language_type=" + langCode + "&image=" + Uri.EscapeDataString(base64);
             byte[] buffer = encoding.GetBytes(str);
             request.ContentLength = buffer.Length;
             request.GetRequestStream().Write(buffer, 0, buffer.Length);
