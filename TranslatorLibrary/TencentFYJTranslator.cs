@@ -51,9 +51,9 @@ namespace TranslatorLibrary
             {
                 retString = hc.GetStringAsync(url + req).GetAwaiter().GetResult();
             }
-            catch
+            catch (System.Net.Http.HttpRequestException ex)
             {
-                errorInfo =  "Request Timeout";
+                errorInfo = ex.Message;
                 return null;
             }
 

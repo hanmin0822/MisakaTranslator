@@ -65,9 +65,9 @@ namespace TranslatorLibrary
 
                 return ResultText;
             }
-            catch (Exception e)
+            catch (System.Net.Http.HttpRequestException ex)
             {
-                errorInfo = e.Message;
+                errorInfo = ex.Message;
                 return null;
             }
         }

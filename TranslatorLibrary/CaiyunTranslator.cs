@@ -52,7 +52,7 @@ namespace TranslatorLibrary
             {
                 retString = hc.PostAsync(url, req).GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
             }
-            catch (WebException ex)
+            catch (System.Net.Http.HttpRequestException ex)
             {
                 errorInfo = ex.Message;
                 return null;
