@@ -320,4 +320,19 @@
     <sys:String x:Key="XiaoniuTransSettingsPage_Introduce">小牛翻译API支持多种语言互译，对日语、汉语的互译支持较好，需要联网使用；您需要先申请该API，获取apiKey后填入下方相应位置并进行测试认证；如果认证出现错误，请根据错误码至小牛翻译API官方文档获取解决办法；同时，小牛翻译还支持自定义术语库，请自行在其管理台操作。小牛翻译API免费版没有什么太大的限制，敬请使用。</sys:String>
     <sys:String x:Key="XiaoniuTransSettingsPage_apikey">小牛翻译 apiKey</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Xiaoniu">小牛翻译</sys:String>
+
+    <sys:String x:Key="MainWindow_Tip_ComicTrans">漫画翻译</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_Btn_Next">下一页</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_Btn_Pre">上一页</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_Btn_AddOCRRect">添加新条目(选择区域)</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_TB_OCRsource">OCR结果：</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_TB_trans">翻译结果：</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_BTNbox_inputJPN">日语手写输入</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_BTNbox_trans">切换翻译结果</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_List_Header_pos">位置</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_List_Header_source">原文</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_List_Header_trans">翻译</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_ChoosePathHint">选择需要翻译的漫画文件夹路径</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_Hint_LastofAll">已经是最后一张图片了</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_Hint_FirstofAll">已经是第一张图片了</sys:String>
 </ResourceDictionary>

@@ -89,6 +89,9 @@
     <Compile Include="ArtificialTransAddWindow.xaml.cs">
       <DependentUpon>ArtificialTransAddWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ComicTranslator\ComicTransMainWindow.xaml.cs">
+      <DependentUpon>ComicTransMainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common.cs" />
     <Compile Include="DictResWindow.xaml.cs">
       <DependentUpon>DictResWindow.xaml</DependentUpon>
@@ -197,11 +200,18 @@
     <Compile Include="TransWinSettingsWindow.xaml.cs">
       <DependentUpon>TransWinSettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SelectTransLangDialog.xaml.cs">
+      <DependentUpon>SelectTransLangDialog.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddOptWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ArtificialTransAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ComicTranslator\ComicTransMainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -270,6 +280,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GuidePages\OCR\ChooseOCRAreaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SelectTransLangDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

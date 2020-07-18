@@ -1,0 +1,55 @@
+﻿<Window x:Class="MisakaTranslator_WPF.ComicTranslator.ComicTransMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:local="clr-namespace:MisakaTranslator_WPF.ComicTranslator"
+        mc:Ignorable="d"
+        Title="{StaticResource MainWindow_Tip_ComicTrans}" Height="800" Width="1000"
+        Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" >
+            <Image Name="sourceComicImg"></Image>
+        </ScrollViewer>
+
+        <StackPanel Margin="10" Grid.Column="1">
+
+            <ListView Name="HookFunListView" Background="White" SelectionMode="Single" Height="250">
+                <ListView.View>
+                    <GridView>
+                    <GridViewColumn Width="70" Header="{StaticResource ComicTransMainWindow_List_Header_pos}" DisplayMemberBinding="{Binding Path=GamePID}"/>
+                    <GridViewColumn Width="100" Header="{StaticResource ComicTransMainWindow_List_Header_source}" DisplayMemberBinding="{Binding Path=HookFunc}"/>
+                    <GridViewColumn Width="100" Header="{StaticResource ComicTransMainWindow_List_Header_trans}" DisplayMemberBinding="{Binding Path=MisakaHookCode}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        <hc:ButtonGroup Orientation="Horizontal" Margin="0,0,0,0">
+            <Button Content="{StaticResource ComicTransMainWindow_Btn_AddOCRRect}" Height="35" FontSize="15" Click="AddOcrRectBtn_Click"></Button>
+
+        </hc:ButtonGroup>
+
+        
+            <hc:TextBox Name="sourceTextBox" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Margin="0,10,0,0" Height="120" hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource ComicTransMainWindow_TB_OCRsource}"></hc:TextBox>
+            <hc:ButtonGroup Orientation="Horizontal" Margin="0,0,0,0">
+                <Button Content="{StaticResource ComicTransMainWindow_BTNbox_inputJPN}" Click="InputJpnBtn_Click"></Button>
+                <Button Content="{StaticResource ComicTransMainWindow_BTNbox_trans}" Click="transBtn_Click" ></Button>
+            </hc:ButtonGroup>
+        <hc:TextBox Name="transTextBox" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Margin="0,10,0,10" Height="120" hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource ComicTransMainWindow_TB_trans}"></hc:TextBox>
+
+            
+
+            <Button Margin="10" Content="{StaticResource ComicTransMainWindow_Btn_Pre}" Height="40" Width="200" FontSize="15" Click="PreBtn_Click"></Button>
+            <Button Margin="10,0,10,10" Content="{StaticResource ComicTransMainWindow_Btn_Next}" Height="40" Width="200" FontSize="15" Click="NextBtn_Click" Style="{StaticResource ButtonPrimary}"></Button>
+
+            
+
+        </StackPanel>
+        
+    </Grid>
+</Window>

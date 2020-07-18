@@ -324,4 +324,18 @@
     <sys:String x:Key="XiaoniuTransSettingsPage_apikey">小牛翻译 apiKey</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Xiaoniu">小牛翻译</sys:String>
 
+    <sys:String x:Key="MainWindow_Tip_ComicTrans">漫画翻译</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_Btn_Next">下一页</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_Btn_Pre">上一页</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_Btn_AddOCRRect">添加新条目(选择区域)</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_TB_OCRsource">OCR结果：</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_TB_trans">翻译结果：</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_BTNbox_inputJPN">日语手写输入</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_BTNbox_trans">切换翻译结果</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_List_Header_pos">位置</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_List_Header_source">原文</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_List_Header_trans">翻译</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_ChoosePathHint">选择需要翻译的漫画文件夹路径</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_Hint_LastofAll">已经是最后一张图片了</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_Hint_FirstofAll">已经是第一张图片了</sys:String>
 </ResourceDictionary>

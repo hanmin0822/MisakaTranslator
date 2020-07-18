@@ -494,5 +494,11 @@ namespace MisakaTranslator_WPF
 
             }
         }
+
+        private void ComicTransBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var ctmw = new ComicTranslator.ComicTransMainWindow();
+            ctmw.Show();
+        }
     }
 }
