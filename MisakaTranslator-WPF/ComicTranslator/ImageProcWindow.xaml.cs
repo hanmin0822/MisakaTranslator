@@ -27,12 +27,18 @@ namespace MisakaTranslator_WPF.ComicTranslator
 
         Stack<StrokeCollection> tempList;//操作栈，用于撤销
 
+        DrawingAttributes da;
+
         public ImageProcWindow(System.Drawing.Bitmap bitmap)
         {
             bmp = bitmap;
             img = new Image();
+            da = new DrawingAttributes();
 
             InitializeComponent();
+
+            tempList = new Stack<StrokeCollection>();
+            ink.Strokes.StrokesChanged += Strokes_StrokesChanged;
 
             img.Width = bitmap.Width;
             img.Height = bitmap.Height;
@@ -40,17 +46,19 @@ namespace MisakaTranslator_WPF.ComicTranslator
             ink.Height = bitmap.Height;
             ink.Width = bitmap.Width;
             ink.EditingMode = InkCanvasEditingMode.None;
+
+            
+            da.Color = Color.FromRgb(255, 255, 255);
+            da.Width = 10;
+            da.Height = 10;
+            da.StylusTip = StylusTip.Ellipse;
         }
 
         private void EraseBtn_Click(object sender, RoutedEventArgs e)
         {
             if (EraseBtn.IsChecked == true)
             {
-                DrawingAttributes da = new DrawingAttributes();
-                da.Color = Color.FromRgb(255, 255, 255);
-                da.Width = 10;
-                da.Height = 10;
-                da.StylusTip = StylusTip.Ellipse;
+                
                 ink.DefaultDrawingAttributes = da;
                 ink.EditingMode = InkCanvasEditingMode.Ink;
                 ink.UseCustomCursor = true;
@@ -113,6 +121,13 @@ namespace MisakaTranslator_WPF.ComicTranslator
             
             GC.Collect();
             
+        }
+
+        private void InkBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            da.Width = InkBar.Value;
+            da.Height = InkBar.Value;
+            ink.DefaultDrawingAttributes = da;
         }
     }
 }

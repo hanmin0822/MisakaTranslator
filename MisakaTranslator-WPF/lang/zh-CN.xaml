@@ -345,4 +345,7 @@
     <sys:String x:Key="ImageProcWindow_eraseBtn">手动擦除</sys:String>
 
     <sys:String x:Key="ComicTransMainWindow_Btn_RemoveBlank">去除空格换行</sys:String>
+    <sys:String x:Key="ImageProcWindow_InkBar">橡皮范围粗细</sys:String>
+    <sys:String x:Key="ImageProcWindow_WinName">OCR图片预处理</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_IsSaveRes">是否保存本次翻译结果?</sys:String>
 </ResourceDictionary>

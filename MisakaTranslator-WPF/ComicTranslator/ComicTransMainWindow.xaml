@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:MisakaTranslator_WPF.ComicTranslator"
         mc:Ignorable="d"
         Title="{StaticResource MainWindow_Tip_ComicTrans}" Height="800" Width="1000"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="7*"></ColumnDefinition>
@@ -26,12 +26,12 @@
 
         <StackPanel Margin="10" Grid.Column="1">
 
-            <ListView Name="HookFunListView" Background="White" SelectionMode="Single" Height="250">
+            <ListView Name="TransResListView" Background="White" SelectionMode="Single" Height="250">
                 <ListView.View>
                     <GridView>
-                    <GridViewColumn Width="70" Header="{StaticResource ComicTransMainWindow_List_Header_pos}" DisplayMemberBinding="{Binding Path=GamePID}"/>
-                    <GridViewColumn Width="100" Header="{StaticResource ComicTransMainWindow_List_Header_source}" DisplayMemberBinding="{Binding Path=HookFunc}"/>
-                    <GridViewColumn Width="100" Header="{StaticResource ComicTransMainWindow_List_Header_trans}" DisplayMemberBinding="{Binding Path=MisakaHookCode}"/>
+                        <GridViewColumn Width="70" Header="{StaticResource ComicTransMainWindow_List_Header_pos}" DisplayMemberBinding="{Binding Path=Pos}"/>
+                        <GridViewColumn Width="100" Header="{StaticResource ComicTransMainWindow_List_Header_source}" DisplayMemberBinding="{Binding Path=SourceText}"/>
+                        <GridViewColumn Width="100" Header="{StaticResource ComicTransMainWindow_List_Header_trans}" DisplayMemberBinding="{Binding Path=TransText}"/>
                     </GridView>
                 </ListView.View>
             </ListView>

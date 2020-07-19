@@ -19,6 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TranslatorLibrary;
 using OCRLibrary;
+using System.ComponentModel;
 
 namespace MisakaTranslator_WPF.ComicTranslator
 {
@@ -27,6 +28,9 @@ namespace MisakaTranslator_WPF.ComicTranslator
     /// </summary>
     public partial class ComicTransMainWindow : Window
     {
+        BindingList<ComicTransData> lstData = new BindingList<ComicTransData>();
+
+
         List<string> ComicImgList;//图片数组
         string DicPath;//文件夹路径
         int CurrentPos;//当前指针
@@ -50,6 +54,9 @@ namespace MisakaTranslator_WPF.ComicTranslator
         public ComicTransMainWindow()
         {
             InitializeComponent();
+
+            TransResListView.ItemsSource = lstData;
+
             ComicImgList = new List<string>();
             CurrentPos = 0;
 
@@ -245,7 +252,11 @@ namespace MisakaTranslator_WPF.ComicTranslator
 
         private void AddOcrRectBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            lstData.Add(new ComicTransData() {
+                Pos = CurrentPos + "," + selectRect.Left + "," + selectRect.Top + "," + selectRect.Width + "," + selectRect.Height,
+                SourceText = sourceTextBox.Text,
+                TransText = transTextBox.Text
+            });
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -301,6 +312,47 @@ namespace MisakaTranslator_WPF.ComicTranslator
         {
             sourceTextBox.Text = sourceTextBox.Text.Replace(" ","").Replace("\r", "").Replace("\n", "");
         }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (lstData.Count != 0) {
+                if (MessageBox.Show(Application.Current.Resources["ComicTransMainWindow_IsSaveRes"].ToString(), Application.Current.Resources["MessageBox_Ask"].ToString(), MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    System.Windows.Forms.SaveFileDialog saveImageDialog = new System.Windows.Forms.SaveFileDialog();
+                    saveImageDialog.Filter = "Txt Files(*.txt)|*.txt";
+                    
+                    if (saveImageDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        SaveResult(saveImageDialog.FileName);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Save Error");
+                        e.Cancel = true;
+                    }
+                }
+            }
+        }
+
+        private void SaveResult(string filePath) {
+            for (int i = 0;i < lstData.Count;i++) {
+                
+            }
+
+            FileStream fs = new FileStream(filePath, FileMode.Create);
+            StreamWriter sw = new StreamWriter(fs);
+            
+            for (int i = 0; i < lstData.Count; i++)
+            {
+                sw.WriteLine(lstData[i].Pos);
+                sw.WriteLine(lstData[i].SourceText);
+                sw.WriteLine(lstData[i].TransText);
+                sw.WriteLine("====================");
+            }
+            sw.Flush();
+            sw.Close();
+            fs.Close();
+        }
     }
 
     public class FileNameSort : IComparer<string>
@@ -326,5 +378,23 @@ namespace MisakaTranslator_WPF.ComicTranslator
             }
             return StrCmpLogicalW(name1, name2);
         }
+    }
+
+    public class ComicTransData {
+        /// <summary>
+        /// 文字位置
+        /// </summary>
+        public string Pos { set; get; }
+
+        /// <summary>
+        /// 原文
+        /// </summary>
+        public string SourceText { set; get; }
+
+        /// <summary>
+        /// 译文
+        /// </summary>
+        public string TransText { set; get; }
+
     }
 }

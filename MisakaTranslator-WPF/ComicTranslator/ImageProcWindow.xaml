@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MisakaTranslator_WPF.ComicTranslator"
         mc:Ignorable="d"
-        Title="ImageProcWindow" Height="450" Width="800">
+        Title="{StaticResource ImageProcWindow_WinName}" Height="450" Width="800">
 
     <Window.Resources>
         <RoutedUICommand x:Key="Ctrl_Z" Text="Ctrl_Z"/>
@@ -26,9 +26,12 @@
           <InkCanvas Grid.Column="0" Name="ink" Margin="10">
             </InkCanvas>
 
-            <StackPanel Margin="10" Grid.Column="1">
+        <StackPanel Margin="10" Grid.Column="1">
             <TextBlock Text="{StaticResource ImageProcWindow_Thresholding}" HorizontalAlignment="Center" Margin="10" FontSize="15"/>
             <Slider Name="ThresholdBar" Margin="10,0,10,10" Maximum="255" Minimum="0" Value="86" ValueChanged="ThresholdBar_ValueChanged"/>
+
+            <TextBlock Text="{StaticResource ImageProcWindow_InkBar}" HorizontalAlignment="Center" Margin="10" FontSize="15"/>
+            <Slider Name="InkBar" Margin="10,0,10,10" Maximum="20" Minimum="1" Value="10" ValueChanged="InkBar_ValueChanged"/>
 
 
             <ToggleButton Name="EraseBtn" Margin="10" Content="{StaticResource ImageProcWindow_eraseBtn}" Style="{StaticResource ToggleButtonInfo}" Height="40" Width="200" FontSize="15" Click="EraseBtn_Click"></ToggleButton>
