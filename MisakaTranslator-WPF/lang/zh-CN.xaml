@@ -102,7 +102,7 @@
     <sys:String x:Key="DreyeTransSettingsPage_Path">译典通翻译本体路径</sys:String>
     <sys:String x:Key="DreyeTransSettingsPage_ChoosePathHint">请选择译典通本体所在文件夹</sys:String>
 
-    <sys:String x:Key="OCRGeneralSettingsPage_Introduce">在这里进行所有OCR选项的通用设置，一个实时翻译窗口只能设置一种OCR方式，您可以指定OCR过程中用到的API；注：离线OCR功能使用Tesseract实现，目前可支持英语、日语的来源识别，如果识别效果不理想，可以考虑自行训练相关OCR字库或使用百度在线OCR识别，更多有关OCR预处理的设置选项见OCR设置窗口。</sys:String>
+    <sys:String x:Key="OCRGeneralSettingsPage_Introduce">在这里进行所有OCR选项的通用设置，一个实时翻译窗口只能设置一种OCR方式，您可以指定OCR过程中用到的API；注：离线OCR功能使用Tesseract实现，目前可支持英语、日语的来源识别，Tesseract5_vert目前仅支持竖向日语识别，如果识别效果不理想，可以考虑自行训练相关OCR字库或使用百度在线OCR识别，更多有关OCR预处理的设置选项见OCR设置窗口。</sys:String>
     <sys:String x:Key="OCRGeneralSettingsPage_OCRSource">OCR来源</sys:String>
 
     <sys:String x:Key="OCRGeneralSettingsPage_Introduce_GlobalOCR">此处选择一种全局快捷键组合用于全局OCR功能，全局OCR功能可以在任何情况下进行OCR识别和翻译，使用单独窗口显示。直接在下方输入框中按下你想要设置的快捷键，例如Ctrl + A，设置完成重启翻译器后生效。</sys:String>
@@ -325,17 +325,24 @@
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Xiaoniu">小牛翻译</sys:String>
 
     <sys:String x:Key="MainWindow_Tip_ComicTrans">漫画翻译</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_Btn_RealSize">真实大小(截图用)</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_Btn_FitWin">适合窗口</sys:String>
     <sys:String x:Key="ComicTransMainWindow_Btn_Next">下一页</sys:String>
     <sys:String x:Key="ComicTransMainWindow_Btn_Pre">上一页</sys:String>
     <sys:String x:Key="ComicTransMainWindow_Btn_AddOCRRect">添加新条目(选择区域)</sys:String>
     <sys:String x:Key="ComicTransMainWindow_TB_OCRsource">OCR结果：</sys:String>
     <sys:String x:Key="ComicTransMainWindow_TB_trans">翻译结果：</sys:String>
     <sys:String x:Key="ComicTransMainWindow_BTNbox_inputJPN">日语手写输入</sys:String>
-    <sys:String x:Key="ComicTransMainWindow_BTNbox_trans">切换翻译结果</sys:String>
+    <sys:String x:Key="ComicTransMainWindow_BTNbox_trans">翻译</sys:String>
     <sys:String x:Key="ComicTransMainWindow_List_Header_pos">位置</sys:String>
     <sys:String x:Key="ComicTransMainWindow_List_Header_source">原文</sys:String>
     <sys:String x:Key="ComicTransMainWindow_List_Header_trans">翻译</sys:String>
     <sys:String x:Key="ComicTransMainWindow_ChoosePathHint">选择需要翻译的漫画文件夹路径</sys:String>
     <sys:String x:Key="ComicTransMainWindow_Hint_LastofAll">已经是最后一张图片了</sys:String>
     <sys:String x:Key="ComicTransMainWindow_Hint_FirstofAll">已经是第一张图片了</sys:String>
+    <sys:String x:Key="ImageProcWindow_Thresholding">二值化处理阈值</sys:String>
+    <sys:String x:Key="ImageProcWindow_Confirm">完成处理</sys:String>
+    <sys:String x:Key="ImageProcWindow_eraseBtn">手动擦除</sys:String>
+
+    <sys:String x:Key="ComicTransMainWindow_Btn_RemoveBlank">去除空格换行</sys:String>
 </ResourceDictionary>

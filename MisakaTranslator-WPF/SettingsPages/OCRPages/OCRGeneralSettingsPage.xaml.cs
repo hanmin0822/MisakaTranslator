@@ -24,16 +24,10 @@ namespace MisakaTranslator_WPF.SettingsPages
 
         public List<string> Langlist;
 
-        private List<string> lstOCR = new List<string>()
-        {
-            "BaiduOCR",
-            "TesseractOCR"
-        };
-
         public OCRGeneralSettingsPage()
         {
             InitializeComponent();
-            OCRSourceCombox.ItemsSource = lstOCR;
+            OCRSourceCombox.ItemsSource = OCRCommon.GetOCRList();
 
             OCRSourceCombox.SelectedValue = Common.appSettings.OCRsource;
             OCRHotKeyBox.Text = Common.appSettings.GlobalOCRHotkey;

@@ -44,7 +44,6 @@ namespace MisakaTranslator_WPF
                 //FitToCurve = true,
                 IsHighlighter = false,
                 IgnorePressure = true,
-
             };
             inkCanvasMeasure.DefaultDrawingAttributes = drawingAttributes;
 

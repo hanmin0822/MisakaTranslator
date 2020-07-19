@@ -92,6 +92,9 @@
     <Compile Include="ComicTranslator\ComicTransMainWindow.xaml.cs">
       <DependentUpon>ComicTransMainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ComicTranslator\ImageProcWindow.xaml.cs">
+      <DependentUpon>ImageProcWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Common.cs" />
     <Compile Include="DictResWindow.xaml.cs">
       <DependentUpon>DictResWindow.xaml</DependentUpon>
@@ -212,6 +215,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ComicTranslator\ComicTransMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ComicTranslator\ImageProcWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

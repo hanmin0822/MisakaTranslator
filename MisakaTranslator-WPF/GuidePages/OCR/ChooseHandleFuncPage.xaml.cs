@@ -92,7 +92,27 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
                     HandyControl.Controls.Growl.Error($"百度OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
                 }
             }
-            
+            else if (Common.appSettings.OCRsource == "Tesseract5_vert")
+            {
+                if (Common.ocr.OCR_Init("",""))
+                {
+                    string res = Common.ocr.OCRProcess();
+
+                    if (res != null)
+                    {
+                        HandyControl.Controls.MessageBox.Show(res, Application.Current.Resources["MessageBox_Result"].ToString());
+                    }
+                    else
+                    {
+                        HandyControl.Controls.Growl.Error($"Tesseract5_vert {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
+                    }
+                }
+                else
+                {
+                    HandyControl.Controls.Growl.Error($"Tesseract5_vert {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
+                }
+            }
+
         }
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)

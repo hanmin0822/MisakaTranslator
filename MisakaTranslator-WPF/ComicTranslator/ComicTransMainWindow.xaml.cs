@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -11,11 +12,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TranslatorLibrary;
+using OCRLibrary;
 
 namespace MisakaTranslator_WPF.ComicTranslator
 {
@@ -31,12 +34,18 @@ namespace MisakaTranslator_WPF.ComicTranslator
         private ITranslator _translator1; //第一翻译源
         private ITranslator _translator2; //第二翻译源
 
+        private IOptChaRec ocr;//OCR对象
+
         string transRes1;
         string transRes2;
-        int CurrentTrans;//当前翻译源
 
         public string DstLang;
         public string SrcLang;
+
+        System.Windows.Point iniP;
+        private ViewModel viewModel;
+        System.Drawing.Rectangle selectRect;
+        double scale;
 
         public ComicTransMainWindow()
         {
@@ -46,9 +55,114 @@ namespace MisakaTranslator_WPF.ComicTranslator
 
             transRes1 = "";
             transRes2 = "";
-            CurrentTrans = 2;
             _translator1 = TranslateWindow.TranslatorAuto(Common.appSettings.FirstTranslator);
             _translator2 = TranslateWindow.TranslatorAuto(Common.appSettings.SecondTranslator);
+
+            ocr = OCRCommon.OCRAuto(Common.appSettings.OCRsource);
+            ocr.SetOCRSourceLang("jpn");
+            if (Common.appSettings.OCRsource == "BaiduOCR")
+            {
+                if (ocr.OCR_Init(Common.appSettings.BDOCR_APIKEY, Common.appSettings.BDOCR_SecretKey) == false)
+                {
+                    HandyControl.Controls.Growl.ErrorGlobal($"百度OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+                }
+            }
+            else if (Common.appSettings.OCRsource == "Tesseract5_vert")
+            {
+                if (ocr.OCR_Init("", "") == false)
+                {
+                    HandyControl.Controls.Growl.ErrorGlobal($"Tesseract5_vert {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+                }
+            }
+            else if (Common.appSettings.OCRsource == "TesseractOCR")
+            {
+                if (ocr.OCR_Init("", "") == false)
+                {
+                    HandyControl.Controls.Growl.ErrorGlobal($"TesseractOCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+                }
+            }
+
+
+            scale = Common.GetScale();
+            DrawingAttributes drawingAttributes = new DrawingAttributes
+            {
+                Color = Colors.Red,
+                Width = 2,
+                Height = 2,
+                StylusTip = StylusTip.Rectangle,
+                //FitToCurve = true,
+                IsHighlighter = false,
+                IgnorePressure = true,
+            };
+            inkCanvasMeasure.DefaultDrawingAttributes = drawingAttributes;
+
+            viewModel = new ViewModel
+            {
+                MeaInfo = "",
+                InkStrokes = new StrokeCollection(),
+            };
+
+            DataContext = viewModel;
+        }
+
+        private void InkCanvasMeasure_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                iniP = e.GetPosition(inkCanvasMeasure);
+            }
+
+            if (e.ChangedButton == MouseButton.Right)
+            {
+                Bitmap bmpImage = new Bitmap(DicPath + "\\" + ComicImgList[CurrentPos]);
+                Bitmap bmp = bmpImage.Clone(selectRect, bmpImage.PixelFormat);
+
+                ImageProcWindow ipw = new ImageProcWindow(bmp);
+                ipw.ShowDialog();
+
+                if (File.Exists(Environment.CurrentDirectory + "\\comicTemp.png"))
+                {
+                    Bitmap bm = new Bitmap(Environment.CurrentDirectory + "\\comicTemp.png");
+                    bm = ImageProcFunc.ColorToGrayscale(bm);
+                    sourceTextBox.Text = ocr.OCRProcess(bm);
+                }
+                else {
+                    sourceTextBox.Text = "OCR error";
+                }
+                
+            }
+        }
+
+        
+
+        
+
+        private void InkCanvasMeasure_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                // Draw square
+                System.Windows.Point endP = e.GetPosition(inkCanvasMeasure);
+                List<System.Windows.Point> pointList = new List<System.Windows.Point>
+                    {
+                        new System.Windows.Point(iniP.X, iniP.Y),
+                        new System.Windows.Point(iniP.X, endP.Y),
+                        new System.Windows.Point(endP.X, endP.Y),
+                        new System.Windows.Point(endP.X, iniP.Y),
+                        new System.Windows.Point(iniP.X, iniP.Y),
+                    };
+                StylusPointCollection point = new StylusPointCollection(pointList);
+                Stroke stroke = new Stroke(point)
+                {
+                    DrawingAttributes = inkCanvasMeasure.DefaultDrawingAttributes.Clone()
+                };
+
+                viewModel.InkStrokes.Clear();
+                viewModel.InkStrokes.Add(stroke);
+
+                selectRect = new System.Drawing.Rectangle((int)iniP.X, (int)iniP.Y, (int)endP.X - (int)iniP.X, (int)endP.Y - (int)iniP.Y);
+                //selectRect = new Rect(new System.Windows.Point(iniP.X * scale, iniP.Y * scale), new System.Windows.Point(endP.X * scale, endP.Y * scale));
+            }
         }
 
         /// <summary>
@@ -62,6 +176,15 @@ namespace MisakaTranslator_WPF.ComicTranslator
             ImageBrush imageBrush = new ImageBrush();
             ImageSourceConverter imageSourceConverter = new ImageSourceConverter();
             sourceComicImg.Source = (ImageSource)imageSourceConverter.ConvertFrom(stream);
+            if (RealsizeTBtn.IsChecked == true)
+            {
+                sourceComicImg.Width = bitmap.Width;
+                sourceComicImg.Height = bitmap.Height;
+            }
+            else {
+                sourceComicImg.Width = this.Width * 0.7;
+                sourceComicImg.Height = this.Height;
+            }
         }
         
         private void PreBtn_Click(object sender, RoutedEventArgs e)
@@ -97,36 +220,27 @@ namespace MisakaTranslator_WPF.ComicTranslator
         private void transBtn_Click(object sender, RoutedEventArgs e)
         {
             string sourceText = sourceTextBox.Text;
-
-            if (transRes1 == "" && transRes2 == "") {
-                if (_translator1 != null)
-                {
-                    transRes1 = _translator1.Translate(sourceText, DstLang, SrcLang);
-                }
-                else
-                {
-                    transRes1 = "None";
-                }
-
-                if (_translator2 != null)
-                {
-                    transRes2 = _translator2.Translate(sourceText, DstLang, SrcLang);
-                }
-                else
-                {
-                    transRes2 = "None";
-                }
-            }
-
-            if (CurrentTrans == 1)
+            
+            if (_translator1 != null)
             {
-                transTextBox.Text = transRes2;
-                CurrentTrans = 2;
+                transRes1 = _translator1.Translate(sourceText, DstLang, SrcLang);
             }
-            else {
-                transTextBox.Text = transRes1;
-                CurrentTrans = 1;
+            else
+            {
+                transRes1 = "None";
             }
+
+            if (_translator2 != null)
+            {
+                transRes2 = _translator2.Translate(sourceText, DstLang, SrcLang);
+            }
+            else
+            {
+                transRes2 = "None";
+            }
+            
+            transTextBox.Text = "翻译一：" + transRes1 + "\n翻译二：" + transRes2;
+                
         }
 
         private void AddOcrRectBtn_Click(object sender, RoutedEventArgs e)
@@ -164,6 +278,28 @@ namespace MisakaTranslator_WPF.ComicTranslator
                 HandyControl.Controls.Growl.ErrorGlobal(Application.Current.Resources["FilePath_Null_Hint"].ToString());
                 this.Close();
             }
+        }
+
+        private void RealsizeTBtn_Click(object sender, RoutedEventArgs e)
+        {
+            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(DicPath + "\\" + ComicImgList[CurrentPos]);
+            sourceComicImg.Width = bitmap.Width;
+            sourceComicImg.Height = bitmap.Height;
+
+            viewModel.InkStrokes.Clear();
+        }
+
+        private void FitWinTBtn_Click(object sender, RoutedEventArgs e)
+        {
+            sourceComicImg.Width = this.Width * 0.7;
+            sourceComicImg.Height = this.Height;
+            
+            viewModel.InkStrokes.Clear();
+        }
+
+        private void RemoveBlankBtn_Click(object sender, RoutedEventArgs e)
+        {
+            sourceTextBox.Text = sourceTextBox.Text.Replace(" ","").Replace("\r", "").Replace("\n", "");
         }
     }
 

@@ -34,14 +34,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
         {
             InitializeComponent();
 
-            if (Common.appSettings.OCRsource == "TesseractOCR")
-            {
-                Common.ocr = new TesseractOCR();
-            }
-            else if (Common.appSettings.OCRsource == "BaiduOCR")
-            {
-                Common.ocr = new BaiduGeneralOCR();
-            }
+            Common.ocr = OCRCommon.OCRAuto(Common.appSettings.OCRsource);
 
             //初始化钩子对象
             if (hook == null)
