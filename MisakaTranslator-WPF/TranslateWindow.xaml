@@ -52,11 +52,11 @@
                 <Button fa:Awesome.Content="WindowCloseOutline" Background="#00000000" BorderThickness="0" Height="40" Width="40" FontSize="16" Foreground="PapayaWhip" Click="Exit_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Exit}"></Button>
             </WrapPanel>
 
-            <WrapPanel Grid.Row="1" Margin="10" Orientation="Vertical">
-            <WrapPanel x:Name="SourceTextPanel" Margin="10" Orientation="Horizontal" Background="Transparent"></WrapPanel>
-                <hc:OutlineText Text="等待源文本" Fill="White" Stroke="Beige" StrokeThickness="1" Name="FirstTransText" Margin="10" TextWrapping="Wrap" StrokePosition="Outside"></hc:OutlineText>
-                <hc:OutlineText Text="" Fill="White" Stroke="Beige" StrokeThickness="1" Name="SecondTransText" Margin="10" TextWrapping="Wrap" StrokePosition="Outside"></hc:OutlineText>
-            </WrapPanel>
+            <StackPanel Grid.Row="1" Margin="10" Orientation="Vertical">
+                <WrapPanel x:Name="SourceTextPanel" Margin="10" Orientation="Horizontal" Background="Transparent"></WrapPanel>
+                <hc:OutlineText Text="等待源文本" Fill="White" Stroke="Beige" StrokeThickness="1" Name="FirstTransText" Margin="10,0,10,10" TextWrapping="Wrap" StrokePosition="Outside"></hc:OutlineText>
+                <hc:OutlineText Text="" Fill="White" Stroke="Beige" StrokeThickness="1" Name="SecondTransText" Margin="10,0,10,10" TextWrapping="Wrap" StrokePosition="Outside"></hc:OutlineText>
+            </StackPanel>
 
 
 

@@ -51,6 +51,11 @@ namespace TranslatorLibrary
                 errorInfo = ex.Message;
                 return null;
             }
+            catch (System.Threading.Tasks.TaskCanceledException ex)
+            {
+                errorInfo = ex.Message;
+                return null;
+            }
 
             XiaoniuTransOutInfo oinfo = JsonConvert.DeserializeObject<XiaoniuTransOutInfo>(retString);
 

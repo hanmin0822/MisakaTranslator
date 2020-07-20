@@ -252,11 +252,14 @@ namespace MisakaTranslator_WPF.ComicTranslator
 
         private void AddOcrRectBtn_Click(object sender, RoutedEventArgs e)
         {
-            lstData.Add(new ComicTransData() {
-                Pos = CurrentPos + "," + selectRect.Left + "," + selectRect.Top + "," + selectRect.Width + "," + selectRect.Height,
-                SourceText = sourceTextBox.Text,
-                TransText = transTextBox.Text
-            });
+            if (selectRect != null && sourceTextBox.Text != "" && transTextBox.Text != "") {
+                lstData.Add(new ComicTransData()
+                {
+                    Pos = CurrentPos + "," + selectRect.Left + "," + selectRect.Top + "," + selectRect.Width + "," + selectRect.Height,
+                    SourceText = sourceTextBox.Text.Replace("\f",""),
+                    TransText = transTextBox.Text
+                });
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

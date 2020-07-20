@@ -53,6 +53,11 @@ namespace TranslatorLibrary
                 errorInfo = ex.Message;
                 return null;
             }
+            catch (System.Threading.Tasks.TaskCanceledException ex)
+            {
+                errorInfo = ex.Message;
+                return null;
+            }
 
             AliapiTransResult oinfo = JsonConvert.DeserializeObject<AliapiTransResult>(retString);
 

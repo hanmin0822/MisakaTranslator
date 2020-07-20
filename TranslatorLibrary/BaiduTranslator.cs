@@ -59,7 +59,12 @@ namespace TranslatorLibrary
                 errorInfo = ex.Message;
                 return null;
             }
-            
+            catch (System.Threading.Tasks.TaskCanceledException ex)
+            {
+                errorInfo = ex.Message;
+                return null;
+            }
+
             BaiduTransOutInfo oinfo = JsonConvert.DeserializeObject<BaiduTransOutInfo>(retString);
 
             if (oinfo.error_code == null || oinfo.error_code == "52000")

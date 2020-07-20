@@ -54,6 +54,11 @@ namespace TranslatorLibrary
                 errorInfo = ex.Message;
                 return null;
             }
+            catch (System.Threading.Tasks.TaskCanceledException ex)
+            {
+                errorInfo = ex.Message;
+                return null;
+            }
 
             YoudaoTransResult oinfo = JsonConvert.DeserializeObject<YoudaoTransResult>(retString);
 

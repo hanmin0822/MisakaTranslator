@@ -71,6 +71,11 @@ namespace TranslatorLibrary
                 errorInfo = ex.Message;
                 return null;
             }
+            catch (TaskCanceledException ex)
+            {
+                errorInfo = ex.Message;
+                return null;
+            }
 
             TencentOldTransOutInfo oinfo = JsonConvert.DeserializeObject<TencentOldTransOutInfo>(retString);
 

@@ -70,6 +70,11 @@ namespace TranslatorLibrary
                 errorInfo = ex.Message;
                 return null;
             }
+            catch (System.Threading.Tasks.TaskCanceledException ex)
+            {
+                errorInfo = ex.Message;
+                return null;
+            }
         }
 
         public void TranslatorInit(string param1 = "", string param2 = "")
