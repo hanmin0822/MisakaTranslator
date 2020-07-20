@@ -131,7 +131,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
                 {
                     Bitmap bm = new Bitmap(Environment.CurrentDirectory + "\\comicTemp.png");
                     bm = ImageProcFunc.ColorToGrayscale(bm);
-                    sourceTextBox.Text = ocr.OCRProcess(bm);
+                    sourceTextBox.Text = ocr.OCRProcess(bm).Replace("\f", "");
                 }
                 else {
                     sourceTextBox.Text = "OCR error";
@@ -256,7 +256,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
                 lstData.Add(new ComicTransData()
                 {
                     Pos = CurrentPos + "," + selectRect.Left + "," + selectRect.Top + "," + selectRect.Width + "," + selectRect.Height,
-                    SourceText = sourceTextBox.Text.Replace("\f",""),
+                    SourceText = sourceTextBox.Text,
                     TransText = transTextBox.Text
                 });
             }
