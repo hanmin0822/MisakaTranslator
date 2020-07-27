@@ -36,7 +36,7 @@ namespace MecabHelperLibrary
     }
 
 
-    public class MecabHelper
+    public class MecabHelper:IDisposable
     {
         private MeCabParam Parameter;
         private MeCabTagger Tagger;
@@ -46,13 +46,10 @@ namespace MecabHelperLibrary
             Tagger = MeCabTagger.Create(Parameter);
         }
 
-        ~MecabHelper() {
+        public void Dispose()
+        {
             Tagger.Dispose();
-            Parameter = null;
-            Tagger = null;
-            GC.Collect();
         }
-
 
         /// <summary>
         /// 处理句子，对句子进行分词，得到结果

@@ -723,11 +723,7 @@ namespace MisakaTranslator_WPF
             dtimer.Stop();
             dtimer = null;
 
-            //立即清一次，否则重复打开翻译窗口会造成异常：Mecab处理类库异常
-            _mecabHelper = null;
-            GC.Collect();
-
-            
+            _mecabHelper.Dispose();
         }
 
 
