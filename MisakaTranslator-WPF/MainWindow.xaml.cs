@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
@@ -307,12 +307,12 @@ namespace MisakaTranslator_WPF
                 //2020-06-08 大部分情况无重复码的游戏不会hook到很多，不进行去多余hook
                 //Common.textHooker.DetachUnrelatedHookWhenDataRecv = Convert.ToBoolean(Common.appSettings.AutoDetach);
                 Common.textHooker.StartHook(Convert.ToBoolean(Common.appSettings.AutoHook));
-                var task1 = System.Threading.Tasks.Task.Run(async delegate
+                var task1 = Task.Run(async delegate
                 {
-                    await System.Threading.Tasks.Task.Delay(3000);
+                    await Task.Delay(3000);
                     Common.textHooker.Auto_AddHookToGame();
                 });
-                
+
                 var tw = new TranslateWindow();
                 tw.Show();
             }
@@ -323,12 +323,12 @@ namespace MisakaTranslator_WPF
             GameInfoDrawer.IsOpen = false;
         }
 
-        private void StartBtn_Click(object sender, RoutedEventArgs e)
+        private async void StartBtn_Click(object sender, RoutedEventArgs e)
         {
             var res = Process.Start(gameInfoList[gid].FilePath);
             res?.WaitForInputIdle(5000);
             GameInfoDrawer.IsOpen = false;
-            Thread.Sleep(2000);
+            await Task.Delay(2000);
             StartTranslateByGid(gid);
         }
 
@@ -352,7 +352,7 @@ namespace MisakaTranslator_WPF
             Dialog.Show(new GameNameDialog(gameInfoList, gid));
         }
 
-        private void LEStartBtn_Click(object sender, RoutedEventArgs e)
+        private async void LEStartBtn_Click(object sender, RoutedEventArgs e)
         {
             var filepath = gameInfoList[gid].FilePath;
             var p = new ProcessStartInfo();
@@ -364,7 +364,7 @@ namespace MisakaTranslator_WPF
             var res = Process.Start(p);
             res?.WaitForInputIdle(5000);
             GameInfoDrawer.IsOpen = false;
-            Thread.Sleep(2000);
+            await Task.Delay(2000);
             StartTranslateByGid(gid);
         }
 
@@ -479,7 +479,7 @@ namespace MisakaTranslator_WPF
             ggw.Show();
         }
 
-        
+
         private void BlurWindow_ContentRendered(object sender, EventArgs e)
         {
             List<string> res = Common.CheckUpdate();
