@@ -129,6 +129,7 @@ namespace MisakaTranslator_WPF
                         break;
                 }
 
+                sw.WriteLine("ExceptionName:" + e.GetType());
                 sw.WriteLine("ExceptionSource:" + e.Source);
                 sw.WriteLine("ExceptionMessage:" + e.Message);
                 sw.WriteLine("ExceptionStackTrace:" + e.StackTrace);
