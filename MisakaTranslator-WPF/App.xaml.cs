@@ -133,6 +133,8 @@ namespace MisakaTranslator_WPF
                 sw.WriteLine("ExceptionSource:" + e.Source);
                 sw.WriteLine("ExceptionMessage:" + e.Message);
                 sw.WriteLine("ExceptionStackTrace:" + e.StackTrace);
+                if(e.InnerException != null)
+                    sw.WriteLine("InnerExceptionStackTrace:" + e.InnerException);
             }
 
             sw.Flush();
