@@ -32,7 +32,7 @@
             </Grid.RowDefinitions>
             <WrapPanel Grid.Row="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Left">
                 <Button fa:Awesome.Content="Expand" Background="#00000000" BorderThickness="0" Height="40" Width="40" FontSize="16" Foreground="PapayaWhip" Name="ChangeSizeButton" Click="ChangeSize_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_ChangeSize}"></Button>
-                <Border hc:WindowAttach.IsDragElement="True" Height="40" Width="40">
+                <Border hc:WindowAttach.IsDragElement="True" Height="16" Width="40">
                     <fa:FontAwesome Icon="Arrows" FontSize="16" Foreground="PapayaWhip" ToolTip="{StaticResource TranslateWin_DragTitle}" VerticalAlignment="Center" HorizontalAlignment="Center"></fa:FontAwesome>
                 </Border>
             </WrapPanel>
