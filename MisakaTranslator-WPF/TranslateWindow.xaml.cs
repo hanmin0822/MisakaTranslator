@@ -704,8 +704,8 @@ namespace MisakaTranslator_WPF
         {
             Common.appSettings.TF_LocX = Convert.ToString((int)this.Left);
             Common.appSettings.TF_LocY = Convert.ToString((int)this.Top);
-            Common.appSettings.TF_SizeW = Convert.ToString((int)this.Width);
-            Common.appSettings.TF_SizeH = Convert.ToString((int)this.Height);
+            Common.appSettings.TF_SizeW = Convert.ToString((int)this.ActualWidth);
+            Common.appSettings.TF_SizeH = Convert.ToString((int)this.ActualHeight);
 
             if (hook != null)
             {
