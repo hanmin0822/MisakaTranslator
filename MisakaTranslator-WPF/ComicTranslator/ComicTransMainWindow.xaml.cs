@@ -38,7 +38,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
         private ITranslator _translator1; //第一翻译源
         private ITranslator _translator2; //第二翻译源
 
-        private IOptChaRec ocr;//OCR对象
+        private OCREngine ocr;//OCR对象
 
         string transRes1;
         string transRes2;

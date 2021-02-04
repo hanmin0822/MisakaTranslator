@@ -10,25 +10,14 @@ using System.Web;
 
 namespace OCRLibrary
 {
-    public class BaiduGeneralOCR : IOptChaRec
+    public class BaiduGeneralOCR : OCREngine
     {
         public string APIKey;
         public string secretKey;
         private string accessToken;
         private string langCode;
-        private string errorInfo;
 
-        private IntPtr WinHandle;
-        private Rectangle OCRArea;
-        private bool isAllWin;
-
-
-        public string GetLastError()
-        {
-            return errorInfo;
-        }
-
-        public string OCRProcess(Bitmap img)
+        public override string OCRProcess(Bitmap img)
         {
             if (img == null || langCode == null || langCode == "") {
                 errorInfo = "Param Missing";
@@ -67,7 +56,7 @@ namespace OCRLibrary
 
         }
 
-        public bool OCR_Init(string param1, string param2)
+        public override bool OCR_Init(string param1, string param2)
         {
             APIKey = param1;
             secretKey = param2;
@@ -125,32 +114,7 @@ namespace OCRLibrary
             return "https://ai.baidu.com/ai-doc/OCR/zk3h7xz52";
         }
 
-        public string OCRProcess()
-        {
-            if (OCRArea != null)
-            {
-                Image img = ScreenCapture.GetWindowRectCapture(WinHandle, OCRArea, isAllWin);
-                return OCRProcess(new Bitmap(img));
-            }
-            else {
-                errorInfo = "未设置截图区域";
-                return null;
-            }
-        }
-
-        public void SetOCRArea(IntPtr handle, Rectangle rec, bool AllWin)
-        {
-            WinHandle = handle;
-            OCRArea = rec;
-            isAllWin = AllWin;
-        }
-
-        public Image GetOCRAreaCap()
-        {
-            return ScreenCapture.GetWindowRectCapture(WinHandle, OCRArea, isAllWin);
-        }
-
-        public void SetOCRSourceLang(string lang)
+        public override void SetOCRSourceLang(string lang)
         {
             if (lang == "jpn")
             {

@@ -144,7 +144,6 @@ namespace OCRLibrary
         /// <returns></returns>
         public static Image GetAllWindow()
         {
-
             int w = Screen.PrimaryScreen.Bounds.Width;
             int h = Screen.PrimaryScreen.Bounds.Height;
 

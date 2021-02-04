@@ -137,8 +137,9 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             SrcImg.Source = ImageProcFunc.ImageToBitmapImage(img);
             try
             {
-            DstImg.Source = ImageProcFunc.ImageToBitmapImage(ImageProcFunc.Auto_Thresholding(new System.Drawing.Bitmap(img),
-                ImageProcFunc.lstHandleFun[ImageProcFunclist[HandleFuncCombox.SelectedIndex]]));
+                string imgProc = ImageProcFunc.lstHandleFun[ImageProcFunclist[HandleFuncCombox.SelectedIndex]];
+                DstImg.Source = ImageProcFunc.ImageToBitmapImage(ImageProcFunc.Auto_Thresholding(new System.Drawing.Bitmap(img), imgProc));
+                Common.ocr.SetOCRSourceImgProc(imgProc);
             }
             catch(NullReferenceException ex)
             {

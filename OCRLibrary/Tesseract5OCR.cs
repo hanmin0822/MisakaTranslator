@@ -9,26 +9,11 @@ using System.Threading.Tasks;
 
 namespace OCRLibrary
 {
-    public class Tesseract5OCR : IOptChaRec
+    public class Tesseract5OCR : OCREngine
     {
         public string srcLangCode;//OCR识别语言 jpn=日语 eng=英语
-        private string errorInfo;
 
-        private IntPtr WinHandle;
-        private Rectangle OCRArea;
-        private bool isAllWin;
-
-        public string GetLastError()
-        {
-            return errorInfo;
-        }
-
-        public Image GetOCRAreaCap()
-        {
-            return ScreenCapture.GetWindowRectCapture(WinHandle, OCRArea, isAllWin);
-        }
-
-        public string OCRProcess(Bitmap img)
+        public override string OCRProcess(Bitmap img)
         {
             Bitmap processedImg = (Bitmap)img.Clone();
             try
@@ -38,16 +23,21 @@ namespace OCRLibrary
                 // Redirect the output stream of the child process.
                 p.StartInfo.UseShellExecute = false;
                 p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.RedirectStandardError = true;
                 p.StartInfo.CreateNoWindow = true;
                 p.StartInfo.FileName = "C:\\Program Files\\Tesseract-OCR\\tesseract";
                 p.StartInfo.Arguments = "temp\\tmp.png temp\\outputbase -l jpn_vert --psm 5";
                 p.Start();
-                // Do not wait for the child process to exit before
+                // Wait for the child process to exit before
                 // reading to the end of its redirected stream.
-                // p.WaitForExit();
-                // Read the output stream first and then wait.
-                string output = p.StandardOutput.ReadToEnd();
                 p.WaitForExit();
+                // Read the output stream first and then wait.
+                string output = p.StandardOutput.ReadToEnd(); // usually empty
+                string err = p.StandardError.ReadToEnd();     // information is all here
+                if (err.ToLower().Contains("error"))
+                {
+                    throw new Exception(err);
+                }
                 byte[] bs = System.IO.File.ReadAllBytes(Environment.CurrentDirectory + "\\temp\\outputbase.txt");
                 string result = Encoding.UTF8.GetString(bs);
                 return result;
@@ -55,25 +45,11 @@ namespace OCRLibrary
             catch (Exception ex)
             {
                 errorInfo = ex.Message;
-                return null;
+                return "";
             }
         }
 
-        public string OCRProcess()
-        {
-            if (OCRArea != null)
-            {
-                Image img = ScreenCapture.GetWindowRectCapture(WinHandle, OCRArea, isAllWin);
-                return OCRProcess(new Bitmap(img));
-            }
-            else
-            {
-                errorInfo = "未设置截图区域";
-                return null;
-            }
-        }
-
-        public bool OCR_Init(string param1 = "", string param2 = "")
+        public override bool OCR_Init(string path, string args)
         {
             try
             {
@@ -87,14 +63,7 @@ namespace OCRLibrary
             }
         }
 
-        public void SetOCRArea(IntPtr handle, Rectangle rec, bool AllWin)
-        {
-            WinHandle = handle;
-            OCRArea = rec;
-            isAllWin = AllWin;
-        }
-
-        public void SetOCRSourceLang(string lang)
+        public override void SetOCRSourceLang(string lang)
         {
             srcLangCode = lang;
         }
