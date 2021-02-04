@@ -8,17 +8,12 @@ using Tesseract;
 
 namespace OCRLibrary
 {
-    public class TesseractOCR : IOptChaRec
+    public class TesseractOCR : OCREngine
     {
         public string srcLangCode;//OCR识别语言 jpn=日语 eng=英语
         private TesseractEngine TessOCR;
-        private string errorInfo;
 
-        private IntPtr WinHandle;
-        private Rectangle OCRArea;
-        private bool isAllWin;
-
-        public string OCRProcess(Bitmap img)
+        public override string OCRProcess(Bitmap img)
         {
             try {
                 var page = TessOCR.Process(img);
@@ -32,7 +27,7 @@ namespace OCRLibrary
             }
         }
 
-        public bool OCR_Init(string param1 = "", string param2 = "")
+        public override bool OCR_Init(string param1 = "", string param2 = "")
         {
             try
             {
@@ -45,39 +40,7 @@ namespace OCRLibrary
                 return false;
             }
         }
-
-        public string GetLastError()
-        {
-            return errorInfo;
-        }
-
-        public string OCRProcess()
-        {
-            if (OCRArea != null)
-            {
-                Image img = ScreenCapture.GetWindowRectCapture(WinHandle, OCRArea, isAllWin);
-                return OCRProcess(new Bitmap(img));
-            }
-            else
-            {
-                errorInfo = "未设置截图区域";
-                return null;
-            }
-        }
-
-        public void SetOCRArea(IntPtr handle, Rectangle rec, bool AllWin)
-        {
-            WinHandle = handle;
-            OCRArea = rec;
-            isAllWin = AllWin;
-        }
-
-        public Image GetOCRAreaCap()
-        {
-            return ScreenCapture.GetWindowRectCapture(WinHandle, OCRArea, isAllWin);
-        }
-
-        public void SetOCRSourceLang(string lang)
+        public override void SetOCRSourceLang(string lang)
         {
             srcLangCode = lang;
         }

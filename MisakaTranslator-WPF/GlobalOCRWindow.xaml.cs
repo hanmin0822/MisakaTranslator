@@ -31,7 +31,7 @@ namespace MisakaTranslator_WPF
 
         private void dataInit()
         {
-            IOptChaRec ocr;
+            OCREngine ocr;
             string res = null;
             if (Common.appSettings.OCRsource == "TesseractOCR")
             {
