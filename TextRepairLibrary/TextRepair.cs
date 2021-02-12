@@ -1,10 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using IronPython.Hosting;
 
 namespace TextRepairLibrary
 {
@@ -22,8 +24,27 @@ namespace TextRepairLibrary
             { "去除字母和数字" , "RepairFun_RemoveLetterNumber" },
             { "去除HTML标签" , "RepairFun_RemoveHTML" },
             { "正则表达式替换(见说明)" , "RepairFun_RegexReplace" },
-            { "用户自定义(见说明)" , "RepairFun_Custom" }
+            { "用户自定义DLL(见说明)" , "RepairFun_Custom" }
         };
+
+        static TextRepair()
+        {
+            try
+            {
+                string[] handlers = Directory.GetFiles("textRepairPlugins");
+                foreach(var handler in handlers)
+                {
+                    string stem = Path.GetFileNameWithoutExtension(handler);
+                    string ext = Path.GetExtension(handler);
+                    if (ext != ".py" || stem == "__init__")
+                    {
+                        continue;
+                    }
+                    lstRepairFun.Add("用户自定义Python2脚本: " + stem, "#" + stem);
+                }
+            }
+            catch { }
+        }
 
 
         /// <summary>
@@ -33,6 +54,10 @@ namespace TextRepairLibrary
         /// <param name="sourceText">源文本</param>
         /// <returns></returns>
         public static string RepairFun_Auto(string functionName,string sourceText) {
+            if (functionName.StartsWith("#"))
+            {
+                return RepairFun_PythonScript(functionName.Substring(1), sourceText);
+            }
             Type t = typeof(TextRepair);//括号中的为所要使用的函数所在的类的类名
             MethodInfo mt = t.GetMethod(functionName);
             if (mt != null)
@@ -201,23 +226,53 @@ namespace TextRepairLibrary
             {
                 return "";
             }
-
-            Assembly asb =
-                Assembly.LoadFrom(Environment.CurrentDirectory + "\\UserCustomRepairRepeat.dll");
-            Type t = asb.GetType("UserCustomRepairRepeat.RepairRepeat");//获取类名 命名空间+类名
-            object o = Activator.CreateInstance(t);
-            MethodInfo method = t.GetMethod("UserCustomRepairRepeatFun");//functionname:方法名字
-            object[] obj =
+            try
             {
-                source
-            };
-            var ret = method.Invoke(o, obj);
-
-            return (string)ret;
+                Assembly asb = Assembly.LoadFrom(Environment.CurrentDirectory + "\\UserCustomRepairRepeat.dll");
+                Type t = asb.GetType("UserCustomRepairRepeat.RepairRepeat");//获取类名 命名空间+类名
+                object o = Activator.CreateInstance(t);
+                MethodInfo method = t.GetMethod("UserCustomRepairRepeatFun");//functionname:方法名字
+                object[] obj =
+                {
+                    source
+                };
+                var ret = method.Invoke(o, obj);
+                return (string)ret;
+            } catch (Exception e)
+            {
+                return e.Message;
+            }
         }
 
+        /// <summary>
+        /// 用户自定义Python脚本
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static string RepairFun_PythonScript(string handler, string source)
+        {
+            if (source == "")
+            {
+                return "";
+            }
 
+            Microsoft.Scripting.Hosting.ScriptEngine pythonEngine = Python.CreateEngine();
+            Microsoft.Scripting.Hosting.ScriptSource pythonScript = pythonEngine.CreateScriptSourceFromString(
+                $"import textRepairPlugins.{handler} as customHandler\n" +
+                "ResultStr = customHandler.process(SourceStr)\n"
+                );
+            Microsoft.Scripting.Hosting.ScriptScope scope = pythonEngine.CreateScope();
+            scope.SetVariable("SourceStr", source);
 
-
+            try
+            {
+                pythonScript.Execute(scope);
+            } 
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+            return (string)scope.GetVariable("ResultStr");
+        }
     }
 }
