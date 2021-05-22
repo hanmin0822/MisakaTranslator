@@ -361,3 +361,7 @@ Test/*
 
 # Vscode
 .vscode/
+
+# 不忽略使用的Textractor库
+!/TextHookLibrary/lib/TextHook/x86
+!/TextHookLibrary/lib/TextHook/x64
