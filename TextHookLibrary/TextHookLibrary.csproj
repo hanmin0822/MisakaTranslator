@@ -50,19 +50,5 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextHostLib.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="lib\TextHook\x64\texthook.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\TextHook\x64\TextractorCLI.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\TextHook\x86\texthook.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\TextHook\x86\TextractorCLI.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
