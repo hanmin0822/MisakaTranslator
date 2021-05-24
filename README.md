@@ -20,7 +20,7 @@
 
 ~~MisakaTranslator的名字由来是因为本软件连接到了一万多名御坂妹妹所组成的『御坂网络』，利用其强大的计算能力来提供实时可靠的翻译（误）~~
 
-<del>[MisakaTranslator官方网站](https://misaka.galeden.cn/)</del>
+[MisakaTranslator官方网站](https://misaka.galeden.cn/)
 
 [测试版演示视频](https://www.bilibili.com/video/av94082641)
 
