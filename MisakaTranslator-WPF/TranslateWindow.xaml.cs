@@ -486,6 +486,8 @@ namespace MisakaTranslator_WPF
 
                 //1.得到原句
                 string source = e.Data.Data;
+                if (source == null && e.Data.HookFunc == "Clipboard")
+                    return;
 
                 //2.进行去重
                 string repairedText = TextRepair.RepairFun_Auto(Common.UsingRepairFunc, source);
