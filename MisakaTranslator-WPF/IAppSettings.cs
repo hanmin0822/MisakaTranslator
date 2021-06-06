@@ -114,6 +114,20 @@ namespace MisakaTranslator_WPF
             set;
         }
 
+        [Option(Alias = "IBMTranslator.IBMApiKey", DefaultValue = "")]
+        string IBMApiKey
+        {
+            get;
+            set;
+        }
+
+        [Option(Alias = "IBMTranslator.IBMURL", DefaultValue = "")]
+        string IBMURL
+        {
+            get;
+            set;
+        }
+
         [Option(Alias = "Translate_All.EachRowTrans", DefaultValue = "True")]
         string EachRowTrans
         {

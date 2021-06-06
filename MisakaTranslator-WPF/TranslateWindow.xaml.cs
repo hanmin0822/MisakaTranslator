@@ -207,6 +207,10 @@ namespace MisakaTranslator_WPF
                     XiaoniuTranslator xt = new XiaoniuTranslator();
                     xt.TranslatorInit(Common.appSettings.xiaoniuApiKey);
                     return xt;
+                case "IBMTranslator":
+                    IBMTranslator it = new IBMTranslator();
+                    it.TranslatorInit(Common.appSettings.IBMApiKey, Common.appSettings.IBMURL);
+                    return it;
                 case "YoudaoTranslator":
                     YoudaoTranslator yd = new YoudaoTranslator();
                     yd.TranslatorInit();

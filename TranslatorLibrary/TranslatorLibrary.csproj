@@ -69,6 +69,7 @@
     <Compile Include="TencentOldTranslator.cs" />
     <Compile Include="XiaoniuTranslator.cs" />
     <Compile Include="YoudaoTranslator.cs" />
+    <Compile Include="IBMTranslator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
