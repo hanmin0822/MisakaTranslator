@@ -45,9 +45,8 @@ namespace TranslatorLibrary
             string jsonParam = "{\"source\": [\"" + q + "\"], \"trans_type\": \"" + trans_type + "\", \"request_id\": \"demo\", \"detect\": true}";
 
             var hc = CommonFunction.GetHttpClient();
-            var req = new StringContent(jsonParam);
+            var req = new StringContent(jsonParam, null, "application/json");
             req.Headers.Add("X-Authorization", "token " + caiyunToken);
-            req.Headers.Add("ContentType", "application/json;charset=UTF-8");
             try
             {
                 retString = hc.PostAsync(url, req).GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();

@@ -109,7 +109,6 @@ namespace TranslatorLibrary
                         { Timeout = TimeSpan.FromSeconds(6) };
                         var headers = HC.DefaultRequestHeaders;
                         headers.UserAgent.ParseAdd("MisakaTranslator");
-                        headers.Add("ContentType", "text/html;charset=UTF-8");
                         headers.AcceptEncoding.ParseAdd("gzip");
                         headers.Connection.ParseAdd("keep-alive");
                         ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
