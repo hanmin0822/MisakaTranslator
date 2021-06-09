@@ -22,11 +22,6 @@ namespace TranslatorLibrary
 
         public string Translate(string sourceText, string desLang, string srcLang)
         {
-            return TranslateAsync(sourceText, desLang, srcLang).GetAwaiter().GetResult();
-        }
-
-        public async Task<string> TranslateAsync(string sourceText, string desLang, string srcLang)
-        {
             if (desLang == "kr")
                 desLang = "ko";
             if (srcLang == "kr")
@@ -37,7 +32,7 @@ namespace TranslatorLibrary
                 srcLang = "ja";
             if(desLang != "en" && srcLang != "en")
             {
-                sourceText = await TranslateAsync(sourceText, "en", srcLang);
+                sourceText = Translate(sourceText, "en", srcLang);
                 srcLang = "en";                                   
             }
 
@@ -49,7 +44,7 @@ namespace TranslatorLibrary
 
             try
             {
-                resp = await hc.SendAsync(req);
+                resp = hc.SendAsync(req).GetAwaiter().GetResult();
             }
             catch (System.Net.Http.HttpRequestException ex)
             {
@@ -66,7 +61,7 @@ namespace TranslatorLibrary
                 req.Dispose();
             }
 
-            string retString = await resp.Content.ReadAsStringAsync();
+            string retString = resp.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             var dynamicResult = JsonConvert.DeserializeObject<dynamic>(retString);
 
             if (!resp.IsSuccessStatusCode){
@@ -108,7 +103,7 @@ namespace TranslatorLibrary
         /// <returns></returns>
         public static string GetUrl_Doc()
         {
-            return "https://cloud.ibm.com/docs/language-translator";
+            return "https://cloud.ibm.com/apidocs/language-translator#translate";
         }
     }
 }
