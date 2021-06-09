@@ -72,7 +72,7 @@ namespace MisakaTranslator_WPF
             this.Topmost = true;
             UI_Init();
             IsOCRingFlag = false;
-            
+
 
             _mecabHelper = new MecabHelper();
 
@@ -86,7 +86,7 @@ namespace MisakaTranslator_WPF
                 _textSpeechHelper.SetVolume(Common.appSettings.ttsVolume);
                 _textSpeechHelper.SetRate(Common.appSettings.ttsRate);
             }
-            
+
             if (Common.appSettings.xxgPath != string.Empty)
             {
                 _dict = new XxgJpzhDict();
@@ -110,7 +110,7 @@ namespace MisakaTranslator_WPF
             {
                 MouseKeyboardHook_Init();
             }
-            
+
 
         }
 
@@ -146,7 +146,7 @@ namespace MisakaTranslator_WPF
                 }
             }
 
-            
+
         }
 
         /// <summary>
@@ -389,10 +389,14 @@ namespace MisakaTranslator_WPF
                                 if (_translator1 != null)
                                 {
                                     transRes1 = _translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                                    if(transRes1 == null)
+                                        Growl.ErrorGlobal(_translator1.GetType().Name + ": " + _translator1.GetLastError());
                                 }
                                 if (_translator2 != null)
                                 {
                                     transRes2 = _translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                                    if(transRes2 == null)
+                                        Growl.ErrorGlobal(_translator2.GetType().Name + ": " + _translator2.GetLastError());
                                 }
 
                                 //6.翻译后处理
@@ -440,7 +444,7 @@ namespace MisakaTranslator_WPF
                 }
             }
 
-            
+
         }
 
         private void DictArea_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -572,7 +576,7 @@ namespace MisakaTranslator_WPF
                             superScript.Background = Brushes.Transparent;
                             superScript.Foreground = Brushes.White;
                             stackPanel.Children.Add(superScript);
-                            
+
 
                             //是否打开假名标注
                             if (Common.appSettings.TF_isKanaShow)
@@ -584,10 +588,10 @@ namespace MisakaTranslator_WPF
                                 textBlock.Margin = new Thickness(10, 0, 0, 10);
                                 SourceTextPanel.Children.Add(textBlock);
                             }
-                            
+
                         }
                     }
-                    
+
 
                     //4.翻译前预处理
                     string beforeString = _beforeTransHandle.AutoHandle(repairedText);
@@ -598,10 +602,14 @@ namespace MisakaTranslator_WPF
                     if (_translator1 != null)
                     {
                         transRes1 = _translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                        if(transRes1 == null)
+                            Growl.ErrorGlobal(_translator1.GetType().Name + ": " + _translator1.GetLastError());
                     }
                     if (_translator2 != null)
                     {
                         transRes2 = _translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                        if(transRes2 == null)
+                            Growl.ErrorGlobal(_translator2.GetType().Name + ": " + _translator2.GetLastError());
                     }
 
                     //6.翻译后处理
@@ -632,10 +640,10 @@ namespace MisakaTranslator_WPF
                         }
                     }
                 }
-                
+
             }));
 
-            
+
         }
 
         private void ChangeSize_Item_Click(object sender, RoutedEventArgs e)
