@@ -128,6 +128,13 @@ namespace MisakaTranslator_WPF
             set;
         }
 
+        [Option(Alias = "YandexTranslator.YandexApiKey", DefaultValue = "")]
+        string YandexApiKey
+        {
+            get;
+            set;
+        }
+
         [Option(Alias = "Translate_All.EachRowTrans", DefaultValue = "True")]
         string EachRowTrans
         {

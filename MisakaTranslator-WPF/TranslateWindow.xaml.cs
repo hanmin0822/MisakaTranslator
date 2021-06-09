@@ -211,6 +211,10 @@ namespace MisakaTranslator_WPF
                     IBMTranslator it = new IBMTranslator();
                     it.TranslatorInit(Common.appSettings.IBMApiKey, Common.appSettings.IBMURL);
                     return it;
+                case "YandexTranslator":
+                    YandexTranslator yt = new YandexTranslator();
+                    yt.TranslatorInit(Common.appSettings.YandexApiKey);
+                    return yt;
                 case "YoudaoTranslator":
                     YoudaoTranslator yd = new YoudaoTranslator();
                     yd.TranslatorInit();

@@ -28,6 +28,7 @@ namespace TranslatorLibrary
             { "彩云小译" , "CaiyunTranslator" },
             { "小牛翻译" , "XiaoniuTranslator"},
             { "IBM翻译" , "IBMTranslator"},
+            { "Yandex翻译" , "YandexTranslator"},
             { "有道翻译(公共接口)" , "YoudaoTranslator" },
             { "ALAPI免费接口" , "AlapiTranslator"},
             { "谷歌翻译(公共接口)" , "GoogleCNTranslator"},

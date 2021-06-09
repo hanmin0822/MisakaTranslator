@@ -70,6 +70,7 @@
     <Compile Include="XiaoniuTranslator.cs" />
     <Compile Include="YoudaoTranslator.cs" />
     <Compile Include="IBMTranslator.cs" />
+    <Compile Include="YandexTranslator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
