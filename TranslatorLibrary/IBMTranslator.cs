@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Text.Json;
+using Newtonsoft.Json;
 using System.Net.Http;
 
 namespace TranslatorLibrary
@@ -67,16 +67,14 @@ namespace TranslatorLibrary
             }
 
             string retString = await resp.Content.ReadAsStringAsync();
-            var doc = JsonDocument.Parse(retString);
+            var dynamicResult = JsonConvert.DeserializeObject<dynamic>(retString);
 
             if (!resp.IsSuccessStatusCode){
-                errorInfo = doc.RootElement.GetProperty("error").GetString();
+                errorInfo = dynamicResult.error;
                 return null;
             }
 
-            var listoftranslation = doc.RootElement.GetProperty("translations").EnumerateArray();
-            string result = string.Join("\n", listoftranslation.Select(x => x.GetProperty("translation").GetString()));
-            doc.Dispose();
+            string result = dynamicResult.translations[0].translation;
             return result;
         }
 
