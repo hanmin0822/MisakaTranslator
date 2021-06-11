@@ -33,6 +33,8 @@ namespace TranslatorLibrary
             if(desLang != "en" && srcLang != "en")
             {
                 sourceText = Translate(sourceText, "en", srcLang);
+                if (sourceText == null)
+                    return null;
                 srcLang = "en";                                   
             }
 
