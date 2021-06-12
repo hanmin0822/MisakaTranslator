@@ -495,10 +495,8 @@ namespace MisakaTranslator_WPF
         /// <summary>
         /// Hook模式下调用的事件
         /// </summary>
-        public void DataRecvEventHandler(object sender, SolvedDataRecvEventArgs e)
+        public async void DataRecvEventHandler(object sender, SolvedDataRecvEventArgs e)
         {
-            Application.Current.Dispatcher.BeginInvoke((Action)(() =>
-            {
 
                 //1.得到原句
                 string source = e.Data.Data;
@@ -521,7 +519,7 @@ namespace MisakaTranslator_WPF
                 if (repairedText.Length != 0 && repairedText.Length <= Common.appSettings.TransLimitNums)
                 {
                     //2.5 清除面板
-                    SourceTextPanel.Children.Clear();
+                    Application.Current.Dispatcher.Invoke(() => SourceTextPanel.Children.Clear());
 
                     _currentsrcText = repairedText;
 
@@ -615,13 +613,13 @@ namespace MisakaTranslator_WPF
                     {
                         transRes1 = _translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
                         if(transRes1 == null)
-                            Growl.ErrorGlobal(_translator1.GetType().Name + ": " + _translator1.GetLastError());
+                            Application.Current.Dispatcher.Invoke(() => Growl.ErrorGlobal(_translator1.GetType().Name + ": " + _translator1.GetLastError()));
                     }
                     if (_translator2 != null)
                     {
                         transRes2 = _translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
                         if(transRes2 == null)
-                            Growl.ErrorGlobal(_translator2.GetType().Name + ": " + _translator2.GetLastError());
+                            Application.Current.Dispatcher.Invoke(() => Growl.ErrorGlobal(_translator2.GetType().Name + ": " + _translator2.GetLastError()));
                     }
 
                     //6.翻译后处理
@@ -629,8 +627,10 @@ namespace MisakaTranslator_WPF
                     string afterString2 = _afterTransHandle.AutoHandle(transRes2);
 
                     //7.翻译结果显示到窗口上
+                    Application.Current.Dispatcher.Invoke(() => {
                     FirstTransText.Text = afterString1;
                     SecondTransText.Text = afterString2;
+                    });
 
                     //8.翻译结果记录到队列
                     if (_gameTextHistory.Count > 5)
@@ -653,7 +653,6 @@ namespace MisakaTranslator_WPF
                     }
                 }
 
-            }));
 
 
         }
