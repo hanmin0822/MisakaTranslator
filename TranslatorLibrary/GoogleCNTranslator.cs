@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web;
 
 namespace TranslatorLibrary
@@ -12,8 +6,6 @@ namespace TranslatorLibrary
     public class GoogleCNTranslator : ITranslator
     {
         private string errorInfo;//错误信息
-
-        public string GetTkkJS;
 
         public string GetLastError()
         {
@@ -39,9 +31,7 @@ namespace TranslatorLibrary
 
             string fun = string.Format(@"TL('{0}')", sourceText);
 
-            var tk = ExecuteScript(fun, GetTkkJS);
-
-            string googleTransUrl = "https://translate.googleapis.com/translate_a/single?client=gtx&dt=t&sl=" + srcLang + "&tl=" + desLang + "&tk=" + tk + "&q=" + HttpUtility.UrlEncode(sourceText);
+            string googleTransUrl = "https://translate.googleapis.com/translate_a/single?client=gtx&dt=t&sl=" + srcLang + "&tl=" + desLang + "&q=" + HttpUtility.UrlEncode(sourceText);
 
             var hc = CommonFunction.GetHttpClient();
 
@@ -79,34 +69,6 @@ namespace TranslatorLibrary
             }
         }
 
-        public void TranslatorInit(string param1 = "", string param2 = "")
-        {
-            GetTkkJS = File.ReadAllText($"{Environment.CurrentDirectory}\\lib\\GoogleJS.js");
-        }
-
-        /// <summary>
-        /// 执行JS
-        /// </summary>
-        /// <param name="sExpression">参数体</param>
-        /// <param name="sCode">JavaScript代码的字符串</param>
-        /// <returns></returns>
-        private string ExecuteScript(string sExpression, string sCode)
-        {
-            MSScriptControl.ScriptControl scriptControl = new MSScriptControl.ScriptControl();
-            scriptControl.UseSafeSubset = true;
-            scriptControl.Language = "JScript";
-            scriptControl.AddCode(sCode);
-            try
-            {
-                string str = scriptControl.Eval(sExpression).ToString();
-                return str;
-            }
-            catch (Exception ex)
-            {
-                string str = ex.Message;
-            }
-            return null;
-        }
-
+        public void TranslatorInit(string param1 = "", string param2 = "") {; }
     }
 }
