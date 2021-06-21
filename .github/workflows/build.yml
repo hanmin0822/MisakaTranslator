@@ -9,8 +9,8 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@master
-    - uses: microsoft/setup-msbuild@v1
-    - run: msbuild -v:m -r -p:MeCabUseDefaultDictionary=false
+    - uses: actions/setup-dotnet@v3
+    - run: dotnet build -p:MeCabUseDefaultDictionary=false
     - run: |
         cd MisakaTranslator-WPF/bin
         echo ("本artifact为nightly build，为了减小体积，" +
