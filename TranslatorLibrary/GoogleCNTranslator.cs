@@ -43,9 +43,11 @@ namespace TranslatorLibrary
 
             string googleTransUrl = "https://translate.google.cn/translate_a/single?client=gtx&dt=t&sl=" + srcLang + "&tl=" + desLang + "&tk=" + tk + "&q=" + HttpUtility.UrlEncode(sourceText);
 
+            var hc = CommonFunction.GetHttpClient();
+
             try
             {
-                var ResultHtml = GetResultHtml(googleTransUrl);
+                var ResultHtml = hc.GetStringAsync(googleTransUrl).GetAwaiter().GetResult();
 
                 dynamic TempResult = Newtonsoft.Json.JsonConvert.DeserializeObject(ResultHtml);
 
@@ -80,25 +82,6 @@ namespace TranslatorLibrary
         public void TranslatorInit(string param1 = "", string param2 = "")
         {
             GetTkkJS = File.ReadAllText($"{Environment.CurrentDirectory}\\lib\\GoogleJS.js");
-        }
-
-        /// <summary>
-        /// 访问页面
-        /// </summary>
-        /// <param name="url"></param>
-        /// <param name="cc"></param>
-        /// <param name="refer"></param>
-        /// <returns></returns>
-        public string GetResultHtml(string url)
-        {
-
-            var hc = CommonFunction.GetHttpClient();
-            return hc.GetStringAsync(url).GetAwaiter().GetResult();
-
-            // string usergant = "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36";
-            //webRequest.Referer = "https://translate.google.cn/";
-            //webRequest.Headers.Add("X-Requested-With:XMLHttpRequest");
-            //webRequest.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
         }
 
         /// <summary>
