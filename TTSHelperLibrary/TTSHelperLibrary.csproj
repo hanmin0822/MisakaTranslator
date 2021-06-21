@@ -1,7 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netframework'))">
     <Reference Include="System.Speech" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
+    <PackageReference Include="System.Speech" Version="7.0.0"/>
   </ItemGroup>
 
 </Project>

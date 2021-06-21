@@ -13,6 +13,7 @@
 
     <EnableMsixTooling>true</EnableMsixTooling>
     <WindowsPackageType>MSIX</WindowsPackageType>
+    <AllowNeutralPackageWithAppHost>true</AllowNeutralPackageWithAppHost>
     <WindowsAppSDKCopyXamlToolingLibs>false</WindowsAppSDKCopyXamlToolingLibs>
     <WindowsAppSDKFrameworkPackageReference>false</WindowsAppSDKFrameworkPackageReference>
 
