@@ -76,7 +76,7 @@ namespace TranslatorLibrary
                 return null;
             }
 
-            if (oinfo?.target.Count >= 1)
+            if (oinfo.target?.Count >= 1)
             {
                 //得到翻译结果
                 return string.Join("", oinfo.target.Select(x => Regex.Unescape(x)));
