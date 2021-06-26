@@ -60,7 +60,16 @@ namespace TranslatorLibrary
                 return null;
             }
 
-            YoudaoTransResult oinfo = JsonConvert.DeserializeObject<YoudaoTransResult>(retString);
+            YoudaoTransResult oinfo;
+            try
+            {
+                oinfo = JsonConvert.DeserializeObject<YoudaoTransResult>(retString);
+            }
+            catch (JsonException)
+            {
+                errorInfo = "Deserialize failed. Possible due to quota limits.";
+                return null;
+            }
 
             if (oinfo.errorCode == 0)
             {
