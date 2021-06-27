@@ -73,7 +73,7 @@ namespace TextHookLibrary
                         IDataObject iData = Clipboard.GetDataObject();
                         if (iData != null)
                         {
-                            string str = (string)iData.GetData(DataFormats.Text);
+                            string str = (string)iData.GetData(DataFormats.UnicodeText);
                             this.onClipboardUpdate(str);
                         }
                         else {
