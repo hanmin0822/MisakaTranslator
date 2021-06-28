@@ -153,7 +153,7 @@
     <sys:String x:Key="TesseractCliSettingsPage_Args">TesseractCli Parameters</sys:String>
     <sys:String x:Key="TesseractCliSettingsPage_Select">Select</sys:String>
 
-    <sys:String x:Key="HookSettingsPage_Introduce">This is the text hook method (Textractor) setting. Textractor was recoded and runs along with the Translator. There is no need to change its path.</sys:String>
+    <sys:String x:Key="HookSettingsPage_Introduce">This is Textractor setting. You need to choose the path of its folder after installing or extracting it.</sys:String>
     <sys:String x:Key="HookSettingsPage_AutoHook">Enable smart hook</sys:String>
     <sys:String x:Key="HookSettingsPage_AutoHook_Introduce">Once enabled, Translator hooks the process that uses the biggest memory among multiple processes with the same name.</sys:String>
     <sys:String x:Key="HookSettingsPage_AutoHookHint">Note: This approach is slightly more efficient, but may not find the text.</sys:String>

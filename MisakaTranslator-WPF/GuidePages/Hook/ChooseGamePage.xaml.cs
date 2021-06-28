@@ -54,7 +54,7 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                     Common.textHooker = new TextHookHandle(SameNameGameProcessList);
                 }
 
-                if(!Common.textHooker.Init(!(bool)x64GameCheckBox.IsChecked))
+                if (!Common.textHooker.Init((bool)x64GameCheckBox.IsChecked ? Common.appSettings.Textractor_Path64 : Common.appSettings.Textractor_Path32))
                 {
                     HandyControl.Controls.MessageBox.Show(Application.Current.Resources["MainWindow_TextractorError_Hint"].ToString());
                     return;

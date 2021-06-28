@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Win32;
 
 namespace TextHookLibrary {
     /// <summary>
@@ -132,36 +134,51 @@ namespace TextHookLibrary {
         /// 初始化Textractor,建立CLI与本软件间的通信
         /// </summary>
         /// <returns>成功返回真，失败返回假</returns>
-        public bool Init(bool x86 = true) {
-            string Path = Environment.CurrentDirectory + @"\lib\TextHook\" + (x86 ? "x86" : "x64");//打开对应的Textractor
-            string CurrentPath = Environment.CurrentDirectory;
-            try {
-                Environment.CurrentDirectory = Path;//更改当前工作目录保证TextractorCLI正常运行
-            }
-#pragma warning disable 168
-            catch (System.IO.DirectoryNotFoundException ex) {
-#pragma warning restore 168
+        public bool Init(string path)
+        {
+            if(!File.Exists(path))
+            {
                 return false;
             }
 
-            ProcessTextractor = new Process();
-            ProcessTextractor.StartInfo.FileName = "TextractorCLI.exe";
-            ProcessTextractor.StartInfo.CreateNoWindow = true;
-            ProcessTextractor.StartInfo.UseShellExecute = false;
-            ProcessTextractor.StartInfo.StandardOutputEncoding = Encoding.Unicode;
-            ProcessTextractor.StartInfo.RedirectStandardInput = true;
-            ProcessTextractor.StartInfo.RedirectStandardOutput = true;
+            ProcessTextractor = new Process()
+            {
+                StartInfo = new ProcessStartInfo()
+                {
+                    FileName = path,
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+#if NETCOREAPP
+                    StandardInputEncoding = new UnicodeEncoding(false, false),
+#endif
+                    StandardOutputEncoding = Encoding.Unicode,
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = true,
+                    WorkingDirectory = Path.GetDirectoryName(path)
+                },
+            };
+
             ProcessTextractor.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
-            try {
+            try
+            {
+#if NETFRAMEWORK
+                // .NET Framework根据Console.InputEncoding编码在Start()中创建输入流
+                Console.InputEncoding = new UnicodeEncoding(false, false);
+#endif
                 bool res = ProcessTextractor.Start();
+#if NETFRAMEWORK
+                // Console.InputEncoding修改为非UTF16编码需要创建控制台
+                PInvoke.AllocConsole();
+                Console.InputEncoding = Encoding.Default;
+                PInvoke.FreeConsole();
+#endif
                 ProcessTextractor.BeginOutputReadLine();
-                Environment.CurrentDirectory = CurrentPath;//打开后即可恢复原目录
                 return res;
             }
-#pragma warning disable 168
-            catch (System.ComponentModel.Win32Exception ex) {
-#pragma warning restore 168
-                Environment.CurrentDirectory = CurrentPath;//恢复原目录
+            catch (System.ComponentModel.Win32Exception)
+            {
+                ProcessTextractor.Dispose();
+                ProcessTextractor = null;
                 return false;
             }
         }

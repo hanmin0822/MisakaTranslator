@@ -17,7 +17,6 @@ namespace MisakaTranslator_WPF.SettingsPages.DictionaryPages
 
         private void ChoosePathBtn_Click(object sender, RoutedEventArgs e)
         {
-
             FolderBrowserDialog dialog = new();
             if (dialog.ShowDialog() == DialogResult.OK)
             {

@@ -250,7 +250,7 @@ namespace MisakaTranslator_WPF {
 
             Common.textHooker = pidList.Count == 1 ? new TextHookHandle(pidList[0].Id) : new TextHookHandle(pidList);
 
-            if(!Common.textHooker.Init(!gameInfoList[gid].Isx64))
+            if (!Common.textHooker.Init(gameInfoList[gid].Isx64 ? Common.appSettings.Textractor_Path64 : Common.appSettings.Textractor_Path32))
             {
                 HandyControl.Controls.MessageBox.Show(Application.Current.Resources["MainWindow_TextractorError_Hint"].ToString());
                 return;

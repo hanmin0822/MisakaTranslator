@@ -150,7 +150,7 @@
     <sys:String x:Key="TesseractCliSettingsPage_Args">自定义参数</sys:String>
     <sys:String x:Key="TesseractCliSettingsPage_Select">选择</sys:String>
 
-    <sys:String x:Key="HookSettingsPage_Introduce">在这里进行文本Hook注入方式(Textractor)的相关设置;Textractor模块已经根据需要重写过并随本程序一起运行，您不需要更改它的位置</sys:String>
+    <sys:String x:Key="HookSettingsPage_Introduce">在这里进行Textractor的相关设置；您需要选择安装或解压后的文件夹位置</sys:String>
     <sys:String x:Key="HookSettingsPage_AutoHook">开启智能注入</sys:String>
     <sys:String x:Key="HookSettingsPage_AutoHook_Introduce">开启智能注入后，遇到某些游戏存在多个同名进程的情况下，将自动选择占用内存最大的进程注入</sys:String>
     <sys:String x:Key="HookSettingsPage_AutoHookHint">注意:这种方式可以略微提高效率，但可能导致无法寻找到文本</sys:String>

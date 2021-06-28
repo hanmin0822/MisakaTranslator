@@ -455,6 +455,12 @@ namespace MisakaTranslator_WPF
 
         [Option(Alias = "Mecab.dicPath", DefaultValue = "")]
         string Mecab_dicPath { get; set; }
+
+        [Option(Alias = "Textractor.Path32", DefaultValue = "")]
+        string Textractor_Path32 { get; set; }
+
+        [Option(Alias = "Textractor.Path64", DefaultValue = "")]
+        string Textractor_Path64 { get; set; }
     }
 
     public interface IRepeatRepairSettings

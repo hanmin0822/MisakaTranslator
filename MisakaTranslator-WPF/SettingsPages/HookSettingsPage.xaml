@@ -13,12 +13,32 @@
         <hc:ScrollViewer HorizontalScrollBarVisibility="Disabled">
             <StackPanel Background="White">
                 <TextBlock Text="{StaticResource HookSettingsPage_Introduce}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
-                <StackPanel Margin="20,10,10,10" Height="348">
-                    <TextBlock Text="{StaticResource HookSettingsPage_AutoHook_Introduce}" Margin="0,20,0,0" TextWrapping="WrapWithOverflow"/>
-                    <CheckBox Name="AutoHookCheckBox" Content="{StaticResource HookSettingsPage_AutoHook}" Margin="0,20,0,0" hc:InfoElement.Title="{StaticResource HookSettingsPage_AutoHook}" hc:Poptip.HitMode="None" hc:Poptip.IsOpen="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" hc:Poptip.Content="{StaticResource HookSettingsPage_AutoHookHint}" hc:Poptip.Placement="Right" Click="AutoHookCheckBox_Click" HorizontalAlignment="Left"/>
-                    <TextBlock Text="{StaticResource HookSettingsPage_AutoDetach_Introduce}" Margin="0,20,0,0" TextWrapping="WrapWithOverflow"/>
-                    <CheckBox Name="AutoDetachCheckBox" Content="{StaticResource HookSettingsPage_AutoDetach}" Margin="0,20,0,0" Canvas.Left="10" Canvas.Top="105" Click="AutoDetachCheckBox_Click" HorizontalAlignment="Left"/>
-                    <Button Content="{StaticResource HookSettingsPage_BtnExtractHistory}" Margin="0,20,0,0" Click="Button_Click" HorizontalAlignment="Left"/>
+                <StackPanel Margin="20,10,10,10" Height="348" >
+                    <Grid Margin="0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="x86:" Grid.Column="0" VerticalAlignment="Center" />
+                        <TextBox hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource MecabDictPage_DBPath}" Name="Path32Box" IsReadOnly="True" Margin="10,0" Grid.Column="1" TextWrapping="WrapWithOverflow" />
+                        <Button Content="{StaticResource JbeijingTransSettingsPage_ChoosePath}" Width="128" Grid.Column="2" Click="ChoosePath32Btn_Click" />
+                    </Grid>
+                    <Grid Margin="0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="x64:" Grid.Column="0"  VerticalAlignment="Center" />
+                        <TextBox hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource MecabDictPage_DBPath}" Name="Path64Box" IsReadOnly="True" Margin="10,0" Grid.Column="1" TextWrapping="WrapWithOverflow" />
+                        <Button Content="{StaticResource JbeijingTransSettingsPage_ChoosePath}" Width="128" Grid.Column="2" Click="ChoosePath64Btn_Click" />
+                    </Grid>
+                    <TextBlock Text="{StaticResource HookSettingsPage_AutoHook_Introduce}" Margin="0,10" TextWrapping="WrapWithOverflow"/>
+                    <CheckBox Name="AutoHookCheckBox" Content="{StaticResource HookSettingsPage_AutoHook}" Margin="0,10" hc:InfoElement.Title="{StaticResource HookSettingsPage_AutoHook}" hc:Poptip.HitMode="None" hc:Poptip.IsOpen="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" hc:Poptip.Content="{StaticResource HookSettingsPage_AutoHookHint}" hc:Poptip.Placement="Right" Click="AutoHookCheckBox_Click" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{StaticResource HookSettingsPage_AutoDetach_Introduce}" Margin="0,10" TextWrapping="WrapWithOverflow"/>
+                    <CheckBox Name="AutoDetachCheckBox" Content="{StaticResource HookSettingsPage_AutoDetach}" Margin="0,10" Canvas.Left="10" Canvas.Top="105" Click="AutoDetachCheckBox_Click" HorizontalAlignment="Left"/>
+                    <Button Content="{StaticResource HookSettingsPage_BtnExtractHistory}" Margin="0,10" Click="Button_Click" HorizontalAlignment="Left"/>
                 </StackPanel>
             </StackPanel>
         </hc:ScrollViewer>
