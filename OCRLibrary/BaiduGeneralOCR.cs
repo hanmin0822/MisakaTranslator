@@ -25,19 +25,18 @@ namespace OCRLibrary
             }
 
             string host = "https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic?access_token=" + accessToken;
-            Encoding encoding = Encoding.Default;
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(host);
+            HttpWebRequest request = WebRequest.CreateHttp(host);
             request.Method = "post";
-            request.KeepAlive = true;
             // 图片的base64编码
             string base64 = ImageProcFunc.GetFileBase64(img);
             String str = "language_type=" + langCode + "&image=" + HttpUtility.UrlEncode(base64);
-            byte[] buffer = encoding.GetBytes(str);
+            byte[] buffer = Encoding.Default.GetBytes(str);
             request.ContentLength = buffer.Length;
             request.GetRequestStream().Write(buffer, 0, buffer.Length);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+            StreamReader reader = new StreamReader(response.GetResponseStream());
             string result = reader.ReadToEnd();
+            response.Close();
 
             string ret = "";
             BaiduOCRresOutInfo oinfo = JsonConvert.DeserializeObject<BaiduOCRresOutInfo>(result);
