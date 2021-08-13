@@ -33,7 +33,7 @@ namespace TranslatorLibrary
 
             string retString;
 
-            var sb = new StringBuilder("https://free.niutrans.com/NiuTransServer/translation?")
+            var sb = new StringBuilder("https://api.niutrans.com/NiuTransServer/translation?")
                 .Append("&from=").Append(srcLang)
                 .Append("&to=").Append(desLang)
                 .Append("&apikey=").Append(apiKey)
