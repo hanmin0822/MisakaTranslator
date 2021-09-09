@@ -35,6 +35,7 @@ namespace TranslatorLibrary
             { "JBeijing" , "JBeijingTranslator" },
             { "金山快译" , "KingsoftFastAITTranslator" },
             { "译典通", "Dreye"},
+            { "DeepL", "DeepLTranslator"},
             { "本地人工翻译(见说明)" , "ArtificialTranslator"}
         };
 

@@ -40,6 +40,11 @@ namespace MisakaTranslator_WPF
             this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/BaiduTransSettingsPage.xaml", UriKind.Relative));
         }
 
+        private void Item_DeepLTrans_Selected(object sender, RoutedEventArgs e)
+        {
+            this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/DeepLTransSettingsPage.xaml", UriKind.Relative));
+        }
+
         private void Item_FYJTrans_Selected(object sender, RoutedEventArgs e)
         {
             this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/TencentFYJTransSettingsPage.xaml", UriKind.Relative));

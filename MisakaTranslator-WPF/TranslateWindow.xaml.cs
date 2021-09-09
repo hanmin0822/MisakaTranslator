@@ -239,6 +239,10 @@ namespace MisakaTranslator_WPF
                     DreyeTranslator drt = new DreyeTranslator();
                     drt.TranslatorInit(Common.appSettings.DreyePath);
                     return drt;
+                case "DeepLTranslator":
+                    DeepLTranslator deepl = new DeepLTranslator();
+                    deepl.TranslatorInit(Common.appSettings.DeepLsecretKey, Common.appSettings.DeepLsecretKey);
+                    return deepl;
                 case "ArtificialTranslator":
                     ArtificialTranslator at = new ArtificialTranslator();
                     at.TranslatorInit(Common.appSettings.ArtificialPatchPath);
