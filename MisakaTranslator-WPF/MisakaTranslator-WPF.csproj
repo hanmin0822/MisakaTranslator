@@ -108,6 +108,9 @@
     <Compile Include="SettingsPages\SoftwareSettingsPage.xaml.cs">
       <DependentUpon>SoftwareSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPages\TranslatorPages\DeepLTransSettingsPage.xaml.cs">
+      <DependentUpon>DeepLTransSettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPages\TranslatorPages\XiaoniuTransSettingsPage.xaml.cs">
       <DependentUpon>XiaoniuTransSettingsPage.xaml</DependentUpon>
     </Compile>
@@ -235,6 +238,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SettingsPages\SoftwareSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\TranslatorPages\DeepLTransSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

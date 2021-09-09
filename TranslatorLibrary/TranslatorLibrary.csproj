@@ -58,6 +58,7 @@
     <Compile Include="ArtificialTranslator.cs" />
     <Compile Include="BaiduTranslator.cs" />
     <Compile Include="CaiyunTranslator.cs" />
+    <Compile Include="DeepLTranslator.cs" />
     <Compile Include="CommonFunction.cs" />
     <Compile Include="DreyeTranslator.cs" />
     <Compile Include="GoogleCNTranslator.cs" />

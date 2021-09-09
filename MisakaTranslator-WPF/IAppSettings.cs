@@ -86,6 +86,13 @@ namespace MisakaTranslator_WPF
             set;
         }
 
+        [Option(Alias = "DeepLTranslator.secretKey", DefaultValue = "")]
+        string DeepLsecretKey
+        {
+            get;
+            set;
+        }
+
         [Option(Alias = "TencentTranslator.appID", DefaultValue = "")]
         string TXappID
         {
