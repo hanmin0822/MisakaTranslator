@@ -43,6 +43,7 @@
     <sys:String x:Key="SettingsMenu_OCRSettings">OCR Settings</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_General">General</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_Baidu">Baidu OCR API</sys:String>
+    <sys:String x:Key="SettingsMenu_OCRSettings_Tesseract5">Tesseract5 OCR</sys:String>
     
     
     <sys:String x:Key="Language_Changed">Language is set. Restart translator to take effect.</sys:String>
@@ -117,6 +118,12 @@
     <sys:String x:Key="BaiduOCRSettingsPage_Introduce">Baidu universal text recognition (network required) can be used for multi-scene, multilingual, high-precision text detection and recognition. You need to apply for the API and activate translation services (on the website in Chinese), get access to the API Key and Secret Key, and then fill in below before testing. It is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of Baidu OCR.</sys:String>
     <sys:String x:Key="BaiduOCRSettingsPage_APIKEY">Baidu OCR API Key</sys:String>
     <sys:String x:Key="BaiduOCRSettingsPage_SecretKey">Baidu OCR Secret Key</sys:String>
+
+    <sys:String x:Key="TessactOCR5SettingsPage_Introduce">Tesseract5 support any languages, but only Japanese are pre-configed. Use command line args for other languages. (See tesseartact --help-extra for details)</sys:String>
+    <sys:String x:Key="TessactOCR5SettingsPage_Path">Tesseract5 Path</sys:String>
+    <sys:String x:Key="TessactOCR5SettingsPage_Setting">Tesseract5 Mode</sys:String>
+    <sys:String x:Key="TessactOCR5SettingsPage_Args">Tesseract5 Parameters</sys:String>
+    <sys:String x:Key="TessactOCR5SettingsPage_Select">Select</sys:String>
 
     <sys:String x:Key="HookSettingsPage_Introduce">This is the text hook method (Textractor) setting. Textractor was recoded and runs along with the Translator. There is no need to change its path.</sys:String>
     <sys:String x:Key="HookSettingsPage_AutoHook">Enable smart hook</sys:String>

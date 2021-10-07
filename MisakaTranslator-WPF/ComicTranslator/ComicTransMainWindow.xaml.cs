@@ -74,11 +74,11 @@ namespace MisakaTranslator_WPF.ComicTranslator
                     HandyControl.Controls.Growl.ErrorGlobal($"百度OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
                 }
             }
-            else if (Common.appSettings.OCRsource == "Tesseract5_vert")
+            else if (Common.appSettings.OCRsource == "Tesseract5")
             {
-                if (ocr.OCR_Init("", "") == false)
+                if (ocr.OCR_Init(Common.appSettings.Tesseract5OCR_Path, Common.appSettings.Tesseract5OCR_Args) == false)
                 {
-                    HandyControl.Controls.Growl.ErrorGlobal($"Tesseract5_vert {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+                    HandyControl.Controls.Growl.ErrorGlobal($"Tesseract5 {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
                 }
             }
             else if (Common.appSettings.OCRsource == "TesseractOCR")

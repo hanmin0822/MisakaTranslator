@@ -55,6 +55,28 @@ namespace MisakaTranslator_WPF
                     HandyControl.Controls.Growl.ErrorGlobal($"TesseractOCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
                 }
             }
+            else if (Common.appSettings.OCRsource == "TesseractOCR5")
+            {
+                ocr = new Tesseract5OCR();
+                if (ocr.OCR_Init(Common.appSettings.Tesseract5OCR_Path, Common.appSettings.Tesseract5OCR_Args))
+                {
+                    ocr.SetOCRSourceLang(Common.appSettings.GlobalOCRLang);
+                    res = ocr.OCRProcess(new System.Drawing.Bitmap(img));
+
+                    if (res != null)
+                    {
+                        sourceText.Text = res;
+                    }
+                    else
+                    {
+                        HandyControl.Controls.Growl.ErrorGlobal($"TesseractOCR5 {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+                    }
+                }
+                else
+                {
+                    HandyControl.Controls.Growl.ErrorGlobal($"TesseractOCR5 {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+                }
+            }
             else if (Common.appSettings.OCRsource == "BaiduOCR")
             {
                 ocr = new BaiduGeneralOCR();

@@ -12,6 +12,8 @@ namespace OCRLibrary
     public class Tesseract5OCR : OCREngine
     {
         public string srcLangCode;//OCR识别语言 jpn=日语 eng=英语
+        private string path;
+        private string args;
 
         public override string OCRProcess(Bitmap img)
         {
@@ -25,8 +27,8 @@ namespace OCRLibrary
                 p.StartInfo.RedirectStandardOutput = true;
                 p.StartInfo.RedirectStandardError = true;
                 p.StartInfo.CreateNoWindow = true;
-                p.StartInfo.FileName = "C:\\Program Files\\Tesseract-OCR\\tesseract";
-                p.StartInfo.Arguments = "temp\\tmp.png temp\\outputbase -l jpn_vert --psm 5";
+                p.StartInfo.FileName = path;
+                p.StartInfo.Arguments = "temp\\tmp.png temp\\outputbase " + args;
                 p.Start();
                 // Wait for the child process to exit before
                 // reading to the end of its redirected stream.
@@ -51,6 +53,8 @@ namespace OCRLibrary
 
         public override bool OCR_Init(string path, string args)
         {
+            this.path = path;
+            this.args = args;
             try
             {
                 Directory.CreateDirectory(Environment.CurrentDirectory + "\\temp");

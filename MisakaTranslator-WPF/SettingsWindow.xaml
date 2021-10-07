@@ -25,6 +25,7 @@
             <hc:SideMenuItem Header="{StaticResource SettingsMenu_OCRSettings}" FontSize="15">
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_OCRSettings_General}" Selected="Item_OCRGeneral_Selected"/>
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_OCRSettings_Baidu}" Selected="Item_BaiduOCR_Selected"/>
+                <hc:SideMenuItem Header="{StaticResource SettingsMenu_OCRSettings_Tesseract5}" Selected="Item_Tesseract5OCR_Selected"/>
             </hc:SideMenuItem>
             <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings}" FontSize="15">
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_General}" Selected="Item_TransGeneral_Selected"/>
