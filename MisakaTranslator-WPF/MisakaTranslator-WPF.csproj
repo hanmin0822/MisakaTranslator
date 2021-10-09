@@ -105,6 +105,9 @@
     <Compile Include="SettingsPages\ArtificialTransSettingsPage.xaml.cs">
       <DependentUpon>ArtificialTransSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPages\OCRPages\TesseractOCR5SettingsPage.xaml.cs">
+      <DependentUpon>TesseractOCR5SettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPages\SoftwareSettingsPage.xaml.cs">
       <DependentUpon>SoftwareSettingsPage.xaml</DependentUpon>
     </Compile>
@@ -234,6 +237,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SettingsPages\ArtificialTransSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\OCRPages\TesseractOCR5SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
