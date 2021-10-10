@@ -39,7 +39,9 @@ namespace OCRLibrary
 
         public static Dictionary<string, string> lstHandleFun = new Dictionary<string, string>() {
             { "不进行处理" , "ImgFunc_NoDeal" },
-            { "OTSU二值化处理" , "ImgFunc_OTSU" }
+            { "OTSU二值化处理" , "ImgFunc_OTSU" },
+            { "连通分量二值化处理", "ImgFunc_CC" },
+            { "连通分量二值化处理（反转）", "ImgFunc_CC_Reversed" }
         };
 
         public static Dictionary<string, string> lstOCRLang = new Dictionary<string, string>() {
@@ -59,6 +61,10 @@ namespace OCRLibrary
                     return b;
                 case "ImgFunc_OTSU":
                     return OtsuThreshold(b);
+                case "ImgFunc_CC":
+                    return ConnectedComponentThreshold(b, false);
+                case "ImgFunc_CC_Reversed":
+                    return ConnectedComponentThreshold(b, true);
             }
             return b;
         }
@@ -197,14 +203,25 @@ namespace OCRLibrary
 
             return Thresholding(b, threshold);
         }
-        
+
         /// <summary>
-        /// 按固定颜色进行二值化处理,即阈值颜色变白，非阈值颜色变黑
+        /// 自动二值化处理-连通分量法
         /// </summary>
         /// <param name="b"></param>
-        /// <param name="thresh"></param>
+        /// <param name="reversed"></param>
         /// <returns></returns>
-        public static Bitmap ColorThreshold(Bitmap b, Color thresh)
+        public static Bitmap ConnectedComponentThreshold(Bitmap b, bool reversed)
+        {
+            return ConnectComponentImageProcImpl.Process(b, reversed);
+        }
+
+            /// <summary>
+            /// 按固定颜色进行二值化处理,即阈值颜色变白，非阈值颜色变黑
+            /// </summary>
+            /// <param name="b"></param>
+            /// <param name="thresh"></param>
+            /// <returns></returns>
+            public static Bitmap ColorThreshold(Bitmap b, Color thresh)
         {
             int width = b.Width;
             int height = b.Height;
@@ -238,7 +255,7 @@ namespace OCRLibrary
                 return b;
             }
         }
-        
+
         /// <summary>
         /// 将System.Drawing.Image转换成System.Windows.Media.Imaging.BitmapImage
         /// </summary>

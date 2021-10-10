@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaiduGeneralOCR.cs" />
+    <Compile Include="ConnectComponentImageProcImpl.cs" />
     <Compile Include="ImageProcFunc.cs" />
     <Compile Include="OCREngine.cs" />
     <Compile Include="OCRCommon.cs" />
