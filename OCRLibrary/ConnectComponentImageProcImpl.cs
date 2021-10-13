@@ -28,7 +28,7 @@ namespace OCRLibrary
             float[,,] pixel = new float[width, height, 3];
             int[,] selected = new int[width, height];
             //把像素值转换成0-1之间的浮点数，存入pixel
-            NormalizeBitmap(b, ref pixel, reversed);
+            NormalizeBitmap(b, pixel, reversed);
             //将颜色相近的像素合并成色块，并去掉和图片边缘相邻的所有色块（假设文字在图片内部）
             //注：此时还不知道文字是什么颜色的
             //将那些最有可能是文字的色块所包含的像素坐标存入textPixels
@@ -40,16 +40,16 @@ namespace OCRLibrary
             for (int x = 0; x < width; x++)
             {
                 if (components[x, 0] == 0)
-                    VisitComponent(x, 0, cur, ref components, ref pixel, textPixels, validLevels, true);
+                    VisitComponent(x, 0, cur, components, pixel, textPixels, validLevels, true);
                 if (components[x, height - 1] == 0)
-                    VisitComponent(x, height - 1, cur, ref components, ref pixel, textPixels, validLevels, true);
+                    VisitComponent(x, height - 1, cur, components, pixel, textPixels, validLevels, true);
             }
             for (int y = 1; y < height - 1; y++)
             {
                 if (components[0, y] == 0)
-                    VisitComponent(0, y, cur, ref components, ref pixel, textPixels, validLevels, true);
+                    VisitComponent(0, y, cur, components, pixel, textPixels, validLevels, true);
                 if (components[width - 1, y] == 0)
-                    VisitComponent(width - 1, y, cur, ref components, ref pixel, textPixels, validLevels, true);
+                    VisitComponent(width - 1, y, cur, components, pixel, textPixels, validLevels, true);
             }
             ++cur;
             for (int x = 1; x < width - 1; x++)
@@ -58,7 +58,7 @@ namespace OCRLibrary
                 {
                     if (components[x, y] == 0)
                     {
-                        VisitComponent(x, y, cur, ref components, ref pixel, textPixels, validLevels, false);
+                        VisitComponent(x, y, cur, components, pixel, textPixels, validLevels, false);
                         ++cur;
                     }
                 }
@@ -86,12 +86,12 @@ namespace OCRLibrary
             //找出这些像素颜色的近似（加权）几何中位数，以及标准差
             //我们猜测这个几何中位数就是文字的颜色
             float stddiv;
-            ColorTuple median = GeometricMedian(textPixels, ref pixel, out stddiv);
+            ColorTuple median = GeometricMedian(textPixels, pixel, out stddiv);
             float radius = Math.Min(1.1f * stddiv, 0.3f);
             radius = Math.Max(radius, 0.1f);
             //把颜色接近几何中位数的所有像素标记为疑似文字像素（标为1），去除其他像素（标为0）
             //标为1的像素之间互相是联通的
-            Relabel(ref pixel, ref components, median, radius);
+            Relabel(pixel, components, median, radius);
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
@@ -102,11 +102,11 @@ namespace OCRLibrary
                         List<(int, int)> visited = new List<(int, int)>();
                         bool isBorder = false;
                         List<(int, int)> boundary = ComputeBoundary(median, x, y, 2,
-                            ref pixel, ref components, visited, out isBorder);
+                            pixel, components, visited, out isBorder);
                         //如果当前色块与边界接壤，则舍弃
                         if (!isBorder)
                         {
-                            int level = ComputeLevelWithBoundary(boundary, components[x, y], maxLevel, ref components);
+                            int level = ComputeLevelWithBoundary(boundary, components[x, y], maxLevel, components);
                             //如果当前色块的宽度/大小符合要求，则记录，否则舍弃
                             if ((visited.Count >= minSize || level >= minLevel) && level <= maxLevel)
                             {
@@ -120,7 +120,7 @@ namespace OCRLibrary
                 }
             }
             //将记录下来的色块标为白色，其他标为黑色
-            return SelectedThreshold(b, ref selected);
+            return SelectedThreshold(b, selected);
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace OCRLibrary
         /// <param name="b"></param>
         /// <param name="pixel"></param>
         /// <param name="reversed"></param>
-        private static void NormalizeBitmap(Bitmap b, ref float[,,] pixel, bool reversed)
+        private static void NormalizeBitmap(Bitmap b, float[,,] pixel, bool reversed)
         {
             int width = pixel.GetLength(0);
             int height = pixel.GetLength(1);
@@ -184,7 +184,7 @@ namespace OCRLibrary
         /// <param name="validLevels"></param>
         /// <param name="skipCheck"></param>
         /// <returns></returns>
-        private static bool VisitComponent(int x, int y, int cur, ref int[,] components, ref float[,,] pixel,
+        private static bool VisitComponent(int x, int y, int cur, int[,] components, float[,,] pixel,
             List<(int, int)> textPixels, List<int> validLevels, bool skipCheck)
         {
             //颜色相似：颜色距离初始像素thresh或距离最近的色块内像素contThresh以内
@@ -248,7 +248,7 @@ namespace OCRLibrary
             }
             if (!skipCheck && (double)lightEdgeCount / edgeCount > 0.8)
             {
-                int level = ComputeLevelWithBoundary(boundary, cur, maxLevel, ref components);
+                int level = ComputeLevelWithBoundary(boundary, cur, maxLevel, components);
                 if (level > 0 && (level >= minLevel || componentSize >= minSize) && level <= maxLevel)
                 {
                     validLevels.Add(level);
@@ -271,8 +271,8 @@ namespace OCRLibrary
         /// <param name="visited"></param>
         /// <param name="isBorder">是否与图片边缘接壤</param>
         /// <returns></returns>
-        private static List<(int, int)> ComputeBoundary(ColorTuple m, int x, int y, int newComp, ref float[,,] pixel,
-            ref int[,] components, List<(int, int)> visited, out bool isBorder)
+        private static List<(int, int)> ComputeBoundary(ColorTuple m, int x, int y, int newComp, float[,,] pixel,
+            int[,] components, List<(int, int)> visited, out bool isBorder)
         {
             //第二轮的相似条件比第一轮宽松，因为我们已经找到了文字的颜色和大致的位置
             float thresh = 0.35f, thresh2 = thresh * thresh;
@@ -339,7 +339,7 @@ namespace OCRLibrary
         /// <param name="maxLevel">最大宽度</param>
         /// <param name="components">像素到色块的映射</param>
         /// <returns></returns>
-        private static int ComputeLevelWithBoundary(List<(int, int)> boundary, int cur, int maxLevel, ref int[,] components)
+        private static int ComputeLevelWithBoundary(List<(int, int)> boundary, int cur, int maxLevel, int[,] components)
         {
             List<(int, int)> nextBoundary = new List<(int, int)>();
             int width = components.GetLength(0);
@@ -382,7 +382,7 @@ namespace OCRLibrary
         /// <param name="pixel"></param>
         /// <param name="stddev"></param>
         /// <returns></returns>
-        private static ColorTuple GeometricMedian(List<(int, int)> textPixels, ref float[,,] pixel, out float stddev)
+        private static ColorTuple GeometricMedian(List<(int, int)> textPixels, float[,,] pixel, out float stddev)
         {
             ColorTuple v = new ColorTuple(0.0f, 0.0f, 0.0f);
             float ep = 0.0001f;
@@ -438,7 +438,7 @@ namespace OCRLibrary
         /// <param name="components"></param>
         /// <param name="clr"></param>
         /// <param name="radius"></param>
-        private static void Relabel(ref float[,,] pixel, ref int[,] components, ColorTuple clr, float radius)
+        private static void Relabel(float[,,] pixel, int[,] components, ColorTuple clr, float radius)
         {
             float r2 = radius * radius;
             for (int x = 0; x < components.GetLength(0); x++)
@@ -520,7 +520,7 @@ namespace OCRLibrary
         /// <param name="b"></param>
         /// <param name="cluster"></param>
         /// <param name="threshCluster"></param>
-        private static Bitmap SelectedThreshold(Bitmap b, ref int[,] selected)
+        private static Bitmap SelectedThreshold(Bitmap b, int[,] selected)
         {
             int width = b.Width;
             int height = b.Height;
