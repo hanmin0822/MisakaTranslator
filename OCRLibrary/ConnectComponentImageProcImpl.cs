@@ -33,7 +33,7 @@ namespace OCRLibrary
             //注：此时还不知道文字是什么颜色的
             //将那些最有可能是文字的色块所包含的像素坐标存入textPixels
             int[,] components = new int[width, height];
-            List<Tuple<int, int>> textPixels = new List<Tuple<int, int>>();
+            List<(int, int)> textPixels = new List<(int, int)>();
             List<int> validLevels = new List<int>();
             int cur = 1;
             //先遍历边缘，再遍历中间
@@ -99,9 +99,9 @@ namespace OCRLibrary
                     //遍历所有可能是文字的色块
                     if (components[x, y] == 1)
                     {
-                        List<Tuple<int, int>> visited = new List<Tuple<int, int>>();
+                        List<(int, int)> visited = new List<(int, int)>();
                         bool isBorder = false;
-                        List<Tuple<int, int>> boundary = ComputeBoundary(median, x, y, 2,
+                        List<(int, int)> boundary = ComputeBoundary(median, x, y, 2,
                             ref pixel, ref components, visited, out isBorder);
                         //如果当前色块与边界接壤，则舍弃
                         if (!isBorder)
@@ -185,7 +185,7 @@ namespace OCRLibrary
         /// <param name="skipCheck"></param>
         /// <returns></returns>
         private static bool VisitComponent(int x, int y, int cur, ref int[,] components, ref float[,,] pixel,
-            List<Tuple<int, int>> textPixels, List<int> validLevels, bool skipCheck)
+            List<(int, int)> textPixels, List<int> validLevels, bool skipCheck)
         {
             //颜色相似：颜色距离初始像素thresh或距离最近的色块内像素contThresh以内
             float thresh = 0.25f, thresh2 = thresh * thresh;
@@ -193,13 +193,13 @@ namespace OCRLibrary
             //定义有效宽度的范围，超出范围的则不认为是文字
             int minLevel = 2, maxLevel = 10;
             int minSize = 16;
-            Queue<Tuple<int, int>> q = new Queue<Tuple<int, int>>();
-            List<Tuple<int, int>> boundary = new List<Tuple<int, int>>();
-            List<Tuple<int, int>> visited = new List<Tuple<int, int>>();
+            Queue<(int, int)> q = new Queue<(int, int)>();
+            List<(int, int)> boundary = new List<(int, int)>();
+            List<(int, int)> visited = new List<(int, int)>();
             int width = components.GetLength(0);
             int height = components.GetLength(1);
             components[x, y] = cur;       // 假设components[x, y] == 0
-            q.Enqueue(Tuple.Create(x, y));
+            q.Enqueue((x, y));
             //lightEdgeCount记录当前像素为色块边界且当前像素比边界外的像素亮的次数
             int lightEdgeCount = 0, edgeCount = 0, componentSize = 1;
 
@@ -225,7 +225,7 @@ namespace OCRLibrary
                         {
                             components[nextX, nextY] = cur;
                             componentSize++;
-                            q.Enqueue(Tuple.Create(nextX, nextY));
+                            q.Enqueue((nextX, nextY));
                         }
                         else
                         {
@@ -243,7 +243,7 @@ namespace OCRLibrary
                 }
                 if (!skipCheck && isBoundary)
                 {
-                    boundary.Add(Tuple.Create(i, j));
+                    boundary.Add((i, j));
                 }
             }
             if (!skipCheck && (double)lightEdgeCount / edgeCount > 0.8)
@@ -271,18 +271,18 @@ namespace OCRLibrary
         /// <param name="visited"></param>
         /// <param name="isBorder">是否与图片边缘接壤</param>
         /// <returns></returns>
-        private static List<Tuple<int, int>> ComputeBoundary(ColorTuple m, int x, int y, int newComp, ref float[,,] pixel,
-            ref int[,] components, List<Tuple<int, int>> visited, out bool isBorder)
+        private static List<(int, int)> ComputeBoundary(ColorTuple m, int x, int y, int newComp, ref float[,,] pixel,
+            ref int[,] components, List<(int, int)> visited, out bool isBorder)
         {
             //第二轮的相似条件比第一轮宽松，因为我们已经找到了文字的颜色和大致的位置
             float thresh = 0.35f, thresh2 = thresh * thresh;
             float contThresh = 0.15f, c2 = contThresh * contThresh;
-            List<Tuple<int, int>> boundary = new List<Tuple<int, int>>();
-            Queue<Tuple<int, int>> q = new Queue<Tuple<int, int>>();
+            List<(int, int)> boundary = new List<(int, int)>();
+            Queue<(int, int)> q = new Queue<(int, int)>();
             int width = components.GetLength(0);
             int height = components.GetLength(1);
-            q.Enqueue(Tuple.Create(x, y));
-            visited.Add(Tuple.Create(x, y));
+            q.Enqueue((x, y));
+            visited.Add((x, y));
             int cur = components[x, y];
             components[x, y] = newComp;
             isBorder = false;
@@ -311,7 +311,7 @@ namespace OCRLibrary
                     {
                         isBoundary = true; //标记边界
                     }
-                    var nextXY = Tuple.Create(nextX, nextY);
+                    var nextXY = (nextX, nextY);
                     if (inrange && components[nextX, nextY] == cur)
                     {
                         visited.Add(nextXY);
@@ -321,7 +321,7 @@ namespace OCRLibrary
                 }
                 if (!isBorder && isBoundary)
                 {
-                    boundary.Add(Tuple.Create(xx, yy));
+                    boundary.Add((xx, yy));
                 }
             }
             return boundary;
@@ -339,9 +339,9 @@ namespace OCRLibrary
         /// <param name="maxLevel">最大宽度</param>
         /// <param name="components">像素到色块的映射</param>
         /// <returns></returns>
-        private static int ComputeLevelWithBoundary(List<Tuple<int, int>> boundary, int cur, int maxLevel, ref int[,] components)
+        private static int ComputeLevelWithBoundary(List<(int, int)> boundary, int cur, int maxLevel, ref int[,] components)
         {
-            List<Tuple<int, int>> nextBoundary = new List<Tuple<int, int>>();
+            List<(int, int)> nextBoundary = new List<(int, int)>();
             int width = components.GetLength(0);
             int height = components.GetLength(1);
             int level = 0;
@@ -363,7 +363,7 @@ namespace OCRLibrary
                             && components[nextX, nextY] == cur)
                         {
                             components[nextX, nextY] = -cur; //标记为已访问
-                            nextBoundary.Add(Tuple.Create(nextX, nextY)); //把下一层入队
+                            nextBoundary.Add((nextX, nextY)); //把下一层入队
                         }
                     }
                 }
@@ -382,7 +382,7 @@ namespace OCRLibrary
         /// <param name="pixel"></param>
         /// <param name="stddev"></param>
         /// <returns></returns>
-        private static ColorTuple GeometricMedian(List<Tuple<int, int>> textPixels, ref float[,,] pixel, out float stddev)
+        private static ColorTuple GeometricMedian(List<(int, int)> textPixels, ref float[,,] pixel, out float stddev)
         {
             ColorTuple v = new ColorTuple(0.0f, 0.0f, 0.0f);
             float ep = 0.0001f;
