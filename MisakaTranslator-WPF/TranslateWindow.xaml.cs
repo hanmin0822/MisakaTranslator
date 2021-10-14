@@ -60,6 +60,8 @@ namespace MisakaTranslator_WPF
 
         private IntPtr winHandle;//窗口句柄，用于设置活动窗口，以达到全屏状态下总在最前的目的
 
+        private static readonly object SaveTransResultLock = new object(); // 保存翻译结果线程锁，防止多线程读写数据库引起冲突
+
         public TranslateWindow()
         {
             InitializeComponent();
@@ -505,26 +507,40 @@ namespace MisakaTranslator_WPF
                 if (source == null && e.Data.HookFunc == "Clipboard")
                     return;
 
-                //2.进行去重
-                string repairedText = TextRepair.RepairFun_Auto(Common.UsingRepairFunc, source);
+                new Thread(() => TranslateText(source)).Start();
 
-                if (Convert.ToBoolean(Common.appSettings.EachRowTrans) == false)
-                {
-                    //不需要分行翻译
-                    repairedText = repairedText.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
-                }
-                //去乱码
-                repairedText = repairedText.Replace("_", "").Replace("-", "").Replace("+", "").Replace("&", "");
+            }));
 
-                //补充:如果去重之后的文本长度超过指定值（默认100），直接不翻译、不显示
-                //补充2：如果去重后文本长度为0，则不翻译不显示
-                if (repairedText.Length != 0 && repairedText.Length <= Common.appSettings.TransLimitNums)
+
+        }
+
+
+        private void TranslateText(string source)
+        {
+
+            //2.进行去重
+            string repairedText = TextRepair.RepairFun_Auto(Common.UsingRepairFunc, source);
+
+            if (Convert.ToBoolean(Common.appSettings.EachRowTrans) == false)
+            {
+                //不需要分行翻译
+                repairedText = repairedText.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
+            }
+            //去乱码
+            repairedText = repairedText.Replace("_", "").Replace("-", "").Replace("+", "").Replace("&", "");
+
+            //补充:如果去重之后的文本长度超过指定值（默认100），直接不翻译、不显示
+            //补充2：如果去重后文本长度为0，则不翻译不显示
+            if (repairedText.Length != 0 && repairedText.Length <= Common.appSettings.TransLimitNums)
+            {
+                Application.Current.Dispatcher.BeginInvoke((Action)(() =>
                 {
                     //2.5 清除面板
                     SourceTextPanel.Children.Clear();
+                    FirstTransText.Text = "";
+                    SecondTransText.Text = "";
 
                     _currentsrcText = repairedText;
-
                     if (_isShowSource)
                     {
                         //3.分词
@@ -582,7 +598,8 @@ namespace MisakaTranslator_WPF
                             {
                                 superScript.FontSize = (double)SourceTextFontSize - 6.5;
                             }
-                            else {
+                            else
+                            {
                                 superScript.FontSize = 1;
                             }
                             superScript.Background = Brushes.Transparent;
@@ -596,66 +613,115 @@ namespace MisakaTranslator_WPF
                                 stackPanel.Children.Add(textBlock);
                                 SourceTextPanel.Children.Add(stackPanel);
                             }
-                            else {
+                            else
+                            {
                                 textBlock.Margin = new Thickness(10, 0, 0, 10);
                                 SourceTextPanel.Children.Add(textBlock);
                             }
 
                         }
                     }
+                }));
+                
 
+                new Thread(() => TranslateTextApi(repairedText, 1)).Start();
+                new Thread(() => TranslateTextApi(repairedText, 2)).Start();
+            }
+            
+        }
 
-                    //4.翻译前预处理
-                    string beforeString = _beforeTransHandle.AutoHandle(repairedText);
+        /// <summary>
+        /// TranslateTextApi
+        /// 提交去乱码后的原文到翻译器，获取翻译结果
+        /// </summary>
+        /// <param name="repairedText">去乱码后的原文</param>
+        /// <param name="tranResultIndex">第几翻译器</param>
+        /// <param name="isRenew">是否是重新翻译</param>
+        private void TranslateTextApi(string repairedText, int tranResultIndex, bool isRenew = false)
+        {
+            //4.翻译前预处理
+            string beforeString = _beforeTransHandle.AutoHandle(repairedText);
 
-                    //5.提交翻译
-                    string transRes1 = string.Empty;
-                    string transRes2 = string.Empty;
-                    if (_translator1 != null)
+            //5.提交翻译
+            string transRes = string.Empty;
+            if (tranResultIndex == 1)
+            {
+                if (_translator1 != null)
+                {
+                    transRes = _translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                    if (transRes == null)
                     {
-                        transRes1 = _translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
-                        if(transRes1 == null)
+                        Application.Current.Dispatcher.Invoke((Action)(() =>
+                        {
                             Growl.ErrorGlobal(_translator1.GetType().Name + ": " + _translator1.GetLastError());
+                        }));
                     }
-                    if (_translator2 != null)
+                        
+                }
+            }
+            else if (tranResultIndex == 2)
+            {
+                if (_translator2 != null)
+                {
+                    transRes = _translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                    if (transRes == null)
                     {
-                        transRes2 = _translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
-                        if(transRes2 == null)
+                        Application.Current.Dispatcher.Invoke((Action)(() =>
+                        {
                             Growl.ErrorGlobal(_translator2.GetType().Name + ": " + _translator2.GetLastError());
+                        }));
                     }
+                }
+            }
 
-                    //6.翻译后处理
-                    string afterString1 = _afterTransHandle.AutoHandle(transRes1);
-                    string afterString2 = _afterTransHandle.AutoHandle(transRes2);
+            //6.翻译后处理
+            string afterString = _afterTransHandle.AutoHandle(transRes);
 
-                    //7.翻译结果显示到窗口上
-                    FirstTransText.Text = afterString1;
-                    SecondTransText.Text = afterString2;
+            //7.翻译结果显示到窗口上
+            switch (tranResultIndex)
+            {
+                case 1:
+                    Application.Current.Dispatcher.Invoke((Action)(() =>
+                    {
+                        FirstTransText.Text = afterString;
+                    }));
+                    break;
+                case 2:
+                    Application.Current.Dispatcher.Invoke((Action)(() =>
+                    {
+                        SecondTransText.Text = afterString;
+                    }));
+                    break;
+            }
 
+            if (!isRenew)
+            {
+                lock (SaveTransResultLock)
+                {
                     //8.翻译结果记录到队列
-                    if (_gameTextHistory.Count > 5)
+                    if (_gameTextHistory.Count > 10)
                     {
                         _gameTextHistory.Dequeue();
                     }
-                    _gameTextHistory.Enqueue(repairedText + "\n" + afterString1 + "\n" + afterString2);
+                    _gameTextHistory.Enqueue(repairedText + "\n" + afterString);
 
                     //9.翻译原句和结果记录到数据库
                     if (Common.appSettings.ATon)
                     {
-                        bool addRes = _artificialTransHelper.AddTrans(repairedText, afterString1);
+                        bool addRes = _artificialTransHelper.AddTrans(repairedText, afterString);
                         if (addRes == false)
                         {
-                            HandyControl.Data.GrowlInfo growlInfo = new HandyControl.Data.GrowlInfo();
-                            growlInfo.Message = Application.Current.Resources["ArtificialTransAdd_Error_Hint"].ToString();
-                            growlInfo.WaitTime = 2;
-                            Growl.InfoGlobal(growlInfo);
+                            Application.Current.Dispatcher.Invoke((Action)(() =>
+                            {
+                                HandyControl.Data.GrowlInfo growlInfo = new HandyControl.Data.GrowlInfo();
+                                growlInfo.Message = Application.Current.Resources["ArtificialTransAdd_Error_Hint"].ToString();
+                                growlInfo.WaitTime = 2;
+                                Growl.InfoGlobal(growlInfo);
+                            }));
                         }
                     }
                 }
-
-            }));
-
-
+            }
         }
 
         private void ChangeSize_Item_Click(object sender, RoutedEventArgs e)
@@ -798,42 +864,39 @@ namespace MisakaTranslator_WPF
 
         private void RenewOCR_Item_Click(object sender, RoutedEventArgs e)
         {
+            FirstTransText.Text = "";
+            SecondTransText.Text = "";
             if (Common.transMode == 2)
             {
                 OCR();
             }
             else
             {
-                if (Convert.ToBoolean(Common.appSettings.EachRowTrans))
-                {
-                    //需要分行翻译
-                    _currentsrcText = _currentsrcText.Replace("<br>", string.Empty).Replace("</br>", string.Empty).Replace("\n", string.Empty).Replace("\t", string.Empty).Replace("\r", string.Empty);
-                }
-                //去乱码
-                _currentsrcText = _currentsrcText.Replace("_", string.Empty).Replace("-", string.Empty).Replace("+", string.Empty);
+                new Thread(() => TranslateTextApi(_currentsrcText, 1, true)).Start();
+                new Thread(() => TranslateTextApi(_currentsrcText, 2, true)).Start();
 
-                //4.翻译前预处理
-                string beforeString = _beforeTransHandle.AutoHandle(_currentsrcText);
-
-                //5.提交翻译
-                string transRes1 = string.Empty;
-                string transRes2 = string.Empty;
-                if (_translator1 != null)
-                {
-                    transRes1 = _translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
-                }
-                if (_translator2 != null)
-                {
-                    transRes2 = _translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
-                }
-
-                //6.翻译后处理
-                string afterString1 = _afterTransHandle.AutoHandle(transRes1);
-                string afterString2 = _afterTransHandle.AutoHandle(transRes2);
-
-                //7.翻译结果显示到窗口上
-                FirstTransText.Text = afterString1;
-                SecondTransText.Text = afterString2;
+                // //4.翻译前预处理
+                // string beforeString = _beforeTransHandle.AutoHandle(_currentsrcText);
+                //
+                // //5.提交翻译
+                // string transRes1 = string.Empty;
+                // string transRes2 = string.Empty;
+                // if (_translator1 != null)
+                // {
+                //     transRes1 = _translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                // }
+                // if (_translator2 != null)
+                // {
+                //     transRes2 = _translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                // }
+                //
+                // //6.翻译后处理
+                // string afterString1 = _afterTransHandle.AutoHandle(transRes1);
+                // string afterString2 = _afterTransHandle.AutoHandle(transRes2);
+                //
+                // //7.翻译结果显示到窗口上
+                // FirstTransText.Text = afterString1;
+                // SecondTransText.Text = afterString2;
             }
         }
 
