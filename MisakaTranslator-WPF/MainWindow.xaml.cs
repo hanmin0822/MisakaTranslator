@@ -388,10 +388,16 @@ namespace MisakaTranslator_WPF {
                 foreach (var process in processes) {
                     for (int j = 0; j < gameInfoList.Count; j++) {
                         string filepath;
-                        try {
+                        try
+                        {
                             filepath = process.MainModule.FileName;
                         }
-                        catch (Win32Exception ex) {
+                        catch (Win32Exception ex)
+                        {
+                            continue;
+                        }
+                        catch (System.InvalidOperationException ex)
+                        {
                             continue;
                         }
 
