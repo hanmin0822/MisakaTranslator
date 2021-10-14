@@ -45,7 +45,12 @@ namespace ArtificialTransHelperLibrary
             
             List<List<string>> ret = sqlite.ExecuteReader(sql, 4);
 
-            if (ret.Count > 0) {
+            if (ret == null) {
+                return false;
+            }
+
+            if (ret.Count > 0)
+            {
                 return true;
             }
 
