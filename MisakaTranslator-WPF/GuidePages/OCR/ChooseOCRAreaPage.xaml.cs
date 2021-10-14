@@ -129,8 +129,8 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             }
 
             ScreenCaptureWindow scw = new ScreenCaptureWindow(img);
-            scw.Width = img.PixelWidth;
-            scw.Height = img.PixelHeight;
+            scw.Width = img.Width;
+            scw.Height = img.Height;
             scw.Topmost = true;
             scw.Top = 0;
             scw.Left = 0;
