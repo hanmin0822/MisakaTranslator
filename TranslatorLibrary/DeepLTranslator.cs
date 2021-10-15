@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 /*
  * DeepL translator integration
@@ -27,7 +28,7 @@ namespace TranslatorLibrary
             return errorInfo;
         }
 
-        public string Translate(string sourceText, string desLang, string srcLang)
+        public async Task<string> TranslateAsync(string sourceText, string desLang, string srcLang)
         {
             if (sourceText == "" || desLang == "" || srcLang == "")
             {
@@ -44,10 +45,10 @@ namespace TranslatorLibrary
 
             try
             {
-                HttpResponseMessage response = CommonFunction.GetHttpClient().PostAsync(TRANSLATE_API_URL, request).GetAwaiter().GetResult();
+                HttpResponseMessage response = await CommonFunction.GetHttpClient().PostAsync(TRANSLATE_API_URL, request);
                 if (response.IsSuccessStatusCode)
                 {
-                    string resultStr = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                    string resultStr = await response.Content.ReadAsStringAsync();
                     DeepLTranslateResult translateResult = JsonConvert.DeserializeObject<DeepLTranslateResult>(resultStr);
                     if (translateResult != null && translateResult.translations != null && translateResult.translations.Count > 0)
                     {
