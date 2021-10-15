@@ -20,8 +20,8 @@
 
             <TextBlock Grid.Row="0" Text="{StaticResource ChooseHandleFuncPage_Introduce}" VerticalAlignment="Center" Margin="15"/>
 
-            <hc:ComboBox Grid.Row="1" Name="OCRLangCombox" VerticalAlignment="Center" Margin="15" Width="200" hc:InfoElement.TitleWidth="80" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource ChooseHandleFuncPage_OCRLangCBox}" hc:Poptip.HitMode="None" hc:Poptip.IsOpen="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" hc:Poptip.Content="{StaticResource ChooseHandleFuncPage_OCRLangCBox_Hint}" hc:Poptip.Placement="Top" SelectionChanged="OCRLangCombox_SelectionChanged" HorizontalAlignment="Left"/>
-            <hc:ComboBox Grid.Row="1" Name="HandleFuncCombox" VerticalAlignment="Center" Margin="15" Width="300" hc:InfoElement.TitleWidth="100" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource ChooseHandleFuncPage_HandleFuncCBox}" SelectionChanged="HandleFuncCombox_SelectionChanged" HorizontalAlignment="Right"/>
+            <hc:ComboBox Grid.Row="1" Name="OCRLangCombox" VerticalAlignment="Center" Margin="15" Width="200" hc:InfoElement.TitleWidth="80" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource ChooseHandleFuncPage_OCRLangCBox}" hc:Poptip.HitMode="None" hc:Poptip.IsOpen="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" hc:Poptip.Content="{StaticResource ChooseHandleFuncPage_OCRLangCBox_Hint}" hc:Poptip.Placement="Top" SelectionChanged="OCRLangCombox_SelectionChanged" HorizontalAlignment="Left"/>
+            <hc:ComboBox Grid.Row="1" Name="HandleFuncCombox" VerticalAlignment="Center" Margin="15" Width="300" hc:InfoElement.TitleWidth="100" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource ChooseHandleFuncPage_HandleFuncCBox}" SelectionChanged="HandleFuncCombox_SelectionChanged" HorizontalAlignment="Right"/>
 
 
             <Button Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15" Content="{StaticResource ChooseHandleFuncPage_RenewAreaBtn}" Click="RenewAreaBtn_Click"></Button>

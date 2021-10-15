@@ -21,12 +21,12 @@
             <TextBlock Grid.Row="0" Text="{StaticResource ChooseHotKeyPage_Introduce}" VerticalAlignment="Center" Margin="15"/>
 
             <StackPanel Orientation="Horizontal" Margin="15" Grid.Row="1">
-                <hc:ComboBox Name="HotKeySourceCombox" VerticalAlignment="Center" Width="200" hc:InfoElement.TitleWidth="80" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource ChooseHotKeyPage_HotKeySourceCBox}" hc:Poptip.HitMode="None" hc:Poptip.IsOpen="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" hc:Poptip.Content="{StaticResource ChooseHotKeyPage_HotKeySourceCBox_Hint}" hc:Poptip.Placement="Top" HorizontalAlignment="Left" SelectionChanged="HotKeySourceCombox_SelectionChanged"/>
+                <hc:ComboBox Name="HotKeySourceCombox" VerticalAlignment="Center" Width="200" hc:InfoElement.TitleWidth="80" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource ChooseHotKeyPage_HotKeySourceCBox}" hc:Poptip.HitMode="None" hc:Poptip.IsOpen="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" hc:Poptip.Content="{StaticResource ChooseHotKeyPage_HotKeySourceCBox_Hint}" hc:Poptip.Placement="Top" HorizontalAlignment="Left" SelectionChanged="HotKeySourceCombox_SelectionChanged"/>
                 <Button Name="ChooseHotkeyBtn" VerticalAlignment="Center" Margin="15" Content="{StaticResource ChooseHotKeyPage_HotKeySetBtn}" Click="HotKeySetBtn_Click"></Button>
                 <TextBlock VerticalAlignment="Center" Margin="15" Name="HotKeyTag"></TextBlock>
             </StackPanel>
 
-            <hc:TextBox Name="OCRDelayBox" Text="1500" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15" Width="250" hc:InfoElement.TitleWidth="130" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource ChooseHotKeyPage_OCRDelayBox}"></hc:TextBox>
+            <hc:TextBox Name="OCRDelayBox" Text="1500" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15" Width="250" hc:InfoElement.TitleWidth="130" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource ChooseHotKeyPage_OCRDelayBox}"></hc:TextBox>
 
             <Button Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="30" Width="200" Content="{StaticResource ChooseHotKeyPage_ConfirmBtn}" Click="ConfirmBtn_Click"></Button>
 

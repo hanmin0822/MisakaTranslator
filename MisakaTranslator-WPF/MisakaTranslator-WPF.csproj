@@ -486,7 +486,7 @@
       <Version>4.7.0.9</Version>
     </PackageReference>
     <PackageReference Include="HandyControl">
-      <Version>2.4.0</Version>
+      <Version>3.2.*</Version>
     </PackageReference>
     <PackageReference Include="System.Data.SQLite">
       <Version>1.0.112</Version>

@@ -14,10 +14,10 @@
             <StackPanel Background="White">
                 <TextBlock Text="{StaticResource DreyeTransSettingsPage_Introduce}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
                 <StackPanel Margin="20,20,20,0">
-                    <hc:TextBox hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource DreyeTransSettingsPage_Path}" Name="PathBox" ShowClearButton="True"/>
+                    <hc:TextBox hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource DreyeTransSettingsPage_Path}" Name="PathBox" ShowClearButton="True"/>
                     <Button Margin="0,10,0,0" Content="{StaticResource JbeijingTransSettingsPage_ChoosePath}" Width="122" Click="ChoosePathBtn_Click" HorizontalAlignment="Right" ></Button>
                     <hc:Divider/>
-                    <hc:TextBox hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource API_testSrcText}" Name="TestSrcText" ShowClearButton="True" Text="本ソフトウェアのご利用を歓迎します。"/>
+                    <hc:TextBox hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource API_testSrcText}" Name="TestSrcText" ShowClearButton="True" Text="本ソフトウェアのご利用を歓迎します。"/>
 
                     <Grid Margin="0,10,0,0">
                         <Grid.ColumnDefinitions>
@@ -26,8 +26,8 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <hc:TextBox hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource API_testSrcLang}" Name="TestSrcLang" ShowClearButton="True" Text="jp" TextAlignment="Center"/>
-                        <hc:TextBox Grid.Column="2" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource API_testDstLang}" Name="TestDstLang" ShowClearButton="True" Text="zh" TextAlignment="Center"/>
+                        <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource API_testSrcLang}" Name="TestSrcLang" ShowClearButton="True" Text="jp" TextAlignment="Center"/>
+                        <hc:TextBox Grid.Column="2" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource API_testDstLang}" Name="TestDstLang" ShowClearButton="True" Text="zh" TextAlignment="Center"/>
                         <Button Grid.Column="3" Content="{StaticResource API_testTransBtn}" Margin="10,0,0,0" Width="122" Click="TransTestBtn_Click" ></Button>
                     </Grid>
 

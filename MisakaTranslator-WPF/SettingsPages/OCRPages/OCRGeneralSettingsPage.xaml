@@ -12,11 +12,11 @@
     <hc:ScrollViewer HorizontalScrollBarVisibility="Disabled">
         <StackPanel Background="White">
             <TextBlock Text="{StaticResource OCRGeneralSettingsPage_Introduce}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
-            <hc:ComboBox Name="OCRSourceCombox" Margin="10,10,10,50" Width="380" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource OCRGeneralSettingsPage_OCRSource}" SelectionChanged="OCRsourceCombox_SelectionChanged" HorizontalAlignment="Left" />
+            <hc:ComboBox Name="OCRSourceCombox" Margin="10,10,10,50" Width="380" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource OCRGeneralSettingsPage_OCRSource}" SelectionChanged="OCRsourceCombox_SelectionChanged" HorizontalAlignment="Left" />
 
             <TextBlock Text="{StaticResource OCRGeneralSettingsPage_Introduce_GlobalOCR}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
-            <hc:TextBox Name="OCRHotKeyBox" Margin="10" Width="380" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource OCRGeneralSettingsPage_GlobalOCRHotKey}"  HorizontalAlignment="Left" KeyDown="OCRHotKeyBox_KeyDown" />
-            <hc:ComboBox Name="OCRLangCombox" Margin="10" Width="200" hc:InfoElement.TitleWidth="80" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource ChooseHandleFuncPage_OCRLangCBox}" HorizontalAlignment="Left" SelectionChanged="OCRLangCombox_SelectionChanged" />
+            <hc:TextBox Name="OCRHotKeyBox" Margin="10" Width="380" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource OCRGeneralSettingsPage_GlobalOCRHotKey}"  HorizontalAlignment="Left" KeyDown="OCRHotKeyBox_KeyDown" />
+            <hc:ComboBox Name="OCRLangCombox" Margin="10" Width="200" hc:InfoElement.TitleWidth="80" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource ChooseHandleFuncPage_OCRLangCBox}" HorizontalAlignment="Left" SelectionChanged="OCRLangCombox_SelectionChanged" />
 
         </StackPanel>
     </hc:ScrollViewer>

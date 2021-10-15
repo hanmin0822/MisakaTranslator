@@ -14,7 +14,7 @@
             <StackPanel Background="White">
                 <TextBlock Text="{StaticResource TTSSettingsPage_Hint}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
                 <StackPanel Margin="20,20,20,0">
-                    <hc:ComboBox Name="TTSSourceCombox" Margin="10,10,10,10"  Width="500" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.TitleWidth="100" hc:InfoElement.Title="{StaticResource TTSSettingsPage_TTSSourceLabel}" SelectionChanged="TTSSourceCombox_SelectionChanged" HorizontalAlignment="Left" />
+                    <hc:ComboBox Name="TTSSourceCombox" Margin="10,10,10,10"  Width="500" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="100" hc:InfoElement.Title="{StaticResource TTSSettingsPage_TTSSourceLabel}" SelectionChanged="TTSSourceCombox_SelectionChanged" HorizontalAlignment="Left" />
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{StaticResource TTSSettingsPage_TTSVolumeLabel}" VerticalAlignment="Center" Margin="10"/>
@@ -27,7 +27,7 @@
                     </StackPanel>
 
                     <hc:Divider/>
-                    <hc:TextBox Margin="10" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource TTSSettingsPage_TestText}" Name="TestSrcText" ShowClearButton="True" Text="本ソフトウェアのご利用を歓迎します。"/>
+                    <hc:TextBox Margin="10" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource TTSSettingsPage_TestText}" Name="TestSrcText" ShowClearButton="True" Text="本ソフトウェアのご利用を歓迎します。"/>
                     <Button Content="{StaticResource TTSSettingsPage_TestBtn}" Margin="10,0,10,10" Width="122" Click="TestBtn_Click" HorizontalAlignment="Right" ></Button>
                 </StackPanel>
             </StackPanel>

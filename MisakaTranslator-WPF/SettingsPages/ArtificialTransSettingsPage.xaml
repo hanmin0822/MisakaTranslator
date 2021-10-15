@@ -18,13 +18,13 @@
                         <TextBlock Text="{StaticResource ArtificialTransSettingsPage_ATon_Hint}" Margin="0,20,0,0" TextWrapping="WrapWithOverflow"/>
                         <CheckBox Name="ATonCheckBox" Content="{StaticResource ArtificialTransSettingsPage_ATon}" Margin="0,20,0,0" hc:InfoElement.Title="{StaticResource HookSettingsPage_AutoHook}" Click="ATonCheckBox_Click" HorizontalAlignment="Left"/>
 
-                        <hc:TextBox hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource ArtificialTransSettingsPage_ChoosePath_Hint}" Name="PathBox" ShowClearButton="True" Margin="0,20,0,0"/>
+                        <hc:TextBox hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource ArtificialTransSettingsPage_ChoosePath_Hint}" Name="PathBox" ShowClearButton="True" Margin="0,20,0,0"/>
                         <Button Margin="0,10,0,0" Content="{StaticResource JbeijingTransSettingsPage_ChoosePath}" Width="122" Click="ChoosePathBtn_Click" HorizontalAlignment="Right" ></Button>
 
                         <hc:Divider/>
 
                         <StackPanel Orientation="Horizontal">
-                            <hc:ComboBox Name="PatchFileCombox" Margin="0,0,0,0" Width="380" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource ArtificialTransSettingsPage_GameChoose}"  HorizontalAlignment="Left"/>
+                            <hc:ComboBox Name="PatchFileCombox" Margin="0,0,0,0" Width="380" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource ArtificialTransSettingsPage_GameChoose}"  HorizontalAlignment="Left"/>
                             <Button Content="{StaticResource ArtificialTransSettingsPage_ExportBtn}" Margin="10,0,0,0"  HorizontalAlignment="Right" Click="ExportBtn_Click"/>
                         </StackPanel>
                         

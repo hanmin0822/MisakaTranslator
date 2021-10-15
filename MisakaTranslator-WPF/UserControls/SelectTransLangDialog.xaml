@@ -9,8 +9,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Border Background="{DynamicResource RegionBrush}" Padding="24">
         <StackPanel>
-            <hc:ComboBox Name="SrcLangCombox" Width="380" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource ChooseLanguagePage_srcLang}"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <hc:ComboBox Margin="0,20,0,0" Name="DstLangCombox" Width="380" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource ChooseLanguagePage_dstLang}"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <hc:ComboBox Name="SrcLangCombox" Width="380" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource ChooseLanguagePage_srcLang}"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <hc:ComboBox Margin="0,20,0,0" Name="DstLangCombox" Width="380" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource ChooseLanguagePage_dstLang}"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
             <Button Margin="0,20,0,0" Height="30" Click="Button_Click" Command="hc:ControlCommands.Close" Style="{StaticResource ButtonSuccess}" Content="{StaticResource ChooseLanguagePage_BtnConfirm}"/>
         </StackPanel>
