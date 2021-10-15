@@ -19,8 +19,8 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Text="{StaticResource ChooseLanguagePage_Introduce}" VerticalAlignment="Center" Margin="10"/>
-            <hc:ComboBox Grid.Row="1" Name="SrcLangCombox" Width="380" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource ChooseLanguagePage_srcLang}"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <hc:ComboBox Grid.Row="2" Name="DstLangCombox" Width="380" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource ChooseLanguagePage_dstLang}"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <hc:ComboBox Grid.Row="1" Name="SrcLangCombox" Width="380" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource ChooseLanguagePage_srcLang}"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <hc:ComboBox Grid.Row="2" Name="DstLangCombox" Width="380" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource ChooseLanguagePage_dstLang}"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <Button Grid.Row="3" Content="{StaticResource ChooseLanguagePage_BtnConfirm}" HorizontalAlignment="Right" Margin="20" Width="200" Click="ConfirmBtn_Click"></Button>
         </Grid>
 

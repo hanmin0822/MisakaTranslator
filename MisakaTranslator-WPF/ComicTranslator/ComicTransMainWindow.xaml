@@ -41,14 +41,14 @@
         </hc:ButtonGroup>
 
         
-            <hc:TextBox Name="sourceTextBox" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Margin="0,10,0,0" Height="120" hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource ComicTransMainWindow_TB_OCRsource}"></hc:TextBox>
+            <hc:TextBox Name="sourceTextBox" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Margin="0,10,0,0" Height="120" hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource ComicTransMainWindow_TB_OCRsource}"></hc:TextBox>
             <hc:ButtonGroup Orientation="Horizontal" Margin="0,0,0,0">
                 <Button Content="{StaticResource ComicTransMainWindow_BTNbox_inputJPN}" Click="InputJpnBtn_Click"></Button>
                 <Button Content="{StaticResource ComicTransMainWindow_Btn_RemoveBlank}" Click="RemoveBlankBtn_Click"></Button>
                 <Button Content="{StaticResource ComicTransMainWindow_BTNbox_trans}" Click="transBtn_Click" ></Button>
             </hc:ButtonGroup>
             
-            <hc:TextBox Name="transTextBox" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Margin="0,10,0,10" Height="120" hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource ComicTransMainWindow_TB_trans}"></hc:TextBox>
+            <hc:TextBox Name="transTextBox" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Margin="0,10,0,10" Height="120" hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource ComicTransMainWindow_TB_trans}"></hc:TextBox>
 
             <hc:ButtonGroup Orientation="Horizontal" Margin="0,0,0,0">
                 <RadioButton Name="RealsizeTBtn" Content="{StaticResource ComicTransMainWindow_Btn_RealSize}" Click="RealsizeTBtn_Click" IsChecked="True"></RadioButton>

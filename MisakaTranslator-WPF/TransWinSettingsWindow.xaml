@@ -25,7 +25,7 @@
             <TabItem Header="{StaticResource TransWinSettingsWin_Tab_source}">
 
                 <StackPanel>
-                    <hc:ComboBox Name="sourceFont" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontName}" Margin="10" />
+                    <hc:ComboBox Name="sourceFont" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontName}" Margin="10" />
 
                     <hc:NumericUpDown Name="sourceFontSize" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontSize}" Margin="10" Style="{StaticResource NumericUpDownExtend}"/>
 
@@ -39,7 +39,7 @@
             <TabItem Header="{StaticResource TransWinSettingsWin_Tab_first}">
                 
                 <StackPanel>
-                    <hc:ComboBox Name="firstFont" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontName}" Margin="10" />
+                    <hc:ComboBox Name="firstFont" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontName}" Margin="10" />
 
                     <hc:NumericUpDown Name="firstFontSize" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontSize}" Margin="10" Style="{StaticResource NumericUpDownExtend}" />
 
@@ -53,7 +53,7 @@
             <TabItem Header="{StaticResource TransWinSettingsWin_Tab_second}">
                 
                 <StackPanel>
-                    <hc:ComboBox Name="secondFont" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontName}" Margin="10" />
+                    <hc:ComboBox Name="secondFont" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontName}" Margin="10" />
 
                     <hc:NumericUpDown Name="secondFontSize" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontSize}" Margin="10" Style="{StaticResource NumericUpDownExtend}"/>
 

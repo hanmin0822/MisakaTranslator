@@ -19,7 +19,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <hc:TextBox hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource BaiduOCRSettingsPage_APIKEY}" Name="APIKEYBox" ShowClearButton="True"/>
+                        <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource BaiduOCRSettingsPage_APIKEY}" Name="APIKEYBox" ShowClearButton="True"/>
                         <Button Grid.Column="1" Content="{StaticResource API_applyBtn}" Width="122" Click="ApplyBtn_Click" Margin="10,0,0,0"/>
                     </Grid>
                     <Grid Margin="0,10,0,0">
@@ -27,7 +27,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <hc:TextBox hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource BaiduOCRSettingsPage_SecretKey}" Name="SecretKeyBox" ShowClearButton="True"/>
+                        <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource BaiduOCRSettingsPage_SecretKey}" Name="SecretKeyBox" ShowClearButton="True"/>
                         <Button Grid.Column="1" Content="{StaticResource API_authTestBtn}" Width="122" Click="AuthTestBtn_Click" Margin="10,0,0,0"/>
                     </Grid>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Right">

@@ -23,9 +23,9 @@
                 <StackPanel Grid.Row="1">
                     <hc:ComboBox Name="RepairFuncCombox" Margin="10,10,10,0" VerticalAlignment="Center" SelectionChanged="RepairFuncCombox_SelectionChanged" />
 
-                    <hc:TextBox Name="sourceTextBox" TextWrapping="Wrap" Margin="10,0,10,0" Height="100" hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource ChooseTextRepairFuncPage_SourceText}"></hc:TextBox>
+                    <hc:TextBox Name="sourceTextBox" TextWrapping="Wrap" Margin="10,0,10,0" Height="100" hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource ChooseTextRepairFuncPage_SourceText}"></hc:TextBox>
 
-                    <hc:TextBox Name="repairedTextBox" TextWrapping="Wrap" Margin="10,0,10,0" Height="100" hc:InfoElement.TitleAlignment="Top" hc:InfoElement.Title="{StaticResource ChooseTextRepairFuncPage_RepairedText}"></hc:TextBox>
+                    <hc:TextBox Name="repairedTextBox" TextWrapping="Wrap" Margin="10,0,10,0" Height="100" hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource ChooseTextRepairFuncPage_RepairedText}"></hc:TextBox>
 
                 </StackPanel>
                 

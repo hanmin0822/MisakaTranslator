@@ -20,10 +20,10 @@
         <TextBox Name="srcText" Grid.Row="1" Margin="5" TextWrapping="Wrap"/>
 
 
-        <hc:TextBox Margin="5" Name="srcWord" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200" hc:InfoElement.TitleWidth="50" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource AddOptWin_beforeBox}"/>
-        <hc:TextBox Margin="5" Name="dstWord" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Width="210" hc:InfoElement.TitleWidth="60" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource AddOptWin_afterBox}"/>
+        <hc:TextBox Margin="5" Name="srcWord" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Width="200" hc:InfoElement.TitleWidth="50" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource AddOptWin_beforeBox}"/>
+        <hc:TextBox Margin="5" Name="dstWord" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Width="210" hc:InfoElement.TitleWidth="60" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource AddOptWin_afterBox}"/>
 
-        <hc:ComboBox Grid.Row="3" Name="wordTypeCombox" Margin="5" VerticalAlignment="Center" Width="150" hc:InfoElement.TitleWidth="50" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource AddOptWin_wordType}"  HorizontalAlignment="Left"/>
+        <hc:ComboBox Grid.Row="3" Name="wordTypeCombox" Margin="5" VerticalAlignment="Center" Width="150" hc:InfoElement.TitleWidth="50" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource AddOptWin_wordType}"  HorizontalAlignment="Left"/>
         <Button Grid.Row="3" HorizontalAlignment="Right" Width="100" Margin="5" Content="{StaticResource AddOptWin_confirmBtn}" Click="ConfirmBtn_Click"/>
 
     </Grid>

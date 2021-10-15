@@ -19,12 +19,12 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <hc:TextBox hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource CaiyunTransSettingsPage_Token}" Name="TransTokenBox" ShowClearButton="True"/>
+                        <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource CaiyunTransSettingsPage_Token}" Name="TransTokenBox" ShowClearButton="True"/>
                         <Button Grid.Column="1" Content="{StaticResource API_applyBtn}" Margin="10,0,0,0" Width="122" Click="ApplyBtn_Click" ></Button>
                     </Grid>
                     <Button Content="{StaticResource API_authTestBtn}" Margin="0,10,0,0" Width="122" Click="AuthTestBtn_Click" HorizontalAlignment="Right" ></Button>
                     <hc:Divider/>
-                    <hc:TextBox hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource API_testSrcText}" Name="TestSrcText" ShowClearButton="True" Text="本ソフトウェアのご利用を歓迎します。"/>
+                    <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource API_testSrcText}" Name="TestSrcText" ShowClearButton="True" Text="本ソフトウェアのご利用を歓迎します。"/>
                     <Grid Margin="0,10,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -32,8 +32,8 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <hc:TextBox hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource API_testSrcLang}" Name="TestSrcLang" ShowClearButton="True" Text="jp" TextAlignment="Center"/>
-                        <hc:TextBox Grid.Column="2" hc:InfoElement.TitleAlignment="Left" hc:InfoElement.Title="{StaticResource API_testDstLang}" Name="TestDstLang" ShowClearButton="True" Text="zh" TextAlignment="Center"/>
+                        <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource API_testSrcLang}" Name="TestSrcLang" ShowClearButton="True" Text="jp" TextAlignment="Center"/>
+                        <hc:TextBox Grid.Column="2" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource API_testDstLang}" Name="TestDstLang" ShowClearButton="True" Text="zh" TextAlignment="Center"/>
                         <Button Grid.Column="3" Content="{StaticResource API_testTransBtn}" Margin="10,0,0,0" Width="122" Click="TransTestBtn_Click" ></Button>
                     </Grid>
                     <StackPanel Margin="0,10,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
