@@ -28,13 +28,13 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             TransSecretKeyBox.Text = Common.appSettings.TXOSecretKey;
         }
 
-        private void AuthTestBtn_Click(object sender, RoutedEventArgs e)
+        private async void AuthTestBtn_Click(object sender, RoutedEventArgs e)
         {
             Common.appSettings.TXOSecretId = TransAppIDBox.Text;
             Common.appSettings.TXOSecretKey = TransSecretKeyBox.Text;
             ITranslator Trans = new TencentOldTranslator();
             Trans.TranslatorInit(TransAppIDBox.Text, TransSecretKeyBox.Text);
-            if (Trans.Translate("apple", "zh", "en") != null)
+            if (await Trans.TranslateAsync("apple", "zh", "en") != null)
             {
                 HandyControl.Controls.Growl.Success($"腾讯私人{Application.Current.Resources["APITest_Success_Hint"]}");
             }
@@ -59,11 +59,11 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             System.Diagnostics.Process.Start(TencentOldTranslator.GetUrl_bill());
         }
 
-        private void TransTestBtn_Click(object sender, RoutedEventArgs e)
+        private async void TransTestBtn_Click(object sender, RoutedEventArgs e)
         {
             ITranslator Trans = new TencentOldTranslator();
             Trans.TranslatorInit(Common.appSettings.TXOSecretId, Common.appSettings.TXOSecretKey);
-            string res = Trans.Translate(TestSrcText.Text, TestDstLang.Text, TestSrcLang.Text);
+            string res = await Trans.TranslateAsync(TestSrcText.Text, TestDstLang.Text, TestSrcLang.Text);
             if (res != null)
             {
                 HandyControl.Controls.MessageBox.Show(res, Application.Current.Resources["MessageBox_Result"].ToString());

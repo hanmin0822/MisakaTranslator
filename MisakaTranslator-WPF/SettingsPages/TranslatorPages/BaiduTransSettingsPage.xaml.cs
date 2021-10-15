@@ -28,14 +28,14 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             BDTransSecretKeyBox.Text = Common.appSettings.BDsecretKey;
         }
 
-        private void AuthTestBtn_Click(object sender, RoutedEventArgs e)
+        private async void AuthTestBtn_Click(object sender, RoutedEventArgs e)
         {
             Common.appSettings.BDappID = BDTransAppIDBox.Text;
             Common.appSettings.BDsecretKey = BDTransSecretKeyBox.Text;
             ITranslator BDTrans = new BaiduTranslator();
             BDTrans.TranslatorInit(BDTransAppIDBox.Text, BDTransSecretKeyBox.Text);
 
-            if (BDTrans.Translate("apple", "zh", "en") != null)
+            if (await BDTrans.TranslateAsync("apple", "zh", "en") != null)
             {
                 HandyControl.Controls.Growl.Success($"百度翻译{Application.Current.Resources["APITest_Success_Hint"]}");
             }
@@ -60,11 +60,11 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             System.Diagnostics.Process.Start(BaiduTranslator.GetUrl_bill());
         }
 
-        private void TransTestBtn_Click(object sender, RoutedEventArgs e)
+        private async void TransTestBtn_Click(object sender, RoutedEventArgs e)
         {
             ITranslator BDTrans = new BaiduTranslator();
             BDTrans.TranslatorInit(Common.appSettings.BDappID, Common.appSettings.BDsecretKey);
-            string res = BDTrans.Translate(TestSrcText.Text, TestDstLang.Text, TestSrcLang.Text);
+            string res = await BDTrans.TranslateAsync(TestSrcText.Text, TestDstLang.Text, TestSrcLang.Text);
 
             if (res != null)
             {

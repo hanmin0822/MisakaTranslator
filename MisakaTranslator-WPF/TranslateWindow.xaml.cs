@@ -400,13 +400,13 @@ namespace MisakaTranslator_WPF
                                 string transRes2 = string.Empty;
                                 if (_translator1 != null)
                                 {
-                                    transRes1 = _translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                                    transRes1 = _translator1.TranslateAsync(beforeString, Common.UsingDstLang, Common.UsingSrcLang).Result;
                                     if(transRes1 == null)
                                         Growl.ErrorGlobal(_translator1.GetType().Name + ": " + _translator1.GetLastError());
                                 }
                                 if (_translator2 != null)
                                 {
-                                    transRes2 = _translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                                    transRes2 = _translator2.TranslateAsync(beforeString, Common.UsingDstLang, Common.UsingSrcLang).Result;
                                     if(transRes2 == null)
                                         Growl.ErrorGlobal(_translator2.GetType().Name + ": " + _translator2.GetLastError());
                                 }
@@ -611,13 +611,13 @@ namespace MisakaTranslator_WPF
                     string transRes2 = string.Empty;
                     if (_translator1 != null)
                     {
-                        transRes1 = _translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                        transRes1 = await _translator1.TranslateAsync(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
                         if(transRes1 == null)
                             Application.Current.Dispatcher.Invoke(() => Growl.ErrorGlobal(_translator1.GetType().Name + ": " + _translator1.GetLastError()));
                     }
                     if (_translator2 != null)
                     {
-                        transRes2 = _translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                        transRes2 = await _translator2.TranslateAsync(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
                         if(transRes2 == null)
                             Application.Current.Dispatcher.Invoke(() => Growl.ErrorGlobal(_translator2.GetType().Name + ": " + _translator2.GetLastError()));
                     }
@@ -819,11 +819,11 @@ namespace MisakaTranslator_WPF
                 string transRes2 = string.Empty;
                 if (_translator1 != null)
                 {
-                    transRes1 = _translator1.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                    transRes1 = _translator1.TranslateAsync(beforeString, Common.UsingDstLang, Common.UsingSrcLang).Result;
                 }
                 if (_translator2 != null)
                 {
-                    transRes2 = _translator2.Translate(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                    transRes2 = _translator2.TranslateAsync(beforeString, Common.UsingDstLang, Common.UsingSrcLang).Result;
                 }
 
                 //6.翻译后处理

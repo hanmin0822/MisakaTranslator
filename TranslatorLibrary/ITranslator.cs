@@ -22,7 +22,7 @@ namespace TranslatorLibrary
         /// <param name="desLang">目标语言</param>
         /// <param name="srcLang">源语言</param>
         /// <returns>翻译后的语句,如果翻译有错误会返回空，可以通过GetLastError来获取错误</returns>
-        string Translate(string sourceText, string desLang, string srcLang);
+        Task<string> TranslateAsync(string sourceText, string desLang, string srcLang);
 
         /// <summary>
         /// 返回最后一次错误的ID或原因

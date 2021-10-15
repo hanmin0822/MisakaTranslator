@@ -21,7 +21,7 @@ namespace TranslatorLibrary
             return errorInfo;
         }
 
-        public string Translate(string sourceText, string desLang, string srcLang)
+        public async Task<string> TranslateAsync(string sourceText, string desLang, string srcLang)
         {
             if (sourceText == "" || desLang == "" || srcLang == "")
             {
@@ -49,7 +49,7 @@ namespace TranslatorLibrary
             req.Headers.Add("X-Authorization", "token " + caiyunToken);
             try
             {
-                retString = hc.PostAsync(url, req).GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                retString = await (await hc.PostAsync(url, req)).Content.ReadAsStringAsync();
             }
             catch (System.Net.Http.HttpRequestException ex)
             {

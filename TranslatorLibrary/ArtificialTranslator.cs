@@ -196,7 +196,7 @@ namespace TranslatorLibrary
          * 
          */
         #endregion
-        public string Translate(string sourceText, string desLang, string srcLang)
+        public async Task<string> TranslateAsync(string sourceText, string desLang, string srcLang)
         {
             //sourceText = addNoise(addNoise2(sourceText)); //The translator is able to find the correct match on hook mode under a high noise
             Console.WriteLine(String.Format("Input:{0}", sourceText));

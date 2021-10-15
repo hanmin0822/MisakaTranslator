@@ -19,7 +19,7 @@ namespace TranslatorLibrary
             return errorInfo;
         }
 
-        public string Translate(string sourceText, string desLang, string srcLang)
+        public async Task<string> TranslateAsync(string sourceText, string desLang, string srcLang)
         {
             if (desLang == "kr")
                 desLang = "ko";
@@ -35,7 +35,7 @@ namespace TranslatorLibrary
 
             try
             {
-                string retString = hc.GetStringAsync(apiurl + sourceText).GetAwaiter().GetResult();
+                string retString = await hc.GetStringAsync(apiurl + sourceText);
                 var doc = JsonConvert.DeserializeObject<dynamic>(retString);
                 return doc.text[0];
             }

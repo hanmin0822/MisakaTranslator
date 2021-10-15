@@ -29,7 +29,7 @@ namespace MisakaTranslator_WPF
             img = i;
         }
 
-        private void dataInit()
+        private async void dataInit()
         {
             OCREngine ocr;
             string res = null;
@@ -113,11 +113,11 @@ namespace MisakaTranslator_WPF
                 string transRes2 = "";
                 if (translator1 != null)
                 {
-                    transRes1 = translator1.Translate(res, Common.UsingDstLang, Common.UsingSrcLang);
+                    transRes1 = await translator1.TranslateAsync(res, Common.UsingDstLang, Common.UsingSrcLang);
                 }
                 if (translator2 != null)
                 {
-                    transRes2 = translator2.Translate(res, Common.UsingDstLang, Common.UsingSrcLang);
+                    transRes2 = await translator2.TranslateAsync(res, Common.UsingDstLang, Common.UsingSrcLang);
                 }
 
                 FirstTransText.Text = transRes1;

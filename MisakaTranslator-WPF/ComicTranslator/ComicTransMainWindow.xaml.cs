@@ -224,13 +224,13 @@ namespace MisakaTranslator_WPF.ComicTranslator
             sourceTextBox.Focus();
         }
 
-        private void transBtn_Click(object sender, RoutedEventArgs e)
+        private async void transBtn_Click(object sender, RoutedEventArgs e)
         {
             string sourceText = sourceTextBox.Text;
             
             if (_translator1 != null)
             {
-                transRes1 = _translator1.Translate(sourceText, DstLang, SrcLang);
+                transRes1 = await _translator1.TranslateAsync(sourceText, DstLang, SrcLang);
             }
             else
             {
@@ -239,7 +239,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
 
             if (_translator2 != null)
             {
-                transRes2 = _translator2.Translate(sourceText, DstLang, SrcLang);
+                transRes2 = await _translator2.TranslateAsync(sourceText, DstLang, SrcLang);
             }
             else
             {
