@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MisakaTranslator_WPF"
         mc:Ignorable="d"
-        Title="ScreenCaptureWindow" Height="450" Width="800" WindowStyle="None" ResizeMode="NoResize" Closing="Window_Closing">
+        Title="ScreenCaptureWindow" Height="450" Width="800" WindowStyle="None" ResizeMode="NoResize" WindowState="Maximized" Closing="Window_Closing">
     <Grid>
         <Image Name="imgMeasure" HorizontalAlignment="Center" Stretch="Uniform"/>
         <InkCanvas Name="inkCanvasMeasure" EditingMode="None" Background="Transparent" Strokes="{Binding InkStrokes, Mode=TwoWay}" HorizontalAlignment="Center" 
