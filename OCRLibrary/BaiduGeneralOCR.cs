@@ -36,7 +36,6 @@ namespace OCRLibrary
             using (var requestStream = request.GetRequestStream())
             {
                 await requestStream.WriteAsync(buffer, 0, buffer.Length);
-                requestStream.Close();
             }
             HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
             StreamReader reader = new StreamReader(response.GetResponseStream());
