@@ -39,7 +39,7 @@ namespace MisakaTranslator_WPF
                 if (ocr.OCR_Init("", "") != false)
                 {
                     ocr.SetOCRSourceLang(Common.appSettings.GlobalOCRLang);
-                    res = ocr.OCRProcess(new System.Drawing.Bitmap(img));
+                    res = await ocr.OCRProcessAsync(new System.Drawing.Bitmap(img));
 
                     if (res != null)
                     {
@@ -61,7 +61,7 @@ namespace MisakaTranslator_WPF
                 if (ocr.OCR_Init(Common.appSettings.Tesseract5OCR_Path, Common.appSettings.Tesseract5OCR_Args))
                 {
                     ocr.SetOCRSourceLang(Common.appSettings.GlobalOCRLang);
-                    res = ocr.OCRProcess(new System.Drawing.Bitmap(img));
+                    res = await ocr.OCRProcessAsync(new System.Drawing.Bitmap(img));
 
                     if (res != null)
                     {
@@ -83,7 +83,7 @@ namespace MisakaTranslator_WPF
                 if (ocr.OCR_Init(Common.appSettings.BDOCR_APIKEY, Common.appSettings.BDOCR_SecretKey))
                 {
                     ocr.SetOCRSourceLang(Common.appSettings.GlobalOCRLang);
-                    res = ocr.OCRProcess(new System.Drawing.Bitmap(img));
+                    res = await ocr.OCRProcessAsync(new System.Drawing.Bitmap(img));
 
                     if (res != null)
                     {

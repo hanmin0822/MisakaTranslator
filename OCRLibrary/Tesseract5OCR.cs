@@ -15,7 +15,7 @@ namespace OCRLibrary
         private string path;
         private string args;
 
-        public override string OCRProcess(Bitmap img)
+        public override async Task<string> OCRProcessAsync(Bitmap img)
         {
             Bitmap processedImg = (Bitmap)img.Clone();
             try
@@ -32,7 +32,17 @@ namespace OCRLibrary
                 p.Start();
                 // Wait for the child process to exit before
                 // reading to the end of its redirected stream.
-                p.WaitForExit();
+                await Task.Run(() =>
+                {
+                    try
+                    {
+                        p.WaitForExit();
+                    }
+                    catch (Exception e)
+                    {
+                        errorInfo = e.Message;
+                    }
+                });
                 // Read the output stream first and then wait.
                 string output = p.StandardOutput.ReadToEnd(); // usually empty
                 string err = p.StandardError.ReadToEnd();     // information is all here

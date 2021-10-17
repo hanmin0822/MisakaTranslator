@@ -51,14 +51,14 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             GC.Collect();
         }
 
-        private void OCRTestBtn_Click(object sender, RoutedEventArgs e)
+        private async void OCRTestBtn_Click(object sender, RoutedEventArgs e)
         {
             
             if (Common.appSettings.OCRsource == "TesseractOCR")
             {
                 if (Common.ocr.OCR_Init("", "") != false)
                 {
-                    string res = Common.ocr.OCRProcess();
+                    string res = await Common.ocr.OCRProcessAsync();
 
                     if (res != null)
                     {
@@ -77,7 +77,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             {
                 if (Common.ocr.OCR_Init(Common.appSettings.BDOCR_APIKEY, Common.appSettings.BDOCR_SecretKey))
                 {
-                    string res = Common.ocr.OCRProcess();
+                    string res = await Common.ocr.OCRProcessAsync();
 
                     if (res != null)
                     {
@@ -96,7 +96,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             {
                 if (Common.ocr.OCR_Init(Common.appSettings.Tesseract5OCR_Path, Common.appSettings.Tesseract5OCR_Args))
                 {
-                    string res = Common.ocr.OCRProcess();
+                    string res = await Common.ocr.OCRProcessAsync();
 
                     if (res != null)
                     {

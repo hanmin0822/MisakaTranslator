@@ -6,6 +6,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace OCRLibrary
@@ -17,7 +18,7 @@ namespace OCRLibrary
         private string accessToken;
         private string langCode;
 
-        public override string OCRProcess(Bitmap img)
+        public override async Task<string> OCRProcessAsync(Bitmap img)
         {
             if (img == null || langCode == null || langCode == "") {
                 errorInfo = "Param Missing";
@@ -32,10 +33,14 @@ namespace OCRLibrary
             String str = "language_type=" + langCode + "&image=" + HttpUtility.UrlEncode(base64);
             byte[] buffer = Encoding.Default.GetBytes(str);
             request.ContentLength = buffer.Length;
-            request.GetRequestStream().Write(buffer, 0, buffer.Length);
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            using (var requestStream = request.GetRequestStream())
+            {
+                await requestStream.WriteAsync(buffer, 0, buffer.Length);
+                requestStream.Close();
+            }
+            HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
             StreamReader reader = new StreamReader(response.GetResponseStream());
-            string result = reader.ReadToEnd();
+            string result = await reader.ReadToEndAsync();
             response.Close();
 
             string ret = "";

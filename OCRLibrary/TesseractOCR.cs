@@ -13,13 +13,19 @@ namespace OCRLibrary
         public string srcLangCode;//OCR识别语言 jpn=日语 eng=英语
         private TesseractEngine TessOCR;
 
-        public override string OCRProcess(Bitmap img)
+        public override async Task<string> OCRProcessAsync(Bitmap img)
         {
-            try {
-                var page = TessOCR.Process(img);
-                string res = page.GetText();
-                page.Dispose();
-                return res;
+            try
+            {
+                return await Task.Run(() =>
+                {
+                    using (var page = TessOCR.Process(img))
+                    {
+                        string res = page.GetText();
+                        page.Dispose();
+                        return res;
+                    }
+                });
             }
             catch (Exception ex) {
                 errorInfo = ex.Message;
