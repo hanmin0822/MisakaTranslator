@@ -25,13 +25,13 @@ namespace OCRLibrary
         /// OCR处理，根据设定的截图区域自动截图后识别
         /// </summary>
         /// <returns>返回识别结果，如果为空可通过GetLastError得到错误提示</returns>
-        public async Task<string> OCRProcessAsync()
+        public Task<string> OCRProcessAsync()
         {
             if (OCRArea != null)
             {
                 Bitmap img = new Bitmap(ScreenCapture.GetWindowRectCapture(WinHandle, OCRArea, isAllWin));
                 Bitmap processedImg = ImageProcFunc.Auto_Thresholding(img, imgProc);
-                return await OCRProcessAsync(new Bitmap(processedImg));
+                return OCRProcessAsync(new Bitmap(processedImg));
             }
             else
             {
