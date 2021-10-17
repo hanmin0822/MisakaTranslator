@@ -295,7 +295,7 @@ namespace MisakaTranslator_WPF
                         // 重新OCR不需要等待
                         if (!isRenew)
                         {
-                            Thread.Sleep(Common.UsingOCRDelay);
+                            await Task.Delay(Common.UsingOCRDelay);
                         }
 
                         string srcText = await Common.ocr.OCRProcessAsync();
