@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -56,6 +56,8 @@ namespace MisakaTranslator_WPF
         private bool _isShowSource; //是否显示原文
         private bool _isLocked;
 
+        private readonly object _saveTransResultLock = new object(); // 读写数据库和_gameTextHistory的线程锁
+
         private TextSpeechHelper _textSpeechHelper;//TTS朗读对象
 
         private IntPtr winHandle;//窗口句柄，用于设置活动窗口，以达到全屏状态下总在最前的目的
@@ -104,7 +106,7 @@ namespace MisakaTranslator_WPF
 
             if (Common.transMode == 1)
             {
-                Common.textHooker.Sevent += DataRecvEventHandler;
+                Common.textHooker.Sevent += TranslateEventHook;
             }
             else if (Common.transMode == 2)
             {
@@ -257,7 +259,7 @@ namespace MisakaTranslator_WPF
         /// </summary>
         void Hook_OnKeyBoardActivity(object sender)
         {
-            OCR();
+            TranslateEventOcr();
         }
 
         /// <summary>
@@ -270,11 +272,15 @@ namespace MisakaTranslator_WPF
             if (Common.isAllWindowCap && Process.GetCurrentProcess().Id != FindWindowInfo.GetProcessIDByHWND(FindWindowInfo.GetWindowHWND(e.x, e.y))
                 || Common.OCRWinHwnd == (IntPtr)FindWindowInfo.GetWindowHWND(e.x, e.y))
             {
-                OCR();
+                TranslateEventOcr();
             }
         }
 
-        private void OCR()
+        /// <summary>
+        /// OCR事件
+        /// </summary>
+        /// <param name="isRenew">是否是重新获取翻译</param>
+        private async void TranslateEventOcr(bool isRenew = false)
         {
             if (IsPauseFlag)
             {
@@ -286,158 +292,18 @@ namespace MisakaTranslator_WPF
 
                     for (; j < 3; j++)
                     {
+                        // 重新OCR不需要等待
+                        if (!isRenew)
+                        {
+                            await Task.Delay(Common.UsingOCRDelay);
+                        }
 
-                        Thread.Sleep(Common.UsingOCRDelay);
-
-                        string srcText = Common.ocr.OCRProcess();
+                        string srcText = await Common.ocr.OCRProcessAsync();
                         GC.Collect();
 
                         if (!string.IsNullOrEmpty(srcText))
                         {
-                            Application.Current.Dispatcher.BeginInvoke((Action)(() =>
-                            {
-                                //0.清除面板
-                                SourceTextPanel.Children.Clear();
-
-                                //1.得到原句
-                                string source = srcText;
-
-                                _currentsrcText = source;
-
-                                if (_isShowSource)
-                                {
-                                    //3.分词
-                                    List<MecabWordInfo> mwi = _mecabHelper.SentenceHandle(source);
-                                    //分词后结果显示
-                                    for (int i = 0; i < mwi.Count; i++)
-                                    {
-                                        StackPanel stackPanel = new StackPanel();
-                                        stackPanel.Orientation = Orientation.Vertical;
-                                        stackPanel.Margin = new Thickness(10, 0, 0, 10);
-
-                                        TextBlock textBlock = new TextBlock();
-                                        if (!string.IsNullOrEmpty(SourceTextFont))
-                                        {
-                                            FontFamily fontFamily = new FontFamily(SourceTextFont);
-                                            textBlock.FontFamily = fontFamily;
-                                        }
-                                        textBlock.Text = mwi[i].Word;
-                                        textBlock.Tag = mwi[i].Kana;
-                                        textBlock.Margin = new Thickness(0, 0, 0, 0);
-                                        textBlock.FontSize = SourceTextFontSize;
-                                        textBlock.Background = Brushes.Transparent;
-                                        textBlock.MouseLeftButtonDown += DictArea_MouseLeftButtonDown;
-                                        //根据不同词性跟字体上色
-                                        switch (mwi[i].PartOfSpeech)
-                                        {
-                                            case "名詞":
-                                                textBlock.Foreground = Brushes.AliceBlue;
-                                                break;
-                                            case "助詞":
-                                                textBlock.Foreground = Brushes.LightGreen;
-                                                break;
-                                            case "動詞":
-                                                textBlock.Foreground = Brushes.Red;
-                                                break;
-                                            case "連体詞":
-                                                textBlock.Foreground = Brushes.Orange;
-                                                break;
-                                            default:
-                                                textBlock.Foreground = Brushes.White;
-                                                break;
-                                        }
-
-
-                                        TextBlock superScript = new TextBlock();//假名或注释等的上标标签
-                                        if (!string.IsNullOrEmpty(SourceTextFont))
-                                        {
-                                            FontFamily fontFamily = new FontFamily(SourceTextFont);
-                                            superScript.FontFamily = fontFamily;
-                                        }
-                                        superScript.Text = mwi[i].Kana;
-                                        superScript.Margin = new Thickness(0, 0, 0, 2);
-                                        superScript.HorizontalAlignment = HorizontalAlignment.Center;
-                                        if ((double)SourceTextFontSize - 6.5 > 0)
-                                        {
-                                            superScript.FontSize = (double)SourceTextFontSize - 6.5;
-                                        }
-                                        else
-                                        {
-                                            superScript.FontSize = 1;
-                                        }
-                                        superScript.Background = Brushes.Transparent;
-                                        superScript.Foreground = Brushes.White;
-                                        stackPanel.Children.Add(superScript);
-
-
-                                        //是否打开假名标注
-                                        if (Common.appSettings.TF_isKanaShow)
-                                        {
-                                            stackPanel.Children.Add(textBlock);
-                                            SourceTextPanel.Children.Add(stackPanel);
-                                        }
-                                        else
-                                        {
-                                            textBlock.Margin = new Thickness(10, 0, 0, 10);
-                                            SourceTextPanel.Children.Add(textBlock);
-                                        }
-                                    }
-                                }
-
-                                if (Convert.ToBoolean(Common.appSettings.EachRowTrans) == false)
-                                {
-                                    //不需要分行翻译
-                                    source = source.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
-                                }
-                                //去乱码
-                                source = source.Replace("_", "").Replace("-", "").Replace("+", "").Replace("&", "");
-
-                                //4.翻译前预处理
-                                string beforeString = _beforeTransHandle.AutoHandle(source);
-
-                                //5.提交翻译
-                                string transRes1 = string.Empty;
-                                string transRes2 = string.Empty;
-                                if (_translator1 != null)
-                                {
-                                    transRes1 = _translator1.TranslateAsync(beforeString, Common.UsingDstLang, Common.UsingSrcLang).Result;
-                                    if(transRes1 == null)
-                                        Growl.ErrorGlobal(_translator1.GetType().Name + ": " + _translator1.GetLastError());
-                                }
-                                if (_translator2 != null)
-                                {
-                                    transRes2 = _translator2.TranslateAsync(beforeString, Common.UsingDstLang, Common.UsingSrcLang).Result;
-                                    if(transRes2 == null)
-                                        Growl.ErrorGlobal(_translator2.GetType().Name + ": " + _translator2.GetLastError());
-                                }
-
-                                //6.翻译后处理
-                                string afterString1 = _afterTransHandle.AutoHandle(transRes1);
-                                string afterString2 = _afterTransHandle.AutoHandle(transRes2);
-
-                                //7.翻译结果显示到窗口上
-                                FirstTransText.Text = afterString1;
-                                SecondTransText.Text = afterString2;
-
-                                //8.翻译结果记录到队列
-                                if (_gameTextHistory.Count > 5)
-                                {
-                                    _gameTextHistory.Dequeue();
-                                }
-                                _gameTextHistory.Enqueue(source + "\n" + afterString1 + "\n" + afterString2);
-
-                                //9.翻译原句和结果记录到数据库
-                                if (Common.appSettings.ATon) {
-                                    bool addRes = _artificialTransHelper.AddTrans(source, afterString1);
-                                    if (addRes == false)
-                                    {
-                                        HandyControl.Data.GrowlInfo growlInfo = new HandyControl.Data.GrowlInfo();
-                                        growlInfo.Message = Application.Current.Resources["ArtificialTransAdd_Error_Hint"].ToString();
-                                        growlInfo.WaitTime = 2;
-                                        Growl.InfoGlobal(growlInfo);
-                                    }
-                                }
-                            }));
+                            TranslateText(srcText, isRenew);
 
                             IsOCRingFlag = false;
                             break;
@@ -446,10 +312,10 @@ namespace MisakaTranslator_WPF
 
                     if (j == 3)
                     {
-                        Application.Current.Dispatcher.BeginInvoke((Action)(() =>
-                        {
-                            FirstTransText.Text = "[OCR]自动识别三次均为空，请自行刷新！";
-                        }));
+                        _ = Application.Current.Dispatcher.BeginInvoke((Action)(() =>
+                          {
+                              FirstTransText.Text = "[OCR]自动识别三次均为空，请自行刷新！";
+                          }));
 
                         IsOCRingFlag = false;
                     }
@@ -495,167 +361,243 @@ namespace MisakaTranslator_WPF
         /// <summary>
         /// Hook模式下调用的事件
         /// </summary>
-        public async void DataRecvEventHandler(object sender, SolvedDataRecvEventArgs e)
+        public void TranslateEventHook(object sender, SolvedDataRecvEventArgs e)
         {
+            //1.得到原句
+            string source = e.Data.Data;
+            if (source == null && e.Data.HookFunc == "Clipboard")
+                return;
+            //2.进行去重
+            string repairedText = TextRepair.RepairFun_Auto(Common.UsingRepairFunc, source);
 
-                //1.得到原句
-                string source = e.Data.Data;
-                if (source == null && e.Data.HookFunc == "Clipboard")
-                    return;
+            if (Convert.ToBoolean(Common.appSettings.EachRowTrans) == false)
+            {
+                //不需要分行翻译
+                repairedText = repairedText.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
+            }
+            //去乱码
+            repairedText = repairedText.Replace("_", "").Replace("-", "").Replace("+", "").Replace("&", "");
+            TranslateText(repairedText);
+        }
 
-                //2.进行去重
-                string repairedText = TextRepair.RepairFun_Auto(Common.UsingRepairFunc, source);
-
-                if (Convert.ToBoolean(Common.appSettings.EachRowTrans) == false)
+        /// <summary>
+        /// 翻译
+        /// </summary>
+        /// <param name="repairedText">原文</param>
+        /// <param name="isRenew">是否是重新获取翻译</param>
+        private void TranslateText(string repairedText, bool isRenew = false)
+        {
+            //补充:如果去重之后的文本长度超过指定值（默认100），直接不翻译、不显示
+            //补充2：如果去重后文本长度为0，则不翻译不显示
+            if (repairedText.Length != 0 && repairedText.Length <= Common.appSettings.TransLimitNums)
+            {
+                //2.5 清除面板
+                Application.Current.Dispatcher.Invoke(() =>
                 {
-                    //不需要分行翻译
-                    repairedText = repairedText.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
-                }
-                //去乱码
-                repairedText = repairedText.Replace("_", "").Replace("-", "").Replace("+", "").Replace("&", "");
+                    SourceTextPanel.Children.Clear();
+                    FirstTransText.Text = "";
+                    SecondTransText.Text = "";
+                });
 
-                //补充:如果去重之后的文本长度超过指定值（默认100），直接不翻译、不显示
-                //补充2：如果去重后文本长度为0，则不翻译不显示
-                if (repairedText.Length != 0 && repairedText.Length <= Common.appSettings.TransLimitNums)
+                _currentsrcText = repairedText;
+
+                // 3. 更新原文
+                UpdateSource(repairedText);
+
+                // 分别获取两个翻译结果
+                TranslateApiSubmitSync(repairedText, 1, isRenew);
+                TranslateApiSubmitSync(repairedText, 2, isRenew);
+            }
+        }
+
+        /// <summary>
+        /// 更新原文
+        /// 注意执行过程中调用了StackPanel等UI组件，必须交回主线程才能执行。
+        /// </summary>
+        /// <param name="repairedText">原文</param>
+        private void UpdateSource(string repairedText)
+        {
+            if (_isShowSource)
+            {
+                // 使用BeginInvoke，在更新原文时可以去获取翻译
+                Application.Current.Dispatcher.BeginInvoke((Action)(() =>
                 {
-                    //2.5 清除面板
-                    Application.Current.Dispatcher.Invoke(() => SourceTextPanel.Children.Clear());
-
-                    _currentsrcText = repairedText;
-
-                    if (_isShowSource)
+                    //3.分词
+                    var mwi = _mecabHelper.SentenceHandle(repairedText);
+                    //分词后结果显示
+                    for (int i = 0; i < mwi.Count; i++)
                     {
-                        //3.分词
-                        var mwi = _mecabHelper.SentenceHandle(repairedText);
-                        //分词后结果显示
-                        for (int i = 0; i < mwi.Count; i++)
+                        StackPanel stackPanel = new StackPanel();
+                        stackPanel.Orientation = Orientation.Vertical;
+                        stackPanel.Margin = new Thickness(10, 0, 0, 10);
+
+                        TextBlock textBlock = new TextBlock();
+                        if (!string.IsNullOrEmpty(SourceTextFont))
                         {
-                            StackPanel stackPanel = new StackPanel();
-                            stackPanel.Orientation = Orientation.Vertical;
-                            stackPanel.Margin = new Thickness(10, 0, 0, 10);
-
-                            TextBlock textBlock = new TextBlock();
-                            if (!string.IsNullOrEmpty(SourceTextFont))
-                            {
-                                FontFamily fontFamily = new FontFamily(SourceTextFont);
-                                textBlock.FontFamily = fontFamily;
-                            }
-                            textBlock.Text = mwi[i].Word;
-                            textBlock.Tag = mwi[i].Kana;
-                            textBlock.Margin = new Thickness(0, 0, 0, 0);
-                            textBlock.FontSize = SourceTextFontSize;
-                            textBlock.Background = Brushes.Transparent;
-                            textBlock.MouseLeftButtonDown += DictArea_MouseLeftButtonDown;
-                            //根据不同词性跟字体上色
-                            switch (mwi[i].PartOfSpeech)
-                            {
-                                case "名詞":
-                                    textBlock.Foreground = Brushes.AliceBlue;
-                                    break;
-                                case "助詞":
-                                    textBlock.Foreground = Brushes.LightGreen;
-                                    break;
-                                case "動詞":
-                                    textBlock.Foreground = Brushes.Red;
-                                    break;
-                                case "連体詞":
-                                    textBlock.Foreground = Brushes.Orange;
-                                    break;
-                                default:
-                                    textBlock.Foreground = Brushes.White;
-                                    break;
-                            }
-
-
-                            TextBlock superScript = new TextBlock();//假名或注释等的上标标签
-                            if (!string.IsNullOrEmpty(SourceTextFont))
-                            {
-                                FontFamily fontFamily = new FontFamily(SourceTextFont);
-                                superScript.FontFamily = fontFamily;
-                            }
-                            superScript.Text = mwi[i].Kana;
-                            superScript.Margin = new Thickness(0, 0, 0, 2);
-                            superScript.HorizontalAlignment = HorizontalAlignment.Center;
-                            if ((double)SourceTextFontSize - 6.5 > 0)
-                            {
-                                superScript.FontSize = (double)SourceTextFontSize - 6.5;
-                            }
-                            else {
-                                superScript.FontSize = 1;
-                            }
-                            superScript.Background = Brushes.Transparent;
-                            superScript.Foreground = Brushes.White;
-                            stackPanel.Children.Add(superScript);
-
-
-                            //是否打开假名标注
-                            if (Common.appSettings.TF_isKanaShow)
-                            {
-                                stackPanel.Children.Add(textBlock);
-                                SourceTextPanel.Children.Add(stackPanel);
-                            }
-                            else {
-                                textBlock.Margin = new Thickness(10, 0, 0, 10);
-                                SourceTextPanel.Children.Add(textBlock);
-                            }
-
+                            FontFamily fontFamily = new FontFamily(SourceTextFont);
+                            textBlock.FontFamily = fontFamily;
                         }
+                        textBlock.Text = mwi[i].Word;
+                        textBlock.Tag = mwi[i].Kana;
+                        textBlock.Margin = new Thickness(0, 0, 0, 0);
+                        textBlock.FontSize = SourceTextFontSize;
+                        textBlock.Background = Brushes.Transparent;
+                        textBlock.MouseLeftButtonDown += DictArea_MouseLeftButtonDown;
+                        //根据不同词性跟字体上色
+                        switch (mwi[i].PartOfSpeech)
+                        {
+                            case "名詞":
+                                textBlock.Foreground = Brushes.AliceBlue;
+                                break;
+                            case "助詞":
+                                textBlock.Foreground = Brushes.LightGreen;
+                                break;
+                            case "動詞":
+                                textBlock.Foreground = Brushes.Red;
+                                break;
+                            case "連体詞":
+                                textBlock.Foreground = Brushes.Orange;
+                                break;
+                            default:
+                                textBlock.Foreground = Brushes.White;
+                                break;
+                        }
+
+
+                        TextBlock superScript = new TextBlock();//假名或注释等的上标标签
+                        if (!string.IsNullOrEmpty(SourceTextFont))
+                        {
+                            FontFamily fontFamily = new FontFamily(SourceTextFont);
+                            superScript.FontFamily = fontFamily;
+                        }
+                        superScript.Text = mwi[i].Kana;
+                        superScript.Margin = new Thickness(0, 0, 0, 2);
+                        superScript.HorizontalAlignment = HorizontalAlignment.Center;
+                        if ((double)SourceTextFontSize - 6.5 > 0)
+                        {
+                            superScript.FontSize = (double)SourceTextFontSize - 6.5;
+                        }
+                        else
+                        {
+                            superScript.FontSize = 1;
+                        }
+                        superScript.Background = Brushes.Transparent;
+                        superScript.Foreground = Brushes.White;
+                        stackPanel.Children.Add(superScript);
+
+
+                        //是否打开假名标注
+                        if (Common.appSettings.TF_isKanaShow)
+                        {
+                            stackPanel.Children.Add(textBlock);
+                            SourceTextPanel.Children.Add(stackPanel);
+                        }
+                        else
+                        {
+                            textBlock.Margin = new Thickness(10, 0, 0, 10);
+                            SourceTextPanel.Children.Add(textBlock);
+                        }
+
                     }
+                }));
+            }
+        }
 
+        /// <summary>
+        /// 提交原文到翻译器，获取翻译结果并显示
+        /// </summary>
+        /// <param name="repairedText">原文</param>
+        /// <param name="tranResultIndex">翻译框序号</param>
+        /// <param name="isRenew">是否是重新获取翻译</param>
+        private async void TranslateApiSubmitSync(string repairedText, int tranResultIndex, bool isRenew = false)
+        {
+            //4.翻译前预处理 
+            string beforeString = _beforeTransHandle.AutoHandle(repairedText);
 
-                    //4.翻译前预处理
-                    string beforeString = _beforeTransHandle.AutoHandle(repairedText);
-
-                    //5.提交翻译
-                    string transRes1 = string.Empty;
-                    string transRes2 = string.Empty;
-                    if (_translator1 != null)
+            //5.提交翻译 
+            string transRes = string.Empty;
+            if (tranResultIndex == 1)
+            {
+                if (_translator1 != null)
+                {
+                    transRes = await _translator1.TranslateAsync(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                    if (transRes == null)
                     {
-                        transRes1 = await _translator1.TranslateAsync(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
-                        if(transRes1 == null)
-                            Application.Current.Dispatcher.Invoke(() => Growl.ErrorGlobal(_translator1.GetType().Name + ": " + _translator1.GetLastError()));
+                        Application.Current.Dispatcher.Invoke((Action)(() =>
+                        {
+                            Growl.ErrorGlobal(_translator1.GetType().Name + ": " + _translator1.GetLastError());
+                        }));
+                        return;
                     }
-                    if (_translator2 != null)
+                }
+            }
+            else if (tranResultIndex == 2)
+            {
+                if (_translator2 != null)
+                {
+                    transRes = await _translator2.TranslateAsync(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
+                    if (transRes == null)
                     {
-                        transRes2 = await _translator2.TranslateAsync(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
-                        if(transRes2 == null)
-                            Application.Current.Dispatcher.Invoke(() => Growl.ErrorGlobal(_translator2.GetType().Name + ": " + _translator2.GetLastError()));
+                        Application.Current.Dispatcher.Invoke((Action)(() =>
+                        {
+                            Growl.ErrorGlobal(_translator2.GetType().Name + ": " + _translator2.GetLastError());
+                        }));
+                        return;
                     }
+                }
+            }
 
-                    //6.翻译后处理
-                    string afterString1 = _afterTransHandle.AutoHandle(transRes1);
-                    string afterString2 = _afterTransHandle.AutoHandle(transRes2);
+            //6.翻译后处理 
+            string afterString = _afterTransHandle.AutoHandle(transRes);
 
-                    //7.翻译结果显示到窗口上
-                    Application.Current.Dispatcher.Invoke(() => {
-                    FirstTransText.Text = afterString1;
-                    SecondTransText.Text = afterString2;
-                    });
+            //7.翻译结果显示到窗口上 
+            switch (tranResultIndex)
+            {
+                case 1:
+                    _ = Application.Current.Dispatcher.BeginInvoke((Action)(() =>
+                      {
+                          FirstTransText.Text = afterString;
+                      }));
+                    break;
+                case 2:
+                    _ = Application.Current.Dispatcher.BeginInvoke((Action)(() =>
+                      {
+                          SecondTransText.Text = afterString;
+                      }));
+                    break;
+            }
 
+            if (!isRenew)
+            {
+                lock (_saveTransResultLock)
+                {
                     //8.翻译结果记录到队列
-                    if (_gameTextHistory.Count > 5)
+                    // todo: 这是比较粗暴地添加历史记录，可以优化（时间排序等）
+                    if (_gameTextHistory.Count > 10)
                     {
                         _gameTextHistory.Dequeue();
                     }
-                    _gameTextHistory.Enqueue(repairedText + "\n" + afterString1 + "\n" + afterString2);
-
-                    //9.翻译原句和结果记录到数据库
+                    _gameTextHistory.Enqueue(repairedText + "\n" + afterString);
+                
+                    //9.翻译原句和结果记录到数据库 
                     if (Common.appSettings.ATon)
                     {
-                        bool addRes = _artificialTransHelper.AddTrans(repairedText, afterString1);
+                        bool addRes = _artificialTransHelper.AddTrans(repairedText, afterString);
                         if (addRes == false)
                         {
-                            HandyControl.Data.GrowlInfo growlInfo = new HandyControl.Data.GrowlInfo();
-                            growlInfo.Message = Application.Current.Resources["ArtificialTransAdd_Error_Hint"].ToString();
-                            growlInfo.WaitTime = 2;
-                            Growl.InfoGlobal(growlInfo);
+                            Application.Current.Dispatcher.Invoke((Action)(() =>
+                            {
+                                HandyControl.Data.GrowlInfo growlInfo = new HandyControl.Data.GrowlInfo();
+                                growlInfo.Message = Application.Current.Resources["ArtificialTransAdd_Error_Hint"].ToString();
+                                growlInfo.WaitTime = 2;
+                                Growl.InfoGlobal(growlInfo);
+                            }));
                         }
                     }
                 }
-
-
-
+            }
         }
+
 
         private void ChangeSize_Item_Click(object sender, RoutedEventArgs e)
         {
@@ -736,7 +678,7 @@ namespace MisakaTranslator_WPF
 
             if (Common.textHooker != null)
             {
-                Common.textHooker.Sevent -= DataRecvEventHandler;
+                Common.textHooker.Sevent -= TranslateEventHook;
                 Common.textHooker.StopHook();
                 Common.textHooker = null;
             }
@@ -799,40 +741,12 @@ namespace MisakaTranslator_WPF
         {
             if (Common.transMode == 2)
             {
-                OCR();
+                TranslateEventOcr(true);
             }
             else
             {
-                if (Convert.ToBoolean(Common.appSettings.EachRowTrans))
-                {
-                    //需要分行翻译
-                    _currentsrcText = _currentsrcText.Replace("<br>", string.Empty).Replace("</br>", string.Empty).Replace("\n", string.Empty).Replace("\t", string.Empty).Replace("\r", string.Empty);
-                }
-                //去乱码
-                _currentsrcText = _currentsrcText.Replace("_", string.Empty).Replace("-", string.Empty).Replace("+", string.Empty);
-
-                //4.翻译前预处理
-                string beforeString = _beforeTransHandle.AutoHandle(_currentsrcText);
-
-                //5.提交翻译
-                string transRes1 = string.Empty;
-                string transRes2 = string.Empty;
-                if (_translator1 != null)
-                {
-                    transRes1 = _translator1.TranslateAsync(beforeString, Common.UsingDstLang, Common.UsingSrcLang).Result;
-                }
-                if (_translator2 != null)
-                {
-                    transRes2 = _translator2.TranslateAsync(beforeString, Common.UsingDstLang, Common.UsingSrcLang).Result;
-                }
-
-                //6.翻译后处理
-                string afterString1 = _afterTransHandle.AutoHandle(transRes1);
-                string afterString2 = _afterTransHandle.AutoHandle(transRes2);
-
-                //7.翻译结果显示到窗口上
-                FirstTransText.Text = afterString1;
-                SecondTransText.Text = afterString2;
+                TranslateApiSubmitSync(_currentsrcText, 1, true);
+                TranslateApiSubmitSync(_currentsrcText, 2, true);
             }
         }
 

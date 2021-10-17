@@ -112,7 +112,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
             DataContext = viewModel;
         }
 
-        private void InkCanvasMeasure_MouseDown(object sender, MouseButtonEventArgs e)
+        private async void InkCanvasMeasure_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
@@ -131,7 +131,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
                 {
                     Bitmap bm = new Bitmap(Environment.CurrentDirectory + "\\comicTemp.png");
                     bm = ImageProcFunc.ColorToGrayscale(bm);
-                    sourceTextBox.Text = ocr.OCRProcess(bm).Replace("\f", "");
+                    sourceTextBox.Text = (await ocr.OCRProcessAsync(bm)).Replace("\f", "");
                 }
                 else {
                     sourceTextBox.Text = "OCR error";
