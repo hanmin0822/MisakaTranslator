@@ -67,7 +67,7 @@ namespace TranslatorLibrary
             }
             catch (JsonException)
             {
-                errorInfo = "Deserialize failed. Possible due to quota limits.";
+                errorInfo = "Deserialize failed. Possibly due to quota limits.";
                 return null;
             }
 
