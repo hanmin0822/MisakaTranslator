@@ -19,7 +19,7 @@ namespace TranslatorLibrary
             return errorInfo;
         }
 
-        public string Translate(string sourceText, string desLang, string srcLang)
+        public async Task<string> TranslateAsync(string sourceText, string desLang, string srcLang)
         {
             if (sourceText == "" || desLang == "" || srcLang == "")
             {
@@ -46,7 +46,7 @@ namespace TranslatorLibrary
             var hc = CommonFunction.GetHttpClient();
             try
             {
-                retString = hc.GetStringAsync(url).GetAwaiter().GetResult();
+                retString = await hc.GetStringAsync(url);
             }
             catch (System.Net.Http.HttpRequestException ex)
             {

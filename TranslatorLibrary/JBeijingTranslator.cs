@@ -45,7 +45,7 @@ namespace TranslatorLibrary
             return errorInfo;
         }
 
-        public string Translate(string sourceText, string desLang, string srcLang)
+        public Task<string> TranslateAsync(string sourceText, string desLang, string srcLang)
         {
             string JBeijingTranslatorPath = JBJCTDllPath;
 
@@ -89,7 +89,7 @@ namespace TranslatorLibrary
             Marshal.FreeHGlobal(jp2);
             Marshal.FreeHGlobal(jp3);
 
-            return ret;
+            return Task.FromResult(ret);
         }
 
         public void TranslatorInit(string param1, string param2 = "")

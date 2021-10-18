@@ -20,7 +20,7 @@ namespace TranslatorLibrary
             return errorInfo;
         }
 
-        public string Translate(string sourceText, string desLang, string srcLang)
+        public async Task<string> TranslateAsync(string sourceText, string desLang, string srcLang)
         {
             if (desLang == "zh")
                 desLang = "zh-cn";
@@ -47,7 +47,7 @@ namespace TranslatorLibrary
 
             try
             {
-                var ResultHtml = hc.GetStringAsync(googleTransUrl).GetAwaiter().GetResult();
+                var ResultHtml = await hc.GetStringAsync(googleTransUrl);
 
                 dynamic TempResult = Newtonsoft.Json.JsonConvert.DeserializeObject(ResultHtml);
 

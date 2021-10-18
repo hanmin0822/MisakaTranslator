@@ -32,13 +32,13 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
 
         }
 
-        private void AuthTestBtn_Click(object sender, RoutedEventArgs e)
+        private async void AuthTestBtn_Click(object sender, RoutedEventArgs e)
         {
             Common.appSettings.DeepLsecretKey = DeepLTransSecretKeyBox.Text;
             ITranslator deepLTrans = new DeepLTranslator();
             deepLTrans.TranslatorInit(DeepLTransSecretKeyBox.Text, DeepLTransSecretKeyBox.Text);
 
-            if (deepLTrans.Translate("apple", "zh", "en") != null)
+            if (await deepLTrans.TranslateAsync("apple", "zh", "en") != null)
             {
                 HandyControl.Controls.Growl.Success($"DeepL {Application.Current.Resources["APITest_Success_Hint"]}");
             }
@@ -63,11 +63,11 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             System.Diagnostics.Process.Start(DeepLTranslator.BILL_URL);
         }
 
-        private void TransTestBtn_Click(object sender, RoutedEventArgs e)
+        private async void TransTestBtn_Click(object sender, RoutedEventArgs e)
         {
             ITranslator deepLTrans = new DeepLTranslator();
             deepLTrans.TranslatorInit(DeepLTransSecretKeyBox.Text, DeepLTransSecretKeyBox.Text);
-            string res = deepLTrans.Translate(TestSrcText.Text, TestDstLang.Text, TestSrcLang.Text);
+            string res = await deepLTrans.TranslateAsync(TestSrcText.Text, TestDstLang.Text, TestSrcLang.Text);
 
             if (res != null)
             {

@@ -27,12 +27,12 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             TransTokenBox.Text = Common.appSettings.xiaoniuApiKey;
         }
 
-        private void AuthTestBtn_Click(object sender, RoutedEventArgs e)
+        private async void AuthTestBtn_Click(object sender, RoutedEventArgs e)
         {
             Common.appSettings.xiaoniuApiKey = TransTokenBox.Text;
             ITranslator Trans = new XiaoniuTranslator();
             Trans.TranslatorInit(TransTokenBox.Text, "");
-            if (Trans.Translate("apple", "zh", "en") != null)
+            if (await Trans.TranslateAsync("apple", "zh", "en") != null)
             {
                 HandyControl.Controls.Growl.Success($"小牛翻译{Application.Current.Resources["APITest_Success_Hint"]}");
             }
@@ -57,11 +57,11 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             System.Diagnostics.Process.Start(XiaoniuTranslator.GetUrl_bill());
         }
 
-        private void TransTestBtn_Click(object sender, RoutedEventArgs e)
+        private async void TransTestBtn_Click(object sender, RoutedEventArgs e)
         {
             ITranslator Trans = new XiaoniuTranslator();
             Trans.TranslatorInit(Common.appSettings.xiaoniuApiKey, "");
-            string res = Trans.Translate(TestSrcText.Text, TestDstLang.Text, TestSrcLang.Text);
+            string res = await Trans.TranslateAsync(TestSrcText.Text, TestDstLang.Text, TestSrcLang.Text);
             if (res != null)
             {
                 HandyControl.Controls.MessageBox.Show(res, Application.Current.Resources["MessageBox_Result"].ToString());

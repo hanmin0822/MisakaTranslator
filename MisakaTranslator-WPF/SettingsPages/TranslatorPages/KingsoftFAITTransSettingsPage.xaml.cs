@@ -48,11 +48,11 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             }
         }
 
-        private void TransTestBtn_Click(object sender, RoutedEventArgs e)
+        private async void TransTestBtn_Click(object sender, RoutedEventArgs e)
         {
             ITranslator Trans = new KingsoftFastAITTranslator();
             Trans.TranslatorInit(Common.appSettings.KingsoftFastAITPath, "");
-            string res = Trans.Translate(TestSrcText.Text, "zh", TestSrcLang.Text);
+            string res = await Trans.TranslateAsync(TestSrcText.Text, "zh", TestSrcLang.Text);
             if (res != null)
             {
                 HandyControl.Controls.MessageBox.Show(res, Application.Current.Resources["MessageBox_Result"].ToString());

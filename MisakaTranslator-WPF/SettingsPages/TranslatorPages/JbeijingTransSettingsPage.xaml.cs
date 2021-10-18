@@ -27,11 +27,11 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             PathBox.Text = Common.appSettings.JBJCTDllPath;
         }
 
-        private void TransTestBtn_Click(object sender, RoutedEventArgs e)
+        private async void TransTestBtn_Click(object sender, RoutedEventArgs e)
         {
             ITranslator Trans = new JBeijingTranslator();
             Trans.TranslatorInit(Common.appSettings.JBJCTDllPath, "");
-            string res = Trans.Translate(TestSrcText.Text, "", "");
+            string res = await Trans.TranslateAsync(TestSrcText.Text, "", "");
             if (res != null)
             {
                 HandyControl.Controls.MessageBox.Show(res, Application.Current.Resources["MessageBox_Result"].ToString());

@@ -15,7 +15,7 @@ namespace OCRLibrary
         private string path;
         private string args;
 
-        public override string OCRProcess(Bitmap img)
+        public override Task<string> OCRProcessAsync(Bitmap img)
         {
             Bitmap processedImg = (Bitmap)img.Clone();
             try
@@ -42,12 +42,12 @@ namespace OCRLibrary
                 }
                 byte[] bs = System.IO.File.ReadAllBytes(Environment.CurrentDirectory + "\\temp\\outputbase.txt");
                 string result = Encoding.UTF8.GetString(bs);
-                return result;
+                return Task.FromResult(result);
             }
             catch (Exception ex)
             {
                 errorInfo = ex.Message;
-                return "";
+                return Task.FromResult((string)null);
             }
         }
 

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using System.Text;
 using System.Web;
 
@@ -15,7 +16,7 @@ namespace TranslatorLibrary
         public string secretKey;//百度翻译API 的密钥
         private string errorInfo;//错误信息
         
-        public string Translate(string sourceText, string desLang, string srcLang)
+        public async Task<string> TranslateAsync(string sourceText, string desLang, string srcLang)
         {
             if (sourceText == "" || desLang == "" || srcLang == "") {
                 errorInfo = "Param Missing";
@@ -52,7 +53,7 @@ namespace TranslatorLibrary
             var hc = CommonFunction.GetHttpClient();
             try
             {
-                retString = hc.GetStringAsync(url).GetAwaiter().GetResult();
+                retString = await hc.GetStringAsync(url);
             }
             catch (System.Net.Http.HttpRequestException ex)
             {

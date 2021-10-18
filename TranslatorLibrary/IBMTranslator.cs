@@ -20,7 +20,7 @@ namespace TranslatorLibrary
             return errorInfo;
         }
 
-        public string Translate(string sourceText, string desLang, string srcLang)
+        public async Task<string> TranslateAsync(string sourceText, string desLang, string srcLang)
         {
             if (desLang == "kr")
                 desLang = "ko";
@@ -32,7 +32,7 @@ namespace TranslatorLibrary
                 srcLang = "ja";
             if(desLang != "en" && srcLang != "en")
             {
-                sourceText = Translate(sourceText, "en", srcLang);
+                sourceText = await TranslateAsync(sourceText, "en", srcLang);
                 if (sourceText == null)
                     return null;
                 srcLang = "en";                                   
@@ -46,7 +46,7 @@ namespace TranslatorLibrary
 
             try
             {
-                resp = hc.SendAsync(req).GetAwaiter().GetResult();
+                resp = await hc.SendAsync(req);
             }
             catch (System.Net.Http.HttpRequestException ex)
             {
@@ -63,7 +63,7 @@ namespace TranslatorLibrary
                 req.Dispose();
             }
 
-            string retString = resp.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            string retString = await resp.Content.ReadAsStringAsync();
             var dynamicResult = JsonConvert.DeserializeObject<dynamic>(retString);
 
             if (!resp.IsSuccessStatusCode){

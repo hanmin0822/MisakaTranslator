@@ -54,7 +54,7 @@ namespace TranslatorLibrary
             return errorInfo;
         }
 
-        public string Translate(string sourceText, string desLang, string srcLang)
+        public Task<string> TranslateAsync(string sourceText, string desLang, string srcLang)
         {
             if (FilePath == "")
             {
@@ -118,7 +118,7 @@ namespace TranslatorLibrary
                 return null;
             }
 
-            return ret;
+            return Task.FromResult(ret);
         }
 
         public void TranslatorInit(string param1, string param2 = "")

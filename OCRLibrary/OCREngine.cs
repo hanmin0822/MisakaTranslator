@@ -19,22 +19,23 @@ namespace OCRLibrary
         /// </summary>
         /// <param name="img">欲处理的图片</param>
         /// <returns>返回识别结果，如果为空可通过GetLastError得到错误提示</returns>
-        public abstract string OCRProcess(Bitmap img);
+        public abstract Task<string> OCRProcessAsync(Bitmap img);
 
         /// <summary>
         /// OCR处理，根据设定的截图区域自动截图后识别
         /// </summary>
         /// <returns>返回识别结果，如果为空可通过GetLastError得到错误提示</returns>
-        public string OCRProcess()
+        public Task<string> OCRProcessAsync()
         {
             if (OCRArea != null)
             {
                 Bitmap img = new Bitmap(ScreenCapture.GetWindowRectCapture(WinHandle, OCRArea, isAllWin));
                 Bitmap processedImg = ImageProcFunc.Auto_Thresholding(img, imgProc);
-                return OCRProcess(new Bitmap(processedImg));
+                return OCRProcessAsync(new Bitmap(processedImg));
             }
             else
             {
+                // todo: 这个分支走不到
                 errorInfo = "未设置截图区域";
                 return null;
             }
