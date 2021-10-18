@@ -69,7 +69,7 @@
     <sys:String x:Key="API_docBtn">错误码说明(API文档)</sys:String>
     <sys:String x:Key="API_billBtn">额度查询</sys:String>
 
-    <sys:String x:Key="GeneralTransSettingsPage_Introduce">在这里进行所有翻译选项的通用设置，一个实时翻译窗口最多支持两个不同来源的翻译;您可以指定翻译过程中用到的API及显示顺序和是否使用分行翻译;更多关于翻译文本个性化的选项在实时翻译窗口中进行设置。</sys:String>
+    <sys:String x:Key="GeneralTransSettingsPage_Introduce">在这里进行所有翻译选项的通用设置，一个实时翻译窗口最多支持两个不同来源的翻译;您可以指定翻译过程中用到的API及显示顺序和是否使用分行翻译;更多关于翻译文本个性化的选项在实时翻译窗口中进行设置;公共接口有额度限制无法频繁使用。</sys:String>
     <sys:String x:Key="GeneralTransSettingsPage_FirstTranslator">第一翻译源</sys:String>
     <sys:String x:Key="GeneralTransSettingsPage_SecondTranslator">第二翻译源</sys:String>
     <sys:String x:Key="GeneralTransSettingsPage_EachRowTransCheckBox">使用分行翻译</sys:String>
