@@ -44,7 +44,7 @@
 
 ## 从源码构建
 
-* 本项目的目标框架为4.6.1，但新的应也能成功构建
+* 本项目的目标框架为4.7.2
 * KeyboardMouseMonitor为VC项目，如不想构建可去掉，之后复制lib
 * **其余二进制依赖需在构建完成后手动从已Release的包中复制lib文件夹**
 * Actions的artifact为nightly build，也不含lib
