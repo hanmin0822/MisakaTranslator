@@ -9,7 +9,7 @@ namespace SQLHelperLibrary
 {
     public class SQLHelper
     {
-        private readonly SQLiteConnection _mDbConnection;//数据库连接
+        private readonly string _mDbConnectionString;
         private string _errorInfo;//最后一次错误信息
 
         /// <summary>
@@ -27,8 +27,7 @@ namespace SQLHelperLibrary
                     FailIfMissing = false,
                     DataSource = dataSource
                 };
-                var mConnectionString = connectionStringBuilder.ConnectionString;
-                _mDbConnection = new SQLiteConnection(mConnectionString);
+                _mDbConnectionString = connectionStringBuilder.ConnectionString;
             }
             catch (Exception ex)
             {
@@ -58,19 +57,22 @@ namespace SQLHelperLibrary
         /// <returns>返回影响的结果数</returns>
         public int ExecuteSql(string sql)
         {
-            var command = new SQLiteCommand(sql, _mDbConnection);
-            try
+            using (var mDbConnection = new SQLiteConnection(_mDbConnectionString))
             {
-                _mDbConnection.Open();
-                var res = command.ExecuteNonQuery();
-                _mDbConnection.Close();
-                return res;
-            }
-            catch (SQLiteException ex)
-            {
-                _mDbConnection.Close();
-                _errorInfo = ex.Message;
-                return -1;
+                try
+                {
+                    mDbConnection.Open();
+                    using (var command = new SQLiteCommand(sql, mDbConnection))
+                    {
+                        var res = command.ExecuteNonQuery();
+                        return res;
+                    }
+                }
+                catch (SQLiteException ex)
+                {
+                    _errorInfo = ex.Message;
+                    return -1;
+                }
             }
         }
 
@@ -82,35 +84,33 @@ namespace SQLHelperLibrary
         /// <returns></returns>
         public List<string> ExecuteReader_OneLine(string sql, int columns)
         {
-            var cmd = new SQLiteCommand(sql, _mDbConnection);
-            try
+            using (var mDbConnection = new SQLiteConnection(_mDbConnectionString))
             {
-                _mDbConnection.Open();
-                var myReader = cmd.ExecuteReader();
-
-                if (myReader.HasRows == false)
+                try
                 {
-                    _mDbConnection.Close();
-                    return new List<string>();
-                }
-                
-                var ret = new List<string>();
-                while (myReader.Read())
-                {
-                    for (var i = 0; i < columns; i++)
+                    mDbConnection.Open();
+                    using (var cmd = new SQLiteCommand(sql, mDbConnection))
                     {
-                        ret.Add(myReader[i].ToString());
+                        using (var myReader = cmd.ExecuteReader())
+                        {
+                            var ret = new List<string>();
+                            while (myReader.Read())
+                            {
+                                for (var i = 0; i < columns; i++)
+                                {
+                                    ret.Add(myReader[i].ToString());
+                                }
+                            }
+                            return ret;
+                        }
                     }
+                    
                 }
-
-                _mDbConnection.Close();
-                return ret;
-            }
-            catch (System.Data.SQLite.SQLiteException e)
-            {
-                _mDbConnection.Close();
-                _errorInfo = e.Message;
-                return null;
+                catch (SQLiteException e)
+                {
+                    _errorInfo = e.Message;
+                    return null;
+                }
             }
         }
 
@@ -122,40 +122,38 @@ namespace SQLHelperLibrary
         /// <returns></returns>
         public List<List<string>> ExecuteReader(string sql, int columns)
         {
-            var cmd = new SQLiteCommand(sql, _mDbConnection);
-            try
+            using (var mDbConnection = new SQLiteConnection(_mDbConnectionString))
             {
-                _mDbConnection.Open();
-                var myReader = cmd.ExecuteReader();
-
-                if (myReader.HasRows == false)
+                try
                 {
-                    _mDbConnection.Close();
-                    return new List<List<string>>();
-                }
-
-                
-                var ret = new List<List<string>>();
-                while (myReader.Read())
-                {
-                    var lst = new List<string>();
-                    for (var i = 0; i < columns; i++)
+                    mDbConnection.Open();
+                    using (var cmd = new SQLiteCommand(sql, mDbConnection))
                     {
-                        lst.Add(myReader[i].ToString());
+                        using (var myReader = cmd.ExecuteReader())
+                        {
+                            var ret = new List<List<string>>();
+                            while (myReader.Read())
+                            {
+                                var lst = new List<string>();
+                                for (var i = 0; i < columns; i++)
+                                {
+                                    lst.Add(myReader[i].ToString());
+                                }
+                                ret.Add(lst);
+                            }
+
+                            return ret;
+                        }
                     }
-                    ret.Add(lst);
                     
                 }
-
-                _mDbConnection.Close();
-                return ret;
+                catch (SQLiteException e)
+                {
+                    _errorInfo = e.Message;
+                    return null;
+                }
             }
-            catch (System.Data.SQLite.SQLiteException e)
-            {
-                _mDbConnection.Close();
-                _errorInfo = e.Message;
-                return null;
-            }
+            
         }
 
         /// <summary>
