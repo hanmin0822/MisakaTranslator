@@ -309,11 +309,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Resource Include="GuidePages\Completation.png" />
-    <Content Include="lang\en-US.xaml">
+    <Page Include="lang\en-US.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Page>
     <Page Include="lang\zh-CN.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
