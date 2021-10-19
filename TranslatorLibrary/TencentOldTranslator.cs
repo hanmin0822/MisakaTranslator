@@ -31,7 +31,7 @@ namespace TranslatorLibrary
             }
             
             // 原文
-            string q = sourceText;
+            string q = HttpUtility.UrlEncode(sourceText);
 
             string retString;
 
@@ -40,6 +40,7 @@ namespace TranslatorLibrary
 
             string url = "https://tmt.tencentcloudapi.com/?";
 
+            // 签名，参数使用未URL编码的值
             var sb = new StringBuilder()
                 .Append("Action=TextTranslate")
                 .Append("&Nonce=").Append(salt)
@@ -59,7 +60,21 @@ namespace TranslatorLibrary
             };
             byte[] data = Encoding.UTF8.GetBytes("GETtmt.tencentcloudapi.com/?" + req);
             var result = hmac.ComputeHash(data);
-            req = req + "&Signature=" + HttpUtility.UrlEncode(Convert.ToBase64String(result));
+
+            // 请求参数，参数使用URL编码后的值
+            sb = new StringBuilder()
+                .Append("Action=TextTranslate")
+                .Append("&Nonce=").Append(salt)
+                .Append("&ProjectId=0")
+                .Append("&Region=ap-shanghai")
+                .Append("&SecretId=").Append(SecretId)
+                .Append("&Source=").Append(srcLang)
+                .Append("&SourceText=").Append(q)
+                .Append("&Target=").Append(desLang)
+                .Append("&Timestamp=").Append(CommonFunction.GetTimeStamp())
+                .Append("&Version=2018-03-21")
+                .Append("&Signature=").Append(HttpUtility.UrlEncode(Convert.ToBase64String(result)));
+            req = sb.ToString();
 
             var hc = CommonFunction.GetHttpClient();
             try

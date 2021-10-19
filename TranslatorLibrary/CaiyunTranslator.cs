@@ -42,7 +42,13 @@ namespace TranslatorLibrary
 
             string url = "https://api.interpreter.caiyunai.com/v1/translator";
             //json参数
-            string jsonParam = "{\"source\": [\"" + q + "\"], \"trans_type\": \"" + trans_type + "\", \"request_id\": \"demo\", \"detect\": true}";
+            string jsonParam = JsonConvert.SerializeObject(new Dictionary<string, object>
+            {
+                {"source", new List<string>{q}},
+                {"trans_type", trans_type},
+                {"request_id", "demo"},
+                {"detect", true}
+            });
 
             var hc = CommonFunction.GetHttpClient();
             var req = new StringContent(jsonParam, null, "application/json");
