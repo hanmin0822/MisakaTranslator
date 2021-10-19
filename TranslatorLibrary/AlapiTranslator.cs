@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace TranslatorLibrary
 {
@@ -37,16 +38,19 @@ namespace TranslatorLibrary
                 srcLang = "fra";
 
             // 原文
-            string q = sourceText;
+            string q = HttpUtility.UrlEncode(sourceText);
             string retString;
 
-            
-            string url = "https://v1.alapi.cn/api/fanyi?q=" + q + "&from=" + srcLang + "&to=" + desLang;
+            var url = new StringBuilder()
+                .Append("https://v1.alapi.cn/api/fanyi?")
+                .Append("q=").Append(q)
+                .Append("&from=").Append(srcLang)
+                .Append("&to=").Append(desLang);
 
             var hc = CommonFunction.GetHttpClient();
             try
             {
-                retString = await hc.GetStringAsync(url);
+                retString = await hc.GetStringAsync(url.ToString());
             }
             catch (System.Net.Http.HttpRequestException ex)
             {

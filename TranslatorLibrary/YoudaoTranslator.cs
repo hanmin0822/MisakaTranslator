@@ -1,11 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace TranslatorLibrary
 {
@@ -37,7 +34,7 @@ namespace TranslatorLibrary
                 srcLang = "ja";
 
             // 原文
-            string q = sourceText;
+            string q = HttpUtility.UrlEncode(sourceText);
             string retString;
 
             string trans_type = srcLang + "2" + desLang;
@@ -73,16 +70,15 @@ namespace TranslatorLibrary
 
             if (oinfo.errorCode == 0)
             {
-                //得到翻译结果
-                if (oinfo.translateResult.Count == 1)
+                var sb = new StringBuilder(32);
+                foreach (var youdaoTransDataList in oinfo.translateResult)
                 {
-                    return string.Join("", oinfo.translateResult[0].Select(x => x.tgt));
+                    foreach (var youdaoTransDataItem in youdaoTransDataList)
+                    {
+                        sb.Append(youdaoTransDataItem.tgt);
+                    }
                 }
-                else
-                {
-                    errorInfo = "UnknownError";
-                    return null;
-                }
+                return sb.ToString();
             }
             else
             {

@@ -35,13 +35,18 @@ namespace TranslatorLibrary
                 sourceText = await TranslateAsync(sourceText, "en", srcLang);
                 if (sourceText == null)
                     return null;
-                srcLang = "en";                                   
+                srcLang = "en";
             }
 
             HttpResponseMessage resp;
             var hc = CommonFunction.GetHttpClient();
             var req = new HttpRequestMessage(HttpMethod.Post, URL);
-            req.Content = new StringContent("{\"text\":[\""+ sourceText.Replace("\"", "") +"\"],\"model_id\":\"" + srcLang + "-" + desLang + "\"}",null,"application/json");
+            string jsonParam = JsonConvert.SerializeObject(new Dictionary<string, object>
+            {
+                {"text", new string[] {sourceText}},
+                {"model_id", srcLang + "-" + desLang}
+            });
+            req.Content = new StringContent(jsonParam, null,"application/json");
             req.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(ApiKey)));
 
             try
