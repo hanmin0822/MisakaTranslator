@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using System.Net.Http;
+using System.Web;
 
 namespace TranslatorLibrary
 {
@@ -35,7 +31,7 @@ namespace TranslatorLibrary
 
             try
             {
-                string retString = await hc.GetStringAsync(apiurl + sourceText);
+                string retString = await hc.GetStringAsync(apiurl + HttpUtility.UrlEncode(sourceText));
                 var doc = JsonConvert.DeserializeObject<dynamic>(retString);
                 return doc.text[0];
             }
