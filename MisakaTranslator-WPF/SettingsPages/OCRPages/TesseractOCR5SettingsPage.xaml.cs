@@ -37,10 +37,10 @@ namespace MisakaTranslator_WPF.SettingsPages.OCRPages
         {
             InitializeComponent();
             PathBox.Text = Common.appSettings.Tesseract5OCR_Path;
+            ArgsBox.Text = Common.appSettings.Tesseract5OCR_Args;
             SelectBox.ItemsSource = itemList;
             SelectBox.SelectedIndex = valueList.IndexOf(Common.appSettings.Tesseract5OCR_Mode);
             SyncModeAndArgs();
-            ArgsBox.Text = Common.appSettings.Tesseract5OCR_Args;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
