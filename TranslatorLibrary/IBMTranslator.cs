@@ -35,7 +35,7 @@ namespace TranslatorLibrary
                 sourceText = await TranslateAsync(sourceText, "en", srcLang);
                 if (sourceText == null)
                     return null;
-                srcLang = "en";                                   
+                srcLang = "en";
             }
 
             HttpResponseMessage resp;
@@ -43,7 +43,7 @@ namespace TranslatorLibrary
             var req = new HttpRequestMessage(HttpMethod.Post, URL);
             string jsonParam = JsonConvert.SerializeObject(new Dictionary<string, object>
             {
-                {"text", new List<string>{sourceText}},
+                {"text", new string[] {sourceText}},
                 {"model_id", srcLang + "-" + desLang}
             });
             req.Content = new StringContent(jsonParam, null,"application/json");

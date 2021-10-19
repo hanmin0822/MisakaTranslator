@@ -44,7 +44,7 @@ namespace TranslatorLibrary
             //json参数
             string jsonParam = JsonConvert.SerializeObject(new Dictionary<string, object>
             {
-                {"source", new List<string>{q}},
+                {"source", new string[] {q}},
                 {"trans_type", trans_type},
                 {"request_id", "demo"},
                 {"detect", true}
