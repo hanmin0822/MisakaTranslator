@@ -221,13 +221,11 @@ namespace TextHookLibrary {
                     await DetachProcess(GamePID);
                 }
                 else if (HandleMode == 2) {
-                    for (int i = 0; i < PossibleGameProcessList.Count; i++) {
-                        var item = PossibleGameProcessList.ElementAt(i);
+                    foreach (var item in PossibleGameProcessList)
                         if (PossibleGameProcessList[item.Key] == true) {
                             await DetachProcess(item.Key.Id);
                             PossibleGameProcessList[item.Key] = false;
                         }
-                    }
                 }
                 ProcessTextractor.Kill();
             }
@@ -247,11 +245,9 @@ namespace TextHookLibrary {
                 GamePID = MaxMemoryProcess.Id;
 
                 if (AutoHook == false) {
-
                     //不进行智能注入
-                    for (int i = 0; i < PossibleGameProcessList.Count; i++) {
-
-                        var item = PossibleGameProcessList.ElementAt(i);
+                    foreach (var item in PossibleGameProcessList)
+                    {
                         await AttachProcess(item.Key.Id);
                         PossibleGameProcessList[item.Key] = true;
                     }
