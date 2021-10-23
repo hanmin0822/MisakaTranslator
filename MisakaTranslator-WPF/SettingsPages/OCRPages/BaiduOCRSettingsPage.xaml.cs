@@ -33,6 +33,12 @@ namespace MisakaTranslator_WPF.SettingsPages.OCRPages
             Common.appSettings.BDOCR_APIKEY = APIKEYBox.Text;
             Common.appSettings.BDOCR_SecretKey = SecretKeyBox.Text;
 
+            if(APIKEYBox.Text.Length == 17)
+            {
+                HandyControl.Controls.Growl.Error($"百度OCR {Application.Current.Resources["APITest_Error_Hint"]}\nDo not use fanyi.baidu.com endpoint.");
+                return;
+            }
+
             BaiduGeneralOCR bgocr = new BaiduGeneralOCR();
 
             bool ret = bgocr.OCR_Init(APIKEYBox.Text, SecretKeyBox.Text);
