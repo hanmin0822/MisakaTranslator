@@ -32,6 +32,13 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
         {
             Common.appSettings.BDappID = BDTransAppIDBox.Text;
             Common.appSettings.BDsecretKey = BDTransSecretKeyBox.Text;
+
+            if(BDTransAppIDBox.Text.Length == 24)
+            {
+                HandyControl.Controls.Growl.Error($"百度翻译{Application.Current.Resources["APITest_Error_Hint"]}\nDo not use ai.baidu.com endpoint.");
+                return;
+            }
+
             ITranslator BDTrans = new BaiduTranslator();
             BDTrans.TranslatorInit(BDTransAppIDBox.Text, BDTransSecretKeyBox.Text);
 
