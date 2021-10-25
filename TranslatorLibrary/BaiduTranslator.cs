@@ -70,14 +70,17 @@ namespace TranslatorLibrary
 
             if (oinfo.error_code == null || oinfo.error_code == "52000")
             {
-                //得到翻译结果
-                if (oinfo.trans_result.Count == 1)
-                {
+                // 52000就是成功
+                if (oinfo.trans_result.Count == 0)
+                    return "";
+                else if(oinfo.trans_result.Count == 1)
                     return oinfo.trans_result[0].dst;
-                }
-                else {
-                    errorInfo = "UnknownError";
-                    return null;
+                else
+                {
+                    var sb2 = new StringBuilder();
+                    foreach (var entry in oinfo.trans_result)
+                        sb2.AppendLine(entry.dst);
+                    return sb2.ToString();
                 }
             }
             else
