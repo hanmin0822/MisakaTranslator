@@ -118,5 +118,7 @@ namespace TranslatorLibrary
                     }
             return HC;
         }
+
+        public static Random RD = new Random();
     }
 }

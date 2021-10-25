@@ -15,7 +15,7 @@ namespace TranslatorLibrary
         public string appId;//百度翻译API 的APP ID
         public string secretKey;//百度翻译API 的密钥
         private string errorInfo;//错误信息
-        
+
         public async Task<string> TranslateAsync(string sourceText, string desLang, string srcLang)
         {
             if (sourceText == "" || desLang == "" || srcLang == "") {
@@ -37,8 +37,7 @@ namespace TranslatorLibrary
 
             string retString;
 
-            Random rd = new Random();
-            string salt = rd.Next(100000).ToString();
+            string salt = CommonFunction.RD.Next(100000).ToString();
 
             string sign = CommonFunction.EncryptString(appId + q + salt + secretKey);
             var sb = new StringBuilder("https://api.fanyi.baidu.com/api/trans/vip/translate?")

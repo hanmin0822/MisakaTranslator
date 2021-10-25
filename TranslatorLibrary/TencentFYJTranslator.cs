@@ -32,8 +32,7 @@ namespace TranslatorLibrary
 
             string retString;
 
-            Random rd = new Random();
-            string salt = rd.Next(100000).ToString();
+            string salt = CommonFunction.RD.Next(100000).ToString();
 
             string url = "https://api.ai.qq.com/fcgi-bin/nlp/nlp_texttranslate?";
 
