@@ -289,7 +289,6 @@ namespace MisakaTranslator_WPF.ComicTranslator
                 }
             }
             else {
-                HandyControl.Controls.Growl.ErrorGlobal(Application.Current.Resources["FilePath_Null_Hint"].ToString());
                 this.Close();
             }
         }
