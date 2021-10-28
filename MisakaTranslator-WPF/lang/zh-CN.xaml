@@ -59,6 +59,8 @@
     <sys:String x:Key="SettingsMenu_DictSettings">词典相关设置</sys:String>
     <sys:String x:Key="SettingsMenu_DictSettings_xxgrz">小学馆日中</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_DeepL">DeepL</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_IBM">IBM</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_Yandex">Yandex</sys:String>
 
     <sys:String x:Key="API_applyBtn">申请API</sys:String>
     <sys:String x:Key="API_authTestBtn">测试API认证</sys:String>
@@ -93,6 +95,13 @@
 
     <sys:String x:Key="CaiyunTransSettingsPage_Introduce">彩云小译API支持多种语言互译，对日语、汉语的Galgame互译支持较好，需要联网使用；您需要先申请该API并给彩云官方发送请求邮件，获取token后填入下方相应位置并进行测试认证；如果认证出现错误，请根据错误码至彩云翻译API官方文档获取解决办法；彩云小译翻译API部分版本可能会产生某些费用，您可以使用额度查询按钮进入控制台确认。</sys:String>
     <sys:String x:Key="CaiyunTransSettingsPage_Token">彩云小译API 令牌</sys:String>
+
+    <sys:String x:Key="IBMTransSettingsPage_Introduce">IBM Language Translator需联网使用，服务器在国外网速较慢。原生仅支持英文与其他语言互译，本项目允许非英文之间互译，但会内部转成英文过渡，翻译质量一般，且会成倍消耗字符量。注册无需验证信用卡和手机，Lite套餐必不产生费用。</sys:String>
+    <sys:String x:Key="IBMTransSettingsPage_apiKey">IBM API 密钥</sys:String>
+    <sys:String x:Key="IBMTransSettingsPage_URL">IBM URL</sys:String>
+
+    <sys:String x:Key="YandexTransSettingsPage_Introduce">Yandex翻译需联网使用，服务器在国外网速较慢。翻译质量一般。注册需要验证信用卡。</sys:String>
+    <sys:String x:Key="YandexTransSettingsPage_apiKey">Yandex API 密钥</sys:String>
 
     <sys:String x:Key="JbeijingTransSettingsPage_Introduce">JBeijing翻译API支持日语译汉语，不需要联网使用；您需要先下载Jbeijing翻译软件本体，在下方对应路径框中确认，保证文件夹下有JBJCT.dll文件；JBeijing翻译API翻译质量不如在线翻译，不过翻译速度比在线翻译快一些。</sys:String>
     <sys:String x:Key="JbeijingTransSettingsPage_Path">JBeijing翻译本体路径</sys:String>
