@@ -61,6 +61,8 @@
     <sys:String x:Key="SettingsMenu_DictSettings">Dictionary Settings</sys:String>
     <sys:String x:Key="SettingsMenu_DictSettings_xxgrz">小学馆日中 Shogakukan ja-zh dictionary</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_DeepL">DeepL</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_IBM">IBM</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_Yandex">Yandex</sys:String>
 
     <sys:String x:Key="API_applyBtn">API Application</sys:String>
     <sys:String x:Key="API_authTestBtn">Test API</sys:String>
@@ -95,6 +97,13 @@
 
     <sys:String x:Key="CaiyunTransSettingsPage_Introduce">Lingocloud (彩云小译, network required) supports multilingual translation with better support for Japanese and Chinese. You need to apply for the API (on the website in Chinese), receive confirmation email, get access to the appID and key, and then fill in below before testing. If the API is tested as invalid, you can refer to official Lingocloud documentations with the error codes. It is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of Lingocloud.</sys:String>
     <sys:String x:Key="CaiyunTransSettingsPage_Token">API token</sys:String>
+
+    <sys:String x:Key="IBMTransSettingsPage_Introduce">IBM Language Translator (network required) supports inter-translation between English and other languages by default. This project supports transition between non-English, through it will be converted to English internally, resulting in large amount of quota consumption and unimpressed quality.</sys:String>
+    <sys:String x:Key="IBMTransSettingsPage_secretKey">IBM API key</sys:String>
+    <sys:String x:Key="IBMTransSettingsPage_URL">IBM URL</sys:String>
+
+    <sys:String x:Key="YandexTransSettingsPage_Introduce">Yandex translate (network required) requires verification credit card for registration.</sys:String>
+    <sys:String x:Key="YandexTransSettingsPage_secretKey">Yandex API key</sys:String>
 
     <sys:String x:Key="JbeijingTransSettingsPage_Introduce">JBeijing Translate API (local) supports Japanese translation to Chinese. You need to download and install the Jbeijing translation software, fill in the corresponding path below and confirm that there is JBJCT.dll file in the folder. JBeijing Translate API translates faster, but its quality is lower than those online APIs.</sys:String>
     <sys:String x:Key="JbeijingTransSettingsPage_Path">JBeijing Translate Path</sys:String>

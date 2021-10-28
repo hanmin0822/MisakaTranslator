@@ -123,5 +123,15 @@ namespace MisakaTranslator_WPF
         {
             this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/XiaoniuTransSettingsPage.xaml", UriKind.Relative));
         }
+
+        private void Item_IBM_Selected(object sender, RoutedEventArgs e)
+        {
+            this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/IBMTransSettingsPage.xaml", UriKind.Relative));
+        }
+
+        private void Item_Yandex_Selected(object sender, RoutedEventArgs e)
+        {
+            this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/YandexTransSettingsPage.xaml", UriKind.Relative));
+        }
     }
 }

@@ -114,6 +114,12 @@
     <Compile Include="SettingsPages\TranslatorPages\DeepLTransSettingsPage.xaml.cs">
       <DependentUpon>DeepLTransSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPages\TranslatorPages\IBMTransSettingsPage.xaml.cs">
+      <DependentUpon>IBMTransSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPages\TranslatorPages\YandexTransSettingsPage.xaml.cs">
+      <DependentUpon>YandexTransSettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingsPages\TranslatorPages\XiaoniuTransSettingsPage.xaml.cs">
       <DependentUpon>XiaoniuTransSettingsPage.xaml</DependentUpon>
     </Compile>
@@ -249,6 +255,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SettingsPages\TranslatorPages\DeepLTransSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\TranslatorPages\IBMTransSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsPages\TranslatorPages\YandexTransSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
