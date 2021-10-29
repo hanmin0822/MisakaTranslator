@@ -50,8 +50,8 @@ namespace MisakaTranslator_WPF
 
         private Queue<string> _gameTextHistory; //历史文本
         public static KeyboardMouseHook hook; //全局键盘鼠标钩子
-        public bool IsOCRingFlag; //线程锁:判断是否正在OCR线程中，保证同时只有一组在跑OCR
-        public bool IsPauseFlag; //是否处在暂停状态（专用于OCR）,为真可以翻译
+        public volatile bool IsOCRingFlag; //线程锁:判断是否正在OCR线程中，保证同时只有一组在跑OCR
+        public bool IsNotPausedFlag; //是否处在暂停状态（专用于OCR）,为真可以翻译
 
         private bool _isShowSource; //是否显示原文
         private bool _isLocked;
@@ -95,7 +95,7 @@ namespace MisakaTranslator_WPF
                 _dict.DictInit(Common.appSettings.xxgPath, string.Empty);
             }
 
-            IsPauseFlag = true;
+            IsNotPausedFlag = true;
             _translator1 = TranslatorAuto(Common.appSettings.FirstTranslator);
             _translator2 = TranslatorAuto(Common.appSettings.SecondTranslator);
 
@@ -282,47 +282,32 @@ namespace MisakaTranslator_WPF
         /// <param name="isRenew">是否是重新获取翻译</param>
         private async void TranslateEventOcr(bool isRenew = false)
         {
-            if (IsPauseFlag)
+            if (!IsNotPausedFlag && IsOCRingFlag)
+                return;
+
+            IsOCRingFlag = true;
+
+            string srcText = null;
+            for (int i = 0; i < 3; i++)
             {
-                if (IsOCRingFlag == false)
-                {
-                    IsOCRingFlag = true;
+                // 重新OCR不需要等待
+                if (!isRenew)
+                    await Task.Delay(Common.UsingOCRDelay);
 
-                    int j = 0;
+                srcText = await Common.ocr.OCRProcessAsync();
+                GC.Collect();
 
-                    for (; j < 3; j++)
-                    {
-                        // 重新OCR不需要等待
-                        if (!isRenew)
-                        {
-                            await Task.Delay(Common.UsingOCRDelay);
-                        }
-
-                        string srcText = await Common.ocr.OCRProcessAsync();
-                        GC.Collect();
-
-                        if (!string.IsNullOrEmpty(srcText))
-                        {
-                            TranslateText(srcText, isRenew);
-
-                            IsOCRingFlag = false;
-                            break;
-                        }
-                    }
-
-                    if (j == 3)
-                    {
-                        _ = Application.Current.Dispatcher.BeginInvoke((Action)(() =>
-                          {
-                              FirstTransText.Text = "[OCR]自动识别三次均为空，请自行刷新！";
-                          }));
-
-                        IsOCRingFlag = false;
-                    }
-                }
+                if (!string.IsNullOrEmpty(srcText))
+                    break;
             }
 
-
+            if (!string.IsNullOrEmpty(srcText))
+                TranslateText(srcText, isRenew);
+            else
+                Application.Current.Dispatcher.Invoke((Action)(() => {
+                    FirstTransText.Text = "[OCR]自动识别三次均为空，请自行刷新！";
+                }));
+            IsOCRingFlag = false;
         }
 
         private void DictArea_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -637,7 +622,7 @@ namespace MisakaTranslator_WPF
             }
             else
             {
-                if(IsPauseFlag)
+                if(IsNotPausedFlag)
                 {
                     PauseButton.SetValue(FontAwesome.WPF.Awesome.ContentProperty, FontAwesomeIcon.Play);
                 }
@@ -645,7 +630,7 @@ namespace MisakaTranslator_WPF
                 {
                     PauseButton.SetValue(FontAwesome.WPF.Awesome.ContentProperty, FontAwesomeIcon.Pause);
                 }
-                IsPauseFlag = !IsPauseFlag;
+                IsNotPausedFlag = !IsNotPausedFlag;
             }
 
         }
