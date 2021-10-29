@@ -70,9 +70,9 @@ namespace TranslatorLibrary
             if (oinfo.error_code == null || oinfo.error_code == "52000")
             {
                 // 52000就是成功
-                if (oinfo.trans_result.Count == 0)
+                if (oinfo.trans_result.Length == 0)
                     return "";
-                else if(oinfo.trans_result.Count == 1)
+                else if(oinfo.trans_result.Length == 1)
                     return oinfo.trans_result[0].dst;
                 else
                 {
@@ -130,17 +130,17 @@ namespace TranslatorLibrary
         }
     }
 
-    class BaiduTransOutInfo
+    struct BaiduTransOutInfo
     {
-        public string from { get; set; }
-        public string to { get; set; }
-        public List<BaiduTransResult> trans_result { get; set; }
-        public string error_code { get; set; }
+        public string from;
+        public string to;
+        public BaiduTransResult[] trans_result;
+        public string error_code;
     }
 
-    class BaiduTransResult
+    struct BaiduTransResult
     {
-        public string src { get; set; }
-        public string dst { get; set; }
+        public string src;
+        public string dst;
     }
 }

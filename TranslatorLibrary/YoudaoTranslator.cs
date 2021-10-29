@@ -93,16 +93,16 @@ namespace TranslatorLibrary
         }
     }
 
-    class YoudaoTransResult
+    struct YoudaoTransResult
     {
-        public string type { get; set; }
-        public int errorCode { get; set; }
-        public int elapsedTime { get; set; }
-        public List<List<YoudaoTransData>> translateResult { get; set; }
+        public string type;
+        public int errorCode;
+        public int elapsedTime;
+        public YoudaoTransData[][] translateResult;
     }
 
-    class YoudaoTransData {
-        public string src { get; set; }
-        public string tgt { get; set; }
+    struct YoudaoTransData {
+        public string src;
+        public string tgt;
     }
 }

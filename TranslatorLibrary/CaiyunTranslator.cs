@@ -82,7 +82,7 @@ namespace TranslatorLibrary
                 return null;
             }
 
-            if (oinfo.target?.Count >= 1)
+            if (oinfo.target?.Length >= 1)
             {
                 //得到翻译结果
                 return string.Join("", oinfo.target.Select(x => Regex.Unescape(x)));
@@ -130,12 +130,12 @@ namespace TranslatorLibrary
     }
 
 
-    class CaiyunTransResult
+    struct CaiyunTransResult
     {
-        public string message { get; set; }
-        public double confidence { get; set; }
-        public int rc { get; set; }
-        public List<string> target { get; set; }
+        public string message;
+        public double confidence;
+        public int rc;
+        public string[] target;
     }
 
 

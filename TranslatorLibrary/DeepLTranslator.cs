@@ -50,7 +50,7 @@ namespace TranslatorLibrary
                 {
                     string resultStr = await response.Content.ReadAsStringAsync();
                     DeepLTranslateResult translateResult = JsonConvert.DeserializeObject<DeepLTranslateResult>(resultStr);
-                    if (translateResult != null && translateResult.translations != null && translateResult.translations.Count > 0)
+                    if (translateResult.translations?.Length > 0)
                     {
                         return translateResult.translations[0].text;
                     }else
@@ -129,14 +129,14 @@ namespace TranslatorLibrary
         }
     }
 
-    class DeepLTranslateResult
+    struct DeepLTranslateResult
     {
-        public List<DeepLTranslations> translations { get; set; }
+        public DeepLTranslations[] translations;
     }
 
-    class DeepLTranslations
+    struct DeepLTranslations
     {
-        public string detected_source_language { get; set; }
-        public string text { get; set; }
+        public string detected_source_language;
+        public string text;
     }
 }

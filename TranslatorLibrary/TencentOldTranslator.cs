@@ -100,7 +100,7 @@ namespace TranslatorLibrary
             }
             else
             {
-                errorInfo = "ErrorID:" + oinfo.Response.Error.Code + " ErrorInfo:" + oinfo.Response.Error.Message;
+                errorInfo = "ErrorID:" + oinfo.Response.Error.Value.Code + " ErrorInfo:" + oinfo.Response.Error.Value.Message;
                 return null;
             }
 
@@ -141,24 +141,24 @@ namespace TranslatorLibrary
         }
     }
 
-    class TencentOldTransOutInfo
+    struct TencentOldTransOutInfo
     {
-        public TencentOldTransResult Response { get; set; }
+        public TencentOldTransResult Response;
     }
 
-    class TencentOldTransResult
+    struct TencentOldTransResult
     {
-        public string RequestId { get; set; }
-        public string TargetText { get; set; }
-        public string Source { get; set; }
-        public string Target { get; set; }
-        public TencentOldTransOutError Error { get; set; }
+        public string RequestId;
+        public string TargetText;
+        public string Source;
+        public string Target;
+        public TencentOldTransOutError? Error;
     }
 
-    class TencentOldTransOutError
+    struct TencentOldTransOutError
     {
-        public string Code { get; set; }
-        public string Message { get; set; }
+        public string Code;
+        public string Message;
     }
 
 }

@@ -69,15 +69,14 @@ namespace TranslatorLibrary
             }
 
             string retString = await resp.Content.ReadAsStringAsync();
-            var dynamicResult = JsonConvert.DeserializeObject<dynamic>(retString);
+            var result = JsonConvert.DeserializeObject<Result>(retString);
 
             if (!resp.IsSuccessStatusCode){
-                errorInfo = dynamicResult.error;
+                errorInfo = result.error;
                 return null;
             }
 
-            string result = dynamicResult.translations[0].translation;
-            return result;
+            return result.translations[0].translation;
         }
 
         public void TranslatorInit(string param1, string param2)
@@ -111,6 +110,17 @@ namespace TranslatorLibrary
         public static string GetUrl_Doc()
         {
             return "https://cloud.ibm.com/apidocs/language-translator#translate";
+        }
+
+        struct Result
+        {
+            public Translations[] translations;
+            public string error;
+        }
+
+        struct Translations
+        {
+            public string translation;
         }
     }
 }
