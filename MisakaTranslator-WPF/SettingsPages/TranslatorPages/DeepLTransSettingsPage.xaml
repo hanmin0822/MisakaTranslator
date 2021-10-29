@@ -19,7 +19,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource DeepLTransSettingsPage_secretKey}" Name="DeepLTransSecretKeyBox" ShowClearButton="True" TextChanged="DeepLTransSecretKeyBox_TextChanged"/>
+                    <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource DeepLTransSettingsPage_secretKey}" Name="DeepLTransSecretKeyBox" ShowClearButton="True"/>
                     <Button Grid.Column="1" Content="{StaticResource API_authTestBtn}" Margin="10,0,0,0" Width="122" Click="AuthTestBtn_Click" ></Button>
                 </Grid>
                 <hc:Divider/>

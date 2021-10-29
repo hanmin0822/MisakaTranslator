@@ -27,11 +27,6 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             DeepLTransSecretKeyBox.Text = Common.appSettings.DeepLsecretKey;
         }
 
-        private void DeepLTransSecretKeyBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private async void AuthTestBtn_Click(object sender, RoutedEventArgs e)
         {
             Common.appSettings.DeepLsecretKey = DeepLTransSecretKeyBox.Text;

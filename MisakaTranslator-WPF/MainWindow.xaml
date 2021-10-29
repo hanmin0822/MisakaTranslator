@@ -104,7 +104,7 @@
                             <Button Content="{StaticResource MainWindow_Drawer_Start}" Height="50" Margin="5" Foreground="White" Background="{DynamicResource SuccessBrush}" Click="StartBtn_Click"/>
                             <Button Content="{StaticResource MainWindow_Drawer_LEStart}" Height="50" Margin="5" Foreground="White" Background="{DynamicResource InfoBrush}" Click="LEStartBtn_Click"/>
                             <Button Content="{StaticResource MainWindow_Drawer_DeleteGame}" Height="50" Margin="5" Foreground="White" Background="{DynamicResource DangerBrush}" Click="DeleteGameBtn_Click"/>
-                                <Button Content="{StaticResource MainWindow_Drawer_UpdateName}" Height="50" Margin="5" Foreground="White" Command="{Binding ShowInteractiveDialogCmd}" Background="{DynamicResource WarningBrush}" Click="UpdateNameBtn_Click"/>
+                                <Button Content="{StaticResource MainWindow_Drawer_UpdateName}" Height="50" Margin="5" Foreground="White" Background="{DynamicResource WarningBrush}" Click="UpdateNameBtn_Click"/>
                         </hc:ButtonGroup>
                         </Border>
 
