@@ -124,13 +124,13 @@ namespace TranslatorLibrary
 
     }
 
-    class XiaoniuTransOutInfo
+    struct XiaoniuTransOutInfo
     {
-        public string from { get; set; }
-        public string to { get; set; }
-        public string src_text { get; set; }
-        public string tgt_text { get; set; }
-        public string error_code { get; set; }
-        public string error_msg { get; set; }
+        public string from;
+        public string to;
+        public string src_text;
+        public string tgt_text;
+        public string error_code;
+        public string error_msg;
     }
 }

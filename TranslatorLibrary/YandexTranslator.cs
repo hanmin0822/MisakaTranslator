@@ -32,7 +32,7 @@ namespace TranslatorLibrary
             try
             {
                 string retString = await hc.GetStringAsync(apiurl + HttpUtility.UrlEncode(sourceText));
-                var doc = JsonConvert.DeserializeObject<dynamic>(retString);
+                var doc = JsonConvert.DeserializeObject<Result>(retString);
                 return doc.text[0];
             }
             catch (System.Net.Http.HttpRequestException ex)
@@ -77,6 +77,12 @@ namespace TranslatorLibrary
         public static string GetUrl_Doc()
         {
             return "https://yandex.com/dev/translate/doc/dg/reference/translate.html";
+        }
+
+        struct Result
+        {
+            public int code;
+            public string[] text;
         }
     }
 }

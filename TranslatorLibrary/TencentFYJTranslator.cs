@@ -110,16 +110,16 @@ namespace TranslatorLibrary
         }
     }
 
-    class TencentTransOutInfo
+    struct TencentTransOutInfo
     {
-        public string ret { get; set; }
-        public string msg { get; set; }
-        public TencentTransResult data { get; set; }
+        public string ret;
+        public string msg;
+        public TencentTransResult data;
     }
 
-    class TencentTransResult
+    struct TencentTransResult
     {
-        public string source_text { get; set; }
-        public string target_text { get; set; }
+        public string source_text;
+        public string target_text;
     }
 }
