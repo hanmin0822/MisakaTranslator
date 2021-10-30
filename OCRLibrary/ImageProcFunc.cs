@@ -70,6 +70,16 @@ namespace OCRLibrary
         }
 
 
+        public static byte[] Image2Bytes(Image img)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                img.Save(stream, ImageFormat.Png);
+                return stream.ToArray();
+            }
+        }
+
+
         /// <summary>
         /// 得到图片的Base64编码
         /// </summary>
@@ -77,21 +87,7 @@ namespace OCRLibrary
         /// <returns></returns>
         public static string GetFileBase64(Image img)
         {
-            string fileName = Environment.CurrentDirectory + "\\OCRRes.png";
-            try
-            {
-                img.Save(fileName, ImageFormat.Png);
-            }
-            catch (System.NullReferenceException ex)
-            {
-                throw ex;
-            }
-            FileStream filestream = new FileStream(fileName, FileMode.Open);
-            byte[] arr = new byte[filestream.Length];
-            filestream.Read(arr, 0, (int)filestream.Length);
-            string baser64 = Convert.ToBase64String(arr);
-            filestream.Close();
-            return baser64;
+            return Convert.ToBase64String(Image2Bytes(img));
         }
         
         /// <summary>
