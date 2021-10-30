@@ -43,6 +43,7 @@
     <sys:String x:Key="SettingsMenu_OCRSettings">OCR Settings</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_General">General</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_Baidu">Baidu OCR API</sys:String>
+    <sys:String x:Key="SettingsMenu_OCRSettings_BaiduFanyi">BaiduFanyi OCR API</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_Tesseract5">Tesseract5 OCR</sys:String>
     
     
@@ -127,6 +128,8 @@
     <sys:String x:Key="BaiduOCRSettingsPage_Introduce">Baidu universal text recognition (network required) can be used for multi-scene, multilingual, high-precision text detection and recognition. You need to apply for the API and activate translation services (on the website in Chinese), get access to the API Key and Secret Key, and then fill in below before testing. It is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of Baidu OCR.</sys:String>
     <sys:String x:Key="BaiduOCRSettingsPage_APIKEY">Baidu OCR API Key</sys:String>
     <sys:String x:Key="BaiduOCRSettingsPage_SecretKey">Baidu OCR Secret Key</sys:String>
+
+    <sys:String x:Key="BaiduFanyiOCRSettingsPage_Introduce">BaiduFanyi OCR have the same parameters as "Translation Settings - Baidu Translate". Note you must trun on "Image translation" service. This one directly translates from image to Chinese, rather than OCR to text then translate.</sys:String>
 
     <sys:String x:Key="TessactOCR5SettingsPage_Introduce">Tesseract5 support any languages, but only Japanese are pre-configed. Use command line args for other languages. (See tesseartact --help-extra for details)</sys:String>
     <sys:String x:Key="TessactOCR5SettingsPage_Path">Tesseract5 Path</sys:String>

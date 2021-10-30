@@ -91,20 +91,36 @@ namespace MisakaTranslator_WPF
                     }
                     else
                     {
-                        HandyControl.Controls.Growl.ErrorGlobal($"百度OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+                        HandyControl.Controls.Growl.ErrorGlobal($"百度智能云OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
                     }
                 }
                 else
                 {
-                    HandyControl.Controls.Growl.ErrorGlobal($"百度OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+                    HandyControl.Controls.Growl.ErrorGlobal($"百度智能云OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
                 }
+            }
+            else if (Common.appSettings.OCRsource == "BaiduFanyiOCR")
+            {
+                ocr = new BaiduFanyiOCR();
+                if (ocr.OCR_Init(Common.appSettings.BDappID, Common.appSettings.BDsecretKey))
+                {
+                    ocr.SetOCRSourceLang(Common.appSettings.GlobalOCRLang);
+                    res = await ocr.OCRProcessAsync(new System.Drawing.Bitmap(img));
+
+                    if (res != null)
+                        FirstTransText.Text = res;
+                    else
+                        HandyControl.Controls.Growl.ErrorGlobal($"百度翻译OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+                }
+                else
+                    HandyControl.Controls.Growl.ErrorGlobal($"百度翻译OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
             }
 
             if (res == null)
             {
                 FirstTransText.Text = "OCR ERROR";
             }
-            else
+            else if(Common.appSettings.OCRsource != "BaiduFanyiOCR")
             {
                 ITranslator translator1 = TranslateWindow.TranslatorAuto(Common.appSettings.FirstTranslator);
                 ITranslator translator2 = TranslateWindow.TranslatorAuto(Common.appSettings.SecondTranslator);
