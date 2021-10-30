@@ -109,12 +109,11 @@ namespace TranslatorLibrary
                         {
                             AutomaticDecompression = DecompressionMethods.GZip
                         })
-                        { Timeout = TimeSpan.FromSeconds(6) };
+                        { Timeout = TimeSpan.FromSeconds(5) };
                         var headers = HC.DefaultRequestHeaders;
                         headers.UserAgent.ParseAdd("MisakaTranslator");
-                        headers.AcceptEncoding.ParseAdd("gzip");
                         headers.Connection.ParseAdd("keep-alive");
-                        ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
+                        ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12; // For FX4.7
                     }
             return HC;
         }
