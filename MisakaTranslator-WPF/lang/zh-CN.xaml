@@ -45,7 +45,8 @@
     <sys:String x:Key="SettingsMenu_HookSettings">Hook相关设置</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings">OCR相关设置</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_General">通用设置</sys:String>
-    <sys:String x:Key="SettingsMenu_OCRSettings_Baidu">百度在线OCR API</sys:String>
+    <sys:String x:Key="SettingsMenu_OCRSettings_Baidu">百度智能云OCR API</sys:String>
+    <sys:String x:Key="SettingsMenu_OCRSettings_BaiduFanyi">百度翻译OCR API</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_Tesseract5">Tesseract5 OCR</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings">翻译相关设置</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_General">通用设置</sys:String>
@@ -78,7 +79,7 @@
     <sys:String x:Key="GeneralTransSettingsPage_TransSourceHint">注意：如果同时使用多个在线API，可能会影响效率</sys:String>
     <sys:String x:Key="GeneralTransSettingsPage_EachRowTransHint">不使用分行翻译时，软件会将读取到的文本合并成一句话翻译，对于部分游戏可以提高翻译质量。</sys:String>
 
-    <sys:String x:Key="BaiduTransSettingsPage_Introduce">百度翻译API支持28种语言互译，对英语、日语、汉语的互译支持较好，需要联网使用；您需要先申请百度翻译API并开通翻译服务，获取appID和密钥后填入下方相应位置并进行测试认证，注意本项与百度OCR不在同一个地方注册；如果认证出现错误，请根据错误码至百度翻译API官方获取解决办法；百度翻译API部分版本可能会产生某些费用，您可以使用额度查询按钮进入控制台确认。</sys:String>
+    <sys:String x:Key="BaiduTransSettingsPage_Introduce">百度翻译API支持28种语言互译，对英语、日语、汉语的互译支持较好，需要联网使用；您需要先申请百度翻译API并开通翻译服务，获取appID和密钥后填入下方相应位置并进行测试认证，注意本项与百度智能云OCR不在同一个地方注册；如果认证出现错误，请根据错误码至百度翻译API官方获取解决办法；百度翻译API部分版本可能会产生某些费用，您可以使用额度查询按钮进入控制台确认。</sys:String>
     <sys:String x:Key="BaiduTransSettingsPage_appID">百度翻译API appID</sys:String>
     <sys:String x:Key="BaiduTransSettingsPage_secretKey">百度翻译API 密钥</sys:String>
 
@@ -123,8 +124,10 @@
     <sys:String x:Key="OCRGeneralSettingsPage_GlobalOCRHotKey">全局OCR快捷键</sys:String>
 
     <sys:String x:Key="BaiduOCRSettingsPage_Introduce">百度通用文字识别可以供多场景、多语种、高精度的整图文字检测和识别服务，需要联网使用；您需要先申请本API并创建一个应用，获取APIKEY和SecretKey后填入下方相应位置并进行测试认证；百度通用文字识别部分版本可能会产生某些费用，您可以使用额度查询按钮进入控制台确认。</sys:String>
-    <sys:String x:Key="BaiduOCRSettingsPage_APIKEY">百度OCR API_KEY</sys:String>
-    <sys:String x:Key="BaiduOCRSettingsPage_SecretKey">百度OCR Secret_Key</sys:String>
+    <sys:String x:Key="BaiduOCRSettingsPage_APIKEY">百度智能云OCR API_KEY</sys:String>
+    <sys:String x:Key="BaiduOCRSettingsPage_SecretKey">百度智能云OCR Secret_Key</sys:String>
+
+    <sys:String x:Key="BaiduFanyiOCRSettingsPage_Introduce">百度翻译OCR采用与“翻译相关设置 - 百度翻译API”相同的参数，无需在本页面设置。注意光有APPID还不够，必须保证开通了“图片翻译”服务。本项直接从图片翻译成中文，而非先从图片中识别出日文或英文文字再用文字翻译。</sys:String>
 
     <sys:String x:Key="TessactOCR5SettingsPage_Introduce">Tesseract5理论上支持所有语言，横向纵向，分页方法。这个设置页只预设日语的横向和纵向，如果需要其他语言，请使用自定义命令行参数（详见tesseract --help-extra）。如果识别效果不理想，可以考虑自行训练相关OCR字库，更多有关OCR预处理的设置选项见OCR设置窗口。</sys:String>
     <sys:String x:Key="TessactOCR5SettingsPage_Path">Tesseract5安装路径</sys:String>

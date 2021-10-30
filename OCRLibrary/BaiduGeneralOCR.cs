@@ -103,7 +103,7 @@ namespace OCRLibrary
         }
 
         /// <summary>
-        /// 百度OCRAPI申请地址
+        /// 百度智能云OCRAPI申请地址
         /// </summary>
         /// <returns></returns>
         public static string GetUrl_allpyAPI()
@@ -112,7 +112,7 @@ namespace OCRLibrary
         }
 
         /// <summary>
-        /// 百度OCRAPI额度查询地址
+        /// 百度智能云OCRAPI额度查询地址
         /// </summary>
         /// <returns></returns>
         public static string GetUrl_bill()
@@ -121,7 +121,7 @@ namespace OCRLibrary
         }
 
         /// <summary>
-        /// 百度OCRAPI文档地址
+        /// 百度智能云OCRAPI文档地址
         /// </summary>
         /// <returns></returns>
         public static string GetUrl_Doc()

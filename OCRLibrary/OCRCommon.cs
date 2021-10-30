@@ -11,6 +11,7 @@ namespace OCRLibrary
         public static List<string> lstOCR = new List<string>()
         {
             "BaiduOCR",
+            "BaiduFanyiOCR",
             "TesseractOCR",
             "Tesseract5"
         };
@@ -25,6 +26,8 @@ namespace OCRLibrary
             {
                 case "BaiduOCR":
                     return new BaiduGeneralOCR(); ;
+                case "BaiduFanyiOCR":
+                    return new BaiduFanyiOCR();
                 case "TesseractOCR":
                     return new TesseractOCR(); ;
                 case "Tesseract5":

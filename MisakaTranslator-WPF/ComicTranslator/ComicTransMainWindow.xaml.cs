@@ -71,7 +71,14 @@ namespace MisakaTranslator_WPF.ComicTranslator
             {
                 if (ocr.OCR_Init(Common.appSettings.BDOCR_APIKEY, Common.appSettings.BDOCR_SecretKey) == false)
                 {
-                    HandyControl.Controls.Growl.ErrorGlobal($"百度OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+                    HandyControl.Controls.Growl.ErrorGlobal($"百度智能云OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+                }
+            }
+            if (Common.appSettings.OCRsource == "BaiduFanyiOCR")
+            {
+                if (ocr.OCR_Init(Common.appSettings.BDappID, Common.appSettings.BDsecretKey) == false)
+                {
+                    HandyControl.Controls.Growl.ErrorGlobal($"百度翻译OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
                 }
             }
             else if (Common.appSettings.OCRsource == "Tesseract5")

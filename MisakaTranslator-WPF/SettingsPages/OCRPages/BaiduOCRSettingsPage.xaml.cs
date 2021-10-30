@@ -35,7 +35,7 @@ namespace MisakaTranslator_WPF.SettingsPages.OCRPages
 
             if(APIKEYBox.Text.Length == 17)
             {
-                HandyControl.Controls.Growl.Error($"百度OCR {Application.Current.Resources["APITest_Error_Hint"]}\nDo not use fanyi.baidu.com endpoint.");
+                HandyControl.Controls.Growl.Error($"百度智能云OCR {Application.Current.Resources["APITest_Error_Hint"]}\nDo not use fanyi.baidu.com endpoint.");
                 return;
             }
 
@@ -45,11 +45,11 @@ namespace MisakaTranslator_WPF.SettingsPages.OCRPages
 
             if (ret == true)
             {
-                HandyControl.Controls.Growl.Success($"百度OCR {Application.Current.Resources["APITest_Success_Hint"]}");
+                HandyControl.Controls.Growl.Success($"百度智能云OCR {Application.Current.Resources["APITest_Success_Hint"]}");
             }
             else
             {
-                HandyControl.Controls.Growl.Error($"百度OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{bgocr.GetLastError()}");
+                HandyControl.Controls.Growl.Error($"百度智能云OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{bgocr.GetLastError()}");
             }
         }
 
