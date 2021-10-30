@@ -148,16 +148,20 @@ namespace MisakaTranslator_WPF {
             return IntPtr.Zero;
         }
 
-        private static SettingsWindow _settingsWindow;
+        private WeakReference<SettingsWindow> _settingsWindow;
 
         private void SettingsBtn_Click(object sender, RoutedEventArgs e) {
-            if (_settingsWindow == null || _settingsWindow.IsVisible == false) {
-                _settingsWindow = new SettingsWindow();
-                _settingsWindow.Show();
+            if(_settingsWindow != null && _settingsWindow.TryGetTarget(out var sw))
+            {
+                sw.Show();
+                sw.WindowState = WindowState.Normal;
+                sw.Activate();
             }
-            else {
-                _settingsWindow.WindowState = WindowState.Normal;
-                _settingsWindow.Activate();
+            else
+            {
+                sw = new SettingsWindow();
+                _settingsWindow = new WeakReference<SettingsWindow>(sw);
+                sw.Show();
             }
         }
 

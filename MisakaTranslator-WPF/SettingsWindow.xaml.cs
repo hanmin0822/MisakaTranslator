@@ -25,6 +25,12 @@ namespace MisakaTranslator_WPF
 
         }
 
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            Hide();
+            e.Cancel = true;
+        }
+
         private void Item_About_Selected(object sender, RoutedEventArgs e)
         {
             this.SettingFrame.Navigate(new Uri("SettingsPages/AboutPage.xaml", UriKind.Relative));
