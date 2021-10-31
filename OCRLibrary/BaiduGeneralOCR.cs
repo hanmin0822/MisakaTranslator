@@ -28,6 +28,8 @@ namespace OCRLibrary
             string host = "https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic?access_token=" + accessToken;
             HttpWebRequest request = WebRequest.CreateHttp(host);
             request.Method = "post";
+            request.AutomaticDecompression = DecompressionMethods.GZip;
+            request.Timeout = 5000;
             // 图片的base64编码
             string base64 = ImageProcFunc.GetFileBase64(img);
             String str = "language_type=" + langCode + "&image=" + HttpUtility.UrlEncode(base64);
@@ -37,20 +39,30 @@ namespace OCRLibrary
             {
                 await requestStream.WriteAsync(buffer, 0, buffer.Length);
             }
-            HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
-            StreamReader reader = new StreamReader(response.GetResponseStream());
-            string result = await reader.ReadToEndAsync();
-            response.Close();
 
-            string ret = "";
+            string result;
+            try
+            {
+                HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync();
+                StreamReader reader = new StreamReader(response.GetResponseStream());
+                result = await reader.ReadToEndAsync();
+                response.Close();
+            }
+            catch (WebException ex)
+            {
+                errorInfo = ex.Message;
+                return null;
+            }
+
+            StringBuilder sb = new StringBuilder();
             BaiduOCRresOutInfo oinfo = JsonConvert.DeserializeObject<BaiduOCRresOutInfo>(result);
             if (oinfo.words_result != null)
             {
                 for (int i = 0; i < oinfo.words_result_num; i++)
                 {
-                    ret = ret + oinfo.words_result[i].words + "\n";
+                    sb.AppendLine(oinfo.words_result[i].words);
                 }
-                return ret;
+                return sb.ToString();
             }
             else {
                 errorInfo = "UnknownError";
