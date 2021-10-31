@@ -510,7 +510,7 @@ namespace MisakaTranslator_WPF
                     {
                         Application.Current.Dispatcher.Invoke((Action)(() =>
                         {
-                            Growl.ErrorGlobal(_translator1.GetType().Name + ": " + _translator1.GetLastError());
+                            Growl.WarningGlobal(_translator1.GetType().Name + ": " + _translator1.GetLastError());
                         }));
                         return;
                     }
@@ -525,7 +525,7 @@ namespace MisakaTranslator_WPF
                     {
                         Application.Current.Dispatcher.Invoke((Action)(() =>
                         {
-                            Growl.ErrorGlobal(_translator2.GetType().Name + ": " + _translator2.GetLastError());
+                            Growl.WarningGlobal(_translator2.GetType().Name + ": " + _translator2.GetLastError());
                         }));
                         return;
                     }
