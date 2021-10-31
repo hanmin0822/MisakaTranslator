@@ -539,13 +539,13 @@ namespace MisakaTranslator_WPF
             switch (tranResultIndex)
             {
                 case 1:
-                    _ = Application.Current.Dispatcher.BeginInvoke((Action)(() =>
+                    Application.Current.Dispatcher.Invoke((Action)(() =>
                       {
                           FirstTransText.Text = afterString;
                       }));
                     break;
                 case 2:
-                    _ = Application.Current.Dispatcher.BeginInvoke((Action)(() =>
+                    Application.Current.Dispatcher.Invoke((Action)(() =>
                       {
                           SecondTransText.Text = afterString;
                       }));
