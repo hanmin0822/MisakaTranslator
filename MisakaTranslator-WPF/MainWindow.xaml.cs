@@ -209,7 +209,7 @@ namespace MisakaTranslator_WPF {
             {
                 try
                 {
-                    if (p.MainModule.FileName == gameInfoList[gid].GameName)
+                    if (p.MainModule.FileName == gameInfoList[gid].FilePath)
                         pidList.Add(p);
                     else
                         p.Dispose();
@@ -217,7 +217,7 @@ namespace MisakaTranslator_WPF {
                 catch (System.ComponentModel.Win32Exception)
                 {
                     //这个地方直接跳过，是因为32位程序确实会读到64位的系统进程，而系统进程是不能被访问的
-                    continue;
+                    p.Dispose();
                 }
             }
 
