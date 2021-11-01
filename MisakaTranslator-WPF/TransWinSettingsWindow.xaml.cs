@@ -150,7 +150,7 @@ namespace MisakaTranslator_WPF
                 MinHeight = 0,
                 Title = "选择颜色"
             };
-            picker.SelectedColorChanged += delegate
+            picker.Confirmed += delegate
             {
                 if (sender == BgColorBtn)
                 {
