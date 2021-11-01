@@ -112,6 +112,7 @@ namespace TranslatorLibrary
             return "https://cloud.ibm.com/apidocs/language-translator#translate";
         }
 
+#pragma warning disable 0649
         struct Result
         {
             public Translations[] translations;

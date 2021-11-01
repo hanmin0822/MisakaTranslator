@@ -130,6 +130,7 @@ namespace TranslatorLibrary
         }
     }
 
+#pragma warning disable 0649
     struct BaiduTransOutInfo
     {
         public string from;

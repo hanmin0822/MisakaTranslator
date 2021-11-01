@@ -129,6 +129,7 @@ namespace TranslatorLibrary
         }
     }
 
+#pragma warning disable 0649
     struct DeepLTranslateResult
     {
         public DeepLTranslations[] translations;

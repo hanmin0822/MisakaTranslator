@@ -79,6 +79,7 @@ namespace TranslatorLibrary
             return "https://yandex.com/dev/translate/doc/dg/reference/translate.html";
         }
 
+#pragma warning disable 0649
         struct Result
         {
             public int code;

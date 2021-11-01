@@ -129,7 +129,7 @@ namespace TranslatorLibrary
         }
     }
 
-
+#pragma warning disable 0649
     struct CaiyunTransResult
     {
         public string message;

@@ -93,6 +93,7 @@ namespace TranslatorLibrary
         }
     }
 
+#pragma warning disable 0649
     struct YoudaoTransResult
     {
         public string type;

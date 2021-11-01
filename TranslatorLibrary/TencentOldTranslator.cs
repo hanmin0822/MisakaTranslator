@@ -141,6 +141,7 @@ namespace TranslatorLibrary
         }
     }
 
+#pragma warning disable 0649
     struct TencentOldTransOutInfo
     {
         public TencentOldTransResult Response;

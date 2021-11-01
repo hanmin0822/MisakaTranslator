@@ -130,6 +130,7 @@ namespace OCRLibrary
         }
     }
 
+#pragma warning disable 0649
     struct Result
     {
         public string error_code;

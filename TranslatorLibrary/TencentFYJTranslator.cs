@@ -110,6 +110,7 @@ namespace TranslatorLibrary
         }
     }
 
+#pragma warning disable 0649
     struct TencentTransOutInfo
     {
         public string ret;

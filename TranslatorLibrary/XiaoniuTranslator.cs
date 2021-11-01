@@ -124,6 +124,7 @@ namespace TranslatorLibrary
 
     }
 
+#pragma warning disable 0649
     struct XiaoniuTransOutInfo
     {
         public string from;
