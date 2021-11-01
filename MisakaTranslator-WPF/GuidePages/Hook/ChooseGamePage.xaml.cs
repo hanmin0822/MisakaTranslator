@@ -58,7 +58,7 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
 
                 
                 Common.GameID = -1;
-                string filepath = Common.FindProcessPath(GamePid);
+                string filepath = ProcessHelper.FindProcessPath(GamePid);
                 if (filepath != "") {
                     Common.GameID = GameLibraryHelper.GetGameID(filepath);
                 }

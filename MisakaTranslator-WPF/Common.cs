@@ -92,34 +92,6 @@ namespace MisakaTranslator_WPF
         }
 
         /// <summary>
-        /// 根据进程PID找到程序所在路径
-        /// </summary>
-        /// <param name="pid"></param>
-        /// <returns></returns>
-        public static string FindProcessPath(int pid)
-        {
-            Process[] ps = Process.GetProcesses();
-            string filepath = "";
-            for (int i = 0; i < ps.Length; i++)
-            {
-                if (ps[i].Id == pid)
-                {
-                    try
-                    {
-                        filepath = ps[i].MainModule.FileName;
-                    }
-                    catch (System.ComponentModel.Win32Exception ex)
-                    {
-                        continue;
-                        //这个地方直接跳过，是因为32位程序确实会读到64位的系统进程，而系统进程是不能被访问的
-                    }
-                    break;
-                }
-            }
-            return filepath;
-        }
-
-        /// <summary>
         /// 全局OCR
         /// </summary>
         public static void GlobalOCR()

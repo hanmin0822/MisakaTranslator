@@ -203,22 +203,21 @@ namespace MisakaTranslator_WPF {
         }
 
         private void StartTranslateByGid(int gid) {
-            var ps = Process.GetProcesses();
             var pidList = new List<Process>();
 
-            foreach (var process in ps) {
-                string filepath;
-                try {
-                    filepath = process.MainModule.FileName;
+            foreach (var p in Process.GetProcesses())
+            {
+                try
+                {
+                    if (p.MainModule.FileName == gameInfoList[gid].GameName)
+                        pidList.Add(p);
+                    else
+                        p.Dispose();
                 }
-                catch (Exception) {
-                    continue;
+                catch (System.ComponentModel.Win32Exception)
+                {
                     //这个地方直接跳过，是因为32位程序确实会读到64位的系统进程，而系统进程是不能被访问的
-                    //throw ex;
-                }
-
-                if (gameInfoList[gid].FilePath == filepath) {
-                    pidList.Add(process);
+                    continue;
                 }
             }
 
@@ -385,34 +384,30 @@ namespace MisakaTranslator_WPF {
         /// </summary>
         /// <returns>数组索引（非GameID），-1代表未找到</returns>
         private int GetGameListHasProcessGame_PID_ID() {
-            var processes = Process.GetProcesses();
             var ret = new List<int>();
             gameInfoList = GameLibraryHelper.GetAllGameLibrary();
-            if (gameInfoList != null) {
-                foreach (var process in processes) {
-                    for (int j = 0; j < gameInfoList.Count; j++) {
-                        string filepath;
-                        try
-                        {
-                            filepath = process.MainModule.FileName;
-                        }
-                        catch (Win32Exception)
-                        {
-                            continue;
-                        }
-                        catch (InvalidOperationException)
-                        {
-                            continue;
-                        }
+            if (gameInfoList == null)
+                return -1;
 
-                        if (filepath == gameInfoList[j].FilePath) {
+            foreach (var process in Process.GetProcesses()) {
+                for (int j = 0; j < gameInfoList.Count; j++) {
+                    try
+                    {
+                        if (process.MainModule.FileName == gameInfoList[j].FilePath)
                             return j;
-                        }
+                    }
+                    catch (Win32Exception)
+                    {
+                        continue;
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        continue;
                     }
                 }
-
-                return -1;
+                process.Dispose();
             }
+
             return -1;
         }
 

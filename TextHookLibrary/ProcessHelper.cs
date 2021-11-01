@@ -19,16 +19,15 @@ namespace TextHookLibrary
             Dictionary<string, int> ret = new Dictionary<string, int>();
             
             //获取系统进程列表
-            Process[] ps = Process.GetProcesses();
-            for (int i = 0; i < ps.Length; i++)
+            foreach (Process p in Process.GetProcesses())
             {
-                Process p = ps[i];
                 if (p.MainWindowHandle != IntPtr.Zero)
                 {
                     string info = "";
                     info = p.ProcessName + "—" + p.Id;
                     ret.Add(info, p.Id);
                 }
+                p.Dispose();
             }
             return ret;
         }
@@ -40,27 +39,14 @@ namespace TextHookLibrary
         /// <returns></returns>
         public static List<Process> FindSameNameProcess(int pid)
         {
+            string DesProcessName = Process.GetProcessById(pid).ProcessName;
+
             List<Process> res = new List<Process>();
-            Process[] ps = Process.GetProcesses();
-            string DesProcessName = "";
-
-            for (int i = 0; i < ps.Length; i++)
-            {
-                if (ps[i].Id == pid)
-                {
-                    DesProcessName = ps[i].ProcessName;
-                    break;
-                }
-            }
-
-            for (int i = 0; i < ps.Length; i++)
-            {
-                if (ps[i].ProcessName == DesProcessName)
-                {
-                    res.Add(ps[i]);
-                }
-            }
-
+            foreach (Process p in Process.GetProcesses())
+                if (p.ProcessName == DesProcessName)
+                    res.Add(p);
+                else
+                    p.Dispose();
             return res;
         }
 
@@ -71,26 +57,15 @@ namespace TextHookLibrary
         /// <returns></returns>
         public static string FindProcessPath(int pid)
         {
-            string filepath = "";
-            Process[] ps = Process.GetProcesses();
-            for (int i = 0; i < ps.Length; i++)
+            try
             {
-                if (ps[i].Id == pid)
-                {
-                    try
-                    {
-                        filepath = ps[i].MainModule.FileName;
-                    }
-                    catch (System.ComponentModel.Win32Exception ex)
-                    {
-                        continue;
-                        //这个地方直接跳过，是因为32位程序确实会读到64位的系统进程，而系统进程是不能被访问的
-                        //throw ex;
-                    }
-                    break;
-                }
+                Process p = Process.GetProcessById(pid);
+                return p.MainModule.FileName;
             }
-            return filepath;
+            catch (System.ComponentModel.Win32Exception)
+            {
+                return "";
+            }
         }
 
     }
