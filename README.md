@@ -48,6 +48,7 @@
 * KeyboardMouseMonitor为VC项目，如不想构建可去掉，之后复制lib
 * **其余二进制依赖需在构建完成后手动从已Release的包中复制lib文件夹**
 * Actions的artifact为nightly build，也不含lib
+* 如果想用Tesseract4，复制tessdata文件夹
 
 ## 帮助开发者
 
