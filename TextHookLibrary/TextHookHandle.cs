@@ -236,7 +236,7 @@ namespace TextHookLibrary {
         /// <summary>
         /// 开始注入，会判断是否智能注入
         /// </summary>
-        public async void StartHook(bool AutoHook = false) {
+        public async Task StartHook(bool AutoHook = false) {
             if (HandleMode == 1) {
                 await AttachProcess(GamePID);
             }

@@ -202,7 +202,7 @@ namespace MisakaTranslator_WPF {
             GameInfoDrawer.IsOpen = true;
         }
 
-        private void StartTranslateByGid(int gid) {
+        private async Task StartTranslateByGid(int gid) {
             var pidList = new List<Process>();
 
             foreach (var p in Process.GetProcesses())
@@ -256,7 +256,11 @@ namespace MisakaTranslator_WPF {
 
             Common.textHooker = pidList.Count == 1 ? new TextHookHandle(pidList[0].Id) : new TextHookHandle(pidList);
 
-            Common.textHooker.Init(!gameInfoList[gid].Isx64);
+            if(!Common.textHooker.Init(!gameInfoList[gid].Isx64))
+            {
+                HandyControl.Controls.MessageBox.Show(Application.Current.Resources["MainWindow_TextractorError_Hint"].ToString());
+                return;
+            }
             Common.textHooker.HookCodeList.Add(gameInfoList[gid].Hookcode);
             Common.textHooker.HookCode_Custom = gameInfoList[gid].HookCodeCustom;
 
@@ -269,12 +273,10 @@ namespace MisakaTranslator_WPF {
                 Common.textHooker.MisakaCodeList = null;
                 //2020-06-08 大部分情况无重复码的游戏不会hook到很多，不进行去多余hook
                 //Common.textHooker.DetachUnrelatedHookWhenDataRecv = Convert.ToBoolean(Common.appSettings.AutoDetach);
-                Common.textHooker.StartHook(Convert.ToBoolean(Common.appSettings.AutoHook));
-                var task1 = Task.Run(async delegate
-                {
-                    await Task.Delay(3000);
-                    Common.textHooker.Auto_AddHookToGame();
-                });
+                await Common.textHooker.StartHook(Convert.ToBoolean(Common.appSettings.AutoHook));
+
+                await Task.Delay(3000);
+                Common.textHooker.Auto_AddHookToGame();
 
                 var tw = new TranslateWindow();
                 tw.Show();
@@ -290,7 +292,7 @@ namespace MisakaTranslator_WPF {
             res?.WaitForInputIdle(5000);
             GameInfoDrawer.IsOpen = false;
             await Task.Delay(2000);
-            StartTranslateByGid(gid);
+            await StartTranslateByGid(gid);
         }
 
         /// <summary>
@@ -326,7 +328,7 @@ namespace MisakaTranslator_WPF {
             res?.WaitForInputIdle(5000);
             GameInfoDrawer.IsOpen = false;
             await Task.Delay(2000);
-            StartTranslateByGid(gid);
+            await StartTranslateByGid(gid);
         }
 
         private void BlurWindow_Closing(object sender, CancelEventArgs e) {
@@ -369,13 +371,13 @@ namespace MisakaTranslator_WPF {
             }
         }
 
-        private void AutoStart_BtnClick(object sender, RoutedEventArgs e) {
+        private async void AutoStart_BtnClick(object sender, RoutedEventArgs e) {
             var res = GetGameListHasProcessGame_PID_ID();
             if (res == -1) {
                 Growl.ErrorGlobal(Application.Current.Resources["MainWindow_AutoStartError_Hint"].ToString());
             }
             else {
-                StartTranslateByGid(res);
+                await StartTranslateByGid(res);
             }
         }
 

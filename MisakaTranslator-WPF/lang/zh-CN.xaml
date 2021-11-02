@@ -36,6 +36,7 @@
     <sys:String x:Key="MainWindow_AutoStartError_Hint">未在当前进程列表中找到可以自动开始翻译的游戏！</sys:String>
     <sys:String x:Key="MainWindow_GlobalOCRError_Hint">全局OCR热键注册失败！</sys:String>
     <sys:String x:Key="MainWindow_StartError_Hint">未找到游戏进程！</sys:String>
+    <sys:String x:Key="MainWindow_TextractorError_Hint">Textractor不存在或启动失败</sys:String>
     
 
     <sys:String x:Key="SettingsMenu_WinName">MisakaTranslator本体设置</sys:String>

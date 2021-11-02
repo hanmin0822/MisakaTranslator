@@ -390,8 +390,8 @@ namespace MisakaTranslator_WPF
                 UpdateSource(repairedText);
 
                 // 分别获取两个翻译结果
-                TranslateApiSubmitSync(repairedText, 1, isRenew);
-                TranslateApiSubmitSync(repairedText, 2, isRenew);
+                TranslateApiSubmitASync(repairedText, 1, isRenew);
+                TranslateApiSubmitASync(repairedText, 2, isRenew);
             }
         }
 
@@ -494,7 +494,7 @@ namespace MisakaTranslator_WPF
         /// <param name="repairedText">原文</param>
         /// <param name="tranResultIndex">翻译框序号</param>
         /// <param name="isRenew">是否是重新获取翻译</param>
-        private async void TranslateApiSubmitSync(string repairedText, int tranResultIndex, bool isRenew = false)
+        private async Task TranslateApiSubmitASync(string repairedText, int tranResultIndex, bool isRenew = false)
         {
             //4.翻译前预处理 
             string beforeString = _beforeTransHandle.AutoHandle(repairedText);
@@ -730,8 +730,8 @@ namespace MisakaTranslator_WPF
             }
             else
             {
-                TranslateApiSubmitSync(_currentsrcText, 1, true);
-                TranslateApiSubmitSync(_currentsrcText, 2, true);
+                TranslateApiSubmitASync(_currentsrcText, 1, true);
+                TranslateApiSubmitASync(_currentsrcText, 2, true);
             }
         }
 

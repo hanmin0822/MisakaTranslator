@@ -54,8 +54,11 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                     Common.textHooker = new TextHookHandle(SameNameGameProcessList);
                 }
 
-                Common.textHooker.Init(!(bool)x64GameCheckBox.IsChecked);
-
+                if(!Common.textHooker.Init(!(bool)x64GameCheckBox.IsChecked))
+                {
+                    HandyControl.Controls.MessageBox.Show(Application.Current.Resources["MainWindow_TextractorError_Hint"].ToString());
+                    return;
+                }
                 
                 Common.GameID = -1;
                 string filepath = ProcessHelper.FindProcessPath(GamePid);

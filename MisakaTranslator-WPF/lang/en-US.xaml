@@ -34,6 +34,7 @@
     <sys:String x:Key="MainWindow_AutoStartError_Hint">Game process with saved settings is not found!</sys:String>
     <sys:String x:Key="MainWindow_GlobalOCRError_Hint">Global OCR shortcut registration failed!</sys:String>
     <sys:String x:Key="MainWindow_StartError_Hint">Game process not found!</sys:String>
+    <sys:String x:Key="MainWindow_TextractorError_Hint">Textractor doesn't exist or failed to start.</sys:String>
 
     <sys:String x:Key="SettingsMenu_WinName">Preferences</sys:String>
     <sys:String x:Key="SettingsMenu_About">MisakaTranslator</sys:String>
