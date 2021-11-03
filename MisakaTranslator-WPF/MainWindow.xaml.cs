@@ -30,6 +30,7 @@ namespace MisakaTranslator_WPF {
             InitializeLanguage();
             InitializeComponent();
             Initialize(settings);
+            GrowlDisableSwitch();
 
             //注册全局OCR热键
             this.SourceInitialized += new EventHandler(MainWindow_SourceInitialized);
@@ -443,6 +444,18 @@ namespace MisakaTranslator_WPF {
         private void ComicTransBtn_Click(object sender, RoutedEventArgs e) {
             var ctmw = new ComicTranslator.ComicTransMainWindow();
             ctmw.Show();
+        }
+
+        /// <summary>
+        /// 允许关闭全局通知。实际做法是新建了一个无关联的panel，那些通知本质上还是会生成。
+        /// </summary>
+        void GrowlDisableSwitch() {
+            if (!Common.appSettings.GrowlEnabled) {
+                Growl.InfoGlobal("将不会显示全局通知。");
+                var gw = typeof(Growl).GetField("GrowlWindow", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic).GetValue(null);
+                var panel = gw.GetType().GetProperty("GrowlPanel", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                panel.SetValue(gw, new StackPanel());
+            }
         }
     }
 }

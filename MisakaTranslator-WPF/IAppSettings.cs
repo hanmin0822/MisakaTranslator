@@ -391,6 +391,8 @@ namespace MisakaTranslator_WPF
         #endregion
         #endregion
 
+        [Option(DefaultValue = true)]
+        bool GrowlEnabled { get; set; }
     }
 
     public interface IRepeatRepairSettings

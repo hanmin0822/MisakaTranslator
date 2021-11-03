@@ -34,6 +34,8 @@ namespace MisakaTranslator_WPF.SettingsPages
                     ExitRadioButton.IsChecked = true;
                     break;
             }
+
+            GrowlEnabledCheckBox.IsChecked = Common.appSettings.GrowlEnabled;
         }
 
         private void RadioButtonBase_OnClick(object sender, RoutedEventArgs e)
@@ -48,6 +50,11 @@ namespace MisakaTranslator_WPF.SettingsPages
                     Common.appSettings.OnClickCloseButton = "Exit";
                     break;
             }
+        }
+
+        private void GrowlEnabledCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            Common.appSettings.GrowlEnabled = GrowlEnabledCheckBox.IsChecked.Value;
         }
     }
 }
