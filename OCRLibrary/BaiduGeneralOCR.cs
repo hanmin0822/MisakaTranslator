@@ -29,7 +29,7 @@ namespace OCRLibrary
             HttpWebRequest request = WebRequest.CreateHttp(host);
             request.Method = "post";
             request.AutomaticDecompression = DecompressionMethods.GZip;
-            request.Timeout = 5000;
+            request.Timeout = 8000;
             // 图片的base64编码
             string base64 = ImageProcFunc.GetFileBase64(img);
             String str = "language_type=" + langCode + "&image=" + HttpUtility.UrlEncode(base64);

@@ -109,7 +109,7 @@ namespace TranslatorLibrary
                         {
                             AutomaticDecompression = DecompressionMethods.GZip
                         })
-                        { Timeout = TimeSpan.FromSeconds(5) };
+                        { Timeout = TimeSpan.FromSeconds(8) };
                         var headers = HC.DefaultRequestHeaders;
                         headers.UserAgent.ParseAdd("MisakaTranslator");
                         headers.Connection.ParseAdd("keep-alive");

@@ -44,7 +44,7 @@ namespace OCRLibrary
 
             HttpWebRequest request = WebRequest.CreateHttp(endpoint);
             request.Method = "POST";
-            request.Timeout = 5000;
+            request.Timeout = 8000;
             request.UserAgent = "MisakaTranslator";
             request.AutomaticDecompression = DecompressionMethods.GZip;
             const string boundary = "boundary";
