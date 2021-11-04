@@ -323,6 +323,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Resource Include="GuidePages\Completation.png" />
+    <Resource Include="GuidePages\Completation_small.png" />
     <Page Include="lang\en-US.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -482,6 +483,7 @@
   <ItemGroup>
     <Resource Include="logo.ico" />
     <Resource Include="SettingsPages\AboutV2.jpg" />
+    <Resource Include="SettingsPages\AboutV2_small.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
