@@ -302,7 +302,12 @@ namespace MisakaTranslator_WPF
             }
 
             if (!string.IsNullOrEmpty(srcText))
-                TranslateText(srcText, isRenew);
+            {
+                if (Common.appSettings.OCRsource == "BaiduFanyiOCR")
+                    FirstTransText.Text = srcText;
+                else
+                    TranslateText(srcText, isRenew);
+            }
             else
                 Application.Current.Dispatcher.Invoke((Action)(() => {
                     FirstTransText.Text = "[OCR]自动识别三次均为空，请自行刷新！";
