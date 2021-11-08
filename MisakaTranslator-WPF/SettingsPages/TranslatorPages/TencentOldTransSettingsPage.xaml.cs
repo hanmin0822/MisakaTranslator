@@ -36,11 +36,11 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             Trans.TranslatorInit(TransAppIDBox.Text, TransSecretKeyBox.Text);
             if (await Trans.TranslateAsync("apple", "zh", "en") != null)
             {
-                HandyControl.Controls.Growl.Success($"腾讯私人{Application.Current.Resources["APITest_Success_Hint"]}");
+                HandyControl.Controls.Growl.Success($"腾讯云{Application.Current.Resources["APITest_Success_Hint"]}");
             }
             else
             {
-                HandyControl.Controls.Growl.Error($"腾讯私人{Application.Current.Resources["APITest_Error_Hint"]}\n{Trans.GetLastError()}");
+                HandyControl.Controls.Growl.Error($"腾讯云{Application.Current.Resources["APITest_Error_Hint"]}\n{Trans.GetLastError()}");
             }
         }
 
@@ -70,7 +70,7 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
             }
             else
             {
-                HandyControl.Controls.Growl.Error($"腾讯私人{Application.Current.Resources["APITest_Error_Hint"]}\n{Trans.GetLastError()}");
+                HandyControl.Controls.Growl.Error($"腾讯云{Application.Current.Resources["APITest_Error_Hint"]}\n{Trans.GetLastError()}");
             }
         }
     }

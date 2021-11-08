@@ -24,7 +24,7 @@ namespace TranslatorLibrary
             { "无翻译" , "NoTranslator"},
             { "百度翻译" , "BaiduTranslator" },
             { "腾讯翻译君" , "TencentFYJTranslator" },
-            { "腾讯私人翻译" , "TencentOldTranslator" },
+            { "腾讯云翻译" , "TencentOldTranslator" },
             { "彩云小译" , "CaiyunTranslator" },
             { "小牛翻译" , "XiaoniuTranslator"},
             { "IBM翻译" , "IBMTranslator"},

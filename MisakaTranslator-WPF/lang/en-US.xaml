@@ -55,7 +55,7 @@
     <sys:String x:Key="SettingsMenu_TranslatorSettings_General">General</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Baidu">百度翻译 Baidu Translate</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_TencentFYJ">腾讯翻译君 Tencent AI Translate</sys:String>
-    <sys:String x:Key="SettingsMenu_TranslatorSettings_TencentOld">腾讯私人翻译 Tencent TMT</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_TencentOld">腾讯云翻译 Tencent TMT</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Jbeijing">Jbeijing</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_KingsoftFAIT">金山快译 Kingsoft FastAIT</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Dreye">译典通 Dr.eye</sys:String>
@@ -89,7 +89,7 @@
     <sys:String x:Key="DeepLTransSettingsPage_Introduce">DeepL (network required) provides better translation among them English, Japanese and Chinese. You need to apply for the translation services, acquire the authentication key, and then fill in below before testing. If the API is tested as invalid, you can refer to official Baidu documentations with the error codes. It is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of DeepL Translate.</sys:String>
     <sys:String x:Key="DeepLTransSettingsPage_secretKey">DeepL authentication key</sys:String>
 
-    <sys:String x:Key="TencentOldTransSettingsPage_Introduce">Tencent TMT API (腾讯私人翻译, network required) supports multilingual translation with better support for Japanese and Chinese. You need to apply for the API (on the website in Chinese), get access to the SecretId and SecretKey, and then fill in below before testing. If the API is tested as invalid, you can refer to official Tencent documentations with the error codes. Previous version of API is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of Tencent TMT.</sys:String>
+    <sys:String x:Key="TencentOldTransSettingsPage_Introduce">Tencent TMT API (腾讯云翻译, network required) supports multilingual translation with better support for Japanese and Chinese. You need to apply for the API (on the website in Chinese), get access to the SecretId and SecretKey, and then fill in below before testing. If the API is tested as invalid, you can refer to official Tencent documentations with the error codes. Previous version of API is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of Tencent TMT.</sys:String>
     <sys:String x:Key="TencentOldTransSettingsPage_SecretId">SecretId</sys:String>
     <sys:String x:Key="TencentOldTransSettingsPage_SecretKey">SecretKey</sys:String>
 

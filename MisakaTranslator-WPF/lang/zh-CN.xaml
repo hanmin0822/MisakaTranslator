@@ -53,7 +53,7 @@
     <sys:String x:Key="SettingsMenu_TranslatorSettings_General">通用设置</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Baidu">百度翻译API</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_TencentFYJ">腾讯翻译君</sys:String>
-    <sys:String x:Key="SettingsMenu_TranslatorSettings_TencentOld">腾讯私人</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_TencentOld">腾讯云</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Jbeijing">Jbeijing</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_KingsoftFAIT">金山快译</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Dreye">译典通</sys:String>
@@ -88,8 +88,8 @@
     <sys:String x:Key="DeepLTransSettingsPage_secretKey">DeepL API 密钥</sys:String>
 
     <sys:String x:Key="TencentOldTransSettingsPage_Introduce">腾讯翻译(私人)API支持多种语言互译，对日语、汉语的Galgame互译支持较好，需要联网使用；您需要先申请该API并创建一个密钥，获取SecretId和SecretKey后填入下方相应位置并进行测试认证；如果认证出现错误，请根据错误码至腾讯翻译API官方文档获取解决办法；腾讯旧版翻译API部分版本可能会产生某些费用，您可以使用额度查询按钮进入控制台确认。</sys:String>
-    <sys:String x:Key="TencentOldTransSettingsPage_SecretId">腾讯私人API SecretId</sys:String>
-    <sys:String x:Key="TencentOldTransSettingsPage_SecretKey">腾讯私人API SecretKey</sys:String>
+    <sys:String x:Key="TencentOldTransSettingsPage_SecretId">腾讯云API SecretId</sys:String>
+    <sys:String x:Key="TencentOldTransSettingsPage_SecretKey">腾讯云API SecretKey</sys:String>
 
     <sys:String x:Key="TencentFYJTransSettingsPage_Introduce">腾讯翻译(翻译君)API支持多种语言互译，对英语、日语、汉语的互译支持较好，需要联网使用；您需要先申请腾讯翻译API并开通一个应用，获取appID和密钥后填入下方相应位置并进行测试认证；如果认证出现错误，请根据错误码至腾讯翻译API官方文档获取解决办法；腾讯翻译API部分版本可能会产生某些费用，您可以使用额度查询按钮进入控制台确认。</sys:String>
     <sys:String x:Key="TencentFYJTransSettingsPage_appID">翻译君API appID</sys:String>
