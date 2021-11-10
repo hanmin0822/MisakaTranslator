@@ -513,10 +513,10 @@ namespace MisakaTranslator_WPF
                     transRes = await _translator1.TranslateAsync(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
                     if (transRes == null)
                     {
-                        Application.Current.Dispatcher.Invoke((Action)(() =>
+                        Application.Current.Dispatcher.Invoke(() =>
                         {
                             Growl.WarningGlobal(_translator1.GetType().Name + ": " + _translator1.GetLastError());
-                        }));
+                        });
                         return;
                     }
                 }
@@ -528,10 +528,10 @@ namespace MisakaTranslator_WPF
                     transRes = await _translator2.TranslateAsync(beforeString, Common.UsingDstLang, Common.UsingSrcLang);
                     if (transRes == null)
                     {
-                        Application.Current.Dispatcher.Invoke((Action)(() =>
+                        Application.Current.Dispatcher.Invoke(() =>
                         {
                             Growl.WarningGlobal(_translator2.GetType().Name + ": " + _translator2.GetLastError());
-                        }));
+                        });
                         return;
                     }
                 }
@@ -544,16 +544,16 @@ namespace MisakaTranslator_WPF
             switch (tranResultIndex)
             {
                 case 1:
-                    Application.Current.Dispatcher.Invoke((Action)(() =>
+                    Application.Current.Dispatcher.Invoke(() =>
                       {
                           FirstTransText.Text = afterString;
-                      }));
+                      });
                     break;
                 case 2:
-                    Application.Current.Dispatcher.Invoke((Action)(() =>
+                    Application.Current.Dispatcher.Invoke(() =>
                       {
                           SecondTransText.Text = afterString;
-                      }));
+                      });
                     break;
             }
 
@@ -575,13 +575,13 @@ namespace MisakaTranslator_WPF
                         bool addRes = _artificialTransHelper.AddTrans(repairedText, afterString);
                         if (addRes == false)
                         {
-                            Application.Current.Dispatcher.Invoke((Action)(() =>
+                            Application.Current.Dispatcher.Invoke(() =>
                             {
                                 HandyControl.Data.GrowlInfo growlInfo = new HandyControl.Data.GrowlInfo();
                                 growlInfo.Message = Application.Current.Resources["ArtificialTransAdd_Error_Hint"].ToString();
                                 growlInfo.WaitTime = 2;
                                 Growl.InfoGlobal(growlInfo);
-                            }));
+                            });
                         }
                     }
                 }
