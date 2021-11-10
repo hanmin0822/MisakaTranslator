@@ -308,10 +308,11 @@ namespace MisakaTranslator_WPF
                 else
                     TranslateText(srcText, isRenew);
             }
+            else if (!string.IsNullOrEmpty(Common.ocr.GetLastError()))
+                Growl.WarningGlobal(Common.appSettings.OCRsource + " Error: " + Common.ocr.GetLastError());
             else
-                Application.Current.Dispatcher.Invoke((Action)(() => {
-                    FirstTransText.Text = "[OCR]自动识别三次均为空，请自行刷新！";
-                }));
+                Growl.WarningGlobal("[OCR]自动识别三次均为空，请自行刷新！");
+
             IsOCRingFlag = false;
         }
 
