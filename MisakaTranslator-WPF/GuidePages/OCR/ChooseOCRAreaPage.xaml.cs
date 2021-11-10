@@ -134,7 +134,9 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             scw.Topmost = true;
             scw.Top = 0;
             scw.Left = 0;
-            scw.Show();
+            scw.ShowDialog(); // 不用Show()因为需要阻塞等待结果
+
+            RenewAreaBtn_Click(null, null); // 显示结果
         }
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
