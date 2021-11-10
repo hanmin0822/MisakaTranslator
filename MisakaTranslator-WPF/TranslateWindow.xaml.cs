@@ -304,7 +304,7 @@ namespace MisakaTranslator_WPF
             if (!string.IsNullOrEmpty(srcText))
             {
                 if (Common.appSettings.OCRsource == "BaiduFanyiOCR")
-                    FirstTransText.Text = srcText;
+                    Application.Current.Dispatcher.Invoke(() => {FirstTransText.Text = srcText;});
                 else
                     TranslateText(srcText, isRenew);
             }
