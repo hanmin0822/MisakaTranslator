@@ -227,7 +227,7 @@
     <sys:String x:Key="ChooseOCRAreaPage_NextErrorHint">Please select the window first.</sys:String>
     <sys:String x:Key="ChooseOCRAreaPage_RenewErrorHint">请先预览选择区域！</sys:String>
 
-    <sys:String x:Key="ChooseHandleFuncPage_Introduce">Select the OCR source language and an OCR pre-processing method for your game, which can be viewed below for testing and confirming.</sys:String>
+    <sys:String x:Key="ChooseHandleFuncPage_Introduce">Select the OCR source language and an OCR pre-processing method for your game, which can be viewed below for testing and confirming. Note that you must do the test otherwise OCR won't be initialized.</sys:String>
     <sys:String x:Key="ChooseHandleFuncPage_OCRLangCBox">OCR source language</sys:String>
     <sys:String x:Key="ChooseHandleFuncPage_OCRLangCBox_Hint">Select the source language of the game.</sys:String>
     <sys:String x:Key="ChooseHandleFuncPage_HandleFuncCBox">OCR pre-processing method</sys:String>
