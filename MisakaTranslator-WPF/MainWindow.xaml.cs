@@ -451,10 +451,13 @@ namespace MisakaTranslator_WPF {
         /// </summary>
         void GrowlDisableSwitch() {
             if (!Common.appSettings.GrowlEnabled) {
-                Growl.InfoGlobal("将不会显示全局通知。");
+                Growl.InfoGlobal("将不会显示全局通知。"); // 必须先显示一句否则GrowlWindow是null
                 var gw = typeof(Growl).GetField("GrowlWindow", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic).GetValue(null);
                 var panel = gw.GetType().GetProperty("GrowlPanel", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-                panel.SetValue(gw, new StackPanel());
+                var sp = new StackPanel();
+                sp.Children.Add(new UIElement()); // 必须添加一个成员否则HC检测到成员为空时就把GrowlWindow设为null了
+                panel.SetValue(gw, sp);
+                this.Closing += (o, e) => gw.GetType().GetMethod("Close").Invoke(gw, null); // 关闭主窗口时关闭GrowlWindow否则程序无法退出
             }
         }
     }
