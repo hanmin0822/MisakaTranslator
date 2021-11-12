@@ -84,13 +84,13 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             {
                 HandyControl.Controls.Growl.Error(Application.Current.Resources["ChooseHotKeyPage_NoKeyHint"].ToString());
             }
-            else if (int.Parse(OCRDelayBox.Text) <= 0)
+            else if (!int.TryParse(OCRDelayBox.Text, out int delay) || delay <= 0)
             {
                 HandyControl.Controls.Growl.Error(Application.Current.Resources["ChooseHotKeyPage_TooLessDelayHint"].ToString());
             }
             else {
                 Common.UsingHotKey = HotKey;
-                Common.UsingOCRDelay = int.Parse(OCRDelayBox.Text);
+                Common.UsingOCRDelay = delay;
 
                 //存入数据库
 

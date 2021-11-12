@@ -174,9 +174,9 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
 
         private void HookCodeConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (PIDTextBox.Text != "" && HookCodeTextBox.Text != "")
+            if (PIDTextBox.Text != "" && HookCodeTextBox.Text != "" && int.TryParse(PIDTextBox.Text, out int pid))
             {
-                Common.textHooker.AttachProcessByHookCode(int.Parse(PIDTextBox.Text), HookCodeTextBox.Text);
+                Common.textHooker.AttachProcessByHookCode(pid, HookCodeTextBox.Text);
                 LastCustomHookCode = HookCodeTextBox.Text;
                 InputDrawer.IsOpen = false;
                 HandyControl.Controls.Growl.Info(Application.Current.Resources["ChooseHookFuncPage_HookApplyHint"].ToString());

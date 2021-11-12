@@ -105,6 +105,8 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
         private void SingleConfirm_Click(object sender, RoutedEventArgs e)
         {
             Common.repairSettings.SingleWordRepeatTimes = Single_TextBox.Text;
+            if (!int.TryParse(Single_TextBox.Text, out int _))
+                return;
             Common.RepairFuncInit();
             repairedTextBox.Text = TextRepair.RepairFun_RemoveSingleWordRepeat(sourceTextBox.Text);
             Single_InputDrawer.IsOpen = false;
@@ -113,6 +115,8 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
         private void SentenceConfirm_Click(object sender, RoutedEventArgs e)
         {
             Common.repairSettings.SentenceRepeatFindCharNum = Sentence_TextBox.Text;
+            if (!int.TryParse(Sentence_TextBox.Text, out int _))
+                return;
             Common.RepairFuncInit();
             repairedTextBox.Text = TextRepair.RepairFun_RemoveSentenceRepeat(sourceTextBox.Text);
             Sentence_InputDrawer.IsOpen = false;
