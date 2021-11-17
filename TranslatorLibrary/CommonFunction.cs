@@ -30,7 +30,7 @@ namespace TranslatorLibrary
             { "IBM翻译" , "IBMTranslator"},
             { "Yandex翻译" , "YandexTranslator"},
             { "有道翻译(公共接口)" , "YoudaoTranslator" },
-            { "ALAPI免费接口" , "AlapiTranslator"},
+            // { "ALAPI免费接口" , "AlapiTranslator"},
             { "谷歌翻译(公共接口)" , "GoogleCNTranslator"},
             { "JBeijing" , "JBeijingTranslator" },
             { "金山快译" , "KingsoftFastAITTranslator" },

@@ -10,7 +10,7 @@ using System.Web;
 
 namespace TranslatorLibrary
 {
-
+    // 此公共API无法使用了，官方推出了需注册的V2，看社区来更新吧。目前在CommonFunction中注释掉了从界面上设置本API的途径
     public class AlapiTranslator : ITranslator
     {
         private string errorInfo;//错误信息
