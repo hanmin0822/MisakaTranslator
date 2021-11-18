@@ -489,6 +489,8 @@ namespace TextHookLibrary {
         /// </summary>
         /// <param name="ClipboardText"></param>
         private void cm_ClipboardUpdate(string ClipboardText) {
+            if (Pause) // 暂停时什么也不做
+                return;
             SolvedDataRecvEventArgs e = new SolvedDataRecvEventArgs {
                 Data = new TextHookData() {
                     GamePID = -1,
