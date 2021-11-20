@@ -31,7 +31,7 @@
             <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings}" FontSize="15">
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_General}" Selected="Item_TransGeneral_Selected"/>
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Baidu}" Selected="Item_BaiduTrans_Selected"/>
-                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_TencentFYJ}" Selected="Item_FYJTrans_Selected"/>
+                <!-- <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_TencentFYJ}" Selected="Item_FYJTrans_Selected"/> -->
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_TencentOld}" Selected="Item_TXOTrans_Selected"/>
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Caiyun}" Selected="Item_Caiyun_Selected"/>
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Xiaoniu}" Selected="Item_Xiaoniu_Selected"/>

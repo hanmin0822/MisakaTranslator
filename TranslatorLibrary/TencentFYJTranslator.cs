@@ -7,6 +7,8 @@ using System.Web;
 
 namespace TranslatorLibrary
 {
+    // 点申请试用会跳转到腾讯云机器翻译，api.ai.qq.com的接口返回502 Bad Gateway
+    // 目前在CommonFunction.cs和SettingsWindow.xaml中从界面上隐藏本项
     public class TencentFYJTranslator : ITranslator
     {
         private string errorInfo;//错误信息
