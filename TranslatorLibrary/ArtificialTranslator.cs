@@ -13,10 +13,10 @@ namespace TranslatorLibrary
     {
         private class CursorPriorityQueue
         {
-            public class CPQComparator : IComparer<Tuple<int, double>>
+            public class CPQComparator : IComparer<(int, double)>
             {
                 // Call CaseInsensitiveComparer.Compare with the parameters reversed.
-                int IComparer<Tuple<int, double>>.Compare(Tuple<int, double> x, Tuple<int, double> y)
+                int IComparer<(int, double)>.Compare((int, double) x, (int, double) y)
                 {
                     int r1 = x.Item2.CompareTo(y.Item2);
                     if (r1 != 0)
@@ -29,7 +29,7 @@ namespace TranslatorLibrary
                     }
                 }
             }
-            SortedSet<Tuple<int, double>> nextCursorsSet = new SortedSet<Tuple<int, double>>(new CPQComparator());
+            SortedSet<(int, double)> nextCursorsSet = new SortedSet<(int, double)>(new CPQComparator());
             int maxSize;
             public CursorPriorityQueue(int maxSize)
             {
@@ -39,14 +39,14 @@ namespace TranslatorLibrary
             {
                 if (nextCursorsSet.Count < maxSize)
                 {
-                    bool result = nextCursorsSet.Add(new Tuple<int, double>(i, p));
+                    bool result = nextCursorsSet.Add((i, p));
                     return result;
                 }
                 var m = nextCursorsSet.Min;
                 if (p > m.Item2)
                 {
                     nextCursorsSet.Remove(m);
-                    return nextCursorsSet.Add(new Tuple<int, double>(i, p));
+                    return nextCursorsSet.Add((i, p));
                 }
                 return false;
             }
