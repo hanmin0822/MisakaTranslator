@@ -38,6 +38,7 @@ namespace OCRLibrary
             sw.Flush();
             string sign = BitConverter.ToString(md5.ComputeHash(ms.ToArray())).Replace("-", "").ToLower();
             sw.Close();
+            md5.Dispose();
 
             string endpoint = "https://fanyi-api.baidu.com/api/trans/sdk/picture?cuid=APICUID&mac=mac&salt=" + salt + "&appid=" + appId + "&sign=" + sign + "&to=zh&from=" + langCode;
 

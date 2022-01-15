@@ -51,6 +51,7 @@ namespace TranslatorLibrary
             byte[] byteOld = Encoding.UTF8.GetBytes(str);
             // 调用加密方法
             byte[] byteNew = md5.ComputeHash(byteOld);
+            md5.Dispose();
             // 将加密结果转换为字符串
             StringBuilder sb = new StringBuilder();
             foreach (byte b in byteNew)

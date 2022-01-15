@@ -59,6 +59,7 @@ namespace TranslatorLibrary
             };
             byte[] data = Encoding.UTF8.GetBytes("GETtmt.tencentcloudapi.com/?" + req);
             var result = hmac.ComputeHash(data);
+            hmac.Dispose();
 
             // 请求参数，参数使用URL编码后的值
             sb = new StringBuilder()
