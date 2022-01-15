@@ -27,7 +27,7 @@
                 <StackPanel>
                     <hc:ComboBox Name="sourceFont" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontName}" Margin="10" />
 
-                    <hc:NumericUpDown Name="sourceFontSize" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontSize}" Margin="10" Style="{StaticResource NumericUpDownExtend}"/>
+                    <hc:NumericUpDown Name="sourceFontSize" Minimum="8" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontSize}" Margin="10" Style="{StaticResource NumericUpDownExtend}"/>
 
                     <CheckBox Name="KanaCheckBox" Content="{StaticResource TransWinSettingsWin_KanaCbox}" Margin="10" HorizontalAlignment="Left"/>
 
@@ -41,7 +41,7 @@
                 <StackPanel>
                     <hc:ComboBox Name="firstFont" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontName}" Margin="10" />
 
-                    <hc:NumericUpDown Name="firstFontSize" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontSize}" Margin="10" Style="{StaticResource NumericUpDownExtend}" />
+                    <hc:NumericUpDown Name="firstFontSize" Minimum="8" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontSize}" Margin="10" Style="{StaticResource NumericUpDownExtend}" />
 
                     <TextBlock Text="{StaticResource TransWinSettingsWin_BgColor}" HorizontalAlignment="Center" Margin="15"/>
                     <Button Name="firstColorBtn" Content="{StaticResource TransWinSettingsWin_BtnChooseColor}" Margin="0" Width="200" Style="{StaticResource ButtonPrimary}" Click="ChooseColorBtn_Click"/>
@@ -55,7 +55,7 @@
                 <StackPanel>
                     <hc:ComboBox Name="secondFont" hc:InfoElement.TitleWidth="140" hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontName}" Margin="10" />
 
-                    <hc:NumericUpDown Name="secondFontSize" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontSize}" Margin="10" Style="{StaticResource NumericUpDownExtend}"/>
+                    <hc:NumericUpDown Name="secondFontSize" Minimum="8" hc:InfoElement.Title="{StaticResource TransWinSettingsWin_FontSize}" Margin="10" Style="{StaticResource NumericUpDownExtend}"/>
 
                     <TextBlock Text="{StaticResource TransWinSettingsWin_BgColor}" HorizontalAlignment="Center" Margin="15"/>
                     <Button Name="secondColorBtn" Content="{StaticResource TransWinSettingsWin_BtnChooseColor}" Margin="0" Width="200" Style="{StaticResource ButtonPrimary}" Click="ChooseColorBtn_Click"/>
