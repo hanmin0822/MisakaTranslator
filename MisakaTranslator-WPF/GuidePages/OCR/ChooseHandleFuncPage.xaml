@@ -26,7 +26,7 @@
 
             <Button Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15" Content="{StaticResource ChooseHandleFuncPage_RenewAreaBtn}" Click="RenewAreaBtn_Click"></Button>
             <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15" Content="{StaticResource ChooseHandleFuncPage_OCRBtn}" Click="OCRTestBtn_Click"></Button>
-            <Button Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" Content="{StaticResource ChooseHandleFuncPage_ConfirmBtn}" Click="ConfirmBtn_Click"></Button>
+            <Button x:Name="ConfirmBtn" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" Content="{StaticResource ChooseHandleFuncPage_ConfirmBtn}" Click="ConfirmBtn_Click" IsEnabled="False"></Button>
 
             <hc:CompareSlider Name="picCompair"  Grid.Row="3" Value="10" Margin="15">
                 <hc:CompareSlider.TargetContent>

@@ -28,7 +28,7 @@
 
             <Button Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15" Content="{StaticResource ChooseOCRAreaPage_ChooseAreaBtn}" Click="ChooseAreaBtn_Click"></Button>
             <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15" Content="{StaticResource ChooseOCRAreaPage_RenewAreaBtn}" Click="RenewAreaBtn_Click"></Button>
-            <Button Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" Content="{StaticResource ChooseOCRAreaPage_ConfirmBtn}" Click="ConfirmBtn_Click"></Button>
+            <Button x:Name="ConfirmBtn" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" Content="{StaticResource ChooseOCRAreaPage_ConfirmBtn}" Click="ConfirmBtn_Click" IsEnabled="False"></Button>
 
 
             <Border Grid.Row="3" Margin="15" BorderThickness="1" BorderBrush="Black">

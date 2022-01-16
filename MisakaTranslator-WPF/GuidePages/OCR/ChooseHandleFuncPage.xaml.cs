@@ -127,6 +127,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
                 }
             }
 
+            ConfirmBtn.IsEnabled = true;
         }
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
