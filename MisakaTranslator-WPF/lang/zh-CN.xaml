@@ -130,8 +130,8 @@
 
     <sys:String x:Key="BaiduFanyiOCRSettingsPage_Introduce">百度翻译OCR采用与“翻译相关设置 - 百度翻译API”相同的参数，无需在本页面设置。注意光有APPID还不够，必须保证开通了“图片翻译”服务。本项直接从图片翻译成中文，而非先从图片中识别出日文或英文文字再用文字翻译。</sys:String>
 
-    <sys:String x:Key="TessactOCR5SettingsPage_Introduce">Tesseract5理论上支持所有语言，横向纵向，分页方法。这个设置页只预设日语的横向和纵向，如果需要其他语言，请使用自定义命令行参数（详见tesseract --help-extra）。如果识别效果不理想，可以考虑自行训练相关OCR字库，更多有关OCR预处理的设置选项见OCR设置窗口。</sys:String>
-    <sys:String x:Key="TessactOCR5SettingsPage_Path">Tesseract5安装路径</sys:String>
+    <sys:String x:Key="TessactOCR5SettingsPage_Introduce">Tesseract5理论上支持所有语言，横向纵向，分页方法。需单独安装，Win版在UB-Mannheim的Wiki页下载，还需在tessdata_best下jpn.traineddata放到与exe同级的tessdata文件夹中。如果需要其他语言，请使用自定义命令行参数（详见tesseract --help-extra）。</sys:String>
+    <sys:String x:Key="TessactOCR5SettingsPage_Path">Tesseract5的exe路径</sys:String>
     <sys:String x:Key="TessactOCR5SettingsPage_Setting">模式</sys:String>
     <sys:String x:Key="TessactOCR5SettingsPage_Args">自定义参数</sys:String>
     <sys:String x:Key="TessactOCR5SettingsPage_Select">选择</sys:String>

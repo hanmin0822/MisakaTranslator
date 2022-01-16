@@ -22,6 +22,7 @@ namespace MisakaTranslator_WPF.SettingsPages.OCRPages
         {
             { "日语（横向）", "jpn" },
             { "日语（纵向）", "jpn_vert" },
+            { "英语", "eng" },
             { "自定义", "custom" }
         };
         static List<string> itemList = modeLst.Keys.ToList();
@@ -46,6 +47,7 @@ namespace MisakaTranslator_WPF.SettingsPages.OCRPages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
+            dialog.Filter = "可执行文件|*.exe";
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 if (string.IsNullOrEmpty(dialog.FileName))
@@ -81,6 +83,10 @@ namespace MisakaTranslator_WPF.SettingsPages.OCRPages
                 case "jpn_vert":
                     Common.appSettings.Tesseract5OCR_Args = "-l jpn_vert --psm 5";
                     ArgsBox.Text = Common.appSettings.Tesseract5OCR_Args;
+                    ArgsBox.IsEnabled = false;
+                    break;
+                case "eng":
+                    Common.appSettings.Tesseract5OCR_Args = ArgsBox.Text = "--psm 6";
                     ArgsBox.IsEnabled = false;
                     break;
                 default:

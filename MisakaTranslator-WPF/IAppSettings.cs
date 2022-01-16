@@ -205,7 +205,7 @@ namespace MisakaTranslator_WPF
             set;
         }
 
-        [Option(Alias = "Tesseract5OCR.Path", DefaultValue = "C:\\Program Files\\Tesseract-OCR\\tesseract")]
+        [Option(Alias = "Tesseract5OCR.Path", DefaultValue = "C:\\Program Files\\Tesseract-OCR\\tesseract.exe")]
         string Tesseract5OCR_Path
         {
             get;

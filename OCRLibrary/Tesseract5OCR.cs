@@ -11,65 +11,57 @@ namespace OCRLibrary
 {
     public class Tesseract5OCR : OCREngine
     {
-        public string srcLangCode;//OCR识别语言 jpn=日语 eng=英语
         private string path;
         private string args;
 
         public override Task<string> OCRProcessAsync(Bitmap img)
         {
-            Bitmap processedImg = (Bitmap)img.Clone();
             try
             {
-                processedImg.Save(Environment.CurrentDirectory + "\\temp\\tmp.png", System.Drawing.Imaging.ImageFormat.Png);
-                Process p = new Process();
-                // Redirect the output stream of the child process.
-                p.StartInfo.UseShellExecute = false;
-                p.StartInfo.RedirectStandardOutput = true;
-                p.StartInfo.RedirectStandardError = true;
-                p.StartInfo.CreateNoWindow = true;
-                p.StartInfo.FileName = path;
-                p.StartInfo.Arguments = "temp\\tmp.png temp\\outputbase " + args;
-                p.Start();
-                // Wait for the child process to exit before
-                // reading to the end of its redirected stream.
+                Process p = Process.Start(new ProcessStartInfo()
+                {
+                    FileName = path,
+                    Arguments = "- - " + args,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true
+                });
+                var imgdata = ImageProcFunc.Image2Bytes(img);
+                p.StandardInput.BaseStream.Write(imgdata, 0, imgdata.Length);
+                p.StandardInput.Close();
                 p.WaitForExit();
-                // Read the output stream first and then wait.
-                string output = p.StandardOutput.ReadToEnd(); // usually empty
-                string err = p.StandardError.ReadToEnd();     // information is all here
+
+                string err = p.StandardError.ReadToEnd();
                 if (err.ToLower().Contains("error"))
                 {
-                    throw new Exception(err);
+                    errorInfo = err;
+                    return null;
                 }
-                byte[] bs = System.IO.File.ReadAllBytes(Environment.CurrentDirectory + "\\temp\\outputbase.txt");
-                string result = Encoding.UTF8.GetString(bs);
+         
+                string result = p.StandardOutput.ReadToEnd();
+                p.Dispose();
                 return Task.FromResult(result);
             }
             catch (Exception ex)
             {
                 errorInfo = ex.Message;
-                return Task.FromResult((string)null);
+                return null;
             }
         }
 
         public override bool OCR_Init(string path, string args)
         {
+            if(!File.Exists(path))
+                return false;
             this.path = path;
             this.args = args;
-            try
-            {
-                Directory.CreateDirectory(Environment.CurrentDirectory + "\\temp");
-                return true;
-            }
-            catch (Exception ex)
-            {
-                errorInfo = ex.Message;
-                return false;
-            }
+            return true;
         }
 
         public override void SetOCRSourceLang(string lang)
         {
-            srcLangCode = lang;
         }
     }
 }
