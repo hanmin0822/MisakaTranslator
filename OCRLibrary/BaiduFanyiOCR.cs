@@ -19,7 +19,8 @@ namespace OCRLibrary
 
         public override async Task<string> OCRProcessAsync(Bitmap img)
         {
-            if (img == null || langCode == null || langCode == "") {
+            if (img == null || langCode == null || langCode == "")
+            {
                 errorInfo = "Param Missing";
                 return null;
             }
@@ -63,7 +64,7 @@ namespace OCRLibrary
 
             try
             {
-                using(var resp = await request.GetResponseAsync())
+                using (var resp = await request.GetResponseAsync())
                 {
                     string retStr = new StreamReader(resp.GetResponseStream()).ReadToEnd();
                     var result = JsonConvert.DeserializeObject<Result>(retStr);
@@ -76,7 +77,7 @@ namespace OCRLibrary
                     }
                 }
             }
-            catch(WebException ex)
+            catch (WebException ex)
             {
                 errorInfo = ex.Message;
                 return null;
@@ -87,7 +88,7 @@ namespace OCRLibrary
         {
             appId = param1;
             secretKey = param2;
-            if(string.IsNullOrEmpty(appId) || string.IsNullOrEmpty(secretKey) || appId.Length == 24)
+            if (string.IsNullOrEmpty(appId) || string.IsNullOrEmpty(secretKey) || appId.Length == 24)
             {
                 errorInfo = "Wrong secret.";
                 return false;
@@ -129,17 +130,17 @@ namespace OCRLibrary
             else
                 langCode = lang;
         }
-    }
 
 #pragma warning disable 0649
-    struct Result
-    {
-        public string error_code;
-        public string error_msg;
-        public Data data;
-    }
-    struct Data
-    {
-        public string sumDst;
+        struct Result
+        {
+            public string error_code;
+            public string error_msg;
+            public Data data;
+        }
+        struct Data
+        {
+            public string sumDst;
+        }
     }
 }
