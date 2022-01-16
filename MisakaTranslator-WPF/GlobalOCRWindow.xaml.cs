@@ -55,7 +55,7 @@ namespace MisakaTranslator_WPF
                     HandyControl.Controls.Growl.ErrorGlobal($"TesseractOCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
                 }
             }
-            else if (Common.appSettings.OCRsource == "TesseractOCR5")
+            else if (Common.appSettings.OCRsource == "Tesseract5")
             {
                 ocr = new Tesseract5OCR();
                 if (ocr.OCR_Init(Common.appSettings.Tesseract5OCR_Path, Common.appSettings.Tesseract5OCR_Args))
@@ -69,12 +69,12 @@ namespace MisakaTranslator_WPF
                     }
                     else
                     {
-                        HandyControl.Controls.Growl.WarningGlobal($"TesseractOCR5 {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+                        HandyControl.Controls.Growl.WarningGlobal($"Tesseract5 {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
                     }
                 }
                 else
                 {
-                    HandyControl.Controls.Growl.ErrorGlobal($"TesseractOCR5 {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+                    HandyControl.Controls.Growl.ErrorGlobal($"Tesseract5 {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
                 }
             }
             else if (Common.appSettings.OCRsource == "BaiduOCR")
@@ -120,8 +120,22 @@ namespace MisakaTranslator_WPF
             {
                 FirstTransText.Text = "OCR ERROR";
             }
-            else if(Common.appSettings.OCRsource != "BaiduFanyiOCR")
+            else if (Common.appSettings.OCRsource != "BaiduFanyiOCR")
             {
+                // 因为历史原因，OCR的源语言用的是三个字母的，如eng和jpn。而翻译的API即Common.UsingSrcLang用的两个字母，如en和jp
+                string srclang;
+                switch(Common.appSettings.GlobalOCRLang){
+                    case "eng":
+                        srclang = "en";
+                        break;
+                    case "jpn":
+                        srclang = "jp";
+                        break;
+                    default:
+                        srclang = Common.appSettings.GlobalOCRLang;
+                        break;
+                }
+
                 ITranslator translator1 = TranslateWindow.TranslatorAuto(Common.appSettings.FirstTranslator);
                 ITranslator translator2 = TranslateWindow.TranslatorAuto(Common.appSettings.SecondTranslator);
                 //5.提交翻译
@@ -129,11 +143,11 @@ namespace MisakaTranslator_WPF
                 string transRes2 = "";
                 if (translator1 != null)
                 {
-                    transRes1 = await translator1.TranslateAsync(res, Common.UsingDstLang, Common.UsingSrcLang);
+                    transRes1 = await translator1.TranslateAsync(res, Common.UsingDstLang, srclang);
                 }
                 if (translator2 != null)
                 {
-                    transRes2 = await translator2.TranslateAsync(res, Common.UsingDstLang, Common.UsingSrcLang);
+                    transRes2 = await translator2.TranslateAsync(res, Common.UsingDstLang, srclang);
                 }
 
                 FirstTransText.Text = transRes1;

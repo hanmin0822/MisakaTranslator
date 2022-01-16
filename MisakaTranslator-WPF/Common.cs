@@ -100,7 +100,6 @@ namespace MisakaTranslator_WPF
             ScreenCaptureWindow scw = new ScreenCaptureWindow(img, 2);
             scw.Width = img.Width;
             scw.Height = img.Height;
-            scw.Topmost = true;
             scw.Left = 0;
             scw.Top = 0;
             scw.Show();

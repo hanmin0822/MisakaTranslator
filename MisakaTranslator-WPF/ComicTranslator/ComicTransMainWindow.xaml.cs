@@ -143,7 +143,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
                 else {
                     sourceTextBox.Text = "OCR error";
                 }
-                
+                e.Handled = true;
             }
         }
 

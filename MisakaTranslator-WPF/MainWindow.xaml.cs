@@ -201,6 +201,7 @@ namespace MisakaTranslator_WPF {
             }
 
             GameInfoDrawer.IsOpen = true;
+            e.Handled = true;
         }
 
         private async Task StartTranslateByGid(int gid) {

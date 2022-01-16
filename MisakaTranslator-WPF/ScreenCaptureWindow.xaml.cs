@@ -66,6 +66,7 @@ namespace MisakaTranslator_WPF
 
             if (e.ChangedButton == MouseButton.Right)
             {
+                e.Handled = true;
                 this.Close();
             }
         }
