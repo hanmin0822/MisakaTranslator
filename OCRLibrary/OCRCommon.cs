@@ -12,6 +12,7 @@ namespace OCRLibrary
         {
             "BaiduOCR",
             "BaiduFanyiOCR",
+            "TencentOCR",
             "TesseractOCR",
             "TesseractCli"
         };
@@ -28,6 +29,8 @@ namespace OCRLibrary
                     return new BaiduGeneralOCR(); ;
                 case "BaiduFanyiOCR":
                     return new BaiduFanyiOCR();
+                case "TencentOCR":
+                    return new TencentOCR();
                 case "TesseractOCR":
                     return new TesseractOCR(); ;
                 case "TesseractCli":

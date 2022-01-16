@@ -84,6 +84,10 @@ namespace MisakaTranslator_WPF
         {
             this.SettingFrame.Navigate(new Uri("SettingsPages/OCRPages/BaiduFanyiOCRSettingsPage.xaml", UriKind.Relative));
         }
+        private void Item_TencentOCR_Selected(object sender, RoutedEventArgs e)
+        {
+            this.SettingFrame.Navigate(new Uri("SettingsPages/OCRPages/TencentOCRSettingsPage.xaml", UriKind.Relative));
+        }
         private void Item_TesseractCli_Selected(object sender, RoutedEventArgs e)
         {
             this.SettingFrame.Navigate(new Uri("SettingsPages/OCRPages/TesseractCliSettingsPage.xaml", UriKind.Relative));

@@ -85,6 +85,13 @@ namespace MisakaTranslator_WPF.ComicTranslator
                     HandyControl.Controls.Growl.ErrorGlobal($"百度翻译OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
                 }
             }
+            else if (Common.appSettings.OCRsource == "TencentOCR")
+            {
+                if (ocr.OCR_Init(Common.appSettings.TXOSecretId, Common.appSettings.TXOSecretKey) == false)
+                {
+                    HandyControl.Controls.Growl.ErrorGlobal($"腾讯云图片翻译 {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+                }
+            }
             else if (Common.appSettings.OCRsource == "TesseractCli")
             {
                 if (ocr.OCR_Init(Common.appSettings.TesseractCli_Path, Common.appSettings.TesseractCli_Args) == false)
@@ -155,7 +162,10 @@ namespace MisakaTranslator_WPF.ComicTranslator
                 {
                     Bitmap bm = new Bitmap(Environment.CurrentDirectory + "\\comicTemp.png");
                     bm = ImageProcFunc.ColorToGrayscale(bm);
-                    sourceTextBox.Text = (await ocr.OCRProcessAsync(bm))?.Replace("\f", "");
+                    if (!(Common.appSettings.OCRsource == "BaiduFanyiOCR" || Common.appSettings.OCRsource == "TencentOCR"))
+                        sourceTextBox.Text = (await ocr.OCRProcessAsync(bm))?.Replace("\f", "");
+                    else
+                        transTextBox.Text = await ocr.OCRProcessAsync(bm);
                     bm.Dispose();
                 }
                 else {

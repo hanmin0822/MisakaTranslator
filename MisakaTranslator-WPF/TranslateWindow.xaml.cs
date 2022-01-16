@@ -318,7 +318,7 @@ namespace MisakaTranslator_WPF
 
             if (!string.IsNullOrEmpty(srcText))
             {
-                if (Common.appSettings.OCRsource == "BaiduFanyiOCR")
+                if (Common.appSettings.OCRsource == "BaiduFanyiOCR" || Common.appSettings.OCRsource == "TencentOCR")
                     Application.Current.Dispatcher.Invoke(() => {FirstTransText.Text = srcText;});
                 else
                 {
