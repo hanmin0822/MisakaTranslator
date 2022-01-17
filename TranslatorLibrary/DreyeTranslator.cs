@@ -58,7 +58,7 @@ namespace TranslatorLibrary
         {
             if (FilePath == "")
             {
-                return null;
+                return Task.FromResult<string>(null);
             }
 
             Encoding shiftjis = Encoding.GetEncoding("shift-jis"); 
@@ -85,7 +85,7 @@ namespace TranslatorLibrary
                     {
                         Environment.CurrentDirectory = currentpath;
                         errorInfo = ex.Message;
-                        return null;
+                        return Task.FromResult<string>(null);
                     }
                 }
                 else if (srcLang == "en")
@@ -104,18 +104,18 @@ namespace TranslatorLibrary
                     {
                         Environment.CurrentDirectory = currentpath;
                         errorInfo = ex.Message;
-                        return null;
+                        return Task.FromResult<string>(null);
                     }
                 }
                 else {
                     errorInfo = "语言不支持";
-                    return null;
+                    return Task.FromResult<string>(null);
                 }
             }
             else
             {
                 errorInfo = "语言不支持";
-                return null;
+                return Task.FromResult<string>(null);
             }
 
             return Task.FromResult(ret);

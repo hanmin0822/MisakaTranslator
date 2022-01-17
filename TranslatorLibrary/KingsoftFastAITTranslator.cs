@@ -112,7 +112,7 @@ namespace TranslatorLibrary
         {
             if (FilePath == "" || desLang != "zh")
             {
-                return null;
+                return Task.FromResult<string>(null);
             }
 
             
@@ -137,7 +137,7 @@ namespace TranslatorLibrary
                 {
                     Environment.CurrentDirectory = path;
                     errorInfo = ex.Message;
-                    return null;
+                    return Task.FromResult<string>(null);
                 }
                 finally
                 {
@@ -161,7 +161,7 @@ namespace TranslatorLibrary
                 {
                     Environment.CurrentDirectory = path;
                     errorInfo = ex.Message;
-                    return null;
+                    return Task.FromResult<string>(null);
                 }
                 finally
                 {
@@ -172,7 +172,7 @@ namespace TranslatorLibrary
             }
             else
             {
-                return null;
+                return Task.FromResult<string>(null);
             }
             Environment.CurrentDirectory = path;
             return Task.FromResult(to.ToString());

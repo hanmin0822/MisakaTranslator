@@ -37,7 +37,7 @@ namespace OCRLibrary
                 if (err.ToLower().Contains("error"))
                 {
                     errorInfo = err;
-                    return null;
+                    return Task.FromResult<string>(null);
                 }
          
                 string result = p.StandardOutput.ReadToEnd();
@@ -47,7 +47,7 @@ namespace OCRLibrary
             catch (Exception ex)
             {
                 errorInfo = ex.Message;
-                return null;
+                return Task.FromResult<string>(null);
             }
         }
 

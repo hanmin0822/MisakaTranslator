@@ -51,7 +51,7 @@ namespace TranslatorLibrary
 
             if (JBeijingTranslatorPath == "")
             {
-                return null;
+                return Task.FromResult<string>(null);
             }
 
             /*
@@ -78,7 +78,7 @@ namespace TranslatorLibrary
             catch (Exception ex)
             {
                 errorInfo = ex.Message;
-                return null;
+                return Task.FromResult<string>(null);
             }
 
             Environment.CurrentDirectory = path;
