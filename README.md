@@ -20,7 +20,7 @@
 
 ~~MisakaTranslator的名字由来是因为本软件连接到了一万多名御坂妹妹所组成的『御坂网络』，利用其强大的计算能力来提供实时可靠的翻译（误）~~
 
-<del>[MisakaTranslator相关文件下载地址](https://blog.csdn.net/hanmin822/article/details/119796334)</del>
+[MisakaTranslator相关文件下载地址](https://blog.csdn.net/hanmin822/article/details/119796334)
 
 [测试版演示视频](https://www.bilibili.com/video/av94082641)
 
