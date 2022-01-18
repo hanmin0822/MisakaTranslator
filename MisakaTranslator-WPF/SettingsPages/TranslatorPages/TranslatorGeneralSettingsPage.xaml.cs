@@ -36,6 +36,8 @@ namespace MisakaTranslator_WPF.SettingsPages
             EachRowTransCheckBox.IsChecked = Convert.ToBoolean(Common.appSettings.EachRowTrans);
 
             TransLimitBox.Value = Common.appSettings.TransLimitNums;
+            // 给TransLimitBox添加Minimum后，初始化它时就会触发一次ValueChanged，导致Settings被设为1，因此只能从设置中读取数据后再添加事件处理函数
+            TransLimitBox.ValueChanged += TransLimitBox_ValueChanged;
         }
 
         private void FirstTransCombox_SelectionChanged(object sender, SelectionChangedEventArgs e)
