@@ -26,7 +26,8 @@ namespace OCRLibrary
                     CreateNoWindow = true,
                     RedirectStandardInput = true,
                     RedirectStandardOutput = true,
-                    RedirectStandardError = true
+                    RedirectStandardError = true,
+                    StandardOutputEncoding = Encoding.UTF8
                 });
                 var imgdata = ImageProcFunc.Image2Bytes(img);
                 p.StandardInput.BaseStream.Write(imgdata, 0, imgdata.Length);
