@@ -295,7 +295,6 @@ namespace MisakaTranslator_WPF
                     await Task.Delay(Common.UsingOCRDelay);
 
                 srcText = await Common.ocr.OCRProcessAsync();
-                GC.Collect();
 
                 if (!string.IsNullOrEmpty(srcText))
                     break;

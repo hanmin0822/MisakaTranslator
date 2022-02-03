@@ -29,9 +29,9 @@ namespace OCRLibrary
         {
             if (OCRArea != null)
             {
-                Bitmap img = new Bitmap(ScreenCapture.GetWindowRectCapture(WinHandle, OCRArea, isAllWin));
+                Bitmap img = ScreenCapture.GetWindowRectCapture(WinHandle, OCRArea, isAllWin);
                 Bitmap processedImg = ImageProcFunc.Auto_Thresholding(img, imgProc);
-                return OCRProcessAsync(new Bitmap(processedImg));
+                return OCRProcessAsync(processedImg);
             }
             else
             {
@@ -58,7 +58,7 @@ namespace OCRLibrary
         /// 得到OCR区域截图
         /// </summary>
         /// <returns></returns>
-        public Image GetOCRAreaCap()
+        public Bitmap GetOCRAreaCap()
         {
             return ScreenCapture.GetWindowRectCapture(WinHandle, OCRArea, isAllWin);
         }

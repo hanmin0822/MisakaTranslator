@@ -21,9 +21,9 @@ namespace MisakaTranslator_WPF
     /// </summary>
     public partial class GlobalOCRWindow : Window
     {
-        System.Drawing.Image img;
+        System.Drawing.Bitmap img;
 
-        public GlobalOCRWindow(System.Drawing.Image i)
+        public GlobalOCRWindow(System.Drawing.Bitmap i)
         {
             InitializeComponent();
             img = i;
@@ -39,7 +39,7 @@ namespace MisakaTranslator_WPF
                 if (ocr.OCR_Init("", "") != false)
                 {
                     ocr.SetOCRSourceLang(Common.appSettings.GlobalOCRLang);
-                    res = await ocr.OCRProcessAsync(new System.Drawing.Bitmap(img));
+                    res = await ocr.OCRProcessAsync(img);
 
                     if (res != null)
                     {
@@ -61,7 +61,7 @@ namespace MisakaTranslator_WPF
                 if (ocr.OCR_Init(Common.appSettings.Tesseract5OCR_Path, Common.appSettings.Tesseract5OCR_Args))
                 {
                     ocr.SetOCRSourceLang(Common.appSettings.GlobalOCRLang);
-                    res = await ocr.OCRProcessAsync(new System.Drawing.Bitmap(img));
+                    res = await ocr.OCRProcessAsync(img);
 
                     if (res != null)
                     {
@@ -83,7 +83,7 @@ namespace MisakaTranslator_WPF
                 if (ocr.OCR_Init(Common.appSettings.BDOCR_APIKEY, Common.appSettings.BDOCR_SecretKey))
                 {
                     ocr.SetOCRSourceLang(Common.appSettings.GlobalOCRLang);
-                    res = await ocr.OCRProcessAsync(new System.Drawing.Bitmap(img));
+                    res = await ocr.OCRProcessAsync(img);
 
                     if (res != null)
                     {
@@ -105,7 +105,7 @@ namespace MisakaTranslator_WPF
                 if (ocr.OCR_Init(Common.appSettings.BDappID, Common.appSettings.BDsecretKey))
                 {
                     ocr.SetOCRSourceLang(Common.appSettings.GlobalOCRLang);
-                    res = await ocr.OCRProcessAsync(new System.Drawing.Bitmap(img));
+                    res = await ocr.OCRProcessAsync(img);
 
                     if (res != null)
                         FirstTransText.Text = res;
@@ -158,6 +158,10 @@ namespace MisakaTranslator_WPF
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             dataInit();
+        }
+        private void Window_Closing(object sender, object e)
+        {
+            img.Dispose();
         }
     }
 }

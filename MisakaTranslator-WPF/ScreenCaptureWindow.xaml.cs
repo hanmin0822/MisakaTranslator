@@ -104,7 +104,7 @@ namespace MisakaTranslator_WPF
             if (capMode == 2)
             {
                 //全局OCR截图，直接打开结果页面
-                System.Drawing.Image img = ScreenCapture.GetWindowRectCapture(System.IntPtr.Zero, OCRArea, true);
+                System.Drawing.Bitmap img = ScreenCapture.GetWindowRectCapture(System.IntPtr.Zero, OCRArea, true);
 
                 var reswin = new GlobalOCRWindow(img);
                 POINT mousestart = new POINT();

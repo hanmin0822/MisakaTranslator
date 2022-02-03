@@ -74,7 +74,7 @@ namespace OCRLibrary
         /// </summary>
         /// <param name="handle"></param>
         /// <returns></returns>
-        public static Image GetWindowCapture(IntPtr handle)
+        public static Bitmap GetWindowCapture(IntPtr handle)
         {
             // get te hDC of the target window  
             IntPtr hdcSrc = GetWindowDC(handle);
@@ -99,7 +99,7 @@ namespace OCRLibrary
             DeleteDC(hdcDest);
             ReleaseDC(handle, hdcSrc);
             // get a .NET image object for it  
-            Image img = Image.FromHbitmap(hBitmap);
+            Bitmap img = Image.FromHbitmap(hBitmap);
             // free up the Bitmap object  
             DeleteObject(hBitmap);
             return img;
@@ -112,37 +112,20 @@ namespace OCRLibrary
         /// <param name="rec"></param>
         /// <param name="isAllWin">是否是全屏截屏</param>
         /// <returns></returns>
-        public static Image GetWindowRectCapture(IntPtr handle, Rectangle rec, bool isAllWin)
+        public static Bitmap GetWindowRectCapture(IntPtr handle, Rectangle rec, bool isAllWin)
         {
             if (rec.Width == 0 || rec.Height == 0)
-            {
                 return null;
-            }
-            Image img;
-            if (isAllWin == true)
-            {
-                img = GetAllWindow();
-            }
-            else
-            {
-                img = GetWindowCapture(handle);
-            }
-            Bitmap bmpImage = new Bitmap(img);
-            try
-            {
-                return bmpImage.Clone(rec, bmpImage.PixelFormat);
-            }
-            catch (OutOfMemoryException ex)
-            {
-                return null;
-            }
+
+            using (Bitmap img = isAllWin? GetAllWindow():GetWindowCapture(handle))
+                return img.Clone(rec, img.PixelFormat);
         }
 
         /// <summary>
         /// 全屏截屏
         /// </summary>
         /// <returns></returns>
-        public static Image GetAllWindow()
+        public static Bitmap GetAllWindow()
         {
             int w = Screen.PrimaryScreen.Bounds.Width;
             int h = Screen.PrimaryScreen.Bounds.Height;
@@ -150,6 +133,7 @@ namespace OCRLibrary
             Bitmap bitmap = new Bitmap(w, h);
             Graphics graphics = Graphics.FromImage(bitmap);
             graphics.CopyFromScreen(0, 0, 0, 0, new Size(w, h));
+            graphics.Dispose();
 
             return bitmap;
         }

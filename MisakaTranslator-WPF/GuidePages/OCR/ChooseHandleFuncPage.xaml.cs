@@ -41,11 +41,11 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
 
         private void RenewAreaBtn_Click(object sender, RoutedEventArgs e)
         {
-            System.Drawing.Image img = Common.ocr.GetOCRAreaCap();
+            System.Drawing.Bitmap img = Common.ocr.GetOCRAreaCap();
             
             SrcImg.Source = ImageProcFunc.ImageToBitmapImage(img);
 
-            DstImg.Source = ImageProcFunc.ImageToBitmapImage(ImageProcFunc.Auto_Thresholding(new System.Drawing.Bitmap(img), 
+            DstImg.Source = ImageProcFunc.ImageToBitmapImage(ImageProcFunc.Auto_Thresholding(img, 
                 ImageProcFunc.lstHandleFun[ImageProcFunclist[HandleFuncCombox.SelectedIndex]]));
 
             GC.Collect();
