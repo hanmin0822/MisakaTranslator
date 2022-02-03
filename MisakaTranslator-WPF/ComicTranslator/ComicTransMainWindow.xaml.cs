@@ -74,7 +74,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
                     HandyControl.Controls.Growl.ErrorGlobal($"百度智能云OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
                 }
             }
-            if (Common.appSettings.OCRsource == "BaiduFanyiOCR")
+            else if (Common.appSettings.OCRsource == "BaiduFanyiOCR")
             {
                 if (ocr.OCR_Init(Common.appSettings.BDappID, Common.appSettings.BDsecretKey) == false)
                 {
@@ -125,8 +125,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
             {
                 iniP = e.GetPosition(inkCanvasMeasure);
             }
-
-            if (e.ChangedButton == MouseButton.Right)
+            else if (e.ChangedButton == MouseButton.Right)
             {
                 Bitmap bmpImage = new Bitmap(DicPath + "\\" + ComicImgList[CurrentPos]);
                 Bitmap bmp = bmpImage.Clone(selectRect, bmpImage.PixelFormat);
@@ -138,7 +137,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
                 {
                     Bitmap bm = new Bitmap(Environment.CurrentDirectory + "\\comicTemp.png");
                     bm = ImageProcFunc.ColorToGrayscale(bm);
-                    sourceTextBox.Text = (await ocr.OCRProcessAsync(bm)).Replace("\f", "");
+                    sourceTextBox.Text = (await ocr.OCRProcessAsync(bm))?.Replace("\f", "");
                 }
                 else {
                     sourceTextBox.Text = "OCR error";

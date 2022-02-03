@@ -105,14 +105,16 @@ namespace MisakaTranslator_WPF
             scw.Show();
         }
 
+        static double scale;
         /// <summary>
         /// 获取DPI缩放倍数
         /// </summary>
         /// <returns>DPI缩放倍数</returns>
         public static double GetScale()
         {
-            Graphics currentGraphics = Graphics.FromHwnd(new WindowInteropHelper(mainWin).Handle);
-            return currentGraphics.DpiX / 96;
+            if (scale == 0)
+                scale = Graphics.FromHwnd(new WindowInteropHelper(mainWin).Handle).DpiX / 96;
+            return scale;
         }
 
         /// <summary>
