@@ -129,15 +129,18 @@ namespace MisakaTranslator_WPF.ComicTranslator
             {
                 Bitmap bmpImage = new Bitmap(DicPath + "\\" + ComicImgList[CurrentPos]);
                 Bitmap bmp = bmpImage.Clone(selectRect, bmpImage.PixelFormat);
+                bmpImage.Dispose();
 
                 ImageProcWindow ipw = new ImageProcWindow(bmp);
                 ipw.ShowDialog();
+                bmp.Dispose();
 
                 if (File.Exists(Environment.CurrentDirectory + "\\comicTemp.png"))
                 {
                     Bitmap bm = new Bitmap(Environment.CurrentDirectory + "\\comicTemp.png");
                     bm = ImageProcFunc.ColorToGrayscale(bm);
                     sourceTextBox.Text = (await ocr.OCRProcessAsync(bm))?.Replace("\f", "");
+                    bm.Dispose();
                 }
                 else {
                     sourceTextBox.Text = "OCR error";
@@ -156,7 +159,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
             {
                 // Draw square
                 System.Windows.Point endP = e.GetPosition(inkCanvasMeasure);
-                List<System.Windows.Point> pointList = new List<System.Windows.Point>
+                System.Windows.Point[] pointList = new System.Windows.Point[]
                     {
                         new System.Windows.Point(iniP.X, iniP.Y),
                         new System.Windows.Point(iniP.X, endP.Y),

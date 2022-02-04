@@ -87,13 +87,13 @@ namespace MisakaTranslator_WPF
             {
                 // Draw square
                 System.Windows.Point endP = e.GetPosition(inkCanvasMeasure);
-                List<System.Windows.Point> pointList = new List<System.Windows.Point>
+                Point[] pointList = new Point[]
                     {
-                        new System.Windows.Point(iniP.X, iniP.Y),
-                        new System.Windows.Point(iniP.X, endP.Y),
-                        new System.Windows.Point(endP.X, endP.Y),
-                        new System.Windows.Point(endP.X, iniP.Y),
-                        new System.Windows.Point(iniP.X, iniP.Y),
+                        new Point(iniP.X, iniP.Y),
+                        new Point(iniP.X, endP.Y),
+                        new Point(endP.X, endP.Y),
+                        new Point(endP.X, iniP.Y),
+                        new Point(iniP.X, iniP.Y),
                     };
                 StylusPointCollection point = new StylusPointCollection(pointList);
                 Stroke stroke = new Stroke(point)
@@ -109,7 +109,7 @@ namespace MisakaTranslator_WPF
 
         void Capture()
         {
-            OCRArea = new System.Drawing.Rectangle((int)selectRect.Location.X, (int)selectRect.Location.Y, (int)selectRect.Size.Width, (int)selectRect.Size.Height);
+            OCRArea = new System.Drawing.Rectangle((int)selectRect.X, (int)selectRect.Y, (int)selectRect.Width, (int)selectRect.Height);
 
             if (capMode == 2)
             {
