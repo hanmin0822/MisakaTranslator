@@ -67,6 +67,16 @@ namespace MisakaTranslator_WPF
             if (e.ChangedButton == MouseButton.Right)
             {
                 e.Handled = true;
+                Capture();
+                this.Close();
+            }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (capMode == 2 && e.Key == Key.Escape)
+            {
+                e.Handled = true;
                 this.Close();
             }
         }
@@ -97,7 +107,7 @@ namespace MisakaTranslator_WPF
             }
         }
 
-        private void Window_Closing(object sender, CancelEventArgs e)
+        void Capture()
         {
             OCRArea = new System.Drawing.Rectangle((int)selectRect.Location.X, (int)selectRect.Location.Y, (int)selectRect.Size.Width, (int)selectRect.Size.Height);
 
