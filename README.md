@@ -34,7 +34,7 @@
 * 提供更好体验的在线API：提供多种在线API(`百度OCR+多种在线翻译API+多种公共接口翻译`)
 * 更高的OCR精度：支持在提交OCR前对图片进行预处理（多种处理方法）
 * 分词及字典：支持Mecab分词和字典功能，可针对单词进行查询
-* 翻译优化系统：支持人名地名欲翻译，提高翻译质量，这个系统正在被不断完善
+* 翻译优化系统：支持人名地名预翻译，提高翻译质量，这个系统正在被不断完善
 * 人工翻译系统：支持用户自己定义语句翻译并生成人工翻译文件以供分享
 * TTS语音发音：支持朗读句子和单词
 * 漫画翻译：更友好、准确的漫画翻译
@@ -64,7 +64,7 @@ E-Mail/QQ:512240272@qq.com
 
 ## 本项目开发过程中使用到的重要参考文献
 
-* [C#调用多种翻译API和使用Textractor提取文本](https://www.lgztx.com/) 
+* [C#调用多种翻译API和使用Textractor提取文本](https://www.lgztx.com/)
 * [C#图像处理(二值化,灰阶)](https://blog.csdn.net/chaoguodong/article/details/7877312)
 * [C#中使用全局键盘鼠标钩子](https://www.cnblogs.com/CJSTONE/p/4961865.html)
 
@@ -73,7 +73,7 @@ E-Mail/QQ:512240272@qq.com
 * 画师-[洛奚](https://www.pixiv.net/users/13495987)
 * 官网制作-[Disviel](https://github.com/Disviel)
 * 人设&画师-[百川行](https://www.pixiv.net/users/17591894)
-* 合作开发者-[unlsycn](https://github.com/HumphreyDotSln) 
+* 合作开发者-[unlsycn](https://github.com/HumphreyDotSln)
 * 合作开发者-[tpxxn](https://github.com/tpxxn)
 * 合作开发者-[imba-tjd](https://github.com/imba-tjd)
 
