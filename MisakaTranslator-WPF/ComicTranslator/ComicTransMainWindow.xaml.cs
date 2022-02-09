@@ -34,7 +34,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
         List<string> ComicImgList;//图片数组
         string DicPath;//文件夹路径
         int CurrentPos;//当前指针
-        
+
         private ITranslator _translator1; //第一翻译源
         private ITranslator _translator2; //第二翻译源
 
@@ -127,6 +127,18 @@ namespace MisakaTranslator_WPF.ComicTranslator
             }
             else if (e.ChangedButton == MouseButton.Right)
             {
+                // 当从右下往左上选择时，宽高会为负，导致出现OutOfMemoryException。因为Width为负，X+Width实际上是减少X
+                if(selectRect.Width < 0)
+                {
+                    selectRect.Location = new System.Drawing.Point(selectRect.X + selectRect.Width, selectRect.Y);
+                    selectRect.Size = new System.Drawing.Size(-selectRect.Width, selectRect.Height);
+                }
+                if(selectRect.Height < 0)
+                {
+                    selectRect.Location = new System.Drawing.Point(selectRect.X, selectRect.Y + selectRect.Height);
+                    selectRect.Size = new System.Drawing.Size(selectRect.Width, -selectRect.Height);
+                }
+
                 Bitmap bmpImage = new Bitmap(DicPath + "\\" + ComicImgList[CurrentPos]);
                 Bitmap bmp = bmpImage.Clone(selectRect, bmpImage.PixelFormat);
                 bmpImage.Dispose();
@@ -149,9 +161,9 @@ namespace MisakaTranslator_WPF.ComicTranslator
             }
         }
 
-        
 
-        
+
+
 
         private void InkCanvasMeasure_MouseMove(object sender, MouseEventArgs e)
         {
@@ -202,7 +214,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
                 sourceComicImg.Height = this.Height;
             }
         }
-        
+
         private void PreBtn_Click(object sender, RoutedEventArgs e)
         {
             if (CurrentPos > 0) {
@@ -236,7 +248,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
         private async void transBtn_Click(object sender, RoutedEventArgs e)
         {
             string sourceText = sourceTextBox.Text;
-            
+
             if (_translator1 != null)
             {
                 transRes1 = await _translator1.TranslateAsync(sourceText, DstLang, SrcLang);
@@ -254,9 +266,9 @@ namespace MisakaTranslator_WPF.ComicTranslator
             {
                 transRes2 = "None";
             }
-            
+
             transTextBox.Text = "翻译一：" + transRes1 + "\n翻译二：" + transRes2;
-                
+
         }
 
         private void AddOcrRectBtn_Click(object sender, RoutedEventArgs e)
@@ -286,7 +298,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
                 {
                     //选择语言，该页面所用语言独立于Common
                     HandyControl.Controls.Dialog.Show(new UserControls.SelectTransLangDialog(this));
-                    
+
                     DicPath = dialog.SelectedPath;
                     DirectoryInfo TheFolder = new DirectoryInfo(DicPath);
                     foreach (FileInfo NextFile in TheFolder.GetFiles())
@@ -315,7 +327,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
         {
             sourceComicImg.Width = this.Width * 0.7;
             sourceComicImg.Height = this.Height;
-            
+
             viewModel.InkStrokes.Clear();
         }
 
@@ -331,7 +343,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
                 {
                     System.Windows.Forms.SaveFileDialog saveImageDialog = new System.Windows.Forms.SaveFileDialog();
                     saveImageDialog.Filter = "Txt Files(*.txt)|*.txt";
-                    
+
                     if (saveImageDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
                         SaveResult(saveImageDialog.FileName);
@@ -347,12 +359,12 @@ namespace MisakaTranslator_WPF.ComicTranslator
 
         private void SaveResult(string filePath) {
             for (int i = 0;i < lstData.Count;i++) {
-                
+
             }
 
             FileStream fs = new FileStream(filePath, FileMode.Create);
             StreamWriter sw = new StreamWriter(fs);
-            
+
             for (int i = 0; i < lstData.Count; i++)
             {
                 sw.WriteLine(lstData[i].Pos);
