@@ -47,7 +47,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
             ink.Width = bitmap.Width;
             ink.EditingMode = InkCanvasEditingMode.None;
 
-            
+
             da.Color = Color.FromRgb(255, 255, 255);
             da.Width = 10;
             da.Height = 10;
@@ -58,7 +58,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
         {
             if (EraseBtn.IsChecked == true)
             {
-                
+
                 ink.DefaultDrawingAttributes = da;
                 ink.EditingMode = InkCanvasEditingMode.Ink;
                 ink.UseCustomCursor = true;
@@ -115,12 +115,9 @@ namespace MisakaTranslator_WPF.ComicTranslator
             System.Drawing.Bitmap bm = (System.Drawing.Bitmap)bmp.Clone();
             System.IO.MemoryStream stream = new System.IO.MemoryStream();
             ImageProcFunc.Thresholding(bm, (byte)(int)ThresholdBar.Value).Save(stream, System.Drawing.Imaging.ImageFormat.Png);
-            ImageBrush imageBrush = new ImageBrush();
+            bm.Dispose();
             ImageSourceConverter imageSourceConverter = new ImageSourceConverter();
             img.Source = (ImageSource)imageSourceConverter.ConvertFrom(stream);
-            
-            GC.Collect();
-            
         }
 
         private void InkBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
