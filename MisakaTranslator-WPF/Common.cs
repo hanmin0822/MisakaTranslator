@@ -85,8 +85,8 @@ namespace MisakaTranslator_WPF
         /// </summary>
         public static void RepairFuncInit()
         {
-            TextRepair.SingleWordRepeatTimes = int.Parse(repairSettings.SingleWordRepeatTimes);
-            TextRepair.SentenceRepeatFindCharNum = int.Parse(repairSettings.SentenceRepeatFindCharNum);
+            TextRepair.SingleWordRepeatTimes = repairSettings.SingleWordRepeatTimes;
+            TextRepair.SentenceRepeatFindCharNum = repairSettings.SentenceRepeatFindCharNum;
             TextRepair.regexPattern = repairSettings.Regex;
             TextRepair.regexReplacement = repairSettings.Regex_Replace;
         }

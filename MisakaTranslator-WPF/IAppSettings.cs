@@ -397,15 +397,15 @@ namespace MisakaTranslator_WPF
 
     public interface IRepeatRepairSettings
     {
-        [Option(Alias = "RepairFun_RemoveSingleWordRepeat.RepeatTimes", DefaultValue = "0")]
-        string SingleWordRepeatTimes
+        [Option(Alias = "RepairFun_RemoveSingleWordRepeat.RepeatTimes", DefaultValue = 0)]
+        int SingleWordRepeatTimes
         {
             get;
             set;
         }
 
-        [Option(Alias = "RepairFun_RemoveSentenceRepeat.FindCharNum", DefaultValue = "4")]
-        string SentenceRepeatFindCharNum
+        [Option(Alias = "RepairFun_RemoveSentenceRepeat.FindCharNum", DefaultValue = 4)]
+        int SentenceRepeatFindCharNum
         {
             get;
             set;

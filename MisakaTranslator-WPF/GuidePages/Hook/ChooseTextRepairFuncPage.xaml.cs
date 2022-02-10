@@ -28,7 +28,7 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
         public ChooseTextRepairFuncPage()
         {
             InitializeComponent();
-            
+
             RepairFuncCombox.ItemsSource = lstRepairFun;
             RepairFuncCombox.SelectedIndex = 0;
 
@@ -93,7 +93,7 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                             $"UPDATE game_library SET repair_func = '{Common.UsingRepairFunc}' WHERE gameid = {Common.GameID};");
                         break;
                 }
-                
+
             }
 
             //使用路由事件机制通知窗口来完成下一步操作
@@ -104,9 +104,9 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
 
         private void SingleConfirm_Click(object sender, RoutedEventArgs e)
         {
-            Common.repairSettings.SingleWordRepeatTimes = Single_TextBox.Text;
-            if (!int.TryParse(Single_TextBox.Text, out int _))
+            if (!int.TryParse(Single_TextBox.Text, out int times))
                 return;
+            Common.repairSettings.SingleWordRepeatTimes = times;
             Common.RepairFuncInit();
             repairedTextBox.Text = TextRepair.RepairFun_RemoveSingleWordRepeat(sourceTextBox.Text);
             Single_InputDrawer.IsOpen = false;
@@ -114,9 +114,9 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
 
         private void SentenceConfirm_Click(object sender, RoutedEventArgs e)
         {
-            Common.repairSettings.SentenceRepeatFindCharNum = Sentence_TextBox.Text;
-            if (!int.TryParse(Sentence_TextBox.Text, out int _))
+            if (!int.TryParse(Sentence_TextBox.Text, out int num))
                 return;
+            Common.repairSettings.SentenceRepeatFindCharNum = num;
             Common.RepairFuncInit();
             repairedTextBox.Text = TextRepair.RepairFun_RemoveSentenceRepeat(sourceTextBox.Text);
             Sentence_InputDrawer.IsOpen = false;

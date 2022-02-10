@@ -241,10 +241,10 @@ namespace MisakaTranslator_WPF {
 
             switch (Common.UsingRepairFunc) {
                 case "RepairFun_RemoveSingleWordRepeat":
-                    Common.repairSettings.SingleWordRepeatTimes = gameInfoList[gid].RepairParamA;
+                    Common.repairSettings.SingleWordRepeatTimes = int.Parse(gameInfoList[gid].RepairParamA);
                     break;
                 case "RepairFun_RemoveSentenceRepeat":
-                    Common.repairSettings.SentenceRepeatFindCharNum = gameInfoList[gid].RepairParamA;
+                    Common.repairSettings.SentenceRepeatFindCharNum = int.Parse(gameInfoList[gid].RepairParamA);
                     break;
                 case "RepairFun_RegexReplace":
                     Common.repairSettings.Regex = gameInfoList[gid].RepairParamA;
