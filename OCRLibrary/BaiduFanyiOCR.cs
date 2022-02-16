@@ -48,7 +48,6 @@ namespace OCRLibrary
             request.Method = "POST";
             request.Timeout = 8000;
             request.UserAgent = "MisakaTranslator";
-            request.AutomaticDecompression = DecompressionMethods.GZip;
             const string boundary = "boundary";
             request.ContentType = "multipart/form-data;boundary=" + boundary;
 

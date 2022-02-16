@@ -28,7 +28,6 @@ namespace OCRLibrary
             string host = "https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic?access_token=" + accessToken;
             HttpWebRequest request = WebRequest.CreateHttp(host);
             request.Method = "post";
-            request.AutomaticDecompression = DecompressionMethods.GZip;
             request.Timeout = 8000;
             // 图片的base64编码
             string base64 = ImageProcFunc.GetFileBase64(img);

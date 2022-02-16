@@ -106,11 +106,7 @@ namespace TranslatorLibrary
                 lock (typeof(CommonFunction))
                     if (HC == null)
                     {
-                        HC = new HttpClient(new HttpClientHandler()
-                        {
-                            AutomaticDecompression = DecompressionMethods.GZip
-                        })
-                        { Timeout = TimeSpan.FromSeconds(8) };
+                        HC = new HttpClient() { Timeout = TimeSpan.FromSeconds(8) };
                         var headers = HC.DefaultRequestHeaders;
                         headers.UserAgent.ParseAdd("MisakaTranslator");
                         headers.Connection.ParseAdd("keep-alive");
