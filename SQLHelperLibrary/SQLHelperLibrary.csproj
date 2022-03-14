@@ -6,13 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SQLite">
-      <Version>3.1.5</Version>
-    </PackageReference>
+    <PackageReference Include="Microsoft.Data.SQLite.Core" Version="6.0.5" />
+    <PackageReference Include="SQLitePCLRaw.bundle_winsqlite3" Version="2.1.0" />
   </ItemGroup>
 
 </Project>
