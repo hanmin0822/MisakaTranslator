@@ -27,18 +27,14 @@ namespace OCRLibrary
         /// <returns>返回识别结果，如果为空可通过GetLastError得到错误提示</returns>
         public Task<string> OCRProcessAsync()
         {
-            if (OCRArea != null)
+            Bitmap img = ScreenCapture.GetWindowRectCapture(WinHandle, OCRArea, isAllWin);
+            if (img == null)
             {
-                Bitmap img = ScreenCapture.GetWindowRectCapture(WinHandle, OCRArea, isAllWin);
-                Bitmap processedImg = ImageProcFunc.Auto_Thresholding(img, imgProc);
-                return OCRProcessAsync(processedImg);
-            }
-            else
-            {
-                // todo: 这个分支走不到
                 errorInfo = "未设置截图区域";
                 return null;
             }
+            Bitmap processedImg = ImageProcFunc.Auto_Thresholding(img, imgProc);
+            return OCRProcessAsync(processedImg);
         }
 
         /// <summary>
