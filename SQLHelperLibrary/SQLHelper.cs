@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using SQLitePCL;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Data.Sqlite;
 
 namespace SQLHelperLibrary
 {
@@ -11,6 +9,18 @@ namespace SQLHelperLibrary
     {
         private readonly string _mDbConnectionString;
         private string _errorInfo;//最后一次错误信息
+
+        static SQLHelper()
+        {
+            if (Environment.OSVersion.Version.Build >= 10586)
+            {
+                raw.SetProvider(new SQLite3Provider_winsqlite3());
+            }
+            else
+            {
+                raw.SetProvider(new SQLite3Provider_e_sqlite3());
+            }
+        }
 
         /// <summary>
         /// 初始化
@@ -75,7 +85,7 @@ namespace SQLHelperLibrary
                             return ret;
                         }
                     }
-                    
+
                 }
                 catch (SqliteException e)
                 {
@@ -116,7 +126,7 @@ namespace SQLHelperLibrary
                             return ret;
                         }
                     }
-                    
+
                 }
                 catch (SqliteException e)
                 {
@@ -124,14 +134,15 @@ namespace SQLHelperLibrary
                     return null;
                 }
             }
-            
+
         }
 
         /// <summary>
         /// 获取最后一次失败原因
         /// </summary>
         /// <returns></returns>
-        public string GetLastError() {
+        public string GetLastError()
+        {
             return _errorInfo;
         }
     }
