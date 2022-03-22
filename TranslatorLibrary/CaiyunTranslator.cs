@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,7 +42,7 @@ namespace TranslatorLibrary
 
             string url = "https://api.interpreter.caiyunai.com/v1/translator";
             //json参数
-            string jsonParam = JsonConvert.SerializeObject(new Dictionary<string, object>
+            string jsonParam = JsonSerializer.Serialize(new Dictionary<string, object>
             {
                 {"source", new string[] {q}},
                 {"trans_type", trans_type},
@@ -75,7 +75,7 @@ namespace TranslatorLibrary
             CaiyunTransResult oinfo;
             try
             {
-                oinfo = JsonConvert.DeserializeObject<CaiyunTransResult>(retString);
+                oinfo = JsonSerializer.Deserialize<CaiyunTransResult>(retString);
             }
             catch {
                 errorInfo = "JsonConvert Error";

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -66,7 +66,7 @@ namespace OCRLibrary
                 using (var resp = await request.GetResponseAsync())
                 {
                     string retStr = new StreamReader(resp.GetResponseStream()).ReadToEnd();
-                    var result = JsonConvert.DeserializeObject<Result>(retStr);
+                    var result = JsonSerializer.Deserialize<Result>(retStr);
                     if (result.error_code == "0")
                         return result.data.sumDst;
                     else

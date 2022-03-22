@@ -39,7 +39,7 @@ namespace TranslatorLibrary
             {
                 var ResultHtml = await hc.GetStringAsync(googleTransUrl);
 
-                dynamic TempResult = Newtonsoft.Json.JsonConvert.DeserializeObject(ResultHtml);
+                dynamic TempResult = System.Text.Json.JsonSerializer.Deserialize<dynamic>(ResultHtml);
 
                 string ResultText = "";
 

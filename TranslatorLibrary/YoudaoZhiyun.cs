@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -7,6 +6,7 @@ using System.Text;
 using System.Web;
 using System.Security.Cryptography;
 using System.Net.Http;
+using System.Text.Json;
 
 namespace TranslatorLibrary
 {
@@ -54,7 +54,7 @@ namespace TranslatorLibrary
                 if (response.IsSuccessStatusCode)
                 {
                     string resultStr = await response.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<YoudaoZhiyunResult>(resultStr);
+                    var result = JsonSerializer.Deserialize<YoudaoZhiyunResult>(resultStr);
                     if (result.errorCode == "0")
                     {
                         return string.Join("\n", result.translation);

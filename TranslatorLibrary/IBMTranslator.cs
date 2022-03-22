@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+using System.Text.Json;
 using System.Net.Http;
 
 namespace TranslatorLibrary
@@ -41,7 +41,7 @@ namespace TranslatorLibrary
             HttpResponseMessage resp;
             var hc = CommonFunction.GetHttpClient();
             var req = new HttpRequestMessage(HttpMethod.Post, URL);
-            string jsonParam = JsonConvert.SerializeObject(new Dictionary<string, object>
+            string jsonParam = JsonSerializer.Serialize(new Dictionary<string, object>
             {
                 {"text", new string[] {sourceText}},
                 {"model_id", srcLang + "-" + desLang}
@@ -69,7 +69,7 @@ namespace TranslatorLibrary
             }
 
             string retString = await resp.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<Result>(retString);
+            var result = JsonSerializer.Deserialize<Result>(retString);
 
             if (!resp.IsSuccessStatusCode){
                 errorInfo = result.error;

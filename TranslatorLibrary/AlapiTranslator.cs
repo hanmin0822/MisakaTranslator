@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -63,7 +63,7 @@ namespace TranslatorLibrary
                 return null;
             }
 
-            AliapiTransResult oinfo = JsonConvert.DeserializeObject<AliapiTransResult>(retString);
+            AliapiTransResult oinfo = JsonSerializer.Deserialize<AliapiTransResult>(retString);
 
             if (oinfo.msg == "success")
             {

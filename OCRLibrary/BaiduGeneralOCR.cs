@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -54,7 +54,7 @@ namespace OCRLibrary
             }
 
             StringBuilder sb = new StringBuilder();
-            BaiduOCRresOutInfo oinfo = JsonConvert.DeserializeObject<BaiduOCRresOutInfo>(result);
+            BaiduOCRresOutInfo oinfo = JsonSerializer.Deserialize<BaiduOCRresOutInfo>(result);
             if (oinfo.words_result != null)
             {
                 for (int i = 0; i < oinfo.words_result_num; i++)
@@ -76,7 +76,7 @@ namespace OCRLibrary
             secretKey = param2;
 
             string ret = BaiduGetToken(APIKey, secretKey);
-            BaiduTokenOutInfo btoi = JsonConvert.DeserializeObject<BaiduTokenOutInfo>(ret);
+            BaiduTokenOutInfo btoi = JsonSerializer.Deserialize<BaiduTokenOutInfo>(ret);
             if (btoi.access_token != null)
             {
                 accessToken = btoi.access_token;
