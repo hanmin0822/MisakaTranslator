@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,7 +60,7 @@ namespace TranslatorLibrary
             YoudaoTransResult oinfo;
             try
             {
-                oinfo = JsonConvert.DeserializeObject<YoudaoTransResult>(retString);
+                oinfo = JsonSerializer.Deserialize<YoudaoTransResult>(retString);
             }
             catch (JsonException)
             {

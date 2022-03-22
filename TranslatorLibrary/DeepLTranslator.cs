@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -49,7 +49,7 @@ namespace TranslatorLibrary
                 if (response.IsSuccessStatusCode)
                 {
                     string resultStr = await response.Content.ReadAsStringAsync();
-                    DeepLTranslateResult translateResult = JsonConvert.DeserializeObject<DeepLTranslateResult>(resultStr);
+                    DeepLTranslateResult translateResult = JsonSerializer.Deserialize<DeepLTranslateResult>(resultStr);
                     if (translateResult.translations?.Length > 0)
                     {
                         return translateResult.translations[0].text;

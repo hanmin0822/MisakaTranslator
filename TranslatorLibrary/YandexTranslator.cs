@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+using System.Text.Json;
 using System.Web;
 
 namespace TranslatorLibrary
@@ -32,7 +32,7 @@ namespace TranslatorLibrary
             try
             {
                 string retString = await hc.GetStringAsync(apiurl + HttpUtility.UrlEncode(sourceText));
-                var doc = JsonConvert.DeserializeObject<Result>(retString);
+                var doc = JsonSerializer.Deserialize<Result>(retString);
                 return doc.text[0];
             }
             catch (System.Net.Http.HttpRequestException ex)
