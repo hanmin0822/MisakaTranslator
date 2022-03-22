@@ -26,7 +26,7 @@ namespace MisakaTranslator_WPF {
             Instance = this;
             Common.mainWin = this;
 
-            var settings = new ConfigurationBuilder<IAppSettings>().UseJsonFile("settings/settings.json").Build();
+            var settings = new ConfigurationBuilder<IAppSettings>().UseIniFile("settings/settings.ini").Build();
             InitializeLanguage();
             InitializeComponent();
             Initialize(settings);
