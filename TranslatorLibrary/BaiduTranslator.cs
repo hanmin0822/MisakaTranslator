@@ -65,7 +65,7 @@ namespace TranslatorLibrary
                 return null;
             }
 
-            BaiduTransOutInfo oinfo = JsonSerializer.Deserialize<BaiduTransOutInfo>(retString);
+            BaiduTransOutInfo oinfo = JsonSerializer.Deserialize<BaiduTransOutInfo>(retString, CommonFunction.JsonOP);
 
             if (oinfo.error_code == null || oinfo.error_code == "52000")
             {

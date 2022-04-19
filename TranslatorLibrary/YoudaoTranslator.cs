@@ -60,7 +60,7 @@ namespace TranslatorLibrary
             YoudaoTransResult oinfo;
             try
             {
-                oinfo = JsonSerializer.Deserialize<YoudaoTransResult>(retString);
+                oinfo = JsonSerializer.Deserialize<YoudaoTransResult>(retString, CommonFunction.JsonOP);
             }
             catch (JsonException)
             {

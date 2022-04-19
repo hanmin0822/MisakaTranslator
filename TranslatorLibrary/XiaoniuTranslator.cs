@@ -57,7 +57,7 @@ namespace TranslatorLibrary
                 return null;
             }
 
-            XiaoniuTransOutInfo oinfo = JsonSerializer.Deserialize<XiaoniuTransOutInfo>(retString);
+            XiaoniuTransOutInfo oinfo = JsonSerializer.Deserialize<XiaoniuTransOutInfo>(retString, CommonFunction.JsonOP);
 
             if (oinfo.error_code == null || oinfo.error_code == "52000")
             {

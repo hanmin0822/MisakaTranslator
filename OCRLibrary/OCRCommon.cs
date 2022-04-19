@@ -36,5 +36,10 @@ namespace OCRLibrary
                     return null;
             }
         }
+
+        public static System.Text.Json.JsonSerializerOptions JsonOP = new System.Text.Json.JsonSerializerOptions()
+        {
+            IncludeFields = true
+        };
     }
 }

@@ -75,7 +75,7 @@ namespace TranslatorLibrary
             CaiyunTransResult oinfo;
             try
             {
-                oinfo = JsonSerializer.Deserialize<CaiyunTransResult>(retString);
+                oinfo = JsonSerializer.Deserialize<CaiyunTransResult>(retString, CommonFunction.JsonOP);
             }
             catch {
                 errorInfo = "JsonConvert Error";

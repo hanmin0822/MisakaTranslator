@@ -66,7 +66,7 @@ namespace OCRLibrary
                 using (var resp = await request.GetResponseAsync())
                 {
                     string retStr = new StreamReader(resp.GetResponseStream()).ReadToEnd();
-                    var result = JsonSerializer.Deserialize<Result>(retStr);
+                    var result = JsonSerializer.Deserialize<Result>(retStr, OCRCommon.JsonOP);
                     if (result.error_code == "0")
                         return result.data.sumDst;
                     else

@@ -49,7 +49,7 @@ namespace TranslatorLibrary
             {
                 var ResultHtml = await hc.GetStringAsync(googleTransUrl);
 
-                dynamic TempResult = System.Text.Json.JsonSerializer.Deserialize<dynamic>(ResultHtml);
+                dynamic TempResult = System.Text.Json.JsonSerializer.Deserialize<dynamic>(ResultHtml, CommonFunction.JsonOP);
 
                 string ResultText = "";
 

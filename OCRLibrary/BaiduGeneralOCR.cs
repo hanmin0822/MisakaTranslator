@@ -54,7 +54,7 @@ namespace OCRLibrary
             }
 
             StringBuilder sb = new StringBuilder();
-            BaiduOCRresOutInfo oinfo = JsonSerializer.Deserialize<BaiduOCRresOutInfo>(result);
+            BaiduOCRresOutInfo oinfo = JsonSerializer.Deserialize<BaiduOCRresOutInfo>(result, OCRCommon.JsonOP);
             if (oinfo.words_result != null)
             {
                 for (int i = 0; i < oinfo.words_result_num; i++)
@@ -76,7 +76,7 @@ namespace OCRLibrary
             secretKey = param2;
 
             string ret = BaiduGetToken(APIKey, secretKey);
-            BaiduTokenOutInfo btoi = JsonSerializer.Deserialize<BaiduTokenOutInfo>(ret);
+            BaiduTokenOutInfo btoi = JsonSerializer.Deserialize<BaiduTokenOutInfo>(ret, OCRCommon.JsonOP);
             if (btoi.access_token != null)
             {
                 accessToken = btoi.access_token;
