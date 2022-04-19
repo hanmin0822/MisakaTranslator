@@ -49,7 +49,7 @@ namespace TranslatorLibrary
                 if (response.IsSuccessStatusCode)
                 {
                     string resultStr = await response.Content.ReadAsStringAsync();
-                    DeepLTranslateResult translateResult = JsonSerializer.Deserialize<DeepLTranslateResult>(resultStr);
+                    DeepLTranslateResult translateResult = JsonSerializer.Deserialize<DeepLTranslateResult>(resultStr, CommonFunction.JsonOP);
                     if (translateResult.translations?.Length > 0)
                     {
                         return translateResult.translations[0].text;

@@ -124,5 +124,10 @@ namespace TranslatorLibrary
         }
 
         public static Random RD = new Random();
+
+        public static System.Text.Json.JsonSerializerOptions JsonOP = new()
+        {
+            IncludeFields = true
+        };
     }
 }

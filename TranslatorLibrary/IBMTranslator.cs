@@ -69,7 +69,7 @@ namespace TranslatorLibrary
             }
 
             string retString = await resp.Content.ReadAsStringAsync();
-            var result = JsonSerializer.Deserialize<Result>(retString);
+            var result = JsonSerializer.Deserialize<Result>(retString, CommonFunction.JsonOP);
 
             if (!resp.IsSuccessStatusCode){
                 errorInfo = result.error;

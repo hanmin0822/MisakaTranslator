@@ -32,7 +32,7 @@ namespace TranslatorLibrary
             try
             {
                 string retString = await hc.GetStringAsync(apiurl + HttpUtility.UrlEncode(sourceText));
-                var doc = JsonSerializer.Deserialize<Result>(retString);
+                var doc = JsonSerializer.Deserialize<Result>(retString, CommonFunction.JsonOP);
                 return doc.text[0];
             }
             catch (System.Net.Http.HttpRequestException ex)

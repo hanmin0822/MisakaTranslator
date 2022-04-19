@@ -64,7 +64,7 @@ namespace TranslatorLibrary
                 return null;
             }
 
-            TencentTransOutInfo oinfo = JsonSerializer.Deserialize<TencentTransOutInfo>(retString);
+            TencentTransOutInfo oinfo = JsonSerializer.Deserialize<TencentTransOutInfo>(retString, CommonFunction.JsonOP);
 
             if (oinfo.ret == "0")
             {
