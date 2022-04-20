@@ -22,7 +22,18 @@
   </Dependencies>
 
   <Resources>
-    <Resource Language="x-generate"/>
+    <!-- 
+       MakePri.exe doesn't support to generate Non-PRI Resource.
+      <Resource Language="x-generate"/> 
+    -->
+    <Resource Language="ZH-CN"/>
+    <Resource Language="EN-US"/>
+    <!-- MakePri.exe doesn't support to generate uap:Scale when multi-resources bundle is prevented to build.-->
+    <Resource uap:Scale="100" />
+    <Resource uap:Scale="125" />
+    <Resource uap:Scale="150" />
+    <Resource uap:Scale="200" />
+    <Resource uap:Scale="400" />
   </Resources>
 
   <Applications>
