@@ -33,4 +33,22 @@
     <OutputPath>$(BaseOutputPath)</OutputPath>
   </PropertyGroup>
 
+  <!--
+    Enable NuGet PackageReference for C++
+    Reference: microsoft/react-native-windows project and ProjectMile/Mile.CPP project
+  -->
+  <ItemGroup Label="CppPackageReference" Condition="'$(MSBuildProjectExtension)' == '.vcxproj'">
+    <ProjectCapability Include="PackageReferences" />
+  </ItemGroup>
+  <PropertyGroup Label="CppPackageReference" Condition="'$(MSBuildProjectExtension)' == '.vcxproj'">
+    <TargetFrameworkMoniker>native,Version=v0.0</TargetFrameworkMoniker>
+    <NuGetTargetMoniker>native,Version=v0.0</NuGetTargetMoniker>
+    <TargetFrameworkMoniker Condition ="'$(DesignTimeBuild)' == 'true'">.NETCore,Version=v5.0</TargetFrameworkMoniker>
+    <NuGetTargetMoniker Condition ="'$(DesignTimeBuild)' == 'true'">.NETCore,Version=v5.0</NuGetTargetMoniker>
+    <RuntimeIdentifiers>win;win-x86;win-x64;win-arm;win-arm64;win10-x86;win10-x64;win10-arm;win10-arm64;win10-x86-aot;win10-x64-aot;win10-arm-aot;win10-arm64-aot</RuntimeIdentifiers>
+  </PropertyGroup>
+  <PropertyGroup Label="CppPackageReference" Condition="('$(MSBuildProjectExtension)' == '.vcxproj') Or('$(MSBuildProjectExtension)' == '.wapproj') Or ('$(MSBuildProjectExtension)' == '.csproj')">
+    <AssetTargetFallback>$(AssetTargetFallback);native;uap$(TargetPlatformVersion)</AssetTargetFallback>
+  </PropertyGroup>
+
 </Project>
