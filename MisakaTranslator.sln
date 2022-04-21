@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtificialTransHelperLibrar
 EndProject
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "MisakaPackage", "MisakaPackage\MisakaPackage.wapproj", "{0E03DE26-892B-4235-B86D-1F23D9E3BC48}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppEnvironmentLibrary", "AppEnvironmentLibrary\AppEnvironmentLibrary.csproj", "{BD2675CF-1F34-4742-B4F4-ED545225202D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -213,6 +215,18 @@ Global
 		{0E03DE26-892B-4235-B86D-1F23D9E3BC48}.Release|x86.ActiveCfg = Release|x86
 		{0E03DE26-892B-4235-B86D-1F23D9E3BC48}.Release|x86.Build.0 = Release|x86
 		{0E03DE26-892B-4235-B86D-1F23D9E3BC48}.Release|x86.Deploy.0 = Release|x86
+		{BD2675CF-1F34-4742-B4F4-ED545225202D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD2675CF-1F34-4742-B4F4-ED545225202D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD2675CF-1F34-4742-B4F4-ED545225202D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BD2675CF-1F34-4742-B4F4-ED545225202D}.Debug|x64.Build.0 = Debug|Any CPU
+		{BD2675CF-1F34-4742-B4F4-ED545225202D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BD2675CF-1F34-4742-B4F4-ED545225202D}.Debug|x86.Build.0 = Debug|Any CPU
+		{BD2675CF-1F34-4742-B4F4-ED545225202D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD2675CF-1F34-4742-B4F4-ED545225202D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD2675CF-1F34-4742-B4F4-ED545225202D}.Release|x64.ActiveCfg = Release|Any CPU
+		{BD2675CF-1F34-4742-B4F4-ED545225202D}.Release|x64.Build.0 = Release|Any CPU
+		{BD2675CF-1F34-4742-B4F4-ED545225202D}.Release|x86.ActiveCfg = Release|Any CPU
+		{BD2675CF-1F34-4742-B4F4-ED545225202D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
