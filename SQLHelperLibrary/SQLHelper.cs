@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AppEnvironmentLibrary;
 
 namespace SQLHelperLibrary
 {
@@ -38,7 +39,7 @@ namespace SQLHelperLibrary
         /// <summary>
         /// 专用于游戏库的初始化
         /// </summary>
-        public SQLHelper() : this($"{Environment.CurrentDirectory}\\MisakaGameLibrary.sqlite") { }
+        public SQLHelper() : this($"{AppEnvironment.LocalFolder}\\MisakaGameLibrary.sqlite") { }
 
 
         /// <summary>
@@ -104,7 +105,7 @@ namespace SQLHelperLibrary
                             return ret;
                         }
                     }
-                    
+
                 }
                 catch (SQLiteException e)
                 {
@@ -145,7 +146,7 @@ namespace SQLHelperLibrary
                             return ret;
                         }
                     }
-                    
+
                 }
                 catch (SQLiteException e)
                 {
@@ -153,7 +154,7 @@ namespace SQLHelperLibrary
                     return null;
                 }
             }
-            
+
         }
 
         /// <summary>

@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AppEnvironmentLibrary\AppEnvironmentLibrary.csproj" />
     <ProjectReference Include="..\SQLHelperLibrary\SQLHelperLibrary.csproj" />
   </ItemGroup>
 

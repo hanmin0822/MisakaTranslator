@@ -1,4 +1,5 @@
-﻿using SQLHelperLibrary;
+﻿using AppEnvironmentLibrary;
+using SQLHelperLibrary;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,12 +18,12 @@ namespace TransOptimizationLibrary
         public string PeopleChatName;//显示在结果中的对话人名 以 人名：对话 的形式展示
 
         public NounTransOptimization(string gameName,string srcL,string dstL) {
-            if (File.Exists(Environment.CurrentDirectory + "\\TransOptimization\\Misaka_" + gameName + ".sqlite") == false)
+            if (File.Exists(AppEnvironment.LocalFolder + "\\TransOptimization\\Misaka_" + gameName + ".sqlite") == false)
             {
                 CreateNewNounTransDB(gameName);
             }
             else {
-                sqlite = new SQLHelper(Environment.CurrentDirectory + "\\TransOptimization\\Misaka_" + gameName + ".sqlite");
+                sqlite = new SQLHelper(AppEnvironment.LocalFolder + "\\TransOptimization\\Misaka_" + gameName + ".sqlite");
             }
             srcLangCode = srcL;
             dstLangCode = dstL;
@@ -93,7 +94,7 @@ namespace TransOptimizationLibrary
                 return false;
             }
         }
-        
+
         /// <summary>
         /// (未实现)替换通过Mecab分词得到的名词
         /// </summary>
@@ -103,14 +104,14 @@ namespace TransOptimizationLibrary
             return text;
 
         }
-        
+
         /// <summary>
         /// 新建一个名词翻译数据库（一个游戏一个库）
         /// </summary>
         /// <param name="gameName"></param>
         private void CreateNewNounTransDB(string gameName) {
-            SQLHelper.CreateNewDatabase(Environment.CurrentDirectory + "\\TransOptimization\\Misaka_" + gameName + ".sqlite");
-            sqlite = new SQLHelper(Environment.CurrentDirectory + "\\TransOptimization\\Misaka_" + gameName + ".sqlite");
+            SQLHelper.CreateNewDatabase(AppEnvironment.LocalFolder + "\\TransOptimization\\Misaka_" + gameName + ".sqlite");
+            sqlite = new SQLHelper(AppEnvironment.LocalFolder + "\\TransOptimization\\Misaka_" + gameName + ".sqlite");
             sqlite.ExecuteSql("CREATE TABLE NounTransOpt(source TEXT PRIMARY KEY,src_lang TEXT,type INT,userTrans TEXT,dst_lang TEXT,machineTrans TEXT);");
         }
     }

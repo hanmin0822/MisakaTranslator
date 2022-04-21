@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AppEnvironmentLibrary;
 
 namespace TransOptimizationLibrary
 {
@@ -11,16 +12,16 @@ namespace TransOptimizationLibrary
     {
 
         NounTransOptimization nto;
-        
+
 
 
         public BeforeTransHandle(string gameName,string srcLang,string dstLang) {
-            if (!Directory.Exists(Environment.CurrentDirectory + "\\TransOptimization"))
-                Directory.CreateDirectory(Environment.CurrentDirectory + "\\TransOptimization");
+            if (!Directory.Exists(AppEnvironment.LocalFolder + "\\TransOptimization"))
+                Directory.CreateDirectory(AppEnvironment.LocalFolder + "\\TransOptimization");
 
             nto = new NounTransOptimization(gameName,srcLang,dstLang);
         }
-        
+
         /// <summary>
         /// 外部调用的共用方法，自动进行翻译前处理
         /// </summary>
@@ -33,7 +34,7 @@ namespace TransOptimizationLibrary
 
             //暂支持人名地名预处理
             return nto.ReplacePeoPleLocNameInSentence(text);
-            
+
         }
 
         /// <summary>

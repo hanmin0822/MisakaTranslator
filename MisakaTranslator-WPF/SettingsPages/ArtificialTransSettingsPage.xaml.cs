@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AppEnvironmentLibrary;
 
 namespace MisakaTranslator_WPF.SettingsPages
 {
@@ -30,8 +31,8 @@ namespace MisakaTranslator_WPF.SettingsPages
             ATonCheckBox.IsChecked = Common.appSettings.ATon;
             PathBox.Text = Common.appSettings.ArtificialPatchPath;
 
-            if (Directory.Exists(Environment.CurrentDirectory + "\\ArtificialTranslation")) {
-                strNames = Directory.GetFiles(Environment.CurrentDirectory + "\\ArtificialTranslation");
+            if (Directory.Exists(AppEnvironment.LocalFolder + "\\ArtificialTranslation")) {
+                strNames = Directory.GetFiles(AppEnvironment.LocalFolder + "\\ArtificialTranslation");
 
                 List<string> fileList = new List<string>();
 
@@ -48,7 +49,7 @@ namespace MisakaTranslator_WPF.SettingsPages
                 }
             }
 
-            
+
         }
 
         private void ChoosePathBtn_Click(object sender, RoutedEventArgs e)
@@ -95,14 +96,14 @@ namespace MisakaTranslator_WPF.SettingsPages
                 else {
                     HandyControl.Controls.Growl.Error(Application.Current.Resources["ArtificialTransSettingsPage_Export_Error"].ToString());
                 }
-                
+
             }
             else
             {
                 HandyControl.Controls.Growl.Error(Application.Current.Resources["ArtificialTransSettingsPage_Export_Error"].ToString());
             }
 
-            
+
         }
     }
 }

@@ -433,6 +433,10 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AppEnvironmentLibrary\AppEnvironmentLibrary.csproj">
+      <Project>{bd2675cf-1f34-4742-b4f4-ed545225202d}</Project>
+      <Name>AppEnvironmentLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ArtificialTransHelperLibrary\ArtificialTransHelperLibrary.csproj">
       <Project>{a6568552-a4d0-4546-ace5-d8a710ee7e0e}</Project>
       <Name>ArtificialTransHelperLibrary</Name>

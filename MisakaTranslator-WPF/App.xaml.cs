@@ -1,7 +1,7 @@
-﻿using System;
+﻿using AppEnvironmentLibrary;
+using System;
 using System.IO;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -12,6 +12,10 @@ namespace MisakaTranslator_WPF
     {
         public App()
         {
+            if (AppEnvironment.RunWithId)
+            {
+                Environment.CurrentDirectory = AppEnvironment.PackageFolder;
+            }
             //注册开始和退出事件
             this.Startup += App_Startup;
             this.Exit += App_Exit;
@@ -92,11 +96,11 @@ namespace MisakaTranslator_WPF
         /// <param name="errorMessage">错误消息</param>
         private static void PrintErrorMessageToFile(string fileName, Exception e, int exceptionThread, string errorMessage = null)
         {
-            if (!Directory.Exists($"{Environment.CurrentDirectory}\\logs"))
+            if (!Directory.Exists($"{AppEnvironment.TemporaryFolder}\\logs"))
             {
-                Directory.CreateDirectory($"{Environment.CurrentDirectory}\\logs");
+                Directory.CreateDirectory($"{AppEnvironment.TemporaryFolder}\\logs");
             }
-            FileStream fs = new FileStream($"{Environment.CurrentDirectory}\\logs\\{fileName}.txt", FileMode.Create);
+            FileStream fs = new FileStream($"{AppEnvironment.TemporaryFolder}\\logs\\{fileName}.txt", FileMode.Create);
 
             StreamWriter sw = new StreamWriter(fs);
 
