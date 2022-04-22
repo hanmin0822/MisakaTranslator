@@ -62,6 +62,9 @@
     <Content Include="..\MisakaTranslator-WPF\textRepairPlugins\*">
       <Link>textRepairPlugins\%(FileName)%(Extension)</Link>
     </Content>
+    <Content Include="ExternalDependence\**\*">
+      <Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </Content>
     <None Include="priconfig.packaging.xml" />
   </ItemGroup>
   <!--

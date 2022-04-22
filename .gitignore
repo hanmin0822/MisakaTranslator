@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Custom Ignorance
+Output/
+ExternalDependence/
+
 # User-specific files
 *.rsuser
 *.suo
@@ -17,7 +21,6 @@
 mono_crash.*
 
 # Build results
-[Oo]utput/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
