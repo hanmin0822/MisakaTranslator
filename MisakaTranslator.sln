@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLHelperLibrary", "SQLHelp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransOptimizationLibrary", "TransOptimizationLibrary\TransOptimizationLibrary.csproj", "{A17B385F-8E6E-4B7D-B3EF-EC08C7A8D115}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MisakaTranslator-WPF", "MisakaTranslator-WPF\MisakaTranslator-WPF.csproj", "{5F985830-49EF-4EF4-8A37-9AEE99E17AD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MisakaTranslator-WPF", "MisakaTranslator-WPF\MisakaTranslator-WPF.csproj", "{5F985830-49EF-4EF4-8A37-9AEE99E17AD4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DictionaryHelperLibrary", "DictionaryHelperLibrary\DictionaryHelperLibrary.csproj", "{EBE31ABB-EFB0-4A46-A8E0-655F614F88D9}"
 EndProject
@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtificialTransHelperLibrar
 EndProject
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "MisakaPackage", "MisakaPackage\MisakaPackage.wapproj", "{0E03DE26-892B-4235-B86D-1F23D9E3BC48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppEnvironmentLibrary", "AppEnvironmentLibrary\AppEnvironmentLibrary.csproj", "{BD2675CF-1F34-4742-B4F4-ED545225202D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppEnvironmentLibrary", "AppEnvironmentLibrary\AppEnvironmentLibrary.csproj", "{BD2675CF-1F34-4742-B4F4-ED545225202D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
