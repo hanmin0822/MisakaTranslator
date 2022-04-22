@@ -12,15 +12,6 @@
     <RootNamespace>$(MSBuildProjectName.Replace("-","_"))</RootNamespace>
   </PropertyGroup>
 
-  <!-- WPF Application项目中MSBuildProjectName不是项目名(实际为"项目名_随机字符串") 故需要使用AssemblyName统一输出目录 -->
-  <PropertyGroup Label="RedirectOutputPath">
-    <BaseOutputPath>$(GlobalProjectOutputPath)$(AssemblyName)-Bin-$(Configuration)-$(Platform)\</BaseOutputPath>
-    <BaseIntermediateOutputPath>$(GlobalProjectOutputPath)$(AssemblyName)-Obj-$(Configuration)-$(Platform)\</BaseIntermediateOutputPath>
-    <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
-    <MSBuildProjectExtensionsPath>$(GlobalProjectOutputPath)$(AssemblyName)-Obj-Extensions\</MSBuildProjectExtensionsPath>
-    <OutputPath>$(BaseOutputPath)</OutputPath>
-  </PropertyGroup>
-
   <ItemGroup>
     <Content Include="logo.ico" />
   </ItemGroup>
