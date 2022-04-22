@@ -10,10 +10,15 @@
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <StartupObject>MisakaTranslator_WPF.App</StartupObject>
     <RootNamespace>$(MSBuildProjectName.Replace("-","_"))</RootNamespace>
+    <DebugType Condition="'$(Configuration)'=='Release'">none</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="logo.ico" />
+    <Resource Include="GuidePages\Completation.png" />
+    <Resource Include="GuidePages\Completation_small.png" />
+    <Resource Include="logo.ico" />
+    <Resource Include="SettingsPages\Aboutv2.jpg" />
+    <Resource Include="SettingsPages\Aboutv2_small.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,5 +56,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <!-- WPF(.NET Framework) 在.NET SDK项目模板下 即使指定DebugType为none 不会自动清除pdb文件-->
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(DebugType)'=='none'">
+    <Exec Command="del /q $(TargetDir)\*.pdb" />
+  </Target>
 
 </Project>

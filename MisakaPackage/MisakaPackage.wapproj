@@ -63,6 +63,13 @@
       <Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
     </Content>
     <None Include="priconfig.packaging.xml" />
+    <!-- 由于SQLite设施问题，在.NET SDK Publish及Appx Packaging模式下SQLite.Interop.dll会被自动裁剪 -->
+    <Content Include="..\Output\MisakaTranslator-WPF-Bin-$(Configuration)-AnyCPU\x64\SQLite.Interop.dll">
+      <Link>x64\SQLite.Interop.dll</Link>
+    </Content>
+    <Content Include="..\Output\MisakaTranslator-WPF-Bin-$(Configuration)-AnyCPU\x86\SQLite.Interop.dll">
+      <Link>x86\SQLite.Interop.dll</Link>
+    </Content>
   </ItemGroup>
   <!--
     Put all output files to the AppX root folder.
