@@ -49,7 +49,7 @@
 * **其余二进制依赖需在构建完成后手动从已Release的包中复制lib文件夹**
 * Actions的artifact为nightly build，也不含lib
 * 如果想用Tesseract4，复制tessdata文件夹
-* 如果创建Appx/MSIX格式安装包，在需要复制lib、tessdata文件夹至MisakaPackage项目下的ExternalDependence文件夹，复制x86\SQLite.Interop.dll至ExternalDependence\x86文件夹（x64同理）
+* 如果创建Appx/MSIX格式安装包，需要复制lib、tessdata文件夹至MisakaPackage项目下的ExternalDependence文件夹
 
 ## 帮助开发者
 
