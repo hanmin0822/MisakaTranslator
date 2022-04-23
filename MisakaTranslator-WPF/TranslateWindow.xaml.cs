@@ -305,7 +305,15 @@ namespace MisakaTranslator_WPF
                 if (Common.appSettings.OCRsource == "BaiduFanyiOCR")
                     Application.Current.Dispatcher.Invoke(() => {FirstTransText.Text = srcText;});
                 else
+                {
+                    if (!Common.appSettings.EachRowTrans) // 不启用分行翻译
+                        if(Common.UsingSrcLang == "en")
+                            srcText = srcText.Replace("\n", " ").Replace("\r", " ");
+                        else
+                            srcText = srcText.Replace("\n", "").Replace("\r", "");
+
                     TranslateText(srcText, isRenew);
+                }
             }
             else if (!string.IsNullOrEmpty(Common.ocr.GetLastError()))
                 Growl.WarningGlobal(Common.appSettings.OCRsource + " Error: " + Common.ocr.GetLastError());
@@ -360,11 +368,12 @@ namespace MisakaTranslator_WPF
             //2.进行去重
             string repairedText = TextRepair.RepairFun_Auto(Common.UsingRepairFunc, source);
 
-            if (Convert.ToBoolean(Common.appSettings.EachRowTrans) == false)
-            {
-                //不需要分行翻译
-                repairedText = repairedText.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\t", "").Replace("\r", "");
-            }
+            if (!Common.appSettings.EachRowTrans) // 不启用分行翻译
+                if(Common.UsingSrcLang == "en")
+                    repairedText = repairedText.Replace("<br>", " ").Replace("</br>", " ").Replace("\n", " ").Replace("\r", " ").Replace("\t", " ");
+                else
+                    repairedText = repairedText.Replace("<br>", "").Replace("</br>", "").Replace("\n", "").Replace("\r", "").Replace("\t", "");
+
             //去乱码
             repairedText = repairedText.Replace("_", "").Replace("-", "").Replace("+", "").Replace("&", "");
             TranslateText(repairedText);

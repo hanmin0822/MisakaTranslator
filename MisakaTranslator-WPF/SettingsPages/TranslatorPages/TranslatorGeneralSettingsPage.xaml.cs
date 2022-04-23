@@ -33,7 +33,7 @@ namespace MisakaTranslator_WPF.SettingsPages
             FirstTransCombox.SelectedIndex = CommonFunction.GetTranslatorIndex(Common.appSettings.FirstTranslator);
             SecondTransCombox.SelectedIndex = CommonFunction.GetTranslatorIndex(Common.appSettings.SecondTranslator);
 
-            EachRowTransCheckBox.IsChecked = Convert.ToBoolean(Common.appSettings.EachRowTrans);
+            EachRowTransCheckBox.IsChecked = Common.appSettings.EachRowTrans;
 
             TransLimitBox.Value = Common.appSettings.TransLimitNums;
             // 给TransLimitBox添加Minimum后，初始化它时就会触发一次ValueChanged，导致Settings被设为1，因此只能从设置中读取数据后再添加事件处理函数
@@ -52,7 +52,7 @@ namespace MisakaTranslator_WPF.SettingsPages
 
         private void EachRowTransCheckBox_Click(object sender, RoutedEventArgs e)
         {
-            Common.appSettings.EachRowTrans = Convert.ToString(EachRowTransCheckBox.IsChecked);
+            Common.appSettings.EachRowTrans = EachRowTransCheckBox.IsChecked ?? false;
         }
 
         private void TransLimitBox_ValueChanged(object sender, HandyControl.Data.FunctionEventArgs<double> e)

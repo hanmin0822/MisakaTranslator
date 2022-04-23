@@ -136,6 +136,12 @@ namespace MisakaTranslator_WPF
                         break;
                 }
 
+                if (!Common.appSettings.EachRowTrans)
+                    if (srclang == "en")
+                        res = res.Replace("\n", " ").Replace("\r", " ");
+                    else
+                        res = res.Replace("\n", "").Replace("\r", "");
+
                 ITranslator translator1 = TranslateWindow.TranslatorAuto(Common.appSettings.FirstTranslator);
                 ITranslator translator2 = TranslateWindow.TranslatorAuto(Common.appSettings.SecondTranslator);
                 //5.提交翻译

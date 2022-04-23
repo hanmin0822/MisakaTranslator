@@ -142,8 +142,8 @@ namespace MisakaTranslator_WPF
             set;
         }
 
-        [Option(Alias = "Translate_All.EachRowTrans", DefaultValue = "True")]
-        string EachRowTrans
+        [Option(Alias = "Translate_All.EachRowTrans", DefaultValue = true)]
+        bool EachRowTrans
         {
             get;
             set;
