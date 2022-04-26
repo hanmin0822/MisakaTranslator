@@ -683,7 +683,6 @@ namespace MisakaTranslator_WPF
             }
 
             dtimer.Stop();
-            dtimer = null;
 
             _mecabHelper.Dispose();
         }
