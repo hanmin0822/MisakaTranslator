@@ -7,30 +7,30 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(MSBuildProjectExtension)' == '.vcxproj'">
-    <AppxPackageDir>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Bin-Publish\</AppxPackageDir>
-    <GeneratedFilesDir>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Obj-GeneratedFiles\</GeneratedFilesDir>
-    <IntDir>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Obj-$(Configuration)-$(Platform)\</IntDir>
-    <MSBuildProjectExtensionsPath>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Obj-Extensions\</MSBuildProjectExtensionsPath>
-    <OutDir>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Bin-$(Configuration)-$(Platform)\</OutDir>
+    <AppxPackageDir>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Bin\Publish\</AppxPackageDir>
+    <GeneratedFilesDir>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Obj\GeneratedFiles\</GeneratedFilesDir>
+    <IntDir>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Obj\$(Configuration)-$(Platform)\</IntDir>
+    <MSBuildProjectExtensionsPath>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Obj\Extensions\</MSBuildProjectExtensionsPath>
+    <OutDir>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Bin\$(Configuration)-$(Platform)\</OutDir>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(MSBuildProjectExtension)' == '.csproj'">
-    <AppxPackageDir>$(GlobalProjectOutputPath)$(MSBuildProjectName.Split("_")[0])-Bin-Publish\</AppxPackageDir>
-    <BaseOutputPath>$(GlobalProjectOutputPath)$(MSBuildProjectName.Split("_")[0])-Bin-$(Configuration)-$(Platform)\</BaseOutputPath>
-    <BaseIntermediateOutputPath>$(GlobalProjectOutputPath)$(MSBuildProjectName.Split("_")[0])-Obj-$(Configuration)-$(Platform)\</BaseIntermediateOutputPath>
+    <AppxPackageDir>$(GlobalProjectOutputPath)$(MSBuildProjectName.Split("_")[0])-Bin\Publish\</AppxPackageDir>
+    <BaseOutputPath>$(GlobalProjectOutputPath)$(MSBuildProjectName.Split("_")[0])-Bin\$(Configuration)-$(Platform)\</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(GlobalProjectOutputPath)$(MSBuildProjectName.Split("_")[0])-Obj\$(Configuration)-$(Platform)\</BaseIntermediateOutputPath>
     <IntDir>$(BaseIntermediateOutputPath)</IntDir>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
-    <MSBuildProjectExtensionsPath>$(GlobalProjectOutputPath)$(MSBuildProjectName.Split("_")[0])-Obj-Extensions\</MSBuildProjectExtensionsPath>
+    <MSBuildProjectExtensionsPath>$(GlobalProjectOutputPath)$(MSBuildProjectName.Split("_")[0])-Obj\Extensions\</MSBuildProjectExtensionsPath>
     <OutDir>$(BaseOutputPath)</OutDir>
     <OutputPath>$(BaseOutputPath)</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(MSBuildProjectExtension)' == '.wapproj'">
-    <AppxPackageDir>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Bin-Publish\</AppxPackageDir>
-    <BaseOutputPath>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Bin-$(Configuration)-$(Platform)\</BaseOutputPath>
-    <BaseIntermediateOutputPath>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Obj-$(Configuration)-$(Platform)\</BaseIntermediateOutputPath>
+    <AppxPackageDir>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Bin\Publish\</AppxPackageDir>
+    <BaseOutputPath>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Bin\$(Configuration)-$(Platform)\</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Obj\$(Configuration)-$(Platform)\</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
-    <MSBuildProjectExtensionsPath>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Obj-Extensions\</MSBuildProjectExtensionsPath>
+    <MSBuildProjectExtensionsPath>$(GlobalProjectOutputPath)$(MSBuildProjectName)-Obj\Extensions\</MSBuildProjectExtensionsPath>
     <OutputPath>$(BaseOutputPath)</OutputPath>
   </PropertyGroup>
 
@@ -48,7 +48,7 @@
     <NuGetTargetMoniker Condition ="'$(DesignTimeBuild)' == 'true'">.NETCore,Version=v5.0</NuGetTargetMoniker>
     <RuntimeIdentifiers>win;win-x86;win-x64;win-arm;win-arm64;win10-x86;win10-x64;win10-arm;win10-arm64;win10-x86-aot;win10-x64-aot;win10-arm-aot;win10-arm64-aot</RuntimeIdentifiers>
   </PropertyGroup>
-  <PropertyGroup Label="CppPackageReference" Condition="('$(MSBuildProjectExtension)' == '.vcxproj') Or('$(MSBuildProjectExtension)' == '.wapproj') Or ('$(MSBuildProjectExtension)' == '.csproj')">
+  <PropertyGroup Label="CppPackageReference" Condition="('$(MSBuildProjectExtension)' == '.vcxproj') Or ('$(MSBuildProjectExtension)' == '.wapproj') Or ('$(MSBuildProjectExtension)' == '.csproj')">
     <AssetTargetFallback>$(AssetTargetFallback);native;uap$(TargetPlatformVersion)</AssetTargetFallback>
   </PropertyGroup>
 
