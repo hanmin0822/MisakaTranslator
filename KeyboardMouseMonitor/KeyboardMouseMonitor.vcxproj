@@ -23,7 +23,6 @@
     <ProjectGuid>{259361ED-FE9C-4F15-864D-88587EE19BD9}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>KeyboardMouseMonitor</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -78,6 +77,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.SDK.CPP.x64">
+      <Version>10.0.22000.196</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Windows.SDK.CPP.x86">
+      <Version>10.0.22000.196</Version>
+    </PackageReference>
     <PackageReference Include="VC-LTL">
       <Version>5.0.4</Version>
     </PackageReference>
