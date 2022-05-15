@@ -77,6 +77,9 @@
       <Link>x86\%(FileName)%(Extension)</Link>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.197" />
+  </ItemGroup>
   <!--
     Put all output files to the AppX root folder.
     Reference: Microsoft/Terminal project and MouriNaruto's blog
