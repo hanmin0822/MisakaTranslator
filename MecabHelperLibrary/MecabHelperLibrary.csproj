@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="MeCab.DotNet" Version="0.0.40" />
   </ItemGroup>
