@@ -242,7 +242,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
 
         private void InputJpnBtn_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(AppEnvironment.TemporaryFolder + "\\lib\\BaiduJpnInput.exe");
+            Process.Start(AppEnvironment.PackageFolder + "\\lib\\BaiduJpnInput.exe");
             sourceTextBox.Focus();
         }
 
