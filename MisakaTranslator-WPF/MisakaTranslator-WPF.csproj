@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationManifest>App.manifest</ApplicationManifest>
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <RootNamespace>$(MSBuildProjectName.Replace("-","_"))</RootNamespace>
   </PropertyGroup>
