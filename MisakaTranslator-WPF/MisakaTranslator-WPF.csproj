@@ -38,7 +38,7 @@
   <ItemGroup>
     <PackageReference Include="Config.Net" Version="4.19.0" />
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
-    <PackageReference Include="HandyControl" Version="3.3.*" />
+    <PackageReference Include="HandyControl" Version="3.3.0" />
   </ItemGroup>
 
   <ItemGroup>

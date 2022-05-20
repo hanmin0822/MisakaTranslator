@@ -84,7 +84,7 @@
       <Version>10.0.22000.196</Version>
     </PackageReference>
     <PackageReference Include="VC-LTL">
-      <Version>5.0.4</Version>
+      <Version>5.0.5</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

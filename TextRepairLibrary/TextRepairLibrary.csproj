@@ -6,8 +6,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DynamicLanguageRuntime" Version="1.3.0" />
-    <PackageReference Include="IronPython" Version="2.7.11" />
+    <PackageReference Include="DynamicLanguageRuntime" Version="1.3.2" />
+    <PackageReference Include="IronPython" Version="2.7.12" />
   </ItemGroup>
 
 </Project>
