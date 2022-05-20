@@ -5,7 +5,7 @@
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationManifest>App.manifest</ApplicationManifest>
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <StartupObject>MisakaTranslator_WPF.App</StartupObject>
     <RootNamespace>$(MSBuildProjectName.Replace("-","_"))</RootNamespace>
