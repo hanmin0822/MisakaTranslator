@@ -1,4 +1,5 @@
-﻿using OCRLibrary;
+﻿using AppEnvironmentLibrary;
+using OCRLibrary;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -86,7 +87,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
-            ImageSave(ink, Environment.CurrentDirectory + "\\comicTemp.png");
+            ImageSave(ink, AppEnvironment.TemporaryFolder + "\\comicTemp.png");
             this.Close();
         }
 

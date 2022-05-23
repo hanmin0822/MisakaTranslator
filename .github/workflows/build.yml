@@ -13,4 +13,4 @@ jobs:
     - run: msbuild -v:m -r
     - uses: actions/upload-artifact@v2
       with:
-        path: MisakaTranslator-WPF/bin
+        path: Output\MisakaTranslator-WPF-Bin

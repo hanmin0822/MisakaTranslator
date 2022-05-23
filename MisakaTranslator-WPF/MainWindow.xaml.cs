@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
+using AppEnvironmentLibrary;
 using Config.Net;
 using HandyControl.Controls;
 using KeyboardMouseHookLibrary;
@@ -26,7 +27,7 @@ namespace MisakaTranslator_WPF {
             Instance = this;
             Common.mainWin = this;
 
-            var settings = new ConfigurationBuilder<IAppSettings>().UseIniFile("settings/settings.ini").Build();
+            var settings = new ConfigurationBuilder<IAppSettings>().UseIniFile($@"{AppEnvironment.LocalFolder}\settings\settings.ini").Build();
             InitializeLanguage();
             InitializeComponent();
             Initialize(settings);
@@ -34,11 +35,16 @@ namespace MisakaTranslator_WPF {
 
             //注册全局OCR热键
             this.SourceInitialized += new EventHandler(MainWindow_SourceInitialized);
+
+            if (AppEnvironment.RunWithId)
+            {
+                this.Title = $"{this.Title} - DesktopBridge Mode";
+            }
         }
 
         private static void InitializeLanguage() {
             var appResource = Application.Current.Resources.MergedDictionaries;
-            Common.appSettings = new ConfigurationBuilder<IAppSettings>().UseIniFile($"{Environment.CurrentDirectory}\\settings\\settings.ini").Build();
+            Common.appSettings = new ConfigurationBuilder<IAppSettings>().UseIniFile($"{AppEnvironment.LocalFolder}\\settings\\settings.ini").Build();
             foreach (var item in appResource) {
                 if (item.Source.ToString().Contains("lang") && item.Source.ToString() != $@"lang/{Common.appSettings.AppLanguage}.xaml") {
                     appResource.Remove(item);
@@ -55,7 +61,7 @@ namespace MisakaTranslator_WPF {
         private void Initialize(IAppSettings settings) {
             this.Resources["Foreground"] = (SolidColorBrush)(new BrushConverter().ConvertFrom(settings.ForegroundHex));
             gameInfoList = GameLibraryHelper.GetAllGameLibrary();
-            Common.repairSettings = new ConfigurationBuilder<IRepeatRepairSettings>().UseIniFile(Environment.CurrentDirectory + "\\settings\\RepairSettings.ini").Build();
+            Common.repairSettings = new ConfigurationBuilder<IRepeatRepairSettings>().UseIniFile(AppEnvironment.LocalFolder + "\\settings\\RepairSettings.ini").Build();
             GameLibraryPanel_Init();
             //先初始化这两个语言，用于全局OCR识别
             Common.UsingDstLang = "zh";
