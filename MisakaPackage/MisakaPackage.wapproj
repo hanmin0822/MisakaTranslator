@@ -69,13 +69,15 @@
     <Content Condition="('$(Platform)' == 'x64') And exists('..\Output\KeyboardMouseMonitor-Bin\$(Configuration)-x64\KeyboardMouseMonitor.exe')" Include="..\Output\KeyboardMouseMonitor-Bin\$(Configuration)-$(Platform)\KeyboardMouseMonitor.exe">
       <Link>lib\%(FileName)%(Extension)</Link>
     </Content>
-    <!-- 由于SQLite设施问题，在.NET SDK Publish及Appx Packaging模式下SQLite.Interop.dll会被自动裁剪 -->
+    <!-- 
+    由于System.Data.SQLite设施问题，在.NET SDK Publish及Appx Packaging模式下SQLite.Interop.dll会被自动裁剪
     <Content Include="..\Output\MisakaTranslator-WPF-Bin\$(Configuration)-AnyCPU\x64\SQLite.Interop.dll">
       <Link>x64\%(FileName)%(Extension)</Link>
     </Content>
     <Content Include="..\Output\MisakaTranslator-WPF-Bin\$(Configuration)-AnyCPU\x86\SQLite.Interop.dll">
       <Link>x86\%(FileName)%(Extension)</Link>
     </Content>
+    -->
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.197" />

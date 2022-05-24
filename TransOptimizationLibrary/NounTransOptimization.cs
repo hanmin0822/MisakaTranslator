@@ -110,7 +110,6 @@ namespace TransOptimizationLibrary
         /// </summary>
         /// <param name="gameName"></param>
         private void CreateNewNounTransDB(string gameName) {
-            SQLHelper.CreateNewDatabase(AppEnvironment.LocalFolder + "\\TransOptimization\\Misaka_" + gameName + ".sqlite");
             sqlite = new SQLHelper(AppEnvironment.LocalFolder + "\\TransOptimization\\Misaka_" + gameName + ".sqlite");
             sqlite.ExecuteSql("CREATE TABLE NounTransOpt(source TEXT PRIMARY KEY,src_lang TEXT,type INT,userTrans TEXT,dst_lang TEXT,machineTrans TEXT);");
         }

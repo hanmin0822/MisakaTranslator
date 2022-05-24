@@ -92,8 +92,7 @@ namespace ArtificialTransHelperLibrary
         /// <param name="gameName"></param>
         private void CreateNewNounTransDB(string gameName)
         {
-            SQLHelper.CreateNewDatabase(AppEnvironment.LocalFolder + "\\ArtificialTranslation\\MisakaAT_" + gameName + ".sqlite");
-            sqlite = new SQLHelper(AppEnvironment.LocalFolder + "\\ArtificialTranslation\\MisakaAT_" + gameName + ".sqlite");
+           sqlite = new SQLHelper(AppEnvironment.LocalFolder + "\\ArtificialTranslation\\MisakaAT_" + gameName + ".sqlite");
             sqlite.ExecuteSql("CREATE TABLE artificialtrans(id INTEGER PRIMARY KEY AUTOINCREMENT,source TEXT,machineTrans TEXT,userTrans TEXT);");
         }
 

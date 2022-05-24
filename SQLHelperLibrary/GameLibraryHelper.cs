@@ -84,7 +84,6 @@ namespace SQLHelperLibrary
         /// </summary>
         public static bool CreateNewGameList()
         {
-            SQLHelper.CreateNewDatabase(AppEnvironment.LocalFolder + "\\MisakaGameLibrary.sqlite");
             var sqlHelper = new SQLHelper();
             var id = sqlHelper.ExecuteSql("CREATE TABLE game_library(gameid INTEGER PRIMARY KEY AUTOINCREMENT,gamename TEXT,gamefilepath TEXT,transmode INTEGER,src_lang TEXT,dst_lang TEXT,repair_func TEXT,repair_param_a TEXT,repair_param_b TEXT,hookcode TEXT,isMultiHook TEXT,isx64 TEXT,hookcode_custom TEXT);");
             if (id == -1)

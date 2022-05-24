@@ -27,16 +27,6 @@ namespace SQLHelperLibrary
         /// </summary>
         public SQLHelper() : this($"{AppEnvironment.LocalFolder}\\MisakaGameLibrary.sqlite") { }
 
-
-        /// <summary>
-        /// 创建一个新的sqlite数据库，后缀名.sqlite
-        /// </summary>
-        /// <param name="Filepath">数据库路径</param>
-        public static void CreateNewDatabase(string Filepath)
-        {
-            // SQLiteConnection.CreateFile(Filepath); // SqliteConnection不存在此函数
-        }
-
         /// <summary>
         /// 执行一条非查询语句,失败会返回-1，可通过getLastError获取失败原因
         /// </summary>

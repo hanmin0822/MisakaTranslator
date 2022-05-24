@@ -10,4 +10,8 @@
     <PackageReference Include="SQLitePCLRaw.bundle_winsqlite3" Version="2.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AppEnvironmentLibrary\AppEnvironmentLibrary.csproj" />
+  </ItemGroup>
+
 </Project>
