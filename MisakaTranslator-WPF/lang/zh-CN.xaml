@@ -54,6 +54,7 @@
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Baidu">百度翻译API</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_TencentFYJ">腾讯翻译君</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_TencentOld">腾讯云</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_YoudaoZhiyun">有道智云</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Jbeijing">Jbeijing</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_KingsoftFAIT">金山快译</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Dreye">译典通</sys:String>
@@ -104,6 +105,10 @@
 
     <sys:String x:Key="YandexTransSettingsPage_Introduce">Yandex翻译需联网使用，服务器在国外网速较慢。翻译质量一般。注册需要验证信用卡。</sys:String>
     <sys:String x:Key="YandexTransSettingsPage_apiKey">Yandex API 密钥</sys:String>
+
+    <sys:String x:Key="YoudaoZhiyunTransSettingsPage_Introduce">有道智云翻译API支持多种语言互译，对日语、汉语的Galgame互译支持较好，需要联网使用；您需要先申请该API并创建一个密钥，获取appId和appSecret后填入下方相应位置并进行测试认证；如果认证出现错误，请根据错误码至有道智云翻译API官方文档获取解决办法；有道智云翻译API可能会产生某些费用，您可以使用额度查询按钮进入控制台确认。</sys:String>
+    <sys:String x:Key="YoudaoZhiyunTransSettingsPage_appId">有道智云API appId</sys:String>
+    <sys:String x:Key="YoudaoZhiyunTransSettingsPage_appSecret">有道智云API appSecret</sys:String>
 
     <sys:String x:Key="JbeijingTransSettingsPage_Introduce">JBeijing翻译API支持日语译汉语，不需要联网使用；您需要先下载Jbeijing翻译软件本体，在下方对应路径框中确认，保证文件夹下有JBJCT.dll文件；JBeijing翻译API翻译质量不如在线翻译，不过翻译速度比在线翻译快一些。</sys:String>
     <sys:String x:Key="JbeijingTransSettingsPage_Path">JBeijing翻译本体路径</sys:String>

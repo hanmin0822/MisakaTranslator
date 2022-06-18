@@ -72,6 +72,7 @@
     <Compile Include="YoudaoTranslator.cs" />
     <Compile Include="IBMTranslator.cs" />
     <Compile Include="YandexTranslator.cs" />
+    <Compile Include="YoudaoZhiyun.cs"   />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="MSScriptControl">

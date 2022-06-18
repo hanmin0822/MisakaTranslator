@@ -206,6 +206,9 @@
     <Compile Include="SettingsPages\TranslatorPages\TencentOldTransSettingsPage.xaml.cs">
       <DependentUpon>TencentOldTransSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SettingsPages\TranslatorPages\YoudaoZhiyunTransSettingsPage.xaml.cs">
+      <DependentUpon>YoudaoZhiyunTransSettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -412,6 +415,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SettingsPages\TranslatorPages\YoudaoZhiyunTransSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>  
     <Page Include="SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -61,6 +61,11 @@ namespace MisakaTranslator_WPF
             this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/TencentOldTransSettingsPage.xaml", UriKind.Relative));
         }
 
+        private void Item_YDZYTrans_Selected(object sender, RoutedEventArgs e)
+        {
+            this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/YoudaoZhiyunTransSettingsPage.xaml", UriKind.Relative));
+        }
+
         private void Item_Caiyun_Selected(object sender, RoutedEventArgs e)
         {
             this.SettingFrame.Navigate(new Uri("SettingsPages/TranslatorPages/CaiyunTransSettingsPage.xaml", UriKind.Relative));
