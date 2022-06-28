@@ -142,6 +142,20 @@ namespace MisakaTranslator_WPF
             set;
         }
 
+        [Option(Alias = "YoudaoZhiyun.YDZYAppId", DefaultValue = "")]
+        string YDZYAppId 
+        { 
+            get;
+            set; 
+        }
+
+        [Option(Alias = "YoudaoZhiyun.YDZYAppSecret", DefaultValue = "")]
+        string YDZYAppSecret 
+        { 
+            get; 
+            set; 
+        }
+
         [Option(Alias = "Translate_All.EachRowTrans", DefaultValue = true)]
         bool EachRowTrans
         {
