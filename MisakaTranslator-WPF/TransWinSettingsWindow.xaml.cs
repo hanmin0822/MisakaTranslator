@@ -95,10 +95,28 @@ namespace MisakaTranslator_WPF
                 Common.appSettings.TF_Opacity = OpacityBar.Value;
             };
 
+            DropShadowCheckBox.Click += delegate
+            {
+                Common.appSettings.TF_DropShadow = (bool)DropShadowCheckBox.IsChecked;
+            };
+
             KanaCheckBox.Click += delegate
             {
                 Common.appSettings.TF_isKanaShow = (bool)KanaCheckBox.IsChecked;
             };
+
+            HirakanaCheckBox.Click += delegate
+            {
+                Common.appSettings.TF_Hirakana = (bool)HirakanaCheckBox.IsChecked;
+            };
+
+            KanaBoldCheckBox.Click += delegate
+            {
+                Common.appSettings.TF_SuperBold = (bool)KanaBoldCheckBox.IsChecked;
+            };
+
+          
+
         }
 
         /// <summary>
@@ -134,7 +152,11 @@ namespace MisakaTranslator_WPF
             secondFontSize.Value = Common.appSettings.TF_secondTransTextSize;
 
             OpacityBar.Value = Common.appSettings.TF_Opacity;
+            DropShadowCheckBox.IsChecked = Common.appSettings.TF_DropShadow;
             KanaCheckBox.IsChecked = Common.appSettings.TF_isKanaShow;
+            HirakanaCheckBox.IsChecked = Common.appSettings.TF_Hirakana;
+            KanaBoldCheckBox.IsChecked = Common.appSettings.TF_SuperBold;
+
         }
 
         private void ChooseColorBtn_Click(object sender, RoutedEventArgs e)
