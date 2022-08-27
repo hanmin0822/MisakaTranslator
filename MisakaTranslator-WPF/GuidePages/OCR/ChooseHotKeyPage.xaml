@@ -28,7 +28,7 @@
 
             <hc:TextBox Name="OCRDelayBox" Text="1500" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15" Width="250" hc:InfoElement.TitleWidth="130" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource ChooseHotKeyPage_OCRDelayBox}"></hc:TextBox>
 
-            <Button Name="ConfirmBtn" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="30" Width="200" Content="{StaticResource ChooseHotKeyPage_ConfirmBtn}" Click="ConfirmBtn_Click"></Button>
+            <Button Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="30" Width="200" Content="{StaticResource ChooseHotKeyPage_ConfirmBtn}" Click="ConfirmBtn_Click"></Button>
 
             <hc:Drawer Name="WaitHotKeyDrawer" MaskCanClose="False" Margin="0,0,0,3.4">
                 <Border Background="White" Width="300" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource BorderBrush}">

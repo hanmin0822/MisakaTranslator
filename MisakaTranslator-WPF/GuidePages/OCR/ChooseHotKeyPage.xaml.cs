@@ -51,7 +51,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             HotKeyTag.Text = Application.Current.Resources["ChooseHotKeyPage_HotKeyTag"].ToString() + HotKey.KeyCode;
             hook.Stop();
             hook = null;
-            ConfirmBtn.Focus();//设置完后应该转移焦点
+            HotKeySourceCombox.Focus();//设置完后应该转移焦点
             WaitHotKeyDrawer.IsOpen = false;
         }
 
