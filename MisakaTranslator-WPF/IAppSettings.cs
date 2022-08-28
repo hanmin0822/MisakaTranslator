@@ -380,6 +380,24 @@ namespace MisakaTranslator_WPF
             set;
         }
 
+        [Option(Alias ="TranslateFromSetting.isDropShaow",DefaultValue = true)]
+        bool TF_DropShadow 
+        {   get;
+            set;
+        }
+        [Option(Alias = "TranslateFromSetting.isUseHiragana", DefaultValue = true)]
+        bool TF_Hirakana
+        {
+            get;
+            set;
+        }
+        [Option(Alias = "TranslateFromSetting.isSuperBold", DefaultValue = true)]
+        bool TF_SuperBold
+        {
+            get;
+            set;
+        }
+
         [Option(Alias = "ArtificialTrans.patchPath", DefaultValue = "")]
         string ArtificialPatchPath
         {
@@ -407,6 +425,7 @@ namespace MisakaTranslator_WPF
 
         [Option(DefaultValue = true)]
         bool GrowlEnabled { get; set; }
+        
     }
 
     public interface IRepeatRepairSettings
