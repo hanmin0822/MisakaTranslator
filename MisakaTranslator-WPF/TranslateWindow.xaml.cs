@@ -78,8 +78,11 @@ namespace MisakaTranslator_WPF
             IsOCRingFlag = false;
 
 
-
-            _mecabHelper = new MecabHelper();
+            _mecabHelper = new MecabHelper(Common.appSettings.Mecab_dicPath);
+            if (!_mecabHelper.EnableMecab && Common.appSettings.Mecab_dicPath != string.Empty)
+            {
+                Growl.InfoGlobal(Application.Current.Resources["TranslateWin_NoMeCab_Hint"].ToString());
+            }
 
             _textSpeechHelper = new TextSpeechHelper();
             if (Common.appSettings.ttsVoice == "")

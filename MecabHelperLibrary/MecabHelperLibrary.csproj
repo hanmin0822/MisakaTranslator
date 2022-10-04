@@ -1,5 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <MeCabUseDefaultDictionary>false</MeCabUseDefaultDictionary>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="MeCab.DotNet" Version="0.0.40" />
   </ItemGroup>

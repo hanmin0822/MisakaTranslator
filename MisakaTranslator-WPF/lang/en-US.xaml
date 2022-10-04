@@ -303,6 +303,11 @@
     <sys:String x:Key="XxgJpZhDictPage_BtnTest">Look up</sys:String>
     <sys:String x:Key="XxgJpZhDictPage_ChoosePathHint">Select the Shogakukan dictionary database file.</sys:String>
 
+    <sys:String x:Key="MecabDictPage_Introduce">Please download the dictionary's databases of MeCab, and fill in its location.</sys:String>
+    <sys:String x:Key="MecabDictPage_DBPath">Database folder path</sys:String>
+    <sys:String x:Key="MecabDictPage_ClearPath">Clear</sys:String>
+    <sys:String x:Key="TranslateWin_NoMeCab_Hint">Can't find MeCab Database，please set folder properly.</sys:String>
+
     <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_left">MisakaTranslator has detected that you have input custom H-code behavior. The last H-code recorded is</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_right">If you confirm that this H-code can get text, please select "Yes"; if it can't, select "No" to re-inject a custom H-code; if you do not need a custom H-code, please select "Cancel" to enter the next interface.</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_BtnCannotfindHook">Can not find correct Hook?</sys:String>
