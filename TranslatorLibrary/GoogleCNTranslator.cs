@@ -41,7 +41,7 @@ namespace TranslatorLibrary
 
             var tk = ExecuteScript(fun, GetTkkJS);
 
-            string googleTransUrl = "https://translate.google.cn/translate_a/single?client=gtx&dt=t&sl=" + srcLang + "&tl=" + desLang + "&tk=" + tk + "&q=" + HttpUtility.UrlEncode(sourceText);
+            string googleTransUrl = "https://translate.googleapis.com/translate_a/single?client=gtx&dt=t&sl=" + srcLang + "&tl=" + desLang + "&tk=" + tk + "&q=" + HttpUtility.UrlEncode(sourceText);
 
             var hc = CommonFunction.GetHttpClient();
 
