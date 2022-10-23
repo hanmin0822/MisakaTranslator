@@ -323,6 +323,7 @@
 	<sys:String x:Key="TransWinSettingsWin_HirakanaCbox">使用平假名注音</sys:String>
 
 	<sys:String x:Key="TransWinSettingsWin_KanaBoldCbox">将假名标注加粗</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_ColorfulCbox">开启源文本分词上色</sys:String>
 
 	<sys:String x:Key="MainWindow_AutoUpdateCheck">发现新版本！点击确认进入下载页面，点击取消忽略本次更新提示。</sys:String>
 

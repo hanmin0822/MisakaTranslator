@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -393,6 +394,12 @@ namespace MisakaTranslator_WPF
         }
         [Option(Alias = "TranslateFromSetting.isSuperBold", DefaultValue = true)]
         bool TF_SuperBold
+        {
+            get;
+            set;
+        }
+        [Option(Alias = "TranslateFromSetting.isColorful", DefaultValue = true)]
+        bool TF_Colorful
         {
             get;
             set;
