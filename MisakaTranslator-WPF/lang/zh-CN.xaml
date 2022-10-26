@@ -321,6 +321,7 @@
 	<sys:String x:Key="TransWinSettingsWin_DropShadowCbox">开启文字阴影</sys:String>
 
     <sys:String x:Key="TransWinSettingsWin_KanaCbox">开启日语原文假名标注</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_ColorfulCbox">开启源文本分词上色</sys:String>
 
 
 	<sys:String x:Key="TransWinSettingsWin_HirakanaCbox">使用平假名注音</sys:String>

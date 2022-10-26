@@ -115,6 +115,10 @@ namespace MisakaTranslator_WPF
                 Common.appSettings.TF_SuperBold = (bool)KanaBoldCheckBox.IsChecked;
             };
 
+            ColorfulCheckBox.Click += delegate
+            {
+                Common.appSettings.TF_Colorful = (bool)ColorfulCheckBox.IsChecked;
+            };
           
 
         }
@@ -156,7 +160,7 @@ namespace MisakaTranslator_WPF
             KanaCheckBox.IsChecked = Common.appSettings.TF_isKanaShow;
             HirakanaCheckBox.IsChecked = Common.appSettings.TF_Hirakana;
             KanaBoldCheckBox.IsChecked = Common.appSettings.TF_SuperBold;
-
+            ColorfulCheckBox.IsChecked = Common.appSettings.TF_Colorful;
         }
 
         private void ChooseColorBtn_Click(object sender, RoutedEventArgs e)
