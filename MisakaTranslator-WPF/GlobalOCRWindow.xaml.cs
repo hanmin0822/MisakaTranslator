@@ -142,6 +142,10 @@ namespace MisakaTranslator_WPF
                     else
                         res = res.Replace("\n", "").Replace("\r", "");
 
+                if (Common.appSettings.HttpProxy != "")
+                {
+                    CommonFunction.SetHttpProxiedClient(Common.appSettings.HttpProxy);
+                }
                 ITranslator translator1 = TranslateWindow.TranslatorAuto(Common.appSettings.FirstTranslator);
                 ITranslator translator2 = TranslateWindow.TranslatorAuto(Common.appSettings.SecondTranslator);
                 //5.提交翻译
