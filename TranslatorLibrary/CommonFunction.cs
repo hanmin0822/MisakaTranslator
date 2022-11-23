@@ -115,6 +115,18 @@ namespace TranslatorLibrary
                     }
             return HC;
         }
+        public static void SetHttpProxiedClient(string addr)
+        {
+            if (HC == null)
+            {
+                var px = new WebProxy() { Address = new Uri(addr), UseDefaultCredentials = true };
+                var ph = new HttpClientHandler() { Proxy = px };
+                HC = new HttpClient(handler: ph, disposeHandler: true) { Timeout = TimeSpan.FromSeconds(8) };
+                var headers = HC.DefaultRequestHeaders;
+                headers.UserAgent.ParseAdd("MisakaTranslator");
+                headers.Connection.ParseAdd("keep-alive");
+            }
+        }
 
         public static Random RD = new Random();
     }
