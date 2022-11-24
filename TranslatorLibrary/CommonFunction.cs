@@ -108,9 +108,7 @@ namespace TranslatorLibrary
                     if (HC == null)
                     {
                         HC = new HttpClient() { Timeout = TimeSpan.FromSeconds(8) };
-                        var headers = HC.DefaultRequestHeaders;
-                        headers.UserAgent.ParseAdd("MisakaTranslator");
-                        headers.Connection.ParseAdd("keep-alive");
+                        HC.DefaultRequestHeaders.UserAgent.ParseAdd("MisakaTranslator");
                         ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12; // For FX4.7
                     }
             return HC;
@@ -122,9 +120,7 @@ namespace TranslatorLibrary
                 var px = new WebProxy() { Address = new Uri(addr), UseDefaultCredentials = true };
                 var ph = new HttpClientHandler() { Proxy = px };
                 HC = new HttpClient(ph) { Timeout = TimeSpan.FromSeconds(8) };
-                var headers = HC.DefaultRequestHeaders;
-                headers.UserAgent.ParseAdd("MisakaTranslator");
-                headers.Connection.ParseAdd("keep-alive");
+                HC.DefaultRequestHeaders.UserAgent.ParseAdd("MisakaTranslator");
             }
         }
 
