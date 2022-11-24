@@ -66,8 +66,9 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
     </PackageReference>
-    <PackageReference Include="Tesseract">
-      <Version>3.3.0</Version>
+    <PackageReference Include="TesseractOCR">
+      <Version>5.2.14</Version>
+      <Aliases>Tesseract</Aliases>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
