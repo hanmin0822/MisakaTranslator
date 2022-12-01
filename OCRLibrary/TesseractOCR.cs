@@ -1,35 +1,36 @@
+extern alias Tesseract;
+using tesseract = Tesseract.TesseractOCR;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tesseract;
-using Tesseract.Pix;
 
 namespace OCRLibrary
 {
     public class TesseractOCR : OCREngine
     {
         private string srcLangCode;  //OCR识别语言 jpn=日语 eng=英语
-        private Engine engine;
+        private tesseract.Engine engine;
 
-        public override async Task<string> OCRProcessAsync(Bitmap img)
+        public override Task<string> OCRProcessAsync(Bitmap img)
         {
             try
             {
                 var stream = new MemoryStream();
-                img.Save(stream, Imaging.ImageFormat.Bmp);
-                var pix = Image.LoadFromMemory(stream.GetBuffer(), 0, Convert.ToInt32(stream.Length));
+                img.Save(stream, ImageFormat.Bmp);
+                var pix = tesseract.Pix.Image.LoadFromMemory(stream.GetBuffer(), 0, Convert.ToInt32(stream.Length));
                 var recog = engine.Process(pix);
                 stream.Dispose();
-                return Task.FromResult(recog.Text).Result;
+                return Task.FromResult(recog.Text);
             }
             catch (Exception ex)
             {
                 errorInfo = ex.Message;
-                return Task.FromResult(string.Empty).Result;
+                return Task.FromResult(string.Empty);
             }
         }
 
@@ -37,7 +38,7 @@ namespace OCRLibrary
         {
             try
             {
-                engine = new Engine(Environment.CurrentDirectory + "\\tessdata", srcLangCode);
+                engine = new tesseract.Engine(Environment.CurrentDirectory + "\\tessdata", srcLangCode);
                 return true;
             }
             catch(Exception ex)

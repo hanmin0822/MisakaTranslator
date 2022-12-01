@@ -1,4 +1,5 @@
-﻿using HandyControl.Controls;
+extern alias Tesseract;
+using HandyControl.Controls;
 using OCRLibrary;
 using System;
 using System.Collections.Generic;
