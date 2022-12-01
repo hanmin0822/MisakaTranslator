@@ -78,6 +78,7 @@
     <sys:String x:Key="GeneralTransSettingsPage_Introduce">The translator window simultaneously displays two sources at most. You can set the APIs in use and toggle the sentence-break setting from below.</sys:String>
     <sys:String x:Key="GeneralTransSettingsPage_FirstTranslator">No.1 translation source</sys:String>
     <sys:String x:Key="GeneralTransSettingsPage_SecondTranslator">No.2 translation source</sys:String>
+    <sys:String x:Key="GeneralTransSettingsPage_HttpProxy">HTTP Proxy Address (leaves null if unused)</sys:String>
     <sys:String x:Key="GeneralTransSettingsPage_EachRowTransCheckBox">Enable sentence-break</sys:String>
     <sys:String x:Key="GeneralTransSettingsPage_TransSourceHint">Note: Translation takes longer if you use multiple online APIs at the same time.</sys:String>
     <sys:String x:Key="GeneralTransSettingsPage_EachRowTransHint">When disabled, the Translator combines all texts into one sentence. This improves translation quality for some games.</sys:String>

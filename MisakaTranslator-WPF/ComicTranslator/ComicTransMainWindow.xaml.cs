@@ -60,6 +60,10 @@ namespace MisakaTranslator_WPF.ComicTranslator
             ComicImgList = new List<string>();
             CurrentPos = 0;
 
+            if (Common.appSettings.HttpProxy != "")
+            {
+                CommonFunction.SetHttpProxiedClient(Common.appSettings.HttpProxy);
+            }
             transRes1 = "";
             transRes2 = "";
             _translator1 = TranslateWindow.TranslatorAuto(Common.appSettings.FirstTranslator);

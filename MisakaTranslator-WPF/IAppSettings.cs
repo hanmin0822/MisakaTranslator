@@ -156,6 +156,13 @@ namespace MisakaTranslator_WPF
             set; 
         }
 
+        [Option(Alias = "Translate_All.HttpProxy", DefaultValue = "")]
+        string HttpProxy
+        {
+            get;
+            set;
+        }
+
         [Option(Alias = "Translate_All.EachRowTrans", DefaultValue = true)]
         bool EachRowTrans
         {
