@@ -77,6 +77,7 @@
     <sys:String x:Key="GeneralTransSettingsPage_Introduce">在这里进行所有翻译选项的通用设置，一个实时翻译窗口最多支持两个不同来源的翻译;您可以指定翻译过程中用到的API及显示顺序和是否使用分行翻译;更多关于翻译文本个性化的选项在实时翻译窗口中进行设置;公共接口有额度限制无法频繁使用。</sys:String>
     <sys:String x:Key="GeneralTransSettingsPage_FirstTranslator">第一翻译源</sys:String>
     <sys:String x:Key="GeneralTransSettingsPage_SecondTranslator">第二翻译源</sys:String>
+    <sys:String x:Key="GeneralTransSettingsPage_HttpProxy">HTTP 代理地址（留空时不使用）</sys:String>
     <sys:String x:Key="GeneralTransSettingsPage_EachRowTransCheckBox">使用分行翻译</sys:String>
     <sys:String x:Key="GeneralTransSettingsPage_TransSourceHint">注意：如果同时使用多个在线API，可能会影响效率</sys:String>
     <sys:String x:Key="GeneralTransSettingsPage_EachRowTransHint">不使用分行翻译时，软件会将读取到的文本合并成一句话翻译，对于部分游戏可以提高翻译质量。</sys:String>
