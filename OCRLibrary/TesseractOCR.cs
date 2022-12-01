@@ -25,12 +25,12 @@ namespace OCRLibrary
                 var pix = tesseract.Pix.Image.LoadFromMemory(stream.GetBuffer(), 0, Convert.ToInt32(stream.Length));
                 var recog = engine.Process(pix);
                 stream.Dispose();
-                return Task.FromResult(recog.Text);
+                return recog.Text;
             }
             catch (Exception ex)
             {
                 errorInfo = ex.Message;
-                return Task.FromResult(string.Empty);
+                return null;
             }
         }
 
