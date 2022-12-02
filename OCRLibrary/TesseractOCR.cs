@@ -51,14 +51,7 @@ namespace OCRLibrary
 
         public override void SetOCRSourceLang(string lang)
         {
-            if (lang == "jpn")
-            {
-                srcLangCode = "jpn";
-            }
-            else if (lang == "eng")
-            {
-                srcLangCode = "eng";
-            }
+            srcLangCode = lang;
         }
     }
 }
