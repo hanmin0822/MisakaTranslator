@@ -22,7 +22,8 @@ namespace OCRLibrary
             {
                 var stream = new MemoryStream();
                 img.Save(stream, ImageFormat.Bmp);
-                var pix = tesseract.Pix.Image.LoadFromMemory(stream.GetBuffer(), 0, Convert.ToInt32(stream.Length));
+                var pix = tesseract.Pix.Image.LoadFromMemory(stream));
+
                 var recog = engine.Process(pix);
                 stream.Dispose();
                 return Task.FromResult(recog.Text);
