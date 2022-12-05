@@ -53,6 +53,9 @@ namespace MisakaTranslator_WPF
         public volatile bool IsOCRingFlag; //线程锁:判断是否正在OCR线程中，保证同时只有一组在跑OCR
         public bool IsNotPausedFlag; //是否处在暂停状态（专用于OCR）,为真可以翻译
 
+        private static Timer ocrTimer;  // ocr timing-task
+        private volatile bool ocrTimerPause;  // ocr timing-task pause flag
+
         private bool _isShowSource; //是否显示原文
         private bool _isLocked;
 
@@ -267,6 +270,22 @@ namespace MisakaTranslator_WPF
                     return at;
                 default:
                     return null;
+            }
+        }
+
+        /// <summary>
+        /// 定时事件
+        /// </summary>
+        private void Hook_OnTimingActivity()
+        {
+            ocrTimerPause = false;
+            ocrTimer = new Timer(registerTimingOCR, null, 0, Common.UsingOCRDelay);
+        }
+        private void registerTimingOCR(object obj)
+        {
+            if (!ocrTimerPause)
+            {
+                TranslateEventOcr(isTimer: true);
             }
         }
 
@@ -714,6 +733,7 @@ namespace MisakaTranslator_WPF
                 {
                     PauseButton.SetValue(FontAwesome.WPF.Awesome.ContentProperty, FontAwesomeIcon.Play);
                 }
+                ocrTimerPause = !ocrTimerPause;
                 Common.textHooker.Pause = !Common.textHooker.Pause;
             }
             else
@@ -751,6 +771,11 @@ namespace MisakaTranslator_WPF
             Common.appSettings.TF_SizeW = Convert.ToString((int)this.ActualWidth);
             Common.appSettings.TF_SizeH = Convert.ToString((int)this.ActualHeight);
 
+            if (ocrTimer != null)
+            {
+                ocrTimerPause = true;
+                ocrTimer.Dispose();
+            }
             if (hook != null)
             {
                 hook.Stop();
