@@ -296,7 +296,7 @@ namespace MisakaTranslator_WPF
         /// OCR事件
         /// </summary>
         /// <param name="isRenew">是否是重新获取翻译</param>
-        private async void TranslateEventOcr(bool isRenew = false)
+        private async void TranslateEventOcr(bool isRenew = false, bool isTimer = false)
         {
             if (!IsNotPausedFlag && IsOCRingFlag)
                 return;
@@ -307,7 +307,7 @@ namespace MisakaTranslator_WPF
             for (int i = 0; i < 3; i++)
             {
                 // 重新OCR不需要等待
-                if (!isRenew)
+                if (!isRenew || isTimer)
                     await Task.Delay(Common.UsingOCRDelay);
 
                 srcText = await Common.ocr.OCRProcessAsync();
