@@ -27,7 +27,7 @@ namespace MisakaTranslator_WPF.SettingsPages
 
         private void BtnHelp_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://misaka.galeden.cn/");
+            System.Diagnostics.Process.Start("https://github.com/hanmin0822/MisakaTranslator/issues");
         }
 
         private void BtnGithub_Click(object sender, RoutedEventArgs e)
