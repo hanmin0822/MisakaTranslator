@@ -506,7 +506,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Config.Net">
-      <Version>4.19.0</Version>
+      <Version>5.1.*</Version>
     </PackageReference>
     <PackageReference Include="FontAwesome.WPF">
       <Version>4.7.0.9</Version>
