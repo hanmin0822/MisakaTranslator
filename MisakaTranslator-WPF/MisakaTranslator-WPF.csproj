@@ -418,7 +418,7 @@
     <Page Include="SettingsPages\TranslatorPages\YoudaoZhiyunTransSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>  
+    </Page>
     <Page Include="SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -512,7 +512,7 @@
       <Version>4.7.0.9</Version>
     </PackageReference>
     <PackageReference Include="HandyControl">
-      <Version>3.3.*</Version>
+      <Version>3.4.*</Version>
     </PackageReference>
     <PackageReference Include="System.Data.SQLite">
       <Version>1.0.115</Version>

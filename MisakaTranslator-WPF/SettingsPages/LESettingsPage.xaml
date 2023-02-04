@@ -13,7 +13,7 @@
         <StackPanel Background="White">
             <TextBlock Text="{StaticResource LESettingsPage_Introduce}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
 
-            <hc:TextBox Margin="10" hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource LESettingsPage_LEbox}" Name="PathBox" ShowClearButton="True"/>
+            <hc:TextBox Margin="10" hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource LESettingsPage_LEbox}" Name="PathBox" hc:InfoElement.ShowClearButton="True"/>
             <Button Margin="10" Content="{StaticResource JbeijingTransSettingsPage_ChoosePath}" Width="122" Click="ChoosePathBtn_Click" HorizontalAlignment="Right" ></Button>
 
         </StackPanel>

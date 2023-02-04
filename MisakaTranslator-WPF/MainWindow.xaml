@@ -37,7 +37,7 @@
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
 
-        <hc:ScrollViewer Grid.Row="0" Grid.Column="1"  Margin="10,10,10,10.5" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" Orientation="Horizontal" Grid.ColumnSpan="2">
+        <hc:ScrollViewer Grid.Row="0" Grid.Column="1"  Margin="10,10,10,10.5" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" hc:ScrollViewerAttach.Orientation="Horizontal" Grid.ColumnSpan="2">
             <hc:WaterfallPanel Name="GameLibraryPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Height="250" Groups="2" Orientation="Vertical" hc:PanelElement.FluidMoveBehavior="{StaticResource BehaviorXY200}">
 
             </hc:WaterfallPanel>

@@ -27,7 +27,7 @@
                     </StackPanel>
 
                     <hc:Divider/>
-                    <hc:TextBox Margin="10" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource TTSSettingsPage_TestText}" Name="TestSrcText" ShowClearButton="True" Text="本ソフトウェアのご利用を歓迎します。"/>
+                    <hc:TextBox Margin="10" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource TTSSettingsPage_TestText}" Name="TestSrcText" hc:InfoElement.ShowClearButton="True" Text="本ソフトウェアのご利用を歓迎します。"/>
                     <Button Content="{StaticResource TTSSettingsPage_TestBtn}" Margin="10,0,10,10" Width="122" Click="TestBtn_Click" HorizontalAlignment="Right" ></Button>
                 </StackPanel>
             </StackPanel>

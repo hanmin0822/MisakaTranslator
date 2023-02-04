@@ -19,7 +19,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource TessactOCR5SettingsPage_Path}" Name="PathBox" ShowClearButton="True" Height="30" VerticalAlignment="Top" TextChanged="PathBox_TextChanged"/>
+                        <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource TessactOCR5SettingsPage_Path}" Name="PathBox" hc:InfoElement.ShowClearButton="True" Height="30" VerticalAlignment="Top" TextChanged="PathBox_TextChanged"/>
                         <Button Grid.Column="1" Content="{StaticResource TessactOCR5SettingsPage_Select}" Width="122" Margin="10,0,-0.8,0.4" VerticalAlignment="Stretch" Height="Auto" Click="Button_Click"/>
                     </Grid>
                     <Grid Margin="0,10,0,0">
@@ -28,7 +28,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <hc:ComboBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource TessactOCR5SettingsPage_Setting}" Name="SelectBox" ShowClearButton="True" SelectionChanged="SelectBox_SelectionChanged"/>
+                        <hc:ComboBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource TessactOCR5SettingsPage_Setting}" Name="SelectBox" hc:InfoElement.ShowClearButton="True" SelectionChanged="SelectBox_SelectionChanged"/>
 
                     </Grid>
                     <Grid Margin="0,10,0,0">
@@ -37,7 +37,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource TessactOCR5SettingsPage_Args}" Name="ArgsBox" ShowClearButton="True" TextChanged="ArgsBox_TextChanged"/>
+                        <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource TessactOCR5SettingsPage_Args}" Name="ArgsBox" hc:InfoElement.ShowClearButton="True" TextChanged="ArgsBox_TextChanged"/>
 
                     </Grid>
                 </StackPanel>

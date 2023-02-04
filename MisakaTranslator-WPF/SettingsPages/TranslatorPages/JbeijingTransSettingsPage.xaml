@@ -14,10 +14,10 @@
             <StackPanel Background="White">
                 <TextBlock Text="{StaticResource JbeijingTransSettingsPage_Introduce}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
                 <StackPanel Margin="20,20,20,0">
-                    <hc:TextBox hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource JbeijingTransSettingsPage_Path}" Name="PathBox" ShowClearButton="True"/>
+                    <hc:TextBox hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource JbeijingTransSettingsPage_Path}" Name="PathBox" hc:InfoElement.ShowClearButton="True"/>
                     <Button Margin="0,10,0,0" Content="{StaticResource JbeijingTransSettingsPage_ChoosePath}" Width="122" Click="ChoosePathBtn_Click" HorizontalAlignment="Right" ></Button>
                     <hc:Divider/>
-                    <hc:TextBox hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource API_testSrcText}" Name="TestSrcText" ShowClearButton="True" Text="本ソフトウェアのご利用を歓迎します。"/>
+                    <hc:TextBox hc:InfoElement.TitlePlacement="Top" hc:InfoElement.Title="{StaticResource API_testSrcText}" Name="TestSrcText" hc:InfoElement.ShowClearButton="True" Text="本ソフトウェアのご利用を歓迎します。"/>
                     <Button Margin="0,10,0,0" Grid.Column="1" Content="{StaticResource API_testTransBtn}" Width="122" Click="TransTestBtn_Click" HorizontalAlignment="Right" ></Button>
                 </StackPanel>
             </StackPanel>
