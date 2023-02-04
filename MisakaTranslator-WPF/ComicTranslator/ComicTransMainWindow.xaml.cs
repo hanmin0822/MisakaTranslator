@@ -202,7 +202,17 @@ namespace MisakaTranslator_WPF.ComicTranslator
         /// </summary>
         /// <param name="path"></param>
         private void ShowPictrue(string path) {
-            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(path);
+            System.Drawing.Bitmap bitmap;
+            try
+            {
+                bitmap = new System.Drawing.Bitmap(path);
+            }
+            catch(ArgumentException)
+            {
+                HandyControl.Controls.Growl.Warning("Failed to open " + path);
+                return;
+            }
+
             System.IO.MemoryStream stream = new System.IO.MemoryStream();
             bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
             ImageBrush imageBrush = new ImageBrush();
