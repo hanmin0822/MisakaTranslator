@@ -43,16 +43,9 @@ namespace TranslatorLibrary
 
                 string ResultText = "";
 
-                if (TempResult != null)
+                for (int i = 0; i < TempResult[0].GetArrayLength(); i++)
                 {
-
-                    for (int i = 0; i < TempResult[0].Count; i++)
-                    {
-                        if (TempResult[0][i] != null)
-                        {
-                            ResultText += TempResult[0][i][0];
-                        }
-                    }
+                    ResultText += TempResult[0][i][0];
                 }
 
                 return ResultText;
