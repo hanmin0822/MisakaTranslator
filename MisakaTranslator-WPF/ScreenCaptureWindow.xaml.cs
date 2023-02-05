@@ -68,7 +68,7 @@ namespace MisakaTranslator_WPF
             {
                 e.Handled = true;
                 Capture();
-                this.Close();
+                Dispatcher.Invoke(async () => { await System.Threading.Tasks.Task.Delay(100); Close(); }); // 等待一毫秒再关闭否则右键会被下层窗口接收到
             }
         }
 
