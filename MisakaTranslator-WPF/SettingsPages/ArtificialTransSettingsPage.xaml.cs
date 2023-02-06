@@ -59,7 +59,7 @@ namespace MisakaTranslator_WPF.SettingsPages
                 InitialDirectory = @"D:\"
             };
 
-            if (dialog.ShowDialog().GetValueOrDefault())
+            if (dialog.ShowDialog() == true)
             {
                 PathBox.Text = dialog.FileName;
                 Common.appSettings.ArtificialPatchPath = PathBox.Text;

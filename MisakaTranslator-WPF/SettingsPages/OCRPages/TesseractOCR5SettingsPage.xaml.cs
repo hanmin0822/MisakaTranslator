@@ -46,9 +46,9 @@ namespace MisakaTranslator_WPF.SettingsPages.OCRPages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
             dialog.Filter = "可执行文件|*.exe";
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (dialog.ShowDialog() == true)
             {
                 if (string.IsNullOrEmpty(dialog.FileName))
                 {

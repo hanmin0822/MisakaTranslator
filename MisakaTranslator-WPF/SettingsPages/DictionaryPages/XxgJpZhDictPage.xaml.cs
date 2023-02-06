@@ -30,13 +30,13 @@ namespace MisakaTranslator_WPF.SettingsPages.DictionaryPages
         private void ChoosePathBtn_Click(object sender, RoutedEventArgs e)
         {
 
-            System.Windows.Forms.OpenFileDialog dialog = new System.Windows.Forms.OpenFileDialog
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog
             {
                 Multiselect = false,
                 Title = Application.Current.Resources["XxgJpZhDictPage_ChoosePathHint"].ToString(),
                 Filter = "所有文件(*.*)|*.*"
             };
-            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (dialog.ShowDialog() == true)
             {
                 if (string.IsNullOrEmpty(dialog.FileName))
                 {
