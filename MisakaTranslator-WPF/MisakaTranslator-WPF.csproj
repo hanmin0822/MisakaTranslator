@@ -514,9 +514,6 @@
     <PackageReference Include="HandyControl">
       <Version>3.4.*</Version>
     </PackageReference>
-    <PackageReference Include="System.Data.SQLite">
-      <Version>1.0.115</Version>
-    </PackageReference>
     <PackageReference Include="TesseractOCR">
       <Version>5.2.14</Version>
       <Aliases>Tesseract</Aliases>

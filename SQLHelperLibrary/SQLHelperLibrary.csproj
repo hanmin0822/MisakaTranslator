@@ -50,10 +50,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="System.Data.SQLite">
+    <PackageReference Include="System.Data.SQLite.Core">
       <Version>1.0.115</Version>
     </PackageReference>
   </ItemGroup>
