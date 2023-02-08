@@ -348,7 +348,7 @@ namespace MisakaTranslator_WPF {
         }
 
         public void CloseNotifyIcon() {
-            Instance.NotifyIconContextContent.Visibility = Visibility.Collapsed;
+            Application.Current.Dispatcher.Invoke(() => NotifyIconContextContent.Dispose());
         }
 
         private void ButtonPush_OnClick(object sender, RoutedEventArgs e) => NotifyIconContextContent.CloseContextControl();
