@@ -207,21 +207,9 @@ namespace MisakaTranslator_WPF {
         private async Task StartTranslateByGid(int gid) {
             var pidList = new List<Process>();
 
-            foreach (var p in Process.GetProcesses())
-            {
-                try
-                {
-                    if (p.MainModule.FileName == gameInfoList[gid].FilePath)
-                        pidList.Add(p);
-                    else
-                        p.Dispose();
-                }
-                catch (System.ComponentModel.Win32Exception)
-                {
-                    //这个地方直接跳过，是因为32位程序确实会读到64位的系统进程，而系统进程是不能被访问的
-                    p.Dispose();
-                }
-            }
+            foreach (var (pid, path) in ProcessHelper.GetProcessesData(gameInfoList[gid].Isx64))
+                if (path == gameInfoList[gid].FilePath)
+                    pidList.Add(Process.GetProcessById(pid));
 
             if (pidList.Count == 0) {
                 HandyControl.Controls.MessageBox.Show(Application.Current.Resources["MainWindow_StartError_Hint"].ToString(), Application.Current.Resources["MessageBox_Hint"].ToString());
@@ -393,24 +381,11 @@ namespace MisakaTranslator_WPF {
             if (gameInfoList == null)
                 return -1;
 
-            foreach (var process in Process.GetProcesses()) {
+            foreach (var (_, path) in ProcessHelper.GetProcessesData(true))
                 for (int j = 0; j < gameInfoList.Count; j++) {
-                    try
-                    {
-                        if (process.MainModule.FileName == gameInfoList[j].FilePath)
-                            return j;
-                    }
-                    catch (Win32Exception)
-                    {
-                        continue;
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        continue;
-                    }
+                    if (path == gameInfoList[j].FilePath)
+                        return j;
                 }
-                process.Dispose();
-            }
 
             return -1;
         }

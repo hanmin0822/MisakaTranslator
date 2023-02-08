@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 
 namespace TextHookLibrary
 {
-    public class ProcessHelper
+    public static class ProcessHelper
     {
+        const string ExtPath = "lib\\ProcessHelperExt.exe";
 
         /// <summary>
         /// 获得当前系统进程列表 形式：直接用于显示的字串和进程PID
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<string,int> GetProcessList_Name_PID()
+        public static Dictionary<string, int> GetProcessList_Name_PID()
         {
             Dictionary<string, int> ret = new Dictionary<string, int>();
-            
+
             //获取系统进程列表
             foreach (Process p in Process.GetProcesses())
             {
@@ -42,11 +43,8 @@ namespace TextHookLibrary
             string DesProcessName = Process.GetProcessById(pid).ProcessName;
 
             List<Process> res = new List<Process>();
-            foreach (Process p in Process.GetProcesses())
-                if (p.ProcessName == DesProcessName)
-                    res.Add(p);
-                else
-                    p.Dispose();
+            foreach (Process p in Process.GetProcessesByName(DesProcessName))
+                res.Add(p);
             return res;
         }
 
@@ -55,18 +53,67 @@ namespace TextHookLibrary
         /// </summary>
         /// <param name="pid"></param>
         /// <returns></returns>
-        public static string FindProcessPath(int pid)
+        public static string FindProcessPath(int pid, bool isx64game = false)
         {
             try
             {
                 Process p = Process.GetProcessById(pid);
                 return p.MainModule.FileName;
             }
-            catch (System.ComponentModel.Win32Exception)
+            catch (System.ComponentModel.Win32Exception e)
             {
-                return "";
+                if (!(isx64game && e.NativeErrorCode == 299 && System.IO.File.Exists(ExtPath)))
+                    return "";
+
+                // Win32Exception:“A 32 bit processes cannot access modules of a 64 bit process.”
+                // 通过调用外部64位程序，使主程序在32位下获取其它64位程序的路径。外部程序不存在或不是此错误时保持原有逻辑返回""
+                var p = Process.Start(new ProcessStartInfo(ExtPath, pid.ToString())
+                {
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true
+                });
+                string path = p.StandardOutput.ReadToEnd().TrimEnd();
+                if (p.ExitCode == 3) // 不存在此pid对应的进程
+                    return "";
+                else if (p.ExitCode != 0)
+                    throw new InvalidOperationException("Failed to execute ProcessHelper.exe");
+                return path;
             }
         }
 
+        /// <summary>
+        /// 返回 pid,绝对路径 的列表
+        /// </summary>
+        public static List<(int, string)> GetProcessesData(bool isx64game = false)
+        {
+            var l = new List<(int, string)>();
+            // 在32位主程序、64位游戏（或想获取全部进程）、存在外部程序时调用
+            if (isx64game && !Environment.Is64BitProcess && System.IO.File.Exists(ExtPath))
+            {
+                var p = Process.Start(new ProcessStartInfo(ExtPath)
+                {
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true
+                });
+                string output = p.StandardOutput.ReadToEnd();
+                if (p.ExitCode != 0)
+                    throw new InvalidOperationException("Failed to execute ProcessHelperExt.exe");
+
+                string[] lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string line in lines)
+                {
+                    var parts = line.Split('|');
+                    l.Add((int.Parse(parts[0]), parts[1]));
+                }
+            }
+            else
+                foreach (var p in Process.GetProcesses())
+                    using (p)
+                        try { l.Add((p.Id, p.MainModule.FileName)); }
+                        catch (System.ComponentModel.Win32Exception) { }
+            return l;
+        }
     }
 }
