@@ -112,7 +112,8 @@ namespace TextHookLibrary
                 foreach (var p in Process.GetProcesses())
                     using (p)
                         try { l.Add((p.Id, p.MainModule.FileName)); }
-                        catch (System.ComponentModel.Win32Exception) { }
+                        catch (System.ComponentModel.Win32Exception) { } // 无权限
+                        catch (InvalidOperationException) { } // 进程已退出
             return l;
         }
     }

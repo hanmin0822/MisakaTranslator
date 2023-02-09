@@ -11,15 +11,19 @@ try
     if (args.Length == 1)
     {
         int pid = int.Parse(args[0]);
-        Process p;
-        try { p = Process.GetProcessById(pid); }
-        catch (System.ArgumentException) { return 3; } // 不存在pid对应的进程
-        Console.WriteLine(p.MainModule.FileName);
+        try
+        {
+            Process p = Process.GetProcessById(pid);
+            Console.WriteLine(p.MainModule.FileName);
+        }
+        catch (ArgumentException) { return 3; } // 不存在pid对应的进程
+        catch (InvalidOperationException) { return 3; } // 进程已退出
     }
     else
         foreach (var p in Process.GetProcesses())
             try { Console.WriteLine("{0}|{1}", p.Id, p.MainModule.FileName); }
             catch (System.ComponentModel.Win32Exception) { } // 跳过权限不够的进程
+            catch (InvalidOperationException) { } // 进程已退出
 
     return 0;
 }
