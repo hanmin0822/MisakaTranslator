@@ -212,16 +212,12 @@ namespace TextHookLibrary {
         /// 关闭Textractor进程，关闭前Detach所有Hook
         /// </summary>
         public async void CloseTextractor() {
-            /*
-             * TODO:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-             * 这里如果进程退出会出现异常
-             */
             if (ProcessTextractor != null && ProcessTextractor.HasExited == false) {
                 if (HandleMode == 1) {
                     await DetachProcess(GamePID);
                 }
                 else if (HandleMode == 2) {
-                    foreach (var item in PossibleGameProcessList)
+                    foreach (var item in PossibleGameProcessList.ToList())
                         if (PossibleGameProcessList[item.Key] == true) {
                             await DetachProcess(item.Key.Id);
                             PossibleGameProcessList[item.Key] = false;
@@ -246,7 +242,7 @@ namespace TextHookLibrary {
 
                 if (AutoHook == false) {
                     //不进行智能注入
-                    foreach (var item in PossibleGameProcessList)
+                    foreach (var item in PossibleGameProcessList.ToList())
                     {
                         await AttachProcess(item.Key.Id);
                         PossibleGameProcessList[item.Key] = true;
