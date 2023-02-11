@@ -3,31 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MisakaTranslator-WPF", "MisakaTranslator-WPF\MisakaTranslator-WPF.csproj", "{5F985830-49EF-4EF4-8A37-9AEE99E17AD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MisakaTranslator-WPF", "MisakaTranslator-WPF\MisakaTranslator-WPF.csproj", "{5F985830-49EF-4EF4-8A37-9AEE99E17AD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslatorLibrary", "TranslatorLibrary\TranslatorLibrary.csproj", "{BBEBCF78-7BBB-4B19-99EE-87DDEA4F3793}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TranslatorLibrary", "TranslatorLibrary\TranslatorLibrary.csproj", "{BBEBCF78-7BBB-4B19-99EE-87DDEA4F3793}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCRLibrary", "OCRLibrary\OCRLibrary.csproj", "{B66D98EC-FE39-45B4-9808-AC737C1A49FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OCRLibrary", "OCRLibrary\OCRLibrary.csproj", "{B66D98EC-FE39-45B4-9808-AC737C1A49FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextRepairLibrary", "TextRepairLibrary\TextRepairLibrary.csproj", "{722C0650-3D77-42B2-A754-50F2CB3F4C8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextRepairLibrary", "TextRepairLibrary\TextRepairLibrary.csproj", "{722C0650-3D77-42B2-A754-50F2CB3F4C8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyboardMouseHookLibrary", "KeyboardMouseHookLibrary\KeyboardMouseHookLibrary.csproj", "{1AE9EA11-9FA0-4D30-B16E-ECF7183DEC7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardMouseHookLibrary", "KeyboardMouseHookLibrary\KeyboardMouseHookLibrary.csproj", "{1AE9EA11-9FA0-4D30-B16E-ECF7183DEC7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextHookLibrary", "TextHookLibrary\TextHookLibrary.csproj", "{A976D07E-0B39-41B6-B6F7-7022BBFBD3FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextHookLibrary", "TextHookLibrary\TextHookLibrary.csproj", "{A976D07E-0B39-41B6-B6F7-7022BBFBD3FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MecabHelperLibrary", "MecabHelperLibrary\MecabHelperLibrary.csproj", "{82FDE770-321E-4433-8E05-8803850F24DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MecabHelperLibrary", "MecabHelperLibrary\MecabHelperLibrary.csproj", "{82FDE770-321E-4433-8E05-8803850F24DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLHelperLibrary", "SQLHelperLibrary\SQLHelperLibrary.csproj", "{08A96F84-775C-4F7E-90B0-B54780A4DDB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQLHelperLibrary", "SQLHelperLibrary\SQLHelperLibrary.csproj", "{08A96F84-775C-4F7E-90B0-B54780A4DDB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransOptimizationLibrary", "TransOptimizationLibrary\TransOptimizationLibrary.csproj", "{A17B385F-8E6E-4B7D-B3EF-EC08C7A8D115}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransOptimizationLibrary", "TransOptimizationLibrary\TransOptimizationLibrary.csproj", "{A17B385F-8E6E-4B7D-B3EF-EC08C7A8D115}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DictionaryHelperLibrary", "DictionaryHelperLibrary\DictionaryHelperLibrary.csproj", "{EBE31ABB-EFB0-4A46-A8E0-655F614F88D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DictionaryHelperLibrary", "DictionaryHelperLibrary\DictionaryHelperLibrary.csproj", "{EBE31ABB-EFB0-4A46-A8E0-655F614F88D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTSHelperLibrary", "TTSHelperLibrary\TTSHelperLibrary.csproj", "{DD77C61B-AF8A-44BE-BAC7-745381F84753}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTSHelperLibrary", "TTSHelperLibrary\TTSHelperLibrary.csproj", "{DD77C61B-AF8A-44BE-BAC7-745381F84753}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KeyboardMouseMonitor", "KeyboardMouseMonitor\KeyboardMouseMonitor.vcxproj", "{259361ED-FE9C-4F15-864D-88587EE19BD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtificialTransHelperLibrary", "ArtificialTransHelperLibrary\ArtificialTransHelperLibrary.csproj", "{A6568552-A4D0-4546-ACE5-D8A710EE7E0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtificialTransHelperLibrary", "ArtificialTransHelperLibrary\ArtificialTransHelperLibrary.csproj", "{A6568552-A4D0-4546-ACE5-D8A710EE7E0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
