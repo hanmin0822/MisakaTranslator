@@ -182,6 +182,8 @@ namespace TextHookLibrary {
         /// </summary>
         /// <param name="pid"></param>
         public async Task DetachProcess(int pid) {
+            if (!ProcessHelper.IsProcessRunning(pid))
+                return;
             await ProcessTextractor.StandardInput.WriteLineAsync("detach -P" + pid);
             await ProcessTextractor.StandardInput.FlushAsync();
         }
@@ -213,13 +215,14 @@ namespace TextHookLibrary {
         /// </summary>
         public async void CloseTextractor() {
             if (ProcessTextractor != null && ProcessTextractor.HasExited == false) {
-                if (HandleMode == 1) {
+                if (HandleMode == 1 && ProcessHelper.IsProcessRunning(GamePID)) {
                     await DetachProcess(GamePID);
                 }
                 else if (HandleMode == 2) {
                     foreach (var item in PossibleGameProcessList.ToList())
                         if (PossibleGameProcessList[item.Key] == true) {
-                            await DetachProcess(item.Key.Id);
+                            if(ProcessHelper.IsProcessRunning(item.Key.Id))
+                                await DetachProcess(item.Key.Id);
                             PossibleGameProcessList[item.Key] = false;
                         }
                 }

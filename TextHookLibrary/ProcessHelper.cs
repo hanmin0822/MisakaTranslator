@@ -116,5 +116,10 @@ namespace TextHookLibrary
                         catch (InvalidOperationException) { } // 进程已退出
             return l;
         }
+
+        /// <summary>
+        /// internal bool System.Diagnostics.ProcessManager.IsProcessRunning(int pid)
+        /// </summary>
+        public static Func<int, bool> IsProcessRunning = (Func<int, bool>)typeof(Process).Assembly.GetType("System.Diagnostics.ProcessManager").GetMethod("IsProcessRunning", new[] { typeof(int) }).CreateDelegate(typeof(Func<int, bool>));
     }
 }
