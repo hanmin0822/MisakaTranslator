@@ -10,4 +10,8 @@
     <RuntimeIdentifiers>win;win-x86;win-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
+  <ItemGroup Condition="'$(MSBuildProjectExtension)' == '.vcxproj'">
+    <PackageReference Include="VC-LTL" Version="5.0.5" />
+  </ItemGroup>
+
 </Project>
