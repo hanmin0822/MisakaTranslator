@@ -5,10 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SQLite.Core" Version="7.0.4" />
-    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" Version="2.1.4" IncludeAssets="none" ExcludeAssets="all" PrivateAssets="all" GeneratePathProperty="true" />
-    <PackageReference Include="SQLitePCLRaw.provider.e_sqlite3" Version="2.1.4" />
-    <PackageReference Include="SQLitePCLRaw.provider.winsqlite3" Version="2.1.4" />
+    <PackageReference Include="Microsoft.Data.SQLite.Core" />
+    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" IncludeAssets="none" ExcludeAssets="all" PrivateAssets="all" GeneratePathProperty="true" />
+    <PackageReference Include="SQLitePCLRaw.provider.e_sqlite3" />
+    <PackageReference Include="SQLitePCLRaw.provider.winsqlite3" />
   </ItemGroup>
 
   <ItemGroup>

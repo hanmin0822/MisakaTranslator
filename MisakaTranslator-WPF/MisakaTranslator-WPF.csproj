@@ -39,12 +39,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Config.Net" Version="5.1.5" />
-    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
-    <PackageReference Include="HandyControl" Version="3.4.0" />
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="$([System.Version]::Parse('$(TargetPlatformVersion)').ToString(3)).*" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools.MSIX" Version="1.2.20250107.1" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzer" />
-    <PackageReference Include="TesseractOCR" Version="5.2.14" Aliases="Tesseract" />
+    <PackageReference Include="Config.Net" />
+    <PackageReference Include="FontAwesome.WPF" />
+    <PackageReference Include="HandyControl" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools.MSIX" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzer" />
+    <PackageReference Include="TesseractOCR" Aliases="Tesseract" />
   </ItemGroup>
 
     <PropertyGroup>

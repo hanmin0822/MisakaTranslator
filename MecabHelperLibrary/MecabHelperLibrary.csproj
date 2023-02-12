@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MeCab.DotNet" Version="0.0.40" />
+    <PackageReference Include="MeCab.DotNet" />
   </ItemGroup>
 
 </Project>

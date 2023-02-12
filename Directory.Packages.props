@@ -1,0 +1,30 @@
+﻿<Project>
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    <CentralPackageFloatingVersionsEnabled>true</CentralPackageFloatingVersionsEnabled>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageVersion Include="Config.Net" Version="5.1.5" />
+    <PackageVersion Include="FontAwesome.WPF" Version="4.7.0.9" />
+    <PackageVersion Include="HandyControl" Version="3.4.0" />
+    <PackageVersion Include="IronPython" Version="2.7.11" />
+    <PackageVersion Include="MeCab.DotNet" Version="0.0.40" />
+    <PackageVersion Include="Microsoft.Data.SQLite.Core" Version="7.0.4" />
+    <PackageVersion Include="Microsoft.Windows.CsWin32" Version="0.3.2-beta" />
+    <PackageVersion Include="Microsoft.Windows.CsWinRT" Version="2.0.2" />
+    <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="$([System.Version]::Parse('$(TargetPlatformVersion)').ToString(3)).*" />
+    <PackageVersion Include="Microsoft.Windows.SDK.BuildTools.MSIX" Version="1.2.20250107.1" />
+    <PackageVersion Include="Microsoft.Windows.SDK.Contracts" Version="$([System.Version]::Parse('$(TargetPlatformVersion)').ToString(3)).*" />
+    <PackageVersion Include="Microsoft.Windows.SDK.Win32Metadata" Version="52.0.65-preview" />
+    <PackageVersion Include="TesseractOCR" Version="5.2.14" />
+    <PackageVersion Include="SQLitePCLRaw.lib.e_sqlite3" Version="2.1.4" />
+    <PackageVersion Include="SQLitePCLRaw.provider.e_sqlite3" Version="2.1.4" />
+    <PackageVersion Include="SQLitePCLRaw.provider.winsqlite3" Version="2.1.4" />
+    <PackageVersion Include="System.Speech" Version="7.0.0"/>
+    <PackageVersion Include="System.Text.Json" Version="7.0.1" />
+  </ItemGroup>
+
+</Project>
