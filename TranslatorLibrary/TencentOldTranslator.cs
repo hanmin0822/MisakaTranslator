@@ -29,13 +29,9 @@ namespace TranslatorLibrary
                 errorInfo = "Param Missing";
                 return null;
             }
-            
-            // 原文
-            string q = HttpUtility.UrlEncode(sourceText);
-
-            string retString;
 
             string salt = CommonFunction.RD.Next(100000).ToString();
+            string ts = CommonFunction.GetTimeStamp().ToString();
 
             string url = "https://tmt.tencentcloudapi.com/?";
 
@@ -49,14 +45,11 @@ namespace TranslatorLibrary
                 .Append("&Source=").Append(srcLang)
                 .Append("&SourceText=").Append(sourceText)
                 .Append("&Target=").Append(desLang)
-                .Append("&Timestamp=").Append(CommonFunction.GetTimeStamp())
+                .Append("&Timestamp=").Append(ts)
                 .Append("&Version=2018-03-21");
             string req = sb.ToString();
 
-            HMACSHA1 hmac = new HMACSHA1()
-            {
-                Key = Encoding.UTF8.GetBytes(SecretKey)
-            };
+            HMACSHA1 hmac = new HMACSHA1(Encoding.UTF8.GetBytes(SecretKey));
             byte[] data = Encoding.UTF8.GetBytes("GETtmt.tencentcloudapi.com/?" + req);
             var result = hmac.ComputeHash(data);
             hmac.Dispose();
@@ -69,13 +62,14 @@ namespace TranslatorLibrary
                 .Append("&Region=ap-shanghai")
                 .Append("&SecretId=").Append(SecretId)
                 .Append("&Source=").Append(srcLang)
-                .Append("&SourceText=").Append(q)
+                .Append("&SourceText=").Append(HttpUtility.UrlEncode(sourceText))
                 .Append("&Target=").Append(desLang)
-                .Append("&Timestamp=").Append(CommonFunction.GetTimeStamp())
+                .Append("&Timestamp=").Append(ts)
                 .Append("&Version=2018-03-21")
                 .Append("&Signature=").Append(HttpUtility.UrlEncode(Convert.ToBase64String(result)));
             req = sb.ToString();
 
+            string retString;
             var hc = CommonFunction.GetHttpClient();
             try
             {
