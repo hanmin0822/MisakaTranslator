@@ -10,8 +10,13 @@
     <RuntimeIdentifiers>win;win-x86;win-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
+  <ItemGroup Condition="'$(MSBuildProjectExtension)' == '.csproj'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(MSBuildProjectExtension)' == '.vcxproj'">
     <PackageReference Include="VC-LTL" Version="5.0.5" />
+    <PackageReference Include="Microsoft.Windows.SDK.CPP.$(PlatformShortName)" Version="10.0.22621.*" />
   </ItemGroup>
 
 </Project>
