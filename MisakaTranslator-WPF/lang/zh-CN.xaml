@@ -47,7 +47,7 @@
     <sys:String x:Key="SettingsMenu_OCRSettings">OCR相关设置</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_General">通用设置</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_Baidu">百度智能云OCR API</sys:String>
-    <sys:String x:Key="SettingsMenu_OCRSettings_BaiduFanyi">百度翻译OCR API</sys:String>
+    <sys:String x:Key="SettingsMenu_OCRSettings_BaiduFanyi">百度翻译OCR</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_Tesseract5">Tesseract5 OCR</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings">翻译相关设置</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_General">通用设置</sys:String>

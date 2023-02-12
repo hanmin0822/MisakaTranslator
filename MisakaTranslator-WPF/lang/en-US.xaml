@@ -44,7 +44,7 @@
     <sys:String x:Key="SettingsMenu_OCRSettings">OCR Settings</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_General">General</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_Baidu">Baidu OCR API</sys:String>
-    <sys:String x:Key="SettingsMenu_OCRSettings_BaiduFanyi">BaiduFanyi OCR API</sys:String>
+    <sys:String x:Key="SettingsMenu_OCRSettings_BaiduFanyi">BaiduFanyi OCR</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_Tesseract5">Tesseract5 OCR</sys:String>
     
     
@@ -56,6 +56,7 @@
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Baidu">百度翻译 Baidu Translate</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_TencentFYJ">腾讯翻译君 Tencent AI Translate</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_TencentOld">腾讯云翻译 Tencent TMT</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_YoudaoZhiyun">有道智云 Youdao AI</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Jbeijing">Jbeijing</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_KingsoftFAIT">金山快译 Kingsoft FastAIT</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Dreye">译典通 Dr.eye</sys:String>
