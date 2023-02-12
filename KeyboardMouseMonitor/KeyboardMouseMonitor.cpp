@@ -7,7 +7,6 @@
 *   使用时将这个项目单独编译，生成的EXE文件放入lib中即可
 *************************************************/
 
-#include "pch.h"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
