@@ -226,22 +226,22 @@ namespace MisakaTranslator_WPF
             set;
         }
 
-        [Option(Alias = "Tesseract5OCR.Path", DefaultValue = "C:\\Program Files\\Tesseract-OCR\\tesseract.exe")]
-        string Tesseract5OCR_Path
+        [Option(Alias = "TesseractCli.Path", DefaultValue = "C:\\Program Files\\Tesseract-OCR\\tesseract.exe")]
+        string TesseractCli_Path
         {
             get;
             set;
         }
 
-        [Option(Alias = "Tesseract5OCR.Mode", DefaultValue = "jpn")]
-        string Tesseract5OCR_Mode
+        [Option(Alias = "TesseractCli.Mode", DefaultValue = "jpn")]
+        string TesseractCli_Mode
         {
             get;
             set;
         }
 
-        [Option(Alias = "Tesseract5OCR.Args", DefaultValue = "")]
-        string Tesseract5OCR_Args
+        [Option(Alias = "TesseractCli.Args", DefaultValue = "")]
+        string TesseractCli_Args
         {
             get;
             set;

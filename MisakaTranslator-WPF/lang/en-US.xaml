@@ -45,7 +45,7 @@
     <sys:String x:Key="SettingsMenu_OCRSettings_General">General</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_Baidu">Baidu OCR API</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_BaiduFanyi">BaiduFanyi OCR</sys:String>
-    <sys:String x:Key="SettingsMenu_OCRSettings_Tesseract5">Tesseract5 OCR</sys:String>
+    <sys:String x:Key="SettingsMenu_OCRSettings_TesseractCli">TesseractCli OCR</sys:String>
     
     
     <sys:String x:Key="Language_Changed">Language is set. Restart translator to take effect.</sys:String>
@@ -126,7 +126,7 @@
     <sys:String x:Key="DreyeTransSettingsPage_Path">Dr.eye Path</sys:String>
     <sys:String x:Key="DreyeTransSettingsPage_ChoosePathHint">Please select the folder where Dr.eye is located</sys:String>
 
-    <sys:String x:Key="OCRGeneralSettingsPage_Introduce">This is the OCR (Optical Character Recognition) setting page. The translation window supports only one OCR source. Offline OCR uses Tesseract. It currently supports English and Japanese recognition. Tesseract5_vert can only supports vertical Japanese. If the recognition performance is low, you can train related OCR word library or use Baidu online OCR instead.</sys:String>
+    <sys:String x:Key="OCRGeneralSettingsPage_Introduce">This is the OCR (Optical Character Recognition) setting page. The translation window supports only one OCR source. Offline OCR uses Tesseract. It currently supports English and Japanese recognition. TesseractCli_vert can only supports vertical Japanese. If the recognition performance is low, you can train related OCR word library or use Baidu online OCR instead.</sys:String>
     <sys:String x:Key="OCRGeneralSettingsPage_OCRSource">OCR source</sys:String>
 
     <sys:String x:Key="OCRGeneralSettingsPage_Introduce_GlobalOCR">Select a global shortcut here for the global OCR function, with which you can recognize and translate in any case. It displays a separate window. Click and press the shortcut you want in the input box below, such as Ctrl + A, and the setting takes effect after the translator is restarted.</sys:String>
@@ -138,11 +138,11 @@
 
     <sys:String x:Key="BaiduFanyiOCRSettingsPage_Introduce">BaiduFanyi OCR have the same parameters as "Translation Settings - Baidu Translate". Note you must trun on "Image translation" service. This one directly translates from image to Chinese, rather than OCR to text then translate.</sys:String>
 
-    <sys:String x:Key="TessactOCR5SettingsPage_Introduce">Tesseract5 support any languages, but only Japanese are pre-configed. Use command line args for other languages. (See tesseartact --help-extra for details)</sys:String>
-    <sys:String x:Key="TessactOCR5SettingsPage_Path">Tesseract5 Path</sys:String>
-    <sys:String x:Key="TessactOCR5SettingsPage_Setting">Tesseract5 Mode</sys:String>
-    <sys:String x:Key="TessactOCR5SettingsPage_Args">Tesseract5 Parameters</sys:String>
-    <sys:String x:Key="TessactOCR5SettingsPage_Select">Select</sys:String>
+    <sys:String x:Key="TesseractCliSettingsPage_Introduce">TesseractCli support any languages, but only Japanese are pre-configed. Use command line args for other languages. (See tesseartact --help-extra for details)</sys:String>
+    <sys:String x:Key="TesseractCliSettingsPage_Path">TesseractCli Path</sys:String>
+    <sys:String x:Key="TesseractCliSettingsPage_Setting">TesseractCli Mode</sys:String>
+    <sys:String x:Key="TesseractCliSettingsPage_Args">TesseractCli Parameters</sys:String>
+    <sys:String x:Key="TesseractCliSettingsPage_Select">Select</sys:String>
 
     <sys:String x:Key="HookSettingsPage_Introduce">This is the text hook method (Textractor) setting. Textractor was recoded and runs along with the Translator. There is no need to change its path.</sys:String>
     <sys:String x:Key="HookSettingsPage_AutoHook">Enable smart hook</sys:String>

@@ -59,7 +59,7 @@
     <Compile Include="OCRCommon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenCapture.cs" />
-    <Compile Include="Tesseract5OCR.cs" />
+    <Compile Include="TesseractCli.cs" />
     <Compile Include="TesseractOCR.cs" />
   </ItemGroup>
   <ItemGroup>

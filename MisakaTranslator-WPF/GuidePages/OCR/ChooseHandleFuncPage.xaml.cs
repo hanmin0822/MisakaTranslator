@@ -107,9 +107,9 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
                 else
                     HandyControl.Controls.Growl.Error($"百度翻译OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
             }
-            else if (Common.appSettings.OCRsource == "Tesseract5")
+            else if (Common.appSettings.OCRsource == "TesseractCli")
             {
-                if (Common.ocr.OCR_Init(Common.appSettings.Tesseract5OCR_Path, Common.appSettings.Tesseract5OCR_Args))
+                if (Common.ocr.OCR_Init(Common.appSettings.TesseractCli_Path, Common.appSettings.TesseractCli_Args))
                 {
                     string res = await Common.ocr.OCRProcessAsync();
 
@@ -119,12 +119,12 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
                     }
                     else
                     {
-                        HandyControl.Controls.Growl.Error($"Tesseract5 {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
+                        HandyControl.Controls.Growl.Error($"TesseractCli {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
                     }
                 }
                 else
                 {
-                    HandyControl.Controls.Growl.Error($"Tesseract5 {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
+                    HandyControl.Controls.Growl.Error($"TesseractCli {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
                 }
             }
 
