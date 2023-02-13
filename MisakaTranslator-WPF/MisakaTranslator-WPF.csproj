@@ -2,13 +2,11 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net472</TargetFramework>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <RootNamespace>$(MSBuildProjectName.Replace("-","_"))</RootNamespace>
-    <Version>2.12.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

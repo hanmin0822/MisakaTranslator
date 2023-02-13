@@ -1,5 +1,11 @@
 <Project>
 
+  <PropertyGroup Condition="'$(MSBuildProjectExtension)' == '.csproj'">
+    <TargetFramework>net472</TargetFramework>
+    <Platforms>AnyCPU</Platforms>
+    <Version>2.12.2.0</Version>
+  </PropertyGroup>
+
   <ItemGroup Condition="'$(MSBuildProjectExtension)' == '.vcxproj'">
     <ProjectCapability Include="PackageReferences" />
   </ItemGroup>

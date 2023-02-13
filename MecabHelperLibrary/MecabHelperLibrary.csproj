@@ -1,9 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="MeCab.DotNet" Version="0.0.40" />
   </ItemGroup>
