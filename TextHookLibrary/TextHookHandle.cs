@@ -206,6 +206,8 @@ namespace TextHookLibrary {
         public async Task DetachProcessByHookAddress(int pid, string HookAddress) {
             //这个方法的原理是注入一个用户给定的钩子，给定一个Hook地址，由于hook地址存在，Textractor会自动卸载掉之前的
             //但是后续给定的模块并不存在，于是Textractor再卸载掉这个用户自定义钩子，达到卸载一个指定Hook办法
+            if (!ProcessHelper.IsProcessRunning(pid))
+                return;
             await ProcessTextractor.StandardInput.WriteLineAsync("HW0@" + HookAddress + ":module_which_never_exists" + " -P" + pid);
             await ProcessTextractor.StandardInput.FlushAsync();
         }
