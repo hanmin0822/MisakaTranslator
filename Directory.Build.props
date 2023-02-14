@@ -5,6 +5,7 @@
     <Platforms>AnyCPU</Platforms>
     <PlatformTarget>$(Platform)</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>11.0</LangVersion>
     <Version>2.12.2.0</Version>
   </PropertyGroup>
 
