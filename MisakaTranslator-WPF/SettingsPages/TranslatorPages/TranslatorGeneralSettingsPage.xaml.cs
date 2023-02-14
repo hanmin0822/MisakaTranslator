@@ -56,9 +56,12 @@ namespace MisakaTranslator_WPF.SettingsPages
             Common.appSettings.EachRowTrans = EachRowTransCheckBox.IsChecked ?? false;
         }
 
-        private void HttpProxyBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void HttpProxyBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            Common.appSettings.HttpProxy = HttpProxyBox.Text;
+            string text = HttpProxyBox.Text.Trim();
+            try { new Uri(text); }
+            catch (UriFormatException) { HandyControl.Controls.Growl.Error("Proxy url unsupported."); return; };
+            Common.appSettings.HttpProxy = text;
         }
 
         private void TransLimitBox_ValueChanged(object sender, HandyControl.Data.FunctionEventArgs<double> e)
