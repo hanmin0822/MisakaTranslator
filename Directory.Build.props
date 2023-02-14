@@ -3,6 +3,8 @@
   <PropertyGroup Condition="'$(MSBuildProjectExtension)' == '.csproj'">
     <TargetFramework>net472</TargetFramework>
     <Platforms>AnyCPU</Platforms>
+    <PlatformTarget>$(Platform)</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
     <Version>2.12.2.0</Version>
   </PropertyGroup>
 
