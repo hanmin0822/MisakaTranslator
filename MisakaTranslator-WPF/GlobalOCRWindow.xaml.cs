@@ -116,12 +116,28 @@ namespace MisakaTranslator_WPF
                 else
                     HandyControl.Controls.Growl.ErrorGlobal($"百度翻译OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
             }
+            else if (Common.appSettings.OCRsource == "TencentOCR")
+            {
+                ocr = new TencentOCR();
+                if (ocr.OCR_Init(Common.appSettings.TXOSecretId, Common.appSettings.TXOSecretKey))
+                {
+                    ocr.SetOCRSourceLang(Common.appSettings.GlobalOCRLang);
+                    res = await ocr.OCRProcessAsync(new System.Drawing.Bitmap(img));
+
+                    if (res != null)
+                        FirstTransText.Text = res;
+                    else
+                        HandyControl.Controls.Growl.WarningGlobal($"腾讯云图片翻译 {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+                }
+                else
+                    HandyControl.Controls.Growl.ErrorGlobal($"腾讯云图片翻译 {Application.Current.Resources["APITest_Error_Hint"]}\n{ocr.GetLastError()}");
+            }
 
             if (res == null)
             {
                 FirstTransText.Text = "OCR ERROR";
             }
-            else if (Common.appSettings.OCRsource != "BaiduFanyiOCR")
+            else if (!(Common.appSettings.OCRsource == "BaiduFanyiOCR" || Common.appSettings.OCRsource == "TencentOCR"))
             {
                 // 因为历史原因，OCR的源语言用的是三个字母的，如eng和jpn。而翻译的API即Common.UsingSrcLang用的两个字母，如en和jp
                 string srclang;

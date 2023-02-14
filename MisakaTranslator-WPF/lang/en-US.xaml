@@ -45,6 +45,7 @@
     <sys:String x:Key="SettingsMenu_OCRSettings_General">General</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_Baidu">Baidu OCR API</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_BaiduFanyi">BaiduFanyi OCR</sys:String>
+    <sys:String x:Key="SettingsMenu_OCRSettings_Tencent">Tencent Image Translation</sys:String>
     <sys:String x:Key="SettingsMenu_OCRSettings_TesseractCli">TesseractCli OCR</sys:String>
     
     
@@ -137,6 +138,8 @@
     <sys:String x:Key="BaiduOCRSettingsPage_SecretKey">Baidu OCR Secret Key</sys:String>
 
     <sys:String x:Key="BaiduFanyiOCRSettingsPage_Introduce">BaiduFanyi OCR have the same parameters as "Translation Settings - Baidu Translate". Note you must trun on "Image translation" service. This one directly translates from image to Chinese, rather than OCR to text then translate.</sys:String>
+
+    <sys:String x:Key="TencentOCRSettingsPage_Introduce">Tencent Image Translation have the same parameters as "Translation Settings - Tencent". This one directly translates from image to Chinese, rather than OCR to text then translate.</sys:String>
 
     <sys:String x:Key="TesseractCliSettingsPage_Introduce">TesseractCli support any languages, but only Japanese are pre-configed. Use command line args for other languages. (See tesseartact --help-extra for details)</sys:String>
     <sys:String x:Key="TesseractCliSettingsPage_Path">TesseractCli Path</sys:String>
