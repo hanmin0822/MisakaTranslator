@@ -13,9 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="7.0.1" />
-    <PackageReference Include="TesseractOCR" Version="5.2.14">
-      <Aliases>Tesseract</Aliases>
-    </PackageReference>
+    <PackageReference Include="TesseractOCR" Version="5.2.14" Aliases="Tesseract" />
   </ItemGroup>
 
 </Project>

@@ -7,6 +7,8 @@
     <ApplicationManifest>App.manifest</ApplicationManifest>
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <RootNamespace>$(MSBuildProjectName.Replace("-","_"))</RootNamespace>
+    <PlatformTarget Condition="'$(Platform)' == 'AnyCPU'">AnyCPU</PlatformTarget>
+    <Prefer32Bit Condition="'$(Platform)' == 'AnyCPU'">false</Prefer32Bit>
   </PropertyGroup>
 
   <ItemGroup>
@@ -38,9 +40,7 @@
     <PackageReference Include="Config.Net" Version="5.1.5" />
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
     <PackageReference Include="HandyControl" Version="3.4.0" />
-    <PackageReference Include="TesseractOCR" Version="5.2.14">
-      <Aliases>Tesseract</Aliases>
-    </PackageReference>
+    <PackageReference Include="TesseractOCR" Version="5.2.14" Aliases="Tesseract" />
   </ItemGroup>
 
 </Project>
