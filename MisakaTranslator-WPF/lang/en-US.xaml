@@ -258,7 +258,6 @@
     <sys:String x:Key="ChooseHotKeyPage_NoKeyHint">Please set a trigger</sys:String>
     <sys:String x:Key="ChooseHotKeyPage_TooLessDelayHint">Delay must be greater than 0 ms</sys:String>
 
-    <sys:String x:Key="TranslateWin_DragTitle">Hold to drag here</sys:String>
     <sys:String x:Key="TranslateWin_Menu_ChangeSize">Resize the window</sys:String>
     <sys:String x:Key="TranslateWin_Menu_ShowSource">Show/Hide source text</sys:String>
     <sys:String x:Key="TranslateWin_Menu_Settings">Translator Window Settings</sys:String>

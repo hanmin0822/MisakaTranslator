@@ -256,7 +256,6 @@
     <sys:String x:Key="ChooseHotKeyPage_NoKeyHint">请设置一个触发键</sys:String>
     <sys:String x:Key="ChooseHotKeyPage_TooLessDelayHint">延时时间必须大于0毫秒</sys:String>
 
-    <sys:String x:Key="TranslateWin_DragTitle">按住此处拖拽窗口</sys:String>
     <sys:String x:Key="TranslateWin_Menu_ChangeSize">调整界面尺寸</sys:String>
     <sys:String x:Key="TranslateWin_Menu_ShowSource">显示/隐藏原文</sys:String>
     <sys:String x:Key="TranslateWin_Menu_Settings">翻译界面设置</sys:String>
