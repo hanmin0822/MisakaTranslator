@@ -16,6 +16,7 @@
                     <TextBlock Text="{StaticResource TransWinSettingsWin_BgColor}" HorizontalAlignment="Center" Margin="10" FontSize="15"/>
                     <Button Name="BgColorBtn" Content="{StaticResource TransWinSettingsWin_BtnChooseColor}" Margin="10" Width="200" Style="{StaticResource ButtonPrimary}" Click="ChooseColorBtn_Click"/>
                     <Border Name="BgColorBlock" Margin="10" Width="200" Height="25"/>
+                    <CheckBox x:Name="ZenModeCheckBox" Content="{StaticResource TransWinSettingsWin_ZenMode}" HorizontalAlignment="Center" Margin="10" FontSize="15" />
                 </StackPanel>
 
             </TabItem>

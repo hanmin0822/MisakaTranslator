@@ -73,7 +73,7 @@ namespace MisakaTranslator_WPF
 
             sourceFontSize.ValueChanged += delegate
             {
-                translateWin.SourceTextFontSize = (int) sourceFontSize.Value;
+                translateWin.SourceTextFontSize = (int)sourceFontSize.Value;
                 Common.appSettings.TF_srcTextSize = sourceFontSize.Value;
             };
 
@@ -113,8 +113,22 @@ namespace MisakaTranslator_WPF
             {
                 Common.appSettings.TF_Colorful = (bool)ColorfulCheckBox.IsChecked;
             };
-          
 
+            ZenModeCheckBox.Click += delegate (object sender, RoutedEventArgs e)
+            {
+                if ((bool)(sender as CheckBox).IsChecked)
+                {
+                    translateWin.TitleBar.Visibility = Visibility.Collapsed;
+                    translateWin.Top += translateWin.TitleBar.Height;
+                    translateWin.Height -= translateWin.TitleBar.Height;
+                }
+                else
+                {
+                    translateWin.TitleBar.Visibility = Visibility.Visible;
+                    translateWin.Top -= translateWin.TitleBar.Height;
+                    translateWin.Height += translateWin.TitleBar.Height;
+                }
+            };
         }
 
         /// <summary>
@@ -123,9 +137,9 @@ namespace MisakaTranslator_WPF
         private void UI_Init()
         {
             BrushConverter brushConverter = new BrushConverter();
-            BgColorBlock.Background = (Brush) brushConverter.ConvertFromString(Common.appSettings.TF_BackColor);
-            firstColorBlock.Background = (Brush) brushConverter.ConvertFromString(Common.appSettings.TF_firstTransTextColor);
-            secondColorBlock.Background = (Brush) brushConverter.ConvertFromString(Common.appSettings.TF_secondTransTextColor);
+            BgColorBlock.Background = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_BackColor);
+            firstColorBlock.Background = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_firstTransTextColor);
+            secondColorBlock.Background = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_secondTransTextColor);
 
             for (int i = 0; i < FontList.Count; i++)
             {

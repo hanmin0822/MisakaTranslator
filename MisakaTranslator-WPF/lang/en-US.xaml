@@ -279,6 +279,7 @@
     <sys:String x:Key="TransWinSettingsWin_Tab_first">No.1 Translation</sys:String>
     <sys:String x:Key="TransWinSettingsWin_Tab_second">No.2 Translation</sys:String>
     <sys:String x:Key="TransWinSettingsWin_BgColor">Background color and opacity</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_ZenMode">Zen Mode (Valid only this time)</sys:String>
     <sys:String x:Key="TransWinSettingsWin_FontColor">Font color</sys:String>
     <sys:String x:Key="TransWinSettingsWin_FontSize">Font size</sys:String>
     <sys:String x:Key="TransWinSettingsWin_FontName">Font</sys:String>
@@ -319,16 +320,16 @@
     <sys:String x:Key="AddOptWin_Success_Hint">已添加名词翻译优化词条</sys:String>
     <sys:String x:Key="AddOptWin_Error_Hint">添加名词翻译优化词条失败</sys:String>
 
-	<sys:String x:Key="TransWinSettingsWin_DropShadowCbox">开启文字阴影</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_DropShadowCbox">开启文字阴影</sys:String>
 
-	<sys:String x:Key="TransWinSettingsWin_KanaCbox">开启日语原文假名标注</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_KanaCbox">开启日语原文假名标注</sys:String>
 
-	<sys:String x:Key="TransWinSettingsWin_HirakanaCbox">使用平假名注音</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_HirakanaCbox">使用平假名注音</sys:String>
 
-	<sys:String x:Key="TransWinSettingsWin_KanaBoldCbox">将假名标注加粗</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_KanaBoldCbox">将假名标注加粗</sys:String>
     <sys:String x:Key="TransWinSettingsWin_ColorfulCbox">开启源文本分词上色</sys:String>
 
-	<sys:String x:Key="MainWindow_AutoUpdateCheck">发现新版本！点击确认进入下载页面，点击取消忽略本次更新提示。</sys:String>
+    <sys:String x:Key="MainWindow_AutoUpdateCheck">发现新版本！点击确认进入下载页面，点击取消忽略本次更新提示。</sys:String>
 
     <sys:String x:Key="GeneralTransSettingsPage_Translimit">翻译限制字数</sys:String>
 
