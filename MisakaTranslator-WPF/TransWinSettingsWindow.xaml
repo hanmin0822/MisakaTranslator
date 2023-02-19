@@ -13,9 +13,6 @@
             <TabItem Header="{StaticResource TransWinSettingsWin_Tab_Window}">
 
                 <StackPanel>
-                    <TextBlock Text="{StaticResource TransWinSettingsWin_Opacity}" HorizontalAlignment="Center" Margin="10" FontSize="15"/>
-                    <Slider Name="OpacityBar" Margin="10" Maximum="100" Minimum="0" Value="0"/>
-
                     <TextBlock Text="{StaticResource TransWinSettingsWin_BgColor}" HorizontalAlignment="Center" Margin="10" FontSize="15"/>
                     <Button Name="BgColorBtn" Content="{StaticResource TransWinSettingsWin_BtnChooseColor}" Margin="10" Width="200" Style="{StaticResource ButtonPrimary}" Click="ChooseColorBtn_Click"/>
                     <Border Name="BgColorBlock" Margin="10" Width="200" Height="25"/>

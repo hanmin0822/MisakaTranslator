@@ -276,8 +276,7 @@
     <sys:String x:Key="TransWinSettingsWin_Tab_source">源文本</sys:String>
     <sys:String x:Key="TransWinSettingsWin_Tab_first">翻译一</sys:String>
     <sys:String x:Key="TransWinSettingsWin_Tab_second">翻译二</sys:String>
-    <sys:String x:Key="TransWinSettingsWin_Opacity">翻译窗口透明度</sys:String>
-    <sys:String x:Key="TransWinSettingsWin_BgColor">背景颜色</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_BgColor">背景颜色及透明度</sys:String>
     <sys:String x:Key="TransWinSettingsWin_FontColor">字体颜色</sys:String>
     <sys:String x:Key="TransWinSettingsWin_FontSize">字体大小</sys:String>
     <sys:String x:Key="TransWinSettingsWin_FontName">字体</sys:String>

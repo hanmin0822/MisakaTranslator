@@ -89,12 +89,6 @@ namespace MisakaTranslator_WPF
                 Common.appSettings.TF_secondTransTextSize = secondFontSize.Value;
             };
 
-            OpacityBar.ValueChanged += delegate
-            {
-                translateWin.Opacity = OpacityBar.Value / 100;
-                Common.appSettings.TF_Opacity = OpacityBar.Value;
-            };
-
             DropShadowCheckBox.Click += delegate
             {
                 Common.appSettings.TF_DropShadow = (bool)DropShadowCheckBox.IsChecked;
@@ -155,7 +149,6 @@ namespace MisakaTranslator_WPF
             firstFontSize.Value = Common.appSettings.TF_firstTransTextSize;
             secondFontSize.Value = Common.appSettings.TF_secondTransTextSize;
 
-            OpacityBar.Value = Common.appSettings.TF_Opacity;
             DropShadowCheckBox.IsChecked = Common.appSettings.TF_DropShadow;
             KanaCheckBox.IsChecked = Common.appSettings.TF_isKanaShow;
             HirakanaCheckBox.IsChecked = Common.appSettings.TF_Hirakana;

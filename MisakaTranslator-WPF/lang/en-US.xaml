@@ -278,8 +278,7 @@
     <sys:String x:Key="TransWinSettingsWin_Tab_source">Source text</sys:String>
     <sys:String x:Key="TransWinSettingsWin_Tab_first">No.1 Translation</sys:String>
     <sys:String x:Key="TransWinSettingsWin_Tab_second">No.2 Translation</sys:String>
-    <sys:String x:Key="TransWinSettingsWin_Opacity">Translator window opacity</sys:String>
-    <sys:String x:Key="TransWinSettingsWin_BgColor">Background color</sys:String>
+    <sys:String x:Key="TransWinSettingsWin_BgColor">Background color and opacity</sys:String>
     <sys:String x:Key="TransWinSettingsWin_FontColor">Font color</sys:String>
     <sys:String x:Key="TransWinSettingsWin_FontSize">Font size</sys:String>
     <sys:String x:Key="TransWinSettingsWin_FontName">Font</sys:String>

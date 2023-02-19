@@ -176,7 +176,6 @@ namespace MisakaTranslator_WPF
             SecondTransText.Fill = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_secondTransTextColor);
 
             this.Background = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_BackColor);
-            this.Opacity = Common.appSettings.TF_Opacity / 100;
 
             if (int.Parse(Common.appSettings.TF_LocX) != -1 && int.Parse(Common.appSettings.TF_SizeW) != 0)
             {
