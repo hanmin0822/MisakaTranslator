@@ -176,8 +176,8 @@ namespace MisakaTranslator_WPF
             FirstTransText.Fill = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_firstTransTextColor);
             SecondTransText.Fill = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_secondTransTextColor);
 
-            BackWinChrome.Background = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_BackColor);
-            BackWinChrome.Opacity = Common.appSettings.TF_Opacity / 100;
+            this.Background = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_BackColor);
+            this.Opacity = Common.appSettings.TF_Opacity / 100;
 
             if (int.Parse(Common.appSettings.TF_LocX) != -1 && int.Parse(Common.appSettings.TF_SizeW) != 0)
             {
@@ -682,15 +682,15 @@ namespace MisakaTranslator_WPF
 
         private void ChangeSize_Item_Click(object sender, RoutedEventArgs e)
         {
-            if (BackWinChrome.Opacity != 1)
+            if (this.Opacity != 1)
             {
-                BackWinChrome.Opacity = 1;
+                this.Opacity = 1;
                 ChangeSizeButton.Foreground = Brushes.Gray;
                 Growl.InfoGlobal(Application.Current.Resources["TranslateWin_DragBox_Hint"].ToString());
             }
             else
             {
-                BackWinChrome.Opacity = Common.appSettings.TF_Opacity / 100;
+                this.Opacity = Common.appSettings.TF_Opacity / 100;
                 ChangeSizeButton.Foreground = Brushes.PapayaWhip;
             }
 
@@ -839,13 +839,13 @@ namespace MisakaTranslator_WPF
         {
             if(!_isLocked)
             {
-                BackWinChrome.Opacity = 0;
+                this.Opacity = 0;
                 _isLocked = true;
                 LockButton.SetValue(FontAwesome.WPF.Awesome.ContentProperty, FontAwesomeIcon.UnlockAlt);
             }
             else
             {
-                BackWinChrome.Opacity = Common.appSettings.TF_Opacity / 100;
+                this.Opacity = Common.appSettings.TF_Opacity / 100;
                 _isLocked = false;
                 LockButton.SetValue(FontAwesome.WPF.Awesome.ContentProperty, FontAwesomeIcon.Lock);
             }

@@ -7,64 +7,55 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:MisakaTranslator_WPF"
         mc:Ignorable="d"
-        Background="{DynamicResource TranslateWindowBackground}"
-        AllowsTransparency="True" WindowStyle="None"
+        WindowStyle="None" AllowsTransparency="True"
         Title="TranslateWindow" Height="450" MinHeight="32" Width="800" MinWidth="384"
-        Closing="Window_Closing" Loaded="TransWin_Loaded">
+        Closing="Window_Closing" Loaded="TransWin_Loaded"
+        hc:WindowAttach.IsDragElement="True">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" />
     </WindowChrome.WindowChrome>
 
-    <Grid hc:WindowAttach.IsDragElement="True">
-        <!--背景（Background）-->
-        <Border Name="BackWinChrome" Margin="0" Background="White">
-            <Border.Effect>
-                <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="20" Opacity="0.25" Color="#FF5B5B5B" />
-            </Border.Effect>
-        </Border>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <ResourceDictionary>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Height" Value="32" />
+                    <Setter Property="Width" Value="32" />
+                    <Setter Property="FontSize" Value="16" />
+                    <Setter Property="Foreground" Value="PapayaWhip" />
+                </Style>
+            </ResourceDictionary>
+        </Grid.Resources>
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="32" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.Resources>
-                <ResourceDictionary>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="Transparent" />
-                        <Setter Property="BorderThickness" Value="0" />
-                        <Setter Property="Height" Value="32" />
-                        <Setter Property="Width" Value="32" />
-                        <Setter Property="FontSize" Value="16" />
-                        <Setter Property="Foreground" Value="PapayaWhip" />
-                    </Style>
-                </ResourceDictionary>
-            </Grid.Resources>
+        <WrapPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <Button fa:Awesome.Content="Expand" Name="ChangeSizeButton" Click="ChangeSize_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_ChangeSize}" />
+            <Button fa:Awesome.Content="Lock" Name="LockButton" Click="Lock_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Lock}" />
+        </WrapPanel>
+        <WrapPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button fa:Awesome.Content="Pause" Name="PauseButton" Click="Pause_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Pause}" />
+            <Button fa:Awesome.Content="Repeat" Click="RenewOCR_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_RenewOCR}" />
+            <Button fa:Awesome.Content="EyeSlash" Name="ShowSourceButton" Click="ShowSource_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_ShowSource}" />
+            <Button fa:Awesome.Content="History" Click="History_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_History}" />
+            <Button fa:Awesome.Content="Edit" Click="AddNoun_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_AddNounTrans}" />
+            <Button fa:Awesome.Content="UserPlus" Click="ArtificialTransAdd_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_ATadd}" />
+            <Button fa:Awesome.Content="Cog" Click="Settings_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Settings}" />
+            <Button fa:Awesome.Content="Microphone" Click="TTS_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_TTS}" />
+        </WrapPanel>
+        <WrapPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Button fa:Awesome.Content="WindowMinimize" Click="Min_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Min}" />
+            <Button fa:Awesome.Content="WindowCloseOutline" Click="Exit_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Exit}" />
+        </WrapPanel>
 
-            <WrapPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left">
-                <Button fa:Awesome.Content="Expand" Name="ChangeSizeButton" Click="ChangeSize_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_ChangeSize}" />
-                <Button fa:Awesome.Content="Lock" Name="LockButton" Click="Lock_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Lock}" />
-            </WrapPanel>
-            <WrapPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Button fa:Awesome.Content="Pause" Name="PauseButton" Click="Pause_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Pause}" />
-                <Button fa:Awesome.Content="Repeat" Click="RenewOCR_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_RenewOCR}" />
-                <Button fa:Awesome.Content="EyeSlash" Name="ShowSourceButton" Click="ShowSource_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_ShowSource}" />
-                <Button fa:Awesome.Content="History" Click="History_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_History}" />
-                <Button fa:Awesome.Content="Edit" Click="AddNoun_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_AddNounTrans}" />
-                <Button fa:Awesome.Content="UserPlus" Click="ArtificialTransAdd_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_ATadd}" />
-                <Button fa:Awesome.Content="Cog" Click="Settings_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Settings}" />
-                <Button fa:Awesome.Content="Microphone" Click="TTS_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_TTS}" />
-            </WrapPanel>
-            <WrapPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <Button fa:Awesome.Content="WindowMinimize" Click="Min_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Min}" />
-                <Button fa:Awesome.Content="WindowCloseOutline" Click="Exit_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Exit}" />
-            </WrapPanel>
-
-            <StackPanel Grid.Row="1" Margin="10" Orientation="Vertical">
-                <WrapPanel x:Name="SourceTextPanel" Margin="10,0,10,5" Orientation="Horizontal" Background="Transparent"></WrapPanel>
-                <hc:OutlineText Text="等待源文本" Fill="White" Stroke="Beige" StrokeThickness="1" Name="FirstTransText" Margin="10,0,10,5" TextWrapping="Wrap" StrokePosition="Outside"></hc:OutlineText>
-                <hc:OutlineText Text="" Fill="White" Stroke="Beige" StrokeThickness="1" Name="SecondTransText" Margin="10,0,10,0" TextWrapping="Wrap" StrokePosition="Outside"></hc:OutlineText>
-            </StackPanel>
-        </Grid>
+        <StackPanel Grid.Row="1" Margin="10" Orientation="Vertical">
+            <WrapPanel x:Name="SourceTextPanel" Margin="10,0,10,5" Orientation="Horizontal" Background="Transparent"></WrapPanel>
+            <hc:OutlineText Text="等待源文本" Fill="White" Stroke="Beige" StrokeThickness="1" Name="FirstTransText" Margin="10,0,10,5" TextWrapping="Wrap" StrokePosition="Outside"></hc:OutlineText>
+            <hc:OutlineText Text="" Fill="White" Stroke="Beige" StrokeThickness="1" Name="SecondTransText" Margin="10,0,10,0" TextWrapping="Wrap" StrokePosition="Outside"></hc:OutlineText>
+        </StackPanel>
     </Grid>
 </Window>

@@ -91,7 +91,7 @@ namespace MisakaTranslator_WPF
 
             OpacityBar.ValueChanged += delegate
             {
-                translateWin.BackWinChrome.Opacity = OpacityBar.Value / 100;
+                translateWin.Opacity = OpacityBar.Value / 100;
                 Common.appSettings.TF_Opacity = OpacityBar.Value;
             };
 
@@ -181,7 +181,7 @@ namespace MisakaTranslator_WPF
                 if (sender == BgColorBtn)
                 {
                     BgColorBlock.Background = picker.SelectedBrush;
-                    translateWin.BackWinChrome.Background = picker.SelectedBrush;
+                    translateWin.Background = picker.SelectedBrush;
                     Common.appSettings.TF_BackColor = picker.SelectedBrush.ToString();
                 }
                 else if (sender == firstColorBtn)
