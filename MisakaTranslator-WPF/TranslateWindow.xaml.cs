@@ -20,6 +20,7 @@ using TranslatorLibrary;
 using TransOptimizationLibrary;
 using TTSHelperLibrary;
 using ArtificialTransHelperLibrary;
+using System.Windows.Controls.Primitives;
 
 namespace MisakaTranslator_WPF
 {
@@ -682,18 +683,15 @@ namespace MisakaTranslator_WPF
 
         private void ChangeSize_Item_Click(object sender, RoutedEventArgs e)
         {
-            if (this.Opacity != 1)
+            if ((bool)(sender as ToggleButton).IsChecked)
             {
-                this.Opacity = 1;
-                ChangeSizeButton.Foreground = Brushes.Gray;
+                this.BorderThickness = new(3);
                 Growl.InfoGlobal(Application.Current.Resources["TranslateWin_DragBox_Hint"].ToString());
             }
             else
             {
-                this.Opacity = Common.appSettings.TF_Opacity / 100;
-                ChangeSizeButton.Foreground = Brushes.PapayaWhip;
+                this.BorderThickness = new(0);
             }
-
         }
 
         private void Exit_Item_Click(object sender, RoutedEventArgs e)
