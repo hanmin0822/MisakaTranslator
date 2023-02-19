@@ -683,11 +683,13 @@ namespace MisakaTranslator_WPF
             if ((bool)(sender as ToggleButton).IsChecked)
             {
                 this.BorderThickness = new(3);
+                this.ResizeMode = ResizeMode.CanResizeWithGrip;
                 Growl.InfoGlobal(Application.Current.Resources["TranslateWin_DragBox_Hint"].ToString());
             }
             else
             {
                 this.BorderThickness = new(0);
+                this.ResizeMode = ResizeMode.CanResize;
             }
         }
 
