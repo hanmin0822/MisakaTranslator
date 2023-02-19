@@ -282,14 +282,14 @@ namespace MisakaTranslator_WPF
             set;
         }
 
-        [Option(Alias = "TranslateFormSettings.opacity", DefaultValue = "50")]
+        [Option(Alias = "TranslateFormSettings.opacity", DefaultValue = "100")]
         double TF_Opacity
         {
             get;
             set;
         }
 
-        [Option(Alias = "TranslateFormSettings.backColor", DefaultValue = "#ffffffff")]
+        [Option(Alias = "TranslateFormSettings.backColor", DefaultValue = "#7f000000")]
         string TF_BackColor
         {
             get;
