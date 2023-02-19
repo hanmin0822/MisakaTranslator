@@ -798,6 +798,7 @@ namespace MisakaTranslator_WPF
                 MaxHeight = 300,
                 MinWidth = 600,
                 MinHeight = 300,
+                Owner = this,
                 Title = Application.Current.Resources["TranslateWin_History_Title"].ToString()
             };
             dtimer.Stop();
