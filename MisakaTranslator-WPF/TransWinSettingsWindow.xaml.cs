@@ -180,6 +180,7 @@ namespace MisakaTranslator_WPF
             {
                 if (sender == BgColorBtn)
                 {
+                    translateWin.LockButton.IsChecked = true;
                     BgColorBlock.Background = picker.SelectedBrush;
                     translateWin.Background = picker.SelectedBrush;
                     Common.appSettings.TF_BackColor = picker.SelectedBrush.ToString();

@@ -52,7 +52,7 @@
 
         <WrapPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left">
             <ToggleButton fa:Awesome.Content="Expand" Name="ChangeSizeButton" Click="ChangeSize_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_ChangeSize}" />
-            <Button fa:Awesome.Content="Lock" Name="LockButton" Click="Lock_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Lock}" />
+            <ToggleButton fa:Awesome.Content="MousePointer" Name="LockButton" IsChecked="True" Click="Lock_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Lock}" />
         </WrapPanel>
         <WrapPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Button fa:Awesome.Content="Pause" Name="PauseButton" Click="Pause_Item_Click" ToolTip="{StaticResource TranslateWin_Menu_Pause}" />

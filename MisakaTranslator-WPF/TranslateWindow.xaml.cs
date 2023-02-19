@@ -55,7 +55,6 @@ namespace MisakaTranslator_WPF
         public bool IsNotPausedFlag; //是否处在暂停状态（专用于OCR）,为真可以翻译
 
         private bool _isShowSource; //是否显示原文
-        private bool _isLocked;
 
         private readonly object _saveTransResultLock = new object(); // 读写数据库和_gameTextHistory的线程锁
 
@@ -71,7 +70,6 @@ namespace MisakaTranslator_WPF
             InitializeComponent();
 
             _isShowSource = true;
-            _isLocked = false;
 
             _gameTextHistory = new Queue<string>();
 
@@ -835,17 +833,14 @@ namespace MisakaTranslator_WPF
 
         private void Lock_Item_Click(object sender, RoutedEventArgs e)
         {
-            if(!_isLocked)
+            if(!(bool)(sender as ToggleButton).IsChecked)
             {
-                this.Opacity = 0;
-                _isLocked = true;
-                LockButton.SetValue(FontAwesome.WPF.Awesome.ContentProperty, FontAwesomeIcon.UnlockAlt);
+                this.Background = new SolidColorBrush(Colors.Transparent);
             }
             else
             {
-                this.Opacity = Common.appSettings.TF_Opacity / 100;
-                _isLocked = false;
-                LockButton.SetValue(FontAwesome.WPF.Awesome.ContentProperty, FontAwesomeIcon.Lock);
+                BrushConverter brushConverter = new();
+                this.Background = (Brush)brushConverter.ConvertFromString(Common.appSettings.TF_BackColor);
             }
         }
 
