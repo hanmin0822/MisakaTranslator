@@ -181,7 +181,8 @@ namespace MisakaTranslator_WPF
                 WindowStyle = WindowStyle.None,
                 MinWidth = 0,
                 MinHeight = 0,
-                Title = "选择颜色"
+                Title = "选择颜色",
+                Owner = this
             };
             picker.Confirmed += delegate
             {
