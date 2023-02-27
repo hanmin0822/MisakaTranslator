@@ -1,0 +1,11 @@
+// Windows.Win32.Security
+// enum
+TOKEN_ELEVATION_TYPE
+// structure
+TOKEN_ELEVATION
+// function
+GetTokenInformation
+
+// Windows.Win32.System.Threading
+// function
+OpenProcessToken

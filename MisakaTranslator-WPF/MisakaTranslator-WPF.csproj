@@ -4,14 +4,16 @@
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
-    <ApplicationManifest>App.manifest</ApplicationManifest>
+    <ApplicationManifest>Properties\App.manifest</ApplicationManifest>
     <ApplicationIcon>logo.ico</ApplicationIcon>
-    <RootNamespace>$(MSBuildProjectName.Replace("-","_"))</RootNamespace>
+    <RootNamespace>MisakaTranslator_WPF</RootNamespace>
     <PlatformTarget Condition="'$(Platform)' == 'AnyCPU'">AnyCPU</PlatformTarget>
     <Prefer32Bit Condition="'$(Platform)' == 'AnyCPU'">false</Prefer32Bit>
+    <StartupObject>MisakaTranslator_WPF.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
+    <AdditionalFiles Include="Properties\NativeMethods.txt" />
     <Resource Include="logo.ico" />
     <Resource Include="GuidePages\Completation.png" />
     <Resource Include="GuidePages\Completation_small.png" />
@@ -40,6 +42,8 @@
     <PackageReference Include="Config.Net" Version="5.1.5" />
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
     <PackageReference Include="HandyControl" Version="3.4.0" />
+    <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.2.188-beta" />
+    <PackageReference Include="Microsoft.Windows.SDK.Win32Metadata" Version="42.0.39-preview" />
     <PackageReference Include="TesseractOCR" Version="5.2.14" Aliases="Tesseract" />
   </ItemGroup>
 
