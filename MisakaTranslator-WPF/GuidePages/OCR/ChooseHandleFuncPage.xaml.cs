@@ -141,6 +141,26 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
                     HandyControl.Controls.Growl.Error($"TesseractCli {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
                 }
             }
+            else if(Common.appSettings.OCRsource == "WindowsOCR")
+            {
+                if (Common.ocr.OCR_Init("", "") != false)
+                {
+                    string res = await Common.ocr.OCRProcessAsync();
+
+                    if (res != null)
+                    {
+                        HandyControl.Controls.MessageBox.Show(res, Application.Current.Resources["MessageBox_Result"].ToString());
+                    }
+                    else
+                    {
+                        HandyControl.Controls.Growl.Error($"Windows OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
+                    }
+                }
+                else
+                {
+                    HandyControl.Controls.Growl.Error($"Windows OCR {Application.Current.Resources["APITest_Error_Hint"]}\n{Common.ocr.GetLastError()}");
+                }
+            }
 
             ConfirmBtn.IsEnabled = true;
         }
