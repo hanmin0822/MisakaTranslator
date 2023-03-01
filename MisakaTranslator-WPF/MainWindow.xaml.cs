@@ -142,6 +142,10 @@ namespace MisakaTranslator_WPF {
             if (Common.GlobalOCRHotKey.RegisterHotKeyByStr(Common.appSettings.GlobalOCRHotkey, hwnd, CallBack) == false) {
                 Growl.ErrorGlobal(Application.Current.Resources["MainWindow_GlobalOCRError_Hint"].ToString());
             }
+            //解决UAC选择No后窗口会被Explorer覆盖 并通过TopMost调整窗口Z Order
+            base.Activate();
+            base.Topmost = true;
+            base.Topmost = false;
         }
 
         private static IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled) {
