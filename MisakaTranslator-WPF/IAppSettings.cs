@@ -114,6 +114,13 @@ namespace MisakaTranslator_WPF
             set;
         }
 
+        [Option(Alias = "ChatGPTTranslator.apiKey", DefaultValue = "")]
+        string ChatGPTapiKey
+        {
+            get;
+            set;
+        }
+
         [Option(Alias = "XiaoniuTranslator.xiaoniuApiKey", DefaultValue = "")]
         string xiaoniuApiKey
         {
