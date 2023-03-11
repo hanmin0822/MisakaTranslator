@@ -43,7 +43,6 @@ namespace TranslatorLibrary
             string jsonParam = $"{{\"model\": \"{openai_model}\",\"messages\": [{{\"role\": \"system\", \"content\": \"Translate {srcLang} To {desLang}\"}},{{\"role\": \"user\", \"content\": \"{q}\"}}]}}";
             var hc = CommonFunction.GetHttpClient();
             var req = new StringContent(jsonParam, null, "application/json");
-            //req.Headers.Add("Authorization", "Bearer " + apiKey);
             hc.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", apiKey);
             try
             {
@@ -90,7 +89,7 @@ namespace TranslatorLibrary
                 }
                 catch
                 {
-                    errorInfo = "未知错误";
+                    errorInfo = "Unknown error";
                     return null;
                 }
                 return null;
@@ -108,51 +107,46 @@ namespace TranslatorLibrary
     }
 
 #pragma warning disable 0649
-    public class ChatResponse
+    public struct ChatResponse
     {
-        public string id { get; set; }
-        public string _object { get; set; }
-        public int created { get; set; }
-        public string model { get; set; }
-        public ChatUsage usage { get; set; }
-        public ChatChoice[] choices { get; set; }
+        public string id;
+        public string _object;
+        public int created;
+        public string model;
+        public ChatUsage usage;
+        public ChatChoice[] choices;
     }
 
-    public class ChatUsage
+    public struct ChatUsage
     {
-        public int prompt_tokens { get; set; }
-        public int completion_tokens { get; set; }
-        public int total_tokens { get; set; }
+        public int prompt_tokens;
+        public int completion_tokens;
+        public int total_tokens;
     }
 
-    public class ChatChoice
+    public struct ChatChoice
     {
-        public ChatMessage message { get; set; }
-        public string finish_reason { get; set; }
-        public int index { get; set; }
+        public ChatMessage message;
+        public string finish_reason;
+        public int index;
     }
 
-    public class ChatMessage
+    public struct ChatMessage
     {
-        public string role { get; set; }
-        public string content { get; set; }
+        public string role;
+        public string content;
     }
 
-    public class ChatResErr
+    public struct ChatResErr
     {
-        public ChatError error { get; set; }
+        public ChatError error;
     }
 
-    public class ChatError
+    public struct ChatError
     {
-        public string message { get; set; }
-        public string type { get; set; }
-        public object param { get; set; }
-        public object code { get; set; }
+        public string message;
+        public string type;
+        public object param;
+        public object code;
     }
-
-
-
-
-
 }
