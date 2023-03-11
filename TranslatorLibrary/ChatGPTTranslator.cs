@@ -86,6 +86,7 @@ namespace TranslatorLibrary
                 {
                     var err = JsonSerializer.Deserialize<ChatResErr>(retString, CommonFunction.JsonOP);
                     errorInfo = err.error.message;
+                    return null;
                 }
                 catch
                 {
