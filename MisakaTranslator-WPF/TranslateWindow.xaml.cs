@@ -259,6 +259,10 @@ namespace MisakaTranslator_WPF
                     DeepLTranslator deepl = new DeepLTranslator();
                     deepl.TranslatorInit(Common.appSettings.DeepLsecretKey, Common.appSettings.DeepLsecretKey);
                     return deepl;
+                case "ChatGPTTranslator":
+                    ChatGPTTranslator chatgpt = new ChatGPTTranslator();
+                    chatgpt.TranslatorInit(Common.appSettings.ChatGPTapiKey, Common.appSettings.ChatGPTapiKey);
+                    return chatgpt;
                 case "ArtificialTranslator":
                     ArtificialTranslator at = new ArtificialTranslator();
                     at.TranslatorInit(Common.appSettings.ArtificialPatchPath);

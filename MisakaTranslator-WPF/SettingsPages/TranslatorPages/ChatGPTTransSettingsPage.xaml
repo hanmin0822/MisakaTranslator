@@ -1,4 +1,4 @@
-﻿<Page x:Class="MisakaTranslator_WPF.SettingsPages.TranslatorPages.DeepLTransSettingsPage"
+﻿<Page x:Class="MisakaTranslator_WPF.SettingsPages.TranslatorPages.ChatGPTTransSettingsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,20 +7,20 @@
       xmlns:local="clr-namespace:MisakaTranslator_WPF.SettingsPages.TranslatorPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="594"
-      Title="DeepLTransSettingsPage">
+      Title="ChatGPTTransSettingsPage">
 
     <Grid>
         <hc:ScrollViewer HorizontalScrollBarVisibility="Disabled">
             <StackPanel Background="White">
-            <TextBlock Text="{StaticResource DeepLTransSettingsPage_Introduce}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
+                <TextBlock Text="{StaticResource ChatGPTTransSettingsPage_Introduce}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
                 <StackPanel Margin="20,20,20,0">
                     <Grid Margin="0,10,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                        <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource DeepLTransSettingsPage_secretKey}" Name="DeepLTransSecretKeyBox" hc:InfoElement.ShowClearButton="True"/>
-                        <Button Grid.Column="1" Content="{StaticResource API_authTestBtn}" Margin="10,0,0,0" Width="122" Click="AuthTestBtn_Click" ></Button>
+                        <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource ChatGPTTransSettingsPage_secretKey}" Name="ChatGPTTransSecretKeyBox" hc:InfoElement.ShowClearButton="True"/>
+                    <Button Grid.Column="1" Content="{StaticResource API_authTestBtn}" Margin="10,0,0,0" Width="122" Click="AuthTestBtn_Click" ></Button>
                 </Grid>
                 <hc:Divider/>
                 <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource API_testSrcText}" Name="TestSrcText" hc:InfoElement.ShowClearButton="True" Text="本ソフトウェアのご利用を歓迎します。"/>

@@ -37,6 +37,7 @@ namespace TranslatorLibrary
             { "金山快译" , "KingsoftFastAITTranslator" },
             { "译典通", "Dreye"},
             { "DeepL", "DeepLTranslator"},
+            {"ChatGPT","ChatGPTTranslator" },
             { "本地人工翻译(见说明)" , "ArtificialTranslator"}
         };
 
