@@ -92,14 +92,9 @@ namespace KeyboardMouseHookLibrary
                         break;
                     default:
                     {
-                        if (Regex.IsMatch(value, @"[0-9]"))
-                        {
-                            vk = (Keys)Enum.Parse(typeof(Keys), "D" + value.Trim());
-                        }
-                        else
-                        {
-                            vk = (Keys)Enum.Parse(typeof(Keys), value.Trim());
-                        }
+                        string pattern = Regex.IsMatch(value, @"[0-9]") ?  "D" + value.Trim() : value.Trim();
+                        if (!Enum.TryParse<Keys>(pattern, out vk))
+                            return false;
                         break;
                     }
                 }
