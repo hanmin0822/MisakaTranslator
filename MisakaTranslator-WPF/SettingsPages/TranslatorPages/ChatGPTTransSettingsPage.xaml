@@ -30,7 +30,8 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.ColumnSpan="2">
-                            <hc:TextBox hc:TitleElement.TitlePlacement="Left" hc:TitleElement.Title="{StaticResource ChatGPTTransSettingsPage_apiUrl}" x:Name="ChatGPTTransUrlBox" hc:InfoElement.ShowClearButton="True" Text="https://api.openai.com/v1/chat/completions" Margin="0,0,132,0"/>
+                            <hc:TextBox hc:TitleElement.TitlePlacement="Left" hc:TitleElement.Title="{StaticResource ChatGPTTransSettingsPage_apiUrl}" x:Name="ChatGPTTransUrlBox" hc:InfoElement.ShowClearButton="True" 
+                                        Text="https://api.openai.com/v1/chat/completions" Margin="0,0,132,0"/>
                             <Button Content="{StaticResource API_authTestBtn}" Margin="432,0,0,0" Width="122" Click="AuthTestBtn_Click" HorizontalAlignment="Left" />
                         </Grid>
                     </Grid>
