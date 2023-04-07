@@ -121,7 +121,7 @@ namespace MisakaTranslator_WPF
             set;
         }
 
-        [Option(Alias = "ChatGPTTranslator.apiUrl", DefaultValue = "")]
+        [Option(Alias = "ChatGPTTranslator.apiUrl", DefaultValue = "https://api.openai.com/v1/chat/completions")]
         string ChatGPTapiUrl
         {
             get;
