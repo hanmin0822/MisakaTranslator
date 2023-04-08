@@ -19,7 +19,6 @@ namespace TranslatorLibrary
         public static readonly string SIGN_UP_URL = "https://platform.openai.com";
         public static readonly string BILL_URL = "https://platform.openai.com/account/usage";
         public static readonly string DOCUMENT_URL = "https://platform.openai.com/docs/introduction/overview";
-        //public static readonly string TRANSLATE_API_URL = "https://api.openai.com/v1/chat/completions";
         private string openai_model = "gpt-3.5-turbo";
 
         private string apiKey; //ChatGPT翻译API的密钥
@@ -97,7 +96,7 @@ namespace TranslatorLibrary
             }
         }
 
-        public void TranslatorInit(string param1, string param2 = """https://api.openai.com/v1/chat/completions""")
+        public void TranslatorInit(string param1, string param2)
         {
             apiKey = param1;
             apiUrl = param2;
