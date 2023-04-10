@@ -69,8 +69,6 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
         {
             if (HookFunListView.SelectedIndex != -1)
             {
-                SQLHelper sqliteH = new SQLHelper();
-
                 string hookAdd = lstData[HookFunListView.SelectedIndex].HookAddress;
                 int pid = lstData[HookFunListView.SelectedIndex].GamePID;
 
@@ -102,7 +100,7 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                         //往数据库写信息，下一次游戏启动需要重新选方法
                         if (Common.GameID != -1)
                         {
-                            sqliteH.ExecuteSql(
+                            GameLibraryHelper.sqlHelper.ExecuteSql(
                                 $"UPDATE game_library SET isMultiHook = '{"True"}' WHERE gameid = {Common.GameID};");
                         }
 
@@ -115,15 +113,15 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                 {
                     if (Common.GameID != -1)
                     {
-                        sqliteH.ExecuteSql(
+                        GameLibraryHelper.sqlHelper.ExecuteSql(
                             $"UPDATE game_library SET isMultiHook = '{"False"}' WHERE gameid = {Common.GameID};");
                     }
                 }
 
                 if (Common.GameID != -1)
                 {
-                    sqliteH.ExecuteSql($"UPDATE game_library SET transmode = {"1"} WHERE gameid = {Common.GameID};");
-                    sqliteH.ExecuteSql(
+                    GameLibraryHelper.sqlHelper.ExecuteSql($"UPDATE game_library SET transmode = {"1"} WHERE gameid = {Common.GameID};");
+                    GameLibraryHelper.sqlHelper.ExecuteSql(
                         $"UPDATE game_library SET hookcode = '{lstData[HookFunListView.SelectedIndex].HookCode}' WHERE gameid = {Common.GameID};");
 
                     if (LastCustomHookCode != "NULL")
@@ -137,7 +135,7 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                         if (result == MessageBoxResult.Yes)
                         {
                             //记录这个特殊码到数据库
-                            sqliteH.ExecuteSql(
+                            GameLibraryHelper.sqlHelper.ExecuteSql(
                                 $"UPDATE game_library SET hookcode_custom = '{LastCustomHookCode}' WHERE gameid = {Common.GameID};");
                         }
                         else if (result == MessageBoxResult.No)
@@ -146,13 +144,13 @@ namespace MisakaTranslator_WPF.GuidePages.Hook
                             return;
                         } else{
                             //不记录特殊码，但也要写NULL
-                            sqliteH.ExecuteSql(
+                            GameLibraryHelper.sqlHelper.ExecuteSql(
                                 $"UPDATE game_library SET hookcode_custom = '{"NULL"}' WHERE gameid = {Common.GameID};");
 
                         }
                     }
                     else {
-                        sqliteH.ExecuteSql(
+                        GameLibraryHelper.sqlHelper.ExecuteSql(
                             $"UPDATE game_library SET hookcode_custom = '{"NULL"}' WHERE gameid = {Common.GameID};");
                     }
 

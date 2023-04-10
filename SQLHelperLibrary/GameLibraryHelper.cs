@@ -76,16 +76,16 @@ namespace SQLHelperLibrary
         public bool Isx64 { get; set; }
     }
 
-    public class GameLibraryHelper
+    public static class GameLibraryHelper
     {
+        public static readonly SQLHelper sqlHelper = new($"{Environment.CurrentDirectory}\\MisakaGameLibrary.sqlite");
+
         /// <summary>
         /// 创建一个新游戏列表库
         /// </summary>
         public static bool CreateNewGameList()
         {
-            SQLHelper.CreateNewDatabase(Environment.CurrentDirectory + "\\MisakaGameLibrary.sqlite");
-            var sqlHelper = new SQLHelper();
-            var id = sqlHelper.ExecuteSql("CREATE TABLE game_library(gameid INTEGER PRIMARY KEY AUTOINCREMENT,gamename TEXT,gamefilepath TEXT,transmode INTEGER,src_lang TEXT,dst_lang TEXT,repair_func TEXT,repair_param_a TEXT,repair_param_b TEXT,hookcode TEXT,isMultiHook TEXT,isx64 TEXT,hookcode_custom TEXT);");
+            var id = sqlHelper.ExecuteSql("CREATE TABLE IF NOT EXISTS game_library(gameid INTEGER PRIMARY KEY AUTOINCREMENT,gamename TEXT,gamefilepath TEXT,transmode INTEGER,src_lang TEXT,dst_lang TEXT,repair_func TEXT,repair_param_a TEXT,repair_param_b TEXT,hookcode TEXT,isMultiHook TEXT,isx64 TEXT,hookcode_custom TEXT);");
             if (id == -1)
             {
                 MessageBox.Show("新建游戏库时发生错误，错误代码:\n" + sqlHelper.GetLastError(), "数据库错误");
@@ -114,14 +114,12 @@ namespace SQLHelperLibrary
                 }
             }
 
-            var sqliteH = new SQLHelper();
-
-            var ls = sqliteH.ExecuteReader_OneLine(
+            var ls = sqlHelper.ExecuteReader_OneLine(
                 $"SELECT gameid FROM game_library WHERE gamefilepath = '{gamePath}';", 1);
 
             if (ls == null)
             {
-                MessageBox.Show($"数据库访问时发生错误，错误代码:\n{sqliteH.GetLastError()}", "数据库错误");
+                MessageBox.Show($"数据库访问时发生错误，错误代码:\n{sqlHelper.GetLastError()}", "数据库错误");
                 return -1;
             }
 
@@ -129,8 +127,8 @@ namespace SQLHelperLibrary
             {
                 var sql =
                     $"INSERT INTO game_library VALUES(NULL,'{Path.GetFileNameWithoutExtension(gamePath)}','{gamePath}',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);";
-                sqliteH.ExecuteSql(sql);
-                ls = sqliteH.ExecuteReader_OneLine(
+                sqlHelper.ExecuteSql(sql);
+                ls = sqlHelper.ExecuteReader_OneLine(
                     $"SELECT gameid FROM game_library WHERE gamefilepath = '{gamePath}';", 1);
             }
 
@@ -150,7 +148,6 @@ namespace SQLHelperLibrary
                 }
             }
 
-            var sqlHelper = new SQLHelper();
             var ls = sqlHelper.ExecuteReader("SELECT * FROM game_library;", 13);
 
             if (ls == null)
@@ -210,7 +207,6 @@ namespace SQLHelperLibrary
                 }
             }
 
-            var sqlHelper = new SQLHelper();
             var ls = sqlHelper.ExecuteReader_OneLine($"SELECT * FROM game_library WHERE gameid = {gameID};", 13);
 
             if (ls == null)
@@ -250,8 +246,7 @@ namespace SQLHelperLibrary
         /// <param name="gameID"></param>
         /// <returns></returns>
         public static bool DeleteGameByID(int gameID) {
-            var sqliteH = new SQLHelper();
-            var ret = sqliteH.ExecuteSql($"DELETE FROM game_library WHERE gameid = {gameID};");
+            var ret = sqlHelper.ExecuteSql($"DELETE FROM game_library WHERE gameid = {gameID};");
             return ret != -1;
         }
 
@@ -262,8 +257,7 @@ namespace SQLHelperLibrary
         /// <param name="name"></param>
         /// <returns></returns>
         public static bool UpdateGameNameByID(int gameID, string name) {
-            var sqliteH = new SQLHelper();
-            var ret = sqliteH.ExecuteSql($"UPDATE game_library SET gamename = '{name}' WHERE gameid = {gameID};");
+            var ret = sqlHelper.ExecuteSql($"UPDATE game_library SET gamename = '{name}' WHERE gameid = {gameID};");
             return ret != -1;
         }
     }

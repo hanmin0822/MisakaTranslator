@@ -301,6 +301,10 @@
     <sys:String x:Key="XxgJpZhDictPage_BtnTest">字典查询</sys:String>
     <sys:String x:Key="XxgJpZhDictPage_ChoosePathHint">请选择小学馆日中词典数据库文件</sys:String>
 
+    <sys:String x:Key="MecabDictPage_Introduce">指定MeCab词典文件夹路径，启用日语分词功能。</sys:String>
+    <sys:String x:Key="MecabDictPage_DBPath">词典数据库文件夹路径</sys:String>
+    <sys:String x:Key="MecabDictPage_ClearPath">清除路径</sys:String>
+    <sys:String x:Key="TranslateWin_NoMeCab_Hint">找不到MeCab数据库，请设置正确的文件夹路径。</sys:String>
 
     <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_left">MisakaTranslator检测到您有自定义特殊码行为，记录最后一个特殊码为</sys:String>
     <sys:String x:Key="ChooseHookFuncPage_MBOX_hookcodeConfirm_right">如果您确认这个特殊码可以得到文本，请选择是；如果此特殊码不是您想要的结果，您可以选择否来重新注入一个自定义特殊码；如果您不需要自定义特殊码，请选择取消来进入下一个界面。</sys:String>

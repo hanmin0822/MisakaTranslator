@@ -10,12 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - uses: actions/setup-dotnet@v3
-    - run: dotnet build -p:MeCabUseDefaultDictionary=false
-    - run: |
-        cd MisakaTranslator-WPF/bin
-        echo ("本artifact为nightly build，为了减小体积，" +
-          "未包含正常运行必须的mecab字典和Textractor，" +
-          "需手动从已release的包中复制dic和lib文件夹。") > readme.txt
+    - run: dotnet build
     - uses: actions/upload-artifact@master
       with:
         path: MisakaTranslator-WPF/bin

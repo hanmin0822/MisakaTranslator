@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace MecabHelperLibrary
 {
-    public struct MecabWordInfo {
+    public struct MecabWordInfo
+    {
 
         /// <summary>
         /// 单词
@@ -45,62 +46,78 @@ namespace MecabHelperLibrary
         public string Feature;
     }
 
-
-    public class MecabHelper:IDisposable
+    public class MecabHelper : IDisposable
     {
-        private MeCabParam Parameter;
-        private MeCabTagger Tagger;
+        private readonly MeCabTagger Tagger;
 
-        public MecabHelper() {
-            Parameter = new MeCabParam();
-            //Parameter.UserDic.Append("");
-            Tagger = MeCabTagger.Create(Parameter);
+        public bool EnableMecab { get; protected set; }
+
+        public MecabHelper(string dicPath)
+        {
+            try
+            {
+                Tagger = MeCabTagger.Create(
+                    new MeCabParam()
+                    {
+                        DicDir = dicPath
+                    }
+                );
+                EnableMecab = true;
+            }
+            catch    
+            {
+                Tagger = null;
+                EnableMecab = false;
+            }
         }
 
         public void Dispose()
         {
-            Tagger.Dispose();
+            Tagger?.Dispose();
         }
-
-
-
 
         /// <summary>
         /// 处理句子，对句子进行分词，得到结果
         /// </summary>
         /// <param name="sentence"></param>
         /// <returns></returns>
-        public List<MecabWordInfo> SentenceHandle(string sentence) {
-
+        public List<MecabWordInfo> SentenceHandle(string sentence)
+        {
             List<MecabWordInfo> ret = new List<MecabWordInfo>();
-
-            foreach (var node in Tagger.ParseToNodes(sentence))
+            if (EnableMecab)
             {
-                if (node.CharType > 0)
+                foreach (var node in Tagger.ParseToNodes(sentence))
                 {
-                    var features = node.Feature.Split(',');
-
-                    
-                    MecabWordInfo mwi = new MecabWordInfo {
-                        Word = node.Surface,
-                        PartOfSpeech = features[0],
-                        Description = features[1],
-                        Feature =  node.Feature
-                    };
-
-                    //加这一步是为了防止乱码进入分词导致无法读取假名
-                    //以及助词一般不需要注音
-                    if (features.Length >= 8 & mwi.PartOfSpeech != "助詞")
+                    if (node.CharType > 0)
                     {
-                        mwi.HiraKana = KataganaToHiragana(features[7]);
-                        mwi.Romaji = HiraganaToAlphabet(mwi.HiraKana);
-                        mwi.Kana = features[7];
+                        var features = node.Feature.Split(',');
+
+
+                        MecabWordInfo mwi = new MecabWordInfo
+                        {
+                            Word = node.Surface,
+                            PartOfSpeech = features[0],
+                            Description = features[1],
+                            Feature = node.Feature
+                        };
+
+                        //加这一步是为了防止乱码进入分词导致无法读取假名
+                        //以及助词一般不需要注音
+                        if (features.Length >= 8 & mwi.PartOfSpeech != "助詞")
+                        {
+                            mwi.HiraKana = KataganaToHiragana(features[7]);
+                            mwi.Romaji = HiraganaToAlphabet(mwi.HiraKana);
+                            mwi.Kana = features[7];
+                        }
+
+                        ret.Add(mwi);
                     }
-                    
-                    ret.Add(mwi);
                 }
             }
-
+            else
+            {
+                ret.Add(new MecabWordInfo { Word = sentence });
+            }
             return ret;
         }
 
@@ -298,7 +315,7 @@ namespace MecabHelperLibrary
             string s2 = "";
             for (int i = 0; i < s1.Length; i++)
             {
-               
+
                 if (i + 1 < s1.Length)
                 {
                     // 有「っ」的情况下
@@ -323,5 +340,4 @@ namespace MecabHelperLibrary
             return s2;
         }
     }
-
 }

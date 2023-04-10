@@ -49,10 +49,9 @@ namespace MisakaTranslator_WPF.GuidePages
                 //写数据库信息
                 if(Common.GameID != -1)
                 {
-                    SQLHelper sqliteH = new SQLHelper();
-                    sqliteH.ExecuteSql(
+                    GameLibraryHelper.sqlHelper.ExecuteSql(
                         $"UPDATE game_library SET src_lang = '{Common.UsingSrcLang}' WHERE gameid = {Common.GameID};");
-                    sqliteH.ExecuteSql(
+                    GameLibraryHelper.sqlHelper.ExecuteSql(
                         $"UPDATE game_library SET dst_lang = '{Common.UsingDstLang}' WHERE gameid = {Common.GameID};");
                 }
 
