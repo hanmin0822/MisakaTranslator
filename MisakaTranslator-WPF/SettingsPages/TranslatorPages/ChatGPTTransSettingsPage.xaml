@@ -15,33 +15,46 @@
                 <TextBlock Text="{StaticResource ChatGPTTransSettingsPage_Introduce}" FontSize="16" Margin="10" TextWrapping="WrapWithOverflow"/>
                 <StackPanel Margin="20,20,20,0">
                     <Grid Margin="0,10,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                        <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource ChatGPTTransSettingsPage_secretKey}" Name="ChatGPTTransSecretKeyBox" hc:InfoElement.ShowClearButton="True"/>
-                    <Button Grid.Column="1" Content="{StaticResource API_authTestBtn}" Margin="10,0,0,0" Width="122" Click="AuthTestBtn_Click" ></Button>
-                </Grid>
-                <hc:Divider/>
-                <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource API_testSrcText}" Name="TestSrcText" hc:InfoElement.ShowClearButton="True" Text="本ソフトウェアのご利用を歓迎します。"/>
-                <Grid Margin="0,10,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource API_testSrcLang}" Name="TestSrcLang" hc:InfoElement.ShowClearButton="True" Text="jp" TextAlignment="Center"/>
-                    <hc:TextBox Grid.Column="2" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource API_testDstLang}" Name="TestDstLang" hc:InfoElement.ShowClearButton="True" Text="zh" TextAlignment="Center"/>
-                    <Button Grid.Column="3" Content="{StaticResource API_testTransBtn}" Margin="10,0,0,0" Width="122" Click="TransTestBtn_Click" ></Button>
-                </Grid>
-                <StackPanel Margin="0,10,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Content="{StaticResource API_applyBtn}" Width="122" Click="ApplyBtn_Click" HorizontalAlignment="Left" />
-                    <Button Content="{StaticResource API_docBtn}" Margin="10,0,0,0" Width="225" Click="DocBtn_Click" HorizontalAlignment="Left" ></Button>
-                    <Button Content="{StaticResource API_billBtn}" Margin="10,0,0,0" Width="122" Click="BillBtn_Click" HorizontalAlignment="Right" ></Button>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.ColumnSpan="2">
+                            <hc:TextBox hc:TitleElement.TitlePlacement="Left" hc:TitleElement.Title="{StaticResource ChatGPTTransSettingsPage_secretKey}" x:Name="ChatGPTTransSecretKeyBox" hc:InfoElement.ShowClearButton="True" Margin="0,0,132,0"/>
+                            <!--Button Content="{StaticResource API_authTestBtn}" Margin="432,0,0,0" Width="122" Click="AuthTestBtn_Click" HorizontalAlignment="Left" /-->
+                        </Grid>
+                    </Grid>
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.ColumnSpan="2">
+                            <hc:TextBox hc:TitleElement.TitlePlacement="Left" hc:TitleElement.Title="{StaticResource ChatGPTTransSettingsPage_apiUrl}" x:Name="ChatGPTTransUrlBox" hc:InfoElement.ShowClearButton="True" 
+                                        Text="https://api.openai.com/v1/chat/completions" Margin="0,0,132,0"/>
+                            <Button Content="{StaticResource API_authTestBtn}" Margin="432,0,0,0" Width="122" Click="AuthTestBtn_Click" HorizontalAlignment="Left" />
+                        </Grid>
+                    </Grid>
+                    <hc:Divider/>
+                    <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource API_testSrcText}" Name="TestSrcText" hc:InfoElement.ShowClearButton="True" Text="本ソフトウェアのご利用を歓迎します。"/>
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <hc:TextBox hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource API_testSrcLang}" Name="TestSrcLang" hc:InfoElement.ShowClearButton="True" Text="jp" TextAlignment="Center"/>
+                        <hc:TextBox Grid.Column="2" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{StaticResource API_testDstLang}" Name="TestDstLang" hc:InfoElement.ShowClearButton="True" Text="zh" TextAlignment="Center"/>
+                        <Button Grid.Column="3" Content="{StaticResource API_testTransBtn}" Margin="10,0,0,0" Width="122" Click="TransTestBtn_Click" ></Button>
+                    </Grid>
+                    <StackPanel Margin="0,10,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="{StaticResource API_applyBtn}" Width="122" Click="ApplyBtn_Click" HorizontalAlignment="Left" />
+                        <Button Content="{StaticResource API_docBtn}" Margin="10,0,0,0" Width="225" Click="DocBtn_Click" HorizontalAlignment="Left" ></Button>
+                        <Button Content="{StaticResource API_billBtn}" Margin="10,0,0,0" Width="122" Click="BillBtn_Click" HorizontalAlignment="Right" ></Button>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
-        </StackPanel>
         </hc:ScrollViewer>
         <StackPanel hc:Growl.GrowlParent="True" HorizontalAlignment="Right" Margin="15"/>
 

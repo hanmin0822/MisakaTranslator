@@ -19,10 +19,10 @@ namespace TranslatorLibrary
         public static readonly string SIGN_UP_URL = "https://platform.openai.com";
         public static readonly string BILL_URL = "https://platform.openai.com/account/usage";
         public static readonly string DOCUMENT_URL = "https://platform.openai.com/docs/introduction/overview";
-        public static readonly string TRANSLATE_API_URL = "https://api.openai.com/v1/chat/completions";
         private string openai_model = "gpt-3.5-turbo";
 
         private string apiKey; //ChatGPT翻译API的密钥
+        private string apiUrl; //ChatGPT翻译API的URL
         private string errorInfo; //错误信息
 
         public string GetLastError()
@@ -46,7 +46,7 @@ namespace TranslatorLibrary
             hc.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", apiKey);
             try
             {
-                retString = await (await hc.PostAsync(TRANSLATE_API_URL, req)).Content.ReadAsStringAsync();
+                retString = await (await hc.PostAsync(apiUrl, req)).Content.ReadAsStringAsync();
             }
             catch (System.Net.Http.HttpRequestException ex)
             {
@@ -94,16 +94,13 @@ namespace TranslatorLibrary
                 }
                 return null;
             }
-                
-            
         }
 
-        public void TranslatorInit(string param1, string param2 = "")
+        public void TranslatorInit(string param1, string param2)
         {
             apiKey = param1;
+            apiUrl = param2;
         }
-
-
     }
 
 #pragma warning disable 0649

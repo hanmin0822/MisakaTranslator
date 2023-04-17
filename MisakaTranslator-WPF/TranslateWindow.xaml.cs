@@ -264,7 +264,7 @@ namespace MisakaTranslator_WPF
                     return deepl;
                 case "ChatGPTTranslator":
                     ChatGPTTranslator chatgpt = new ChatGPTTranslator();
-                    chatgpt.TranslatorInit(Common.appSettings.ChatGPTapiKey, Common.appSettings.ChatGPTapiKey);
+                    chatgpt.TranslatorInit(Common.appSettings.ChatGPTapiKey, Common.appSettings.ChatGPTapiUrl);
                     return chatgpt;
                 case "ArtificialTranslator":
                     ArtificialTranslator at = new ArtificialTranslator();

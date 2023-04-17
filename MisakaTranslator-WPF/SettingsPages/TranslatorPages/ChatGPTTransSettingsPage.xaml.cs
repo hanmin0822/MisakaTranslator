@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using TranslatorLibrary;
 
 namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
@@ -25,13 +13,16 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
         {
             InitializeComponent();
             ChatGPTTransSecretKeyBox.Text = Common.appSettings.ChatGPTapiKey;
+            ChatGPTTransUrlBox.Text = Common.appSettings.ChatGPTapiUrl;
         }
 
         private async void AuthTestBtn_Click(object sender, RoutedEventArgs e)
         {
             Common.appSettings.ChatGPTapiKey = ChatGPTTransSecretKeyBox.Text;
+            Common.appSettings.ChatGPTapiUrl = ChatGPTTransUrlBox.Text;
+
             ITranslator chatGPTTrans = new ChatGPTTranslator();
-            chatGPTTrans.TranslatorInit(ChatGPTTransSecretKeyBox.Text, ChatGPTTransSecretKeyBox.Text);
+            chatGPTTrans.TranslatorInit(ChatGPTTransSecretKeyBox.Text, ChatGPTTransUrlBox.Text);
 
             if (await chatGPTTrans.TranslateAsync("apple", "zh", "en") != null)
             {
@@ -61,7 +52,7 @@ namespace MisakaTranslator_WPF.SettingsPages.TranslatorPages
         private async void TransTestBtn_Click(object sender, RoutedEventArgs e)
         {
             ITranslator chatGPTTrans = new ChatGPTTranslator();
-            chatGPTTrans.TranslatorInit(ChatGPTTransSecretKeyBox.Text, ChatGPTTransSecretKeyBox.Text);
+            chatGPTTrans.TranslatorInit(ChatGPTTransSecretKeyBox.Text, ChatGPTTransUrlBox.Text);
             string res = await chatGPTTrans.TranslateAsync(TestSrcText.Text, TestDstLang.Text, TestSrcLang.Text);
 
             if (res != null)
