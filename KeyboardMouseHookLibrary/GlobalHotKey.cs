@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Windows.Win32;
+using Windows.Win32.Foundation;
+using Windows.Win32.UI.Input.KeyboardAndMouse;
 
 namespace KeyboardMouseHookLibrary
 {
@@ -11,32 +13,15 @@ namespace KeyboardMouseHookLibrary
 
     public class GlobalHotKey
     {
-        //引入系统API
-        [DllImport("user32.dll")]
-        private static extern bool RegisterHotKey(IntPtr hWnd, int id, int modifiers, Keys vk);
-
-        [DllImport("user32.dll")]
-        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-
-
         private int _keyId = 10;     //区分不同的快捷键
         private readonly Dictionary<int, HotKeyCallBackHandler> _keymap = new Dictionary<int, HotKeyCallBackHandler>();   //每一个key对于一个处理函数
         public delegate void HotKeyCallBackHandler();
 
-        //组合控制键
-        public enum HotkeyModifiers
-        {
-            Alt = 1,
-            Control = 2,
-            Shift = 4,
-            Win = 8
-        }
-
         //注册快捷键
-        public bool RegisterGlobalHotKey(IntPtr hWnd, int modifiers, Keys vk, HotKeyCallBackHandler callBack)
+        internal bool RegisterGlobalHotKey(HWND hWnd, HOT_KEY_MODIFIERS modifiers, Keys vk, HotKeyCallBackHandler callBack)
         {
             int id = _keyId++;
-            bool registerHotkeyResult = RegisterHotKey(hWnd, id, modifiers, vk);
+            bool registerHotkeyResult = PInvoke.RegisterHotKey(hWnd, id, modifiers, (uint)vk);
             _keymap[id] = callBack;
             return registerHotkeyResult;
         }
@@ -48,7 +33,7 @@ namespace KeyboardMouseHookLibrary
             {
                 if (var.Value == callBack)
                 {
-                    UnregisterHotKey(hWnd, var.Key);
+                    PInvoke.UnregisterHotKey((HWND)hWnd, var.Key);
                     return;
                 }
             }
@@ -75,20 +60,20 @@ namespace KeyboardMouseHookLibrary
         {
             if (str == "")
                 return false;
-            int modifiers = 0;
+            HOT_KEY_MODIFIERS modifiers = 0;
             Keys vk = Keys.None;
             foreach (string value in str.Split('+'))
             {
                 switch (value.Trim())
                 {
                     case "Ctrl":
-                        modifiers += (int)HotkeyModifiers.Control;
+                        modifiers = HOT_KEY_MODIFIERS.MOD_CONTROL;
                         break;
                     case "Alt":
-                        modifiers += (int)HotkeyModifiers.Alt;
+                        modifiers = HOT_KEY_MODIFIERS.MOD_ALT;
                         break;
                     case "Shift":
-                        modifiers += (int)HotkeyModifiers.Shift;
+                        modifiers = HOT_KEY_MODIFIERS.MOD_SHIFT;
                         break;
                     default:
                     {
@@ -102,7 +87,7 @@ namespace KeyboardMouseHookLibrary
 
 
             //这里注册了Ctrl+Alt+E 快捷键
-            return RegisterGlobalHotKey(handle, modifiers, vk, callback);
+            return RegisterGlobalHotKey((HWND)handle, modifiers, vk, callback);
         }
 
     }

@@ -12,28 +12,29 @@ namespace MisakaTranslator_WPF
     {
         static unsafe bool IsElevated()
         {
-            if (PInvoke.OpenProcessToken(Process.GetCurrentProcess().SafeHandle, TOKEN_ACCESS_MASK.TOKEN_ALL_ACCESS, out var hToken))
+            HANDLE hToken = HANDLE.Null;
+            TOKEN_ELEVATION tokenType = new()
             {
-                TOKEN_ELEVATION tokenType = new();
-                if (PInvoke.GetTokenInformation(hToken, TOKEN_INFORMATION_CLASS.TokenElevation, &tokenType, (uint)Marshal.SizeOf(tokenType), out var _))
-                {
-                    return (BOOL)(int)tokenType.TokenIsElevated;
-                }
+                TokenIsElevated = 0
+            };
+            if (PInvoke.OpenProcessToken((HANDLE)Process.GetCurrentProcess().Handle, TOKEN_ACCESS_MASK.TOKEN_ALL_ACCESS, &hToken))
+            {
+                PInvoke.GetTokenInformation(hToken, TOKEN_INFORMATION_CLASS.TokenElevation, &tokenType, (uint)Marshal.SizeOf(tokenType), out var _);
+                PInvoke.CloseHandle(hToken);
             }
-            return false;
+            return (BOOL)(int)tokenType.TokenIsElevated;
         }
 
         static unsafe bool CanElevate()
         {
-            if (PInvoke.OpenProcessToken(Process.GetCurrentProcess().SafeHandle, TOKEN_ACCESS_MASK.TOKEN_ALL_ACCESS, out var hToken))
+            HANDLE hToken = HANDLE.Null;
+            TOKEN_ELEVATION_TYPE tokenType = 0;
+            if (PInvoke.OpenProcessToken((HANDLE)Process.GetCurrentProcess().Handle, TOKEN_ACCESS_MASK.TOKEN_ALL_ACCESS, &hToken))
             {
-                TOKEN_ELEVATION_TYPE tokenType = new();
-                if (PInvoke.GetTokenInformation(hToken, TOKEN_INFORMATION_CLASS.TokenElevationType, &tokenType, sizeof(TOKEN_ELEVATION_TYPE), out var _))
-                {
-                    return tokenType == TOKEN_ELEVATION_TYPE.TokenElevationTypeLimited;
-                }
+                PInvoke.GetTokenInformation(hToken, TOKEN_INFORMATION_CLASS.TokenElevationType, &tokenType, sizeof(TOKEN_ELEVATION_TYPE), out var _);
+                PInvoke.CloseHandle(hToken);
             }
-            return false;
+            return tokenType == TOKEN_ELEVATION_TYPE.TokenElevationTypeLimited;
         }
 
         static bool RunElevate()

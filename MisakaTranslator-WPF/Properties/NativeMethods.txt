@@ -1,11 +1,13 @@
-// Windows.Win32.Security
 // enum
-TOKEN_ELEVATION_TYPE
-// structure
-TOKEN_ELEVATION
-// function
-GetTokenInformation
+Windows.Win32.Security.TOKEN_ELEVATION_TYPE
+Windows.Win32.UI.WindowsAndMessaging.HWND_TOPMOST
 
-// Windows.Win32.System.Threading
+// structure
+Windows.Win32.Security.TOKEN_ELEVATION
+
 // function
-OpenProcessToken
+Windows.Win32.Security.GetTokenInformation
+Windows.Win32.System.Threading.OpenProcessToken
+Windows.Win32.UI.Shell.StrCmpLogicalW
+Windows.Win32.UI.WindowsAndMessaging.GetCursorPos
+Windows.Win32.UI.WindowsAndMessaging.SetWindowPos

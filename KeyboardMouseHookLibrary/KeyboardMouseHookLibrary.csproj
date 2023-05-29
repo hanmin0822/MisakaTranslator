@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <UseWindowsForms>true</UseWindowsForms>
+    <UseWin32>true</UseWin32>
   </PropertyGroup>
 
 </Project>

@@ -1,0 +1,14 @@
+// enum
+Windows.Win32.UI.WindowsAndMessaging.WM_LBUTTONUP
+Windows.Win32.UI.WindowsAndMessaging.WM_RBUTTONUP
+Windows.Win32.UI.WindowsAndMessaging.WM_KEYUP
+
+// structure
+Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCT
+Windows.Win32.UI.WindowsAndMessaging.KBDLLHOOKSTRUCT
+
+// function
+Windows.Win32.UI.WindowsAndMessaging.CallNextHookEx
+Windows.Win32.UI.WindowsAndMessaging.SetWindowsHookEx
+Windows.Win32.UI.WindowsAndMessaging.UnhookWindowsHookEx
+Windows.Win32.UI.WindowsAndMessaging.GetMessage

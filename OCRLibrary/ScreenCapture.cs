@@ -1,74 +1,15 @@
 ﻿using System;
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Windows.Win32;
+using Windows.Win32.Foundation;
+using Windows.Win32.Graphics.Gdi;
+using Windows.Win32.UI.WindowsAndMessaging;
 
 namespace OCRLibrary
 {
-    public struct SC_RECT
-    {
-        public int left;
-        public int top;
-        public int right;
-        public int bottom;
-    }
-
-    public struct POINT
-    {
-        public int X;
-        public int Y;
-        public POINT(int x, int y)
-        {
-            this.X = x;
-            this.Y = y;
-        }
-    }
-
-    
-
     public class ScreenCapture
     {
-        public const int CAPTUREBLT = 1073741824;
-        public const int SRCCOPY = 0x00CC0020; // BitBlt dwRop parameter  
-        [DllImport("gdi32.dll")]
-        public static extern bool BitBlt(IntPtr hObject, int nXDest, int nYDest,
-            int nWidth, int nHeight, IntPtr hObjectSource,
-            int nXSrc, int nYSrc, int dwRop);
-        [DllImport("gdi32.dll")]
-        public static extern IntPtr CreateCompatibleBitmap(IntPtr hDC, int nWidth,
-          int nHeight);
-        [DllImport("gdi32.dll")]
-        public static extern IntPtr CreateCompatibleDC(IntPtr hDC);
-        [DllImport("gdi32.dll")]
-        public static extern bool DeleteDC(IntPtr hDC);
-        [DllImport("gdi32.dll")]
-        public static extern bool DeleteObject(IntPtr hObject);
-        [DllImport("gdi32.dll")]
-        public static extern IntPtr SelectObject(IntPtr hDC, IntPtr hObject);
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr GetDesktopWindow();
-        [DllImport("user32.dll")]
-        public static extern IntPtr GetWindowDC(IntPtr hWnd);
-        [DllImport("user32.dll")]
-        public static extern IntPtr ReleaseDC(IntPtr hWnd, IntPtr hDC);
-        [DllImport("user32.dll")]
-        public static extern IntPtr GetWindowRect(IntPtr hWnd, ref SC_RECT rect);
-        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
-        public static extern int ShowWindow(IntPtr hwnd, int nCmdShow);
-        #region  窗口关联
-        //            nCmdShow的含义
-        //0 关闭窗口
-        //1 正常大小显示窗口
-        //2 最小化窗口
-        //3 最大化窗口
-        //使用实例: ShowWindow(myPtr, 0);
-        #endregion
-
-
-        [DllImport("user32.dll")]
-        public static extern bool GetCursorPos(out POINT lpPoint);
-
         /// <summary>
         /// 根据窗口HWND截取窗口
         /// </summary>
@@ -76,32 +17,31 @@ namespace OCRLibrary
         /// <returns></returns>
         public static Bitmap GetWindowCapture(IntPtr handle)
         {
-            // get te hDC of the target window  
-            IntPtr hdcSrc = GetWindowDC(handle);
-            ShowWindow(hdcSrc, 1);
-            // get the size  
-            SC_RECT windowRect = new SC_RECT();
-            GetWindowRect(handle, ref windowRect);
+            // get te hDC of the target window
+            HDC hdcSrc = PInvoke.GetWindowDC((HWND)handle);
+            PInvoke.ShowWindow((HWND)handle, SHOW_WINDOW_CMD.SW_SHOWNA);
+            // get the size
+            PInvoke.GetWindowRect((HWND)handle, out RECT windowRect);
             int width = windowRect.right - windowRect.left;
             int height = windowRect.bottom - windowRect.top;
-            // create a device context we can copy to  
-            IntPtr hdcDest = CreateCompatibleDC(hdcSrc);
-            // create a bitmap we can copy it to,  
-            // using GetDeviceCaps to get the width/height  
-            IntPtr hBitmap = CreateCompatibleBitmap(hdcSrc, width, height);
-            // select the bitmap object  
-            IntPtr hOld = SelectObject(hdcDest, hBitmap);
-            // bitblt over  
-            BitBlt(hdcDest, 0, 0, width, height, hdcSrc, 0, 0, SRCCOPY | CAPTUREBLT);
-            // restore selection  
-            SelectObject(hdcDest, hOld);
-            // clean up   
-            DeleteDC(hdcDest);
-            ReleaseDC(handle, hdcSrc);
-            // get a .NET image object for it  
-            Bitmap img = Image.FromHbitmap(hBitmap);
-            // free up the Bitmap object  
-            DeleteObject(hBitmap);
+            // create a device context we can copy to
+            HDC hdcDest = PInvoke.CreateCompatibleDC(hdcSrc);
+            // create a bitmap we can copy it to,
+            // using GetDeviceCaps to get the width/height
+            HBITMAP hBitmap = PInvoke.CreateCompatibleBitmap(hdcSrc, width, height);
+            // select the bitmap object
+            HGDIOBJ hOld = PInvoke.SelectObject(hdcDest, hBitmap);
+            // bitblt over
+            PInvoke.BitBlt(hdcDest, 0, 0, width, height, hdcSrc, 0, 0, ROP_CODE.SRCCOPY | ROP_CODE.CAPTUREBLT);
+            // restore selection
+            PInvoke.SelectObject(hdcDest, hOld);
+            // clean up
+            PInvoke.DeleteDC(hdcDest);
+            PInvoke.ReleaseDC((HWND)handle, hdcSrc);
+            // get a .NET image object for it
+            Bitmap img = Image.FromHbitmap(hBitmap);
+            // free up the Bitmap object
+            PInvoke.DeleteObject(hBitmap);
             return img;
         }
 

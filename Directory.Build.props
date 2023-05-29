@@ -1,6 +1,6 @@
 <Project>
 
-  <PropertyGroup Condition="'$(MSBuildProjectExtension)' == '.csproj'">
+  <PropertyGroup>
     <TargetPlatformVersion>10.0.22621.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>7.0</TargetPlatformMinVersion>
     <TargetFrameworks>netframework4.7.2;netcoreapp7.0-windows$(TargetPlatformVersion)</TargetFrameworks>
@@ -9,27 +9,8 @@
     <Version>2.12.2.0</Version>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(MSBuildProjectExtension)' == '.vcxproj'">
-    <ProjectCapability Include="PackageReferences" />
-  </ItemGroup>
-  <PropertyGroup Condition="'$(MSBuildProjectExtension)' == '.vcxproj'">
-    <AssetTargetFallback>$(AssetTargetFallback);native</AssetTargetFallback>
-    <TargetFrameworkMoniker>native,Version=v0.0</TargetFrameworkMoniker>
-    <NuGetTargetMoniker>native,Version=v0.0</NuGetTargetMoniker>
-    <RuntimeIdentifiers>win;win-x86;win-x64</RuntimeIdentifiers>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(MSBuildProjectExtension)' == '.csproj' and $(TargetFramework.StartsWith('netcoreapp'))">
-    <IncludeWindowsSDKRefFrameworkReferences>false</IncludeWindowsSDKRefFrameworkReferences>
-  </PropertyGroup>
-
-  <ItemGroup Condition="'$(MSBuildProjectExtension)' == '.csproj' and $(TargetFramework.StartsWith('netframework'))">
+  <ItemGroup Condition="$(TargetFramework.StartsWith('netframework'))">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(MSBuildProjectExtension)' == '.vcxproj'">
-    <PackageReference Include="VC-LTL" Version="5.0.5" />
-    <PackageReference Include="Microsoft.Windows.SDK.CPP.$(PlatformShortName)" Version="10.0.22621.*" />
   </ItemGroup>
 
 </Project>

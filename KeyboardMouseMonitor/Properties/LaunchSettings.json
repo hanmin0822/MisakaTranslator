@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "MouseMonitor": {
+      "commandName": "Project",
+      "commandLineArgs": "1 1"
+    },
+    "KeyboardMonitor": {
+      "commandName": "Project",
+      "commandLineArgs": "2 8"
+    }
+  }
+}

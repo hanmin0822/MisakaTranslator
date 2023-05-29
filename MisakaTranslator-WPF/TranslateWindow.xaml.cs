@@ -21,6 +21,9 @@ using TransOptimizationLibrary;
 using TTSHelperLibrary;
 using ArtificialTransHelperLibrary;
 using System.Windows.Controls.Primitives;
+using Windows.Win32;
+using Windows.Win32.Foundation;
+using Windows.Win32.UI.WindowsAndMessaging;
 
 namespace MisakaTranslator_WPF
 {
@@ -30,9 +33,6 @@ namespace MisakaTranslator_WPF
     public partial class TranslateWindow
     {
         public System.Windows.Threading.DispatcherTimer dtimer;//定时器 定时刷新位置
-        //winAPI 设置窗口位置
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern int SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int y, int Width, int Height, int flags);
 
         private ArtificialTransHelper _artificialTransHelper;
 
@@ -60,7 +60,7 @@ namespace MisakaTranslator_WPF
 
         private TextSpeechHelper _textSpeechHelper;//TTS朗读对象
 
-        private IntPtr winHandle;//窗口句柄，用于设置活动窗口，以达到全屏状态下总在最前的目的
+        private HWND winHandle;//窗口句柄，用于设置活动窗口，以达到全屏状态下总在最前的目的
 
         private System.Windows.Media.Effects.DropShadowEffect DropShadow = new System.Windows.Media.Effects.DropShadowEffect();
         
@@ -288,10 +288,10 @@ namespace MisakaTranslator_WPF
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Hook_OnMouseActivity(object sender, POINT e)
+        private void Hook_OnMouseActivity(object sender, System.Drawing.Point e)
         {
-            if (Common.isAllWindowCap && Process.GetCurrentProcess().Id != FindWindowInfo.GetProcessIDByHWND(FindWindowInfo.GetWindowHWND(e.x, e.y))
-                || Common.OCRWinHwnd == (IntPtr)FindWindowInfo.GetWindowHWND(e.x, e.y))
+            if (Common.isAllWindowCap && Process.GetCurrentProcess().Id != FindWindowInfo.GetProcessIDByHWND(FindWindowInfo.GetWindowHWND(e))
+                || Common.OCRWinHwnd == FindWindowInfo.GetWindowHWND(e))
             {
                 TranslateEventOcr();
             }
@@ -860,7 +860,7 @@ namespace MisakaTranslator_WPF
 
         private void TransWin_Loaded(object sender, RoutedEventArgs e)
         {
-            winHandle = new WindowInteropHelper(this).Handle;//记录翻译窗口句柄
+            winHandle = (HWND)new WindowInteropHelper(this).Handle;//记录翻译窗口句柄
 
             dtimer = new System.Windows.Threading.DispatcherTimer();
             dtimer.Interval = TimeSpan.FromMilliseconds(10);
@@ -872,7 +872,7 @@ namespace MisakaTranslator_WPF
         {
             if (this.WindowState != WindowState.Minimized) {
                 //定时刷新窗口到顶层
-                SetWindowPos(winHandle, -1, 0, 0, 0, 0, 1 | 2);
+                PInvoke.SetWindowPos(winHandle, HWND.HWND_TOPMOST, 0, 0, 0, 0, SET_WINDOW_POS_FLAGS.SWP_NOSIZE | SET_WINDOW_POS_FLAGS.SWP_NOMOVE);
             }
         }
 

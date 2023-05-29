@@ -5,33 +5,29 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Windows.Win32;
+using Windows.Win32.Foundation;
 
 namespace TextHookLibrary
 {
     public class ClipboardNotification
     {
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
-        public static extern IntPtr SetClipboardViewer(IntPtr hWnd);
-
-        [DllImport("User32.dll", CharSet = CharSet.Auto)]
-        public static extern bool ChangeClipboardChain(IntPtr hWndRemove, IntPtr hWndNewNext);
-
-        IntPtr winHandle;
-        IntPtr ClipboardViewerNext;
+        HWND winHandle;
+        HWND ClipboardViewerNext;
 
         public ClipboardNotification(IntPtr winH)
         {
-            winHandle = winH;
+            winHandle = (HWND)winH;
         }
 
         public void RegisterClipboardViewer()
         {
-            ClipboardViewerNext = SetClipboardViewer(winHandle);
+            ClipboardViewerNext = PInvoke.SetClipboardViewer(winHandle);
         }
 
         public void UnregisterClipboardViewer()
         {
-            ChangeClipboardChain(winHandle, ClipboardViewerNext);
+            PInvoke.ChangeClipboardChain(winHandle, ClipboardViewerNext);
         }
     }
 

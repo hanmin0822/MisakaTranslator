@@ -1,0 +1,28 @@
+// enum
+Windows.Win32.UI.WindowsAndMessaging.WM_KEYDOWN
+Windows.Win32.UI.WindowsAndMessaging.WM_KEYUP
+Windows.Win32.UI.WindowsAndMessaging.WM_LBUTTONDBLCLK
+Windows.Win32.UI.WindowsAndMessaging.WM_LBUTTONDOWN
+Windows.Win32.UI.WindowsAndMessaging.WM_RBUTTONDBLCLK
+Windows.Win32.UI.WindowsAndMessaging.WM_RBUTTONDOWN
+Windows.Win32.UI.WindowsAndMessaging.WM_SYSKEYDOWN
+Windows.Win32.UI.WindowsAndMessaging.WM_SYSKEYUP
+
+// structure
+Windows.Win32.UI.WindowsAndMessaging.KBDLLHOOKSTRUCT
+Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCT
+
+// function
+Windows.Win32.System.LibraryLoader.GetModuleHandle
+Windows.Win32.UI.Input.KeyboardAndMouse.GetKeyboardState
+Windows.Win32.UI.Input.KeyboardAndMouse.RegisterHotKey
+Windows.Win32.UI.Input.KeyboardAndMouse.ToAscii
+Windows.Win32.UI.Input.KeyboardAndMouse.UnregisterHotKey
+Windows.Win32.UI.WindowsAndMessaging.CallNextHookEx
+Windows.Win32.UI.WindowsAndMessaging.GetClassName
+Windows.Win32.UI.WindowsAndMessaging.GetWindowText
+Windows.Win32.UI.WindowsAndMessaging.GetWindowTextLength
+Windows.Win32.UI.WindowsAndMessaging.GetWindowThreadProcessId
+Windows.Win32.UI.WindowsAndMessaging.SetWindowsHookEx
+Windows.Win32.UI.WindowsAndMessaging.UnhookWindowsHookEx
+Windows.Win32.UI.WindowsAndMessaging.WindowFromPoint

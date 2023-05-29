@@ -20,6 +20,7 @@ using System.Windows.Shapes;
 using TranslatorLibrary;
 using OCRLibrary;
 using System.ComponentModel;
+using Windows.Win32;
 
 namespace MisakaTranslator_WPF.ComicTranslator
 {
@@ -411,10 +412,6 @@ namespace MisakaTranslator_WPF.ComicTranslator
 
     public class FileNameSort : IComparer<string>
     {
-        //调用windos 的 DLL
-        [System.Runtime.InteropServices.DllImport("Shlwapi.dll", CharSet = CharSet.Unicode)]
-        private static extern int StrCmpLogicalW(string param1, string param2);
-
         //前后文件名进行比较。
         public int Compare(string name1, string name2)
         {
@@ -430,7 +427,7 @@ namespace MisakaTranslator_WPF.ComicTranslator
             {
                 return 1;
             }
-            return StrCmpLogicalW(name1, name2);
+            return PInvoke.StrCmpLogical(name1, name2);
         }
     }
 

@@ -25,7 +25,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
     public partial class ChooseOCRAreaPage : Page
     {
         bool isAllWin;
-        int SelectedHwnd;
+        IntPtr SelectedHwnd;
         System.Drawing.Rectangle OCRArea;
         GlobalHook hook;
         bool IsChoosingWin;
@@ -87,13 +87,14 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
         void Hook_OnMouseActivity(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left) {
-                SelectedHwnd = FindWindowInfo.GetWindowHWND(e.X, e.Y);
+                SelectedHwnd = FindWindowInfo.GetWindowHWND(new System.Drawing.Point(e.X, e.Y));
                 string gameName = FindWindowInfo.GetWindowName(SelectedHwnd);
-                int pid = FindWindowInfo.GetProcessIDByHWND(SelectedHwnd);
+                uint pid = FindWindowInfo.GetProcessIDByHWND(SelectedHwnd);
+                string className = FindWindowInfo.GetWindowClassName(SelectedHwnd);
 
                 if (Process.GetCurrentProcess().Id != pid)
                 {
-                    WinNameTag.Text = "[实时]" + gameName + "—" + pid;
+                    WinNameTag.Text = $"[实时] {gameName} - {pid} - {className}";
                 }
                 hook.Stop();
                 IsChoosingWin = false;
@@ -103,7 +104,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
         private void RenewAreaBtn_Click(object sender, RoutedEventArgs e)
         {
             OCRArea = ScreenCaptureWindow.OCRArea;
-            Common.ocr.SetOCRArea((IntPtr)SelectedHwnd, OCRArea, isAllWin);
+            Common.ocr.SetOCRArea(SelectedHwnd, OCRArea, isAllWin);
             OCRAreaPicBox.Source = ImageProcFunc.ImageToBitmapImage(
                 Common.ocr.GetOCRAreaCap());
 
@@ -112,7 +113,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
         
         private void ChooseAreaBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (!isAllWin && SelectedHwnd == 0)
+            if (!isAllWin && SelectedHwnd == IntPtr.Zero)
             {
                 HandyControl.Controls.Growl.Error(Application.Current.Resources["ChooseOCRAreaPage_NextErrorHint"].ToString());
                 return;
@@ -125,7 +126,7 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
             }
             else
             {
-                img = ImageProcFunc.ImageToBitmapImage(ScreenCapture.GetWindowCapture((IntPtr)SelectedHwnd));
+                img = ImageProcFunc.ImageToBitmapImage(ScreenCapture.GetWindowCapture(SelectedHwnd));
             }
 
             ScreenCaptureWindow scw = new ScreenCaptureWindow(img);
@@ -143,8 +144,8 @@ namespace MisakaTranslator_WPF.GuidePages.OCR
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e)
         {
             Common.isAllWindowCap = isAllWin;
-            Common.OCRWinHwnd = (IntPtr)SelectedHwnd;
-            Common.ocr.SetOCRArea((IntPtr)SelectedHwnd, OCRArea, isAllWin);
+            Common.OCRWinHwnd = SelectedHwnd;
+            Common.ocr.SetOCRArea(SelectedHwnd, OCRArea, isAllWin);
 
             //使用路由事件机制通知窗口来完成下一步操作
             PageChangeRoutedEventArgs args = new PageChangeRoutedEventArgs(PageChange.PageChangeRoutedEvent, this);

@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using OCRLibrary;
 using TranslatorLibrary;
+using Windows.Win32;
 
 namespace MisakaTranslator_WPF
 {
@@ -119,8 +120,7 @@ namespace MisakaTranslator_WPF
                     return;
 
                 var reswin = new GlobalOCRWindow(img);
-                POINT mousestart = new POINT();
-                ScreenCapture.GetCursorPos(out mousestart);
+                PInvoke.GetCursorPos(out System.Drawing.Point mousestart);
                 reswin.Left = mousestart.X;
                 reswin.Top = mousestart.Y;
 

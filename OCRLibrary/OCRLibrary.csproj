@@ -1,19 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
-    <IncludeWindowsSDKRefFrameworkReferences>true</IncludeWindowsSDKRefFrameworkReferences>
+    <UseWin32>true</UseWin32>
+    <UseWinRT>true</UseWinRT>
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('netframework'))">
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web" />
-    <PackageReference Include="Microsoft.Windows.SDK.Contracts" Version="$([System.Version]::Parse('$(TargetPlatformVersion)').ToString(3)).*" PrivateAssets="all" />
     <PackageReference Include="System.Text.Json" Version="7.0.1" />
   </ItemGroup>
 

@@ -10,6 +10,7 @@
     <PlatformTarget Condition="'$(Platform)' == 'AnyCPU'">AnyCPU</PlatformTarget>
     <Prefer32Bit Condition="'$(Platform)' == 'AnyCPU'">false</Prefer32Bit>
     <StartupObject>MisakaTranslator_WPF.Program</StartupObject>
+    <UseWin32>true</UseWin32>
 
     <EnableMsixTooling>true</EnableMsixTooling>
     <WindowsPackageType>MSIX</WindowsPackageType>
@@ -26,21 +27,19 @@
 
   <ItemGroup>
     <AppxManifest Include="Properties\Package.appxmanifest" />
-    <AdditionalFiles Include="Properties\NativeMethods.txt" />
     <Resource Include="logo.ico" />
     <Resource Include="GuidePages\Completation.png" />
     <Resource Include="GuidePages\Completation_small.png" />
     <Resource Include="SettingsPages\AboutV2.jpg" />
     <Resource Include="SettingsPages\AboutV2_small.jpg" />
-    <None Update="textRepairPlugins\*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Update="textRepairPlugins\*" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ArtificialTransHelperLibrary\ArtificialTransHelperLibrary.csproj" />
     <ProjectReference Include="..\DictionaryHelperLibrary\DictionaryHelperLibrary.csproj" />
     <ProjectReference Include="..\KeyboardMouseHookLibrary\KeyboardMouseHookLibrary.csproj" />
+    <ProjectReference Include="..\KeyboardMouseMonitor\KeyboardMouseMonitor.csproj" />
     <ProjectReference Include="..\MecabHelperLibrary\MecabHelperLibrary.csproj" />
     <ProjectReference Include="..\OCRLibrary\OCRLibrary.csproj" />
     <ProjectReference Include="..\SQLHelperLibrary\SQLHelperLibrary.csproj" />
@@ -55,9 +54,7 @@
     <PackageReference Include="Config.Net" Version="5.1.5" />
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
     <PackageReference Include="HandyControl" Version="3.4.0" />
-    <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.2.188-beta" IncludeAssets="analyzers;build" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="$([System.Version]::Parse('$(TargetPlatformVersion)').ToString(3)).*" />
-    <PackageReference Include="Microsoft.Windows.SDK.Win32Metadata" Version="42.0.39-preview" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.230217.4" IncludeAssets="buildTransitive" />
     <PackageReference Include="TesseractOCR" Version="5.2.14" Aliases="Tesseract" />
   </ItemGroup>

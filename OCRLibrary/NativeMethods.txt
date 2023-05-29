@@ -1,0 +1,18 @@
+// enum
+Windows.Win32.UI.WindowsAndMessaging.IMAGE_FLAGS
+
+// function
+Windows.Win32.Graphics.Gdi.BitBlt
+Windows.Win32.Graphics.Gdi.CreateCompatibleBitmap
+Windows.Win32.Graphics.Gdi.CreateCompatibleDC
+Windows.Win32.Graphics.Gdi.DeleteDC
+Windows.Win32.Graphics.Gdi.DeleteObject
+Windows.Win32.Graphics.Gdi.SelectObject
+Windows.Win32.Graphics.Gdi.GetWindowDC
+Windows.Win32.Graphics.Gdi.ReleaseDC
+Windows.Win32.UI.WindowsAndMessaging.DestroyIcon
+Windows.Win32.UI.WindowsAndMessaging.GetCursorPos
+Windows.Win32.UI.WindowsAndMessaging.GetDesktopWindow
+Windows.Win32.UI.WindowsAndMessaging.GetWindowRect
+Windows.Win32.UI.WindowsAndMessaging.PrivateExtractIcons
+Windows.Win32.UI.WindowsAndMessaging.ShowWindow
