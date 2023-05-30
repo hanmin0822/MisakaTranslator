@@ -440,5 +440,10 @@ namespace MisakaTranslator_WPF {
                 this.Closing += (o, e) => gw.GetType().GetMethod("Close").Invoke(gw, null); // 关闭主窗口时关闭GrowlWindow否则程序无法退出
             }
         }
+
+        private void LanguageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LanguageContextMenu.IsOpen = true;
+        }
     }
 }

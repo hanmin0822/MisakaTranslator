@@ -6,21 +6,14 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SQLite.Core" Version="7.0.4" />
-    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" Version="2.1.4" IncludeAssets="none" ExcludeAssets="all" PrivateAssets="all" />
+    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" Version="2.1.4" IncludeAssets="none" ExcludeAssets="all" PrivateAssets="all" GeneratePathProperty="true" />
     <PackageReference Include="SQLitePCLRaw.provider.e_sqlite3" Version="2.1.4" />
     <PackageReference Include="SQLitePCLRaw.provider.winsqlite3" Version="2.1.4" />
   </ItemGroup>
 
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <ItemGroup>
-      <Content Include="$(NuGetPackageRoot)\sqlitepclraw.lib.e_sqlite3\2.1.4\runtimes\win-x86\native\e_sqlite3.dll">
-        <Link>runtimes\win-x86\native\e_sqlite3.dll</Link>
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-      <Content Include="$(NuGetPackageRoot)\sqlitepclraw.lib.e_sqlite3\2.1.4\runtimes\win-x64\native\e_sqlite3.dll">
-        <Link>runtimes\win-x64\native\e_sqlite3.dll</Link>
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-    </ItemGroup>
-  </Target>
+  <ItemGroup>
+    <Content Include="$(PkgSQLitePCLRaw_lib_e_sqlite3)\runtimes\win-x86\native\e_sqlite3.dll" Link="runtimes\win-x86\native\e_sqlite3.dll" Visible="false" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="$(PkgSQLitePCLRaw_lib_e_sqlite3)\runtimes\win-x64\native\e_sqlite3.dll" Link="runtimes\win-x64\native\e_sqlite3.dll" Visible="false" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

@@ -451,7 +451,14 @@ namespace MisakaTranslator_WPF
                         stackPanel.Orientation = Orientation.Vertical;
                         stackPanel.Margin = new Thickness(10, 0, 0, 10);
 
-                        TextBlock textBlock = new TextBlock();
+                        System.Windows.Controls.TextBox textBlock = new()
+                        {
+                            IsReadOnly = true,
+                            Background = new SolidColorBrush(Colors.Transparent),
+                            BorderBrush = new SolidColorBrush(Colors.Transparent),
+                            Padding = new Thickness(0),
+                            Margin = new Thickness(0)
+                        };
                         if (!string.IsNullOrEmpty(SourceTextFont))
                         {
                             FontFamily fontFamily = new FontFamily(SourceTextFont);
@@ -771,6 +778,8 @@ namespace MisakaTranslator_WPF
             dtimer.Stop();
 
             _mecabHelper.Dispose();
+
+            Common.mainWin.Visibility = Visibility.Visible;
         }
 
 
@@ -866,6 +875,8 @@ namespace MisakaTranslator_WPF
             dtimer.Interval = TimeSpan.FromMilliseconds(10);
             dtimer.Tick += dtimer_Tick;
             dtimer.Start();
+
+            Common.mainWin.Visibility = Visibility.Collapsed;
         }
 
         void dtimer_Tick(object sender, EventArgs e)

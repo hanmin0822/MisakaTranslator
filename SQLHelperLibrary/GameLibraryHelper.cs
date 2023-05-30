@@ -83,17 +83,13 @@ namespace SQLHelperLibrary
         /// <summary>
         /// 创建一个新游戏列表库
         /// </summary>
-        public static bool CreateNewGameList()
+        static GameLibraryHelper()
         {
             var id = sqlHelper.ExecuteSql("CREATE TABLE IF NOT EXISTS game_library(gameid INTEGER PRIMARY KEY AUTOINCREMENT,gamename TEXT,gamefilepath TEXT,transmode INTEGER,src_lang TEXT,dst_lang TEXT,repair_func TEXT,repair_param_a TEXT,repair_param_b TEXT,hookcode TEXT,isMultiHook TEXT,isx64 TEXT,hookcode_custom TEXT);");
             if (id == -1)
             {
-                MessageBox.Show("新建游戏库时发生错误，错误代码:\n" + sqlHelper.GetLastError(), "数据库错误");
-                return false;
-            }
-            else
-            {
-                return true;
+                MessageBox.Show($"初始化游戏库发生错误，数据库错误代码:\n{sqlHelper.GetLastError()}");
+                throw new Exception(sqlHelper.GetLastError());
             }
         }
 
@@ -105,15 +101,6 @@ namespace SQLHelperLibrary
         /// <returns>返回游戏ID</returns>
         public static int GetGameID(string gamePath)
         {
-
-            if (File.Exists(Environment.CurrentDirectory + "\\MisakaGameLibrary.sqlite") == false)
-            {
-                if (CreateNewGameList() == false)
-                {
-                    return -1;
-                }
-            }
-
             var ls = sqlHelper.ExecuteReader_OneLine(
                 $"SELECT gameid FROM game_library WHERE gamefilepath = '{gamePath}';", 1);
 
@@ -140,14 +127,6 @@ namespace SQLHelperLibrary
         /// </summary>
         public static List<GameInfo> GetAllGameLibrary()
         {
-            if (File.Exists($"{Environment.CurrentDirectory}\\MisakaGameLibrary.sqlite") == false)
-            {
-                if (CreateNewGameList() == false)
-                {
-                    return null;
-                }
-            }
-
             var ls = sqlHelper.ExecuteReader("SELECT * FROM game_library;", 13);
 
             if (ls == null)
@@ -199,14 +178,6 @@ namespace SQLHelperLibrary
         /// <param name="gameID"></param>
         /// <returns></returns>
         public static GameInfo GetGameInfoByID(int gameID) {
-            if (File.Exists(Environment.CurrentDirectory + "\\MisakaGameLibrary.sqlite") == false)
-            {
-                if (CreateNewGameList() == false)
-                {
-                    return null;
-                }
-            }
-
             var ls = sqlHelper.ExecuteReader_OneLine($"SELECT * FROM game_library WHERE gameid = {gameID};", 13);
 
             if (ls == null)

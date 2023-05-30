@@ -15,14 +15,15 @@
     <EnableMsixTooling>true</EnableMsixTooling>
     <WindowsPackageType>MSIX</WindowsPackageType>
     <AllowNeutralPackageWithAppHost>true</AllowNeutralPackageWithAppHost>
-    <WindowsAppSDKCopyXamlToolingLibs>false</WindowsAppSDKCopyXamlToolingLibs>
     <WindowsAppSDKFrameworkPackageReference>false</WindowsAppSDKFrameworkPackageReference>
-
-    <WindowsAppSdkBootstrapInitialize>false</WindowsAppSdkBootstrapInitialize>
-    <WindowsAppSdkDeploymentManagerInitialize>false</WindowsAppSdkDeploymentManagerInitialize>
-    <WindowsAppSdkFoundation>false</WindowsAppSdkFoundation>
-    <WindowsAppSdkUndockedRegFreeWinRTInitialize>false</WindowsAppSdkUndockedRegFreeWinRTInitialize>
-    <WindowsAppSDKWinUI>false</WindowsAppSDKWinUI>
+    <CustomBeforeMicrosoftCommonTargets>
+      $(CustomBeforeMicrosoftCommonTargets);
+      $(PkgMicrosoft_WindowsAppSDK)\build\Microsoft.Build.Msix.props
+    </CustomBeforeMicrosoftCommonTargets>
+    <CustomAfterMicrosoftCommonTargets>
+      $(CustomAfterMicrosoftCommonTargets);
+      $(PkgMicrosoft_WindowsAppSDK)\build\Microsoft.Build.Msix.targets
+    </CustomAfterMicrosoftCommonTargets>
   </PropertyGroup>
 
   <ItemGroup>
@@ -55,14 +56,19 @@
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
     <PackageReference Include="HandyControl" Version="3.4.0" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="$([System.Version]::Parse('$(TargetPlatformVersion)').ToString(3)).*" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.230217.4" IncludeAssets="buildTransitive" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.3.230502000" IncludeAssets="none" ExcludeAssets="all" PrivateAssets="all" GeneratePathProperty="true" />
     <PackageReference Include="TesseractOCR" Version="5.2.14" Aliases="Tesseract" />
   </ItemGroup>
 
+  <!-- Workaround for Desktop Bridge -->
   <Target Name="BeforeGenerateCurrentProjectAppxManifest" BeforeTargets="_GenerateCurrentProjectAppxManifest">
     <PropertyGroup>
-      <!-- Workaround for Desktop Bridge -->
-      <TargetPlatformMinVersion Condition="$([System.Version]::Parse('$(TargetPlatformMinVersion)').ToString(2)) &lt; 10.0">10.0.14393.0</TargetPlatformMinVersion>
+      <TargetPlatformMinVersion Condition="$([System.Version]::Parse('$(TargetPlatformMinVersion)').ToString(2)) &lt; 10.0">10.0.14257.0</TargetPlatformMinVersion>
+    </PropertyGroup>
+  </Target>
+  <Target Name="AfterGenerateCurrentProjectAppxManifest" AfterTargets="_GenerateCurrentProjectAppxManifest">
+    <PropertyGroup>
+      <TargetPlatformMinVersion Condition="$(TargetPlatformMinVersion) == '10.0.14257.0'">$(SupportedOSPlatformVersion)</TargetPlatformMinVersion>
     </PropertyGroup>
   </Target>
 
