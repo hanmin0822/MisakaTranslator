@@ -99,7 +99,7 @@ namespace TextHookLibrary
                 });
                 string output = p.StandardOutput.ReadToEnd();
                 if (p.ExitCode != 0)
-                    throw new InvalidOperationException("Failed to execute ProcessHelperExt.exe");
+                    throw new InvalidOperationException("Failed to execute ProcessHelperExt.exe\n" + p.StandardError.ReadToEnd());
 
                 string[] lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string line in lines)

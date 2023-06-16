@@ -27,4 +27,8 @@ try
 
     return 0;
 }
-catch { return 2; }
+catch (Exception e)
+{
+    Console.Error.WriteLine(e);
+    return 2;
+}
