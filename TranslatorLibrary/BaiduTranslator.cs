@@ -40,7 +40,7 @@ namespace TranslatorLibrary
             string salt = CommonFunction.RD.Next(100000).ToString();
 
             string sign = CommonFunction.EncryptString(appId + q + salt + secretKey);
-            var sb = new StringBuilder("https://api.fanyi.baidu.com/api/trans/vip/translate?")
+            var sb = new StringBuilder("https://fanyi-api.baidu.com/api/trans/vip/translate?")
                 .Append("q=").Append(HttpUtility.UrlEncode(q))
                 .Append("&from=").Append(srcLang)
                 .Append("&to=").Append(desLang)
