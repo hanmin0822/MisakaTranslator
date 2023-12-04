@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetPlatformVersion>10.0.22621.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>7.0</TargetPlatformMinVersion>
-    <TargetFrameworks>netframework4.7.2;netcoreapp7.0-windows$(TargetPlatformVersion)</TargetFrameworks>
+    <TargetFrameworks>netframework4.7.2;net7.0-windows$(TargetPlatformVersion)</TargetFrameworks>
     <Platforms>AnyCPU</Platforms>
     <LangVersion>11.0</LangVersion>
     <Version>2.12.2.0</Version>
