@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -50,26 +51,19 @@ namespace TranslatorLibrary
 
             request.Headers.Add("api-key", key);
             request.Content = new StringContent(JsonSerializer.Serialize(completionRequest), Encoding.UTF8, "application/json");
-            HttpResponseMessage response;
+            ChatResponse? chat;
             try
             {
-                response = await httpClient.SendAsync(request);
+                var response = await httpClient.SendAsync(request);
                 var responseStream = await response.Content.ReadAsStreamAsync();
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    var error = await JsonSerializer.DeserializeAsync<CompletionErrorResponse>(responseStream);
+                    var error = await JsonSerializer.DeserializeAsync<ChatErrorResponse>(responseStream);
                     errorInfo = error == null ? $"http status code is {(int)response.StatusCode}({response.StatusCode})" : error.Error.Message;
                     return null;
                 }
 
-                var completion = await JsonSerializer.DeserializeAsync<CompletionResponse>(responseStream);
-                if (completion is not { Choices.Count: > 0 })
-                {
-                    errorInfo = "No completion choices";
-                    return null;
-                }
-
-                return completion.Choices[0].Message.Content;
+                chat = await JsonSerializer.DeserializeAsync<ChatResponse>(responseStream);
             }
             catch (Exception ex) when (ex is TaskCanceledException or HttpRequestException or JsonException)
             {
@@ -81,6 +75,21 @@ namespace TranslatorLibrary
                 errorInfo = ex.Message;
                 throw;
             }
+            
+            if (chat is not { Choices.Count: > 0 })
+            {
+                errorInfo = "No completion choices";
+                return null;
+            }
+
+            if (chat.Choices[0].Message.Content == null)
+            {
+                var filtered = string.Join(",", chat.Choices[0].ContentFilterResults.EnumerateFiltered().Select(x => x.name));
+                errorInfo = $"Result is filtered: {filtered}";
+                return null;
+            }
+
+            return chat.Choices[0].Message.Content;
         }
 
         public string GetLastError()
@@ -88,7 +97,7 @@ namespace TranslatorLibrary
             return errorInfo;
         }
 
-        private static CompletionRequest CreateCompletionRequest(string sourceText, string desLang, string srcLang)
+        private static ChatRequest CreateCompletionRequest(string sourceText, string desLang, string srcLang)
         {
             var messages = new List<MessageRequest>
             {
@@ -117,7 +126,7 @@ namespace TranslatorLibrary
                     }
                 }
             };
-            return new CompletionRequest
+            return new ChatRequest
             {
                 Messages = messages,
                 Stream = false
@@ -126,7 +135,7 @@ namespace TranslatorLibrary
 
         #region DataModel
 
-        public class CompletionRequest
+        public class ChatRequest
         {
             [JsonPropertyName("messages")] public List<MessageRequest> Messages { get; set; } = new();
             [JsonPropertyName("stream")] public bool Stream { get; set; } = false;
@@ -135,7 +144,7 @@ namespace TranslatorLibrary
             // [JsonPropertyName("max_tokens")] public int MaxTokens { get; set; } = 800;
         }
 
-        public class CompletionResponse
+        public class ChatResponse
         {
             [JsonPropertyName("choices")] public List<ChatChoice> Choices { get; set; } = new();
             // [JsonPropertyName("created")] public ulong Created { get; set; }
@@ -146,12 +155,12 @@ namespace TranslatorLibrary
             // [JsonPropertyName("usage")] public CompletionUsage Usage { get; set; } = new();
         }
 
-        public class CompletionErrorResponse
+        public class ChatErrorResponse
         {
-            [JsonPropertyName("error")] public CompletionError Error { get; set; } = new();
+            [JsonPropertyName("error")] public ChatError Error { get; set; } = new();
         }
 
-        public class CompletionError
+        public class ChatError
         {
             [JsonPropertyName("code")] public string Code { get; set; } = string.Empty;
             [JsonPropertyName("message")] public string Message { get; set; } = string.Empty;
@@ -162,6 +171,41 @@ namespace TranslatorLibrary
             [JsonPropertyName("message")] public MessageResponse Message { get; set; } = new();
             [JsonPropertyName("finish_reason")] public string FinishReason { get; set; } = "stop";
             [JsonPropertyName("index")] public int Index { get; set; }
+            [JsonPropertyName("content_filter_results")] public ContentFilterResults ContentFilterResults { get; set; } = new();
+        }
+
+        public class ContentFilterResults
+        {
+            [JsonPropertyName("hate")] public FilterResult Hate { get; set; } = new();
+            [JsonPropertyName("protected_material_code")] public FilterResult ProtectedMaterialCode { get; set; } = new();
+            [JsonPropertyName("self_harm")] public FilterResult SelfHarm { get; set; } = new();
+            [JsonPropertyName("sexual")] public FilterResult Sexual { get; set; } = new();
+            [JsonPropertyName("violence")] public FilterResult Violence { get; set; } = new();
+            
+            public IEnumerable<(FilterResult result, string name)> EnumerateFiltered()
+            {
+                if (Hate.Filtered)
+                    yield return (Hate, nameof(Hate));
+                if (ProtectedMaterialCode.Filtered)
+                    yield return (ProtectedMaterialCode, nameof(ProtectedMaterialCode));
+                if (SelfHarm.Filtered)
+                    yield return (SelfHarm, nameof(SelfHarm));
+                if (Sexual.Filtered)
+                    yield return (Sexual, nameof(Sexual));
+                if (Violence.Filtered)
+                    yield return (Violence, nameof(Violence));
+            }
+        }
+
+        public struct FilterResult
+        {
+            public FilterResult()
+            {
+            }
+
+            [JsonPropertyName("filtered")] public bool Filtered { get; set; } = false;
+            [JsonPropertyName("severity")] public string Severity { get; set; } = "safe";
+            [JsonPropertyName("detected")] public bool Detected { get; set; } = false;
         }
 
         public class MessageRequest
@@ -173,7 +217,7 @@ namespace TranslatorLibrary
         public class MessageResponse
         {
             [JsonPropertyName("role")] public string Role { get; set; } = ROLE_ASSISTANT;
-            [JsonPropertyName("content")] public string Content { get; set; } = string.Empty;
+            [JsonPropertyName("content")] public string? Content { get; set; } = null;  // idk why it will return null
         }
 
         public class MessageContent
