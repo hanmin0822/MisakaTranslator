@@ -38,6 +38,7 @@ namespace TranslatorLibrary
             { "译典通", "Dreye"},
             { "DeepL", "DeepLTranslator"},
             {"ChatGPT","ChatGPTTranslator" },
+            { "Azure OpenAI", nameof(AzureOpenAITranslator) },
             { "本地人工翻译(见说明)" , "ArtificialTranslator"}
         };
 

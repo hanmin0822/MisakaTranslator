@@ -128,6 +128,20 @@ namespace MisakaTranslator_WPF
             set;
         }
 
+        [Option(Alias = "AzureOpenAITranslator.apiKey", DefaultValue = "")]
+        string AzureOpenAIApiKey
+        {
+            get;
+            set;
+        }
+
+        [Option(Alias = "AzureOpenAITranslator.apiUrl", DefaultValue = "https://XXX.openai.azure.com/openai/deployments/YYY/chat/completions")]
+        string AzureOpenAIApiUrl
+        {
+            get;
+            set;
+        }
+
         [Option(Alias = "XiaoniuTranslator.xiaoniuApiKey", DefaultValue = "")]
         string xiaoniuApiKey
         {

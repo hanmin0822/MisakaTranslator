@@ -42,6 +42,7 @@
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Dreye}" Selected="Item_Dreye_Selected"/>
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_DeepL}" Selected="Item_DeepLTrans_Selected"/>
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_ChatGPT}" Selected="Item_ChatGPTTrans_Selected"/>
+                <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_AzureOpenAI}" Selected="Item_AzureOpenAITrans_Selected"/>
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_IBM}" Selected="Item_IBM_Selected"/>
                 <hc:SideMenuItem Header="{StaticResource SettingsMenu_TranslatorSettings_Yandex}" Selected="Item_Yandex_Selected"/>
             </hc:SideMenuItem>
