@@ -138,21 +138,12 @@ namespace TranslatorLibrary
         public class ChatRequest
         {
             [JsonPropertyName("messages")] public List<MessageRequest> Messages { get; set; } = new();
-            [JsonPropertyName("stream")] public bool Stream { get; set; } = false;
-            // [JsonPropertyName("temperature")] public double Temperature { get; set; } = 0.7;
-            // [JsonPropertyName("top_p")] public double TopP { get; set; } = 0.95;
-            // [JsonPropertyName("max_tokens")] public int MaxTokens { get; set; } = 800;
+            [JsonPropertyName("stream")] public bool Stream { get; set; } = false
         }
 
         public class ChatResponse
         {
             [JsonPropertyName("choices")] public List<ChatChoice> Choices { get; set; } = new();
-            // [JsonPropertyName("created")] public ulong Created { get; set; }
-            // [JsonPropertyName("id")] public string Id { get; set; } = string.Empty;
-            // [JsonPropertyName("model")] public string Model { get; set; } = string.Empty;
-            // [JsonPropertyName("object")] public string Object { get; set; } = string.Empty;
-            // [JsonPropertyName("system_fingerprint")] public string SystemFingerprint { get; set; } = string.Empty;
-            // [JsonPropertyName("usage")] public CompletionUsage Usage { get; set; } = new();
         }
 
         public class ChatErrorResponse
