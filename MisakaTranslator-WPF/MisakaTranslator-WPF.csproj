@@ -60,6 +60,14 @@
     <PackageReference Include="TesseractOCR" Version="5.2.14" Aliases="Tesseract" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="SettingsPages\TranslatorPages\AzureOpenAITransSettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
   <!-- Workaround for Desktop Bridge -->
   <Target Name="BeforeGenerateCurrentProjectAppxManifest" BeforeTargets="_GenerateCurrentProjectAppxManifest">
     <PropertyGroup>

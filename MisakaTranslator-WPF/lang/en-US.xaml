@@ -66,6 +66,7 @@
     <sys:String x:Key="SettingsMenu_DictSettings_xxgrz">小学馆日中 Shogakukan ja-zh dictionary</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_DeepL">DeepL</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_ChatGPT">ChatGPT</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_AzureOpenAI">Azure OpenAI</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_IBM">IBM</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Yandex">Yandex</sys:String>
 
@@ -96,6 +97,10 @@
     <sys:String x:Key="ChatGPTTransSettingsPage_Introduce">ChatPT (network required) provides AI Tranlate. You need to apply for the API, acquire the authentication key, and then fill in below before testing. If the API is tested as invalid, you can refer to official OpenAI documentations with the error codes. It is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of OpenAI.</sys:String>
     <sys:String x:Key="ChatGPTTransSettingsPage_secretKey">ChatGPT authentication key</sys:String>
     <sys:String x:Key="ChatGPTTransSettingsPage_apiUrl">ChatGPT API URL</sys:String>
+
+    <sys:String x:Key="AzureOpenAITransSettingsPage_Introduce">Azure OpenAI (network required) provides AI Translat, basically consistent with ChatGPT</sys:String>
+    <sys:String x:Key="AzureOpenAITransSettingsPage_secretKey">Deployment Key</sys:String>
+    <sys:String x:Key="AzureOpenAITransSettingsPage_apiUrl">Deployment target URL</sys:String>
 
 
     <sys:String x:Key="TencentOldTransSettingsPage_Introduce">Tencent TMT API (腾讯云翻译, network required) supports multilingual translation with better support for Japanese and Chinese. You need to apply for the API (on the website in Chinese), get access to the SecretId and SecretKey, and then fill in below before testing. If the API is tested as invalid, you can refer to official Tencent documentations with the error codes. Previous version of API is likely to incur charges, &quot;Check API quota&quot; will lead you to the dashboard of Tencent TMT.</sys:String>

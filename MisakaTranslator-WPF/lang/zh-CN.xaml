@@ -64,6 +64,7 @@
     <sys:String x:Key="SettingsMenu_DictSettings_xxgrz">小学馆日中</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_DeepL">DeepL</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_ChatGPT">ChatGPT</sys:String>
+    <sys:String x:Key="SettingsMenu_TranslatorSettings_AzureOpenAI">Azure OpenAI</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_IBM">IBM</sys:String>
     <sys:String x:Key="SettingsMenu_TranslatorSettings_Yandex">Yandex</sys:String>
 
@@ -94,6 +95,10 @@
     <sys:String x:Key="ChatGPTTransSettingsPage_Introduce">ChatGPT人工智能翻译，可能拒绝翻译某些内容，可能并非完整翻译原文而略有增减；您需要先申请OpenAI的Api Key，获取密钥后填入下方相应位置并进行测试认证；如果认证出现错误，请根据错误码至OpenAI官方获取解决办法；ChatGPT API 的部分版本可能会产生某些费用，您可以使用额度查询按钮进入控制台确认。</sys:String>
     <sys:String x:Key="ChatGPTTransSettingsPage_secretKey">ChatGPT API 密钥</sys:String>
     <sys:String x:Key="ChatGPTTransSettingsPage_apiUrl">ChatGPT API URL</sys:String>
+
+    <sys:String x:Key="AzureOpenAITransSettingsPage_Introduce">Azure OpenAI人工智能翻译，基本和ChatGPT一致</sys:String>
+    <sys:String x:Key="AzureOpenAITransSettingsPage_secretKey">Deployment 密钥</sys:String>
+    <sys:String x:Key="AzureOpenAITransSettingsPage_apiUrl">Deployment 目标URL</sys:String>
 
     <sys:String x:Key="TencentOldTransSettingsPage_Introduce">腾讯翻译(私人)API支持多种语言互译，对日语、汉语的Galgame互译支持较好，需要联网使用；您需要先申请该API并创建一个密钥，获取SecretId和SecretKey后填入下方相应位置并进行测试认证；如果认证出现错误，请根据错误码至腾讯翻译API官方文档获取解决办法；腾讯旧版翻译API部分版本可能会产生某些费用，您可以使用额度查询按钮进入控制台确认。</sys:String>
     <sys:String x:Key="TencentOldTransSettingsPage_SecretId">腾讯云API SecretId</sys:String>
