@@ -138,7 +138,7 @@ namespace TranslatorLibrary
         public class ChatRequest
         {
             [JsonPropertyName("messages")] public List<MessageRequest> Messages { get; set; } = new();
-            [JsonPropertyName("stream")] public bool Stream { get; set; } = false
+            [JsonPropertyName("stream")] public bool Stream { get; set; } = false;
         }
 
         public class ChatResponse
