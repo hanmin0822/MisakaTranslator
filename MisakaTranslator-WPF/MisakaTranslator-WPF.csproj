@@ -7,8 +7,6 @@
     <ApplicationManifest>Properties\App.manifest</ApplicationManifest>
     <ApplicationIcon>logo.ico</ApplicationIcon>
     <RootNamespace>MisakaTranslator_WPF</RootNamespace>
-    <PlatformTarget Condition="'$(Platform)' == 'AnyCPU'">AnyCPU</PlatformTarget>
-    <Prefer32Bit Condition="'$(Platform)' == 'AnyCPU'">false</Prefer32Bit>
     <StartupObject>MisakaTranslator_WPF.Program</StartupObject>
     <UseWin32>true</UseWin32>
   </PropertyGroup>
@@ -47,12 +45,12 @@
     <PackageReference Include="TesseractOCR" Aliases="Tesseract" />
   </ItemGroup>
 
-    <PropertyGroup>
+  <PropertyGroup>
     <EnableMsixTooling>true</EnableMsixTooling>
     <WindowsPackageType>MSIX</WindowsPackageType>
     <AllowNeutralPackageWithAppHost>true</AllowNeutralPackageWithAppHost>
     <AppxAddDefaultTargetDeviceFamilyItem Condition="$([System.Version]::Parse('$(TargetPlatformMinVersion)')) &lt; $([System.Version]::Parse('10.0.14257.0'))">false</AppxAddDefaultTargetDeviceFamilyItem>
-    </PropertyGroup>
+  </PropertyGroup>
   <ItemGroup Condition="$([System.Version]::Parse('$(TargetPlatformMinVersion)')) &lt; $([System.Version]::Parse('10.0.14257.0'))">
     <TargetDeviceFamily Include="Windows.Desktop">
       <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
