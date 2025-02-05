@@ -3,9 +3,8 @@
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-  xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  IgnorableNamespaces="uap uap10 rescap">
+  IgnorableNamespaces="uap rescap">
 
   <Identity
     Name="MisakaProject.MisakaTranslator"
@@ -16,16 +15,7 @@
     <DisplayName>MisakaTranslator</DisplayName>
     <PublisherDisplayName>MisakaProject</PublisherDisplayName>
     <Logo>Assets\PackageLogo.png</Logo>
-    <uap10:PackageIntegrity>
-      <uap10:Content Enforcement="on" />
-    </uap10:PackageIntegrity>
   </Properties>
-
-  <Dependencies>
-    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
-    <TargetDeviceFamily Name="MSIXCore.Desktop" MinVersion="6.1.7601.0" MaxVersionTested="10.0.14256.0" />
-    <TargetDeviceFamily Name="MSIXCore.Server" MinVersion="6.1.7601.0" MaxVersionTested="10.0.14256.0" />
-  </Dependencies>
 
   <Resources>
     <Resource Language="x-generate"/>

@@ -11,19 +11,6 @@
     <Prefer32Bit Condition="'$(Platform)' == 'AnyCPU'">false</Prefer32Bit>
     <StartupObject>MisakaTranslator_WPF.Program</StartupObject>
     <UseWin32>true</UseWin32>
-
-    <EnableMsixTooling>true</EnableMsixTooling>
-    <WindowsPackageType>MSIX</WindowsPackageType>
-    <AllowNeutralPackageWithAppHost>true</AllowNeutralPackageWithAppHost>
-    <WindowsAppSDKFrameworkPackageReference>false</WindowsAppSDKFrameworkPackageReference>
-    <CustomBeforeMicrosoftCommonTargets>
-      $(CustomBeforeMicrosoftCommonTargets);
-      $(PkgMicrosoft_WindowsAppSDK)\build\Microsoft.Build.Msix.props
-    </CustomBeforeMicrosoftCommonTargets>
-    <CustomAfterMicrosoftCommonTargets>
-      $(CustomAfterMicrosoftCommonTargets);
-      $(PkgMicrosoft_WindowsAppSDK)\build\Microsoft.Build.Msix.targets
-    </CustomAfterMicrosoftCommonTargets>
   </PropertyGroup>
 
   <ItemGroup>
@@ -55,29 +42,22 @@
     <PackageReference Include="Config.Net" Version="5.1.5" />
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
     <PackageReference Include="HandyControl" Version="3.4.0" />
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="$([System.Version]::Parse('$(TargetPlatformVersion)').ToString(3)).*" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.3.230502000" IncludeAssets="none" ExcludeAssets="all" PrivateAssets="all" GeneratePathProperty="true" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="$([System.Version]::Parse('$(TargetPlatformVersion)').ToString(3)).*" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools.MSIX" Version="1.2.20250107.1" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzer" />
     <PackageReference Include="TesseractOCR" Version="5.2.14" Aliases="Tesseract" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Page Update="SettingsPages\TranslatorPages\AzureOpenAITransSettingsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <XamlRuntime>Wpf</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
+    <PropertyGroup>
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <WindowsPackageType>MSIX</WindowsPackageType>
+    <AllowNeutralPackageWithAppHost>true</AllowNeutralPackageWithAppHost>
+    <AppxAddDefaultTargetDeviceFamilyItem Condition="$([System.Version]::Parse('$(TargetPlatformMinVersion)')) &lt; $([System.Version]::Parse('10.0.14257.0'))">false</AppxAddDefaultTargetDeviceFamilyItem>
+    </PropertyGroup>
+  <ItemGroup Condition="$([System.Version]::Parse('$(TargetPlatformMinVersion)')) &lt; $([System.Version]::Parse('10.0.14257.0'))">
+    <TargetDeviceFamily Include="Windows.Desktop">
+      <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
+      <TargetPlatformVersion>$(TargetPlatformVersion)</TargetPlatformVersion>
+    </TargetDeviceFamily>
   </ItemGroup>
-
-  <!-- Workaround for Desktop Bridge -->
-  <Target Name="BeforeGenerateCurrentProjectAppxManifest" BeforeTargets="_GenerateCurrentProjectAppxManifest">
-    <PropertyGroup>
-      <TargetPlatformMinVersion Condition="$([System.Version]::Parse('$(TargetPlatformMinVersion)').ToString(2)) &lt; 10.0">10.0.14257.0</TargetPlatformMinVersion>
-    </PropertyGroup>
-  </Target>
-  <Target Name="AfterGenerateCurrentProjectAppxManifest" AfterTargets="_GenerateCurrentProjectAppxManifest">
-    <PropertyGroup>
-      <TargetPlatformMinVersion Condition="$(TargetPlatformMinVersion) == '10.0.14257.0'">$(SupportedOSPlatformVersion)</TargetPlatformMinVersion>
-    </PropertyGroup>
-  </Target>
 
 </Project>
