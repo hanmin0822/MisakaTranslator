@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Win32;
+using System.Reflection;
 
 namespace TextHookLibrary {
     /// <summary>
@@ -163,14 +163,13 @@ namespace TextHookLibrary {
             {
 #if NETFRAMEWORK
                 // .NET Framework根据Console.InputEncoding编码在Start()中创建输入流
-                Console.InputEncoding = new UnicodeEncoding(false, false);
+                FieldInfo inputEncodingField = typeof(Console).GetField("_inputEncoding", BindingFlags.Static | BindingFlags.NonPublic);
+                inputEncodingField.SetValue(null, new UnicodeEncoding(false, false));
 #endif
                 bool res = ProcessTextractor.Start();
 #if NETFRAMEWORK
-                // Console.InputEncoding修改为非UTF16编码需要创建控制台
-                PInvoke.AllocConsole();
-                Console.InputEncoding = Encoding.Default;
-                PInvoke.FreeConsole();
+                // 非控制台应用Console.InputEncoding修改为非UTF16编码需要反射_inputEncoding 否则失败
+                inputEncodingField.SetValue(null, Encoding.Default);
 #endif
                 ProcessTextractor.BeginOutputReadLine();
                 return res;

@@ -1,5 +1,3 @@
-// function
-Windows.Win32.System.Console.AllocConsole
-Windows.Win32.System.Console.FreeConsole
+﻿// function
 Windows.Win32.System.DataExchange.ChangeClipboardChain
 Windows.Win32.System.DataExchange.SetClipboardViewer
