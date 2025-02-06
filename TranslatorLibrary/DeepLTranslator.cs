@@ -18,7 +18,7 @@ namespace TranslatorLibrary
         public static readonly string BILL_URL = "https://www.deepl.com/pro-account/usage";
         public static readonly string DOCUMENT_URL = "https://www.deepl.com/docs-api/accessing-the-api/error-handling/";
 
-        private static readonly string TRANSLATE_API_URL = "https://api-free.deepl.com/v2/translate";
+        private static readonly string TRANSLATE_API_URL = secretKey.endsWith(":dp")?"https://api.deepl-pro.com/2/translate":"https://api-free.deepl.com/v2/translate";
 
         private string secretKey; //DeepL翻译API的秘钥
         private string errorInfo; //错误信息
